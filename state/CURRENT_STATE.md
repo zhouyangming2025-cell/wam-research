@@ -1,6 +1,6 @@
 # CURRENT_STATE
 
-Last updated: 2026-09-14 — field-reconstruction reset
+Last updated: 2026-09-14 — field census Round 1 complete
 
 ## Research north star
 
@@ -18,7 +18,7 @@ Canonical rules: `state/RESEARCH_PRINCIPLES.md`.
 
 The previous workflow moved too quickly from a small, hypothesis-biased paper set to candidate gaps (P1/P2-R/P3). That is now considered an insufficient basis for research-problem selection.
 
-New active rule:
+Active rule:
 
 ```text
 FIELD UNDERSTANDING FIRST
@@ -55,18 +55,40 @@ Living map:
 FIELD RECONSTRUCTION — Planning-centric WAM Atlas
 ```
 
-The goal is not to find a gap quickly. The goal is to be able to explain the field coherently:
+### Phase-A Round 1 status
 
-- what major world-model families exist;
-- why each family emerged;
-- what world state each predicts;
-- how future information reaches the planner;
-- what supervision is actually available;
-- how action conditioning / interaction / reactivity differ;
-- what benchmark regimes really prove;
-- what strong non-WM end-to-end planners reveal;
-- what trade-offs recur across independent papers;
-- what common claims have counterexamples.
+The first neutral breadth census has started and is recorded in:
+
+`landscape/CENSUS_PHASE_A_ROUND1.md`
+
+Round 1 provisionally places roughly **45 unique works / benchmarks / controls** across the field, covering:
+
+- visual/video generative WMs;
+- occupancy/BEV/geometric WMs;
+- latent/JEPA/predictive-representation WMs;
+- WM-assisted direct planning;
+- candidate/action-conditioned futures;
+- unified world-action models;
+- interactive prediction/planning predecessors;
+- reactive simulation / policy-training environments;
+- reward/value/safety/cost interfaces;
+- strong non-WM E2E planners;
+- benchmark/evaluation lineages.
+
+No gap or innovation verdict has been issued.
+
+### Structural distinctions already visible from census placement
+
+These are **field-map distinctions**, not research gaps:
+
+1. `world model` plays several non-equivalent roles: data generator, pretraining model, auxiliary objective, inference-time future model, candidate evaluator, reward/safety model, simulator, or joint world-action policy.
+2. `latent world model` is also not one paradigm: some future branches disappear at inference; others directly condition the planner; newer WAMs jointly model scene/action latents.
+3. `action conditioned` does not identify the planner interface: the action may condition video generation, occupancy prediction, candidate scoring, or joint action/world generation.
+4. `closed loop` spans fundamentally different regimes: NAVSIM non-reactive pseudo-simulation, CARLA interactive simulation, learned reactive world agents, photorealistic reconstructed simulation, and real vehicle.
+5. Modern WAM interaction ideas have substantial predecessors in conditional prediction, contingency planning and game-theoretic integrated prediction/planning.
+6. Strong non-WM planners are mandatory controls because planning gains can come from representation, trajectory distribution learning, candidate scoring or supervision without an explicit world model.
+
+These distinctions will be tested and refined through anchor deep reads rather than converted into premature problem statements.
 
 ## Field-reconstruction depth
 
@@ -79,47 +101,39 @@ Phase C: cross-family synthesis + historical evolution + evaluation map + trade-
 Phase D: only then reopen research-problem discovery
 ```
 
-This is deliberately different from both blind gap hunting and indiscriminate 100+ paper accumulation.
+Phase A is active. Round 2 now fills missing coverage rather than expanding by gap keywords.
 
-## Existing P2-R work — retained, not driving the program
+## Immediate next task
 
-Round-1 P2-R audit remains useful historical evidence:
+See `state/NEXT_TASK.md`.
 
-`audits/literature/P2R_TARGETED_FAILURE_DEEP_READ_ROUND1.md`
+Round-2 coverage priorities:
 
-Its result remains:
+- Hydra-MDP / DriveSuprim / iPad / VLA planning controls;
+- Think2Drive / WM-RL lineage;
+- ViDAR / GenAD representation-pretraining bridges where planning-relevant;
+- benchmark evolution and operational/deployment properties;
+- uncertainty / multimodal future treatment;
+- credible real-vehicle closed-loop evidence, if any.
 
-```text
-NO DIRECT OBSERVED P2-R FAILURE HAS YET BEEN ESTABLISHED.
-P2-R SURVIVES ROUND 1 AS A QUESTION, NOT AS A CONFIRMED GAP.
-```
+## Corpus / Research Brain architecture
 
-But this is no longer the project's active scientific target.
-
-The previously prepared targeted Round-2 queue (BridgeSim, ReactSim-Bench, CausalDrive, Counterfactual Prediction, CRAFT + historical controls) is still valuable and should be integrated as part of the broader field atlas, especially families F7/F8/F11. It is no longer a gate that must be completed before looking elsewhere.
-
-## Existing corpus status
-
-- Batch 0A: 12 papers registered.
-- 11 have canonical local PDF + MinerU raw MD; P0008 NPPC is paywalled and not readable from the corpus.
-- The private GitHub repo contains the full text layer for the readable papers plus figures, manifest, reports, scripts, state, hypotheses and selected scientific cards/audits.
-- Existing Batch 0A papers were selected partly to test earlier hypotheses and therefore are **not a representative sample of the whole field**.
-
-## Immediate scientific need
-
-Build a neutral census across the field families defined in `landscape/FIELD_ATLAS.md`, seeded by recent DWM surveys, planning-oriented end-to-end surveys, foundational WAM papers, strong non-WM planning baselines, interactive prediction/planning predecessors, and benchmark/evaluation papers.
-
-No novelty/gap verdicts during census placement.
-
-## Architecture / infrastructure in force
-
-1. Canonical PDFs live only on local/NAS when locally archived.
-2. GPT-readable primary-text layer = raw Markdown in the private repo when ingested.
-3. Public official PDFs/pages may also be read directly for active research before local ingestion.
-4. Exact wording / damaged formulas / missing visual evidence should be verified against official PDF/canonical local PDF.
-5. Local corpus agent handles acquisition, conversion, metadata/QC, local assets and local code execution.
-6. GPT-5.6 Sol handles field reconstruction, deep reading, synthesis, scientific interpretation and direct GitHub state updates.
+1. Canonical PDFs live only on local/NAS where available.
+2. GitHub raw MD + figures form the persistent GPT-readable primary-text layer.
+3. Public official PDFs/web sources can be read directly during field census/deep read; local ingestion can follow asynchronously.
+4. Paper Cards contain curated scientific knowledge after deep review.
+5. `landscape/` now contains field-level understanding; hypothesis files are no longer the organizing center during reconstruction.
+6. Local corpus agent handles acquisition/conversion/local code; GPT-5.6 Sol handles field synthesis, deep reading and direct GitHub state maintenance.
 
 ## New-session bootstrap
 
-A fresh session should start at `START_HERE.md`. During this phase it must understand that **field reconstruction, not P2-R gap hunting, is the active task**.
+A fresh session should begin with:
+
+```text
+START_HERE.md
+state/CURRENT_STATE.md
+state/NEXT_TASK.md
+landscape/FIELD_ATLAS.md
+```
+
+During field reconstruction, do not default to `hypotheses/P2R_PRIMARY.md` unless historical hypothesis context is specifically needed.
