@@ -1,6 +1,6 @@
 # LATEST — Handoff
 
-Session: 2026-09-13 — Research Brain hardening + targeted reading freeze.
+Session: 2026-09-13 — Research Brain hardening + Round-2 targeted execution start.
 
 ## New-session fast path
 
@@ -9,10 +9,14 @@ Session: 2026-09-13 — Research Brain hardening + targeted reading freeze.
 2. state/CURRENT_STATE.md
 3. state/NEXT_TASK.md
 4. hypotheses/P2R_PRIMARY.md
-5. latest relevant audit/card only
+5. handoff/LATEST.md
 ```
 
-Do not reload the whole corpus or old chats by default. `START_HERE.md` is the canonical one-file bootstrap.
+Copy-ready fresh-session prompt:
+
+`handoff/NEW_SESSION_PROMPT.md`
+
+Do not reload the whole corpus or old chats by default. If older evidence behind P1/P3 is needed, use `evidence/CORE_EVIDENCE_SNAPSHOT.md`.
 
 ## Research identity
 
@@ -22,7 +26,7 @@ World Model + End-to-End + Planning-centric autonomous driving
 
 Planning is the center of gravity.
 
-**Risk field is optional, not required.** The owner's legacy expertise in risk / predictive risk fields / safety representation is a possible asset only after a real planning problem survives prior-art and falsification pressure. Never search for a problem merely to justify that expertise.
+**Risk field is optional, not required.** Legacy risk/predictive-risk expertise is preserved in `evidence/LEGACY_EXPERTISE_ASSETS.md` as an optional capability pool, not a method commitment.
 
 Canonical operating rules:
 
@@ -38,7 +42,7 @@ P3_HOLD     = HOLD AS BACKUP
 
 P2-R asks whether, under the same state and same ego candidate set, factual/non-reactive and reactive counterfactual futures induce different ego-action orderings because surrounding agents respond differently to ego intervention.
 
-Mechanism of interest:
+Mechanism:
 
 ```text
 ego action
@@ -57,7 +61,7 @@ Round 1 reviewed:
 - P0005 RiskWorld
 - P0012 DA-WAM
 
-Audit:
+Full audit:
 
 `audits/literature/P2R_TARGETED_FAILURE_DEEP_READ_ROUND1.md`
 
@@ -80,9 +84,13 @@ future information can improve trajectory scoring
 
 DA-WAM is the strongest current WAM nearest prior; SafeDrive and BeTop strongly occupy generic candidate-conditioned interaction / reactive-planning framings.
 
-## New decision this session
+Cross-session evidence snapshot:
 
-Do not keep expanding the literature broadly. Freeze the next corpus growth to:
+`evidence/CORE_EVIDENCE_SNAPSHOT.md`
+
+## Round-2 execution started
+
+Broad literature expansion is frozen. Canonical queue:
 
 `state/TARGETED_READING_QUEUE.md`
 
@@ -100,9 +108,19 @@ Do not keep expanding the literature broadly. Freeze the next corpus growth to:
 7. M2I — arXiv:2202.11884 / CVPR 2022
 8. Bahram et al. 2016 — DOI 10.1109/TVT.2015.2508009
 
-These metadata have been web-verified at discovery level; they are not `DOCUMENT_VERIFIED` until canonical PDFs are ingested and front pages checked.
+Pre-ingest public-source reconnaissance has already been written to:
 
-After these eight are adjudicated, stop expansion and issue:
+`audits/literature/P2R_ROUND2_PREINGEST_RECON.md`
+
+Important early boundary: *How Can Driving World Models Do Counterfactual Prediction?* is highly relevant to counterfactual correctness but, at abstract level, intentionally studies a short-horizon setting where alternative ego action does **not** change surrounding-agent evolution; therefore it must not be misread as direct P2-R evidence before full review.
+
+Local ingestion prompt is ready at:
+
+`agent/prompts/ROUND2_TARGETED_INGEST.md`
+
+The corpus agent should ingest only these eight records, produce raw MD + figures + skeleton cards + manifest/report updates, and stop. GPT-5.6 Sol then performs the scientific deep reads.
+
+After the eight-paper adjudication, stop expansion and issue:
 
 ```text
 P2-R SURVIVES
@@ -129,13 +147,7 @@ DIRECT EXPERIMENTAL EVIDENCE
 OUR INFERENCE
 ```
 
-A paper can be strong overall yet fail to prove a specific mechanism. A threatening paper can still contain real limitations. Missing modules are not gaps; action conditioning is not proof of correct reactive counterfactual response.
-
-## Immediate task
-
-Phase 1: local corpus agent ingests only the eight targeted papers above, following the existing canonical PDF → hash → front-page verify → MinerU → QC → manifest → GitHub text-layer pipeline.
-
-Phase 2: GPT-5.6 Sol deep-reads them adversarially in the order specified by `state/TARGETED_READING_QUEUE.md` and writes cards/audits directly here.
+Missing modules are not gaps; action conditioning is not proof of correct reactive counterfactual response; visual/world fidelity is not automatically decision sufficiency.
 
 ## Corpus / infrastructure
 
