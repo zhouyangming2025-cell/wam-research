@@ -121,23 +121,97 @@ META = {
                   code_available="UNKNOWN", official_code_url="",
                   tags="world-model;planning;action-conditioned", hyp="P1_RETIRED;P2R_PRIMARY", rel="HIGH",
                   note="Front page confirms Ruiguo Zhong, Benshan Ma, Xiaolong Chen, Lang Zhang, Mingyue Feng, Yaonong Wang, Pei Liu, Jun Ma (HKUST-GZ / Leapmotor). Acronym checked and NOT ambiguous. EVIDENCE_LEVEL=DOCUMENT_VERIFIED"),
+    # --- Round 2 targeted ingest (agent/prompts/ROUND2_TARGETED_INGEST.md) ---
+    # decision_relevance stays MEDIUM for every Round 2 record: the schema reserves
+    # HIGH for adjudicated evidence (kills/weakens a hypothesis, a direct observed
+    # failure, novelty occupation, a key counterexample, or a changed research
+    # decision), and none of these has been deep-read yet. hypothesis_tags record
+    # the batch's owner-declared purpose, not an adjudication.
+    # Official-code rule: YES only when the paper itself prints a repository URL;
+    # a printed project page is recorded in notes and left UNKNOWN.
+    "P0013": dict(short="BridgeSim", title="BridgeSim: Unveiling the OL-CL Gap in End-to-End Autonomous Driving",
+                  year="2026", first_author="Seth Z. Zhao", venue="arXiv preprint",
+                  arxiv_id="2604.10856", doi="NONE",
+                  official_url="https://arxiv.org/abs/2604.10856",
+                  code_available="UNKNOWN", official_code_url="",
+                  tags="open-loop;closed-loop;end-to-end;evaluation", hyp="P2R_PRIMARY", rel="MEDIUM",
+                  note="Round 2 A1, core P2-R attack set. Front page confirms title and first author Seth Z. Zhao (26 pages). The paper prints a PROJECT PAGE, https://vail-ucla.github.io/BridgeSim/ (p.1), not a repository URL, so code_available stays UNKNOWN pending verification. EVIDENCE_LEVEL=DOCUMENT_VERIFIED"),
+    "P0014": dict(short="ReactSimBench", title="ReactSim-Bench: Benchmarking Reactive Behavior World Model Simulation in Autonomous Driving",
+                  year="2026", first_author="Zhiyuan Zhang", venue="arXiv preprint",
+                  arxiv_id="2606.14058", doi="NONE",
+                  official_url="https://arxiv.org/abs/2606.14058",
+                  code_available="YES", official_code_url="https://github.com/Thinklab-SJTU/ReactSim-Bench",
+                  tags="benchmark;reactive;world-model;evaluation", hyp="P2R_PRIMARY", rel="MEDIUM",
+                  note="Round 2 A2, core P2-R attack set. Front page confirms title and first author Zhiyuan Zhang (19 pages) and prints the repository URL https://github.com/Thinklab-SJTU/ReactSim-Bench on page 1, which is paper-source support for code_available=YES (repo reachability NOT independently verified). EVIDENCE_LEVEL=DOCUMENT_VERIFIED"),
+    "P0015": dict(short="CausalDrive", title="CausalDrive: Real-time Causal World Models for Autonomous Driving",
+                  year="2026", first_author="Tianyi Yan", venue="arXiv preprint",
+                  arxiv_id="2606.15341", doi="NONE",
+                  official_url="https://arxiv.org/abs/2606.15341",
+                  code_available="UNKNOWN", official_code_url="",
+                  tags="world-model;reactive;counterfactual;planning", hyp="P2R_PRIMARY", rel="MEDIUM",
+                  note="Round 2 A3, core P2-R attack set. Front page confirms title and first author Tianyi Yan (18 pages). No repository or project URL appears anywhere in the extracted PDF text, so code_available stays UNKNOWN: absence of a printed URL is not evidence that no code exists. EVIDENCE_LEVEL=DOCUMENT_VERIFIED"),
+    "P0016": dict(short="CounterfactualPred", title="How Can Driving World Models Do Counterfactual Prediction?",
+                  year="2026", first_author="Jiaru Zhang", venue="arXiv preprint",
+                  arxiv_id="2608.11601", doi="NONE",
+                  official_url="https://arxiv.org/abs/2608.11601",
+                  code_available="UNKNOWN", official_code_url="",
+                  tags="world-model;counterfactual;action-conditioned;evaluation", hyp="P2R_PRIMARY", rel="MEDIUM",
+                  note="Round 2 A4, core P2-R attack set. Front page confirms title and first author Jiaru Zhang (Purdue University / Bosch Center for Artificial Intelligence), 18 pages. No repository or project URL found in the extracted text. EVIDENCE_LEVEL=DOCUMENT_VERIFIED"),
+    "P0017": dict(short="CRAFT", title="CRAFT: Counterfactual-to-Interactive Reinforcement Fine-Tuning for Driving Policies",
+                  year="2026", first_author="Keyu Chen", venue="arXiv preprint",
+                  arxiv_id="2605.04470", doi="NONE",
+                  official_url="https://arxiv.org/abs/2605.04470",
+                  code_available="UNKNOWN", official_code_url="",
+                  tags="counterfactual;closed-loop;planning;interactive", hyp="P2R_PRIMARY", rel="MEDIUM",
+                  note="Round 2 A5, core P2-R attack set. Front page confirms title and first author Keyu Chen (Tsinghua University / Li Auto), 22 pages. The paper prints a PROJECT PAGE, https://currychen77.github.io/CRAFT (p.1), not a repository URL, so code_available stays UNKNOWN pending verification. EVIDENCE_LEVEL=DOCUMENT_VERIFIED"),
+    "P0018": dict(short="GameFormer", title="GameFormer: Game-theoretic Modeling and Learning of Transformer-based Interactive Prediction and Planning for Autonomous Driving",
+                  year="2023", first_author="Zhiyu Huang", venue="ICCV 2023",
+                  arxiv_id="2303.05760", doi="NONE",
+                  official_url="https://openaccess.thecvf.com/content/ICCV2023/html/Huang_GameFormer_Game-theoretic_Modeling_and_Learning_of_Transformer-based_Interactive_Prediction_and_ICCV_2023_paper.html",
+                  code_available="UNKNOWN", official_code_url="",
+                  tags="trajectory-prediction;interactive;reactive;planning", hyp="P2R_PRIMARY", rel="MEDIUM",
+                  note="Round 2 H1, historical novelty control for the P2-R occupancy question. Canonical source is the ICCV 2023 camera-ready (CVF Open Access), which SUPERSEDED an earlier arXiv download of the same paper (arXiv:2303.05760, 2348946 bytes, sha256 e7f71bda870dcf1e58ba5ffcecb013b01dcd2c6bc4cdaf726ce97ba9141a8db6) because venue camera-ready outranks a preprint. The CVF URL was located by scanning the ICCV2023 Open Access index: CVF truncates the title inside its slug, so three full-title guesses had returned HTTP 404. Front page confirms title and first author Zhiyu Huang (11 pages). The paper prints a PROJECT PAGE, https://mczhi.github.io/GameFormer/ (p.1), not a repository URL, so code_available stays UNKNOWN. EVIDENCE_LEVEL=DOCUMENT_VERIFIED"),
+    "P0019": dict(short="M2I", title="M2I: From Factored Marginal Trajectory Prediction to Interactive Prediction",
+                  year="2022", first_author="Qiao Sun", venue="CVPR 2022",
+                  arxiv_id="2202.11884", doi="NONE",
+                  official_url="https://openaccess.thecvf.com/content/CVPR2022/html/Sun_M2I_From_Factored_Marginal_Trajectory_Prediction_to_Interactive_Prediction_CVPR_2022_paper.html",
+                  code_available="UNKNOWN", official_code_url="",
+                  tags="trajectory-prediction;interactive;reactive", hyp="P2R_PRIMARY", rel="MEDIUM",
+                  note="Round 2 H2, historical novelty control for the P2-R occupancy question. Canonical source is the CVPR 2022 camera-ready (CVF Open Access), verified as HTTP 206 + %PDF- before download, which outranks the arXiv preprint. Front page confirms the title and first author Qiao Sun (10 pages). No repository or project URL appears anywhere in the extracted PDF text, so code_available stays UNKNOWN: absence of a printed URL is not evidence that no code exists. EVIDENCE_LEVEL=DOCUMENT_VERIFIED"),
+    "P0020": dict(short="Bahram2016", title="A Game-Theoretic Approach to Replanning-Aware Interactive Scene Prediction and Planning",
+                  year="2016", first_author="Mohammad Bahram", venue="IEEE Transactions on Vehicular Technology 65(6), 3981-3992",
+                  arxiv_id="NONE", doi="10.1109/TVT.2015.2508009",
+                  official_url="https://doi.org/10.1109/TVT.2015.2508009",
+                  code_available="UNKNOWN", official_code_url="",
+                  tags="trajectory-prediction;interactive;reactive;planning", hyp="P2R_PRIMARY", rel="MEDIUM",
+                  note="Round 2 H3, historical novelty control for the P2-R occupancy question. BLOCKED: no lawful open canonical source. The DOI resolves to the IEEE Xplore landing page (HTTP 202, HTML, not a PDF); unofficial mirrors are excluded by the ingest prompt, so no PDF is stored and the record carries DOWNLOAD_BLOCKED: PAYWALLED_NO_OPEN_SOURCE. Title, year, venue and author are index-level discovery metadata and NOT document-verified. EVIDENCE_LEVEL=INDEX_BACKED"),
 }
 
-ORDER = [f"P{i:04d}" for i in range(1, 13)]
+ORDER = [f"P{i:04d}" for i in range(1, 21)]
 
 
-def load(name):
-    p = os.path.join(MAN, name)
-    if not os.path.exists(p):
-        return None
-    with open(p, encoding="utf-8") as f:
-        return json.load(f)
+def load_all(name):
+    """Merge every batch ledger for one artifact, e.g. load_all("download_results").
+
+    The CSV is a single corpus-wide index, so it must never lose another
+    batch's rows: every manifests/batch_*_<name>.json is read and later batches
+    win per paper_id. Batch 0A and Round 2 therefore coexist, and a targeted
+    re-run cannot truncate the other batch's provenance.
+    """
+    merged = {}
+    suffix = f"_{name}.json"
+    for fn in sorted(os.listdir(MAN)):
+        if fn.startswith("batch_") and fn.endswith(suffix):
+            with open(os.path.join(MAN, fn), encoding="utf-8") as f:
+                for r in json.load(f):
+                    merged[r["paper_id"]] = r
+    return list(merged.values())
 
 
 def main():
-    dl = {r["paper_id"]: r for r in load("batch_0a_download_results.json") or []}
-    fp = {r["paper_id"]: r for r in load("batch_0a_frontpage_verification.json") or []}
-    raw = {r["paper_id"]: r for r in load("batch_0a_rawmd_results.json") or []}
+    dl = {r["paper_id"]: r for r in load_all("download_results")}
+    fp = {r["paper_id"]: r for r in load_all("frontpage_verification")}
+    raw = {r["paper_id"]: r for r in load_all("rawmd_results")}
 
     rows = []
     for pid in ORDER:

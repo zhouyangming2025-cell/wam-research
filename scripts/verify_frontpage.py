@@ -15,7 +15,10 @@ import unicodedata
 
 BASE = r"D:\zym_information\ZYM\wam\research_assets"
 PDF_DIR = os.path.join(BASE, "papers", "pdf")
-OUT = os.path.join(BASE, "manifests", "batch_0a_frontpage_verification.json")
+# Batch label selects the ledger; the default reproduces the Batch 0A file exactly
+# and CORPUS_BATCH=round2 writes the Round 2 ledger (see scripts/build_raw_md.py).
+BATCH = os.environ.get("CORPUS_BATCH", "0a")
+OUT = os.path.join(BASE, "manifests", f"batch_{BATCH}_frontpage_verification.json")
 
 try:  # console below is GBK; paper front pages contain symbols like U+2020
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
@@ -46,6 +49,27 @@ EXPECT = {
               "Yu", []),
     "P0012": ("DAWAM", "DA-WAM: Decision-Aligned Future Latents for Driving World Models",
               "Zhong", []),
+    # Round 2 targeted ingest. These expectations are the DECLARED discovery
+    # metadata from state/TARGETED_READING_QUEUE.md (WEB-VERIFIED DISCOVERY). The
+    # check promotes a record to DOCUMENT_VERIFIED only if the PDF's own front page
+    # confirms title and first author; anything else is recorded as CONFLICT with
+    # the page-1 head kept for adjudication.
+    "P0013": ("BridgeSim", "BridgeSim: Unveiling the OL-CL Gap in End-to-End Autonomous Driving",
+              "Zhao", []),
+    "P0014": ("ReactSimBench", "ReactSim-Bench: Benchmarking Reactive Behavior World Model Simulation in Autonomous Driving",
+              "Zhang", []),
+    "P0015": ("CausalDrive", "CausalDrive: Real-time Causal World Models for Autonomous Driving",
+              "Yan", []),
+    "P0016": ("CounterfactualPred", "How Can Driving World Models Do Counterfactual Prediction?",
+              "Zhang", []),
+    "P0017": ("CRAFT", "CRAFT: Counterfactual-to-Interactive Reinforcement Fine-Tuning for Driving Policies",
+              "Chen", []),
+    "P0018": ("GameFormer", "GameFormer: Game-theoretic Modeling and Learning of Transformer-based Interactive Prediction and Planning for Autonomous Driving",
+              "Huang", ["Liu", "Lv"]),
+    "P0019": ("M2I", "M2I: From Factored Marginal Trajectory Prediction to Interactive Prediction",
+              "Sun", []),
+    "P0020": ("Bahram2016", "A Game-Theoretic Approach to Replanning-Aware Interactive Scene Prediction and Planning",
+              "Bahram", []),
 }
 
 
@@ -63,6 +87,11 @@ def page_text(pdf, idx: int) -> str:
 
 
 def main() -> int:
+    # optional CLI filter: verify only these paper ids (comma-separated), so a
+    # targeted batch never mixes other batches into its own ledger.
+    only = None
+    if len(sys.argv) > 1 and not sys.argv[1].startswith("-"):
+        only = {s.strip() for s in sys.argv[1].split(",")}
     try:
         import pypdfium2 as pdfium
     except ImportError:
@@ -76,6 +105,8 @@ def main() -> int:
     print(f"pypdfium2={ver}")
     results = []
     for pid, (short, exp_title, exp_sur, extra) in EXPECT.items():
+        if only and pid not in only:
+            continue
         path = os.path.join(PDF_DIR, f"{pid}_{short}.pdf")
         rec = dict(paper_id=pid, short_name=short, path=path, exists=os.path.exists(path),
                    expected_title=exp_title, expected_first_author_surname=exp_sur,
@@ -113,9 +144,21 @@ def main() -> int:
         print(f"    pdf_meta_title: {rec['pdf_meta_title']!r}")
         for l in rec["page1_head"][:14]:
             print(f"    | {l[:150]}")
+    # merge, never drop records: a targeted --only re-run must not truncate the
+    # batch's front-page verification ledger.
+    try:
+        with open(OUT, encoding="utf-8") as f:
+            merged = {r["paper_id"]: r for r in json.load(f)}
+    except (OSError, ValueError):
+        merged = {}
+    for r in results:
+        merged[r["paper_id"]] = r
+    ordered = [merged[k] for k in sorted(merged)]
+
     with open(OUT, "w", encoding="utf-8") as f:
-        json.dump(results, f, indent=2, ensure_ascii=False)
-    print(f"\nresults -> {OUT}")
+        json.dump(ordered, f, indent=2, ensure_ascii=False)
+    print(f"\nrecords in ledger: {len(ordered)} (this run: {len(results)})")
+    print(f"results -> {OUT}")
     return 0
 
 

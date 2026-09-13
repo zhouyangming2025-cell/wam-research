@@ -28,7 +28,11 @@ RAW_DIR = os.path.join(BASE, "papers", "raw_md")
 STAGE = os.path.join(BASE, "papers", "quarantine", "mineru_artifacts")
 LOG_DIR = os.path.join(BASE, "experiment_logs")
 MAN = os.path.join(BASE, "manifests")
-OUT = os.path.join(MAN, "batch_0a_rawmd_results.json")
+# Batch label selects the results ledger. The default reproduces the Batch 0A
+# file exactly; CORPUS_BATCH=round2 writes the Round 2 targeted-ingest ledger, so
+# a targeted re-run can never truncate another batch's provenance.
+BATCH = os.environ.get("CORPUS_BATCH", "0a")
+OUT = os.path.join(MAN, f"batch_{BATCH}_rawmd_results.json")
 
 MINERU = r"D:\Program Files\Mineru\venv\Scripts\mineru.exe"
 MINERU_PY = r"D:\Program Files\Mineru\venv\Scripts\python.exe"
@@ -45,6 +49,18 @@ PAPERS = [
     ("P0004", "BeTop"), ("P0005", "RiskWorld"), ("P0006", "GenDrive"),
     ("P0007", "DriveReward"), ("P0009", "DriveLaW"), ("P0010", "TOAD"),
     ("P0011", "SensitivityShaping"), ("P0012", "DAWAM"),
+    # Round 2 targeted ingest: the frozen set from
+    # agent/prompts/ROUND2_TARGETED_INGEST.md, in the prompt's list order. IDs were
+    # allocated after confirming the live manifest's highest ID was still P0012 and
+    # that none of these eight titles already existed in the corpus.
+    ("P0013", "BridgeSim"),            # A1
+    ("P0014", "ReactSimBench"),        # A2
+    ("P0015", "CausalDrive"),          # A3
+    ("P0016", "CounterfactualPred"),   # A4
+    ("P0017", "CRAFT"),                # A5
+    ("P0018", "GameFormer"),           # H1
+    ("P0019", "M2I"),                  # H2
+    ("P0020", "Bahram2016"),           # H3
 ]
 
 try:

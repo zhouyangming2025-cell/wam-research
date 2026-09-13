@@ -26,7 +26,11 @@ import urllib.request
 
 BASE = r"D:\zym_information\ZYM\wam\research_assets"
 PDF_DIR = os.path.join(BASE, "papers", "pdf")
-RESULTS = os.path.join(BASE, "manifests", "batch_0a_download_results.json")
+# Batch label selects the results ledger. The default reproduces the Batch 0A
+# file exactly; CORPUS_BATCH=round2 writes the Round 2 targeted-ingest ledger, so
+# a targeted re-run can never truncate another batch's provenance.
+BATCH = os.environ.get("CORPUS_BATCH", "0a")
+RESULTS = os.path.join(BASE, "manifests", f"batch_{BATCH}_download_results.json")
 
 TIMEOUT = 90
 ATTEMPTS = 3
@@ -39,6 +43,43 @@ MIN_PDF_BYTES = 20_000        # anything smaller is an error page, not a paper
 # version > official project-hosted PDF. One canonical PDF per paper.
 # `alternate_official` is RECORDED for provenance but is never auto-fetched.
 SOURCES = [
+    # --- Round 2 targeted ingest: H1-H3 historical novelty controls ---
+    dict(paper_id="P0018", short="GameFormer",
+         url="https://openaccess.thecvf.com/content/ICCV2023/papers/Huang_GameFormer_Game-theoretic_Modeling_and_Learning_of_Transformer-based_Interactive_Prediction_and_ICCV_2023_paper.pdf",
+         source_version="ICCV2023_camera_ready",
+         basis="venue camera-ready (CVF Open Access); the URL was located by scanning the ICCV2023 Open Access index page, because CVF truncates the title inside its slug and full-title guesses therefore return 404. This supersedes an earlier arXiv download of the same paper (arXiv:2303.05760): venue camera-ready outranks a preprint in the corpus canonical-source priority, and the superseded hash is recorded in ROUND2_TARGETED_INGEST_REPORT.md",
+         alternate_official="https://openaccess.thecvf.com/content/ICCV2023/html/Huang_GameFormer_Game-theoretic_Modeling_and_Learning_of_Transformer-based_Interactive_Prediction_and_ICCV_2023_paper.html"),
+    dict(paper_id="P0019", short="M2I",
+         url="https://openaccess.thecvf.com/content/CVPR2022/papers/Sun_M2I_From_Factored_Marginal_Trajectory_Prediction_to_Interactive_Prediction_CVPR_2022_paper.pdf",
+         source_version="CVPR2022_camera_ready",
+         basis="venue camera-ready (CVF Open Access); URL verified 2026-09-13 as HTTP 206 + %PDF- before download"),
+    dict(paper_id="P0020", short="Bahram2016",
+         url=None,
+         source_version="none_available",
+         basis="no lawful open canonical source: IEEE Transactions on Vehicular Technology 65(6), 3981-3992, DOI 10.1109/TVT.2015.2508009; the DOI resolves to the IEEE Xplore landing page (HTML, not a PDF). Unofficial mirrors are excluded by the ingest prompt."),
+    # --- Round 2 targeted ingest (agent/prompts/ROUND2_TARGETED_INGEST.md) ---
+    # A1-A5 core P2-R attack set: 2026 arXiv preprints with no verified venue
+    # camera-ready, so the official arXiv version is canonical.
+    dict(paper_id="P0013", short="BridgeSim",
+         url="https://arxiv.org/pdf/2604.10856",
+         source_version="arXiv_v1",
+         basis="official arXiv version (preprint, no verified venue version)"),
+    dict(paper_id="P0014", short="ReactSimBench",
+         url="https://arxiv.org/pdf/2606.14058",
+         source_version="arXiv_v1",
+         basis="official arXiv version (preprint, no verified venue version)"),
+    dict(paper_id="P0015", short="CausalDrive",
+         url="https://arxiv.org/pdf/2606.15341",
+         source_version="arXiv_v1",
+         basis="official arXiv version (preprint, no verified venue version)"),
+    dict(paper_id="P0016", short="CounterfactualPred",
+         url="https://arxiv.org/pdf/2608.11601",
+         source_version="arXiv_v1",
+         basis="official arXiv version (preprint, no verified venue version)"),
+    dict(paper_id="P0017", short="CRAFT",
+         url="https://arxiv.org/pdf/2605.04470",
+         source_version="arXiv_v1",
+         basis="official arXiv version (preprint, no verified venue version)"),
     dict(paper_id="P0001", short="Epona",
          url="https://openaccess.thecvf.com/content/ICCV2025/papers/"
              "Zhang_Epona_Autoregressive_Diffusion_World_Model_for_Autonomous_Driving_"
@@ -219,8 +260,19 @@ def main() -> int:
         if url.startswith("https://arxiv.org"):
             time.sleep(ARXIV_DELAY)
 
+    # merge, never drop records: a targeted re-run must not truncate the ledger.
+    # The run-local `results` list still drives the summary below.
+    try:
+        with open(RESULTS, encoding="utf-8") as f:
+            merged = {r["paper_id"]: r for r in json.load(f)}
+    except (OSError, ValueError):
+        merged = {}
+    for r in results:
+        merged[r["paper_id"]] = r
+    ordered = [merged[k] for k in sorted(merged)]
+
     with open(RESULTS, "w", encoding="utf-8") as f:
-        json.dump(results, f, indent=2, ensure_ascii=False)
+        json.dump(ordered, f, indent=2, ensure_ascii=False)
 
     ok = sum(1 for r in results if r["status"] == "DOWNLOADED")
     blocked = [r["paper_id"] for r in results if r["status"] == "DOWNLOAD_BLOCKED"]
