@@ -4,6 +4,36 @@ Newest entry first.
 
 ---
 
+## 2026-09-13 — Planning-centric scope + problem-first rule + targeted corpus freeze
+
+**Decision**
+
+1. Research identity is fixed as:
+
+```text
+World Model + End-to-End + Planning-centric autonomous driving
+```
+
+2. Risk field / predictive risk field is **not** a required destination. The owner's prior risk/safety expertise is optional prior knowledge, to be used only if a surviving planning problem genuinely benefits from it.
+3. Every paper must be evaluated symmetrically: strongest evidence, strongest limitation, what it proves, what it does not prove, observed failure vs our inference, prior-art pressure, residual question.
+4. Broad corpus expansion is paused. Add only the frozen targeted set in `state/TARGETED_READING_QUEUE.md`: five direct P2-R papers plus three historical interactive-planning controls, then stop and adjudicate.
+5. No method design before this gate closes.
+
+**Why**
+
+The active risk is no longer lack of papers; it is path dependence and premature solution design. Existing Batch 0A evidence already shows that broad architectural claims are heavily occupied. The next papers must therefore have high discrimination value for the narrow P2-R question rather than merely share WAM/risk keywords.
+
+A second risk is confirmation bias: papers that resemble our ideas must not be treated more harshly, and papers that support our hypothesis must not be treated more generously. Scientific review must preserve both strengths and weaknesses.
+
+**What would reverse this decision**
+
+- Broader expansion becomes justified only when a specific unresolved scientific question identifies a missing paper family.
+- Risk-field machinery becomes central only if a validated planning failure yields a missing capability for which that machinery offers a defensible advantage.
+
+Canonical rules: `state/RESEARCH_PRINCIPLES.md`.
+
+---
+
 ## 2026-09-13 — P2-R Round-1 adjudication: survives as question, not confirmed gap
 
 **Decision**
@@ -67,7 +97,7 @@ Kill P2-R rather than widen it if direct literature or a minimal controlled test
 
 **Next gate**
 
-Direct literature attack: BridgeSim, ReactSim-Bench, CausalDrive, How Can Driving World Models Do Counterfactual Prediction?, CRAFT.
+Direct literature attack: BridgeSim, ReactSim-Bench, CausalDrive, How Can Driving World Models Do Counterfactual Prediction?, CRAFT, plus historical controls GameFormer, M2I, and Bahram et al. 2016.
 
 ---
 
