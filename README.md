@@ -16,7 +16,11 @@ Text and extracted figures only — canonical PDFs remain local/NAS.
 
 `START_HERE.md` is intentionally self-contained so a fresh GPT-5.6 Sol session can recover the research direction, current hypothesis, scientific discipline and immediate task without re-reading old chats or the whole corpus.
 
-Read `state/DECISION_LOG.md` only when decision provenance is needed.
+A copy-ready prompt for a totally fresh session lives at:
+
+`handoff/NEW_SESSION_PROMPT.md`
+
+Read `state/DECISION_LOG.md` only when decision provenance is needed. If older cross-paper evidence is needed, prefer `evidence/CORE_EVIDENCE_SNAPSHOT.md` over old conversations.
 
 ## Research scope
 
@@ -26,7 +30,7 @@ World Model + End-to-End + Planning-centric
 
 Planning is the center of gravity. Risk/safety modeling, perception, generation, VLA and representation learning matter only insofar as they contribute to planning capability or explain planning failures.
 
-**Risk field is optional, not a required destination.** Prior expertise is used only if the surviving problem genuinely benefits from it. See `state/RESEARCH_PRINCIPLES.md`.
+**Risk field is optional, not a required destination.** Prior expertise is used only if the surviving problem genuinely benefits from it. See `state/RESEARCH_PRINCIPLES.md` and `evidence/LEGACY_EXPERTISE_ASSETS.md`.
 
 ## Current state
 
@@ -45,9 +49,13 @@ NO DIRECT OBSERVED P2-R FAILURE HAS YET BEEN ESTABLISHED.
 P2-R SURVIVES ROUND 1 AS A QUESTION, NOT AS A CONFIRMED GAP.
 ```
 
-Latest audit:
+Latest full primary-text audit:
 
 `audits/literature/P2R_TARGETED_FAILURE_DEEP_READ_ROUND1.md`
+
+Abstract/project-page reconnaissance for Round 2:
+
+`audits/literature/P2R_ROUND2_PREINGEST_RECON.md`
 
 ## Immediate reading gate
 
@@ -72,11 +80,14 @@ state/TARGETED_READING_QUEUE.md      frozen targeted expansion set
 state/DECISION_LOG.md                decision provenance
 state/RESEARCH_LEDGER.md             factual corpus/gate ledger
 hypotheses/                          P1_RETIRED, P2R_PRIMARY, P3_HOLD
+evidence/CORE_EVIDENCE_SNAPSHOT.md   compact legacy/current cross-paper evidence
+evidence/LEGACY_EXPERTISE_ASSETS.md  optional prior risk/safety capabilities
 audits/literature/                   cross-paper adversarial audits
 papers/cards/                        curated per-paper scientific cards
 papers/raw_md/<PXXXX_Short>/         MinerU raw Markdown + images
 manifests/CORPUS_MANIFEST.csv        corpus registry
 handoff/LATEST.md                    latest session handoff
+handoff/NEW_SESSION_PROMPT.md        copy-ready fresh-session bootstrap prompt
 scripts/                             ingestion/verification scripts
 experiment_logs/                     conversion logs
 BATCH_0A_*.md                        ingest reports
