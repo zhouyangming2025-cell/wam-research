@@ -4,6 +4,63 @@ Newest entry first.
 
 ---
 
+## 2026-09-14 — Field-reconstruction reset: stop hypothesis-first gap hunting
+
+**Decision**
+
+The project will no longer organize literature review around finding, rescuing, or killing a preselected gap.
+
+Active stage becomes:
+
+```text
+FIELD RECONSTRUCTION — Planning-centric WAM Atlas
+```
+
+P1/P2-R/P3 are retained only as historical probes:
+
+```text
+P1 = retired historical hypothesis
+P2-R = parked probe, not active search target
+P3 = parked backup probe
+```
+
+Before formal research-problem selection, the project will reconstruct the field at two depths:
+
+```text
+~50–80 paper census at placement/overview depth
+~15–25 representative anchor deep reads
+```
+
+followed by cross-family synthesis of historical evolution, planning interfaces, supervision, evaluation regimes, recurring trade-offs, counterexamples and under-measured capabilities.
+
+**Why**
+
+The previous process was structurally too narrow: it started from a small, hypothesis-biased paper set and quickly generated candidate gaps. Even careful falsification afterward could not remove the initial path dependence. A narrow claim could survive simply because the search coordinates were narrow, not because the field had been understood.
+
+The earlier analyses are not discarded: paper facts, counterexamples and source audits remain useful evidence. What is withdrawn is their use as sufficient basis for choosing the research problem.
+
+**New canonical artifacts**
+
+- `landscape/FIELD_RECONSTRUCTION_PLAN.md`
+- `landscape/PLANNING_WAM_TAXONOMY.md`
+- `landscape/FIELD_ATLAS.md`
+
+**Research discipline**
+
+During the census phase:
+
+- no gap/novelty verdict per paper;
+- no reading list optimized around P2-R;
+- no forcing risk-field expertise into the map;
+- include strong non-WM end-to-end planners and benchmark/evaluation papers;
+- check historical interactive-prediction/planning predecessors so modern terminology does not hide old ideas.
+
+**Reopen gap selection only when**
+
+The atlas can coherently explain major planning-centric WAM families, their historical transitions, observation→future→planner interfaces, supervision availability, action-conditioning/reactivity distinctions, evaluation meanings, strong counterexamples and recurring trade-offs.
+
+---
+
 ## 2026-09-13 — Planning-centric scope + problem-first rule + targeted corpus freeze
 
 **Decision**
@@ -25,12 +82,9 @@ The active risk is no longer lack of papers; it is path dependence and premature
 
 A second risk is confirmation bias: papers that resemble our ideas must not be treated more harshly, and papers that support our hypothesis must not be treated more generously. Scientific review must preserve both strengths and weaknesses.
 
-**What would reverse this decision**
+**Superseded note**
 
-- Broader expansion becomes justified only when a specific unresolved scientific question identifies a missing paper family.
-- Risk-field machinery becomes central only if a validated planning failure yields a missing capability for which that machinery offers a defensible advantage.
-
-Canonical rules: `state/RESEARCH_PRINCIPLES.md`.
+The 2026-09-14 field-reconstruction reset supersedes the targeted-freeze as the active program. The targeted set remains useful as one branch of the field atlas rather than the sole gate.
 
 ---
 
@@ -42,28 +96,13 @@ Canonical rules: `state/RESEARCH_PRINCIPLES.md`.
 P2-R SURVIVES ROUND 1 AS A QUESTION, NOT AS A CONFIRMED GAP.
 ```
 
-No method design is authorized.
+No method design was authorized.
 
 **Why**
 
-The existing repo corpus is sufficient to show that several broad formulations are already occupied:
+The existing repo corpus showed that several broad formulations were already occupied: interaction-aware planning; reactive/closed-loop evaluation; ego-action-conditioned world modeling; candidate-specific future prediction; future-conditioned candidate scoring.
 
-- interaction-aware planning;
-- reactive / closed-loop evaluation;
-- ego-action-conditioned world modeling;
-- candidate-specific future prediction;
-- future-conditioned candidate scoring.
-
-SafeDrive, BeTop and especially DA-WAM directly occupy these broad directions.
-
-However, the reviewed papers do not directly measure the narrower quantity:
-
-```text
-P[ rank_factual/nonreactive(A) != rank_reactive(A)
-   | fixed state, fixed candidate set, interaction-critical regime ]
-```
-
-with the difference causally attributable to surrounding-agent response to ego intervention.
+The reviewed papers did not directly measure the narrower matched-state / matched-candidate reaction-induced action-ordering quantity.
 
 **Evidence reviewed**
 
@@ -73,31 +112,11 @@ with the difference causally attributable to surrounding-agent response to ego i
 - P0005 RiskWorld
 - P0012 DA-WAM
 
-Full audit:
+Full audit: `audits/literature/P2R_TARGETED_FAILURE_DEEP_READ_ROUND1.md`
 
-`audits/literature/P2R_TARGETED_FAILURE_DEEP_READ_ROUND1.md`
+**Current provenance status**
 
-**Strongest counterevidence / prior-art pressure**
-
-- DA-WAM already predicts a separate future latent for every candidate and scores that candidate using its corresponding future.
-- SafeDrive already constructs candidate-conditioned sparse worlds and performs safety-based candidate selection.
-- BeTop already demonstrates interaction-aware planning under reactive closed-loop evaluation.
-
-Therefore any future P2-R contribution that collapses to "make the model action-conditioned/reactive" is not novel enough.
-
-**What would reverse / kill this decision**
-
-Kill P2-R rather than widen it if direct literature or a minimal controlled test shows any of the following:
-
-1. matched-state / matched-candidate factual-vs-reactive ordering is already directly measured and substantially solved;
-2. ordering inversions are rare or cause negligible planning regret;
-3. apparent inversions are mostly caused by observation shift, control error, temporal compounding, or candidate-set change rather than surrounding-agent response;
-4. current candidate-conditioned methods already preserve reactive ordering under a direct controlled evaluation;
-5. the only remaining contribution is a new name / metric for an already-established interactive-planning phenomenon.
-
-**Next gate**
-
-Direct literature attack: BridgeSim, ReactSim-Bench, CausalDrive, How Can Driving World Models Do Counterfactual Prediction?, CRAFT, plus historical controls GameFormer, M2I, and Bahram et al. 2016.
+Retained as a useful historical scientific audit, but P2-R is parked during field reconstruction and no longer organizes the reading program.
 
 ---
 
@@ -107,36 +126,26 @@ Direct literature attack: BridgeSim, ReactSim-Bench, CausalDrive, How Can Drivin
 
 The private GitHub repo becomes the canonical cross-session Research Brain.
 
-- GPT-5.6 Sol handles scientific deep reading, adversarial review, hypothesis adjudication, evidence synthesis, paper-card scientific content and direct repo state updates.
+- GPT-5.6 Sol handles scientific deep reading, synthesis, hypothesis adjudication, field-atlas maintenance, paper-card scientific content and direct repo state updates.
 - The local corpus agent handles acquisition, MinerU conversion, metadata/QC, local-PDF source extraction, source-code execution, datasets/checkpoints and experiments.
-
-**Why**
-
-The GitHub connector has been verified to read the private repo, its state files and full raw Markdown papers directly. This removes the need for each new chat to reload long conversation history.
 
 **Boundary**
 
-Canonical PDFs remain local/NAS only. GitHub stores raw Markdown, figures, research cards, audits, hypothesis state, manifests and decisions.
+Canonical PDFs remain local/NAS when archived. GitHub stores raw Markdown, figures, research cards, audits, landscape/state files, manifests and decisions.
 
 ---
 
-## 2026-09-13 — Hypothesis status reset (P1 retired, P2R primary, P3 hold)
+## 2026-09-13 — Hypothesis status reset (historical)
 
-**Decision**
+**Decision at that time**
 
-- P1_RETIRED — Planner-Induced Model Exploitation / Search-Support Gap: `RETIRED AS MAIN PROBLEM`
-- P2R_PRIMARY — Reactive Action-Ordering Gap in Planning-centric WAMs: `PRIMARY CANDIDATE, NOT CONFIRMED GAP`
-- P3_HOLD — Decision Sufficiency of World Representations: `HOLD AS BACKUP`
+- P1_RETIRED — `RETIRED AS MAIN PROBLEM`
+- P2R_PRIMARY — `PRIMARY CANDIDATE, NOT CONFIRMED GAP`
+- P3_HOLD — `HOLD AS BACKUP`
 
-**Rationale**
+**Superseded by 2026-09-14**
 
-- P1: real failure mode but low WAM specificity; scorer/reward optimization and mitigation space are already heavily occupied, and source audit weakened the chain from optimizer exploit to deployed-planner failure.
-- P3: highly WAM-native but its broad "planning-oriented rather than reconstruction-oriented representation" framing is under strong 2025–2026 prior-art pressure.
-- P2-R: the narrowed matched-action, reaction-induced ordering question survived the prior-art attack and has clean falsification criteria, but is not yet a confirmed gap.
-
-**What would reverse this decision**
-
-P2-R should be killed if direct evidence does not establish a distinct action-ordering failure attributable to reactive other-agent responses. In that case, returning `NONE` is preferred over protecting the candidate by widening its definition.
+P2-R is now parked as a probe while the field is reconstructed; P3 remains a parked backup probe.
 
 ---
 
@@ -144,15 +153,11 @@ P2-R should be killed if direct evidence does not establish a distinct action-or
 
 **Decision**
 
-1. Canonical PDFs stored only on local/NAS; never uploaded to ChatGPT Library or GitHub.
-2. GPT-readable primary-text layer = MinerU raw Markdown.
+1. Canonical PDFs stored on local/NAS when archived; do not rely on GitHub for PDF binaries.
+2. GPT-readable primary-text layer = MinerU raw Markdown when ingested.
 3. Raw MD may live in the GitHub private repo as the cross-session full-text layer.
 4. ChatGPT Library = optional convenience copy of raw MD, never a system dependency.
 5. `pdf_sha256` = SHA256 over logical document bytes from the canonical Python corpus I/O path.
 6. Windows native/.NET +1024 framed file view = `KNOWN_HOST_QUIRK`; no further investigation.
-7. Insufficient raw MD (exact wording, complex formulas, figures) → on-demand source extract from the local canonical PDF.
+7. Insufficient raw MD (exact wording, complex formulas, figures) → on-demand source extract from the local canonical PDF or direct official PDF verification.
 8. Corpus agent = source/infrastructure worker; scientific judgement is maintained in the Research Brain by GPT-5.6 Sol + owner.
-
-**Why**
-
-This establishes which artifacts may cross which boundary and fixes a reproducible content-hash basis despite the host's API-dependent file framing.
