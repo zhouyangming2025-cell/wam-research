@@ -2,7 +2,7 @@
 
 ## 唯一下一任务
 
-> Build the first neutral **planning-centric WAM field census** before any further gap selection.
+> Complete **Phase-A Field Census Round 2**: fill the remaining planning-centric WAM landscape gaps until the field map reaches sufficient 50–80-work coverage, then freeze breadth expansion and select representative anchor papers for deep reading.
 
 Active plan:
 
@@ -16,31 +16,72 @@ Living atlas:
 
 `landscape/FIELD_ATLAS.md`
 
-## Phase A — census construction
+Round-1 census:
 
-Target roughly **50–80 decision-relevant papers** at metadata / abstract / method-overview depth, sufficient to place each paper accurately in the common taxonomy.
+`landscape/CENSUS_PHASE_A_ROUND1.md`
 
-The census must cover the field families rather than follow a preselected hypothesis:
+## Current progress
+
+Round 1 has provisionally placed roughly **45 unique works / benchmarks / control systems** across F1–F11.
+
+The map now contains early coverage of:
 
 ```text
-F1  visual/video generative driving world models
-F2  BEV / occupancy / geometric predictive world models
-F3  latent / JEPA / predictive-representation world models
-F4  world-model-assisted direct end-to-end planning
-F5  candidate-conditioned / action-conditioned future evaluation
-F6  unified world-action / trajectory-and-world generation
-F7  interactive prediction + planning / contingency / game-theoretic predecessors
-F8  reactive world simulation / closed-loop policy training
-F9  reward / value / safety / cost interfaces
-F10 strong end-to-end planners without explicit world models
-F11 evaluation / benchmark / simulator papers
+visual/video WMs
+occupancy/BEV/geometric WMs
+latent/JEPA/predictive representations
+world-model-assisted planning
+candidate/action-conditioned futures
+unified world-action models
+interactive prediction/planning predecessors
+reactive simulation
+reward/value/safety interfaces
+strong non-WM E2E controls
+planning benchmarks/evaluation regimes
 ```
 
-Use recent high-quality DWM surveys and planning-oriented E2E surveys to seed coverage, but verify representative primary papers directly.
+No research-gap verdict has been issued.
+
+## Round 2 — fill missing coverage, not gaps
+
+Priority coverage holes:
+
+1. **Strong non-WM E2E controls**
+   - Hydra-MDP family
+   - DriveSuprim
+   - iPad
+   - representative modern VLA planners
+
+2. **World-model RL / policy-learning lineage**
+   - Think2Drive and related latent-WM RL driving work
+   - distinguish simulator world model from planner world model
+
+3. **Representation-pretraining bridges**
+   - ViDAR
+   - GenAD
+   - only include additional pretraining WMs if they help explain the transition into planning-centric WMs
+
+4. **Benchmark / evaluation evolution**
+   - nuScenes planning protocol
+   - nuPlan OL / CL-NR / CL-R
+   - NAVSIM v1 / v2
+   - Bench2Drive
+   - HUGSIM
+   - reactive-world benchmarks
+
+5. **Operational/deployment properties**
+   - whether the future-model branch survives at inference
+   - action/candidate count
+   - rollout/planning horizon
+   - latency/FPS when reported
+   - real-vehicle closed-loop evidence, if any
+
+6. **Uncertainty / multimodality**
+   - determine how major families represent multiple plausible futures and whether the planner actually consumes that uncertainty
 
 ## Per-paper census output
 
-For each paper record only what is needed for field placement:
+For every new work record only field-placement facts:
 
 ```text
 Paper
@@ -62,38 +103,23 @@ Historical importance / transition role
 Placement confidence
 ```
 
-Do **not** write a novelty/gap verdict during census placement.
+Do **not** write novelty or gap verdicts.
 
-## Phase B selection gate
+## Phase-A stop condition
 
-After the census has reasonable coverage, choose roughly **15–25 representative anchor papers** for full deep reading.
+Freeze breadth expansion when:
 
-Anchor selection must explain the field, not merely attack P2-R. Include:
+1. the census contains roughly 50–80 reasonably placed works;
+2. F1–F11 each have enough coverage to explain why that family exists;
+3. 2023–2026 historical transitions can be narrated without relying on one survey taxonomy;
+4. benchmark differences are explicit enough to prevent false cross-paper comparison;
+5. strong non-WM planning controls are represented;
+6. a 15–25 paper deep-read anchor set can be justified by field coverage rather than by P1/P2-R/P3.
 
-- foundational generation/simulation WMs;
-- occupancy/BEV planning WMs;
-- latent/JEPA planning WMs;
-- unified world/action models;
-- action-conditioned/candidate-specific planners;
-- interactive prediction/planning predecessors;
-- reactive/closed-loop simulator work;
-- strong non-WM E2E planning baselines;
-- benchmark/evaluation papers;
-- strong counterexamples that invalidate common claims.
+Then begin Phase B anchor deep reads.
 
-## Existing targeted P2-R set
+## Parked hypotheses
 
-BridgeSim, ReactSim-Bench, CausalDrive, *How Can Driving World Models Do Counterfactual Prediction?*, CRAFT, GameFormer, M2I, and Bahram et al. 2016 remain useful. They now populate F7/F8/F11 and historical-continuity coverage; they are **not** the organizing principle of the whole reading program.
+P1/P2-R/P3 remain provenance and diagnostic probes only. Do not optimize Round 2 around proving, rescuing, or killing them.
 
-## Stop condition for this task
-
-Stop the first census pass when:
-
-1. F1–F11 each have enough representative papers to explain the family;
-2. major 2023–2026 planning-centric transitions are visible;
-3. strong non-WM planner baselines and evaluation papers are represented;
-4. the 15–25 anchor set can be justified from coverage rather than hypothesis preference.
-
-Then update `FIELD_ATLAS.md` and select the anchor deep-read set.
-
-Do not design methods. Do not declare a gap. Do not optimize the census to rescue or kill P2-R. Do not force risk-field knowledge into the map.
+Do not design methods. Do not declare a gap. Do not force risk-field knowledge into the atlas.
