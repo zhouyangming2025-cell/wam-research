@@ -25,6 +25,8 @@ observed planning failure
 → possible method
 ```
 
+Optional legacy capabilities are preserved in `evidence/LEGACY_EXPERTISE_ASSETS.md`; they are not method commitments.
+
 ## 2. Current hypothesis state
 
 | slot | hypothesis | status |
@@ -76,6 +78,8 @@ Strongest nearest-prior pressure:
 - **BeTop:** explicit future-interaction structure + reactive closed-loop evaluation.
 
 Do not design a method yet.
+
+For the compact cross-session record of earlier paper findings (including P1/P3 evidence), see `evidence/CORE_EVIDENCE_SNAPSHOT.md`.
 
 ## 4. Immediate task
 
@@ -139,6 +143,8 @@ For an ordinary continuation, read only:
 4. hypotheses/P2R_PRIMARY.md
 5. latest relevant audit/card only
 ```
+
+If the new session needs the prior cross-paper history behind P1/P3 or old counterexamples, read `evidence/CORE_EVIDENCE_SNAPSHOT.md` rather than old chats.
 
 Read `state/DECISION_LOG.md` only when provenance/rationale is needed. Do **not** reload all raw papers or all old chats.
 
