@@ -2,96 +2,98 @@
 
 ## 唯一下一任务
 
-> Complete the frozen **targeted reading gate** before any method design, experiment, broad corpus expansion, or return to risk-field engineering.
+> Build the first neutral **planning-centric WAM field census** before any further gap selection.
 
-Canonical queue:
+Active plan:
 
-`state/TARGETED_READING_QUEUE.md`
+`landscape/FIELD_RECONSTRUCTION_PLAN.md`
 
-## Phase 1 — local corpus ingestion
+Taxonomy:
 
-Ingest only these papers, in this order of acquisition priority:
+`landscape/PLANNING_WAM_TAXONOMY.md`
 
-### Core P2-R set
+Living atlas:
 
-1. BridgeSim — arXiv:2604.10856
-2. ReactSim-Bench — arXiv:2606.14058
-3. CausalDrive — arXiv:2606.15341
-4. How Can Driving World Models Do Counterfactual Prediction? — arXiv:2608.11601
-5. CRAFT — arXiv:2605.04470
+`landscape/FIELD_ATLAS.md`
 
-### Historical controls
+## Phase A — census construction
 
-6. GameFormer — arXiv:2303.05760 / ICCV 2023
-7. M2I — arXiv:2202.11884 / CVPR 2022
-8. Bahram et al. 2016 — DOI 10.1109/TVT.2015.2508009
+Target roughly **50–80 decision-relevant papers** at metadata / abstract / method-overview depth, sufficient to place each paper accurately in the common taxonomy.
 
-For each actual ingestion: allocate next stable Paper ID, acquire canonical PDF from venue/arXiv/official source, hash, front-page verify, MinerU-convert, QC raw MD + figures, update manifest, push text layer to this repo. If H3 has no lawful open PDF, record `PAYWALLED_NO_OPEN_SOURCE` rather than using an unofficial mirror.
-
-Do not ingest the deferred set automatically.
-
-## Phase 2 — GPT-5.6 Sol adversarial deep read
-
-After raw MD is present, deep-read in scientific order:
+The census must cover the field families rather than follow a preselected hypothesis:
 
 ```text
-A4 Counterfactual Prediction
-A2 ReactSim-Bench
-A1 BridgeSim
-A5 CRAFT
-A3 CausalDrive
-H3 Bahram 2016
-H1 GameFormer
-H2 M2I
+F1  visual/video generative driving world models
+F2  BEV / occupancy / geometric predictive world models
+F3  latent / JEPA / predictive-representation world models
+F4  world-model-assisted direct end-to-end planning
+F5  candidate-conditioned / action-conditioned future evaluation
+F6  unified world-action / trajectory-and-world generation
+F7  interactive prediction + planning / contingency / game-theoretic predecessors
+F8  reactive world simulation / closed-loop policy training
+F9  reward / value / safety / cost interfaces
+F10 strong end-to-end planners without explicit world models
+F11 evaluation / benchmark / simulator papers
 ```
 
-For each paper answer:
+Use recent high-quality DWM surveys and planning-oriented E2E surveys to seed coverage, but verify representative primary papers directly.
 
-- exact problem and scope;
-- input → numerical representation → future representation → planner consumption;
-- what receives direct supervision vs inferred/counterfactual supervision;
-- evaluation regime;
-- whether ego intervention is explicit;
-- whether surrounding-agent response changes with intervention;
-- whether state and candidate/action set are held fixed;
-- whether factual-vs-reactive action ordering is actually compared;
-- whether ordering reversal is directly measured;
-- whether planning regret from that reversal is measured;
-- strongest evidence supporting the paper;
-- strongest limitation / alternative explanation;
-- strongest evidence against P2-R;
-- prior-art occupancy level;
-- residual scientific question.
+## Per-paper census output
 
-Use `AUTHOR CLAIM`, `DIRECT EXPERIMENTAL EVIDENCE`, `OUR INFERENCE` separately.
-
-## Scientific question
-
-For fixed current state `s` and fixed ego candidate/action set `A`, is there direct evidence that surrounding-agent response to alternative ego interventions changes ego-action ordering and causes non-trivial planning regret?
+For each paper record only what is needed for field placement:
 
 ```text
-rank_factual/nonreactive(A) ?= rank_reactive(A)
+Paper
+Year / venue
+Family labels
+World state representation
+Predictive/generative mechanism
+World-model role
+Action conditioning
+Interaction/reactivity level
+Planning interface
+Planning output
+Supervision
+Evaluation regime
+Decision-evidence strength
+Main contribution
+Main stated limitation
+Historical importance / transition role
+Placement confidence
 ```
 
-The causal chain must be:
+Do **not** write a novelty/gap verdict during census placement.
 
-```text
-ego action
-→ surrounding-agent response changes
-→ candidate ordering reversal
-→ planning regret
-```
+## Phase B selection gate
 
-not merely generic OL/CL mismatch, observation shift, control error, temporal compounding, representation shift, or changed candidate coverage.
+After the census has reasonable coverage, choose roughly **15–25 representative anchor papers** for full deep reading.
 
-## Stop condition
+Anchor selection must explain the field, not merely attack P2-R. Include:
 
-After A1–A5 + H1–H3 are scientifically adjudicated, **stop corpus expansion** and issue one of:
+- foundational generation/simulation WMs;
+- occupancy/BEV planning WMs;
+- latent/JEPA planning WMs;
+- unified world/action models;
+- action-conditioned/candidate-specific planners;
+- interactive prediction/planning predecessors;
+- reactive/closed-loop simulator work;
+- strong non-WM E2E planning baselines;
+- benchmark/evaluation papers;
+- strong counterexamples that invalidate common claims.
 
-```text
-P2-R SURVIVES
-P2-R KILLED
-NONE / EVIDENCE INSUFFICIENT
-```
+## Existing targeted P2-R set
 
-Do not widen P2-R to protect it. Do not design a method yet. Do not force risk-field knowledge into the solution.
+BridgeSim, ReactSim-Bench, CausalDrive, *How Can Driving World Models Do Counterfactual Prediction?*, CRAFT, GameFormer, M2I, and Bahram et al. 2016 remain useful. They now populate F7/F8/F11 and historical-continuity coverage; they are **not** the organizing principle of the whole reading program.
+
+## Stop condition for this task
+
+Stop the first census pass when:
+
+1. F1–F11 each have enough representative papers to explain the family;
+2. major 2023–2026 planning-centric transitions are visible;
+3. strong non-WM planner baselines and evaluation papers are represented;
+4. the 15–25 anchor set can be justified from coverage rather than hypothesis preference.
+
+Then update `FIELD_ATLAS.md` and select the anchor deep-read set.
+
+Do not design methods. Do not declare a gap. Do not optimize the census to rescue or kill P2-R. Do not force risk-field knowledge into the map.
