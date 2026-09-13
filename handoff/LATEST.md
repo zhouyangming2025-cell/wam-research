@@ -1,67 +1,106 @@
 # LATEST — Handoff
 
-Session: 2026-09-13 — Batch 0A ingestion + Integration Gate 0 staging.
-Prepared by the corpus-librarian agent. This file states where things are and what is
-blocked; it contains no scientific verdicts.
+Session: 2026-09-13 — GPT-5.6 Sol scientific takeover.
 
-## New session read order
+## New-session read order
 
 ```text
 1. state/CURRENT_STATE.md
 2. state/DECISION_LOG.md
 3. state/NEXT_TASK.md
-4. handoff/LATEST.md          (this file)
-then, as needed:
-   hypotheses/<current>.md
-   papers/cards/<relevant IDs>.md
+4. handoff/LATEST.md
+5. hypotheses/P2R_PRIMARY.md
 ```
 
-Do not re-read the whole corpus by default.
+Then read only the paper cards / raw MD / audits relevant to the current task. Do not reload the whole corpus by default.
 
-## What exists now
+## Current research state
 
-- **Local/NAS corpus** (`D:\zym_information\ZYM\wam\research_assets\`): 12 papers
-  registered in `manifests/CORPUS_MANIFEST.csv` (25 columns); 11 canonical PDFs in
-  `papers/pdf/`; 11 MinerU raw MD + referenced images in
-  `papers/raw_md/PXXXX_ShortName/`; all MinerU intermediates quarantined in
-  `papers/quarantine/mineru_artifacts/`. Reports: `BATCH_0A_METADATA_REPORT.md`,
-  `BATCH_0A_INGEST_REPORT.md`.
-- **This repo** (`wam-research`, private): the text layer of the whole corpus — full
-  manifest, all 11 raw MD + their figures, card skeletons (P0001/P0002/P0010), the
-  Research Brain skeleton (`state/`, `hypotheses/`, `handoff/`), the ingest scripts,
-  conversion logs and reports. Canonical PDFs and the 307 MB MinerU `quarantine/` tree
-  are deliberately excluded (see `README.md`).
+```text
+P1_RETIRED  = RETIRED AS MAIN PROBLEM
+P2R_PRIMARY = PRIMARY CANDIDATE, NOT CONFIRMED GAP
+P3_HOLD     = HOLD AS BACKUP
+```
 
-## Non-negotiable boundaries
+P2-R is precisely defined as the possible mismatch between factual/non-reactive and reactive counterfactual **ego-action ordering** under a fixed state and fixed candidate set.
 
-- PDFs never leave local/NAS. The GitHub repo carries raw MD, cards, state — text only.
-- All card verdict fields are `PENDING SCIENTIFIC REVIEW`. The agent does source
-  extraction only; scientific judgement is the owner's.
-- `pdf_sha256` / `raw_md_sha256` are SHA256 over logical document bytes via the
-  canonical Python corpus I/O path. The Windows native/.NET +1024 framed view is a
-  `KNOWN_HOST_QUIRK` — do not re-investigate, do not "fix" hashes with PowerShell.
+Mechanism of interest:
 
-## Open items (blockers on the owner)
+```text
+ego action
+→ surrounding-agent response changes
+→ candidate action ordering reverses
+→ non-trivial planning regret
+```
 
-1. **GitHub push decision** — target private repo URL + auth method. No credentials
-   have been requested, stored or used. Push not attempted.
-2. **P0008 NPPC** — unreadable from the corpus (paywalled). If a lawfully obtained PDF
-   appears, hash it, verify the front page, convert it.
-3. **Two confirmations from the Batch 0A ingest report** still stand: hash read-path
-   authority is now fixed by ruling, but the "open the PDF in a Windows viewer" check
-   was never performed; and the TOAD README-vs-abstract PDMS discrepancy (94.9 vs 94.7)
-   is recorded, unadjudicated.
+## What has changed since Integration Gate 0
 
-## Known host quirks to respect
+- The private repo is **live and readable directly by ChatGPT through the GitHub connection**. GitHub push/authentication is no longer a blocker.
+- GPT-5.6 Sol has taken over scientific interpretation and research-state maintenance.
+- `hypotheses/P2R_PRIMARY.md` now contains the full definition, exclusions, kill criteria and Round-1 status.
+- `hypotheses/P3_HOLD.md` now contains the actual backup-problem definition and prior-art risk.
+- `audits/literature/P2R_TARGETED_FAILURE_DEEP_READ_ROUND1.md` records the first direct scientific audit using repo-hosted primary texts.
 
-- MinerU on this host must be launched through `scripts/run_mineru.py` with
-  `MINERU_SANDBOX_SHIMS=1` and `PYTHONPATH` pointing at `scripts/_mineru_site/`
-  (see `sitecustomize.py` for the four defects it works around); point
-  `MINERU_TOOLS_CONFIG_JSON` at `D:\Program Files\Mineru\mineru.json` or it will try to
-  download models and fail on HuggingFace locks.
-- Any git HTTPS operation needs `-c http.sslBackend=openssl` (schannel is broken here).
+## Round-1 P2-R result
 
-## What is deliberately NOT started
+Reviewed from the existing corpus:
 
-Batch 0B (paused). Targeted Failure Deep Read (awaits owner scope). Any new scientific
-analysis. Any hypothesis verdict.
+- P0002 SafeDrive
+- P0004 BeTop
+- P0003 GraphAD
+- P0005 RiskWorld
+- P0012 DA-WAM
+
+Result:
+
+```text
+P2-R SURVIVES ROUND 1 AS A QUESTION, NOT AS A CONFIRMED GAP.
+```
+
+Important negative result:
+
+```text
+NO DIRECT OBSERVED P2-R FAILURE HAS YET BEEN ESTABLISHED.
+```
+
+Broad claims already considered occupied:
+
+```text
+interaction modeling matters
+reactive / closed-loop evaluation matters
+action-conditioned world modeling matters
+candidate-specific future prediction matters
+future information can improve trajectory scoring
+```
+
+DA-WAM is the strongest current nearest prior because it already maps each candidate trajectory to a distinct imagined future latent and scores the candidate with that latent. SafeDrive and BeTop strongly occupy generic candidate-conditioned interaction / reactive-planning framings.
+
+## Next task
+
+Ingest and attack P2-R with the direct literature set:
+
+1. BridgeSim
+2. ReactSim-Bench
+3. CausalDrive
+4. How Can Driving World Models Do Counterfactual Prediction?
+5. CRAFT
+
+Only if necessary, expand to What Truly Matters, Policy World Model, BeyondDrive, ELF-VLA.
+
+Do not design a method yet.
+
+## Corpus and infrastructure
+
+- Batch 0A: 12 papers registered; 11 readable as raw MD in this repo; P0008 NPPC remains paywalled.
+- Canonical PDFs stay local/NAS only.
+- Raw MD + figures are the cross-session primary-text layer in this private repo.
+- Exact wording / broken formula / visual evidence is extracted from local PDFs on demand.
+- Windows native/.NET +1024 file framing is a known host quirk; canonical content hashes use the Python logical-byte view. The user has confirmed the Epona PDF can render in a normal Windows viewer after refresh; no further host-forensics work is planned.
+
+## Division of labor
+
+**GPT-5.6 Sol:** scientific deep read, adversarial review, hypothesis adjudication, paper cards, evidence synthesis, direct GitHub write-back.
+
+**Local agent:** download, MinerU conversion, metadata/QC, source extraction from local PDFs, local source-code work, datasets/checkpoints/experiments.
+
+The repo, not any one chat, is the canonical research memory.
