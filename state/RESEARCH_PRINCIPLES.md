@@ -2,7 +2,7 @@
 
 Canonical scientific operating rules for this project.
 
-Last updated: 2026-09-13
+Last updated: 2026-09-14
 
 ## 1. Scope
 
@@ -14,7 +14,42 @@ World Model + End-to-End + Planning-centric autonomous driving
 
 The project is not perception-centric and is not a generic world-generation project. A paper can be technically impressive yet peripheral if its contribution does not materially affect planning, decision making, interaction reasoning, evaluation of planning, or the coupling between future modeling and action selection.
 
-## 2. Prior expertise is an asset, not a destination
+## 2. Field understanding comes before gap hunting
+
+This is now the highest-priority rule.
+
+Forbidden workflow:
+
+```text
+read a few papers
+→ guess a gap
+→ search for papers that support/refute the guessed gap
+→ design a method around the surviving wording
+```
+
+Required workflow:
+
+```text
+reconstruct the field
+→ understand major method families and historical transitions
+→ understand representations, supervision, planner interfaces and evaluation regimes
+→ identify recurring trade-offs / contradictions / under-measured capabilities
+→ only then formulate research problems
+→ falsify them
+→ only then design methods
+```
+
+P1/P2-R/P3 are historical probes. They must not determine the field map.
+
+Canonical reconstruction plan:
+
+`landscape/FIELD_RECONSTRUCTION_PLAN.md`
+
+Canonical taxonomy:
+
+`landscape/PLANNING_WAM_TAXONOMY.md`
+
+## 3. Prior expertise is an asset, not a destination
 
 The owner has strong prior expertise in driving risk, predictive risk fields, safety representation, future interaction compression and trajectory-based risk analysis.
 
@@ -30,9 +65,9 @@ we know risk fields
 Required workflow:
 
 ```text
-observed planning failure
-→ failure cause
-→ missing capability
+field understanding
+→ observed/recurrent planning problem
+→ failure cause / missing capability
 → why existing methods do not already solve it
 → research question
 → test / falsification
@@ -41,24 +76,31 @@ observed planning failure
 
 A final contribution that uses none of the legacy risk-field machinery is acceptable if the problem is stronger.
 
-## 3. Problem-first evidence chain
+## 4. Understand papers before judging them
 
-A legitimate research gap should approximately satisfy:
+Do not reduce papers to "supports our hypothesis" / "hurts our hypothesis".
+
+For every anchor paper first reconstruct:
 
 ```text
-Observed Failure
-→ Failure Cause
-→ Missing Capability
-→ Why Existing Method Cannot Easily Handle It
-→ Research Question
-→ Possible Method
+What problem did the authors actually face?
+Why did their design make sense at the time?
+What is the exact data flow?
+What is directly supervised?
+What remains at inference?
+How does the world model enter planning?
+What benchmark regime is used?
+What is the strongest evidence for the method?
+What is the strongest limitation / alternative explanation?
+What trade-off did the method choose?
+What later work changed that trade-off?
 ```
 
-A missing module is not a gap. A new representation is not a gap. A fashionable architecture is not a gap.
+Only after this understanding may the paper be used for research-problem synthesis.
 
-## 4. Symmetric treatment of every paper
+## 5. Symmetric treatment of every paper
 
-Every paper has strengths, limitations, assumptions and evaluation boundaries. Do not read papers as "supporters" or "opponents" of our current hypothesis.
+Every paper has strengths, limitations, assumptions and evaluation boundaries.
 
 For every core paper, explicitly record:
 
@@ -67,13 +109,14 @@ Strongest evidence in favor of the paper's claim
 Strongest limitation / alternative explanation
 What the paper proves
 What the paper does NOT prove
-Which broad claims it already occupies
+Which trade-off it exposes
+Which later papers support or contradict it
 Which residual question remains
 ```
 
-Do not attack papers merely because they threaten our hypothesis; do not excuse weaknesses merely because they support it.
+Do not attack papers merely because they threaten an existing idea; do not excuse weaknesses merely because they support one.
 
-## 5. Evidence taxonomy
+## 6. Evidence taxonomy
 
 Keep separate:
 
@@ -91,111 +134,152 @@ NO DIRECT OBSERVED FAILURE REPORTED
 
 If a mechanism is plausible but untested, label it inference. If a metric is only a proxy, do not silently upgrade it into the target property.
 
-## 6. Evaluation regimes must remain distinct
+## 7. Evaluation regimes must remain distinct
 
-Never collapse the following into one category:
+Never collapse:
 
 ```text
-open-loop offline trajectory evaluation
-non-reactive closed-loop / log-replay simulation
+visual generation / reconstruction evaluation
+motion-prediction evaluation
+open-loop ego trajectory evaluation
+NAVSIM / data-driven non-reactive evaluation
+closed-loop non-reactive simulation
 reactive closed-loop simulation
-world-model visual rollout
+CARLA / Bench2Drive-style interactive simulation
 real-vehicle closed-loop testing
 ```
 
-A multi-step rollout is not automatically closed-loop. A candidate-conditioned predictor is not automatically reactive. A reactive simulator is not proof that the policy has learned the correct counterfactual model.
+A multi-step rollout is not automatically closed-loop. A candidate-conditioned predictor is not automatically reactive. A reactive simulator is not proof that a policy learned correct counterfactual dynamics.
 
-## 7. Planning coupling must be traced concretely
+## 8. Planning coupling must be traced concretely
 
 For planning-centric WAM papers, always ask:
 
 ```text
 What is the input?
-What numerical representation is produced?
-What is predicted about the future?
+What numerical world state is produced?
+What future is predicted?
 What is directly supervised?
-What is only latent / inferred?
+What is latent / inferred / counterfactual?
 How does the planner consume it?
-Does it change candidate generation, scoring, refinement, or direct trajectory decoding?
+Does it change candidate generation, direct decoding, scoring, refinement, optimization, reward or policy training?
 What remains at inference time?
 ```
 
 Do not infer decision usefulness from visual fidelity or representation richness alone.
 
-## 8. Prior-art occupancy vocabulary
+## 9. Historical continuity matters
 
-Use:
+Do not assume a 2025–2026 WAM paper invented a planning concept merely because it uses new terminology.
 
-```text
-CONCEPT_PRECEDENT
-STRONG_NEIGHBOR
-DIRECT_OCCUPATION
-EFFECTIVELY_SOLVED
-NOT_RELEVANT
-```
+Always check relevant predecessors in:
 
-A paper containing a similar component is not automatically direct occupation. Conversely, a paper need not use our terminology to occupy the same scientific question.
+- interactive prediction + planning;
+- conditional prediction;
+- contingency planning;
+- game-theoretic planning;
+- model-predictive control;
+- learned cost / value planning;
+- closed-loop simulation.
 
-## 9. Counterexamples matter
+Modern WAM novelty must be separated from older planning concepts enabled by new representations/models/data.
+
+## 10. Counterexamples matter
 
 One strong counterexample can kill a universal claim.
 
-Examples already learned in this project:
+Examples already learned:
 
 - DriveLaW weakens any claim that an explicit risk/value interface is always necessary.
 - NPPC weakens any universal claim that optimization over a learned cost necessarily produces harmful exploitation.
 - BeTop weakens broad claims that logged-data learning cannot yield useful reactive planning behavior.
 - DA-WAM weakens broad claims that per-candidate action-conditioned futures are missing from planning-centric WAMs.
 
-Use counterexamples to narrow or kill hypotheses rather than adding exceptions until the claim becomes unfalsifiable.
+Use counterexamples to understand the field's conditional structure, not merely to kill hypotheses.
 
-## 10. Reading-depth policy
+## 11. Reading-depth policy
 
 Not all papers deserve equal effort.
 
-### Tier A — hypothesis-deciding
-Deep read method, supervision, inference, evaluation, ablations, failures and limitations. Source-code audit only if the scientific question requires it.
+### CENSUS
+Enough to place a paper accurately in the field taxonomy and understand its historical role.
 
-### Tier B — planning-centric landscape anchors
-Understand architecture, planning coupling, training/evaluation and major evidence; deep-dive only where they bear on the active hypothesis.
+### ANCHOR
+Deep read method, supervision, inference, evaluation, ablations, strengths, limitations and relation to neighboring families.
 
-### Tier C — boundary / counterexample / historical controls
-Read the portions needed to test a specific claim. Do not perform exhaustive reproduction without a decision-relevant reason.
+### DECISION
+Anchor + targeted source/code audit only if needed to resolve a concrete scientific ambiguity.
 
-## 11. Corpus expansion policy
+### BACKGROUND
+Retain for context without exhaustive analysis.
 
-Expand by **problem**, not by keywords.
+The field-census phase may contain ~50–80 papers, while only ~15–25 become anchor deep reads.
 
-Current policy: freeze broad expansion after the targeted direct P2-R set plus a small historical interactive-planning control set. Only add further papers if a concrete unresolved scientific question points to them.
+## 12. Corpus expansion policy
 
-Avoid building a large archive faster than it can be scientifically digested.
+Expand by **field coverage and unresolved scientific structure**, not by keywords and not by a preselected gap.
 
-## 12. Method-design gate
+During field reconstruction, broad expansion is allowed but must be controlled by the taxonomy: each new paper should fill a missing family, historical transition, benchmark regime, or counterexample role.
+
+Avoid two failure modes:
+
+```text
+too few papers → blind hypothesis invention
+too many papers → undigested archive
+```
+
+## 13. Problem-discovery gate
+
+Do not formally select a gap until the field atlas can answer:
+
+1. major method families and why they emerged;
+2. exact observation→future→planner interfaces;
+3. supervision availability and counterfactual limits;
+4. action-conditioning/reactivity distinctions;
+5. benchmark/evaluation meanings;
+6. strongest non-WM planning baselines;
+7. recurring trade-offs across multiple independent families;
+8. strong counterexamples to common claims;
+9. important capabilities that are under-measured rather than merely absent as modules;
+10. contradictory evidence that remains unresolved.
+
+Only then use the chain:
+
+```text
+Observed / recurrent planning difficulty
+→ cause
+→ missing capability or structural trade-off
+→ why existing approaches cannot easily handle it
+→ falsifiable research question
+→ possible method
+```
+
+A missing module is not a gap. A new representation is not a gap. A fashionable architecture is not a gap.
+
+## 14. Method-design gate
 
 No method design until a problem survives:
 
-1. direct prior-art attack;
-2. strongest alternative explanations;
-3. realistic evaluation relevance;
-4. counterexamples;
-5. a falsifiable test showing the failure exists and matters.
+1. field-level understanding;
+2. direct prior-art attack;
+3. strongest alternative explanations;
+4. realistic evaluation relevance;
+5. counterexamples;
+6. a falsifiable test showing the problem exists and matters.
 
-`NONE / EVIDENCE INSUFFICIENT` is an acceptable research outcome.
+`NONE / EVIDENCE INSUFFICIENT` remains acceptable.
 
-## 13. P2-R-specific discipline
-
-Current P2-R candidate must remain narrow:
+## 15. Status of P1 / P2-R / P3 during reconstruction
 
 ```text
-fixed state + fixed action set
-factual/non-reactive ordering vs reactive counterfactual ordering
-reaction-induced ordering reversal
-non-trivial planning regret
+P1 = RETIRED historical hypothesis
+P2-R = PARKED PROBE, not active search target
+P3 = PARKED BACKUP PROBE
 ```
 
-Do not widen it to generic OL→CL mismatch, reactive simulation, interaction modeling, or action conditioning if the narrow question fails.
+Do not optimize the reading list to prove or kill P2-R. The field reconstruction may independently return to it, modify it, or make it irrelevant.
 
-## 14. Research-state authority
+## 16. Research-state authority
 
 Scientific decisions live in this repo, especially:
 
@@ -205,6 +289,8 @@ state/CURRENT_STATE.md
 state/DECISION_LOG.md
 state/NEXT_TASK.md
 state/RESEARCH_LEDGER.md
+state/RESEARCH_PRINCIPLES.md
+landscape/
 hypotheses/
 audits/
 papers/cards/
