@@ -1,8 +1,8 @@
 # START_HERE — WAM Research Brain
 
-**Purpose:** a new GPT-5.6 Sol session should be able to resume the project from this file in under a minute without reconstructing prior chats.
+**Purpose:** a fresh GPT-5.6 Sol session should recover the project direction and current stage in under a minute without reconstructing old chats.
 
-Last updated: 2026-09-13
+Last updated: 2026-09-14
 
 ## 1. Research north star
 
@@ -10,177 +10,152 @@ Last updated: 2026-09-13
 World Model + End-to-End + Planning-centric autonomous driving
 ```
 
-Planning is the center of gravity. Perception, video generation, JEPA/latent prediction, VLA, safety/risk modeling and simulation matter only insofar as they affect planning capability, decision quality, closed-loop behavior, or scientific understanding of planning failures.
+Planning is the center of gravity. Perception, video generation, JEPA/latent prediction, VLA, safety/risk modeling and simulation matter only insofar as they affect planning capability, decision quality, closed-loop behavior, or scientific understanding of planning.
 
-**Risk field is NOT a required destination.** The owner's prior expertise in risk / predictive risk fields / safety representation is an optional asset. Never force a research problem to fit that expertise.
+**Risk field is NOT a required destination.** Prior risk/predictive-risk expertise is an optional capability pool, not a research commitment.
 
-Correct order:
+## 2. Critical methodological reset
 
-```text
-observed planning failure
-→ cause / missing capability
-→ why existing methods do not already solve it
-→ research question
-→ only then ask whether prior risk / interaction / safety expertise helps
-→ possible method
-```
+The project previously moved too quickly from a small paper set to candidate gaps (P1/P2-R/P3). That workflow is now suspended.
 
-Optional legacy capabilities are preserved in `evidence/LEGACY_EXPERTISE_ASSETS.md`; they are not method commitments.
-
-## 2. Current hypothesis state
-
-| slot | hypothesis | status |
-|---|---|---|
-| Primary | `P2R_PRIMARY` — Reactive Action-Ordering Gap in Planning-centric WAMs | **PRIMARY CANDIDATE, NOT CONFIRMED GAP** |
-| Backup | `P3_HOLD` — Decision Sufficiency of World Representations | **HOLD AS BACKUP** |
-| Retired | `P1_RETIRED` — Planner-Induced Model Exploitation / Search-Support Gap | **RETIRED AS MAIN PROBLEM** |
-
-P2-R currently asks, for a fixed state and fixed ego candidate set:
+Active rule:
 
 ```text
-rank_factual/nonreactive(A) ?= rank_reactive(A)
+UNDERSTAND THE FIELD FIRST
+→ reconstruct planning-centric WAM families and historical evolution
+→ understand representations, supervision, planner interfaces, interaction/reactivity and evaluation
+→ identify recurring trade-offs / contradictions / under-measured capabilities
+→ only then reopen research-problem / gap discovery
 ```
 
-The only mechanism of interest is:
+Canonical plan:
+
+`landscape/FIELD_RECONSTRUCTION_PLAN.md`
+
+Taxonomy:
+
+`landscape/PLANNING_WAM_TAXONOMY.md`
+
+Living atlas:
+
+`landscape/FIELD_ATLAS.md`
+
+## 3. Current hypothesis state
+
+Hypotheses are no longer driving the reading program.
 
 ```text
-ego action
-→ surrounding-agent response changes
-→ candidate action ordering reverses
-→ non-trivial planning regret
+P1_RETIRED  = RETIRED historical hypothesis
+P2-R        = PARKED PROBE — not active search target
+P3          = PARKED BACKUP PROBE
 ```
 
-This is deliberately narrower than generic OL→CL mismatch, generic reactive planning, action-conditioned world modeling, or candidate-specific future prediction.
+P2-R's prior formulation and Round-1 audit are retained for provenance, but do not organize the field map.
 
-## 3. Current scientific verdict
-
-Round 1 is complete on SafeDrive, BeTop, GraphAD, RiskWorld and DA-WAM.
+## 4. Current active stage
 
 ```text
-NO DIRECT OBSERVED P2-R FAILURE HAS YET BEEN ESTABLISHED.
-P2-R SURVIVES ROUND 1 AS A QUESTION, NOT AS A CONFIRMED GAP.
+FIELD RECONSTRUCTION — Planning-centric WAM Atlas
 ```
 
-Broad framings already considered occupied:
+Planned depth:
 
 ```text
-Planning should model interactions.
-Reactive / closed-loop evaluation matters.
-World models should be conditioned on ego actions.
-Each candidate should receive its own predicted future.
-Future information can improve candidate scoring.
+Phase A: ~50–80 paper census at placement/overview depth
+Phase B: ~15–25 representative anchor deep reads
+Phase C: cross-family synthesis, historical evolution, planning-interface map, supervision map, evaluation map, trade-off/counterexample map
+Phase D: only then reopen research-problem discovery
 ```
 
-Strongest nearest-prior pressure:
+This is not indiscriminate paper accumulation: census papers are placed in a common taxonomy; only representative anchors receive full deep reads.
 
-- **DA-WAM:** candidate-specific future latent + candidate-specific scorer.
-- **SafeDrive:** candidate-conditioned sparse worlds + fine-grained safety selection.
-- **BeTop:** explicit future-interaction structure + reactive closed-loop evaluation.
+## 5. What the field atlas must explain
 
-Do not design a method yet.
+A mature atlas should answer:
 
-For the compact cross-session record of earlier paper findings (including P1/P3 evidence), see `evidence/CORE_EVIDENCE_SNAPSHOT.md`.
+1. What are the major planning-centric WAM families and why did each emerge?
+2. What world state does each family predict: video, BEV, occupancy, geometry, objects, latent, trajectory, reward/value, hybrid?
+3. How exactly does future information reach the planner?
+4. Which future/action branches receive real supervision and which are inferred/counterfactual?
+5. How do action conditioning, joint prediction, reactivity, contingency and game-theoretic interaction differ?
+6. What planning outputs are used: direct trajectory, candidate scoring, optimization, control, policy?
+7. What do open-loop, NAVSIM, non-reactive closed-loop, reactive closed-loop, CARLA/Bench2Drive and real-vehicle evidence actually prove?
+8. Which strong end-to-end planners succeed without an explicit world model?
+9. What trade-offs recur across multiple independent method families?
+10. Which common field claims have strong counterexamples?
 
-## 4. Immediate task
+No formal gap selection until these questions can be answered coherently.
 
-Freeze broad corpus expansion. Add only the high-discrimination set in `state/TARGETED_READING_QUEUE.md`, then deep-read it adversarially.
+## 6. Existing work that remains useful
 
-Core P2-R attack set:
+The earlier P2-R work is not discarded. It becomes one evidence branch inside the larger atlas.
 
-1. BridgeSim
-2. ReactSim-Bench
-3. CausalDrive
-4. How Can Driving World Models Do Counterfactual Prediction?
-5. CRAFT
-
-Historical controls to prevent renaming old interactive-planning ideas as WAM novelty:
-
-6. GameFormer
-7. M2I
-8. Bahram et al. 2016 — replanning-aware interactive scene prediction and planning
-
-After these are ingested, **stop expanding** unless a concrete unresolved question requires a specific additional paper.
-
-## 5. How every core paper must be read
-
-Do not produce a generic summary. For each paper determine:
-
-```text
-Exact problem
-Input → numerical representation → intermediate future representation → planner consumption
-Training supervision: what has real future supervision? what is inferred/counterfactual?
-Inference / planning coupling
-Evaluation regime: open-loop / non-reactive / reactive / real closed-loop
-Strongest direct evidence
-Strongest limitation / alternative explanation
-Observed failure (if any) vs our inference
-What it proves
-What it does NOT prove
-Prior-art pressure on P2-R / P3
-Residual question after reading
-```
-
-Every paper must be treated symmetrically: record both the strongest case **for** the method and the strongest case **against** over-interpreting it.
-
-Use three evidence labels:
-
-```text
-AUTHOR CLAIM
-DIRECT EXPERIMENTAL EVIDENCE
-OUR INFERENCE
-```
-
-Never convert a missing module into a research gap. Never convert a rollout into closed-loop evidence. Never convert action conditioning into proof of correct intervention response.
-
-## 6. Fast new-session read order
-
-For an ordinary continuation, read only:
-
-```text
-1. START_HERE.md                       ← this file
-2. state/CURRENT_STATE.md
-3. state/NEXT_TASK.md
-4. hypotheses/P2R_PRIMARY.md
-5. latest relevant audit/card only
-```
-
-If the new session needs the prior cross-paper history behind P1/P3 or old counterexamples, read `evidence/CORE_EVIDENCE_SNAPSHOT.md` rather than old chats.
-
-Read `state/DECISION_LOG.md` only when provenance/rationale is needed. Do **not** reload all raw papers or all old chats.
-
-Current latest audit:
+Round-1 audit:
 
 `audits/literature/P2R_TARGETED_FAILURE_DEEP_READ_ROUND1.md`
 
-## 7. Source hierarchy
+Compact prior-paper evidence:
+
+`evidence/CORE_EVIDENCE_SNAPSHOT.md`
+
+The prior direct set — BridgeSim, ReactSim-Bench, CausalDrive, *How Can Driving World Models Do Counterfactual Prediction?*, CRAFT, GameFormer, M2I, Bahram et al. — remains useful for interactive/reactive/counterfactual families, but is no longer the whole agenda.
+
+## 7. Scientific operating rules
+
+Read:
+
+`state/RESEARCH_PRINCIPLES.md`
+
+Core rules:
+
+- field understanding before gap hunting;
+- every paper gets both strongest evidence and strongest limitation;
+- distinguish `AUTHOR CLAIM / DIRECT EXPERIMENTAL EVIDENCE / OUR INFERENCE`;
+- missing module ≠ gap;
+- action-conditioned ≠ reactive correctness;
+- world fidelity ≠ decision sufficiency;
+- visual rollout ≠ closed-loop planning evidence;
+- modern terminology must be checked against older prediction/planning concepts;
+- strong counterexamples are first-class evidence.
+
+## 8. Fast new-session read order
+
+For an ordinary continuation:
 
 ```text
-Local/NAS canonical PDF = exact source authority
-GitHub raw MD + figures  = GPT-readable primary-text layer
-Paper Card               = curated scientific knowledge
-State / hypothesis files = canonical research decisions
-Chat                      = temporary reasoning workspace
+1. START_HERE.md
+2. state/CURRENT_STATE.md
+3. state/NEXT_TASK.md
+4. state/RESEARCH_PRINCIPLES.md
+5. landscape/FIELD_RECONSTRUCTION_PLAN.md
+6. landscape/FIELD_ATLAS.md
 ```
 
-If raw MD is ambiguous or a formula/figure is damaged, request a source extract from the local canonical PDF rather than guessing.
+Then read only the relevant paper cards/raw MD/surveys needed for the current atlas task.
 
-## 8. Division of labor
+Read hypothesis files only when their historical evidence is relevant; do not default back to P2-R.
 
-**GPT-5.6 Sol:** deep reading, adversarial scientific review, cross-paper synthesis, hypothesis adjudication, cards/audits/state updates, direct GitHub write-back.
-
-**Local corpus agent:** acquisition, canonical PDF, MinerU conversion, metadata/QC, local-PDF source extraction, local code execution, datasets/checkpoints/experiments.
-
-## 9. Session closeout rule
-
-Any session that materially changes the research must update, before ending:
+## 9. Source hierarchy
 
 ```text
-state/CURRENT_STATE.md
-state/DECISION_LOG.md        (only if a decision changed)
-state/NEXT_TASK.md
-state/RESEARCH_LEDGER.md     (if corpus/gate changed)
-handoff/LATEST.md
-relevant hypothesis/card/audit
+Official/canonical paper PDF = exact source authority
+GitHub raw MD + figures       = GPT-readable primary-text layer
+Paper Card                    = curated paper knowledge
+Field Atlas                   = cross-paper field understanding
+State files                   = canonical project decisions
+Chat                          = temporary reasoning workspace
 ```
+
+If raw MD is ambiguous, verify against official/canonical PDF rather than guessing.
+
+## 10. Division of labor
+
+**GPT-5.6 Sol:** field census, deep reading, cross-paper synthesis, taxonomy/atlas maintenance, scientific interpretation, direct GitHub write-back.
+
+**Local corpus agent:** bulk acquisition, canonical local PDF archive, MinerU conversion, metadata/QC, local source extraction, source-code execution, datasets/checkpoints/experiments.
+
+## 11. Session closeout rule
+
+Any session that materially changes the research must update the relevant state/atlas/card files before ending.
 
 The repo — not conversation memory — is the research authority.
