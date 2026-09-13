@@ -13,6 +13,7 @@ Canonical documents:
 - `landscape/FIELD_RECONSTRUCTION_PLAN.md`
 - `landscape/PLANNING_WAM_TAXONOMY.md`
 - `landscape/FIELD_ATLAS.md`
+- `landscape/CENSUS_PHASE_A_ROUND1.md`
 
 ## Hypotheses
 
@@ -47,6 +48,7 @@ Important interpretation: Batch 0A is scientifically useful but **not representa
 | 2026-09-13 | P2-R Targeted Failure Deep Read — Round 1 | SafeDrive, BeTop, GraphAD, RiskWorld, DA-WAM | no direct observed reaction-induced action-order inversion established; retained as historical audit |
 | 2026-09-13 | Targeted Expansion Freeze | BridgeSim/ReactSim/CausalDrive/Counterfactual/CRAFT + GameFormer/M2I/Bahram | **SUPERSEDED AS ACTIVE PROGRAM** on 2026-09-14; retained as F7/F8/F11 subqueue |
 | 2026-09-14 | Field-Reconstruction Reset | research methodology | gap-first search suspended; begin neutral planning-centric WAM census + anchor deep reads |
+| 2026-09-14 | Phase-A Census Round 1 | broad cross-family placement from surveys + primary paper/project sources + existing repo evidence | ~45 unique works/benchmarks/controls provisionally placed across F1–F11; no gap verdict; Round 2 coverage holes identified |
 
 ## Field reconstruction targets
 
@@ -73,11 +75,40 @@ F10 strong end-to-end planners without explicit world models
 F11 evaluation / benchmark / simulator papers
 ```
 
+## Phase-A Round-1 census facts
+
+Round-1 record:
+
+`landscape/CENSUS_PHASE_A_ROUND1.md`
+
+Representative works now placed include:
+
+```text
+GAIA-1, DriveDreamer, Drive-WM, Vista, Epona, DrivingGPT, Policy World Model,
+WorldDrive, OccWorld, Drive-OccWorld, WoTE, World4Drive, DriveWorld, LAW,
+DriveLaW, Drive-JEPA, WorldRFT, Auto-JEPA, ReWorld, WA-JEPA, DA-WAM,
+M2I, GameFormer, What Truly Matters, BeTop, GraphAD, SLEDGE, NAVSIM,
+Bench2Drive, HUGSIM, DriveArena, BridgeSim, ReactSim-Bench, CausalDrive,
+CRAFT, SafeDrive, Gen-Drive, DriveReward, RiskWorld, NPPC, TOAD/DrivoR,
+UniAD, VAD, DiffusionDrive
+```
+
+Current provisional anchor pool is ~25 works; it is **not final** and should be reduced only after Round 2 fills missing coverage.
+
+Round-2 holes:
+
+- Hydra-MDP / DriveSuprim / iPad / VLA controls;
+- Think2Drive / WM-RL lineage;
+- ViDAR / GenAD representation-pretraining bridges where planning-relevant;
+- benchmark evolution and deployment properties;
+- uncertainty / multimodality treatment;
+- any credible real-vehicle closed-loop evidence.
+
 ## Existing interactive/reactive subqueue
 
 See `state/TARGETED_READING_QUEUE.md`.
 
-It currently contains:
+It contains:
 
 - BridgeSim
 - ReactSim-Bench
@@ -88,7 +119,7 @@ It currently contains:
 - M2I
 - Bahram et al. 2016
 
-No Paper IDs have been assigned to these entries yet unless later ingestion updates the manifest.
+These papers now populate F7/F8/F11 rather than define the whole agenda.
 
 ## Existing cross-session evidence
 
