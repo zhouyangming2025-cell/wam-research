@@ -2,7 +2,7 @@
 
 Cross-session Research Brain for **World Model + End-to-End + Planning-centric autonomous driving**.
 
-Text and extracted figures only — canonical PDFs remain local/NAS.
+Text and extracted figures only — canonical PDFs remain local/NAS when archived.
 
 ## New session: start here
 
@@ -10,17 +10,31 @@ Text and extracted figures only — canonical PDFs remain local/NAS.
 1. START_HERE.md
 2. state/CURRENT_STATE.md
 3. state/NEXT_TASK.md
-4. hypotheses/P2R_PRIMARY.md
-5. latest relevant audit/card only
+4. state/RESEARCH_PRINCIPLES.md
+5. landscape/FIELD_RECONSTRUCTION_PLAN.md
+6. landscape/FIELD_ATLAS.md
 ```
 
-`START_HERE.md` is intentionally self-contained so a fresh GPT-5.6 Sol session can recover the research direction, current hypothesis, scientific discipline and immediate task without re-reading old chats or the whole corpus.
+The repo is designed so a fresh GPT-5.6 Sol session can recover the project without re-reading old chats.
 
-A copy-ready prompt for a totally fresh session lives at:
+A copy-ready fresh-session prompt is in `handoff/NEW_SESSION_PROMPT.md`.
 
-`handoff/NEW_SESSION_PROMPT.md`
+## Current research stage
 
-Read `state/DECISION_LOG.md` only when decision provenance is needed. If older cross-paper evidence is needed, prefer `evidence/CORE_EVIDENCE_SNAPSHOT.md` over old conversations.
+```text
+FIELD RECONSTRUCTION — Planning-centric WAM Atlas
+```
+
+The project has deliberately paused hypothesis-first gap hunting. P1/P2-R/P3 are retained as historical probes, but they no longer organize the reading program.
+
+Current principle:
+
+```text
+understand the field
+→ map major method families / historical transitions / planning interfaces / supervision / evaluation
+→ synthesize recurring trade-offs and contradictions
+→ only then reopen problem/gap discovery
+```
 
 ## Research scope
 
@@ -28,113 +42,103 @@ Read `state/DECISION_LOG.md` only when decision provenance is needed. If older c
 World Model + End-to-End + Planning-centric
 ```
 
-Planning is the center of gravity. Risk/safety modeling, perception, generation, VLA and representation learning matter only insofar as they contribute to planning capability or explain planning failures.
+Planning is the center of gravity. Risk/safety modeling, perception, generation, VLA and representation learning matter only insofar as they contribute to planning capability or explain planning behavior.
 
-**Risk field is optional, not a required destination.** Prior expertise is used only if the surviving problem genuinely benefits from it. See `state/RESEARCH_PRINCIPLES.md` and `evidence/LEGACY_EXPERTISE_ASSETS.md`.
+**Risk field is optional, not a required destination.**
 
-## Current state
+## Field reconstruction
 
-| slot | hypothesis | status |
-|---|---|---|
-| Primary | P2R_PRIMARY — Reactive Action-Ordering Gap in Planning-centric WAMs | PRIMARY CANDIDATE, NOT CONFIRMED GAP |
-| Backup | P3_HOLD — Decision Sufficiency of World Representations | HOLD AS BACKUP |
-| Retired | P1_RETIRED — Planner-Induced Model Exploitation / Search-Support Gap | RETIRED AS MAIN PROBLEM |
-
-Current stage: **P2-R Targeted Failure Deep Read**.
-
-Round 1 has been completed on SafeDrive, BeTop, GraphAD, RiskWorld and DA-WAM. Result:
+Canonical documents:
 
 ```text
-NO DIRECT OBSERVED P2-R FAILURE HAS YET BEEN ESTABLISHED.
-P2-R SURVIVES ROUND 1 AS A QUESTION, NOT AS A CONFIRMED GAP.
+landscape/FIELD_RECONSTRUCTION_PLAN.md
+landscape/PLANNING_WAM_TAXONOMY.md
+landscape/FIELD_ATLAS.md
 ```
 
-Latest full primary-text audit:
+Planned depth:
 
-`audits/literature/P2R_TARGETED_FAILURE_DEEP_READ_ROUND1.md`
+```text
+~50–80 paper field census
+~15–25 representative anchor deep reads
+cross-family synthesis
+then research-problem discovery
+```
 
-Abstract/project-page reconnaissance for Round 2:
+This avoids both blind gap guessing from too few papers and undigested 100+ paper accumulation.
 
-`audits/literature/P2R_ROUND2_PREINGEST_RECON.md`
+## Hypothesis status
 
-## Immediate reading gate
+```text
+P1_RETIRED = retired historical hypothesis
+P2-R       = parked probe, not active search target
+P3         = parked backup probe
+```
 
-Broad corpus expansion is paused. The frozen high-discrimination queue is:
-
-`state/TARGETED_READING_QUEUE.md`
-
-Core direct set: BridgeSim, ReactSim-Bench, CausalDrive, *How Can Driving World Models Do Counterfactual Prediction?*, CRAFT.
-
-Historical controls: GameFormer, M2I, Bahram et al. 2016 replanning-aware interactive prediction/planning.
-
-After these are adjudicated, stop expanding unless a concrete unresolved question requires another paper.
+Historical P2-R work remains available under `hypotheses/` and `audits/literature/`.
 
 ## Repository layout
 
 ```text
 START_HERE.md                         one-file new-session bootstrap
-state/CURRENT_STATE.md               current hypothesis/stage/verdict
+state/CURRENT_STATE.md               current project stage/state
 state/NEXT_TASK.md                   single next task + stop condition
 state/RESEARCH_PRINCIPLES.md         canonical scientific operating rules
-state/TARGETED_READING_QUEUE.md      frozen targeted expansion set
 state/DECISION_LOG.md                decision provenance
 state/RESEARCH_LEDGER.md             factual corpus/gate ledger
-hypotheses/                          P1_RETIRED, P2R_PRIMARY, P3_HOLD
-evidence/CORE_EVIDENCE_SNAPSHOT.md   compact legacy/current cross-paper evidence
-evidence/LEGACY_EXPERTISE_ASSETS.md  optional prior risk/safety capabilities
-audits/literature/                   cross-paper adversarial audits
+landscape/                           field reconstruction plan, taxonomy, atlas
+hypotheses/                          historical/parked hypotheses
 papers/cards/                        curated per-paper scientific cards
 papers/raw_md/<PXXXX_Short>/         MinerU raw Markdown + images
+audits/literature/                   cross-paper scientific audits
+evidence/                            compact evidence snapshots / legacy capability assets
 manifests/CORPUS_MANIFEST.csv        corpus registry
 handoff/LATEST.md                    latest session handoff
-handoff/NEW_SESSION_PROMPT.md        copy-ready fresh-session bootstrap prompt
+handoff/NEW_SESSION_PROMPT.md        copy-ready fresh-session bootstrap
 scripts/                             ingestion/verification scripts
 experiment_logs/                     conversion logs
-BATCH_0A_*.md                        ingest reports
 ```
 
 ## Source hierarchy
 
 ```text
-Local/NAS canonical PDF = exact source authority
-GitHub raw MD + figures  = GPT-readable primary-text layer
-Paper Card               = curated scientific knowledge
-State / hypothesis files = canonical research decisions
-Chat                      = temporary reasoning workspace
+Official/canonical PDF       = exact source authority
+GitHub raw MD + figures      = GPT-readable primary-text layer
+Paper Card                   = curated paper understanding
+Field Atlas                  = cross-paper field understanding
+State files                  = canonical research decisions
+Chat                         = temporary reasoning workspace
 ```
 
-If raw MD is ambiguous, request a source extract from the local canonical PDF rather than guessing.
-
-## Corpus state
-
-Batch 0A: 12 papers registered; 11 have canonical local PDFs and raw MD here. P0008 NPPC is blocked by paywall/no verified open version.
-
-The targeted Round-2 papers have not yet been assigned Paper IDs or ingested; see `state/TARGETED_READING_QUEUE.md`.
+If raw MD is ambiguous, verify against official/canonical PDF rather than guessing.
 
 ## Scientific discipline
 
-Every core paper must be assessed symmetrically:
+Every anchor paper must be assessed symmetrically:
 
 ```text
-strongest evidence for the paper
+what problem it actually solves
+why its design made sense
+exact observation → future → planner data flow
+what is supervised vs inferred
+strongest direct evidence
 strongest limitation / alternative explanation
 what it proves
 what it does NOT prove
-observed failure vs our inference
-prior-art pressure
-residual question
+historical role / trade-off
+relation to later supporting or contradicting work
 ```
 
-Use `AUTHOR CLAIM`, `DIRECT EXPERIMENTAL EVIDENCE`, and `OUR INFERENCE` separately. Missing modules are not automatically gaps; rollout is not automatically closed-loop; action conditioning is not proof of correct reactive counterfactual behavior.
+Use `AUTHOR CLAIM`, `DIRECT EXPERIMENTAL EVIDENCE`, and `OUR INFERENCE` separately.
+
+## Corpus state
+
+Batch 0A contains 12 registered papers; 11 are readable as raw MD in this repo. Existing papers are useful anchors but are **not** treated as a representative sample of the field because they were partly selected to test earlier hypotheses.
 
 ## Division of labor
 
-**GPT-5.6 Sol:** scientific deep read, adversarial review, cross-paper synthesis, hypothesis adjudication, cards/audits/state updates, direct GitHub write-back.
+**GPT-5.6 Sol:** field census, deep reading, cross-paper synthesis, atlas/taxonomy maintenance, scientific judgement, direct GitHub write-back.
 
-**Local corpus agent:** acquisition, MinerU conversion, metadata/QC, local-PDF source extraction, source-code execution, datasets/checkpoints/experiments.
-
-## Integrity / host note
-
-`pdf_sha256` / `raw_md_sha256` use logical bytes read through the canonical Python corpus I/O path. The Windows host exposes a recorded +1024 native/.NET framed view; this is a known host quirk, not a scientific blocker.
+**Local corpus agent:** bulk acquisition, local PDF archive, MinerU conversion, metadata/QC, local source extraction, code execution, datasets/checkpoints/experiments.
 
 The repo — not conversation history — is the canonical research memory.
