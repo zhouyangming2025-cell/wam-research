@@ -1,8 +1,8 @@
 # CURRENT_STATE
 
-Last updated: 2026-09-13 (Integration Gate 0)
+Last updated: 2026-09-13 — GPT-5.6 Sol scientific takeover
 
-## Hypothesis status (owner ruling 2026-09-13)
+## Hypothesis status
 
 | slot | hypothesis | status |
 |---|---|---|
@@ -12,40 +12,93 @@ Last updated: 2026-09-13 (Integration Gate 0)
 
 ## Current stage
 
-**Targeted Failure Deep Read** (stage of P2R_PRIMARY). Not started. No new scientific
-analysis was performed at Integration Gate 0.
+**P2-R Targeted Failure Deep Read**
 
-## Current evidence status
+Round 1 is complete on the existing Batch 0A corpus. Scientific review has now moved from the corpus-librarian agent to GPT-5.6 Sol using this private repo directly.
 
-- Batch 0A corpus ingestion complete: 12 papers registered, 11 with canonical PDF +
-  MinerU raw MD (`RAW_MD_READY`), 1 blocked (P0008 NPPC, paywalled, no open version).
-- Integration Gate 0 staged, then expanded to the **full corpus text layer**: full
-  manifest, all 11 raw MD + their figures, card skeletons for the three gated papers
-  (P0001, P0002, P0010), scripts, logs and reports. All card verdict fields are
-  `PENDING SCIENTIFIC REVIEW`; none were auto-generated. Target: the private repo
-  `zhouyangming2025-cell/wam-research`.
-- No observed-failure, counterevidence, hypothesis-impact, prior-art-occupancy or
-  research verdicts exist yet for any paper. The agent produces source extraction only.
+Round-1 audit:
 
-## Architecture in force (owner ruling 2026-09-13)
+`audits/literature/P2R_TARGETED_FAILURE_DEEP_READ_ROUND1.md`
 
-1. Canonical PDFs live **only** on local/NAS. Never uploaded anywhere.
-2. No ChatGPT Library or GitHub upload of PDFs, ever.
-3. GPT-readable primary-text layer = **MinerU raw Markdown**.
-4. Raw MD may enter the GitHub **private repo** as the cross-session full-text layer.
-5. ChatGPT Library is an optional convenience copy of raw MD only — not a system dependency.
-6. `pdf_sha256` is computed over the logical document bytes read by the canonical
-   Python corpus I/O path.
-7. The Windows native/.NET +1024 framed view of workspace files is a
-   **KNOWN_HOST_QUIRK** — recorded, not investigated further.
-8. Where raw MD is insufficient for exact wording, formulas or figures, a source extract
-   is generated on demand **from the local canonical PDF**.
-9. The agent does source extraction, not scientific judgement.
+## Current P2-R definition
 
-## Superseded prior state (provenance note)
+For the same current state `s` and the same ego candidate set `A = {a_i}`:
 
-`论文调研/P1_Agent_Bootstrap_Pack/01_RESEARCH_CONTEXT.md` records P1 as the primary
-hypothesis with the boxed verdict "P1 — SURVIVES". That document is **superseded** by
-the owner ruling of 2026-09-13: P1 is now `RETIRED AS MAIN PROBLEM`, P2R_PRIMARY is the
-primary candidate. The old document is retained unread as a historical record and is
-not evidence of the current state.
+```text
+rank_factual/nonreactive(A) ?= rank_reactive(A)
+```
+
+The mechanism of interest is:
+
+```text
+ego action
+→ surrounding-agent response changes
+→ candidate action ordering reverses
+→ non-trivial planning regret
+```
+
+This is narrower than a generic OL→CL gap, reactive planning, action-conditioned world modeling, or candidate-specific future prediction.
+
+## Round-1 scientific verdict
+
+The existing repo corpus is already sufficient to reject several broad formulations as novelty:
+
+```text
+Planning should model interactions.                    OCCUPIED
+Reactive / closed-loop evaluation matters.             OCCUPIED
+World models should be conditioned on ego actions.     OCCUPIED
+Each candidate should receive its own future.          OCCUPIED
+Future information can improve candidate scoring.      OCCUPIED
+```
+
+Key nearest-prior pressure:
+
+- SafeDrive: candidate-conditioned sparse worlds + safety-based candidate selection.
+- BeTop: explicit future interaction structure + reactive closed-loop evaluation.
+- DA-WAM: candidate-specific future latent + candidate-specific scoring.
+
+However, the five reviewed papers do **not** directly establish the precise matched-state / matched-candidate factual-vs-reactive ordering variable.
+
+Therefore:
+
+```text
+NO DIRECT OBSERVED P2-R FAILURE HAS YET BEEN ESTABLISHED.
+P2-R SURVIVES ROUND 1 AS A QUESTION, NOT AS A CONFIRMED GAP.
+```
+
+No method design is authorized.
+
+## Next scientific task
+
+Attack P2-R with the direct reactive / counterfactual literature:
+
+1. BridgeSim
+2. ReactSim-Bench
+3. CausalDrive
+4. How Can Driving World Models Do Counterfactual Prediction?
+5. CRAFT
+
+Secondary only if needed: What Truly Matters, Policy World Model, BeyondDrive, ELF-VLA.
+
+The next decision is not "how to solve P2-R" but whether P2-R should survive at all.
+
+## Corpus status
+
+- Batch 0A: 12 papers registered.
+- 11 have canonical local PDF + MinerU raw MD; P0008 NPPC is paywalled and not readable from the corpus.
+- The private GitHub repo contains the full text layer for the 11 readable papers plus figures, manifest, reports, scripts, state, hypotheses and selected paper cards.
+- Canonical PDFs remain local/NAS only.
+
+## Architecture in force
+
+1. Canonical PDFs live only on local/NAS.
+2. GPT-readable primary-text layer = MinerU raw Markdown in this private repo.
+3. ChatGPT Library is optional and not required.
+4. Exact wording / damaged formulas / missing visual evidence are extracted on demand from the local canonical PDF.
+5. The corpus-librarian agent handles downloading, conversion, local assets and code execution; GPT-5.6 Sol handles scientific interpretation, adversarial review, hypothesis decisions and direct GitHub research-state updates.
+6. `pdf_sha256` is based on the logical document bytes read through the canonical Python corpus I/O path.
+7. Windows native/.NET +1024 framed view is a known host quirk and is not a scientific blocker.
+
+## Superseded states
+
+Historical files that record P1 as the primary hypothesis are provenance only and are superseded by the current status above.
