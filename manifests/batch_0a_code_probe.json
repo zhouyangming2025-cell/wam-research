@@ -1,0 +1,74 @@
+[
+  {
+    "paper_id": "P0001",
+    "short_name": "Epona",
+    "manifest_claim": "YES",
+    "url": "https://github.com/Kevin-thu/Epona",
+    "http_status": 200,
+    "final_url": "https://github.com/Kevin-thu/Epona",
+    "error": null,
+    "page_title": "GitHub - Kevin-thu/Epona: Official Code for Epona: Autoregressive Diffusion World Model for Autonomous Driving (ICCV 2025) · GitHub",
+    "page_mentions_short_name": true,
+    "verdict": "REPO_URL_REACHABLE"
+  },
+  {
+    "paper_id": "P0004",
+    "short_name": "BeTop",
+    "manifest_claim": "YES",
+    "url": "https://github.com/OpenDriveLab/BeTop",
+    "http_status": 200,
+    "final_url": "https://github.com/OpenDriveLab/BeTop",
+    "error": null,
+    "page_title": "GitHub - OpenDriveLab/BeTop: [NeurIPS 2024] Behavioral Topology (BeTop), a multi-agent behavior formulation for interactive motion prediction and planning · Git",
+    "page_mentions_short_name": true,
+    "verdict": "REPO_URL_REACHABLE"
+  },
+  {
+    "paper_id": "P0009",
+    "short_name": "DriveLaW",
+    "manifest_claim": "YES",
+    "url": "https://github.com/xiaomi-research/drivelaw",
+    "http_status": 200,
+    "final_url": "https://github.com/xiaomi-research/drivelaw",
+    "error": null,
+    "page_title": "GitHub - xiaomi-research/drivelaw: [CVPR2026] DriveLaW: Unifying Planning and Video Generation in a Latent Driving World · GitHub",
+    "page_mentions_short_name": true,
+    "verdict": "REPO_URL_REACHABLE"
+  },
+  {
+    "paper_id": "P0010",
+    "short_name": "TOAD",
+    "manifest_claim": "YES",
+    "url": "https://github.com/valeoai/TOAD",
+    "http_status": 200,
+    "final_url": "https://github.com/valeoai/TOAD",
+    "error": null,
+    "page_title": "GitHub - valeoai/TOAD: Official implementation for TOAD: Test-Time Trajectory Optimization for Autonomous Driving · GitHub",
+    "page_mentions_short_name": true,
+    "verdict": "REPO_URL_REACHABLE"
+  },
+  {
+    "paper_id": "P0003",
+    "short_name": "GraphAD",
+    "manifest_claim": "CANDIDATE",
+    "url": "https://github.com/OpenDriveLab/GraphAD",
+    "http_status": 404,
+    "final_url": "https://github.com/OpenDriveLab/GraphAD",
+    "error": "HTTP 404",
+    "page_title": "",
+    "page_mentions_short_name": false,
+    "verdict": "REPO_URL_NOT_REACHABLE"
+  },
+  {
+    "paper_id": "P0006",
+    "short_name": "GenDrive",
+    "manifest_claim": "CANDIDATE",
+    "url": "https://github.com/Chengyuan-Zhang/Gen-Drive",
+    "http_status": 404,
+    "final_url": "https://github.com/Chengyuan-Zhang/Gen-Drive",
+    "error": "HTTP 404",
+    "page_title": "",
+    "page_mentions_short_name": false,
+    "verdict": "REPO_URL_NOT_REACHABLE"
+  }
+]

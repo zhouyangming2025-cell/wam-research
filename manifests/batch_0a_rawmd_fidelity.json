@@ -1,0 +1,192 @@
+[
+  {
+    "merged_forms": 2,
+    "hyphenated_forms": 37,
+    "examples": [
+      {
+        "term": "time-step",
+        "hyphenated": 0,
+        "merged": 2
+      }
+    ],
+    "paper_id": "P0001",
+    "short_name": "Epona",
+    "chars": 56223
+  },
+  {
+    "merged_forms": 12,
+    "hyphenated_forms": 98,
+    "examples": [
+      {
+        "term": "fine-grained",
+        "hyphenated": 21,
+        "merged": 4
+      },
+      {
+        "term": "time-step",
+        "hyphenated": 0,
+        "merged": 3
+      },
+      {
+        "term": "trajectory-conditioned",
+        "hyphenated": 4,
+        "merged": 2
+      },
+      {
+        "term": "grid-centric",
+        "hyphenated": 0,
+        "merged": 1
+      },
+      {
+        "term": "closed-loop",
+        "hyphenated": 10,
+        "merged": 1
+      },
+      {
+        "term": "real-world",
+        "hyphenated": 5,
+        "merged": 1
+      }
+    ],
+    "paper_id": "P0002",
+    "short_name": "SafeDrive",
+    "chars": 49328
+  },
+  {
+    "merged_forms": 0,
+    "hyphenated_forms": 47,
+    "examples": [],
+    "paper_id": "P0003",
+    "short_name": "GraphAD",
+    "chars": 47393
+  },
+  {
+    "merged_forms": 0,
+    "hyphenated_forms": 53,
+    "examples": [],
+    "paper_id": "P0004",
+    "short_name": "BeTop",
+    "chars": 129551
+  },
+  {
+    "merged_forms": 0,
+    "hyphenated_forms": 9,
+    "examples": [],
+    "paper_id": "P0005",
+    "short_name": "RiskWorld",
+    "chars": 48913
+  },
+  {
+    "merged_forms": 14,
+    "hyphenated_forms": 18,
+    "examples": [
+      {
+        "term": "pair-wise",
+        "hyphenated": 0,
+        "merged": 11
+      },
+      {
+        "term": "real-world",
+        "hyphenated": 2,
+        "merged": 1
+      },
+      {
+        "term": "decision-making",
+        "hyphenated": 6,
+        "merged": 1
+      },
+      {
+        "term": "time-step",
+        "hyphenated": 0,
+        "merged": 1
+      }
+    ],
+    "paper_id": "P0006",
+    "short_name": "GenDrive",
+    "chars": 42505
+  },
+  {
+    "merged_forms": 2,
+    "hyphenated_forms": 53,
+    "examples": [
+      {
+        "term": "fine-grained",
+        "hyphenated": 3,
+        "merged": 1
+      },
+      {
+        "term": "closed-loop",
+        "hyphenated": 6,
+        "merged": 1
+      }
+    ],
+    "paper_id": "P0007",
+    "short_name": "DriveReward",
+    "chars": 59082
+  },
+  {
+    "merged_forms": 7,
+    "hyphenated_forms": 54,
+    "examples": [
+      {
+        "term": "closed-loop",
+        "hyphenated": 12,
+        "merged": 2
+      },
+      {
+        "term": "world-model",
+        "hyphenated": 5,
+        "merged": 2
+      },
+      {
+        "term": "time-step",
+        "hyphenated": 0,
+        "merged": 2
+      },
+      {
+        "term": "decision-making",
+        "hyphenated": 4,
+        "merged": 1
+      }
+    ],
+    "paper_id": "P0009",
+    "short_name": "DriveLaW",
+    "chars": 63498
+  },
+  {
+    "merged_forms": 0,
+    "hyphenated_forms": 46,
+    "examples": [],
+    "paper_id": "P0010",
+    "short_name": "TOAD",
+    "chars": 69928
+  },
+  {
+    "merged_forms": 2,
+    "hyphenated_forms": 5,
+    "examples": [
+      {
+        "term": "time-step",
+        "hyphenated": 0,
+        "merged": 2
+      }
+    ],
+    "paper_id": "P0011",
+    "short_name": "SensitivityShaping",
+    "chars": 76865
+  },
+  {
+    "merged_forms": 2,
+    "hyphenated_forms": 32,
+    "examples": [
+      {
+        "term": "pair-wise",
+        "hyphenated": 0,
+        "merged": 2
+      }
+    ],
+    "paper_id": "P0012",
+    "short_name": "DAWAM",
+    "chars": 58840
+  }
+]

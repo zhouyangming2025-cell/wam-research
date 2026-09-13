@@ -1,0 +1,2 @@
+﻿paper_id,title,year,first_author,venue,arxiv_id,doi,official_url,pdf_local_path,raw_md_local_path,library_status,github_card_path,code_available,official_code_url,code_repo_id,reading_status,primary_tags,hypothesis_tags,decision_relevance,last_reviewed,notes
+P0001,EXAMPLE — replace me,,,,,,,D:\...\papers\pdf\P0001_Example.pdf,D:\...\papers\raw_md\P0001_Example.md,NONE,papers/cards/P0001_Example.md,UNKNOWN,,,DISCOVERED,world-model;planning,GENERAL,NONE,,Template row — delete after first real import

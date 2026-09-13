@@ -1,0 +1,2 @@
+﻿repo_id,project_name,official_url,local_path,default_branch,pinned_commit,tag,license,paper_ids,checkpoint_status,checkpoint_local_path,audit_status,github_audit_path,last_checked,notes
+R0001,EXAMPLE — replace me,https://github.com/owner/repo,D:\...\repos\example,main,,,,P0001,NONE,,NOT_STARTED,code/audits/R0001_Example.md,,Template row — delete after first real import

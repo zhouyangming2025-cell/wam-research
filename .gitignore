@@ -1,0 +1,31 @@
+# ---------------------------------------------------------------------------
+# wam-research - what must NOT go to GitHub
+# ---------------------------------------------------------------------------
+# Canonical PDFs (89 MB) stay on local/NAS only: owner ruling - PDFs are never
+# uploaded to GitHub or to any ChatGPT Library.
+papers/pdf/
+**/*.pdf
+# MinerU intermediates (307 MB: _origin/_layout/_span.pdf + JSON): regenerable,
+# never canonical.
+papers/quarantine/
+# Duplicate staging tree (same content as the corpus root, plus a nested .git).
+github_staging/
+# Diagnostics and regenerable scaffolding
+_diag/
+backups/
+checkpoints/
+repos/
+datasets/
+papers/supplements/
+**/*.part
+**/__pycache__/
+*.pyc
+WAM_Corpus_Bootstrap_Pack.zip
+
+# ---------------------------------------------------------------------------
+# Re-include: this machine's global gitignore
+# (C:\Users\9013804\.gitignore_global line 34 = *.log) silently drops the 11
+# MinerU conversion logs, which are Batch 0A ingest evidence. A repo-level
+# .gitignore outranks core.excludesFile.
+# ---------------------------------------------------------------------------
+!experiment_logs/*.log

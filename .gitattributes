@@ -1,0 +1,7 @@
+# Keep every file byte-identical on checkout.
+#
+# The SHA256 values recorded in state/ and in the staging report were computed over
+# these files as written by the corpus tooling (LF line endings). Without this, a
+# Windows clone with core.autocrlf=true would convert LF -> CRLF in the working copy
+# and every recorded hash would fail to reproduce.
+* -text
