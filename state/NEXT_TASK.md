@@ -2,7 +2,7 @@
 
 ## 唯一下一任务
 
-> Continue the **Phase-B Wave-3 comparative deep read** with **Auto-JEPA**, using the completed Epona ↔ DrivingGPT ↔ DriveLaW interface comparison as the baseline.
+> Continue the **Phase-B Wave-3 comparative deep read** with **DA-WAM**, using the completed Epona ↔ DrivingGPT ↔ DriveLaW ↔ Auto-JEPA interface map as the baseline.
 
 Wave 1 and Wave 2 are closed. Broad corpus acquisition remains frozen.
 
@@ -11,6 +11,7 @@ Canonical Wave-3 artifacts:
 ```text
 landscape/PHASE_B_WAVE3_PLAN.md
 landscape/PHASE_B_WAVE3_SYNTHESIS.md
+audits/literature/PHASE_B_WAVE3_AUTOJEPA_AUDIT.md
 ```
 
 ## Wave-3 status
@@ -19,16 +20,15 @@ landscape/PHASE_B_WAVE3_SYNTHESIS.md
 Epona primary-text first pass       = COMPLETE
 DrivingGPT primary-text first pass  = COMPLETE
 DriveLaW primary-text first pass    = COMPLETE
-three-way interface synthesis       = COMPLETE
-Auto-JEPA                           = NEXT
-DA-WAM                              = PENDING
+Auto-JEPA primary-text first pass   = COMPLETE
+DA-WAM                              = NEXT
 Think2Drive                         = PENDING
 Wave 3                              = OPEN
 ```
 
-## Stable first-half result
+## Stable four-way result
 
-“World-action unification” already splits into three mechanisms:
+“World-action unification” now splits into at least four mechanisms:
 
 ```text
 Epona:
@@ -46,85 +46,95 @@ DriveLaW:
 Video-DiT denoising latent
 → direct condition for Action DiT
 → online generative hidden state becomes planner state
+
+Auto-JEPA:
+scene/history/route
+→ predicted future ego-intent latent
+→ trajectory-memory retrieval
+→ scorer/gate
+→ final trajectory
 ```
 
-Important evidence correction:
+New stable distinction introduced by Auto-JEPA:
 
 ```text
-architectural coupling strength
-!= causal evidence strength for planning gain
+WORLD/SCENE FUTURE REPRESENTATION
+!=
+EGO-ACTION FUTURE REPRESENTATION
 ```
 
-Epona has a useful joint-vs-trajectory-only ablation. DrivingGPT lacks a same-model action-only vs joint world/action control in the reviewed paper. DriveLaW supplies stronger representation-side evidence through video-pretraining scale, representation comparisons, and denoising-step ablations.
+Auto-JEPA deliberately compresses the former into a latent target defined by future ego motion. Its strong NAVSIM result therefore supports planning-oriented compression, not classical full environment-transition modeling.
 
-DriveLaW key matched results to carry forward:
+Important Auto-JEPA evidence:
 
 ```text
-video pretraining size:
-0 → 76k → 3.8M → 7.6M
-85.9 → 87.0 → 87.8 → 89.1 PDMS
+fixed medoid intent                    52.6 PDMS
+intent retrieval + gate, no scorer    87.6
+intent + scorer, no gate              91.0
+full                                  91.3
 
-representation under diffusion planner:
-BEV 84.1
-VLM hidden 86.5
-video latent 89.1
-
-video denoise state used by Action DiT:
-t=1 89.1
-t=5 86.9
-t=10 23.2
+K=1 / 200 / 300:
+87.6 / 91.1 / 91.3 PDMS
 ```
 
-Interpret conservatively: the exact internal world-model representation matters greatly for planning; the denoising-step table does not by itself prove a universal inverse relationship between visual fidelity and planning utility.
-
-NAVSIM remains non-reactive pseudo-simulation even where a paper calls PDMS “closed-loop metrics.”
-
-## Immediate Auto-JEPA audit
-
-Auto-JEPA must be read against three established results:
+Semantic occlusion:
 
 ```text
-OccWorld: better reconstruction can coexist with worse forecasting/planning
-LAW: longer predictive horizon is not monotonically better
-DriveLaW: planner quality is highly sensitive to which generative latent is exposed
+dynamic-agent mask mean intent change = 0.080
+matched random mask                    = 0.027
+ratio                                  = 2.97×
+dynamic-agent intervention larger      = 71.1% of samples
 ```
 
-Trace:
+Interpret conservatively: the predicted intent is selectively sensitive to planning-relevant visual content, but this does not establish universal decision sufficiency or reactive causal understanding.
+
+## Immediate DA-WAM audit
+
+DA-WAM is now the crucial contrast because it returns from a single compressed ego-intent latent to **per-candidate future latent prediction + candidate scoring**.
+
+Trace exactly:
 
 ```text
-1. exact observation/context encoder
-2. exact JEPA target representation
-3. predictor input and output tensors
-4. what future information is intentionally preserved or discarded
-5. how ego action/planning intent enters the objective
-6. target encoder / stop-gradient mechanics
-7. whether predictive target/predictor survives at inference
-8. exact deployed planner path
-9. matched controls against reconstruction/generative objectives
-10. matched controls against ordinary auxiliary losses / pretraining
-11. planning metrics and evaluation regime
-12. strongest evidence that compression is decision-oriented
+1. current observation representation
+2. candidate trajectory representation
+3. how each candidate conditions the future latent
+4. exact future-latent tensor and target source
+5. which candidate(s) receive direct future-state supervision
+6. what supervision unexecuted candidates receive
+7. candidate scorer/reward/value heads and labels
+8. inference path: candidate → future latent → score → selected action
+9. whether future latent is genuinely consumed online
+10. matched ablations: no future / shared global future / current latent / action-conditioned future / hard negatives
+11. what gains are due to future-state modeling vs scorer/ranking supervision
+12. NAVSIM evaluation semantics and any reactive/closed-loop evidence
 13. strongest alternative explanation
+14. exact relation to WoTE and Auto-JEPA
 ```
 
-Then update `landscape/PHASE_B_WAVE3_SYNTHESIS.md` with a four-way interface comparison:
+The comparison should explicitly answer:
 
 ```text
-Epona     = shared latent / modular generation
-DrivingGPT= interleaved world-action language
-DriveLaW  = world-generator hidden state → action generator
-Auto-JEPA = deliberately compressed predictive representation (to verify precisely)
+Auto-JEPA:
+one scene-conditioned ego-intent latent
+→ retrieve nearby actions
+→ score candidates
+
+DA-WAM:
+for each candidate action
+→ predict candidate-specific future latent
+→ score candidate
 ```
+
+Do not assume the latter is automatically more counterfactual or more behaviorally correct. Audit where its candidate-specific future supervision actually comes from.
 
 ## Subsequent order
 
 ```text
-Auto-JEPA
-→ DA-WAM
+DA-WAM
 → Think2Drive
 ```
 
-DA-WAM will test per-candidate future-latent evaluation and alternative-action supervision. Think2Drive will separate a learned world used for policy training from a world model used directly by the deployed planner.
+Think2Drive will then separate a learned world used for **policy training inside imagination** from WMs whose representations/futures are directly consumed by the deployed planner.
 
 ## Stop condition
 
