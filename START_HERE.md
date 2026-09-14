@@ -16,7 +16,7 @@ Planning is the center of gravity. Perception, video generation, JEPA/latent pre
 
 ## 2. Critical methodological reset
 
-The project previously moved too quickly from a small paper set to candidate gaps (P1/P2-R/P3). That workflow is now suspended.
+The project previously moved too quickly from a small paper set to candidate gaps (P1/P2-R/P3). That workflow is suspended.
 
 Active rule:
 
@@ -28,48 +28,66 @@ UNDERSTAND THE FIELD FIRST
 → only then reopen research-problem / gap discovery
 ```
 
-Canonical plan:
+Canonical plan: `landscape/FIELD_RECONSTRUCTION_PLAN.md`
 
-`landscape/FIELD_RECONSTRUCTION_PLAN.md`
+Taxonomy: `landscape/PLANNING_WAM_TAXONOMY.md`
 
-Taxonomy:
-
-`landscape/PLANNING_WAM_TAXONOMY.md`
-
-Living atlas:
-
-`landscape/FIELD_ATLAS.md`
+Living atlas: `landscape/FIELD_ATLAS.md`
 
 ## 3. Current hypothesis state
 
-Hypotheses are no longer driving the reading program.
+Hypotheses are not driving the reading program.
 
 ```text
-P1_RETIRED  = RETIRED historical hypothesis
-P2-R        = PARKED PROBE — not active search target
-P3          = PARKED BACKUP PROBE
+P1_RETIRED  = retired historical hypothesis
+P2-R        = parked probe — not active search target
+P3          = parked backup probe
 ```
-
-P2-R's prior formulation and Round-1 audit are retained for provenance, but do not organize the field map.
 
 ## 4. Current active stage
 
 ```text
-FIELD RECONSTRUCTION — Planning-centric WAM Atlas
+FIELD RECONSTRUCTION — Phase-A closeout
 ```
 
-Planned depth:
+The breadth-acquisition target has been reached:
 
 ```text
-Phase A: ~50–80 paper census at placement/overview depth
-Phase B: ~15–25 representative anchor deep reads
-Phase C: cross-family synthesis, historical evolution, planning-interface map, supervision map, evaluation map, trade-off/counterexample map
-Phase D: only then reopen research-problem discovery
+60 stable IDs: P0001–P0060
+58 RAW_MD_READY
+2 lawful-source blockers: P0008 NPPC, P0020 Bahram 2016
 ```
 
-This is not indiscriminate paper accumulation: census papers are placed in a common taxonomy; only representative anchors receive full deep reads.
+So the current task is **not more bulk ingestion**. It is to finish scientific census placement, audit family coverage, freeze Phase A, and select the representative Phase-B deep-read anchors.
 
-## 5. What the field atlas must explain
+## 5. Current map status
+
+`landscape/CENSUS_PHASE_A_ROUND1.md` provisionally places roughly 45 works / benchmarks / controls across the field.
+
+The local agent has since added full text for:
+
+- P0013–P0020 interactive/reactive/counterfactual branch;
+- P0021–P0034 Round-2 coverage works;
+- P0035–P0060 works already named in the Round-1 census.
+
+The infrastructure is ahead of the scientific map. The newly ingested P0021–P0034 still need neutral census placement by GPT/owner.
+
+## 6. Immediate task
+
+Read `state/NEXT_TASK.md`.
+
+In short:
+
+1. census-read P0021–P0034;
+2. create `landscape/CENSUS_PHASE_A_ROUND2.md`;
+3. update `FIELD_ATLAS.md` and run an explicit F1–F11 coverage audit;
+4. add another paper only if a concrete missing family/transition remains;
+5. freeze Phase-A breadth expansion;
+6. select ~15–25 representative Phase-B anchor papers.
+
+Do not design a method and do not declare a gap during this closeout.
+
+## 7. What the field atlas must eventually explain
 
 A mature atlas should answer:
 
@@ -84,56 +102,18 @@ A mature atlas should answer:
 9. What trade-offs recur across multiple independent method families?
 10. Which common field claims have strong counterexamples?
 
-No formal gap selection until these questions can be answered coherently.
-
-## 6. Existing work that remains useful
-
-The earlier P2-R work is not discarded. It becomes one evidence branch inside the larger atlas.
-
-Round-1 audit:
-
-`audits/literature/P2R_TARGETED_FAILURE_DEEP_READ_ROUND1.md`
-
-Compact prior-paper evidence:
-
-`evidence/CORE_EVIDENCE_SNAPSHOT.md`
-
-The prior direct set — BridgeSim, ReactSim-Bench, CausalDrive, *How Can Driving World Models Do Counterfactual Prediction?*, CRAFT, GameFormer, M2I, Bahram et al. — remains useful for interactive/reactive/counterfactual families, but is no longer the whole agenda.
-
-## 7. Scientific operating rules
-
-Read:
-
-`state/RESEARCH_PRINCIPLES.md`
-
-Core rules:
-
-- field understanding before gap hunting;
-- every paper gets both strongest evidence and strongest limitation;
-- distinguish `AUTHOR CLAIM / DIRECT EXPERIMENTAL EVIDENCE / OUR INFERENCE`;
-- missing module ≠ gap;
-- action-conditioned ≠ reactive correctness;
-- world fidelity ≠ decision sufficiency;
-- visual rollout ≠ closed-loop planning evidence;
-- modern terminology must be checked against older prediction/planning concepts;
-- strong counterexamples are first-class evidence.
-
 ## 8. Fast new-session read order
-
-For an ordinary continuation:
 
 ```text
 1. START_HERE.md
 2. state/CURRENT_STATE.md
 3. state/NEXT_TASK.md
 4. state/RESEARCH_PRINCIPLES.md
-5. landscape/FIELD_RECONSTRUCTION_PLAN.md
-6. landscape/FIELD_ATLAS.md
+5. landscape/FIELD_ATLAS.md
+6. landscape/CENSUS_PHASE_A_ROUND1.md
 ```
 
-Then read only the relevant paper cards/raw MD/surveys needed for the current atlas task.
-
-Read hypothesis files only when their historical evidence is relevant; do not default back to P2-R.
+Then read only the raw MD needed for the active census-placement or anchor-deep-read task.
 
 ## 9. Source hierarchy
 
@@ -150,12 +130,8 @@ If raw MD is ambiguous, verify against official/canonical PDF rather than guessi
 
 ## 10. Division of labor
 
-**GPT-5.6 Sol:** field census, deep reading, cross-paper synthesis, taxonomy/atlas maintenance, scientific interpretation, direct GitHub write-back.
+**GPT-5.6 Sol:** census placement, field synthesis, primary-paper reading, anchor selection/deep reads, atlas/state maintenance, scientific judgement.
 
-**Local corpus agent:** bulk acquisition, canonical local PDF archive, MinerU conversion, metadata/QC, local source extraction, source-code execution, datasets/checkpoints/experiments.
-
-## 11. Session closeout rule
-
-Any session that materially changes the research must update the relevant state/atlas/card files before ending.
+**Local corpus agent:** bulk acquisition, canonical local PDF archive, MinerU conversion, metadata/QC, source extraction, local code execution, datasets/checkpoints/experiments.
 
 The repo — not conversation memory — is the research authority.
