@@ -2,12 +2,18 @@
 
 ## 唯一下一任务
 
-> Deep-read **WorldDrive** as the first anchor in **Phase C.5 — Core-WAM Coverage Correction**.
+> Deep-read **World4Drive** as the second anchor in **Phase C.5 — Core-WAM Coverage Correction**.
 
-Canonical first-pass audit:
+Canonical coverage audit:
 
 ```text
 landscape/CORE_WAM_2_2_COVERAGE_AUDIT.md
+```
+
+WorldDrive deep read:
+
+```text
+audits/literature/PHASE_C5_WORLDDRIVE_AUDIT.md
 ```
 
 ## Status
@@ -21,7 +27,8 @@ Wave 4            CLOSED
 Phase-C synthesis COMPLETE FIRST PASS
 Phase D           PAUSED
 Phase C.5         ACTIVE
-missing 2.2 identities / code status FIRST-PASS VERIFIED
+WorldDrive        COMPLETE
+World4Drive       NEXT
 ```
 
 ## Scope
@@ -40,32 +47,37 @@ WAM+VLA / VLA-centric planning
 
 Do not broaden into VLA before core WAM coverage is stable.
 
-## First-pass verified missing core set
+## WorldDrive result carried forward
+
+WorldDrive is now source-audited as:
 
 ```text
-WorldDrive      ANCHOR — official code released
-World4Drive     ANCHOR — official code released
-SeerDrive       ANCHOR — official code released
-Drive-JEPA      ANCHOR/BOUNDARY — official code released
-Metis           ANCHOR — official repo exists; source code still absent as of 2026-09-14
-DynFlowDrive    ANCHOR — official repo exists; implementation still unreleased
-Discrete-WAM    ANCHOR — no official code found in first-pass search
-GraphWorld      ANCHOR — no official code found in first-pass search
+TA-DWM trajectory-conditioned generative pretraining
+→ inherited/frozen vision + motion representation
+→ multimodal candidate planner
+→ TA-DWM candidate-future latent teacher during FAR training
+→ lightweight distilled candidate-future feature at inference
+→ scalar future-aware reward / trajectory selection
 ```
 
-Anti-alias rules remain binding:
+Important distinction:
 
 ```text
-Auto-JEPA != Drive-JEPA
-Drive-WM  != WorldDrive
-DA-WAM    != Discrete-WAM
+full TA-DiT diffusion future rollout = training teacher only
+full diffusion rollout at planner inference = NO
+```
+
+This introduced a new core subtype:
+
+```text
+DISTILLED WORLD-MODEL FORESIGHT
 ```
 
 ## Current deep-read order
 
 ```text
-1. WorldDrive      NEXT
-2. World4Drive
+1. WorldDrive      COMPLETE
+2. World4Drive     NEXT
 3. SeerDrive
 4. Drive-JEPA
 5. Metis
@@ -74,47 +86,52 @@ DA-WAM    != Discrete-WAM
 8. GraphWorld
 ```
 
-## WorldDrive audit requirements
+## World4Drive audit requirements
 
 Trace from primary paper + official code:
 
 ```text
-1. TA-DWM observation/action/future representation
-2. trajectory vocabulary numerical form
-3. what visual encoder and motion encoder learn during world-model pretraining
-4. exactly which encoders/weights are transferred into the downstream planner
-5. Multi-modal Planner candidate/proposal generation
-6. Future-aware Rewarder input, target and inference path
-7. whether FAR consumes an actually rolled-out future at inference or a distilled/current representation
-8. planner/FAR training stages and frozen/trainable components
-9. NAVSIM / NAVSIM-v2 / nuScenes evaluation semantics
-10. matched ablations: planner without WM pretraining, without motion representation, without FAR, etc.
-11. latency / candidate count / planning frequency
-12. strongest evidence that world modeling itself helps planning
-13. strongest alternative explanation (representation pretraining, candidate set, rewarder/scorer, data scale)
-14. exact relation to Epona, WoTE, DriveLaW and LAW
+1. exact visual/BEV/latent input and history representation
+2. what “physical latent world model” actually predicts numerically
+3. intention/action conditioning form
+4. multimodal trajectory proposal mechanism
+5. whether trajectory is generated before future latent, after future latent, or jointly
+6. exact world-model selector / evaluator path
+7. which future branch remains at inference
+8. factual vs alternative-action supervision
+9. frozen/trainable components and training stages
+10. matched ablations isolating latent-world contribution
+11. NAVSIM / nuScenes evaluation semantics
+12. latency / candidate count / planning horizon
+13. strongest evidence and strongest alternative explanation
+14. exact relation to LAW / WorldDrive / WoTE / Epona / DA-WAM
 ```
 
-Required classification after deep read:
+Required classification:
 
 ```text
-training-only predictive shaping?
-online predictive state?
-joint world-action representation?
+predictive representation shaping?
+online latent future?
 candidate consequence evaluation?
-reward/value distillation?
-hybrid of several interfaces?
+joint world-action generation?
+intent-conditioned future planning?
+hybrid?
 ```
 
-## Stop condition for WorldDrive
+## Stop condition for World4Drive
 
-Do not move to World4Drive until we can state, without ambiguity:
+Do not move to SeerDrive until we can state without ambiguity:
 
 ```text
-observation → world model → transferred representation → planner → candidate set → FAR → selected trajectory
+observation/history
+→ world/latent model
+→ intention / candidate trajectories
+→ future latent(s)
+→ selector / planner
+→ final trajectory
 ```
 
-and identify which links are directly supervised, which are generated, which are frozen, and which survive at inference.
+and identify which quantities are observed targets, model-generated alternatives, frozen representations and inference-time inputs.
 
 ## Phase C.5 stop condition
 
