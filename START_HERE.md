@@ -2,7 +2,7 @@
 
 **Purpose:** a fresh GPT-5.6 Sol session should recover the project direction and current stage in under a minute without reconstructing old chats.
 
-Last updated: 2026-09-14
+Last updated: 2026-09-14 — Wave 3 active
 
 ## 1. Research north star
 
@@ -32,40 +32,34 @@ P1/P2-R/P3 are parked historical probes and do not organize the reading program.
 ## 3. Current stage
 
 ```text
-FIELD RECONSTRUCTION — PHASE B: ANCHOR DEEP READS
+FIELD RECONSTRUCTION — PHASE B: WAVE 3 ACTIVE
 ```
 
-Phase A is complete at census depth.
-
-Corpus:
+Phase A is complete at census depth:
 
 ```text
 60 stable IDs: P0001–P0060
 58 RAW_MD_READY
 2 lawful-source blockers: P0008 NPPC, P0020 Bahram 2016
+F1–F11 coverage PASS
+broad ingestion FROZEN
+25 representative anchors FIXED
 ```
 
-Scientific artifacts:
+Wave 1 and Wave 2 are closed. Their evidence is now a binding baseline for Wave 3.
 
-- `landscape/CENSUS_PHASE_A_ROUND1.md`
-- `landscape/CENSUS_PHASE_A_ROUND2.md`
-- `landscape/FIELD_ATLAS.md`
-- `landscape/PHASE_B_ANCHORS.md`
+## 4. What must not be collapsed
 
-F1–F11 coverage passes for anchor selection. Broad ingestion is **frozen**.
-
-## 4. Core field structure established by Phase A
-
-Do not collapse the following distinctions:
+The planning-centric taxonomy distinguishes:
 
 ```text
-WM for data generation
-!= WM for predictive pretraining
-!= WM as auxiliary future supervision
-!= inference-time future representation
-!= per-candidate future evaluator
-!= joint world-action model
-!= WM as RL training simulator
+WM for controllable generation
+!= predictive pretraining
+!= auxiliary future supervision
+!= online hidden future representation
+!= candidate-specific future evaluator
+!= joint world-action generation
+!= WM as an RL imagination environment
 ```
 
 Also:
@@ -75,6 +69,8 @@ VLA/VLM planner != automatically a world model
 multimodal trajectory planner != automatically a world model
 candidate scorer != automatically a world model
 visual simulator realism != behavioral-agent realism
+action-conditioned != reactively supervised
+candidate-specific output != candidate-specific oracle supervision
 ```
 
 Evaluation regimes remain distinct:
@@ -88,40 +84,72 @@ HUGSIM photorealistic reconstructed closed loop
 standardized real-vehicle closed loop (currently sparse)
 ```
 
-A key historical correction: the original nuScenes paper is a multimodal scene/perception benchmark, not an end-to-end planning benchmark; later literature retrofits planning protocols onto its logs.
+## 5. Closed-wave baseline
 
-## 5. Phase-B anchor strategy
+### Wave 1 — historical/non-WM/evaluation controls
 
-Canonical set:
+Artifacts:
 
-`landscape/PHASE_B_ANCHORS.md`
+- `landscape/PHASE_B_WAVE1_SYNTHESIS.md`
+- `landscape/PHASE_B_WAVE1_COMPARABILITY_AUDIT.md`
 
-25 anchors were selected to explain the field across historical interaction roots, strong non-WM controls, visual/occupancy/latent WMs, world-action models, WM-RL, VLA, reactive simulation and benchmark evolution.
+Stable controls include: conditional prediction is not intervention; candidate ranking is an independent bottleneck; multimodal action generation is not automatically WM; prediction accuracy is not planning evidence; final planner gains must be decomposed; benchmark regime changes claim semantics.
 
-Secondary papers remain in the corpus and are promoted only if an anchor comparison exposes a concrete missing link.
+### Wave 2 — world representation and planning interfaces
 
-## 6. Immediate task — Wave 1
+Artifacts:
 
-Read comparatively:
+- `landscape/PHASE_B_WAVE2_SYNTHESIS.md`
+- `landscape/PHASE_B_WAVE2_COMPARABILITY_AUDIT.md`
+- `audits/literature/PHASE_B_WAVE2_INTERFACE_CODE_AUDIT.md`
+
+Stable result:
 
 ```text
-M2I
-GameFormer
-What Truly Matters in Trajectory Prediction?
-UniAD
-nuPlan
-NAVSIM
-DiffusionDrive
-DriveSuprim
+GAIA-1   = controllable generation; no operational planner interface
+Drive-WM = candidate → visual future → perception/reward → selection
+OccWorld = joint future occupancy + ego generation
+WoTE     = candidate → future BEV → learned reward → selection
+ViDAR    = future prediction as representation pretraining
+LAW      = action-aware future-latent auxiliary representation shaping
 ```
 
-Required output:
+Key corrections:
 
-`landscape/PHASE_B_WAVE1_SYNTHESIS.md`
+- better generation/reconstruction quality is not automatically better planning;
+- longer future horizon is not automatically better planning;
+- an online candidate-conditioned model may still lack reactive per-action oracle supervision;
+- a world-model loss can improve planning while the predicted future is absent from the deployed decision path.
 
-Wave 1 must establish the historical/non-WM/evaluation baseline before modern WAM gains are interpreted.
+## 6. Immediate task — Wave 3
 
-Do **not** produce eight isolated summaries. For each paper trace problem, numerical representation, supervision, inference/planner interface, evaluation evidence, strongest strength, strongest limitation, what is and is not established, then synthesize across papers.
+Canonical plan:
+
+`landscape/PHASE_B_WAVE3_PLAN.md`
+
+Read comparatively in this order:
+
+```text
+Epona
+→ DrivingGPT
+→ DriveLaW
+→ Auto-JEPA
+→ DA-WAM
+→ Think2Drive
+```
+
+Wave-3 goal: understand what “world-action unification” actually means across:
+
+```text
+shared latent / joint training
+interleaved world-action token generation
+hidden WM feature → action generation
+compressed planning-oriented predictive target
+candidate-specific future latent → scoring
+Dreamer-style WM → imagined RL policy learning
+```
+
+Start with **Epona ↔ DrivingGPT**, then use DriveLaW as the next bridge. Build one comparison matrix; do not create six isolated summaries.
 
 ## 7. Deep-read evidence discipline
 
@@ -138,13 +166,14 @@ Always ask:
 ```text
 What exactly is predicted?
 What gets direct supervision?
+What future target source exists for alternative actions?
 What survives at inference?
 How does planning consume it?
-What alternative mechanism could explain the reported gain?
+What alternative mechanism could explain the gain?
 What evaluation regime supports the claim?
 ```
 
-Every anchor must receive both its strongest evidence and strongest limitation. No paper is a “supporter” or “opponent” of our research direction.
+Every anchor must receive both its strongest evidence and strongest limitation.
 
 ## 8. Still forbidden
 
@@ -164,10 +193,11 @@ no forced risk-field insertion
 3. state/NEXT_TASK.md
 4. landscape/FIELD_ATLAS.md
 5. landscape/PHASE_B_ANCHORS.md
-6. state/RESEARCH_PRINCIPLES.md
+6. landscape/PHASE_B_WAVE2_COMPARABILITY_AUDIT.md
+7. landscape/PHASE_B_WAVE3_PLAN.md
 ```
 
-Then read only the primary texts required for the current Phase-B wave.
+Then read only the primary texts required for the active Wave-3 comparison.
 
 ## 10. Source hierarchy
 
@@ -175,7 +205,7 @@ Then read only the primary texts required for the current Phase-B wave.
 Official/canonical PDF       = exact source authority
 GitHub raw MD + figures      = GPT-readable primary-text layer
 Paper Card                   = curated paper understanding
-Field Atlas / wave synthesis = cross-paper understanding
+Wave synthesis / Field Atlas = cross-paper understanding
 State files                  = canonical project decisions
 Chat                         = temporary reasoning workspace
 ```
