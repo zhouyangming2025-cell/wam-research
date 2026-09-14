@@ -2,78 +2,117 @@
 
 ## 唯一下一任务
 
-> Finish the **Phase-B Wave-1 quantitative/comparability audit** before moving to visual/latent WAM anchors.
+> Complete the **Phase-B Wave-2 comparability / supervision-source closeout**, then decide whether Wave 2 is stable enough to close.
 
-Phase A is closed and Wave 1 has started.
+Wave 1 is closed. Wave-2 comparative first pass and two source-code audits are complete.
 
-Current Wave-1 artifact:
-
-`landscape/PHASE_B_WAVE1_SYNTHESIS.md`
-
-Status inside that memo:
+Current artifacts:
 
 ```text
-comparative first pass = COMPLETE
-historical/control structure = ESTABLISHED
-quantitative comparability audit = PENDING
-Wave-1 final synthesis gate = OPEN
+landscape/PHASE_B_WAVE2_SYNTHESIS.md
+audits/literature/PHASE_B_WAVE2_INTERFACE_CODE_AUDIT.md
 ```
 
-## Wave-1 anchors
+## Wave-2 anchors
 
 ```text
-M2I
-GameFormer
-What Truly Matters in Trajectory Prediction?
-UniAD
-nuPlan
-NAVSIM
-DiffusionDrive
-DriveSuprim
+GAIA-1
+Drive-WM
+OccWorld
+WoTE
+ViDAR
+LAW
 ```
 
-## What the first pass already established
+## What Wave 2 has already established
 
-The modern WAM wave did not invent the underlying planning problems. Before it, the field already contained:
+The generic phrase `world model helps planning` hides multiple different mechanisms:
 
 ```text
-conditional / interactive future prediction
-joint prediction + ego planning
-prediction-metric vs driving-performance mismatch
-planning-oriented full-stack representation/task coordination
-multimodal direct action generation
-candidate scoring / hard-negative selection
-planning-specific closed-loop evaluation
-scalable non-reactive simulation-based scoring
+controllable generation                    — GAIA-1
+candidate visual future → reward selection — Drive-WM
+joint world + ego future generation        — OccWorld
+candidate future BEV → learned reward      — WoTE
+future prediction as pretraining           — ViDAR
+action-aware auxiliary latent prediction   — LAW
 ```
 
-Strong non-WM planners therefore remain mandatory controls for any later claim that world modeling itself caused a planning gain.
+Source audits further establish:
 
-## Remaining Wave-1 audit
+- LAW's predicted future latent is an auxiliary training signal; the audited test-time planning path does not consume it to select/refine the current trajectory.
+- WoTE's PDM multi-candidate target-generation path changes candidate ego trajectories but scores them against a cached surrounding-agent future interpolated from logged/GT tracks; it is non-reactive supervision with respect to other-agent response.
 
-Do **not** add papers. Tighten these five points from primary text / matched settings:
+## Remaining closeout — no new papers
 
-1. **M2I** — exact joint-sample selection and the boundary between conditional prediction and intervention/causality.
-2. **GameFormer** — isolate raw learned planner vs cost-based refinement contribution; keep WOMD non-reactive replay separate from nuPlan CL-R.
-3. **UniAD** — trace exactly how MotionFormer and OccFormer reach the planner and what the planner ablations isolate.
-4. **DiffusionDrive vs DriveSuprim** — determine which NAVSIM split/version, sensors, data, backbone and metric definitions are actually comparable before treating their scores as controls.
-5. **nuPlan vs NAVSIM** — lock protocol/evaluation differences that later WAM papers inherit; note version-specific metric changes rather than treating benchmark names as fixed semantics.
+### 1. Drive-WM attribution audit
 
-## Required closeout update
-
-Revise `landscape/PHASE_B_WAVE1_SYNTHESIS.md` so the final Wave-1 state becomes:
+From primary paper evidence, separate as far as possible:
 
 ```text
-per-paper evidence audit = COMPLETE
-comparability boundaries = EXPLICIT
-historical/non-WM/evaluation baseline = STABLE
-Wave 1 = CLOSED
+world-generation quality
+vs detector/map performance on generated future
+vs reward design
+vs candidate-set quality
 ```
 
-Then update `FIELD_ATLAS.md` only with field-level conclusions that survive the audit and choose the exact Wave-2 comparison order from `landscape/PHASE_B_ANCHORS.md`.
+Do not convert the reported planning improvement into a pure “better world model” effect unless a matched ablation supports it. Record the strongest evidence and the unresolved confound explicitly.
+
+### 2. OccWorld metric/comparison audit
+
+Normalize which rows use the same planning metric/protocol and which use alternate `†` metrics or different inputs. Identify the cleanest matched evidence for:
+
+```text
+temporal world modeling
+representation/tokenizer choice
+world forecasting ↔ planning relation
+```
+
+Preserve the already important counterexample: higher reconstruction fidelity can coexist with worse forecasting/planning.
+
+### 3. ViDAR downstream-retention audit
+
+Lock exactly:
+
+```text
+what is pretrained
+what is discarded
+what weights/features are transferred
+what downstream planner remains unchanged
+which matched pretraining ablations isolate the future-prediction benefit
+```
+
+The goal is to distinguish “world-model pretraining helps” from generic stronger initialization or LiDAR-supervised representation learning.
+
+### 4. WoTE evidence-strength grading
+
+Integrate the source-code result into the paper evidence:
+
+```text
+future-state-on/off ablation = strong evidence for future-state value under NAVSIM
+candidate-specific online WM = architecturally true
+reactively supervised other-agent response = not established in audited target pipeline
+```
+
+Do not downgrade WoTE merely because supervision is non-reactive; distinguish what it proves from what it does not prove.
+
+## Required output
+
+Create:
+
+`landscape/PHASE_B_WAVE2_COMPARABILITY_AUDIT.md`
+
+Then update `landscape/PHASE_B_WAVE2_SYNTHESIS.md` only where the audit changes interpretation.
 
 ## Stop condition
 
-Wave 1 closes when later WAM papers can be judged against a stable baseline without falsely attributing gains to WM that could instead come from interaction prediction, representation/task coordination, multimodal action modeling, scorer training, or benchmark choice.
+Wave 2 closes when we can answer, without hand-waving:
 
-Do not declare a gap. Do not design a method. Do not broaden the corpus. Do not reactivate P2-R/P3. Do not force risk-field knowledge into the interpretation.
+1. which future-state interfaces are actually used online by planning;
+2. which planning gains are matched to future modeling rather than scorer/reward/input changes;
+3. where alternative ego-action futures receive direct supervision;
+4. whether surrounding-agent responses are factual, fixed-log, or truly reactive;
+5. what evidence supports or contradicts `higher fidelity / longer horizon → better planning`.
+
+If those are stable, close Wave 2 and start Wave 3.
+
+Do not declare a research gap. Do not design a method. Do not broaden the corpus. Do not reactivate P2-R/P3. Do not force risk-field knowledge into the interpretation.
