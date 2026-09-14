@@ -16,6 +16,18 @@ risk-field idea was produced.
 **Stop condition.** Reached: 7 records are `RAW_MD_READY`; 1 record (P0020) carries a
 specific lawful acquisition blocker.
 
+**Status note (2026-09-14).** The ingest prompt `agent/prompts/ROUND2_TARGETED_INGEST.md`
+is now marked `PAUSED / HISTORICAL SUBQUEUE` by the 2026-09-14 field-reconstruction reset,
+which keeps these eight papers as the interactive/reactive/counterfactual branch of the
+field atlas and explicitly allows them to be ingested when convenient. This report is
+therefore the completed execution of that subqueue rather than an active gate: it asserts
+nothing about P2-R, and no reading order or scientific verdict is implied by it.
+
+**Date span.** Acquisition, conversion and verification ran across the 2026-09-13 →
+2026-09-14 boundary (downloads late on 09-13, conversions and verification after midnight),
+so the batch ledgers and the manifest carry the label 2026-09-13 while this report and the
+cards are stamped with the completion date.
+
 ---
 
 ## 1. ID allocation

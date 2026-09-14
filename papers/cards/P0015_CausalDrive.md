@@ -101,7 +101,7 @@ PENDING SCIENTIFIC REVIEW
 ## 15. Change log
 
 ```text
-2026-09-13 — skeleton card created by the local corpus agent during the Round 2
+2026-09-14 — skeleton card created by the local corpus agent during the Round 2
            targeted ingest: metadata, provenance and ingestion/QC facts only.
            Scientific sections deliberately left unreviewed.
 ```

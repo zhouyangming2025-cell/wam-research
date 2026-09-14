@@ -26,7 +26,7 @@ from build_manifest import META, load_all  # noqa: E402
 
 BASE = r"D:\zym_information\ZYM\wam\research_assets"
 CARDS = os.path.join(BASE, "papers", "cards")
-DATE = "2026-09-13"
+DATE = "2026-09-14"
 PENDING = "PENDING SCIENTIFIC REVIEW"
 ROUND2 = [f"P{i:04d}" for i in range(13, 21)]
 

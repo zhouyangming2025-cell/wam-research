@@ -38,6 +38,7 @@ As of 2026-09-14, **field understanding precedes gap hunting**. Canonical rules:
 | date | batch | papers | state |
 |---|---|---|---|
 | 2026-09-13 | Batch 0A | 12 registered (P0001–P0012) | 11 `RAW_MD_READY` (canonical local PDF + raw MD, DOCUMENT_VERIFIED); P0008 NPPC blocked `PAYWALLED_NO_OPEN_SOURCE` |
+| 2026-09-14 | Round 2 targeted ingest (historical subqueue; F7/F8/F11 branch of the field atlas) | 8 registered (P0013–P0020) | 7 `RAW_MD_READY` (canonical local PDF + raw MD, `DOCUMENT_VERIFIED`); P0020 Bahram 2016 blocked `PAYWALLED_NO_OPEN_SOURCE`; cards are skeletons, every scientific section `PENDING SCIENTIFIC REVIEW`; no gap or novelty verdict; report: `ROUND2_TARGETED_INGEST_REPORT.md` |
 
 Important interpretation: Batch 0A is scientifically useful but **not representative of the whole field** because selection was partly hypothesis-driven.
 
