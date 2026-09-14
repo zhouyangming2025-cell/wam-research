@@ -502,11 +502,52 @@ META = {
                   code_available="UNKNOWN", official_code_url="",
                   tags="end-to-end;planning;benchmark;representation", hyp="GENERAL", rel="LOW", reviewed="2026-09-14",
                   note="Phase-A Census Round 1 text-layer batch (CORPUS_BATCH=census1), record created so that this work placed by landscape/CENSUS_PHASE_A_ROUND1.md has a local text layer. Official title, first author and date come from the official landing page (https://openaccess.thecvf.com/content/CVPR2026/html/Kirby_Driving_on_Registers_CVPR_2026_paper.html), copied from manifests/batch_census1_identity.json; front-page verification of the stored PDF returned DOCUMENT_VERIFIED. Canonical source: CVPR2026_camera_ready. No repository URL is printed in the extracted text; absence of a printed URL is not evidence that no code exists, so code_available stays UNKNOWN. Tags are assigned mechanically from the fixed corpus vocabulary by counting the work's own title and text ('end-to-end;planning;benchmark;representation'), not from any field placement. Conversion QC: RAW_MD_READY. decision_relevance=LOW: this batch exists to make the census readable locally, and it makes no claim about whether the work is decision-relevant. Census-depth record: no deep read, no field placement, no novelty or gap verdict. EVIDENCE_LEVEL=DOCUMENT_VERIFIED"),
+    # --- Phase C.5 Core-WAM batch ---
+    "P0061": dict(short="SeerDrive",
+                  title="Future-Aware End-to-End Driving: Bidirectional Modeling of Trajectory Planning and Scene Evolution",
+                  year="2025", first_author="Zhang, Bozhou", venue="NeurIPS 2025",
+                  arxiv_id="2510.11092", doi="NONE",
+                  official_url="https://arxiv.org/abs/2510.11092",
+                  code_available="YES", official_code_url="https://github.com/LogosRoboticsGroup/SeerDrive",
+                  tags="world-model;planning;end-to-end;representation", hyp="GENERAL", rel="LOW", reviewed="2026-09-14",
+                  note="Phase C.5 Core-WAM batch. Official arXiv identity and NeurIPS 2025 status verified; canonical source arXiv_v1. Official code repository live-checked and pinned in CODE_REPO_MANIFEST.csv. Raw Markdown conversion/QC is infrastructure-only; no scientific synthesis."),
+    "P0062": dict(short="Metis",
+                  title="Metis: A Generalizable and Efficient World-Action Model for Autonomous Driving and Urban Navigation",
+                  year="2026", first_author="Li, Jingyu", venue="arXiv preprint",
+                  arxiv_id="2606.15869", doi="NONE",
+                  official_url="https://arxiv.org/abs/2606.15869",
+                  code_available="YES", official_code_url="https://github.com/LogosRoboticsGroup/Metis",
+                  tags="world-model;planning;end-to-end", hyp="GENERAL", rel="LOW", reviewed="2026-09-14",
+                  note="Phase C.5 Core-WAM batch. Official arXiv identity verified; canonical source arXiv_v1. Official repository exists but contains project assets/README only at the checked commit; implementation and checkpoints are not released. Raw Markdown conversion/QC is infrastructure-only; no scientific synthesis."),
+    "P0063": dict(short="DynFlowDrive",
+                  title="DynFlowDrive: Flow-Based Dynamic World Modeling for Autonomous Driving",
+                  year="2026", first_author="Liu, Xiaolu", venue="arXiv preprint",
+                  arxiv_id="2603.19675", doi="NONE",
+                  official_url="https://arxiv.org/abs/2603.19675",
+                  code_available="YES", official_code_url="https://github.com/xiaolul2/DynFlowDrive",
+                  tags="world-model;planning;end-to-end", hyp="GENERAL", rel="LOW", reviewed="2026-09-14",
+                  note="Phase C.5 Core-WAM batch. Official arXiv v2 identity verified; canonical source arXiv_v2. Official repository exists but contains README only at the checked commit and states code will be released once accepted; implementation is unreleased. Raw Markdown conversion/QC is infrastructure-only; no scientific synthesis."),
+    "P0064": dict(short="Discrete-WAM",
+                  title="Discrete-WAM: Unified Discrete Vision-Action Token Editing for World-Policy Learning",
+                  year="2026", first_author="Yao, Ziyang", venue="arXiv preprint",
+                  arxiv_id="2606.05645", doi="NONE",
+                  official_url="https://arxiv.org/abs/2606.05645",
+                  code_available="UNKNOWN", official_code_url="",
+                  tags="world-model;planning;end-to-end;representation", hyp="GENERAL", rel="LOW", reviewed="2026-09-14",
+                  note="Phase C.5 Core-WAM batch. Official arXiv v2 identity verified; canonical source arXiv_v2. No official code repository was found in the paper record or live GitHub search at the check date. Raw Markdown conversion/QC is infrastructure-only; no scientific synthesis."),
+    "P0065": dict(short="GraphWorld",
+                  title="GraphWorld: Long-Horizon Planning with World Models for End-to-End Autonomous Driving",
+                  year="2026", first_author="Song, Ziying", venue="arXiv preprint",
+                  arxiv_id="2606.16274", doi="NONE",
+                  official_url="https://arxiv.org/abs/2606.16274",
+                  code_available="UNKNOWN", official_code_url="",
+                  tags="world-model;planning;end-to-end;interactive", hyp="GENERAL", rel="LOW", reviewed="2026-09-14",
+                  note="Phase C.5 Core-WAM batch. Official arXiv identity verified; canonical source arXiv_v1. No official code repository was found in the paper record or live GitHub search at the check date. Raw Markdown conversion/QC is infrastructure-only; no scientific synthesis."),
 }
 
 
 # P0021-P0034 come from the Phase-A Census Round 2 support batch (census2).
-ORDER = [f"P{i:04d}" for i in range(1, 61)]
+ORDER = [f"P{i:04d}" for i in range(1, 66)]
 
 
 def load_all(name):
