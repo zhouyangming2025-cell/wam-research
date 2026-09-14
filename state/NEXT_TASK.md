@@ -2,90 +2,42 @@
 
 ## 唯一下一任务
 
-> Complete **Phase-A Field Census Round 2**: fill the remaining planning-centric WAM landscape gaps until the field map reaches sufficient 50–80-work coverage, then freeze breadth expansion and select representative anchor papers for deep reading.
+> Complete **Phase-A census placement closeout** and freeze breadth expansion before Phase-B deep reads.
 
-Active plan:
-
-`landscape/FIELD_RECONSTRUCTION_PLAN.md`
-
-Taxonomy:
-
-`landscape/PLANNING_WAM_TAXONOMY.md`
-
-Living atlas:
-
-`landscape/FIELD_ATLAS.md`
-
-Round-1 census:
-
-`landscape/CENSUS_PHASE_A_ROUND1.md`
-
-## Current progress
-
-Round 1 has provisionally placed roughly **45 unique works / benchmarks / control systems** across F1–F11.
-
-The map now contains early coverage of:
+The corpus has already reached the planned breadth scale:
 
 ```text
-visual/video WMs
-occupancy/BEV/geometric WMs
-latent/JEPA/predictive representations
-world-model-assisted planning
-candidate/action-conditioned futures
-unified world-action models
-interactive prediction/planning predecessors
-reactive simulation
-reward/value/safety interfaces
-strong non-WM E2E controls
-planning benchmarks/evaluation regimes
+P0001–P0060 registered
+58 RAW_MD_READY
+2 lawful-source blockers (P0008 NPPC, P0020 Bahram 2016)
 ```
 
-No research-gap verdict has been issued.
+So the next step is **not another broad acquisition batch**.
 
-## Round 2 — fill missing coverage, not gaps
+## Step 1 — scientifically place the newly ingested Round-2 coverage set
 
-Priority coverage holes:
-
-1. **Strong non-WM E2E controls**
-   - Hydra-MDP family
-   - DriveSuprim
-   - iPad
-   - representative modern VLA planners
-
-2. **World-model RL / policy-learning lineage**
-   - Think2Drive and related latent-WM RL driving work
-   - distinguish simulator world model from planner world model
-
-3. **Representation-pretraining bridges**
-   - ViDAR
-   - GenAD
-   - only include additional pretraining WMs if they help explain the transition into planning-centric WMs
-
-4. **Benchmark / evaluation evolution**
-   - nuScenes planning protocol
-   - nuPlan OL / CL-NR / CL-R
-   - NAVSIM v1 / v2
-   - Bench2Drive
-   - HUGSIM
-   - reactive-world benchmarks
-
-5. **Operational/deployment properties**
-   - whether the future-model branch survives at inference
-   - action/candidate count
-   - rollout/planning horizon
-   - latency/FPS when reported
-   - real-vehicle closed-loop evidence, if any
-
-6. **Uncertainty / multimodality**
-   - determine how major families represent multiple plausible futures and whether the planner actually consumes that uncertainty
-
-## Per-paper census output
-
-For every new work record only field-placement facts:
+Read `P0021–P0034` at census depth only:
 
 ```text
-Paper
-Year / venue
+P0021 HydraMDP
+P0022 DriveSuprim
+P0023 iPad
+P0024 DriveVLM
+P0025 OmniDrive
+P0026 ORION
+P0027 Think2Drive
+P0028 ViDAR
+P0029 GenAD
+P0030 nuScenes
+P0031 nuPlan
+P0032 NAVSIM
+P0033 Bench2Drive
+P0034 HUGSIM
+```
+
+For each record, place it using `landscape/PLANNING_WAM_TAXONOMY.md`:
+
+```text
 Family labels
 World state representation
 Predictive/generative mechanism
@@ -99,27 +51,65 @@ Evaluation regime
 Decision-evidence strength
 Main contribution
 Main stated limitation
-Historical importance / transition role
+Historical transition role
 Placement confidence
 ```
 
-Do **not** write novelty or gap verdicts.
+Do not write novelty/gap verdicts.
 
-## Phase-A stop condition
+Create:
 
-Freeze breadth expansion when:
+`landscape/CENSUS_PHASE_A_ROUND2.md`
 
-1. the census contains roughly 50–80 reasonably placed works;
-2. F1–F11 each have enough coverage to explain why that family exists;
-3. 2023–2026 historical transitions can be narrated without relying on one survey taxonomy;
-4. benchmark differences are explicit enough to prevent false cross-paper comparison;
-5. strong non-WM planning controls are represented;
-6. a 15–25 paper deep-read anchor set can be justified by field coverage rather than by P1/P2-R/P3.
+## Step 2 — field-coverage audit
 
-Then begin Phase B anchor deep reads.
+Update `landscape/FIELD_ATLAS.md` and explicitly check whether F1–F11 are now sufficiently represented to explain the field.
 
-## Parked hypotheses
+Required checks:
 
-P1/P2-R/P3 remain provenance and diagnostic probes only. Do not optimize Round 2 around proving, rescuing, or killing them.
+- strong non-WM planning controls are not underrepresented;
+- WM-RL / policy-learning lineage is represented;
+- representation-pretraining bridges are represented;
+- benchmark evolution from nuScenes/nuPlan to NAVSIM/Bench2Drive/HUGSIM is explicit;
+- visual, geometric, latent, world-action, candidate-conditioned, interactive/reactive and value/safety interfaces are all distinguishable;
+- evaluation regimes are not conflated;
+- historical predecessors are visible.
 
-Do not design methods. Do not declare a gap. Do not force risk-field knowledge into the atlas.
+`Hydra-MDP++` and `NAVSIM-v2` remain unresolved optional follow-ups. Do not block Phase-A closeout on them unless the coverage audit shows they are essential to explain a transition.
+
+## Step 3 — freeze Phase A and select Phase-B anchors
+
+If the coverage audit passes, stop broad expansion and choose roughly **15–25 anchor papers** for full deep reading.
+
+Anchor selection must optimize for explaining the field, not for supporting a prior hypothesis. The final anchor set should jointly cover:
+
+```text
+historical interaction/prediction-planning roots
+planning-oriented E2E baseline era
+visual/video WM
+occupancy/BEV/geometric WM
+latent/JEPA predictive representation
+WM-assisted direct planning
+action/candidate-conditioned future evaluation
+world-action unified modeling
+WM-RL / policy improvement
+reactive simulation / closed-loop evaluation
+strong non-WM controls
+benchmark/evaluation transitions
+```
+
+For every selected anchor, record **why this paper is necessary to explain the field** and which other papers it makes redundant at deep-read depth.
+
+## Stop condition
+
+Phase A closes only when:
+
+1. `CENSUS_PHASE_A_ROUND2.md` exists;
+2. `FIELD_ATLAS.md` reflects the new placements;
+3. F1–F11 coverage audit is explicit;
+4. broad ingestion is frozen;
+5. a justified 15–25 anchor set is written down.
+
+Then begin Phase B deep reads.
+
+Do not design methods. Do not declare a gap. Do not reactivate P2-R/P3 as search targets. Do not force risk-field knowledge into the atlas.
