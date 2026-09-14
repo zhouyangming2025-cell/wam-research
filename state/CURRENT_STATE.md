@@ -1,6 +1,6 @@
 # CURRENT_STATE
 
-Last updated: 2026-09-14 — Wave 2 CLOSED; Wave 3 ACTIVE
+Last updated: 2026-09-14 — Wave 3 CLOSED; Research QA Gate ACTIVE
 
 ## Research north star
 
@@ -18,6 +18,7 @@ Canonical rules: `state/RESEARCH_PRINCIPLES.md`.
 FIELD UNDERSTANDING FIRST
 → comparative anchor deep reads
 → cross-family synthesis
+→ evidence QA
 → only then research-problem / gap discovery
 ```
 
@@ -26,10 +27,10 @@ P1/P2-R/P3 remain parked historical probes and do not organize the reading progr
 ## Current active stage
 
 ```text
-FIELD RECONSTRUCTION — PHASE B: WAVE 3 ACTIVE
+RESEARCH QA GATE — WAVES 1–3
 ```
 
-Phase A is closed:
+Phase A remains closed:
 
 ```text
 P0001–P0060 registered
@@ -59,14 +60,14 @@ Canonical artifacts:
 - `landscape/PHASE_B_WAVE1_SYNTHESIS.md`
 - `landscape/PHASE_B_WAVE1_COMPARABILITY_AUDIT.md`
 
-Stable controls carried forward:
+Stable controls:
 
 1. conditional future response is not automatically causal/interventional response;
 2. final planner score must be decomposed into representation, scorer, refinement, optimizer and rules;
 3. matched controls dominate headline SOTA tables;
 4. multimodal/diffusion action generation is not automatically world modeling;
 5. candidate ranking is an independent planning bottleneck;
-6. E2/E3/E4/E5/E6/E7 evaluation regimes are different claims;
+6. evaluation regimes are different claims;
 7. world-prediction accuracy alone is not planning evidence.
 
 ## Wave 2 — CLOSED
@@ -88,39 +89,7 @@ Canonical artifacts:
 - `landscape/PHASE_B_WAVE2_COMPARABILITY_AUDIT.md`
 - `audits/literature/PHASE_B_WAVE2_INTERFACE_CODE_AUDIT.md`
 
-Wave-2 closeout gate:
-
-```text
-comparative first pass       = COMPLETE
-planning-interface audit     = COMPLETE
-comparability/attribution    = COMPLETE
-supervision-source audit     = COMPLETE
-Wave 2                       = CLOSED
-```
-
-### Stable Wave-2 field understanding
-
-“World model helps planning” decomposes into different mechanisms:
-
-```text
-GAIA-1   = controllable world generation; no operational planner interface
-Drive-WM = candidate → visual future → perception/reward → selection
-OccWorld = joint future occupancy + ego generation
-WoTE     = candidate → future BEV → learned reward → selection
-ViDAR    = future prediction as representation pretraining
-LAW      = action-aware future-latent auxiliary supervision
-```
-
-Strongest evidence/boundaries:
-
-1. **GAIA-1:** controllable generation is capability evidence, not direct planning evidence.
-2. **Drive-WM:** generated futures are operationally useful for choosing among candidate commands, but generation fidelity is not cleanly isolated from detector/map quality, reward design or the candidate set. Better FID/FVD/KPM → better planning is **not established**.
-3. **OccWorld:** headline SOTA comparisons are heterogeneous in input, auxiliary supervision and metric implementation. Internal ablations are much cleaner. A higher-resolution tokenizer reconstructs better but forecasts/plans worse; spatial/temporal dynamics ablations materially degrade both forecasting and planning.
-4. **WoTE:** matched NAVSIM ablation `81.0 → 83.2 → 85.6 PDMS` separates trajectory-only, evaluator-only, and evaluator+future-state gains. Future-state input adds value beyond scorer-only in that setup. Source audit shows surrounding-agent target futures are fixed logged/GT tracks across ego candidates in the audited PDM path, so reactive oracle supervision is not established.
-5. **ViDAR:** future point-cloud forecasting is a pretraining objective. The pretrained history/BEV encoder is transferred; the future decoder is not the deployed planner interface. Same downstream UniAD improves, but future temporal learning is still entangled with LiDAR/geometric supervision and latent-rendering design.
-6. **LAW:** source code verifies that the current waypoint is produced before the WM future latent. Training uses future-latent reconstruction; test-time planning discards latent outputs. LAW is representation shaping, not online rollout-based action selection. Its 1.5 s target outperforms 3 s/10 s, so longer horizon is not monotonic.
-
-Stable distinctions:
+Stable Wave-2 distinctions:
 
 ```text
 CONTROLLABLE GENERATION != PLANNING INTERFACE
@@ -132,41 +101,127 @@ LONGER HORIZON != BETTER PLANNING
 CANDIDATE-SPECIFIC OUTPUT != CANDIDATE-SPECIFIC ORACLE SUPERVISION
 ```
 
-These are field-understanding results, not gap claims.
-
-## Wave 3 — ACTIVE
-
-Canonical plan:
-
-`landscape/PHASE_B_WAVE3_PLAN.md`
-
-Anchors and order:
+High-confidence source facts:
 
 ```text
-1. Epona
-2. DrivingGPT
-3. DriveLaW
-4. Auto-JEPA
-5. DA-WAM
-6. Think2Drive
+LAW test-time path discards predicted future latent  = CODE VERIFIED
+WoTE candidate target-generation uses fixed logged surrounding futures = CODE VERIFIED
 ```
 
-Wave-3 purpose: compare what “world-action unification” actually means across shared latent/joint training, interleaved token generation, hidden-WM-feature action generation, compressed predictive representation, candidate-specific future evaluation, and WM-based imagined policy learning.
+## Wave 3 — CLOSED
 
-Immediate comparative questions:
+Anchors:
 
-- What exactly is unified: weights, conditioning, tokens, latent states, objectives, or decision process?
-- What future/world representation survives at inference?
-- Does planning consume a predicted future, a hidden WM feature, a candidate-specific future, or no explicit future?
-- Which matched ablation isolates world/action coupling from stronger action modeling, representation learning, scorer/reward, extra data or RL?
-- How are unexecuted alternative actions supervised?
-- Which evaluation regime actually supports the planning claim?
+```text
+Epona
+DrivingGPT
+DriveLaW
+Auto-JEPA
+DA-WAM
+Think2Drive
+```
+
+Canonical artifacts:
+
+- `landscape/PHASE_B_WAVE3_SYNTHESIS.md`
+- `landscape/PHASE_B_WAVE3_CLOSEOUT.md`
+- `audits/literature/PHASE_B_WAVE3_AUTOJEPA_AUDIT.md`
+- `audits/literature/PHASE_B_WAVE3_DAWAM_AUDIT.md`
+- `audits/literature/PHASE_B_WAVE3_THINK2DRIVE_AUDIT.md`
+
+### Stable six-way interface map
+
+```text
+Epona
+= shared historical predictive representation
+→ separate trajectory / visual generation heads
+
+DrivingGPT
+= interleaved image/action tokens
+→ one causal world-action language
+
+DriveLaW
+= online Video-DiT hidden state
+→ Action DiT
+
+Auto-JEPA
+= predicted future ego-intent latent
+→ trajectory-memory retrieval
+→ scorer/gate
+
+DA-WAM
+= candidate_i
+→ candidate-specific future latent_i
+→ score_i
+
+Think2Drive
+= learned latent transition/reward model
+→ imagined actor/critic rollouts
+→ learned closed-loop policy
+```
+
+### Stable Wave-3 conclusions
+
+1. `world-action unification` is not one architecture; the planning-relevant variable is where predictive/world information enters the decision process.
+2. Architectural coupling strength does not equal planning effect size or causal evidence strength.
+3. Future information has no universal positive sign; representation, horizon, conditioning, planner interface and supervision jointly determine value.
+4. Planning-oriented compression is a real branch of world modeling: Auto-JEPA predicts future ego-motion intent rather than reconstructing a full future scene.
+5. DA-WAM predicts per-candidate future latents but direct observed-future supervision exists only for the expert-matched candidate.
+6. Think2Drive establishes a distinct role: the WM can act primarily as a latent imagination environment for RL policy learning rather than an online candidate evaluator.
+7. Think2Drive official ECCV 2024 PDF was directly checked for RSSM/imagination mechanism, privileged input and CARLA-v2 test results.
+
+These are field-understanding results, not gap claims.
+
+## Research QA Gate — ACTIVE
+
+Canonical artifacts:
+
+```text
+audits/literature/RESEARCH_QA_GATE_WAVES1_3.md
+audits/literature/PDF_VERIFICATION_QUEUE.md
+```
+
+Current rule:
+
+```text
+Do not begin Wave 4 until Priority-A evidence is either
+VERIFIED / CORRECTED / explicitly UNRESOLVED.
+```
+
+Highest-priority checks:
+
+```text
+Epona      joint-vs-trajectory-only ablation
+OccWorld   tokenizer + temporal/spatial ablations + metric footnote
+WoTE       future-state-on/off table
+LAW        action-aware/no-WM + horizon tables
+DriveLaW   pretraining/representation/denoising tables + freeze semantics
+Auto-JEPA  component/K/occlusion evidence
+DA-WAM     future-config ablation + expert-matched future supervision
+DrivingGPT optimized planning decode path
+```
+
+The assistant should use public official PDFs/source code first. User/local PDF help is required only for inaccessible canonical evidence.
 
 ## Immediate next task
 
 See `state/NEXT_TASK.md`.
 
-Begin Wave-3 comparative deep read with Epona → DrivingGPT, then continue through DriveLaW → Auto-JEPA → DA-WAM → Think2Drive. Build one cross-paper mechanism map rather than six isolated summaries.
+Execute the Priority-A verification queue, correct any earlier synthesis if needed, then create:
+
+```text
+audits/literature/RESEARCH_QA_GATE_CLOSEOUT.md
+```
+
+Only after QA closeout may Wave 4 begin:
+
+```text
+Bench2Drive
+HUGSIM
+ORION
+ReactSim-Bench
+CausalDrive
+```
 
 ## Still forbidden
 
@@ -180,7 +235,7 @@ no forced risk-field insertion
 
 ## Research Brain architecture
 
-GitHub raw MD + figures are the persistent GPT-readable primary-text layer; canonical PDFs remain source authority where archived/available. Public source repositories may be audited only when a planning-interface ambiguity is decision-critical; source facts must record repo + commit + file + symbol.
+GitHub raw MD + figures are the persistent GPT-readable primary-text layer; canonical PDFs remain source authority where archived/available. Public official PDFs and source repositories should be used directly for decision-critical verification whenever available.
 
 A fresh session should read:
 
@@ -188,8 +243,7 @@ A fresh session should read:
 START_HERE.md
 state/CURRENT_STATE.md
 state/NEXT_TASK.md
-landscape/FIELD_ATLAS.md
-landscape/PHASE_B_ANCHORS.md
-landscape/PHASE_B_WAVE2_COMPARABILITY_AUDIT.md
-landscape/PHASE_B_WAVE3_PLAN.md
+landscape/PHASE_B_WAVE3_CLOSEOUT.md
+audits/literature/RESEARCH_QA_GATE_WAVES1_3.md
+audits/literature/PDF_VERIFICATION_QUEUE.md
 ```
