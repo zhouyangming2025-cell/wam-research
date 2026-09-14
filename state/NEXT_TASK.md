@@ -2,15 +2,15 @@
 
 ## 唯一下一任务
 
-> Execute **Phase D — Adversarial Problem Discovery** from the completed Waves 1–4 field synthesis.
+> Execute **Phase C.5 — Core-WAM Coverage Correction** before any Phase-D problem discovery.
 
-Canonical field synthesis:
+Canonical scope correction:
 
 ```text
-landscape/PHASE_C_WAVES1_4_FIELD_SYNTHESIS.md
+landscape/PURE_WAM_PRIORITY_CORRECTION.md
 ```
 
-Status:
+## Status
 
 ```text
 Wave 1            CLOSED
@@ -18,150 +18,127 @@ Wave 2            CLOSED
 Wave 3            CLOSED
 Research QA Gate  CLOSED
 Wave 4            CLOSED
-Phase C synthesis COMPLETE FIRST PASS
-Phase D           NEXT
+Phase-C synthesis COMPLETE FIRST PASS
+Phase D           PAUSED
+Phase C.5         ACTIVE
 ```
 
-Broad corpus acquisition remains frozen unless a specific candidate problem requires one tightly scoped prior-art check.
+## Why Phase D is paused
 
-## Phase-D purpose
+The first-pass synthesis is useful, but the core WAM branch is not yet complete enough. The external reading map identifies several planning-centric WAM papers that are absent from the current repo/atlas, while the project spent some effort on VLA controls.
 
-Do **not** choose a method or reuse a historical hypothesis first.
-
-Start from recurrent tensions / under-measured planning properties discovered in Phase C and ask whether any of them correspond to a real, consequential, falsifiable planning problem.
-
-Required chain:
+Primary priority is now:
 
 ```text
-Observed / measurable planning difficulty
-→ failure mechanism
-→ missing capability or structural trade-off
-→ why current approaches cannot easily handle it
-→ strongest counterexample / simpler explanation
-→ falsifiable test
-→ only if it survives: research question
+2.2 WAM core branch
 ```
 
-## Candidate evidence-gap pool — not preselected gaps
-
-Phase C identified:
+Secondary/control priority:
 
 ```text
-E1  real alternative-action surrounding-agent ground truth
-E2  reactive simulator quality → planner decision quality
-E3  simultaneous sensor-realistic + behaviorally validated closed loop
-E4  intervention-conditioned uncertainty calibration
-E5  long-horizon compounding under ego/sensor/agent/model feedback
-E6  compute-normalized planning benefit
-E7  representation semantics vs scale/capacity
-E8  real-vehicle closed-loop validation
-E9  standardized feedback-semantic reporting
-E10 planner robustness to world-model error
+2.1 WAM+VLA / VLA-centric branch
 ```
 
-These are evidence gaps only. Most may fail as research problems.
+VLA is retained as a control, not the main organizing direction.
 
-## Adversarial screen for every candidate
+## Core-WAM audit list
 
-For each candidate, create one row with:
+Already covered deeply:
 
 ```text
-1. exact observed/plausibly measurable failure
-2. why it matters to ego planning
-3. strongest direct evidence from current corpus
-4. strongest historical precedent
-5. strongest 2025–2026 neighboring solution
-6. strongest non-WM explanation / baseline
-7. strongest counterexample
-8. whether the problem is WAM-specific or generic ML/planning
-9. whether the problem can be measured without unavailable counterfactual GT
-10. realistic evaluation regime capable of falsifying it
-11. minimum experiment that could kill the problem
-12. verdict: SURVIVES / WEAK / KILLED / EVIDENCE INSUFFICIENT
+Epona
+WoTE
+DriveLaW
+LAW
 ```
 
-## Binding anti-shortcut rules
-
-Do not accept:
+Must now verify and place:
 
 ```text
-“no one has module X”
-“paper Y did not evaluate metric Z”
-“counterfactual GT is unavailable, therefore this is automatically a gap”
-“reactive world models are new, therefore reactivity is a gap”
-“better planning needs risk, therefore add risk field”
+WorldDrive
+World4Drive
+SeerDrive
+Drive-JEPA
+Metis
+DynFlowDrive
+Discrete-WAM
+GraphWorld
 ```
 
-A valid problem must show a planning consequence, not merely a missing benchmark or representation.
-
-## Required strongest attacks
-
-Every survivor must be attacked by at least:
+Important anti-alias rules:
 
 ```text
-Historical interaction/planning:
-M2I / GameFormer / What Truly Matters
-
-Strong non-WM planning:
-UniAD / DiffusionDrive / DriveSuprim / ORION
-
-Predictive-representation counterexamples:
-OccWorld / LAW / DriveLaW / Auto-JEPA
-
-Candidate-world planning:
-Drive-WM / WoTE / DA-WAM
-
-Closed-loop / reactive simulation:
-Bench2Drive / HUGSIM / ReactSim-Bench / CausalDrive
-
-Policy-imagination control:
-Think2Drive
+Auto-JEPA != automatically Drive-JEPA
+Drive-WM != automatically WorldDrive
+DA-WAM != automatically Discrete-WAM
 ```
 
-No candidate needs every paper, but no candidate may ignore the strongest relevant control.
+Do not merge papers by similar naming without primary-source verification.
 
-## First deliverable
+## First execution block
 
-Create:
+For each missing item, establish:
 
 ```text
-landscape/PHASE_D_PROBLEM_DISCOVERY_ROUND1.md
+1. exact paper identity
+2. year / venue / authors / institutions
+3. official paper URL
+4. official code URL if any
+5. whether it is truly planning-centric WAM
+6. world-state representation
+7. predictive / generative mechanism
+8. exact world→planning interface
+9. supervision source
+10. inference path
+11. evaluation regime
+12. strongest evidence / strongest limitation
+13. relation to existing Waves 1–4 taxonomy
+14. whether deep read is required
 ```
 
-It should contain:
+## Reading-depth gate
+
+Assign each paper:
 
 ```text
-- 5–8 candidate problem statements max;
-- adversarial evidence table;
-- kill criteria for each;
-- no method proposals;
-- no novelty claim;
-- explicit NONE / EVIDENCE INSUFFICIENT option.
+ANCHOR
+CENSUS
+DUPLICATE / NEAR-DUPLICATE
+OUT-OF-SCOPE
+UNVERIFIED
 ```
 
-Do not generate ten vague “future work” topics. Prefer fewer candidates with stronger falsification logic.
+Only ANCHOR papers receive full deep reads.
+
+## Deliverables
+
+Create/update:
+
+```text
+landscape/PHASE_C5_CORE_WAM_COVERAGE_AUDIT.md
+landscape/PHASE_C_WAVES1_4_FIELD_SYNTHESIS.md   # only after evidence changes are known
+state/CURRENT_STATE.md
+state/RESEARCH_LEDGER.md
+```
 
 ## Stop condition
 
-Round 1 stops when every candidate is labeled:
+Do not reopen Phase D until:
 
 ```text
-SURVIVES
-WEAK
-KILLED
-or EVIDENCE INSUFFICIENT
+all listed 2.2 WAM papers are verified/placed;
+all decision-relevant missing WAM mechanisms are deep-read;
+existing field conclusions are rechecked against them;
+a WAM-only historical/interface synthesis is stable.
 ```
-
-Only `SURVIVES` candidates proceed to targeted prior-art/failure verification.
 
 ## Still forbidden
 
 ```text
+no problem/gap selection yet
 no method design
+no broad VLA expansion
 no forced risk-field insertion
-no automatic P2-R/P3 revival
-no broad literature accumulation
-no gap declaration from missing modules
-no conflation of reactive feasibility with true counterfactual response
-no conflation of simulator quality with planner benefit
+no assuming similar paper names are the same work
+no treating the existing first-pass field synthesis as final core-WAM coverage
 ```
