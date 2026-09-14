@@ -1,6 +1,6 @@
 # LATEST — Handoff
 
-Session: 2026-09-14 — post-agent census ingest sync.
+Session: 2026-09-14 — Phase-A census closeout completed.
 
 ## New-session fast path
 
@@ -9,7 +9,7 @@ Session: 2026-09-14 — post-agent census ingest sync.
 2. state/CURRENT_STATE.md
 3. state/NEXT_TASK.md
 4. landscape/FIELD_ATLAS.md
-5. landscape/CENSUS_PHASE_A_ROUND1.md
+5. landscape/PHASE_B_ANCHORS.md
 6. state/RESEARCH_PRINCIPLES.md
 ```
 
@@ -23,93 +23,93 @@ World Model + End-to-End + Planning-centric autonomous driving
 
 Planning is the center of gravity. Risk-field / predictive-risk expertise is optional prior knowledge, not a required destination.
 
-## Critical methodology
+## Methodology in force
 
 ```text
 FIELD UNDERSTANDING FIRST
-→ census the field
-→ select representative anchors
-→ deep-read anchors
-→ synthesize historical transitions / interfaces / supervision / evaluation / trade-offs
-→ only then reopen research-problem discovery
+→ representative comparative deep reads
+→ cross-family synthesis
+→ only then research-problem discovery
 ```
 
 P1/P2-R/P3 are parked provenance probes, not active search targets.
 
-## Latest Git / corpus update
+## Phase A is closed
 
-Latest observed head before this sync:
-
-```text
-e0f4507  Complete Phase-A census round 1 text-layer ingest
-```
-
-The agent has now completed the text-layer support work for the field census:
-
-- P0013–P0020: 7 readable; P0020 Bahram 2016 blocked by lawful-source availability.
-- P0021–P0034: 14/14 verified + raw MD ready.
-- P0035–P0060: 26/26 verified + raw MD ready.
-
-Combined corpus:
+Corpus:
 
 ```text
-60 stable IDs: P0001–P0060
+P0001–P0060 registered
 58 RAW_MD_READY
-2 blocked: P0008 NPPC, P0020 Bahram 2016
+2 lawful-source blockers: P0008 NPPC, P0020 Bahram 2016
 ```
 
-Reports:
+Scientific closeout artifacts:
 
-- `ROUND2_TARGETED_INGEST_REPORT.md`
-- `CENSUS_ROUND2_INGEST_REPORT.md`
-- `CENSUS_ROUND1_TEXTLAYER_INGEST_REPORT.md`
+- `landscape/CENSUS_PHASE_A_ROUND1.md`
+- `landscape/CENSUS_PHASE_A_ROUND2.md`
+- `landscape/FIELD_ATLAS.md`
+- `landscape/PHASE_B_ANCHORS.md`
 
-The agent intentionally did **not** perform scientific placement or edit the owner landscape/state files.
+The F1–F11 coverage audit passes at census depth. Broad paper acquisition is **frozen**.
 
-## Current stage
+## What Round 2 clarified
+
+- Hydra-MDP / DriveSuprim / iPad are strong non-WM planning controls; scoring, hard-negative selection and proposal-centric representation can improve planning without future-world rollout.
+- DriveVLM / OmniDrive / ORION show VLM/VLA reasoning and generative action are adjacent to WAM but not synonymous with a learned environment transition model.
+- Think2Drive represents a distinct WM lineage: latent world dynamics as a neural simulator for RL policy learning.
+- ViDAR is a clean pretraining-only world-prediction case.
+- GenAD is a trajectory-level joint ego/agent future-generation precursor to later world-action models.
+- Benchmark evolution is technically decisive: original nuScenes is not a planning benchmark; nuPlan formalizes planning OL/CL-NR/CL-R; NAVSIM is explicitly non-reactive; Bench2Drive is CARLA interactive closed loop; HUGSIM adds photorealistic reconstructed closed loop.
+
+These are field distinctions, not research gaps.
+
+## Phase-B anchor set
+
+25 anchors are fixed in:
+
+`landscape/PHASE_B_ANCHORS.md`
+
+Secondary papers stay in the corpus and are promoted only when a concrete anchor comparison needs them.
+
+## Immediate next task — Wave 1
+
+Comparative deep-read set:
 
 ```text
-FIELD RECONSTRUCTION — Phase-A closeout
+M2I
+GameFormer
+What Truly Matters in Trajectory Prediction?
+UniAD
+nuPlan
+NAVSIM
+DiffusionDrive
+DriveSuprim
 ```
 
-The corpus breadth target is reached. Do not start another broad acquisition batch.
+Required synthesis artifact:
 
-## Immediate next task
+`landscape/PHASE_B_WAVE1_SYNTHESIS.md`
 
-Scientifically place the newly ingested Round-2 coverage set `P0021–P0034` at census depth and create:
+Goal: establish what interaction, planning, multimodality and evaluation already looked like before modern WAMs, and what strong non-WM planners can already achieve. Later WM gains must be interpreted against this baseline.
 
-`landscape/CENSUS_PHASE_A_ROUND2.md`
+Do not create eight disconnected summaries. Build one comparative account with source-backed per-paper evidence.
 
-Then:
+## Still forbidden
 
-1. update `landscape/FIELD_ATLAS.md`;
-2. explicitly audit F1–F11 coverage;
-3. add another paper only if a specific missing family/transition remains;
-4. freeze Phase-A breadth expansion;
-5. select ~15–25 representative Phase-B anchor papers with a reason each is necessary to explain the field.
+```text
+no gap declaration
+no method design
+no broad literature accumulation
+no P2-R/P3 optimization
+no forced risk-field insertion
+```
 
-`Hydra-MDP++` and `NAVSIM-v2` remain unresolved optional follow-ups; they are not automatic blockers.
+## Corpus / infrastructure
 
-## Existing Phase-A map
-
-`landscape/CENSUS_PHASE_A_ROUND1.md` already places roughly 45 works across visual/video WMs, occupancy/BEV WMs, latent/JEPA/WAMs, interactive planning, reactive simulation, reward/value/safety interfaces, strong non-WM E2E controls and benchmark lineages.
-
-The new P0021–P0034 set fills the main holes identified after Round 1: strong modern non-WM controls, VLA planners, WM-RL, representation-pretraining bridges and benchmark lineage.
-
-## Integrity notes
-
-- A concurrent raw-MD ledger write race was detected and repaired from stored artifacts; the write path was fixed.
-- P0028 ViDAR has a known raw-MD omission of a code URL that is present on PDF page 1; the report/manifest records this explicitly.
-- Canonical hashes use Python logical-byte I/O.
-
-## Scientific discipline
-
-During census closeout:
-
-- no per-paper novelty/gap verdict;
-- use the common taxonomy consistently;
-- separate author claim / direct evidence / inference where interpretation is needed;
-- strong non-WM planners and evaluation papers remain first-class controls;
-- do not confuse corpus acquisition with scientific understanding.
+- Canonical local PDFs remain local/NAS when archived.
+- GitHub raw MD + figures are the persistent GPT-readable text layer.
+- The agent is now on-demand infrastructure support rather than a broad-ingestion worker.
+- Integrity notes remain: repaired raw-MD ledger race; ViDAR Markdown omitted a code URL visible on PDF page 1; canonical hashes use Python logical bytes.
 
 The repo, not conversation memory, is the canonical research authority.
