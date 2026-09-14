@@ -1,6 +1,6 @@
 # CURRENT_STATE
 
-Last updated: 2026-09-14 — Phase D paused; Phase C.5 Core-WAM Coverage Correction ACTIVE
+Last updated: 2026-09-14 — Phase C.5 Core-WAM Coverage Correction ACTIVE; WorldDrive COMPLETE
 
 ## Research north star
 
@@ -12,17 +12,17 @@ Planning is the center of gravity. Risk/predictive-risk expertise is optional pr
 
 ## Scope priority correction
 
-The current project now distinguishes:
+The current project distinguishes:
 
 ```text
 PRIMARY:
-core WAM / World Model + planning
+core WAM / World Model + one-stage end-to-end planning
 
 SECONDARY CONTROL:
 WAM+VLA / VLA-centric planning
 ```
 
-VLA papers remain useful as controls, but they should not consume equal priority while the core WAM branch is still incomplete.
+VLA papers remain useful as controls, but they should not consume equal priority while the core WAM branch is incomplete.
 
 Canonical correction:
 
@@ -36,7 +36,7 @@ landscape/PURE_WAM_PRIORITY_CORRECTION.md
 FIELD UNDERSTANDING FIRST
 → complete core-WAM coverage
 → comparative anchor deep reads
-→ cross-family synthesis
+→ WAM-only synthesis
 → evidence QA
 → only then adversarial problem discovery
 → falsification
@@ -53,9 +53,7 @@ PHASE C.5 — CORE-WAM COVERAGE CORRECTION
 
 Phase D problem discovery is **PAUSED**.
 
-Reason: the Waves 1–4 synthesis is a useful first-pass framework, but a scope review identified under-coverage of several papers in the core 2.2 WAM branch.
-
-## Completed foundation
+Completed foundation:
 
 ```text
 Phase A census     CLOSED
@@ -67,28 +65,11 @@ Wave 4             CLOSED
 Phase-C synthesis  COMPLETE FIRST PASS
 ```
 
-Existing synthesis remains valid as a provisional framework:
+The first-pass synthesis remains useful but is not final core-WAM coverage.
 
-```text
-landscape/PHASE_C_WAVES1_4_FIELD_SYNTHESIS.md
-```
+## Core-WAM correction set
 
-but is not yet treated as final core-WAM coverage.
-
-## Core-WAM papers already deeply covered
-
-```text
-Epona
-WoTE
-DriveLaW
-LAW
-```
-
-Related existing anchors include Drive-WM, OccWorld, ViDAR, Auto-JEPA, DA-WAM, Think2Drive, DrivingGPT, etc., but similar names must not be treated as substitutes for missing papers without verification.
-
-## Core-WAM papers now requiring identity / coverage audit
-
-User-provided 2.2 reading map identifies:
+User-provided 2.2 reading map identified:
 
 ```text
 WorldDrive
@@ -101,29 +82,111 @@ Discrete-WAM
 GraphWorld
 ```
 
-Repository search on 2026-09-14 found no indexed mention of these names.
-
-Anti-alias rules:
+Current progress:
 
 ```text
-Auto-JEPA != automatically Drive-JEPA
-Drive-WM != automatically WorldDrive
-DA-WAM != automatically Discrete-WAM
+WorldDrive      COMPLETE — primary paper + official code audit
+World4Drive     NEXT
+SeerDrive       PENDING
+Drive-JEPA      PENDING
+Metis           PENDING
+DynFlowDrive    PENDING
+Discrete-WAM    PENDING
+GraphWorld      PENDING
 ```
 
-Exact paper identities, years, venues and code status must be verified from primary sources before scientific use.
-
-## VLA branch status
-
-ORION and other VLA/WAM+VLA work remain useful controls for questions such as:
+Canonical coverage map:
 
 ```text
-semantic reasoning vs explicit world rollout
-memory / state representation vs future modeling
-reasoning→action interface vs world-model interface
+landscape/CORE_WAM_2_2_COVERAGE_AUDIT.md
 ```
 
-But no broad VLA expansion is authorized until the 2.2 core-WAM branch is closed.
+## WorldDrive — stable result
+
+Canonical audit:
+
+```text
+audits/literature/PHASE_C5_WORLDDRIVE_AUDIT.md
+```
+
+Official repo audited at:
+
+```text
+TabGuigui/WorldDrive@c375ee1e1fe86ace175609db1ed90fd6db89673b
+```
+
+Exact mechanism:
+
+```text
+TA-DWM trajectory-conditioned scene-generation pretraining
+→ learn shared vision + motion representation
+→ transfer/freeze visual + trajectory encoders into planner
+→ multi-modal trajectory vocabulary planner creates candidates
+→ frozen TA-DWM generates candidate-conditioned future-latent teachers during FAR training
+→ FAR distills candidate future features + learns PDMS preference ranking
+→ inference uses lightweight distilled future features to score/select trajectories
+→ no full TA-DiT diffusion future rollout at inference
+```
+
+This introduces a core subtype not explicit enough in the previous taxonomy:
+
+```text
+DISTILLED WORLD-MODEL FORESIGHT
+```
+
+### Strongest matched evidence
+
+Representation inheritance:
+
+```text
+31.4  no pretrain
+84.9  CogVideoX VAE prior
+85.8  + TA-DWM vision
+86.9  + TA-DWM motion
+```
+
+Interpretation boundary:
+
+```text
+the dominant jump is generic VAE/video pretraining;
+TA-DWM-specific vision+motion representation contributes the smaller 84.9→86.9 increment.
+```
+
+Future-aware rewarder:
+
+```text
+86.9  base planner
+87.0  + trajectory-feature rewarder
+88.1  + distilled future feature
+```
+
+This is meaningful evidence that candidate-conditioned future representation adds value beyond trajectory-feature-only scoring in the matched WorldDrive setup.
+
+### Supervision / causal boundary
+
+FAR uses both:
+
+```text
+TA-DWM latent alignment
++
+PDMS preference/ranking supervision
+```
+
+and alternative candidate futures are model-generated; ordinary logged data does not provide real observed surrounding-world futures for every unexecuted ego trajectory.
+
+Thus WorldDrive does not invalidate:
+
+```text
+candidate-specific output != candidate-specific observed counterfactual supervision
+```
+
+### Evaluation boundary
+
+```text
+NAVSIM / NAVSIM-v2 = planning evidence under their benchmark semantics
+nuScenes            = open-loop trajectory/collision evaluation
+real-vehicle closed loop = not established
+```
 
 ## Existing stable field controls retained
 
@@ -131,7 +194,7 @@ But no broad VLA expansion is authorized until the 2.2 core-WAM branch is closed
 world-prediction quality != planning evidence
 future information is not automatically beneficial
 candidate-specific output != candidate-specific observed counterfactual supervision
-WM-assisted planning != online model-based planning
+WM-assisted planning != full online generative model-based planning
 world completeness != decision relevance
 generative action modeling != world modeling
 candidate ranking/scoring is an independent bottleneck
@@ -140,19 +203,21 @@ sensor photorealism != behavioral realism
 reactive feasibility != counterfactual behavioral truth
 ```
 
-These remain provisional field principles to be rechecked against the missing core-WAM papers.
+WorldDrive strengthens rather than overturns the importance of decomposing:
+
+```text
+representation pretraining
+vs candidate generation
+vs reward/scoring
+vs future representation
+vs online generation cost
+```
 
 ## Immediate next task
 
 See `state/NEXT_TASK.md`.
 
-Execute **Phase C.5 Core-WAM Coverage Correction**:
-
-```text
-verify → classify → deep-read only decision-relevant missing WAM papers
-→ revise synthesis if necessary
-→ then decide whether Phase D can reopen
-```
+Deep-read **World4Drive** from its primary paper + official code, then continue the remaining core-WAM set.
 
 ## Still forbidden
 
@@ -162,7 +227,7 @@ no method design
 no broad VLA expansion
 no forced risk-field insertion
 no assuming similar paper names are identical
-no treating the first-pass synthesis as final WAM coverage
+no treating first-pass Phase-C synthesis as final WAM coverage
 ```
 
 ## Research Brain architecture
