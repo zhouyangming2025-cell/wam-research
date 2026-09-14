@@ -2,127 +2,166 @@
 
 ## 唯一下一任务
 
-> Execute the **Phase-B Wave-4 ORION audit**, using the completed Bench2Drive ↔ HUGSIM feedback decomposition as the control.
+> Execute **Phase D — Adversarial Problem Discovery** from the completed Waves 1–4 field synthesis.
 
-Waves 1–3 and the Research QA Gate are closed. Broad corpus acquisition remains frozen.
-
-Canonical Wave-4 artifacts:
+Canonical field synthesis:
 
 ```text
-landscape/PHASE_B_WAVE4_PLAN.md
-landscape/PHASE_B_WAVE4_SYNTHESIS.md
-audits/literature/PHASE_B_WAVE4_BENCH2DRIVE_HUGSIM_AUDIT.md
+landscape/PHASE_C_WAVES1_4_FIELD_SYNTHESIS.md
 ```
 
-## Wave-4 status
+Status:
 
 ```text
-Bench2Drive      = COMPLETE
-HUGSIM           = COMPLETE
-ORION            = NEXT
-ReactSim-Bench   = PENDING
-CausalDrive      = PENDING
-Wave 4           = OPEN
+Wave 1            CLOSED
+Wave 2            CLOSED
+Wave 3            CLOSED
+Research QA Gate  CLOSED
+Wave 4            CLOSED
+Phase C synthesis COMPLETE FIRST PASS
+Phase D           NEXT
 ```
 
-## Stable first-block result
+Broad corpus acquisition remains frozen unless a specific candidate problem requires one tightly scoped prior-art check.
 
-Replace binary `closed-loop` wording with four feedback axes:
+## Phase-D purpose
+
+Do **not** choose a method or reuse a historical hypothesis first.
+
+Start from recurrent tensions / under-measured planning properties discovered in Phase C and ask whether any of them correspond to a real, consequential, falsifiable planning problem.
+
+Required chain:
 
 ```text
-F_e = ego-state / dynamics feedback
-F_s = sensor / viewpoint feedback
-F_a = surrounding-agent state feedback
-F_b = surrounding-agent behavioral-response feedback
+Observed / measurable planning difficulty
+→ failure mechanism
+→ missing capability or structural trade-off
+→ why current approaches cannot easily handle it
+→ strongest counterexample / simpler explanation
+→ falsifiable test
+→ only if it survives: research question
 ```
 
-Bench2Drive:
+## Candidate evidence-gap pool — not preselected gaps
+
+Phase C identified:
 
 ```text
-CARLA synthetic sensors
-F_e=yes / F_s=yes / F_a=yes
-F_b=scenario-dependent scripted/adaptive
+E1  real alternative-action surrounding-agent ground truth
+E2  reactive simulator quality → planner decision quality
+E3  simultaneous sensor-realistic + behaviorally validated closed loop
+E4  intervention-conditioned uncertainty calibration
+E5  long-horizon compounding under ego/sensor/agent/model feedback
+E6  compute-normalized planning benefit
+E7  representation semantics vs scale/capacity
+E8  real-vehicle closed-loop validation
+E9  standardized feedback-semantic reporting
+E10 planner robustness to world-model error
 ```
 
-HUGSIM:
+These are evidence gaps only. Most may fail as research problems.
+
+## Adversarial screen for every candidate
+
+For each candidate, create one row with:
 
 ```text
-reconstructed photorealistic sensors
-F_e=yes / F_s=yes / F_a=yes
-F_b=regime-dependent:
-  replay=no
-  IDM/normal=controller-reactive
-  attack=explicit ego-dependent adversarial replanning
+1. exact observed/plausibly measurable failure
+2. why it matters to ego planning
+3. strongest direct evidence from current corpus
+4. strongest historical precedent
+5. strongest 2025–2026 neighboring solution
+6. strongest non-WM explanation / baseline
+7. strongest counterexample
+8. whether the problem is WAM-specific or generic ML/planning
+9. whether the problem can be measured without unavailable counterfactual GT
+10. realistic evaluation regime capable of falsifying it
+11. minimum experiment that could kill the problem
+12. verdict: SURVIVES / WEAK / KILLED / EVIDENCE INSUFFICIENT
 ```
 
-Therefore:
+## Binding anti-shortcut rules
+
+Do not accept:
 
 ```text
-photorealistic sensor realism != behavioral realism
-interactive simulator != learned real-driver response model
+“no one has module X”
+“paper Y did not evaluate metric Z”
+“counterfactual GT is unavailable, therefore this is automatically a gap”
+“reactive world models are new, therefore reactivity is a gap”
+“better planning needs risk, therefore add risk field”
 ```
 
-## ORION audit
+A valid problem must show a planning consequence, not merely a missing benchmark or representation.
 
-ORION is a VLA/semantic-reasoning control. Do not assume it is a world-model paper.
+## Required strongest attacks
 
-Trace exactly:
+Every survivor must be attacked by at least:
 
 ```text
-1. visual / language / navigation inputs
-2. intermediate reasoning representation
-3. whether reasoning is free-form text, structured token, latent, or supervision-only
-4. trajectory/action representation
-5. exact training stages and supervision sources
-6. whether reasoning representation is consumed by the deployed planner
-7. whether there is any predictive future/world-state module
-8. whether future reasoning is about scene evolution, ego intent, affordance, or language explanation
-9. closed-loop benchmark(s) and exact feedback semantics
-10. strongest matched ablations isolating reasoning/VLA contribution
-11. strongest non-language / non-WM planning baseline
-12. runtime / planning frequency
-13. strongest evidence and strongest alternative explanation
+Historical interaction/planning:
+M2I / GameFormer / What Truly Matters
+
+Strong non-WM planning:
+UniAD / DiffusionDrive / DriveSuprim / ORION
+
+Predictive-representation counterexamples:
+OccWorld / LAW / DriveLaW / Auto-JEPA
+
+Candidate-world planning:
+Drive-WM / WoTE / DA-WAM
+
+Closed-loop / reactive simulation:
+Bench2Drive / HUGSIM / ReactSim-Bench / CausalDrive
+
+Policy-imagination control:
+Think2Drive
 ```
 
-Required verdict:
+No candidate needs every paper, but no candidate may ignore the strongest relevant control.
+
+## First deliverable
+
+Create:
 
 ```text
-Is ORION primarily:
-A. VLA planner,
-B. world-model planner,
-C. VLA + predictive world representation,
-or D. another mechanism?
+landscape/PHASE_D_PROBLEM_DISCOVERY_ROUND1.md
 ```
 
-Do not allow terminology such as “reasoning” or “world understanding” to substitute for a traced data/inference path.
-
-## After ORION
+It should contain:
 
 ```text
-ReactSim-Bench
-→ CausalDrive
+- 5–8 candidate problem statements max;
+- adversarial evidence table;
+- kill criteria for each;
+- no method proposals;
+- no novelty claim;
+- explicit NONE / EVIDENCE INSUFFICIENT option.
 ```
 
-Those two papers must be read against both:
+Do not generate ten vague “future work” topics. Prefer fewer candidates with stronger falsification logic.
+
+## Stop condition
+
+Round 1 stops when every candidate is labeled:
 
 ```text
-historical interaction controls (M2I / GameFormer / What Truly Matters)
+SURVIVES
+WEAK
+KILLED
+or EVIDENCE INSUFFICIENT
 ```
 
-and:
-
-```text
-simulator feedback controls (Bench2Drive / HUGSIM)
-```
+Only `SURVIVES` candidates proceed to targeted prior-art/failure verification.
 
 ## Still forbidden
 
 ```text
-no gap declaration
 no method design
-no broad paper accumulation
-no P2-R/P3 rescue program
 no forced risk-field insertion
-no conflation of rendering realism with behavioral realism
-no conflation of action conditioning with causal counterfactual validity
+no automatic P2-R/P3 revival
+no broad literature accumulation
+no gap declaration from missing modules
+no conflation of reactive feasibility with true counterfactual response
+no conflation of simulator quality with planner benefit
 ```
