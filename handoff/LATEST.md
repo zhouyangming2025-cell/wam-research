@@ -1,6 +1,6 @@
 # LATEST — Handoff
 
-Session: 2026-09-14 — Phase-A census closeout completed.
+Session: 2026-09-14 — Phase A closed; Phase-B Wave 1 in progress.
 
 ## New-session fast path
 
@@ -10,7 +10,7 @@ Session: 2026-09-14 — Phase-A census closeout completed.
 3. state/NEXT_TASK.md
 4. landscape/FIELD_ATLAS.md
 5. landscape/PHASE_B_ANCHORS.md
-6. state/RESEARCH_PRINCIPLES.md
+6. landscape/PHASE_B_WAVE1_SYNTHESIS.md
 ```
 
 Do not default to P2-R. Do not reload the whole corpus or old chats by default.
@@ -21,60 +21,27 @@ Do not default to P2-R. Do not reload the whole corpus or old chats by default.
 World Model + End-to-End + Planning-centric autonomous driving
 ```
 
-Planning is the center of gravity. Risk-field / predictive-risk expertise is optional prior knowledge, not a required destination.
+Risk-field / predictive-risk expertise is optional prior knowledge, not a required destination.
 
-## Methodology in force
-
-```text
-FIELD UNDERSTANDING FIRST
-→ representative comparative deep reads
-→ cross-family synthesis
-→ only then research-problem discovery
-```
-
-P1/P2-R/P3 are parked provenance probes, not active search targets.
-
-## Phase A is closed
-
-Corpus:
+## Phase-A status
 
 ```text
-P0001–P0060 registered
+F1–F11 census coverage = PASS
+P0001–P0060 = 60 registered
 58 RAW_MD_READY
-2 lawful-source blockers: P0008 NPPC, P0020 Bahram 2016
+broad acquisition = FROZEN
+25 Phase-B anchors = FIXED
 ```
 
-Scientific closeout artifacts:
+Canonical closeout artifacts:
 
-- `landscape/CENSUS_PHASE_A_ROUND1.md`
 - `landscape/CENSUS_PHASE_A_ROUND2.md`
 - `landscape/FIELD_ATLAS.md`
 - `landscape/PHASE_B_ANCHORS.md`
 
-The F1–F11 coverage audit passes at census depth. Broad paper acquisition is **frozen**.
+## Phase-B Wave 1 has started
 
-## What Round 2 clarified
-
-- Hydra-MDP / DriveSuprim / iPad are strong non-WM planning controls; scoring, hard-negative selection and proposal-centric representation can improve planning without future-world rollout.
-- DriveVLM / OmniDrive / ORION show VLM/VLA reasoning and generative action are adjacent to WAM but not synonymous with a learned environment transition model.
-- Think2Drive represents a distinct WM lineage: latent world dynamics as a neural simulator for RL policy learning.
-- ViDAR is a clean pretraining-only world-prediction case.
-- GenAD is a trajectory-level joint ego/agent future-generation precursor to later world-action models.
-- Benchmark evolution is technically decisive: original nuScenes is not a planning benchmark; nuPlan formalizes planning OL/CL-NR/CL-R; NAVSIM is explicitly non-reactive; Bench2Drive is CARLA interactive closed loop; HUGSIM adds photorealistic reconstructed closed loop.
-
-These are field distinctions, not research gaps.
-
-## Phase-B anchor set
-
-25 anchors are fixed in:
-
-`landscape/PHASE_B_ANCHORS.md`
-
-Secondary papers stay in the corpus and are promoted only when a concrete anchor comparison needs them.
-
-## Immediate next task — Wave 1
-
-Comparative deep-read set:
+Wave 1:
 
 ```text
 M2I
@@ -87,29 +54,52 @@ DiffusionDrive
 DriveSuprim
 ```
 
-Required synthesis artifact:
+Current synthesis:
 
 `landscape/PHASE_B_WAVE1_SYNTHESIS.md`
 
-Goal: establish what interaction, planning, multimodality and evaluation already looked like before modern WAMs, and what strong non-WM planners can already achieve. Later WM gains must be interpreted against this baseline.
+Current status:
 
-Do not create eight disconnected summaries. Build one comparative account with source-backed per-paper evidence.
+```text
+comparative first pass = COMPLETE
+historical/control structure = ESTABLISHED
+quantitative comparability audit = PENDING
+Wave-1 final gate = OPEN
+```
+
+## First-pass findings that should survive into later reading
+
+1. M2I shows conditional influencer→reactor future modeling clearly predates modern WAM language, while also exposing conditioning-error propagation.
+2. GameFormer already performs hierarchical future-interaction reasoning + ego planning; its final closed-loop result is materially helped by an explicit refinement planner, so learned interaction and downstream optimization must be separated.
+3. What Truly Matters shows static prediction metrics can misrepresent downstream driving and quantifies a large dynamics-gap contribution in its simulator setup; runtime/compute also affects driving performance.
+4. UniAD establishes planning-oriented representation/task coordination as a strong pre-WAM baseline; planning benefits cannot automatically be credited to future-world prediction.
+5. DiffusionDrive shows strong multimodal **action** generation without a WM; DriveSuprim shows strong candidate scoring/selection without a WM.
+6. nuPlan and NAVSIM represent different evaluation compromises: nuPlan formalizes planning closed loop; NAVSIM intentionally removes reactivity to retain real sensor data, scale and simulation-based metrics.
+
+These are not gap claims.
+
+## Immediate next task
+
+Read `state/NEXT_TASK.md`.
+
+Finish the Wave-1 comparability audit:
+
+- M2I conditional vs intervention boundary;
+- GameFormer raw model vs refinement contribution;
+- UniAD MotionFormer/OccFormer→planner path;
+- DiffusionDrive vs DriveSuprim NAVSIM comparability;
+- nuPlan vs NAVSIM protocol/version boundaries.
+
+Then close Wave 1 and only after that enter Wave 2.
 
 ## Still forbidden
 
 ```text
 no gap declaration
 no method design
-no broad literature accumulation
+no broad paper accumulation
 no P2-R/P3 optimization
 no forced risk-field insertion
 ```
-
-## Corpus / infrastructure
-
-- Canonical local PDFs remain local/NAS when archived.
-- GitHub raw MD + figures are the persistent GPT-readable text layer.
-- The agent is now on-demand infrastructure support rather than a broad-ingestion worker.
-- Integrity notes remain: repaired raw-MD ledger race; ViDAR Markdown omitted a code URL visible on PDF page 1; canonical hashes use Python logical bytes.
 
 The repo, not conversation memory, is the canonical research authority.
