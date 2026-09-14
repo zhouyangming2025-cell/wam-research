@@ -2,27 +2,30 @@
 
 Last updated: 2026-09-14
 
-Status: **FIRST BLOCK COMPLETE — Bench2Drive ↔ HUGSIM**
+Status: **THREE ANCHORS COMPLETE — Bench2Drive ↔ HUGSIM ↔ ORION**
 
 Wave 4:
 
 ```text
 Bench2Drive      COMPLETE
 HUGSIM           COMPLETE
-ORION            NEXT
-ReactSim-Bench   PENDING
+ORION            COMPLETE
+ReactSim-Bench   NEXT
 CausalDrive      PENDING
 ```
 
-Canonical detailed audit:
+Canonical detailed audits:
 
-`audits/literature/PHASE_B_WAVE4_BENCH2DRIVE_HUGSIM_AUDIT.md`
+```text
+audits/literature/PHASE_B_WAVE4_BENCH2DRIVE_HUGSIM_AUDIT.md
+audits/literature/PHASE_B_WAVE4_ORION_AUDIT.md
+```
 
 ---
 
 ## 1. First field correction: “closed loop” is too coarse a binary label
 
-The first two anchors show that evaluation feedback should be decomposed into at least four axes:
+Evaluation feedback should be decomposed into at least four axes:
 
 ```text
 F_e = ego-state / dynamics feedback
@@ -30,8 +33,6 @@ F_s = sensor / viewpoint feedback
 F_a = surrounding-agent state feedback
 F_b = surrounding-agent behavioral-response feedback
 ```
-
-The usual label `closed-loop` hides whether each of these is actually present and what mechanism supplies it.
 
 A provisional map:
 
@@ -41,16 +42,15 @@ A provisional map:
 | NAVSIM | short ego rollout/scoring but not repeated sensor-policy interaction | no novel sensor | fixed/logged environment approximation | no reactive response |
 | Bench2Drive | yes | yes, CARLA synthetic sensors | yes | scenario-dependent scripted/adaptive |
 | HUGSIM | yes | yes, reconstructed photorealistic views | yes | regime-dependent: replay=no; IDM/attack=yes by controller |
+| ORION | inherits Bench2Drive | inherits Bench2Drive | inherits Bench2Drive | inherits Bench2Drive; ORION itself is not the behavior simulator |
 
-This decomposition is now binding for later Wave-4 work.
+This decomposition is binding for the rest of Wave 4.
 
 ---
 
 ## 2. Bench2Drive — interaction-rich policy evaluation, not a world-model benchmark
 
-Bench2Drive is best understood as a **standardized, scenario-disentangled CARLA closed-loop E2E benchmark**.
-
-Its key design is:
+Bench2Drive is a **standardized, scenario-disentangled CARLA closed-loop E2E benchmark**:
 
 ```text
 44 interactive scenarios
@@ -59,31 +59,37 @@ Its key design is:
 ~150 m each
 ```
 
-rather than long routes that mix many skills and compound infraction penalties.
+The policy repeatedly acts in CARLA, so ego action changes physics and future observations. Source inspection confirms that at least some ScenarioRunner actors are ego-adaptive; e.g. `YieldToEmergencyVehicle` uses an `AdaptiveConstantVelocityAgentBehavior` tied to ego and ego-relative trigger conditions.
 
-The policy acts repeatedly in CARLA, so ego action changes physics and future observations. The environment also contains scenario-specific actor logic. Source inspection confirms that at least some actors directly depend on ego state; e.g. `YieldToEmergencyVehicle` uses an `AdaptiveConstantVelocityAgentBehavior` linked to the ego vehicle and ego-relative trigger/end conditions.
+Its traffic interactions are therefore more than fixed replay, but they come from CARLA/ScenarioRunner scripted/controller logic rather than a learned real-driver response distribution.
 
-Therefore Bench2Drive is not merely “replay with a driving score.”
+Bench2Drive’s primary contribution is:
 
-But its traffic interactions are supplied by CARLA/ScenarioRunner logic, not a learned real-driver response distribution. Its main realism strength is **interactive coverage and evaluation structure**, not real-camera photorealism or counterfactual behavioral identification.
+```text
+interactive closed-loop E2E evaluation
++ standardized training data
++ short-route skill decomposition
+```
+
+not photorealistic real-camera simulation or learned world dynamics.
 
 ---
 
 ## 3. HUGSIM — sensor realism and traffic reactivity must be separated
 
-HUGSIM takes a complementary route:
+HUGSIM reconstructs real captured driving scenes with 3D Gaussian Splatting and closes the sensor loop:
 
 ```text
-real driving logs
-→ reconstruct 3D dynamic scene with Gaussian Splatting
-→ render from ego's new closed-loop viewpoints
-→ update ego + actors
+reconstructed world
+→ render observation at current ego pose
+→ planner outputs waypoints
+→ LQR updates ego
+→ actors update
+→ render next observation
 → repeat
 ```
 
-Its principal advance is that when ego deviates, the simulator can render a plausible new camera observation from a reconstructed real scene instead of replaying the logged camera stream.
-
-But actor behavior is heterogeneous:
+Its actor behavior is heterogeneous:
 
 ```text
 replayed actor
@@ -93,23 +99,15 @@ IDM / constant-speed actor
 → hand-designed normal behavior; IDM may yield to ego
 
 aggressive actor
-→ online candidate planning against predicted ego future
-→ explicitly ego-dependent / adversarial
+→ plans candidate trajectories against predicted ego future
+→ explicit ego-dependent adversarial interaction
 ```
 
-Thus HUGSIM simultaneously demonstrates:
-
-```text
-photorealistic closed-loop sensor feedback
-and
-controller-defined interactive traffic
-```
-
-but does not establish that the controller responses reproduce the conditional distribution of real human reactions.
+Therefore HUGSIM demonstrates photorealistic sensor feedback plus controller-defined interaction, but not statistical validation of real human counterfactual responses.
 
 ---
 
-## 4. Two forms of realism already diverge
+## 4. Visual realism and behavioral realism already diverge
 
 The first block exposes an important two-axis space:
 
@@ -119,19 +117,9 @@ vs
 BEHAVIORAL / INTERACTION REALISM
 ```
 
-Bench2Drive emphasizes:
+Bench2Drive emphasizes high scenario/interactivity coverage with synthetic CARLA appearance.
 
-```text
-high scenario/interactivity coverage
-but synthetic CARLA rendering
-```
-
-HUGSIM emphasizes:
-
-```text
-real-scene photorealistic rendering
-while actor behavior is replayed or hand-designed/controller-generated
-```
+HUGSIM emphasizes reconstructed-real-scene appearance while behavior is replayed or supplied by hand-designed/optimization controllers.
 
 Therefore:
 
@@ -140,21 +128,136 @@ more photorealistic != more behaviorally realistic
 more interactive != more sensor-realistic
 ```
 
-This is a field-understanding distinction, not a claim that one benchmark is superior overall.
+---
+
+## 5. ORION — semantic reasoning can be a strong planning route without world rollout
+
+ORION is best classified as a **VLA planner**, not a world-model planner.
+
+Its deployed path is:
+
+```text
+multi-view images
+→ vision encoder
+→ QT-Former
+   → scene/perception/history queries
+   → explicit traffic-state + motion auxiliary supervision
+   → long-term memory
+→ scene/history tokens
+→ LLM hierarchical VQA / driving reasoning
+→ special planning-token embedding
+→ generative trajectory planner
+→ multimodal ego trajectories
+```
+
+There is auxiliary surrounding-agent motion prediction, but no explicit environment transition of the form:
+
+```text
+current world + ego candidate
+→ candidate-specific future world
+→ evaluate action
+```
+
+and no recursive latent environment rollout.
+
+Thus:
+
+```text
+AUXILIARY FUTURE/MOTION SUPERVISION != WORLD-MODEL PLANNING
+```
+
+is reinforced by another family beyond LAW/ViDAR.
 
 ---
 
-## 5. What “reactive world model” must now mean more precisely
+## 6. ORION’s strongest evidence is about the reasoning→action interface, not “LLM magic”
 
-After Bench2Drive/HUGSIM, merely showing:
+With matched QT-Former components:
+
+```text
+plain-text output:
+traffic + motion + memory → 42.23 DS / 13.14% SR
+
+generative planning-token interface:
+traffic + motion + memory → 77.74 DS / 54.62% SR
+```
+
+Difference:
+
+```text
++35.51 DS
++41.48 percentage points SR
+```
+
+This is strong evidence that the interface converting semantic/reasoning representation into continuous action matters.
+
+But another ablation is equally important. Within the generative branch:
+
+```text
+baseline                              56.33 DS / 26.05 SR
++ traffic-state supervision           74.65 / 49.31
++ motion prediction                   74.07 / 49.77
++ memory bank                         77.74 / 54.62
+```
+
+The largest staged jump comes from explicit traffic-state supervision, not from auxiliary motion prediction. Therefore the paper does not isolate abstract VLM common-sense reasoning as the unique source of its gain.
+
+A more defensible mechanism statement is:
+
+```text
+semantic/traffic-state alignment
++ long-term temporal context
++ differentiable reasoning-token → trajectory-generation interface
+jointly produce strong closed-loop performance.
+```
+
+---
+
+## 7. ORION independently reinforces open-loop / closed-loop mismatch
+
+History-query ablation:
+
+```text
+Nh=0   DS 65.10 / SR 38.83 / L2 0.67
+Nh=8   DS 68.09 / SR 39.09 / L2 0.66
+Nh=16  DS 74.10 / SR 44.66 / L2 0.68
+Nh=32  DS 62.46 / SR 37.73 / L2 0.65
+```
+
+The best open-loop L2 setting (`Nh=32`) is not the best closed-loop policy. This strengthens the historical result that trajectory imitation distance is not a sufficient planning metric.
+
+---
+
+## 8. Three distinct things now sit under “better closed-loop driving”
+
+Wave 4 has already separated three routes:
+
+```text
+Bench2Drive
+→ improve EVALUATION STRUCTURE and interactive scenario coverage
+
+HUGSIM
+→ improve SENSOR/RENDERING FEEDBACK REALISM and support interactive actor controllers
+
+ORION
+→ improve POLICY REPRESENTATION / SEMANTIC REASONING / ACTION GENERATION
+```
+
+These are orthogonal enough that headline driving-score improvements should not be treated as evidence for the same capability.
+
+---
+
+## 9. What “reactive world model” must mean more precisely
+
+After Bench2Drive/HUGSIM/ORION, merely showing:
 
 ```text
 ego action → different next world state
 ```
 
-is too weak to distinguish a modern reactive world model from established simulator capabilities.
+is insufficient to establish a new reactive-world capability.
 
-For ReactSim-Bench / CausalDrive we must ask a stricter sequence:
+For ReactSim-Bench / CausalDrive we now require:
 
 ```text
 A. Does ego intervention alter other-agent predicted behavior?
@@ -163,72 +266,75 @@ C. What supervision identifies the response?
 D. Is the response consistent with the same observed episode/history?
 E. Is behavioral accuracy explicitly evaluated?
 F. What reference exists for unexecuted alternatives?
-G. Does improved reaction quality matter to policy/planning outcomes?
+G. Does improved reaction quality change policy/planning outcomes?
 ```
 
-`action-conditioned` answers only A partially. It does not answer C–G.
+`action-conditioned` answers only part of A.
 
 ---
 
-## 6. Why this changes how we read Wave 4
+## 10. Historical picture is multi-dimensional, not a single ladder
 
-The historical story is no longer:
+The field should not be narrated simply as:
 
 ```text
-open loop
-→ closed loop
-→ reactive world models
+open loop → closed loop → reactive world models
 ```
 
-A more accurate story is multi-dimensional:
+A more accurate set of overlapping developments is:
 
 ```text
 logged-data evaluation
-→ interactive physics/game-engine simulation
-→ standardized scenario-level E2E evaluation
-→ photorealistic reconstructed sensor simulation
-→ learned/reactive behavior simulation
-→ action-conditioned world modeling
+interactive physics/game-engine simulation
+standardized scenario-level E2E evaluation
+photorealistic reconstructed sensor simulation
+semantic/VLA policy reasoning
+learned/reactive behavior simulation
+action-conditioned world modeling
 ```
 
-These lines overlap rather than forming one simple ladder.
-
-The remaining Wave-4 anchors must be placed in this space rather than ranked by publication date.
+Modern WAM papers occupy some combination of these axes rather than one scalar maturity level.
 
 ---
 
-## 7. Next — ORION
+## 11. Next — ReactSim-Bench
 
-ORION is next because it supplies a different control:
+ReactSim-Bench is now the critical measurement anchor.
 
-```text
-Can high-level semantic / language reasoning improve closed-loop planning
-without the paper's main contribution being a reactive world simulator?
-```
-
-Audit ORION for:
+It must be audited against both historical controls:
 
 ```text
-observation input
-language/reasoning representation
-trajectory/action generator
-training supervision
-whether reasoning representation is causally consumed at inference
-closed-loop benchmark(s)
-comparison against strong non-language planners
-whether any world-model component exists or the method should remain a VLA control
+M2I / GameFormer / What Truly Matters
 ```
 
-Only after that should ReactSim-Bench and CausalDrive be read as the explicitly reactive-world branch.
+and simulator controls:
+
+```text
+Bench2Drive / HUGSIM
+```
+
+Questions:
+
+```text
+what constitutes an ego deviation/intervention?
+what exactly is predicted about other agents?
+what reference reaction is available?
+how is reaction quality measured?
+does the benchmark distinguish visual plausibility from behavioral correctness?
+are alternative-action futures true counterfactual labels or constructed proxies?
+which model families fail under reactive pressure?
+```
+
+Only then should CausalDrive be judged as a reactive-WM method.
 
 ---
 
-## Current stable Wave-4 statement
+## Current stable Wave-4 statements
 
 ```text
-Closed-loop evaluation must be described by the feedback channels it closes,
-not by the binary label alone.
+Closed-loop evaluation must be described by the feedback channels it closes, not by the binary label alone.
 Photorealistic sensor feedback and behaviorally valid agent reaction are independent capabilities.
+Strong closed-loop planning can improve through semantic/reasoning-action interfaces without an explicit world rollout.
 ```
 
 No research gap is declared.
