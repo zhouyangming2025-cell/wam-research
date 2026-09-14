@@ -1,6 +1,6 @@
 # LATEST — Handoff
 
-Session: 2026-09-14 — Phase-A field census Round 1 completed.
+Session: 2026-09-14 — post-agent census ingest sync.
 
 ## New-session fast path
 
@@ -13,8 +13,6 @@ Session: 2026-09-14 — Phase-A field census Round 1 completed.
 6. state/RESEARCH_PRINCIPLES.md
 ```
 
-Read `landscape/FIELD_RECONSTRUCTION_PLAN.md` when methodology detail is needed.
-
 Do not default to P2-R. Do not reload the whole corpus or old chats by default.
 
 ## Research identity
@@ -25,7 +23,7 @@ World Model + End-to-End + Planning-centric autonomous driving
 
 Planning is the center of gravity. Risk-field / predictive-risk expertise is optional prior knowledge, not a required destination.
 
-## Active methodology
+## Critical methodology
 
 ```text
 FIELD UNDERSTANDING FIRST
@@ -38,111 +36,80 @@ FIELD UNDERSTANDING FIRST
 
 P1/P2-R/P3 are parked provenance probes, not active search targets.
 
-## Phase-A Round 1 completed
+## Latest Git / corpus update
 
-New census file:
-
-`landscape/CENSUS_PHASE_A_ROUND1.md`
-
-Round 1 provisionally places roughly **45 unique works / benchmarks / control systems** across F1–F11.
-
-Coverage now includes:
-
-- visual/video generative WMs: GAIA-1, DriveDreamer, Drive-WM, Vista, Epona, DrivingGPT, Policy World Model, WorldDrive;
-- occupancy/BEV/geometric WMs: OccWorld, Drive-OccWorld, WoTE, World4Drive;
-- latent/JEPA/WAM representations: DriveWorld, LAW, DriveLaW, Drive-JEPA, WorldRFT, Auto-JEPA, ReWorld, WA-JEPA, DA-WAM;
-- interactive prediction/planning: M2I, GameFormer, What Truly Matters, BeTop, GraphAD;
-- reactive/evaluation environments: nuPlan, SLEDGE, NAVSIM, Bench2Drive, HUGSIM, DriveArena, BridgeSim, ReactSim-Bench, CausalDrive, CRAFT;
-- reward/value/safety interfaces: SafeDrive, Gen-Drive, DriveReward, RiskWorld, NPPC, TOAD/DrivoR;
-- strong non-WM controls: UniAD, VAD, DiffusionDrive, DrivoR.
-
-This is census placement only. No new gap has been declared.
-
-## Structural distinctions already visible
-
-These are **map distinctions**, not innovation claims:
+Latest observed head before this sync:
 
 ```text
-WM as data generator
-!= WM as representation pretraining
-!= WM as auxiliary future objective
-!= inference-time future model
-!= candidate evaluator/reward model
-!= simulator
-!= joint world-action policy
+e0f4507  Complete Phase-A census round 1 text-layer ingest
 ```
 
-Likewise:
+The agent has now completed the text-layer support work for the field census:
+
+- P0013–P0020: 7 readable; P0020 Bahram 2016 blocked by lawful-source availability.
+- P0021–P0034: 14/14 verified + raw MD ready.
+- P0035–P0060: 26/26 verified + raw MD ready.
+
+Combined corpus:
 
 ```text
-latent WM
-!= one paradigm
+60 stable IDs: P0001–P0060
+58 RAW_MD_READY
+2 blocked: P0008 NPPC, P0020 Bahram 2016
 ```
 
-because some future branches disappear after training, some directly condition trajectory decoding, some score candidates, and newer models jointly generate world/action latents.
+Reports:
 
-Also:
+- `ROUND2_TARGETED_INGEST_REPORT.md`
+- `CENSUS_ROUND2_INGEST_REPORT.md`
+- `CENSUS_ROUND1_TEXTLAYER_INGEST_REPORT.md`
+
+The agent intentionally did **not** perform scientific placement or edit the owner landscape/state files.
+
+## Current stage
 
 ```text
-closed-loop
+FIELD RECONSTRUCTION — Phase-A closeout
 ```
 
-must remain split across NAVSIM-style non-reactive pseudo-simulation, CARLA interactive simulation, learned reactive world agents, reconstructed photorealistic simulation, and any real-vehicle evidence.
+The corpus breadth target is reached. Do not start another broad acquisition batch.
 
-## Provisional historical skeleton
+## Immediate next task
 
-To be verified during anchor deep reads:
+Scientifically place the newly ingested Round-2 coverage set `P0021–P0034` at census depth and create:
 
-```text
-interactive prediction / game-theoretic planning
-→ planning-oriented E2E + planning benchmarks
-→ generative video / occupancy WMs + world-model pretraining
-→ future state explicitly consumed by planner
-→ latent self-supervised planning representations
-→ unified world-action modeling
-→ candidate-specific future latents / planning-oriented representation shaping
-→ reactive/counterfactual WMs + RL/post-training + stronger closed-loop evaluation
-```
+`landscape/CENSUS_PHASE_A_ROUND2.md`
 
-## Next task — Phase-A Round 2
+Then:
 
-Canonical next task:
+1. update `landscape/FIELD_ATLAS.md`;
+2. explicitly audit F1–F11 coverage;
+3. add another paper only if a specific missing family/transition remains;
+4. freeze Phase-A breadth expansion;
+5. select ~15–25 representative Phase-B anchor papers with a reason each is necessary to explain the field.
 
-`state/NEXT_TASK.md`
+`Hydra-MDP++` and `NAVSIM-v2` remain unresolved optional follow-ups; they are not automatic blockers.
 
-Fill the remaining census holes:
+## Existing Phase-A map
 
-- Hydra-MDP family, DriveSuprim, iPad and representative VLA planning controls;
-- Think2Drive / world-model RL lineage;
-- ViDAR / GenAD only where they help explain planning-relevant representation pretraining;
-- benchmark evolution and deployment/inference properties;
-- uncertainty/multimodal future treatment;
-- credible real-vehicle closed-loop evidence, if any.
+`landscape/CENSUS_PHASE_A_ROUND1.md` already places roughly 45 works across visual/video WMs, occupancy/BEV WMs, latent/JEPA/WAMs, interactive planning, reactive simulation, reward/value/safety interfaces, strong non-WM E2E controls and benchmark lineages.
 
-Target Phase-A total remains roughly **50–80 works**, after which breadth expansion freezes and the ~15–25 anchor set is finalized.
+The new P0021–P0034 set fills the main holes identified after Round 1: strong modern non-WM controls, VLA planners, WM-RL, representation-pretraining bridges and benchmark lineage.
 
-## Current anchor pool
+## Integrity notes
 
-Approximately 25 provisional anchors are listed in `FIELD_ATLAS.md` / `CENSUS_PHASE_A_ROUND1.md`. They intentionally span conflicting design philosophies. Do not reduce the list based on whether a paper supports prior P2-R/P3 thinking.
+- A concurrent raw-MD ledger write race was detected and repaired from stored artifacts; the write path was fixed.
+- P0028 ViDAR has a known raw-MD omission of a code URL that is present on PDF page 1; the report/manifest records this explicitly.
+- Canonical hashes use Python logical-byte I/O.
 
 ## Scientific discipline
 
-During census:
+During census closeout:
 
 - no per-paper novelty/gap verdict;
-- verify representative primary sources, surveys only seed navigation;
-- every deep-read anchor later gets strongest evidence + strongest limitation;
-- distinguish `AUTHOR CLAIM / DIRECT EXPERIMENTAL EVIDENCE / OUR INFERENCE`;
-- trace exact observation → world/future representation → planner flow;
-- record what gets direct future supervision and what is inferred;
-- use strong non-WM planners as controls;
-- keep evaluation regimes distinct.
-
-## Corpus / infrastructure
-
-- Batch 0A remains available but is hypothesis-biased, not representative.
-- Public official PDFs/pages may be read directly during census/deep read; local archival can follow asynchronously.
-- GitHub Research Brain is the cross-session scientific authority.
-- Local corpus agent remains the bulk-ingestion / MinerU / local-code worker.
+- use the common taxonomy consistently;
+- separate author claim / direct evidence / inference where interpretation is needed;
+- strong non-WM planners and evaluation papers remain first-class controls;
+- do not confuse corpus acquisition with scientific understanding.
 
 The repo, not conversation memory, is the canonical research authority.
