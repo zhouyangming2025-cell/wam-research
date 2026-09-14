@@ -5,7 +5,8 @@ Running factual ledger of assets, research-state transitions and scientific gate
 ## Current research stage
 
 ```text
-FIELD RECONSTRUCTION — PHASE B: WAVE 3 ACTIVE
+FIELD RECONSTRUCTION — PHASE C FIRST PASS COMPLETE
+NEXT: PHASE D ADVERSARIAL PROBLEM DISCOVERY
 ```
 
 Canonical documents:
@@ -18,7 +19,10 @@ Canonical documents:
 - `landscape/PHASE_B_WAVE1_COMPARABILITY_AUDIT.md`
 - `landscape/PHASE_B_WAVE2_SYNTHESIS.md`
 - `landscape/PHASE_B_WAVE2_COMPARABILITY_AUDIT.md`
-- `landscape/PHASE_B_WAVE3_PLAN.md`
+- `landscape/PHASE_B_WAVE3_CLOSEOUT.md`
+- `landscape/PHASE_B_WAVE4_SYNTHESIS.md`
+- `audits/literature/RESEARCH_QA_GATE_CLOSEOUT.md`
+- `landscape/PHASE_C_WAVES1_4_FIELD_SYNTHESIS.md`
 
 ## Hypotheses
 
@@ -27,6 +31,8 @@ Canonical documents:
 | P1_RETIRED — Planner-Induced Model Exploitation / Search-Support Gap | RETIRED | historical hypothesis / robustness evidence | `hypotheses/P1_RETIRED.md` |
 | P2R_PRIMARY — Reactive Action-Ordering Gap | PARKED PROBE | diagnostic lens only; not active search target | `hypotheses/P2R_PRIMARY.md` |
 | P3_HOLD — Decision Sufficiency of World Representations | PARKED BACKUP PROBE | possible later synthesis question | `hypotheses/P3_HOLD.md` |
+
+No historical hypothesis is automatically revived by Phase C.
 
 ## Research scope rule
 
@@ -61,14 +67,17 @@ Broad corpus acquisition is frozen.
 |---|---|---|---|
 | 2026-09-13 | P2-R Targeted Failure Deep Read — Round 1 | SafeDrive, BeTop, GraphAD, RiskWorld, DA-WAM | historical audit only; no direct observed reaction-induced action-order inversion established |
 | 2026-09-14 | Field-Reconstruction Reset | methodology | gap-first search suspended; neutral census + anchors activated |
-| 2026-09-14 | Phase-A Census / corpus closeout | P0001–P0060 + F1–F11 atlas | **PASS**; broad expansion frozen; 25 anchors selected |
+| 2026-09-14 | Phase-A Census / corpus closeout | P0001–P0060 + F1–F11 atlas | **PASS**; broad expansion frozen; representative anchors selected |
 | 2026-09-14 | Phase-B Wave 1 | M2I, GameFormer, What Truly Matters, UniAD, nuPlan, NAVSIM, DiffusionDrive, DriveSuprim | **CLOSED**; historical/non-WM/evaluation control baseline stable |
 | 2026-09-14 | Phase-B Wave 2 | GAIA-1, Drive-WM, OccWorld, WoTE, ViDAR, LAW | **CLOSED**; world/future→planning interface taxonomy + attribution/supervision boundaries stable |
-| 2026-09-14 | Phase-B Wave 3 | Epona, DrivingGPT, DriveLaW, Auto-JEPA, DA-WAM, Think2Drive | **ACTIVE** |
+| 2026-09-14 | Phase-B Wave 3 | Epona, DrivingGPT, DriveLaW, Auto-JEPA, DA-WAM, Think2Drive | **CLOSED**; six world/action planning interfaces mapped |
+| 2026-09-14 | Research QA Gate | Priority-A A1–A8 | **CLOSED**; DriveLaW Stage-3 semantics corrected; DrivingGPT runtime path explicitly unresolved |
+| 2026-09-14 | Phase-B Wave 4 | Bench2Drive, HUGSIM, ORION, ReactSim-Bench, CausalDrive | **CLOSED**; feedback/realism/reactivity coordinate system established |
+| 2026-09-14 | Phase C | Waves 1–4 cross-family synthesis | **FIRST PASS COMPLETE**; ten reconstruction questions answered; Phase D authorized |
 
 ## Wave-1 ledger result
 
-Wave 1 established that modern WAM planning claims must be interpreted against older capabilities and strong non-WM controls:
+Wave 1 established binding controls:
 
 ```text
 interaction-conditioned prediction already existed
@@ -79,11 +88,6 @@ multimodal direct action generation can be strong without WM
 candidate ranking can be strong without WM
 OL / non-reactive / reactive evaluation are different claims
 ```
-
-Canonical artifacts:
-
-- `landscape/PHASE_B_WAVE1_SYNTHESIS.md`
-- `landscape/PHASE_B_WAVE1_COMPARABILITY_AUDIT.md`
 
 ## Wave-2 ledger result
 
@@ -98,46 +102,112 @@ ViDAR    — predictive pretraining / representation transfer
 LAW      — action-aware auxiliary future-latent learning
 ```
 
-Canonical artifacts:
-
-- `landscape/PHASE_B_WAVE2_SYNTHESIS.md`
-- `landscape/PHASE_B_WAVE2_COMPARABILITY_AUDIT.md`
-- `audits/literature/PHASE_B_WAVE2_INTERFACE_CODE_AUDIT.md`
-
 Stable evidence conclusions:
 
-1. **Generation quality is not planning evidence.** Drive-WM operationalizes imagined futures for candidate selection, but the effect of better FID/FVD/KPM is not isolated from detector/map/reward/candidate effects.
-2. **World reconstruction fidelity is not monotonic with planning utility.** OccWorld's higher-resolution tokenizer reconstructs better but forecasts/plans worse.
-3. **Future-state input can add value beyond scorer-only.** WoTE's matched NAVSIM ablation is `81.0 → 83.2 → 85.6 PDMS` for trajectory-only → evaluator-only → evaluator+future-state.
-4. **Candidate-specific prediction is not the same as reactive oracle supervision.** WoTE's audited PDM target path shares logged/GT surrounding-agent future across candidate ego trajectories.
-5. **Predictive pretraining can help without an online WM.** ViDAR transfers the pretrained History/BEV encoder into downstream UniAD; its future decoder is not deployed.
-6. **Auxiliary future prediction can help without online rollout.** LAW's audited test path discards future latent outputs; the prediction branch shapes representation/parameters during training.
-7. **Longer horizon is not monotonically better.** LAW's 1.5 s future target outperforms 3 s and 10 s variants in the reported ablation.
+1. Generation quality is not planning evidence.
+2. Better world reconstruction is not monotonic with planning utility.
+3. Future-state input can add value beyond scorer-only in matched WoTE ablation.
+4. Candidate-specific prediction is not reactive oracle supervision.
+5. Predictive pretraining can help without an online WM.
+6. Auxiliary future prediction can help without online rollout.
+7. Longer future horizon is not monotonically better.
 
-## Active Wave-3 gate
+## Wave-3 ledger result
 
-Canonical plan:
-
-`landscape/PHASE_B_WAVE3_PLAN.md`
-
-Order:
+Six planning interfaces:
 
 ```text
-Epona → DrivingGPT → DriveLaW → Auto-JEPA → DA-WAM → Think2Drive
+Epona       shared predictive representation / modular heads
+DrivingGPT  shared world-action causal sequence
+DriveLaW    online world hidden state → action generator
+Auto-JEPA   future ego-intent latent → retrieval / selection
+DA-WAM      action candidate → future latent → score
+Think2Drive learned world → imagination → actor/critic policy learning
 ```
 
-Wave 3 must map:
+Stable conclusions:
 
 ```text
-shared-latent joint training
-interleaved world-action generation
-hidden-WM-feature action generation
-compressed predictive representation shaping
-candidate-specific predictive evaluation
-WM-based imagined policy learning
+architectural coupling strength != evidence strength
+future information has no universal positive sign
+planning-oriented compression is a legitimate WM branch
+candidate-specific future output exceeds available candidate-specific observed supervision
+WM value can come through policy training, not only deployed candidate evaluation
 ```
 
-No gap/method verdict is allowed at this gate.
+QA correction:
+
+```text
+DriveLaW Stage-3 planner training updates both Video DiT and Planning/Action DiT.
+```
+
+## Wave-4 ledger result
+
+Feedback decomposition:
+
+```text
+F_e = ego-state / dynamics feedback
+F_s = sensor / viewpoint feedback
+F_a = surrounding-agent state feedback
+F_b = surrounding-agent behavioral-response feedback
+```
+
+Stable placements:
+
+```text
+Bench2Drive    interactive CARLA E2E policy benchmark
+HUGSIM         reconstructed photorealistic closed-loop simulator; actor behavior external/controller-defined
+ORION          VLA semantic/reasoning planner; no explicit world rollout
+ReactSim-Bench learned behavior-WM reactivity benchmark under externally deviated ego behavior
+CausalDrive    real-time learned action-conditioned reactive visual simulator
+```
+
+Stable distinctions:
+
+```text
+sensor photorealism != behavioral realism
+log realism != reactive robustness
+reactive feasibility != counterfactual behavioral truth
+action conditioning != causal identification
+simulator quality != planner quality
+```
+
+## Phase-C ledger result
+
+Canonical synthesis:
+
+`landscape/PHASE_C_WAVES1_4_FIELD_SYNTHESIS.md`
+
+Planning-centric WAM is now represented by seven main interfaces:
+
+```text
+I1 training-only predictive shaping
+I2 online predictive state → direct planner
+I3 joint world-action generation
+I4 planning-oriented future compression
+I5 candidate consequence evaluation
+I6 imagined environment for policy learning
+I7 learned interactive simulator
+```
+
+Project-wide stable field principles now include:
+
+```text
+world-prediction quality != planning evidence
+future information is interface-conditional
+candidate-specific output != candidate-specific observed counterfactual supervision
+WM-assisted planning != online model-based planning
+world completeness != decision relevance
+closed-loop must be decomposed by feedback channels
+sensor realism != behavioral realism
+log realism != reactive robustness
+reactive feasibility != counterfactual truth
+simulator evidence and planner evidence require separate chains
+```
+
+Phase C identified ten **evidence gaps**, not research gaps, including alternative-action behavioral GT, simulator→planner decision linkage, calibrated intervention-conditioned uncertainty, long-horizon coupled feedback, compute-normalized benefit and world-model-error robustness.
+
+Phase D is authorized to attack these as possible research problems. `NONE / EVIDENCE INSUFFICIENT` remains valid.
 
 ## Integrity notes
 
@@ -146,18 +216,20 @@ No gap/method verdict is allowed at this gate.
 - Canonical content hashes use Python logical-byte I/O, not the host’s framed native view.
 - LAW source facts are pinned to `BraveGroup/LAW@b2f6a784247072923c477ab92324d3aa5a9759bf`.
 - WoTE source facts are pinned to `liyingyanUCAS/WoTE@298957c128a91d41a1c6075bd0bb6e7e845e093f`.
+- DrivingGPT optimized NAVSIM runtime path remains explicitly unresolved because the official code link is unavailable.
 
 ## Existing cross-session evidence
 
 - `evidence/CORE_EVIDENCE_SNAPSHOT.md`
 - `evidence/LEGACY_EXPERTISE_ASSETS.md`
 - `audits/literature/P2R_TARGETED_FAILURE_DEEP_READ_ROUND1.md`
+- `audits/literature/RESEARCH_QA_GATE_CLOSEOUT.md`
 
 Use these as prior evidence, not substitutes for field reconstruction.
 
 ## Division of labor
 
-- **GPT-5.6 Sol:** comparative anchor deep reads, cross-family synthesis, atlas/cards/state maintenance, targeted source audit when scientifically necessary.
+- **GPT-5.6 Sol:** comparative anchor deep reads, cross-family synthesis, problem-discovery/falsification, atlas/cards/state maintenance, targeted source audit when scientifically necessary.
 - **Local corpus agent:** on-demand acquisition/extraction, MinerU/QC, local source-code execution, datasets/checkpoints/experiments.
 
-Broad corpus acquisition remains frozen unless a Phase-B comparison identifies a concrete missing historical or technical link.
+Broad corpus acquisition remains frozen unless Phase D identifies a concrete missing prior-art or measurement link.
