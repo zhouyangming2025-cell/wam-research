@@ -1,6 +1,6 @@
 # CURRENT_STATE
 
-Last updated: 2026-09-14 — field census Round 1 complete
+Last updated: 2026-09-14 — post-agent census ingest sync
 
 ## Research north star
 
@@ -14,11 +14,7 @@ Planning is the center of gravity. Perception, video generation, JEPA/latent pre
 
 Canonical rules: `state/RESEARCH_PRINCIPLES.md`.
 
-## Major methodological reset
-
-The previous workflow moved too quickly from a small, hypothesis-biased paper set to candidate gaps (P1/P2-R/P3). That is now considered an insufficient basis for research-problem selection.
-
-Active rule:
+## Methodological rule in force
 
 ```text
 FIELD UNDERSTANDING FIRST
@@ -27,103 +23,72 @@ FIELD UNDERSTANDING FIRST
 → only then reopen problem/gap discovery
 ```
 
-Canonical plan:
-
-`landscape/FIELD_RECONSTRUCTION_PLAN.md`
-
-Canonical taxonomy:
-
-`landscape/PLANNING_WAM_TAXONOMY.md`
-
-Living map:
-
-`landscape/FIELD_ATLAS.md`
-
-## Hypothesis status during reconstruction
-
-| item | status |
-|---|---|
-| **P1_RETIRED — Planner-Induced Model Exploitation / Search-Support Gap** | RETIRED HISTORICAL HYPOTHESIS |
-| **P2R_PRIMARY — Reactive Action-Ordering Gap** | **PARKED PROBE — NOT ACTIVE SEARCH TARGET** |
-| **P3_HOLD — Decision Sufficiency of World Representations** | PARKED BACKUP PROBE |
-
-`P2R_PRIMARY.md` retains the prior formulation for provenance, but the reading program must no longer be optimized around proving/killing P2-R.
+P1/P2-R/P3 are parked historical probes. They do not organize the current reading program.
 
 ## Current active stage
 
 ```text
-FIELD RECONSTRUCTION — Planning-centric WAM Atlas
+FIELD RECONSTRUCTION — Phase-A closeout
 ```
 
-### Phase-A Round 1 status
+Phase-A breadth acquisition has now reached the planned scale. The active task is no longer bulk paper acquisition; it is to finish **scientific placement and coverage audit**, freeze breadth expansion, and select the representative Phase-B anchor set.
 
-The first neutral breadth census has started and is recorded in:
+## Latest repository / corpus status
 
-`landscape/CENSUS_PHASE_A_ROUND1.md`
-
-Round 1 provisionally places roughly **45 unique works / benchmarks / controls** across the field, covering:
-
-- visual/video generative WMs;
-- occupancy/BEV/geometric WMs;
-- latent/JEPA/predictive-representation WMs;
-- WM-assisted direct planning;
-- candidate/action-conditioned futures;
-- unified world-action models;
-- interactive prediction/planning predecessors;
-- reactive simulation / policy-training environments;
-- reward/value/safety/cost interfaces;
-- strong non-WM E2E planners;
-- benchmark/evaluation lineages.
-
-No gap or innovation verdict has been issued.
-
-### Structural distinctions already visible from census placement
-
-These are **field-map distinctions**, not research gaps:
-
-1. `world model` plays several non-equivalent roles: data generator, pretraining model, auxiliary objective, inference-time future model, candidate evaluator, reward/safety model, simulator, or joint world-action policy.
-2. `latent world model` is also not one paradigm: some future branches disappear at inference; others directly condition the planner; newer WAMs jointly model scene/action latents.
-3. `action conditioned` does not identify the planner interface: the action may condition video generation, occupancy prediction, candidate scoring, or joint action/world generation.
-4. `closed loop` spans fundamentally different regimes: NAVSIM non-reactive pseudo-simulation, CARLA interactive simulation, learned reactive world agents, photorealistic reconstructed simulation, and real vehicle.
-5. Modern WAM interaction ideas have substantial predecessors in conditional prediction, contingency planning and game-theoretic integrated prediction/planning.
-6. Strong non-WM planners are mandatory controls because planning gains can come from representation, trajectory distribution learning, candidate scoring or supervision without an explicit world model.
-
-These distinctions will be tested and refined through anchor deep reads rather than converted into premature problem statements.
-
-## Field-reconstruction depth
-
-Planned structure:
+Latest observed head:
 
 ```text
-Phase A: ~50–80 paper census at placement/overview depth
-Phase B: ~15–25 representative anchor deep reads
-Phase C: cross-family synthesis + historical evolution + evaluation map + trade-off map
-Phase D: only then reopen research-problem discovery
+e0f4507  Complete Phase-A census round 1 text-layer ingest
 ```
 
-Phase A is active. Round 2 now fills missing coverage rather than expanding by gap keywords.
+The local corpus agent has now pushed three major supporting ingests:
+
+1. `P0013–P0020`: prior interactive/reactive/counterfactual branch; 7 `RAW_MD_READY`, P0020 Bahram 2016 blocked `PAYWALLED_NO_OPEN_SOURCE`.
+2. `P0021–P0034`: 14 coverage-hole works; all 14 `DOCUMENT_VERIFIED` + `RAW_MD_READY`.
+3. `P0035–P0060`: 26 works from the existing Phase-A Round-1 census; all 26 `DOCUMENT_VERIFIED` + `RAW_MD_READY`.
+
+Together with Batch 0A:
+
+```text
+60 stable paper IDs registered: P0001–P0060
+58 RAW_MD_READY
+2 lawful-source blockers:
+  P0008 NPPC
+  P0020 Bahram 2016
+```
+
+The corpus now has enough breadth for Phase-A closeout. Further broad ingestion is **paused** unless the coverage audit exposes a specific missing family/transition.
+
+## Important distinction: corpus coverage != scientific placement
+
+The agent correctly performed infrastructure work only. It did **not** assign F1–F11 scientific placement, novelty, gap, or research verdicts.
+
+Current scientific map:
+
+- `landscape/CENSUS_PHASE_A_ROUND1.md` provisionally places roughly 45 works/benchmarks/controls.
+- The newly ingested `P0021–P0034` were chosen to fill Round-2 coverage holes but still need owner/GPT scientific placement in the common taxonomy.
+- `P0035–P0060` mostly correspond to works already placed in Round 1; their new value is that full raw-MD text is now persistent in the repo.
 
 ## Immediate next task
 
 See `state/NEXT_TASK.md`.
 
-Round-2 coverage priorities:
+In order:
 
-- Hydra-MDP / DriveSuprim / iPad / VLA planning controls;
-- Think2Drive / WM-RL lineage;
-- ViDAR / GenAD representation-pretraining bridges where planning-relevant;
-- benchmark evolution and operational/deployment properties;
-- uncertainty / multimodal future treatment;
-- credible real-vehicle closed-loop evidence, if any.
+1. Read `P0021–P0034` at **census depth**, not deep-read depth.
+2. Create `landscape/CENSUS_PHASE_A_ROUND2.md` with neutral taxonomy placement.
+3. Update `FIELD_ATLAS.md` and perform an F1–F11 coverage audit.
+4. Decide whether any truly essential family/transition remains missing. `Hydra-MDP++` and `NAVSIM-v2` remain unresolved optional follow-ups, not automatic blockers.
+5. Freeze Phase-A breadth expansion.
+6. Select roughly **15–25 representative anchor papers** for Phase-B deep reading, justified by field coverage and historical/architectural diversity rather than prior hypotheses.
 
-## Corpus / Research Brain architecture
+No method design and no gap declaration before Phase B/C synthesis.
 
-1. Canonical PDFs live only on local/NAS where available.
-2. GitHub raw MD + figures form the persistent GPT-readable primary-text layer.
-3. Public official PDFs/web sources can be read directly during field census/deep read; local ingestion can follow asynchronously.
-4. Paper Cards contain curated scientific knowledge after deep review.
-5. `landscape/` now contains field-level understanding; hypothesis files are no longer the organizing center during reconstruction.
-6. Local corpus agent handles acquisition/conversion/local code; GPT-5.6 Sol handles field synthesis, deep reading and direct GitHub state maintenance.
+## Integrity notes from latest agent pushes
+
+- A concurrent raw-MD ledger write race was detected and repaired from stored artifacts; the write path was changed so later processes re-read before writing.
+- `P0028 ViDAR` has one known raw-MD extraction omission: the repository URL printed on PDF page 1 is absent from Markdown; the manifest note preserves this provenance fact.
+- Canonical PDF/raw-MD hashes continue to use logical bytes through the Python corpus I/O path.
 
 ## New-session bootstrap
 
@@ -134,6 +99,7 @@ START_HERE.md
 state/CURRENT_STATE.md
 state/NEXT_TASK.md
 landscape/FIELD_ATLAS.md
+landscape/CENSUS_PHASE_A_ROUND1.md
 ```
 
-During field reconstruction, do not default to `hypotheses/P2R_PRIMARY.md` unless historical hypothesis context is specifically needed.
+Then read only the raw MD needed for the active census-placement or anchor-deep-read task.
