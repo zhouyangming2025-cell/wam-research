@@ -4,6 +4,85 @@ Newest entry first.
 
 ---
 
+## 2026-09-14 — Wave 2 closed; Wave 3 authorized
+
+**Decision**
+
+Wave 2 is scientifically stable enough to close after primary-text comparison plus decision-critical source-code audits.
+
+```text
+Wave-2 comparative first pass    = COMPLETE
+planning-interface audit         = COMPLETE
+comparability/attribution audit  = COMPLETE
+supervision-source audit         = COMPLETE
+Wave 2                            = CLOSED
+Wave 3                            = AUTHORIZED
+```
+
+Canonical Wave-2 artifacts:
+
+- `landscape/PHASE_B_WAVE2_SYNTHESIS.md`
+- `landscape/PHASE_B_WAVE2_COMPARABILITY_AUDIT.md`
+- `audits/literature/PHASE_B_WAVE2_INTERFACE_CODE_AUDIT.md`
+
+**Stable Wave-2 interpretation**
+
+The phrase `world model helps planning` is too coarse. The reviewed mechanisms include controllable generation (GAIA-1), visual-future candidate evaluation (Drive-WM), joint occupancy+ego generation (OccWorld), online BEV-future candidate evaluation (WoTE), predictive pretraining (ViDAR), and action-aware auxiliary latent prediction (LAW).
+
+Evidence boundaries now explicit:
+
+- Drive-WM: future-based selection is operational, but visual-generation fidelity is not isolated from perception/reward/candidate design.
+- OccWorld: main SOTA rows are heterogeneous; internal representation/dynamics ablations are stronger evidence. Better reconstruction can coexist with worse forecasting/planning.
+- WoTE: future-state-on/off is strong matched NAVSIM evidence, but the audited PDM supervision uses fixed logged surrounding-agent futures across ego candidates.
+- ViDAR: predictive pretraining transfers the History/BEV encoder; the future decoder is not the deployed planning interface.
+- LAW: source code shows the current waypoint is generated before future-latent prediction and test-time planning discards latent outputs; the mechanism is representation shaping, not online rollout evaluation.
+- Longer horizon and higher world fidelity are not reliable monotonic proxies for planning value.
+
+**Why Wave 3 now**
+
+Wave 2 established the planning-interface taxonomy. Wave 3 can now compare tighter world/action coupling without treating all WAMs as equivalent.
+
+Wave-3 anchors:
+
+```text
+Epona
+DrivingGPT
+DriveLaW
+Auto-JEPA
+DA-WAM
+Think2Drive
+```
+
+Canonical plan: `landscape/PHASE_B_WAVE3_PLAN.md`.
+
+Research-gap and method design remain closed.
+
+---
+
+## 2026-09-14 — Wave 1 closed after historical/control comparability audit
+
+**Decision**
+
+The historical/non-WM/evaluation baseline is stable enough to use as a control layer for modern WAM interpretation.
+
+Canonical artifacts:
+
+- `landscape/PHASE_B_WAVE1_SYNTHESIS.md`
+- `landscape/PHASE_B_WAVE1_COMPARABILITY_AUDIT.md`
+
+Binding controls:
+
+```text
+conditional future != intervention
+matched controls > headline SOTA
+candidate ranking is an independent planning bottleneck
+multimodal action generation != world modeling
+prediction accuracy != planning evidence
+evaluation regime is part of the claim
+```
+
+---
+
 ## 2026-09-14 — Phase-A field census closed; Phase-B representative deep reads authorized
 
 **Decision**
@@ -26,64 +105,19 @@ Canonical artifacts:
 
 **Evidence integrated in closeout**
 
-The newly ingested P0021–P0034 coverage set was scientifically placed from repo-hosted primary text:
-
-- Hydra-MDP, DriveSuprim, iPad — strong non-WM planning/scoring/proposal controls;
-- DriveVLM, OmniDrive, ORION — VLM/VLA planning and supervision controls, not automatically world models;
-- Think2Drive — latent WM as Dreamer-style RL training simulator;
-- ViDAR — future prediction as pretraining objective;
-- GenAD — joint ego/agent trajectory-generation precursor;
-- nuScenes, nuPlan, NAVSIM, Bench2Drive, HUGSIM — benchmark/evaluation lineage.
+The P0021–P0034 coverage set placed Hydra-MDP / DriveSuprim / iPad as non-WM controls; DriveVLM / OmniDrive / ORION as VLM/VLA planning controls; Think2Drive as latent-WM-for-RL; ViDAR as predictive pretraining; GenAD as joint ego/agent trajectory-generation precursor; and nuScenes / nuPlan / NAVSIM / Bench2Drive / HUGSIM as evaluation-history anchors.
 
 **Why Phase A is sufficient**
 
-The project can now place representative methods across visual/video, occupancy/BEV, latent/JEPA, direct WM-assisted planning, candidate-conditioned futures, unified world-action, historical interaction/prediction-planning, reactive/WM-RL, value/safety interfaces, strong non-WM planners, and benchmark/evaluation families.
+Representative coverage exists across visual/video, occupancy/BEV, latent/JEPA, direct WM-assisted planning, candidate-conditioned futures, unified world-action, historical interaction/prediction-planning, reactive/WM-RL, value/safety interfaces, strong non-WM planners, and benchmark/evaluation families.
 
-The remaining weaknesses are comparative questions rather than missing census families:
-
-1. standardized real-vehicle closed-loop evidence is sparse;
-2. multimodality/uncertainty reaches the planner in heterogeneous ways;
-3. visual simulator fidelity and behavioral-agent realism are separate dimensions.
-
-Adding papers indiscriminately would now reduce, not increase, scientific efficiency.
-
-**Key corrections earned by the closeout**
-
-- The original nuScenes paper is a multimodal scene/perception benchmark, not an end-to-end planning benchmark; later literature retrofits open-loop planning protocols onto the logs.
-- VLA/VLM planning is adjacent to WAM but not synonymous with environment transition modeling.
-- Future prediction can serve pretraining, inference representation, candidate evaluation, joint world-action modeling, or RL policy learning; these are distinct scientific roles.
-- Strong planning without an explicit WM must remain a first-class control branch.
-
-**Phase-B strategy**
-
-Read in comparative waves rather than producing 25 isolated summaries.
-
-Wave 1 establishes the historical/non-WM/evaluation baseline:
-
-```text
-M2I
-GameFormer
-What Truly Matters
-UniAD
-nuPlan
-NAVSIM
-DiffusionDrive
-DriveSuprim
-```
-
-Required artifact: `landscape/PHASE_B_WAVE1_SYNTHESIS.md`.
-
-**What would reopen breadth acquisition**
-
-Only a named Phase-B comparison that cannot be resolved from the existing corpus and identifies a specific missing historical or technical link. Corpus size itself is no reason to add papers.
+Remaining weaknesses are comparative questions rather than missing census families. New papers may be added only when a named Phase-B comparison exposes a concrete missing link.
 
 ---
 
-## 2026-09-14 — Phase-A breadth target reached; stop bulk acquisition and close by scientific placement
+## 2026-09-14 — Phase-A breadth target reached; stop bulk acquisition
 
-**Decision**
-
-The corpus reached the planned Phase-A breadth scale at infrastructure level:
+The corpus reached:
 
 ```text
 P0001–P0060 registered
@@ -91,7 +125,7 @@ P0001–P0060 registered
 2 lawful-source blockers
 ```
 
-Broad acquisition was paused pending scientific placement, F1–F11 coverage audit and anchor selection. This gate is now completed by the decision above.
+Broad acquisition was paused pending scientific placement; the later Phase-A closeout converted that pause into a freeze.
 
 ---
 
@@ -110,13 +144,11 @@ reconstruct field
 → only then research-problem discovery
 ```
 
-P1/P2-R/P3 are retained only as historical probes. The previous analyses remain useful evidence, but they are not sufficient basis for choosing a research problem.
+P1/P2-R/P3 are retained only as historical probes.
 
 ---
 
 ## 2026-09-13 — Planning-centric scope + problem-first rule
-
-**Decision**
 
 Research identity:
 
@@ -130,7 +162,7 @@ Risk/predictive-risk expertise is optional prior knowledge, not a required desti
 
 ## 2026-09-13 — P2-R Round-1 adjudication (historical)
 
-The earlier targeted audit found no direct observed reaction-induced action-order inversion in the reviewed set. P2-R is now parked and no longer organizes reading.
+The earlier targeted audit found no direct observed reaction-induced action-order inversion in the reviewed set. P2-R is parked and no longer organizes reading.
 
 Full audit: `audits/literature/P2R_TARGETED_FAILURE_DEEP_READ_ROUND1.md`.
 
