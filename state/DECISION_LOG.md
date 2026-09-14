@@ -4,6 +4,44 @@ Newest entry first.
 
 ---
 
+## 2026-09-14 — Phase-A breadth target reached; stop bulk acquisition and close by scientific placement
+
+**Decision**
+
+The corpus has reached the planned Phase-A breadth scale at infrastructure level:
+
+```text
+P0001–P0060 registered
+58 RAW_MD_READY
+2 lawful-source blockers
+```
+
+Therefore broad acquisition is paused. The next task is not another paper-download batch; it is to scientifically place the newly ingested coverage works, audit F1–F11 coverage, freeze Phase A, and select the representative Phase-B deep-read anchors.
+
+**Why**
+
+The local agent has now supplied the missing text layer for:
+
+- P0013–P0020 interactive/reactive/counterfactual branch;
+- P0021–P0034 Round-2 coverage holes (non-WM controls, VLA, WM-RL, representation bridges, benchmarks);
+- P0035–P0060 works already named in the Phase-A Round-1 census.
+
+Continuing to accumulate papers before integrating these records would recreate the original failure mode: corpus growth faster than scientific understanding.
+
+**Immediate gate**
+
+1. census-place P0021–P0034;
+2. create `landscape/CENSUS_PHASE_A_ROUND2.md`;
+3. update `FIELD_ATLAS.md` and run an explicit F1–F11 coverage audit;
+4. add another paper only if that audit reveals a concrete missing family/transition;
+5. finalize roughly 15–25 Phase-B anchor papers.
+
+`Hydra-MDP++` and `NAVSIM-v2` remain optional unresolved follow-ups rather than automatic blockers.
+
+No gap/novelty selection is reopened by this decision.
+
+---
+
 ## 2026-09-14 — Field-reconstruction reset: stop hypothesis-first gap hunting
 
 **Decision**
