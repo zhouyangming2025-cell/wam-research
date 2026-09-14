@@ -2,12 +2,12 @@
 
 ## 唯一下一任务
 
-> Execute **Phase C.5 — Core-WAM Coverage Correction** before any Phase-D problem discovery.
+> Deep-read **WorldDrive** as the first anchor in **Phase C.5 — Core-WAM Coverage Correction**.
 
-Canonical scope correction:
+Canonical first-pass audit:
 
 ```text
-landscape/PURE_WAM_PRIORITY_CORRECTION.md
+landscape/CORE_WAM_2_2_COVERAGE_AUDIT.md
 ```
 
 ## Status
@@ -21,114 +21,109 @@ Wave 4            CLOSED
 Phase-C synthesis COMPLETE FIRST PASS
 Phase D           PAUSED
 Phase C.5         ACTIVE
+missing 2.2 identities / code status FIRST-PASS VERIFIED
 ```
 
-## Why Phase D is paused
+## Scope
 
-The first-pass synthesis is useful, but the core WAM branch is not yet complete enough. The external reading map identifies several planning-centric WAM papers that are absent from the current repo/atlas, while the project spent some effort on VLA controls.
-
-Primary priority is now:
+Primary direction:
 
 ```text
-2.2 WAM core branch
+WAM + one-stage / end-to-end autonomous-driving planning
 ```
 
-Secondary/control priority:
+Secondary/control direction:
 
 ```text
-2.1 WAM+VLA / VLA-centric branch
+WAM+VLA / VLA-centric planning
 ```
 
-VLA is retained as a control, not the main organizing direction.
+Do not broaden into VLA before core WAM coverage is stable.
 
-## Core-WAM audit list
-
-Already covered deeply:
+## First-pass verified missing core set
 
 ```text
-Epona
-WoTE
-DriveLaW
-LAW
+WorldDrive      ANCHOR — official code released
+World4Drive     ANCHOR — official code released
+SeerDrive       ANCHOR — official code released
+Drive-JEPA      ANCHOR/BOUNDARY — official code released
+Metis           ANCHOR — official repo exists; source code still absent as of 2026-09-14
+DynFlowDrive    ANCHOR — official repo exists; implementation still unreleased
+Discrete-WAM    ANCHOR — no official code found in first-pass search
+GraphWorld      ANCHOR — no official code found in first-pass search
 ```
 
-Must now verify and place:
+Anti-alias rules remain binding:
 
 ```text
-WorldDrive
-World4Drive
-SeerDrive
-Drive-JEPA
-Metis
-DynFlowDrive
-Discrete-WAM
-GraphWorld
+Auto-JEPA != Drive-JEPA
+Drive-WM  != WorldDrive
+DA-WAM    != Discrete-WAM
 ```
 
-Important anti-alias rules:
+## Current deep-read order
 
 ```text
-Auto-JEPA != automatically Drive-JEPA
-Drive-WM != automatically WorldDrive
-DA-WAM != automatically Discrete-WAM
+1. WorldDrive      NEXT
+2. World4Drive
+3. SeerDrive
+4. Drive-JEPA
+5. Metis
+6. DynFlowDrive
+7. Discrete-WAM
+8. GraphWorld
 ```
 
-Do not merge papers by similar naming without primary-source verification.
+## WorldDrive audit requirements
 
-## First execution block
-
-For each missing item, establish:
+Trace from primary paper + official code:
 
 ```text
-1. exact paper identity
-2. year / venue / authors / institutions
-3. official paper URL
-4. official code URL if any
-5. whether it is truly planning-centric WAM
-6. world-state representation
-7. predictive / generative mechanism
-8. exact world→planning interface
-9. supervision source
-10. inference path
-11. evaluation regime
-12. strongest evidence / strongest limitation
-13. relation to existing Waves 1–4 taxonomy
-14. whether deep read is required
+1. TA-DWM observation/action/future representation
+2. trajectory vocabulary numerical form
+3. what visual encoder and motion encoder learn during world-model pretraining
+4. exactly which encoders/weights are transferred into the downstream planner
+5. Multi-modal Planner candidate/proposal generation
+6. Future-aware Rewarder input, target and inference path
+7. whether FAR consumes an actually rolled-out future at inference or a distilled/current representation
+8. planner/FAR training stages and frozen/trainable components
+9. NAVSIM / NAVSIM-v2 / nuScenes evaluation semantics
+10. matched ablations: planner without WM pretraining, without motion representation, without FAR, etc.
+11. latency / candidate count / planning frequency
+12. strongest evidence that world modeling itself helps planning
+13. strongest alternative explanation (representation pretraining, candidate set, rewarder/scorer, data scale)
+14. exact relation to Epona, WoTE, DriveLaW and LAW
 ```
 
-## Reading-depth gate
-
-Assign each paper:
+Required classification after deep read:
 
 ```text
-ANCHOR
-CENSUS
-DUPLICATE / NEAR-DUPLICATE
-OUT-OF-SCOPE
-UNVERIFIED
+training-only predictive shaping?
+online predictive state?
+joint world-action representation?
+candidate consequence evaluation?
+reward/value distillation?
+hybrid of several interfaces?
 ```
 
-Only ANCHOR papers receive full deep reads.
+## Stop condition for WorldDrive
 
-## Deliverables
-
-Create/update:
+Do not move to World4Drive until we can state, without ambiguity:
 
 ```text
-landscape/PHASE_C5_CORE_WAM_COVERAGE_AUDIT.md
-landscape/PHASE_C_WAVES1_4_FIELD_SYNTHESIS.md   # only after evidence changes are known
-state/CURRENT_STATE.md
-state/RESEARCH_LEDGER.md
+observation → world model → transferred representation → planner → candidate set → FAR → selected trajectory
 ```
 
-## Stop condition
+and identify which links are directly supervised, which are generated, which are frozen, and which survive at inference.
+
+## Phase C.5 stop condition
 
 Do not reopen Phase D until:
 
 ```text
-all listed 2.2 WAM papers are verified/placed;
-all decision-relevant missing WAM mechanisms are deep-read;
-existing field conclusions are rechecked against them;
+all eight 2.2 WAM papers are verified/placed;
+all decision-relevant mechanisms are deep-read;
+existing Phase-C conclusions are rechecked against them;
 a WAM-only historical/interface synthesis is stable.
 ```
 
@@ -139,6 +134,5 @@ no problem/gap selection yet
 no method design
 no broad VLA expansion
 no forced risk-field insertion
-no assuming similar paper names are the same work
-no treating the existing first-pass field synthesis as final core-WAM coverage
+no treating similar paper names as the same work
 ```
