@@ -1,0 +1,295 @@
+{
+  "P0021": {
+    "paper_id": "P0021",
+    "short_name": "HydraMDP",
+    "landing_url": "https://arxiv.org/abs/2406.06978",
+    "pdf_url": "https://arxiv.org/pdf/2406.06978",
+    "official_title": "Hydra-MDP: End-to-end Multimodal Planning with Multi-target Hydra-Distillation",
+    "official_authors": [
+      "Li, Zhenxin",
+      "Li, Kailin",
+      "Wang, Shihao",
+      "Lan, Shiyi",
+      "Yu, Zhiding",
+      "Ji, Yishen",
+      "Li, Zhiqi",
+      "Zhu, Ziyue",
+      "Kautz, Jan",
+      "Wu, Zuxuan",
+      "Jiang, Yu-Gang",
+      "Alvarez, Jose M."
+    ],
+    "official_date": "2024/06/11",
+    "arxiv_version": "v4",
+    "expected_key": "Hydra-MDP",
+    "identity_match": true
+  },
+  "P0022": {
+    "paper_id": "P0022",
+    "short_name": "DriveSuprim",
+    "landing_url": "https://arxiv.org/abs/2506.06659",
+    "pdf_url": "https://arxiv.org/pdf/2506.06659",
+    "official_title": "DriveSuprim: Towards Precise Trajectory Selection for End-to-End Planning",
+    "official_authors": [
+      "Yao, Wenhao",
+      "Li, Zhenxin",
+      "Lan, Shiyi",
+      "Wang, Zi",
+      "Sun, Xinglong",
+      "Alvarez, Jose M.",
+      "Wu, Zuxuan"
+    ],
+    "official_date": "2025/06/07",
+    "arxiv_version": "v3",
+    "expected_key": "DriveSuprim",
+    "identity_match": true
+  },
+  "P0023": {
+    "paper_id": "P0023",
+    "short_name": "iPad",
+    "landing_url": "https://arxiv.org/abs/2505.15111",
+    "pdf_url": "https://arxiv.org/pdf/2505.15111",
+    "official_title": "iPad: Iterative Proposal-centric End-to-End Autonomous Driving",
+    "official_authors": [
+      "Guo, Ke",
+      "Liu, Haochen",
+      "Wu, Xiaojun",
+      "Pan, Jia",
+      "Lv, Chen"
+    ],
+    "official_date": "2025/05/21",
+    "arxiv_version": "v1",
+    "expected_key": "iPad",
+    "identity_match": true
+  },
+  "P0024": {
+    "paper_id": "P0024",
+    "short_name": "DriveVLM",
+    "landing_url": "https://arxiv.org/abs/2402.12289",
+    "pdf_url": "https://arxiv.org/pdf/2402.12289",
+    "official_title": "DriveVLM: The Convergence of Autonomous Driving and Large Vision-Language Models",
+    "official_authors": [
+      "Tian, Xiaoyu",
+      "Gu, Junru",
+      "Li, Bailin",
+      "Liu, Yicheng",
+      "Wang, Yang",
+      "Zhao, Zhiyong",
+      "Zhan, Kun",
+      "Jia, Peng",
+      "Lang, Xianpeng",
+      "Zhao, Hang"
+    ],
+    "official_date": "2024/02/19",
+    "arxiv_version": "v5",
+    "expected_key": "DriveVLM",
+    "identity_match": true
+  },
+  "P0025": {
+    "paper_id": "P0025",
+    "short_name": "OmniDrive",
+    "landing_url": "https://arxiv.org/abs/2405.01533",
+    "pdf_url": "https://arxiv.org/pdf/2405.01533",
+    "official_title": "OmniDrive: A Holistic Vision-Language Dataset for Autonomous Driving with Counterfactual Reasoning",
+    "official_authors": [
+      "Wang, Shihao",
+      "Yu, Zhiding",
+      "Jiang, Xiaohui",
+      "Lan, Shiyi",
+      "Shi, Min",
+      "Chang, Nadine",
+      "Kautz, Jan",
+      "Li, Ying",
+      "Alvarez, Jose M."
+    ],
+    "official_date": "2024/05/02",
+    "arxiv_version": "v2",
+    "expected_key": "OmniDrive",
+    "identity_match": true
+  },
+  "P0026": {
+    "paper_id": "P0026",
+    "short_name": "ORION",
+    "landing_url": "https://openaccess.thecvf.com/content/ICCV2025/html/Fu_ORION_A_Holistic_End-to-End_Autonomous_Driving_Framework_by_Vision-Language_Instructed_ICCV_2025_paper.html",
+    "pdf_url": "https://openaccess.thecvf.com/content/ICCV2025/papers/Fu_ORION_A_Holistic_End-to-End_Autonomous_Driving_Framework_by_Vision-Language_Instructed_ICCV_2025_paper.pdf",
+    "official_title": "ORION: A Holistic End-to-End Autonomous Driving Framework by Vision-Language Instructed Action Generation",
+    "official_authors": [
+      "Fu, Haoyu",
+      "Zhang, Diankun",
+      "Zhao, Zongchuang",
+      "Cui, Jianfeng",
+      "Liang, Dingkang",
+      "Zhang, Chong",
+      "Zhang, Dingyuan",
+      "Xie, Hongwei",
+      "Wang, Bing",
+      "Bai, Xiang"
+    ],
+    "official_date": "2025",
+    "arxiv_version": "",
+    "expected_key": "ORION",
+    "identity_match": true
+  },
+  "P0027": {
+    "paper_id": "P0027",
+    "short_name": "Think2Drive",
+    "landing_url": "https://arxiv.org/abs/2402.16720",
+    "pdf_url": "https://arxiv.org/pdf/2402.16720",
+    "official_title": "Think2Drive: Efficient Reinforcement Learning by Thinking in Latent World Model for Quasi-Realistic Autonomous Driving (in CARLA-v2)",
+    "official_authors": [
+      "Li, Qifeng",
+      "Jia, Xiaosong",
+      "Wang, Shaobo",
+      "Yan, Junchi"
+    ],
+    "official_date": "2024/02/26",
+    "arxiv_version": "v2",
+    "expected_key": "Think2Drive",
+    "identity_match": true
+  },
+  "P0028": {
+    "paper_id": "P0028",
+    "short_name": "ViDAR",
+    "landing_url": "https://openaccess.thecvf.com/content/CVPR2024/html/Yang_Visual_Point_Cloud_Forecasting_enables_Scalable_Autonomous_Driving_CVPR_2024_paper.html",
+    "pdf_url": "https://openaccess.thecvf.com/content/CVPR2024/papers/Yang_Visual_Point_Cloud_Forecasting_enables_Scalable_Autonomous_Driving_CVPR_2024_paper.pdf",
+    "official_title": "Visual Point Cloud Forecasting enables Scalable Autonomous Driving",
+    "official_authors": [
+      "Yang, Zetong",
+      "Chen, Li",
+      "Sun, Yanan",
+      "Li, Hongyang"
+    ],
+    "official_date": "2024",
+    "arxiv_version": "",
+    "expected_key": "Visual Point Cloud Forecasting",
+    "identity_match": true
+  },
+  "P0029": {
+    "paper_id": "P0029",
+    "short_name": "GenAD",
+    "landing_url": "https://arxiv.org/abs/2402.11502",
+    "pdf_url": "https://arxiv.org/pdf/2402.11502",
+    "official_title": "GenAD: Generative End-to-End Autonomous Driving",
+    "official_authors": [
+      "Zheng, Wenzhao",
+      "Song, Ruiqi",
+      "Guo, Xianda",
+      "Zhang, Chenming",
+      "Chen, Long"
+    ],
+    "official_date": "2024/02/18",
+    "arxiv_version": "v3",
+    "expected_key": "GenAD",
+    "identity_match": true
+  },
+  "P0030": {
+    "paper_id": "P0030",
+    "short_name": "nuScenes",
+    "landing_url": "https://openaccess.thecvf.com/content_CVPR_2020/html/Caesar_nuScenes_A_Multimodal_Dataset_for_Autonomous_Driving_CVPR_2020_paper.html",
+    "pdf_url": "https://openaccess.thecvf.com/content_CVPR_2020/papers/Caesar_nuScenes_A_Multimodal_Dataset_for_Autonomous_Driving_CVPR_2020_paper.pdf",
+    "official_title": "nuScenes: A Multimodal Dataset for Autonomous Driving",
+    "official_authors": [
+      "Caesar, Holger",
+      "Bankiti, Varun",
+      "Lang, Alex H.",
+      "Vora, Sourabh",
+      "Liong, Venice Erin",
+      "Xu, Qiang",
+      "Krishnan, Anush",
+      "Pan, Yu",
+      "Baldan, Giancarlo",
+      "Beijbom, Oscar"
+    ],
+    "official_date": "2020",
+    "arxiv_version": "",
+    "expected_key": "nuScenes",
+    "identity_match": true
+  },
+  "P0031": {
+    "paper_id": "P0031",
+    "short_name": "nuPlan",
+    "landing_url": "https://arxiv.org/abs/2106.11810",
+    "pdf_url": "https://arxiv.org/pdf/2106.11810",
+    "official_title": "NuPlan: A closed-loop ML-based planning benchmark for autonomous vehicles",
+    "official_authors": [
+      "Caesar, Holger",
+      "Kabzan, Juraj",
+      "Tan, Kok Seang",
+      "Fong, Whye Kit",
+      "Wolff, Eric",
+      "Lang, Alex",
+      "Fletcher, Luke",
+      "Beijbom, Oscar",
+      "Omari, Sammy"
+    ],
+    "official_date": "2021/06/22",
+    "arxiv_version": "v4",
+    "expected_key": "nuPlan",
+    "identity_match": true
+  },
+  "P0032": {
+    "paper_id": "P0032",
+    "short_name": "NAVSIM",
+    "landing_url": "https://arxiv.org/abs/2406.15349",
+    "pdf_url": "https://arxiv.org/pdf/2406.15349",
+    "official_title": "NAVSIM: Data-Driven Non-Reactive Autonomous Vehicle Simulation and Benchmarking",
+    "official_authors": [
+      "Dauner, Daniel",
+      "Hallgarten, Marcel",
+      "Li, Tianyu",
+      "Weng, Xinshuo",
+      "Huang, Zhiyu",
+      "Yang, Zetong",
+      "Li, Hongyang",
+      "Gilitschenski, Igor",
+      "Ivanovic, Boris",
+      "Pavone, Marco",
+      "Geiger, Andreas",
+      "Chitta, Kashyap"
+    ],
+    "official_date": "2024/06/21",
+    "arxiv_version": "v2",
+    "expected_key": "NAVSIM",
+    "identity_match": true
+  },
+  "P0033": {
+    "paper_id": "P0033",
+    "short_name": "Bench2Drive",
+    "landing_url": "https://arxiv.org/abs/2406.03877",
+    "pdf_url": "https://arxiv.org/pdf/2406.03877",
+    "official_title": "Bench2Drive: Towards Multi-Ability Benchmarking of Closed-Loop End-To-End Autonomous Driving",
+    "official_authors": [
+      "Jia, Xiaosong",
+      "Yang, Zhenjie",
+      "Li, Qifeng",
+      "Zhang, Zhiyuan",
+      "Yan, Junchi"
+    ],
+    "official_date": "2024/06/06",
+    "arxiv_version": "v3",
+    "expected_key": "Bench2Drive",
+    "identity_match": true
+  },
+  "P0034": {
+    "paper_id": "P0034",
+    "short_name": "HUGSIM",
+    "landing_url": "https://arxiv.org/abs/2412.01718",
+    "pdf_url": "https://arxiv.org/pdf/2412.01718",
+    "official_title": "HUGSIM: A Real-Time, Photo-Realistic and Closed-Loop Simulator for Autonomous Driving",
+    "official_authors": [
+      "Zhou, Hongyu",
+      "Lin, Longzhong",
+      "Wang, Jiabao",
+      "Lu, Yichong",
+      "Bai, Dongfeng",
+      "Liu, Bingbing",
+      "Wang, Yue",
+      "Geiger, Andreas",
+      "Liao, Yiyi"
+    ],
+    "official_date": "2024/12/02",
+    "arxiv_version": "v1",
+    "expected_key": "HUGSIM",
+    "identity_match": true
+  }
+}

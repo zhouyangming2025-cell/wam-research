@@ -43,6 +43,100 @@ MIN_PDF_BYTES = 20_000        # anything smaller is an error page, not a paper
 # version > official project-hosted PDF. One canonical PDF per paper.
 # `alternate_official` is RECORDED for provenance but is never auto-fetched.
 SOURCES = [
+
+    # --- Phase-A Census Round 2 support batch (CORPUS_BATCH=census2) ---
+    # Coverage holes named in landscape/FIELD_ATLAS.md (F10), landscape/CENSUS_PHASE_A_ROUND1.md
+    # and state/NEXT_TASK.md: strong non-WM E2E controls, WM-RL lineage, representation
+    # pretraining bridges, benchmark/simulator lineage. Identities were resolved against
+    # official landing pages (scripts/fetch_work_identity.py -> manifests/batch_census2_identity.json);
+    # every title, first author and arXiv version below is copied from that ledger, never typed
+    # from memory.
+    dict(paper_id="P0021", short="HydraMDP",
+         url="https://arxiv.org/pdf/2406.06978",
+         source_version="arXiv_v4",
+         basis="official arXiv version v4 (arXiv abs page citation_title matches exactly); no venue camera-ready verified in this batch",
+         alternate_official="https://arxiv.org/abs/2406.06978"),
+    dict(paper_id="P0022", short="DriveSuprim",
+         url="https://arxiv.org/pdf/2506.06659",
+         source_version="arXiv_v3",
+         basis="official arXiv version v3. An AAAI 2026 version exists (DOI 10.1609/aaai.v40i14.38178, seen in OpenAlex), but the AAAI OJS article page returned no galley PDF link in this batch, so it could not be verified and the arXiv version stays canonical",
+         alternate_official="https://arxiv.org/abs/2506.06659"),
+    dict(paper_id="P0023", short="iPad",
+         url="https://arxiv.org/pdf/2505.15111",
+         source_version="arXiv_v1",
+         basis="official arXiv version v1; the IEEE Robotics and Automation Letters version (DOI 10.1109/lra.2026.3723334) is not open, so the preprint is canonical",
+         alternate_official="https://arxiv.org/abs/2505.15111"),
+    dict(paper_id="P0024", short="DriveVLM",
+         url="https://arxiv.org/pdf/2402.12289",
+         source_version="arXiv_v5",
+         basis="official arXiv version v5 (arXiv abs page citation_title matches exactly)",
+         alternate_official="https://arxiv.org/abs/2402.12289"),
+    dict(paper_id="P0025", short="OmniDrive",
+         url="https://openaccess.thecvf.com/content/CVPR2025/papers/"
+             "Wang_OmniDrive_A_Holistic_Vision-Language_Dataset_for_Autonomous_Driving_with_Counterfactual_"
+             "CVPR_2025_paper.pdf",
+         source_version="CVPR2025_camera_ready",
+         basis="venue camera-ready (CVF Open Access). arXiv:2405.01533 v2 carries the same title on its official abs page, so the CVPR 2025 camera-ready supersedes the preprint per corpus canonical-source priority",
+         alternate_official="https://openaccess.thecvf.com/content/CVPR2025/html/"
+                            "Wang_OmniDrive_A_Holistic_Vision-Language_Dataset_for_Autonomous_Driving_with_Counterfactual_"
+                            "CVPR_2025_paper.html"),
+    dict(paper_id="P0026", short="ORION",
+         url="https://openaccess.thecvf.com/content/ICCV2025/papers/"
+             "Fu_ORION_A_Holistic_End-to-End_Autonomous_Driving_Framework_by_Vision-Language_Instructed_"
+             "ICCV_2025_paper.pdf",
+         source_version="ICCV2025_camera_ready",
+         basis="venue camera-ready (CVF Open Access); located by scanning the ICCV2025 Open Access index page, because CVF truncates titles inside slugs and full-title guesses return 404",
+         alternate_official="https://openaccess.thecvf.com/content/ICCV2025/html/"
+                            "Fu_ORION_A_Holistic_End-to-End_Autonomous_Driving_Framework_by_Vision-Language_Instructed_"
+                            "ICCV_2025_paper.html"),
+    dict(paper_id="P0027", short="Think2Drive",
+         url="https://arxiv.org/pdf/2402.16720",
+         source_version="arXiv_v2",
+         basis="official arXiv version v2; the ECCV 2024 Springer version is not open, so the preprint is canonical",
+         alternate_official="https://arxiv.org/abs/2402.16720"),
+    dict(paper_id="P0028", short="ViDAR",
+         url="https://openaccess.thecvf.com/content/CVPR2024/papers/"
+             "Yang_Visual_Point_Cloud_Forecasting_enables_Scalable_Autonomous_Driving_"
+             "CVPR_2024_paper.pdf",
+         source_version="CVPR2024_camera_ready",
+         basis="venue camera-ready (CVF Open Access). NOTE: the camera-ready title is Visual Point Cloud Forecasting enables Scalable Autonomous Driving and does not contain the method name ViDAR used by the census; located by scanning the CVPR2024 Open Access index page",
+         alternate_official="https://openaccess.thecvf.com/content/CVPR2024/html/"
+                            "Yang_Visual_Point_Cloud_Forecasting_enables_Scalable_Autonomous_Driving_"
+                            "CVPR_2024_paper.html"),
+    dict(paper_id="P0029", short="GenAD",
+         url="https://arxiv.org/pdf/2402.11502",
+         source_version="arXiv_v3",
+         basis="official arXiv version v3; the ECCV 2024 Springer version is not open, so the preprint is canonical",
+         alternate_official="https://arxiv.org/abs/2402.11502"),
+    dict(paper_id="P0030", short="nuScenes",
+         url="https://openaccess.thecvf.com/content_CVPR_2020/papers/"
+             "Caesar_nuScenes_A_Multimodal_Dataset_for_Autonomous_Driving_"
+             "CVPR_2020_paper.pdf",
+         source_version="CVPR2020_camera_ready",
+         basis="venue camera-ready (CVF Open Access). CVPR 2020 uses the older CVF path layout (/content_CVPR_2020/), so the modern (CVPR20xx?day=all) index does not list it; the URL was verified as HTTP 206 with %PDF- magic before download",
+         alternate_official="https://openaccess.thecvf.com/content_CVPR_2020/html/"
+                            "Caesar_nuScenes_A_Multimodal_Dataset_for_Autonomous_Driving_"
+                            "CVPR_2020_paper.html"),
+    dict(paper_id="P0031", short="nuPlan",
+         url="https://arxiv.org/pdf/2106.11810",
+         source_version="arXiv_v4",
+         basis="official arXiv version v4, titled NuPlan: A closed-loop ML-based planning benchmark for autonomous vehicles. The Round-1 source register listed only the project page https://nuplan.org/nuplan, which is not a document; a peer-reviewed nuPlan paper is known to exist but was NOT verified in this batch, so the canonical preprint is used and this remains an open census item",
+         alternate_official="https://arxiv.org/abs/2106.11810"),
+    dict(paper_id="P0032", short="NAVSIM",
+         url="https://arxiv.org/pdf/2406.15349",
+         source_version="arXiv_v2",
+         basis="official arXiv version v2 (title and version confirmed twice: arXiv export API and the arXiv abs page). The NeurIPS 2024 Datasets and Benchmarks abstract page listed in the Round-1 source register was not fetched for a camera-ready in this batch",
+         alternate_official="https://arxiv.org/abs/2406.15349"),
+    dict(paper_id="P0033", short="Bench2Drive",
+         url="https://arxiv.org/pdf/2406.03877",
+         source_version="arXiv_v3",
+         basis="official arXiv version v3 (arXiv abs page citation_title matches exactly). A NeurIPS 2024 Datasets and Benchmarks version indexed under DOI 10.52202/079017-0025 was seen in OpenAlex, but no open PDF for it was verified in this batch",
+         alternate_official="https://arxiv.org/abs/2406.03877"),
+    dict(paper_id="P0034", short="HUGSIM",
+         url="https://arxiv.org/pdf/2412.01718",
+         source_version="arXiv_v1",
+         basis="official arXiv version v1. The IEEE TPAMI version (DOI 10.1109/tpami.2025.3647952, listed in the Round-1 source register and seen in OpenAlex) is not open, so the preprint is canonical",
+         alternate_official="https://arxiv.org/abs/2412.01718"),
     # --- Round 2 targeted ingest: H1-H3 historical novelty controls ---
     dict(paper_id="P0018", short="GameFormer",
          url="https://openaccess.thecvf.com/content/ICCV2023/papers/Huang_GameFormer_Game-theoretic_Modeling_and_Learning_of_Transformer-based_Interactive_Prediction_and_ICCV_2023_paper.pdf",

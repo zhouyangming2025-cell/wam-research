@@ -185,9 +185,116 @@ META = {
                   code_available="UNKNOWN", official_code_url="",
                   tags="trajectory-prediction;interactive;reactive;planning", hyp="P2R_PRIMARY", rel="MEDIUM",
                   note="Round 2 H3, historical novelty control for the P2-R occupancy question. BLOCKED: no lawful open canonical source. The DOI resolves to the IEEE Xplore landing page (HTTP 202, HTML, not a PDF); unofficial mirrors are excluded by the ingest prompt, so no PDF is stored and the record carries DOWNLOAD_BLOCKED: PAYWALLED_NO_OPEN_SOURCE. Title, year, venue and author are index-level discovery metadata and NOT document-verified. EVIDENCE_LEVEL=INDEX_BACKED"),
+    # --- Phase-A Census Round 2 support batch (CORPUS_BATCH=census2) ---
+    # Coverage holes named in landscape/FIELD_ATLAS.md (F10), landscape/CENSUS_PHASE_A_ROUND1.md
+    # and state/NEXT_TASK.md. Titles, years, first authors and arXiv versions are copied from
+    # manifests/batch_census2_identity.json (official landing pages); tags come from the corpus
+    # vocabulary and every assignment is backed by the paper's own text; code_available is YES
+    # only where the paper itself prints a repository URL. These are census-depth records: no
+    # deep read, no field placement, no novelty or gap verdict.
+    "P0021": dict(short="HydraMDP", title="Hydra-MDP: End-to-end Multimodal Planning with Multi-target Hydra-Distillation",
+                  year="2024", first_author="Zhenxin Li", venue="arXiv preprint",
+                  arxiv_id="2406.06978", doi="NONE",
+                  official_url="https://arxiv.org/abs/2406.06978",
+                  code_available="YES", official_code_url="https://github.com/NVlabs/Hydra-MDP",
+                  tags="planning;end-to-end", hyp="GENERAL", rel="LOW", reviewed="2026-09-14",
+                  note="Phase-A Census Round 2 support batch (CORPUS_BATCH=census2), coverage hole: F10 strong non-WM end-to-end control from the Hydra-MDP family. Canonical source is the official arXiv version v4; no venue camera-ready was verified. Front page confirms the title and first author Zhenxin Li (5 pages). Code: the abstract's closing line reads 'More details by visiting https://github.com/NVlabs/Hydra-MDP', so code_available=YES. Tags are assigned from the paper's own title/abstract vocabulary only. decision_relevance=LOW: breadth/context record at placement depth, not tied to a live decision. Census-depth record: not deep-read, no field-placement or novelty verdict. EVIDENCE_LEVEL=DOCUMENT_VERIFIED"),
+    "P0022": dict(short="DriveSuprim", title="DriveSuprim: Towards Precise Trajectory Selection for End-to-End Planning",
+                  year="2025", first_author="Wenhao Yao", venue="arXiv preprint",
+                  arxiv_id="2506.06659", doi="NONE",
+                  official_url="https://arxiv.org/abs/2506.06659",
+                  code_available="YES", official_code_url="https://github.com/William-Yao-2000/DriveSuprim",
+                  tags="planning;end-to-end;trajectory-scorer", hyp="GENERAL", rel="LOW", reviewed="2026-09-14",
+                  note="Phase-A Census Round 2 support batch, coverage hole: F10 strong non-WM end-to-end control. Canonical source is the official arXiv version v3. An AAAI 2026 version exists (DOI 10.1609/aaai.v40i14.38178, seen through OpenAlex) but the AAAI OJS article page returned no galley PDF link, so the camera-ready could not be verified and the preprint stays canonical. Front page confirms the title and first author Wenhao Yao (12 pages). Code: page 1 reads 'Code - https://github.com/William-Yao-2000/DriveSuprim', so code_available=YES. decision_relevance=LOW (breadth/context record). Census-depth record: no deep read, no placement or novelty verdict. EVIDENCE_LEVEL=DOCUMENT_VERIFIED"),
+    "P0023": dict(short="iPad", title="iPad: Iterative Proposal-centric End-to-End Autonomous Driving",
+                  year="2025", first_author="Ke Guo", venue="arXiv preprint",
+                  arxiv_id="2505.15111", doi="NONE",
+                  official_url="https://arxiv.org/abs/2505.15111",
+                  code_available="YES", official_code_url="https://github.com/Kguo-cs/iPad",
+                  tags="planning;end-to-end", hyp="GENERAL", rel="LOW", reviewed="2026-09-14",
+                  note="Phase-A Census Round 2 support batch, coverage hole: F10 strong non-WM end-to-end control. Canonical source is the official arXiv version v1 (the PDF carries the arXiv stamp 'arXiv:2505.15111v1 [cs.CV] 21 May 2025'); the IEEE Robotics and Automation Letters version (DOI 10.1109/lra.2026.3723334) is not open. Front page confirms the title and first author Ke Guo (25 pages). Code: the abstract's closing line reads 'Code is available at https://github.com/Kguo-cs/iPad'. decision_relevance=LOW (breadth/context record). Census-depth record: no deep read, no placement or novelty verdict. EVIDENCE_LEVEL=DOCUMENT_VERIFIED"),
+    "P0024": dict(short="DriveVLM", title="DriveVLM: The Convergence of Autonomous Driving and Large Vision-Language Models",
+                  year="2024", first_author="Xiaoyu Tian", venue="arXiv preprint",
+                  arxiv_id="2402.12289", doi="NONE",
+                  official_url="https://arxiv.org/abs/2402.12289",
+                  code_available="UNKNOWN", official_code_url="",
+                  tags="planning;end-to-end", hyp="GENERAL", rel="LOW", reviewed="2026-09-14",
+                  note="Phase-A Census Round 2 support batch, coverage hole: F10 representative VLA planner. Canonical source is the official arXiv version v5. Front page confirms the title and first author Xiaoyu Tian (30 pages). No repository URL is printed anywhere in the extracted text (the paper does mention a deployment video), so code_available stays UNKNOWN: absence of a printed URL is not evidence that no code exists. NOTE for the corpus tag vocabulary: there is no vision-language tag, so this VLA work carries only the closest available tags; a vocabulary extension is an owner decision. decision_relevance=LOW (breadth/context record). Census-depth record: no deep read, no placement or novelty verdict. EVIDENCE_LEVEL=DOCUMENT_VERIFIED"),
+    "P0025": dict(short="OmniDrive", title="OmniDrive: A Holistic Vision-Language Dataset for Autonomous Driving with Counterfactual Reasoning",
+                  year="2024", first_author="Shihao Wang", venue="CVPR 2025",
+                  arxiv_id="2405.01533", doi="NONE",
+                  official_url="https://openaccess.thecvf.com/content/CVPR2025/html/Wang_OmniDrive_A_Holistic_Vision-Language_Dataset_for_Autonomous_Driving_with_Counterfactual_CVPR_2025_paper.html",
+                  code_available="YES", official_code_url="https://github.com/NVlabs/OmniDrive",
+                  tags="planning;end-to-end;counterfactual", hyp="GENERAL", rel="LOW", reviewed="2026-09-14",
+                  note="Phase-A Census Round 2 support batch, coverage hole: F10 representative VLA planner. Canonical source is the CVPR 2025 camera-ready (CVF Open Access), which supersedes arXiv:2405.01533 v2 because the official abs page carries the same title; venue camera-ready outranks a preprint. Front page confirms the title and first author Shihao Wang (11 pages). Code: the camera-ready prints https://github.com/NVlabs/OmniDrive in its page-1 affiliation block, so code_available=YES. decision_relevance=LOW (breadth/context record). Census-depth record: no deep read, no placement or novelty verdict. EVIDENCE_LEVEL=DOCUMENT_VERIFIED"),
+    "P0026": dict(short="ORION", title="ORION: A Holistic End-to-End Autonomous Driving Framework by Vision-Language Instructed Action Generation",
+                  year="2025", first_author="Haoyu Fu", venue="ICCV 2025",
+                  arxiv_id="NONE", doi="NONE",
+                  official_url="https://openaccess.thecvf.com/content/ICCV2025/html/Fu_ORION_A_Holistic_End-to-End_Autonomous_Driving_Framework_by_Vision-Language_Instructed_ICCV_2025_paper.html",
+                  code_available="UNKNOWN", official_code_url="",
+                  tags="planning;end-to-end", hyp="GENERAL", rel="LOW", reviewed="2026-09-14",
+                  note="Phase-A Census Round 2 support batch, coverage hole: F10 representative VLA planner. Canonical source is the ICCV 2025 camera-ready (CVF Open Access); the URL was found by scanning the ICCV2025 Open Access index page because CVF truncates titles inside slugs. Front page confirms the title and first author Haoyu Fu (12 pages). The paper prints only a PROJECT PAGE, https://xiaomi-mlab.github.io/Orion/, and no repository URL, so code_available stays UNKNOWN. decision_relevance=LOW (breadth/context record). Census-depth record: no deep read, no placement or novelty verdict. EVIDENCE_LEVEL=DOCUMENT_VERIFIED"),
+    "P0027": dict(short="Think2Drive", title="Think2Drive: Efficient Reinforcement Learning by Thinking with Latent World Model for Autonomous Driving (in CARLA-v2)",
+                  year="2024", first_author="Qifeng Li", venue="arXiv preprint",
+                  arxiv_id="2402.16720", doi="NONE",
+                  official_url="https://arxiv.org/abs/2402.16720",
+                  code_available="UNKNOWN", official_code_url="",
+                  tags="world-model;latent-world-model;planning", hyp="GENERAL", rel="LOW", reviewed="2026-09-14",
+                  note="Phase-A Census Round 2 support batch, coverage hole: world-model RL lineage. Canonical source is the official arXiv version v2. TITLE DIVERGENCE, recorded rather than smoothed over: the arXiv landing page gives 'Think2Drive: Efficient Reinforcement Learning by Thinking in Latent World Model for Quasi-Realistic Autonomous Driving', while the stored PDF's first page reads 'by Thinking with Latent World Model for Autonomous Driving (in CARLA-v2)' (front-page verdict PARTIAL for that reason); the manifest title follows the paper's own front page. First author Qifeng Li confirmed (24 pages). The paper prints a related project page (https://thinklab-sjtu.github.io/CornerCaseRepo/) and no repository URL, so code_available stays UNKNOWN. decision_relevance=LOW (breadth/context record). Census-depth record: no deep read, no placement or novelty verdict. EVIDENCE_LEVEL=DOCUMENT_VERIFIED"),
+    "P0028": dict(short="ViDAR", title="Visual Point Cloud Forecasting enables Scalable Autonomous Driving",
+                  year="2024", first_author="Zetong Yang", venue="CVPR 2024",
+                  arxiv_id="NONE", doi="NONE",
+                  official_url="https://openaccess.thecvf.com/content/CVPR2024/html/Yang_Visual_Point_Cloud_Forecasting_enables_Scalable_Autonomous_Driving_CVPR_2024_paper.html",
+                  code_available="YES", official_code_url="https://github.com/OpenDriveLab/ViDAR",
+                  tags="representation;trajectory-prediction;planning", hyp="GENERAL", rel="LOW", reviewed="2026-09-14",
+                  note="Phase-A Census Round 2 support batch, coverage hole: representation-pretraining bridge. Canonical source is the CVPR 2024 camera-ready (CVF Open Access). NOTE: the camera-ready title does not contain the method name ViDAR used by the census atlas; the paper introduces ViDAR inside that title. Front page confirms the title and first author Zetong Yang (12 pages). Code: page 1 of the PDF prints https://github.com/OpenDriveLab/ViDAR, so code_available=YES. CONVERSION DEFECT worth knowing: that page-1 line is absent from the extracted raw MD (the MD's only repository mention is a reference to MMDetection3D), so this record's code field rests on the PDF page-1 read, not on the markdown. decision_relevance=LOW (breadth/context record). Census-depth record: no deep read, no placement or novelty verdict. EVIDENCE_LEVEL=DOCUMENT_VERIFIED"),
+    "P0029": dict(short="GenAD", title="GenAD: Generative End-to-End Autonomous Driving",
+                  year="2024", first_author="Wenzhao Zheng", venue="arXiv preprint",
+                  arxiv_id="2402.11502", doi="NONE",
+                  official_url="https://arxiv.org/abs/2402.11502",
+                  code_available="YES", official_code_url="https://github.com/wzzheng/GenAD",
+                  tags="planning;end-to-end;trajectory-prediction", hyp="GENERAL", rel="LOW", reviewed="2026-09-14",
+                  note="Phase-A Census Round 2 support batch, coverage hole: representation-pretraining bridge. Canonical source is the official arXiv version v3; the ECCV 2024 Springer version is not open. Front page confirms the title and first author Wenzhao Zheng (10 pages). Code: the abstract ends with 'Code: https://github.com/wzzheng/GenAD'. decision_relevance=LOW (breadth/context record). Census-depth record: no deep read, no placement or novelty verdict. EVIDENCE_LEVEL=DOCUMENT_VERIFIED"),
+    "P0030": dict(short="nuScenes", title="nuScenes: A Multimodal Dataset for Autonomous Driving",
+                  year="2020", first_author="Holger Caesar", venue="CVPR 2020",
+                  arxiv_id="NONE", doi="NONE",
+                  official_url="https://openaccess.thecvf.com/content_CVPR_2020/html/Caesar_nuScenes_A_Multimodal_Dataset_for_Autonomous_Driving_CVPR_2020_paper.html",
+                  code_available="UNKNOWN", official_code_url="",
+                  tags="evaluation;benchmark", hyp="GENERAL", rel="LOW", reviewed="2026-09-14",
+                  note="Phase-A Census Round 2 support batch, coverage hole: benchmark/evaluation lineage (the open-loop nuScenes planning legacy the atlas recalls). Canonical source is the CVPR 2020 camera-ready; CVPR 2020 uses the older CVF path layout (/content_CVPR_2020/), so the modern (CVPR20xx?day=all) index does not list it, and the URL was verified as HTTP 206 with %PDF- magic before download. Front page confirms the title and first author Holger Caesar (11 pages). The paper prints dataset-site and citation links but no repository URL, so code_available stays UNKNOWN. decision_relevance=LOW (breadth/context record). Census-depth record: no deep read, no placement or novelty verdict. EVIDENCE_LEVEL=DOCUMENT_VERIFIED"),
+    "P0031": dict(short="nuPlan", title="nuPlan: A closed-loop ML-based planning benchmark for autonomous vehicles",
+                  year="2021", first_author="Holger Caesar", venue="arXiv preprint",
+                  arxiv_id="2106.11810", doi="NONE",
+                  official_url="https://arxiv.org/abs/2106.11810",
+                  code_available="UNKNOWN", official_code_url="",
+                  tags="planning;closed-loop;benchmark;evaluation", hyp="GENERAL", rel="LOW", reviewed="2026-09-14",
+                  note="Phase-A Census Round 2 support batch, coverage hole: benchmark/evaluation lineage (closed-loop planning benchmark). Canonical source is the official arXiv version v4. The Round-1 source register listed only the project page https://nuplan.org/nuplan, which is not a document; a peer-reviewed nuPlan paper is known to exist but was NOT verified in this batch, so this remains an open census item. Front page confirms the title and first author Holger Caesar (5 pages). No URL is printed in the extracted text, so code_available stays UNKNOWN. decision_relevance=LOW (breadth/context record). Census-depth record: no deep read, no placement or novelty verdict. EVIDENCE_LEVEL=DOCUMENT_VERIFIED"),
+    "P0032": dict(short="NAVSIM", title="NAVSIM: Data-Driven Non-Reactive Autonomous Vehicle Simulation and Benchmarking",
+                  year="2024", first_author="Daniel Dauner", venue="NeurIPS 2024 Datasets and Benchmarks",
+                  arxiv_id="2406.15349", doi="NONE",
+                  official_url="https://arxiv.org/abs/2406.15349",
+                  code_available="YES", official_code_url="https://github.com/autonomousvision/navsim",
+                  tags="benchmark;evaluation;planning", hyp="GENERAL", rel="LOW", reviewed="2026-09-14",
+                  note="Phase-A Census Round 2 support batch, coverage hole: benchmark/evaluation lineage. Canonical source is the official arXiv version v2; the venue is recorded from the Round-1 source register, which lists the NeurIPS 2024 Datasets and Benchmarks abstract page for NAVSIM, while no camera-ready PDF was fetched in this batch. The paper's own framing is data-driven NON-REACTIVE pseudo-simulation; that distinction is recorded here rather than collapsed into a closed-loop label, and no reactive tag is applied. Front page confirms the title and first author Daniel Dauner (14 pages). Code: the abstract ends with 'Our code is available at https://github.com/autonomousvision/navsim'. decision_relevance=LOW (breadth/context record). Census-depth record: no deep read, no placement or novelty verdict. EVIDENCE_LEVEL=DOCUMENT_VERIFIED"),
+    "P0033": dict(short="Bench2Drive", title="Bench2Drive: Towards Multi-Ability Benchmarking of Closed-Loop End-To-End Autonomous Driving",
+                  year="2024", first_author="Xiaosong Jia", venue="arXiv preprint",
+                  arxiv_id="2406.03877", doi="NONE",
+                  official_url="https://arxiv.org/abs/2406.03877",
+                  code_available="YES", official_code_url="https://github.com/Thinklab-SJTU/Bench2Drive",
+                  tags="benchmark;closed-loop;end-to-end;evaluation", hyp="GENERAL", rel="LOW", reviewed="2026-09-14",
+                  note="Phase-A Census Round 2 support batch, coverage hole: benchmark/evaluation lineage (interactive CARLA closed-loop evaluation). Canonical source is the official arXiv version v3. A NeurIPS 2024 Datasets and Benchmarks version indexed under DOI 10.52202/079017-0025 was seen in OpenAlex, but no open PDF for it was verified in this batch, so the venue is left as arXiv preprint rather than asserted. Front page confirms the title and first author Xiaosong Jia (26 pages). Code: the dataset checklist states 'All data, codes, and checkpoints are in GitHub (https://github.com/Thinklab-SJTU/Bench2Drive)', and the title page prints the project page https://thinklab-sjtu.github.io/Bench2Drive/. decision_relevance=LOW (breadth/context record). Census-depth record: no deep read, no placement or novelty verdict. EVIDENCE_LEVEL=DOCUMENT_VERIFIED"),
+    "P0034": dict(short="HUGSIM", title="HUGSIM: A Real-Time, Photo-Realistic and Closed-Loop Simulator for Autonomous Driving",
+                  year="2024", first_author="Hongyu Zhou", venue="arXiv preprint",
+                  arxiv_id="2412.01718", doi="NONE",
+                  official_url="https://arxiv.org/abs/2412.01718",
+                  code_available="UNKNOWN", official_code_url="",
+                  tags="closed-loop;benchmark;evaluation", hyp="GENERAL", rel="LOW", reviewed="2026-09-14",
+                  note="Phase-A Census Round 2 support batch, coverage hole: benchmark/evaluation lineage (photorealistic closed-loop simulation). Canonical source is the official arXiv version v1; the IEEE TPAMI version (DOI 10.1109/tpami.2025.3647952, listed in the Round-1 source register and seen in OpenAlex) is not open. Front page confirms the title and first author Hongyu Zhou (24 pages). The extracted text contains no repository URL at all, so code_available stays UNKNOWN. First conversion attempt failed with a local MinerU service error (502 Bad Gateway while two conversion jobs ran concurrently); the paper converted cleanly when retried serially - this is a host/resource artifact, not a document problem. decision_relevance=LOW (breadth/context record). Census-depth record: no deep read, no placement or novelty verdict. EVIDENCE_LEVEL=DOCUMENT_VERIFIED"),
 }
 
-ORDER = [f"P{i:04d}" for i in range(1, 21)]
+
+# P0021-P0034 come from the Phase-A Census Round 2 support batch (census2).
+ORDER = [f"P{i:04d}" for i in range(1, 35)]
 
 
 def load_all(name):
@@ -242,6 +349,14 @@ def main():
         if r.get("qc") == "RAW_MD_QC_FAIL":
             notes += f" RAW_MD_QC_FAIL: {r.get('qc_detail')}."
 
+        # Never claim a card that does not exist on disk: Phase-A census records are
+        # ingested at placement depth only, and cards are a deep-read artifact.
+        repo_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        card_rel = f"papers/cards/{pid}_{short}.md"
+        if not os.path.exists(os.path.join(repo_root, card_rel.replace("/", os.sep))):
+            card_rel = ""
+            notes += " NO_CARD: no card file exists on disk for this record (card creation is a deep-read step)."
+
         rows.append([
             pid, m["title"], m["year"], m["first_author"], m["venue"],
             m["arxiv_id"], m["doi"], m["official_url"],
@@ -249,9 +364,10 @@ def main():
             d.get("sha256") if downloaded else "",
             (r.get("raw_md_sha256") if raw_ok else "UNKNOWN"),
             pdf_rel, raw_rel, lib,
-            f"papers/cards/{pid}_{short}.md",
+            card_rel,
+
             m["code_available"], m["official_code_url"], "",
-            reading, m["tags"], m["hyp"], m["rel"], DATE, notes,
+            reading, m["tags"], m["hyp"], m["rel"], m.get("reviewed", DATE), notes,
         ])
 
     os.makedirs(MAN, exist_ok=True)

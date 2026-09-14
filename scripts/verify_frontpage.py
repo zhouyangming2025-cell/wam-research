@@ -54,6 +54,22 @@ EXPECT = {
     # check promotes a record to DOCUMENT_VERIFIED only if the PDF's own front page
     # confirms title and first author; anything else is recorded as CONFLICT with
     # the page-1 head kept for adjudication.
+    # --- Phase-A Census Round 2 support batch (titles copied from the official landing
+    # pages recorded in manifests/batch_census2_identity.json) ---
+    "P0021": ("HydraMDP", "Hydra-MDP: End-to-end Multimodal Planning with Multi-target Hydra-Distillation", "Li", []),
+    "P0022": ("DriveSuprim", "DriveSuprim: Towards Precise Trajectory Selection for End-to-End Planning", "Yao", []),
+    "P0023": ("iPad", "iPad: Iterative Proposal-centric End-to-End Autonomous Driving", "Guo", []),
+    "P0024": ("DriveVLM", "DriveVLM: The Convergence of Autonomous Driving and Large Vision-Language Models", "Tian", []),
+    "P0025": ("OmniDrive", "OmniDrive: A Holistic Vision-Language Dataset for Autonomous Driving with Counterfactual Reasoning", "Wang", []),
+    "P0026": ("ORION", "ORION: A Holistic End-to-End Autonomous Driving Framework by Vision-Language Instructed Action Generation", "Fu", []),
+    "P0027": ("Think2Drive", "Think2Drive: Efficient Reinforcement Learning by Thinking in Latent World Model for Quasi-Realistic Autonomous Driving", "Li", []),
+    "P0028": ("ViDAR", "Visual Point Cloud Forecasting enables Scalable Autonomous Driving", "Yang", []),
+    "P0029": ("GenAD", "GenAD: Generative End-to-End Autonomous Driving", "Zheng", []),
+    "P0030": ("nuScenes", "nuScenes: A Multimodal Dataset for Autonomous Driving", "Caesar", []),
+    "P0031": ("nuPlan", "nuPlan: A closed-loop ML-based planning benchmark for autonomous vehicles", "Caesar", []),
+    "P0032": ("NAVSIM", "NAVSIM: Data-Driven Non-Reactive Autonomous Vehicle Simulation and Benchmarking", "Dauner", []),
+    "P0033": ("Bench2Drive", "Bench2Drive: Towards Multi-Ability Benchmarking of Closed-Loop End-To-End Autonomous Driving", "Jia", []),
+    "P0034": ("HUGSIM", "HUGSIM: A Real-Time, Photo-Realistic and Closed-Loop Simulator for Autonomous Driving", "Zhou", []),
     "P0013": ("BridgeSim", "BridgeSim: Unveiling the OL-CL Gap in End-to-End Autonomous Driving",
               "Zhao", []),
     "P0014": ("ReactSimBench", "ReactSim-Bench: Benchmarking Reactive Behavior World Model Simulation in Autonomous Driving",

@@ -53,6 +53,21 @@ PAPERS = [
     # agent/prompts/ROUND2_TARGETED_INGEST.md, in the prompt's list order. IDs were
     # allocated after confirming the live manifest's highest ID was still P0012 and
     # that none of these eight titles already existed in the corpus.
+    # --- Phase-A Census Round 2 support batch (CORPUS_BATCH=census2) ---
+    ("P0021", "HydraMDP"),        # F10 strong non-WM control
+    ("P0022", "DriveSuprim"),     # F10 strong non-WM control
+    ("P0023", "iPad"),            # F10 strong non-WM control
+    ("P0024", "DriveVLM"),        # F10 representative VLA planner
+    ("P0025", "OmniDrive"),       # F10 representative VLA planner
+    ("P0026", "ORION"),           # F10 representative VLA planner
+    ("P0027", "Think2Drive"),     # WM-RL lineage
+    ("P0028", "ViDAR"),           # representation-pretraining bridge
+    ("P0029", "GenAD"),           # representation-pretraining bridge
+    ("P0030", "nuScenes"),        # benchmark lineage
+    ("P0031", "nuPlan"),          # benchmark lineage
+    ("P0032", "NAVSIM"),          # benchmark lineage
+    ("P0033", "Bench2Drive"),     # benchmark lineage
+    ("P0034", "HUGSIM"),          # benchmark lineage
     ("P0013", "BridgeSim"),            # A1
     ("P0014", "ReactSimBench"),        # A2
     ("P0015", "CausalDrive"),          # A3
@@ -256,10 +271,23 @@ def main():
         if q["problems"]:
             print(f"    problems: {q['problems']}", flush=True)
 
-    # merge, never drop records: a targeted re-run must not truncate the file
-    merged = {r["paper_id"]: r for r in results}
+    # merge, never drop records: a targeted re-run must not truncate the file.
+    # The ledger is re-read here, immediately before writing, because two concurrent runs
+    # would otherwise each write back the snapshot they read at process start and silently
+    # drop the other's records. That happened once for the census2 batch; the lost records
+    # were reconstructed from the stored artifacts by scripts/repair_rawmd_ledger.py.
+    latest = {}
+    if os.path.exists(OUT):
+        try:
+            with open(OUT, encoding="utf-8") as f:
+                latest = {r["paper_id"]: r for r in json.load(f)}
+        except Exception:
+            latest = {}
+    merged = dict(latest)
     for pid, rec in prev.items():
         merged.setdefault(pid, rec)
+    for r in results:
+        merged[r["paper_id"]] = r
     ordered = [merged[pid] for pid, _s in PAPERS if pid in merged]
 
     with open(OUT, "w", encoding="utf-8") as f:
