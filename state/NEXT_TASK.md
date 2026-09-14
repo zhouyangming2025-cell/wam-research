@@ -2,114 +2,104 @@
 
 ## 唯一下一任务
 
-> Complete **Phase-A census placement closeout** and freeze breadth expansion before Phase-B deep reads.
+> Execute **Phase-B Wave 1 comparative deep reads** to reconstruct the historical planning / interaction / evaluation baseline before interpreting modern WAM gains.
 
-The corpus has already reached the planned breadth scale:
+Phase A is closed:
 
 ```text
-P0001–P0060 registered
+60 registered records
 58 RAW_MD_READY
-2 lawful-source blockers (P0008 NPPC, P0020 Bahram 2016)
+F1–F11 coverage audit PASS
+broad ingestion FROZEN
+25 Phase-B anchors selected
 ```
 
-So the next step is **not another broad acquisition batch**.
+Canonical files:
 
-## Step 1 — scientifically place the newly ingested Round-2 coverage set
+- `landscape/FIELD_ATLAS.md`
+- `landscape/CENSUS_PHASE_A_ROUND1.md`
+- `landscape/CENSUS_PHASE_A_ROUND2.md`
+- `landscape/PHASE_B_ANCHORS.md`
 
-Read `P0021–P0034` at census depth only:
+## Wave 1 papers
+
+Read comparatively, not as eight independent summaries:
 
 ```text
-P0021 HydraMDP
-P0022 DriveSuprim
-P0023 iPad
-P0024 DriveVLM
-P0025 OmniDrive
-P0026 ORION
-P0027 Think2Drive
-P0028 ViDAR
-P0029 GenAD
-P0030 nuScenes
-P0031 nuPlan
-P0032 NAVSIM
-P0033 Bench2Drive
-P0034 HUGSIM
+M2I
+GameFormer
+What Truly Matters in Trajectory Prediction?
+UniAD
+nuPlan
+NAVSIM
+DiffusionDrive
+DriveSuprim
 ```
 
-For each record, place it using `landscape/PLANNING_WAM_TAXONOMY.md`:
+## Wave-1 scientific questions
+
+The objective is to establish the **pre-/non-WAM baseline** for the field:
+
+1. What did interaction modeling already mean before modern driving WMs?
+2. How were prediction and planning coupled before current world-action models?
+3. What weaknesses of open-loop trajectory matching were already known?
+4. What does a strong planning-oriented E2E stack achieve without an explicit WM?
+5. What does a strong direct multimodal action model achieve without an explicit WM?
+6. What does a strong trajectory-selection/scoring planner achieve without an explicit WM?
+7. How do nuPlan and NAVSIM differ in what their metrics/simulation can establish?
+8. Which later WAM claims would be confounded by stronger representation, action modeling, scoring, or evaluation protocol if these controls were ignored?
+
+## Per-anchor deep-read contract
+
+For each anchor record:
 
 ```text
-Family labels
-World state representation
-Predictive/generative mechanism
-World-model role
-Action conditioning
-Interaction/reactivity level
-Planning interface
+Exact problem in historical context
+Input / numerical representation
+Future/world representation, if any
+Direct supervision vs proxy/inferred future
+Inference-time data flow
+Does any future/WM branch survive inference?
+Planner interface
 Planning output
-Supervision
-Evaluation regime
-Decision-evidence strength
-Main contribution
-Main stated limitation
+Multimodality / uncertainty and how the planner consumes it
+Evaluation regime and its evidentiary boundary
+Strongest direct experimental evidence
+Strongest limitation / alternative explanation
+What the paper proves
+What it does NOT prove
 Historical transition role
-Placement confidence
+Closest supporting / contradicting work
 ```
 
-Do not write novelty/gap verdicts.
-
-Create:
-
-`landscape/CENSUS_PHASE_A_ROUND2.md`
-
-## Step 2 — field-coverage audit
-
-Update `landscape/FIELD_ATLAS.md` and explicitly check whether F1–F11 are now sufficiently represented to explain the field.
-
-Required checks:
-
-- strong non-WM planning controls are not underrepresented;
-- WM-RL / policy-learning lineage is represented;
-- representation-pretraining bridges are represented;
-- benchmark evolution from nuScenes/nuPlan to NAVSIM/Bench2Drive/HUGSIM is explicit;
-- visual, geometric, latent, world-action, candidate-conditioned, interactive/reactive and value/safety interfaces are all distinguishable;
-- evaluation regimes are not conflated;
-- historical predecessors are visible.
-
-`Hydra-MDP++` and `NAVSIM-v2` remain unresolved optional follow-ups. Do not block Phase-A closeout on them unless the coverage audit shows they are essential to explain a transition.
-
-## Step 3 — freeze Phase A and select Phase-B anchors
-
-If the coverage audit passes, stop broad expansion and choose roughly **15–25 anchor papers** for full deep reading.
-
-Anchor selection must optimize for explaining the field, not for supporting a prior hypothesis. The final anchor set should jointly cover:
+Separate:
 
 ```text
-historical interaction/prediction-planning roots
-planning-oriented E2E baseline era
-visual/video WM
-occupancy/BEV/geometric WM
-latent/JEPA predictive representation
-WM-assisted direct planning
-action/candidate-conditioned future evaluation
-world-action unified modeling
-WM-RL / policy improvement
-reactive simulation / closed-loop evaluation
-strong non-WM controls
-benchmark/evaluation transitions
+AUTHOR CLAIM
+DIRECT EXPERIMENTAL EVIDENCE
+OUR INFERENCE
 ```
 
-For every selected anchor, record **why this paper is necessary to explain the field** and which other papers it makes redundant at deep-read depth.
+## Required Wave-1 output
+
+Create one comparative synthesis, not eight disconnected cards:
+
+`landscape/PHASE_B_WAVE1_SYNTHESIS.md`
+
+It must answer:
+
+```text
+What problems existed before the modern WAM wave?
+Which were prediction problems, planning problems, supervision problems, or evaluation problems?
+What capabilities were already obtainable without a WM?
+What benchmark assumptions shaped the apparent progress?
+What conceptual inheritance should later WAM papers be compared against?
+```
+
+Paper Cards may be updated alongside the synthesis where useful, but the synthesis is the gate artifact.
 
 ## Stop condition
 
-Phase A closes only when:
+Stop Wave 1 when the comparative synthesis can explain the historical/control baseline coherently. Then choose Wave-2 reading order from `PHASE_B_ANCHORS.md` based on what Wave 1 shows.
 
-1. `CENSUS_PHASE_A_ROUND2.md` exists;
-2. `FIELD_ATLAS.md` reflects the new placements;
-3. F1–F11 coverage audit is explicit;
-4. broad ingestion is frozen;
-5. a justified 15–25 anchor set is written down.
-
-Then begin Phase B deep reads.
-
-Do not design methods. Do not declare a gap. Do not reactivate P2-R/P3 as search targets. Do not force risk-field knowledge into the atlas.
+Do not add broad new papers. Do not declare a gap. Do not design a method. Do not reactivate P2-R/P3 as search targets. Do not force risk-field knowledge into the interpretation.
