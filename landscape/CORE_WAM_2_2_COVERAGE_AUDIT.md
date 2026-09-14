@@ -2,7 +2,7 @@
 
 Last updated: 2026-09-14
 
-Status: **FIRST-PASS IDENTITY / SCOPE / CODE VERIFICATION COMPLETE — DEEP READS NEXT**
+Status: **FIRST-PASS IDENTITY / SCOPE / CODE VERIFICATION COMPLETE — CORE DEEP READS ACTIVE**
 
 ## Scope correction
 
@@ -20,10 +20,10 @@ The following papers were present in the external 2.2 WAM list but were missing 
 
 ## First-pass verified inventory
 
-| Work | Primary source | Year | Official/public code status | First-pass placement | Core priority |
+| Work | Primary source | Year | Official/public code status | Placement / current status | Core priority |
 |---|---|---:|---|---|---|
-| **WorldDrive** — *Bridging Scene Generation and Planning: Driving with World Model via Unifying Vision and Motion Representation* | arXiv:2603.14948 | 2026 | **YES** — `TabGuigui/WorldDrive`; training/eval/checkpoints released | trajectory-aware driving WM + shared vision/motion representation + multimodal planner + future-aware rewarder | **A — mandatory deep read** |
-| **World4Drive** — *End-to-End Autonomous Driving via Intention-aware Physical Latent World Model* | arXiv:2507.00603; ICCV 2025 | 2025 | **YES** — `ucaszyp/World4Drive` | latent WM for multimodal trajectory generation + intention-conditioned future latent + world-model selector | **A — mandatory deep read** |
+| **WorldDrive** — *Bridging Scene Generation and Planning: Driving with World Model via Unifying Vision and Motion Representation* | arXiv:2603.14948 | 2026 | **YES** — `TabGuigui/WorldDrive`; training/eval/checkpoints released; code audited at `c375ee1e...` | **DEEP READ COMPLETE** — TA-DWM representation inheritance + multimodal candidate planner + distilled Future-aware Rewarder; full future diffusion removed at inference | **A — KEEP CORE ANCHOR** |
+| **World4Drive** — *End-to-End Autonomous Driving via Intention-aware Physical Latent World Model* | arXiv:2507.00603; ICCV 2025 | 2025 | **YES** — `ucaszyp/World4Drive` | latent WM for multimodal trajectory generation + intention-conditioned future latent + world-model selector | **A — NEXT DEEP READ** |
 | **SeerDrive** — *Future-Aware End-to-End Driving: Bidirectional Modeling of Trajectory Planning and Scene Evolution* | arXiv:2510.11092; NeurIPS 2025 | 2025 | **YES** — `LogosRoboticsGroup/SeerDrive` | future BEV modeling ↔ trajectory planning iterative/bidirectional coupling | **A — mandatory deep read** |
 | **Drive-JEPA** — *Video JEPA Meets Multimodal Trajectory Distillation for End-to-End Driving* | arXiv:2601.22032 | 2026 | **YES** — `linhanwang/Drive-JEPA`; NAVSIM v1/v2 code + checkpoints | predictive video representation pretraining + proposal-centric multimodal planning/distillation | **A/B boundary — deep read because it tests whether predictive WM value is mainly representation learning** |
 | **Metis** — *A Generalizable and Efficient World-Action Model for Autonomous Driving and Urban Navigation* | arXiv:2606.15869 | 2026 | **PUBLIC REPO, CODE NOT YET RELEASED** as of 2026-09-14 — `LogosRoboticsGroup/Metis` currently contains README/assets/license only | decoupled Video Generation Expert + Action Expert; asymmetric attention; joint world/action training, action-only inference | **A — mandatory deep read** |
@@ -31,17 +31,56 @@ The following papers were present in the external 2.2 WAM list but were missing 
 | **Discrete-WAM** — *Unified Discrete Vision-Action Token Editing for World-Policy Learning* | arXiv:2606.05645 | 2026 | **NO OFFICIAL CODE FOUND IN FIRST-PASS SEARCH** | aligned discrete vision/action tokens + shared discrete diffusion + world/world-action/policy generative tasks | **A — mandatory deep read** |
 | **GraphWorld** — *Long-Horizon Planning with World Models for End-to-End Autonomous Driving* | arXiv:2606.16274 | 2026 | **NO OFFICIAL CODE FOUND IN FIRST-PASS SEARCH**; do not confuse with unrelated `google-research/graphworld` | ego-centric interaction graph + latent world-state-conditioned long-horizon planning | **A — mandatory deep read** |
 
----
-
-## Why these eight materially matter
-
-These are not random missing papers. Collectively they cover several mechanisms not yet represented strongly enough in the current atlas:
+Canonical WorldDrive audit:
 
 ```text
-WorldDrive
-  generation pretraining → planner-shared visual/motion encoders
-  + future-aware rewarder
+audits/literature/PHASE_C5_WORLDDRIVE_AUDIT.md
+```
 
+---
+
+## WorldDrive coverage result
+
+WorldDrive adds a mechanism missing from the first-pass Phase-C taxonomy:
+
+```text
+DISTILLED WORLD-MODEL FORESIGHT
+
+heavy trajectory-conditioned generative WM used as training teacher
+→ transfer/freeze planner-shared vision + motion representations
+→ distill candidate-conditioned future latents into lightweight FAR
+→ online candidate reward/select without diffusion rollout
+```
+
+Primary matched evidence:
+
+```text
+representation inheritance:
+31.4 no pretrain
+→ 84.9 generic CogVideoX VAE
+→ 85.8 + TA-DWM vision
+→ 86.9 + TA-DWM motion
+
+future-aware scoring:
+86.9 base planner
+→ 87.0 trajectory feature rewarder
+→ 88.1 + distilled future feature
+```
+
+Important boundary:
+
+```text
+WorldDrive is NOT full per-candidate TA-DiT rollout at deployment.
+TA-DiT future generation is a training-time teacher for FAR.
+```
+
+This does not overturn existing field principles; it strengthens the claim that WAM planning value depends on the exact training/inference interface rather than the mere presence of generation.
+
+---
+
+## Why the remaining seven materially matter
+
+```text
 World4Drive
   intention-aware latent futures
   + multimodal trajectory generation
@@ -79,9 +118,9 @@ They directly pressure-test the current Phase-C seven-interface taxonomy and may
 
 ---
 
-## Immediate scientific questions for deep reading
+## Deep-reading questions remain binding
 
-For every paper, do not stop at the abstract. Trace:
+For every paper, trace:
 
 ```text
 1. exact observation input and numerical representation
@@ -98,16 +137,16 @@ For every paper, do not stop at the abstract. Trace:
 12. latency / candidate count / horizon / deployment branch
 13. strongest evidence for the paper
 14. strongest competing explanation
-15. relation to Epona / WoTE / LAW / DriveLaW / Auto-JEPA / DA-WAM
+15. relation to Epona / WoTE / LAW / DriveLaW / Auto-JEPA / DA-WAM / WorldDrive
 ```
 
 ---
 
-## Provisional reading order
+## Reading order
 
 ```text
-1. WorldDrive
-2. World4Drive
+1. WorldDrive      COMPLETE
+2. World4Drive     NEXT
 3. SeerDrive
 4. Drive-JEPA
 5. Metis
@@ -115,14 +154,6 @@ For every paper, do not stop at the abstract. Trace:
 7. Discrete-WAM
 8. GraphWorld
 ```
-
-Rationale:
-
-- `WorldDrive` directly connects several already-audited anchors (Epona/WoTE-style future modeling, representation transfer, rewarder) and is likely the highest-value bridge paper.
-- `World4Drive` and `SeerDrive` are 2025 core predecessors that may change the historical narrative before reading 2026 successors.
-- `Drive-JEPA` tests whether WAM benefit is predictive representation + action modeling rather than explicit online simulation.
-- `Metis` explicitly attacks inference-time world-generation necessity.
-- `DynFlowDrive`, `Discrete-WAM`, and `GraphWorld` represent newer 2026 directions: flow dynamics, discrete world-action tokens, and long-horizon graph-world planning.
 
 ---
 
@@ -134,4 +165,4 @@ Phase C.5 core-WAM coverage correction = ACTIVE
 WAM+VLA broadening = DEFERRED
 ```
 
-Do not reopen formal gap selection until these eight papers are placed and the WAM-only synthesis is updated.
+Do not reopen formal gap selection until the remaining seven papers are placed/deep-read as needed and the WAM-only synthesis is updated.
