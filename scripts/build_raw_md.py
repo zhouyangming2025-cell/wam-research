@@ -54,6 +54,33 @@ PAPERS = [
     # allocated after confirming the live manifest's highest ID was still P0012 and
     # that none of these eight titles already existed in the corpus.
     # --- Phase-A Census Round 2 support batch (CORPUS_BATCH=census2) ---
+# --- Phase-A Census Round 1 text-layer batch (CORPUS_BATCH=census1) ---
+    ("P0035", "GAIA1"),
+    ("P0036", "DriveDreamer"),
+    ("P0037", "DriveWM"),
+    ("P0038", "Vista"),
+    ("P0039", "DriveDreamer2"),
+    ("P0040", "DrivingGPT"),
+    ("P0041", "PolicyWM"),
+    ("P0042", "WorldDrive"),
+    ("P0043", "OccWorld"),
+    ("P0044", "DriveOccWorld"),
+    ("P0045", "WoTE"),
+    ("P0046", "World4Drive"),
+    ("P0047", "DriveWorld"),
+    ("P0048", "LAW"),
+    ("P0049", "DriveJEPA"),
+    ("P0050", "WorldRFT"),
+    ("P0051", "AutoJEPA"),
+    ("P0052", "ReWorld"),
+    ("P0053", "WAJEPA"),
+    ("P0054", "WhatTrulyMatters"),
+    ("P0055", "SLEDGE"),
+    ("P0056", "DriveArena"),
+    ("P0057", "UniAD"),
+    ("P0058", "VAD"),
+    ("P0059", "DiffusionDrive"),
+    ("P0060", "DrivoR"),
     ("P0021", "HydraMDP"),        # F10 strong non-WM control
     ("P0022", "DriveSuprim"),     # F10 strong non-WM control
     ("P0023", "iPad"),            # F10 strong non-WM control

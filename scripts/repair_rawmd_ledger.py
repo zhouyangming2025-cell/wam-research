@@ -17,6 +17,7 @@ from __future__ import annotations
 import glob
 import json
 import os
+import re
 import sys
 
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -26,7 +27,15 @@ import build_raw_md as brm  # noqa: E402  (same qc() that produced the original 
 
 BATCH = os.environ.get("CORPUS_BATCH", "census2")
 OUT = os.path.join(BASE, "manifests", f"batch_{BATCH}_rawmd_results.json")
-NEW = [f"P{i:04d}" for i in range(21, 35)]
+# Derived from the artifacts on disk rather than hardcoded, so the repair works for any batch:
+# every paper that has an extracted raw MD is a candidate, and main() only rebuilds the ones the
+# ledger does not already hold, preserving existing records verbatim.
+NEW = sorted({
+    m.group(1)
+    for d in glob.glob(os.path.join(BASE, "papers", "raw_md", "P*_*"))
+    for m in [re.match(r"(P\d{4})_", os.path.basename(d))]
+    if m
+})
 SHORT = dict((p, s) for p, s in brm.PAPERS)
 
 

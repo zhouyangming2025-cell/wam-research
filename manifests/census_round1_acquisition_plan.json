@@ -1,0 +1,401 @@
+{
+  "gaia1": {
+    "status": "PLANNED",
+    "kind": "arXiv",
+    "url": "https://arxiv.org/pdf/2309.17080",
+    "register_urls": [
+      "https://arxiv.org/abs/2309.17080"
+    ],
+    "alternates": [],
+    "census_name": "GAIA-1: A Generative World Model for Autonomous Driving",
+    "register_name": "GAIA-1",
+    "key": "gaia1",
+    "bytes_probe": 16421557,
+    "pdf_magic_ok": true
+  },
+  "drivedreamer": {
+    "status": "PLANNED",
+    "kind": "arXiv",
+    "url": "https://arxiv.org/pdf/2309.09777",
+    "register_urls": [
+      "https://arxiv.org/abs/2309.09777",
+      "https://drivedreamer.github.io/"
+    ],
+    "alternates": [],
+    "census_name": "DriveDreamer: Towards Real-world-driven World Models for Autonomous Driving",
+    "register_name": "DriveDreamer",
+    "key": "drivedreamer",
+    "bytes_probe": 17631231,
+    "pdf_magic_ok": true
+  },
+  "drivewm": {
+    "status": "PLANNED",
+    "register_urls": [
+      "https://drive-wm.github.io/",
+      "https://github.com/BraveGroup/Drive-WM"
+    ],
+    "reason": "no official record with a matching title could be verified through the available discovery sources",
+    "census_name": "Drive-WM: Driving into the Future: Multiview Visual Forecasting and Planning with World Model for Autonomous Driving",
+    "register_name": "Drive-WM",
+    "key": "drivewm",
+    "kind": "VF_camera_ready",
+    "url": "https://openaccess.thecvf.com/content/CVPR2024/papers/Wang_Driving_into_the_Future_Multiview_Visual_Forecasting_and_Planning_with_CVPR_2024_paper.pdf",
+    "resolved_from": "https://openaccess.thecvf.com/content/CVPR2024/html/Wang_Driving_into_the_Future_Multiview_Visual_Forecasting_and_Planning_with_CVPR_2024_paper.html",
+    "basis": "resolved in this batch by discovery then verification: the document was located through https://openaccess.thecvf.com/CVPR2024?day=all, and the official record was verified independently (title 'Driving into the Future: Multiview Visual Forecasting and Planning wit', CVF Open Access)",
+    "bytes_probe": 9487106,
+    "pdf_magic_ok": true
+  },
+  "vista": {
+    "status": "PLANNED",
+    "kind": "arXiv",
+    "url": "https://arxiv.org/pdf/2405.17398",
+    "register_urls": [
+      "https://arxiv.org/abs/2405.17398",
+      "https://github.com/OpenDriveLab/Vista"
+    ],
+    "alternates": [],
+    "census_name": "Vista: A Generalizable Driving World Model with High Fidelity and Versatile Controllability",
+    "register_name": "Vista",
+    "key": "vista",
+    "bytes_probe": 18033269,
+    "pdf_magic_ok": true
+  },
+  "drivedreamer2": {
+    "status": "PLANNED",
+    "kind": "arXiv",
+    "url": "https://arxiv.org/pdf/2403.06845",
+    "register_urls": [
+      "https://arxiv.org/abs/2403.06845",
+      "https://ojs.aaai.org/index.php/AAAI/article/view/33130"
+    ],
+    "alternates": [],
+    "census_name": "DriveDreamer-2: LLM-Enhanced World Models for Diverse Driving Video Generation",
+    "register_name": "DriveDreamer-2",
+    "key": "drivedreamer2",
+    "bytes_probe": 5126823,
+    "pdf_magic_ok": true
+  },
+  "drivinggpt": {
+    "status": "PLANNED",
+    "kind": "VF_camera_ready",
+    "url": "https://openaccess.thecvf.com/content/ICCV2025/papers/Chen_DrivingGPT_Unifying_Driving_World_Modeling_and_Planning_with_Multi-modal_Autoregressive_ICCV_2025_paper.pdf",
+    "register_urls": [
+      "https://openaccess.thecvf.com/content/ICCV2025/html/Chen_DrivingGPT_Unifying_Driving_World_Modeling_and_Planning_with_Multi-modal_Autoregressive_ICCV_2025_paper.html"
+    ],
+    "alternates": [],
+    "census_name": "DrivingGPT: Unifying Driving World Modeling and Planning with Multi-modal Autoregressive Transformers",
+    "register_name": "DrivingGPT",
+    "key": "drivinggpt",
+    "bytes_probe": 1873744,
+    "pdf_magic_ok": true
+  },
+  "policyworldmodel": {
+    "status": "PLANNED",
+    "kind": "arXiv",
+    "url": "https://arxiv.org/pdf/2510.19654",
+    "register_urls": [
+      "https://arxiv.org/abs/2510.19654",
+      "https://6550zhao.github.io/Policy-World-Model/"
+    ],
+    "alternates": [],
+    "census_name": "Policy World Model: From Forecasting to Planning via Collaborative State-Action Prediction",
+    "register_name": "Policy World Model",
+    "key": "policyworldmodel",
+    "bytes_probe": 3750982,
+    "pdf_magic_ok": true
+  },
+  "worlddrive": {
+    "status": "PLANNED",
+    "kind": "arXiv",
+    "url": "https://arxiv.org/pdf/2603.14948",
+    "register_urls": [
+      "https://arxiv.org/abs/2603.14948",
+      "https://github.com/TabGuigui/WorldDrive"
+    ],
+    "alternates": [],
+    "census_name": "WorldDrive: Bridging Scene Generation and Planning via Unifying Vision and Motion Representation",
+    "register_name": "WorldDrive",
+    "key": "worlddrive",
+    "bytes_probe": 47964338,
+    "pdf_magic_ok": true
+  },
+  "occworld": {
+    "status": "PLANNED",
+    "kind": "arXiv",
+    "url": "https://arxiv.org/pdf/2311.16038",
+    "register_urls": [
+      "https://arxiv.org/abs/2311.16038",
+      "https://github.com/wzzheng/OccWorld"
+    ],
+    "alternates": [],
+    "census_name": "OccWorld: Learning a 3D Occupancy World Model for Autonomous Driving",
+    "register_name": "OccWorld",
+    "key": "occworld",
+    "bytes_probe": 8630304,
+    "pdf_magic_ok": true
+  },
+  "driveoccworld": {
+    "status": "PLANNED",
+    "register_urls": [
+      "https://ojs.aaai.org/index.php/AAAI/article/view/33010",
+      "https://drive-occworld.github.io/"
+    ],
+    "reason": "no official record with a matching title could be verified through the available discovery sources",
+    "census_name": "Drive-OccWorld: Driving in the Occupancy World",
+    "register_name": "Drive-OccWorld",
+    "key": "driveoccworld",
+    "kind": "arXiv",
+    "url": "https://arxiv.org/pdf/2408.14197",
+    "resolved_from": "https://arxiv.org/abs/2408.14197",
+    "basis": "resolved in this batch by discovery then verification: the document was located through https://drive-occworld.github.io/, and the official record was verified independently (title 'Driving in the Occupancy World: Vision-Centric 4D Occupancy Forecastin', arXiv:2408.14197v3)",
+    "bytes_probe": 38779075,
+    "pdf_magic_ok": true
+  },
+  "wote": {
+    "status": "PLANNED",
+    "kind": "VF_camera_ready",
+    "url": "https://openaccess.thecvf.com/content/ICCV2025/papers/Li_End-to-End_Driving_with_Online_Trajectory_Evaluation_via_BEV_World_Model_ICCV_2025_paper.pdf",
+    "register_urls": [
+      "https://openaccess.thecvf.com/content/ICCV2025/html/Li_End-to-End_Driving_with_Online_Trajectory_Evaluation_via_BEV_World_Model_ICCV_2025_paper.html"
+    ],
+    "alternates": [],
+    "census_name": "WoTE: End-to-End Driving with Online Trajectory Evaluation via BEV World Model",
+    "register_name": "WoTE",
+    "key": "wote",
+    "bytes_probe": 1218837,
+    "pdf_magic_ok": true
+  },
+  "world4drive": {
+    "status": "PLANNED",
+    "kind": "VF_camera_ready",
+    "url": "https://openaccess.thecvf.com/content/ICCV2025/papers/Zheng_World4Drive_End-to-End_Autonomous_Driving_via_Intention-aware_Physical_Latent_World_Model_ICCV_2025_paper.pdf",
+    "register_urls": [
+      "https://arxiv.org/abs/2507.00603",
+      "https://openaccess.thecvf.com/content/ICCV2025/html/Zheng_World4Drive_End-to-End_Autonomous_Driving_via_Intention-aware_Physical_Latent_World_Model_ICCV_2025_paper.html"
+    ],
+    "alternates": [
+      "https://arxiv.org/pdf/2507.00603"
+    ],
+    "census_name": "World4Drive: End-to-End Autonomous Driving via Intention-aware Physical Latent World Model",
+    "register_name": "World4Drive",
+    "key": "world4drive",
+    "bytes_probe": 2096790,
+    "pdf_magic_ok": true
+  },
+  "driveworld": {
+    "status": "PLANNED",
+    "kind": "VF_camera_ready",
+    "url": "https://openaccess.thecvf.com/content/CVPR2024/papers/Min_DriveWorld_4D_Pre-trained_Scene_Understanding_via_World_Models_for_Autonomous_CVPR_2024_paper.pdf",
+    "register_urls": [
+      "https://arxiv.org/abs/2405.04390",
+      "https://openaccess.thecvf.com/content/CVPR2024/html/Min_DriveWorld_4D_Pre-trained_Scene_Understanding_via_World_Models_for_Autonomous_CVPR_2024_paper.html"
+    ],
+    "alternates": [
+      "https://arxiv.org/pdf/2405.04390"
+    ],
+    "census_name": "DriveWorld: 4D Pre-trained Scene Understanding via World Models for Autonomous Driving",
+    "register_name": "DriveWorld",
+    "key": "driveworld",
+    "bytes_probe": 4077618,
+    "pdf_magic_ok": true
+  },
+  "law": {
+    "status": "PLANNED",
+    "kind": "arXiv",
+    "url": "https://arxiv.org/pdf/2406.08481",
+    "register_urls": [
+      "https://proceedings.iclr.cc/paper_files/paper/2025/hash/6aa4967920e495e90aeeaa3acf18d019-Abstract-Conference.html",
+      "https://arxiv.org/abs/2406.08481"
+    ],
+    "alternates": [],
+    "census_name": "LAW: Enhancing End-to-End Autonomous Driving with Latent World Model",
+    "register_name": "LAW",
+    "key": "law",
+    "bytes_probe": 3953853,
+    "pdf_magic_ok": true
+  },
+  "drivejepa": {
+    "status": "PLANNED",
+    "kind": "arXiv",
+    "url": "https://arxiv.org/pdf/2601.22032",
+    "register_urls": [
+      "https://arxiv.org/abs/2601.22032",
+      "https://github.com/linhanwang/Drive-JEPA"
+    ],
+    "alternates": [],
+    "census_name": "Drive-JEPA: Video JEPA Meets Multimodal Trajectory Distillation for End-to-End Driving",
+    "register_name": "Drive-JEPA",
+    "key": "drivejepa",
+    "bytes_probe": 2376317,
+    "pdf_magic_ok": true
+  },
+  "worldrft": {
+    "status": "PLANNED",
+    "kind": "arXiv",
+    "url": "https://arxiv.org/pdf/2512.19133",
+    "register_urls": [
+      "https://arxiv.org/abs/2512.19133",
+      "https://ojs.aaai.org/index.php/AAAI/article/view/38149"
+    ],
+    "alternates": [],
+    "census_name": "WorldRFT: Latent World Model Planning with Reinforcement Fine-Tuning",
+    "register_name": "WorldRFT",
+    "key": "worldrft",
+    "bytes_probe": 3656389,
+    "pdf_magic_ok": true
+  },
+  "autojepa": {
+    "status": "PLANNED",
+    "kind": "arXiv",
+    "url": "https://arxiv.org/pdf/2607.29031",
+    "register_urls": [
+      "https://arxiv.org/abs/2607.29031"
+    ],
+    "alternates": [],
+    "census_name": "Auto-JEPA: A Latent World Model of Continuous Intent for End-to-End Autonomous Driving",
+    "register_name": "Auto-JEPA",
+    "key": "autojepa",
+    "bytes_probe": 6833537,
+    "pdf_magic_ok": true
+  },
+  "reworld": {
+    "status": "PLANNED",
+    "kind": "arXiv",
+    "url": "https://arxiv.org/pdf/2606.27504",
+    "register_urls": [
+      "https://arxiv.org/abs/2606.27504",
+      "https://github.com/xiaomi-research/reworld"
+    ],
+    "alternates": [],
+    "census_name": "ReWorld: Learning Better Representations for World Action Models",
+    "register_name": "ReWorld: Learning Better Representations for World Action Models",
+    "key": "reworld",
+    "bytes_probe": 9512286,
+    "pdf_magic_ok": true
+  },
+  "wajepa": {
+    "status": "PLANNED",
+    "kind": "arXiv",
+    "url": "https://arxiv.org/pdf/2608.20974",
+    "register_urls": [
+      "https://arxiv.org/abs/2608.20974",
+      "https://github.com/AFARI-Research/WA-JEPA"
+    ],
+    "alternates": [],
+    "census_name": "WA-JEPA: Rethinking the Video JEPA Paradigm for World-Action Modeling in Autonomous Driving",
+    "register_name": "WA-JEPA",
+    "key": "wajepa",
+    "bytes_probe": 7370222,
+    "pdf_magic_ok": true
+  },
+  "whattrulymatters": {
+    "status": "PLANNED",
+    "kind": "NeurIPS_camera_ready",
+    "url": "https://papers.neurips.cc/paper_files/paper/2023/file/e197fe307eb3467035f892dc100d570a-Paper-Conference.pdf",
+    "register_urls": [
+      "https://papers.neurips.cc/paper_files/paper/2023/hash/e197fe307eb3467035f892dc100d570a-Abstract-Conference.html"
+    ],
+    "alternates": [],
+    "census_name": "What Truly Matters in Trajectory Prediction for Autonomous Driving?",
+    "register_name": "What Truly Matters in Trajectory Prediction for Autonomous Driving?",
+    "key": "whattrulymatters",
+    "bytes_probe": 847310,
+    "pdf_magic_ok": true
+  },
+  "sledge": {
+    "status": "PLANNED",
+    "kind": "arXiv",
+    "url": "https://arxiv.org/pdf/2403.17933",
+    "register_urls": [
+      "https://www.ecva.net/papers/eccv_2024/papers_ECCV/html/490_ECCV_2024_paper.php",
+      "https://github.com/autonomousvision/sledge"
+    ],
+    "alternates": [],
+    "census_name": "SLEDGE: Synthesizing Driving Environments with Generative Models and Rule-Based Traffic",
+    "register_name": "SLEDGE",
+    "key": "sledge",
+    "pdf_magic_ok": false,
+    "resolved_from": "https://arxiv.org/abs/2403.17933",
+    "basis": "resolved in this batch by discovery then verification: the arXiv link was found on the paper's own project repository page, then the official arXiv record was fetched and verified independently (citation_title 'SLEDGE: Synthesizing Driving Environments with Generative Models and R', 2024/03/26, v2)"
+  },
+  "drivearena": {
+    "status": "PLANNED",
+    "register_urls": [
+      "https://github.com/PJLab-ADG/DriveArena"
+    ],
+    "reason": "no official record with a matching title could be verified through the available discovery sources",
+    "census_name": "DriveArena",
+    "register_name": "DriveArena",
+    "key": "drivearena",
+    "kind": "arXiv",
+    "url": "https://arxiv.org/pdf/2408.00415",
+    "resolved_from": "https://arxiv.org/abs/2408.00415",
+    "basis": "resolved in this batch by discovery then verification: the document was located through https://github.com/PJLab-ADG/DriveArena, and the official record was verified independently (title 'DriveArena: A Closed-loop Generative Simulation Platform for Autonomou', arXiv:2408.00415v1)",
+    "bytes_probe": 11858883,
+    "pdf_magic_ok": true
+  },
+  "nppc": {
+    "status": "NEEDS_RESOLUTION",
+    "register_urls": [],
+    "reason": "no official record with a matching title could be verified",
+    "census_name": "NPPC",
+    "register_name": "NPPC",
+    "key": "nppc"
+  },
+  "uniad": {
+    "status": "PLANNED",
+    "kind": "VF_camera_ready",
+    "url": "https://openaccess.thecvf.com/content/CVPR2023/papers/Hu_Planning-Oriented_Autonomous_Driving_CVPR_2023_paper.pdf",
+    "register_urls": [
+      "https://openaccess.thecvf.com/content/CVPR2023/html/Hu_Planning-Oriented_Autonomous_Driving_CVPR_2023_paper.html"
+    ],
+    "alternates": [],
+    "census_name": "UniAD: Planning-Oriented Autonomous Driving",
+    "register_name": "UniAD / Planning-Oriented Autonomous Driving",
+    "key": "uniad",
+    "bytes_probe": 2936312,
+    "pdf_magic_ok": true
+  },
+  "vad": {
+    "status": "PLANNED",
+    "kind": "VF_camera_ready",
+    "url": "https://openaccess.thecvf.com/content/ICCV2023/papers/Jiang_VAD_Vectorized_Scene_Representation_for_Efficient_Autonomous_Driving_ICCV_2023_paper.pdf",
+    "register_urls": [
+      "https://openaccess.thecvf.com/content/ICCV2023/html/Jiang_VAD_Vectorized_Scene_Representation_for_Efficient_Autonomous_Driving_ICCV_2023_paper.html"
+    ],
+    "alternates": [],
+    "census_name": "VAD: Vectorized Scene Representation for Efficient Autonomous Driving",
+    "register_name": "VAD",
+    "key": "vad",
+    "bytes_probe": 3410216,
+    "pdf_magic_ok": true
+  },
+  "diffusiondrive": {
+    "status": "PLANNED",
+    "kind": "VF_camera_ready",
+    "url": "https://openaccess.thecvf.com/content/CVPR2025/papers/Liao_DiffusionDrive_Truncated_Diffusion_Model_for_End-to-End_Autonomous_Driving_CVPR_2025_paper.pdf",
+    "register_urls": [
+      "https://openaccess.thecvf.com/content/CVPR2025/html/Liao_DiffusionDrive_Truncated_Diffusion_Model_for_End-to-End_Autonomous_Driving_CVPR_2025_paper.html"
+    ],
+    "alternates": [],
+    "census_name": "DiffusionDrive",
+    "register_name": "DiffusionDrive",
+    "key": "diffusiondrive",
+    "bytes_probe": 1453766,
+    "pdf_magic_ok": true
+  },
+  "drivor": {
+    "status": "PLANNED",
+    "kind": "VF_camera_ready",
+    "url": "https://openaccess.thecvf.com/content/CVPR2026/papers/Kirby_Driving_on_Registers_CVPR_2026_paper.pdf",
+    "register_urls": [
+      "https://openaccess.thecvf.com/content/CVPR2026/html/Kirby_Driving_on_Registers_CVPR_2026_paper.html"
+    ],
+    "alternates": [],
+    "census_name": "DrivoR: Driving on Registers",
+    "register_name": "DrivoR / Driving on Registers",
+    "key": "drivor",
+    "bytes_probe": 8172471,
+    "pdf_magic_ok": true
+  }
+}

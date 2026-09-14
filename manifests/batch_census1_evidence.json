@@ -1,0 +1,1179 @@
+{
+  "P0035": {
+    "paper_id": "P0035",
+    "short": "GAIA1",
+    "raw_md": "papers/raw_md/P0035_GAIA1/P0035_GAIA1.raw.md",
+    "exists": true,
+    "chars": 73066,
+    "repo_urls": [],
+    "project_pages": [],
+    "tag_counts": {
+      "planning": 4,
+      "world-model": 75,
+      "interactive": 1,
+      "reactive": 1,
+      "trajectory-prediction": 0,
+      "trajectory-scorer": 0,
+      "closed-loop": 1,
+      "counterfactual": 0,
+      "end-to-end": 1,
+      "evaluation": 0,
+      "action-conditioned": 2,
+      "diffusion": 38,
+      "reward-model": 0,
+      "OOD": 0,
+      "autoregressive": 20,
+      "benchmark": 0,
+      "latent-world-model": 0,
+      "open-loop": 0,
+      "representation": 36,
+      "risk": 0,
+      "safety": 2
+    },
+    "proposed_tags": [
+      "world-model",
+      "diffusion",
+      "representation",
+      "autoregressive"
+    ],
+    "mojibake": 0,
+    "image_refs": 28
+  },
+  "P0036": {
+    "paper_id": "P0036",
+    "short": "DriveDreamer",
+    "raw_md": "papers/raw_md/P0036_DriveDreamer/P0036_DriveDreamer.raw.md",
+    "exists": true,
+    "chars": 61812,
+    "repo_urls": [],
+    "project_pages": [
+      "https://drivedreamer.github.io"
+    ],
+    "tag_counts": {
+      "planning": 4,
+      "world-model": 37,
+      "interactive": 0,
+      "reactive": 0,
+      "trajectory-prediction": 1,
+      "trajectory-scorer": 0,
+      "closed-loop": 0,
+      "counterfactual": 0,
+      "end-to-end": 5,
+      "evaluation": 6,
+      "action-conditioned": 0,
+      "diffusion": 38,
+      "reward-model": 0,
+      "OOD": 0,
+      "autoregressive": 1,
+      "benchmark": 3,
+      "latent-world-model": 0,
+      "open-loop": 4,
+      "representation": 8,
+      "risk": 0,
+      "safety": 1
+    },
+    "proposed_tags": [
+      "world-model",
+      "diffusion",
+      "representation",
+      "evaluation"
+    ],
+    "mojibake": 0,
+    "image_refs": 13
+  },
+  "P0037": {
+    "paper_id": "P0037",
+    "short": "DriveWM",
+    "raw_md": "papers/raw_md/P0037_DriveWM/P0037_DriveWM.raw.md",
+    "exists": true,
+    "chars": 53322,
+    "repo_urls": [
+      {
+        "url": "https://github.com/BraveGroup/Drive-WM",
+        "line": 9,
+        "context": "Project Page: https://drive-wm.github.io Code: https://github.com/BraveGroup/Drive-WM",
+        "source": "raw markdown",
+        "code_context": true
+      }
+    ],
+    "project_pages": [
+      "https://drive-wm.github.io"
+    ],
+    "tag_counts": {
+      "planning": 48,
+      "world-model": 41,
+      "interactive": 0,
+      "reactive": 0,
+      "trajectory-prediction": 1,
+      "trajectory-scorer": 0,
+      "closed-loop": 0,
+      "counterfactual": 4,
+      "end-to-end": 15,
+      "evaluation": 6,
+      "action-conditioned": 0,
+      "diffusion": 28,
+      "reward-model": 0,
+      "OOD": 0,
+      "autoregressive": 3,
+      "benchmark": 1,
+      "latent-world-model": 0,
+      "open-loop": 0,
+      "representation": 6,
+      "risk": 1,
+      "safety": 4
+    },
+    "proposed_tags": [
+      "planning",
+      "world-model",
+      "diffusion",
+      "end-to-end"
+    ],
+    "mojibake": 0,
+    "image_refs": 9
+  },
+  "P0038": {
+    "paper_id": "P0038",
+    "short": "Vista",
+    "raw_md": "papers/raw_md/P0038_Vista/P0038_Vista.raw.md",
+    "exists": true,
+    "chars": 102786,
+    "repo_urls": [
+      {
+        "url": "https://github.com/OpenDriveLab/Vista",
+        "line": 7,
+        "context": "Code and model: github.com/OpenDriveLab/Vista Demo page: opendrivelab.com/Vista",
+        "source": "raw markdown",
+        "code_context": true
+      }
+    ],
+    "project_pages": [],
+    "tag_counts": {
+      "planning": 18,
+      "world-model": 62,
+      "interactive": 3,
+      "reactive": 1,
+      "trajectory-prediction": 0,
+      "trajectory-scorer": 0,
+      "closed-loop": 2,
+      "counterfactual": 6,
+      "end-to-end": 8,
+      "evaluation": 31,
+      "action-conditioned": 0,
+      "diffusion": 49,
+      "reward-model": 1,
+      "OOD": 0,
+      "autoregressive": 7,
+      "benchmark": 3,
+      "latent-world-model": 1,
+      "open-loop": 3,
+      "representation": 6,
+      "risk": 1,
+      "safety": 2
+    },
+    "proposed_tags": [
+      "world-model",
+      "diffusion",
+      "evaluation",
+      "planning"
+    ],
+    "mojibake": 0,
+    "image_refs": 23
+  },
+  "P0039": {
+    "paper_id": "P0039",
+    "short": "DriveDreamer2",
+    "raw_md": "papers/raw_md/P0039_DriveDreamer2/P0039_DriveDreamer2.raw.md",
+    "exists": true,
+    "chars": 60354,
+    "repo_urls": [],
+    "project_pages": [
+      "https://drivedreamer2.github.io"
+    ],
+    "tag_counts": {
+      "planning": 2,
+      "world-model": 29,
+      "interactive": 0,
+      "reactive": 0,
+      "trajectory-prediction": 0,
+      "trajectory-scorer": 0,
+      "closed-loop": 0,
+      "counterfactual": 0,
+      "end-to-end": 2,
+      "evaluation": 8,
+      "action-conditioned": 0,
+      "diffusion": 0,
+      "reward-model": 0,
+      "OOD": 0,
+      "autoregressive": 1,
+      "benchmark": 1,
+      "latent-world-model": 0,
+      "open-loop": 0,
+      "representation": 2,
+      "risk": 0,
+      "safety": 0
+    },
+    "proposed_tags": [
+      "world-model",
+      "evaluation"
+    ],
+    "mojibake": 0,
+    "image_refs": 21
+  },
+  "P0040": {
+    "paper_id": "P0040",
+    "short": "DrivingGPT",
+    "raw_md": "papers/raw_md/P0040_DrivingGPT/P0040_DrivingGPT.raw.md",
+    "exists": true,
+    "chars": 54571,
+    "repo_urls": [],
+    "project_pages": [
+      "https://rogerchern.github.io/DrivingGPT"
+    ],
+    "tag_counts": {
+      "planning": 51,
+      "world-model": 43,
+      "interactive": 1,
+      "reactive": 2,
+      "trajectory-prediction": 0,
+      "trajectory-scorer": 0,
+      "closed-loop": 4,
+      "counterfactual": 0,
+      "end-to-end": 32,
+      "evaluation": 11,
+      "action-conditioned": 2,
+      "diffusion": 25,
+      "reward-model": 0,
+      "OOD": 0,
+      "autoregressive": 31,
+      "benchmark": 14,
+      "latent-world-model": 1,
+      "open-loop": 4,
+      "representation": 6,
+      "risk": 0,
+      "safety": 0
+    },
+    "proposed_tags": [
+      "planning",
+      "world-model",
+      "autoregressive",
+      "end-to-end"
+    ],
+    "mojibake": 0,
+    "image_refs": 9
+  },
+  "P0041": {
+    "paper_id": "P0041",
+    "short": "PolicyWM",
+    "raw_md": "papers/raw_md/P0041_PolicyWM/P0041_PolicyWM.raw.md",
+    "exists": true,
+    "chars": 69593,
+    "repo_urls": [
+      {
+        "url": "https://github.com/6550Zhao/Policy-World-Model",
+        "line": 7,
+        "context": "Despite remarkable progress in driving world models, their potential for autonomous systems remains largely untapped: the world models are mostly learned for world simulation and decoupled from trajec",
+        "source": "raw markdown",
+        "code_context": false
+      }
+    ],
+    "project_pages": [],
+    "tag_counts": {
+      "planning": 89,
+      "world-model": 82,
+      "interactive": 1,
+      "reactive": 1,
+      "trajectory-prediction": 2,
+      "trajectory-scorer": 0,
+      "closed-loop": 4,
+      "counterfactual": 0,
+      "end-to-end": 21,
+      "evaluation": 4,
+      "action-conditioned": 1,
+      "diffusion": 13,
+      "reward-model": 0,
+      "OOD": 0,
+      "autoregressive": 12,
+      "benchmark": 8,
+      "latent-world-model": 1,
+      "open-loop": 3,
+      "representation": 17,
+      "risk": 1,
+      "safety": 3
+    },
+    "proposed_tags": [
+      "planning",
+      "world-model",
+      "end-to-end",
+      "representation"
+    ],
+    "mojibake": 0,
+    "image_refs": 12
+  },
+  "P0042": {
+    "paper_id": "P0042",
+    "short": "WorldDrive",
+    "raw_md": "papers/raw_md/P0042_WorldDrive/P0042_WorldDrive.raw.md",
+    "exists": true,
+    "chars": 66254,
+    "repo_urls": [
+      {
+        "url": "https://github.com/TabGuigui/WorldDrive",
+        "line": 7,
+        "context": "End-to-end autonomous driving aims to generate safe and plausible planning policiesfrom raw sensor input, and con structing an effective scene representation is a critical challenge. Driving world mod",
+        "source": "raw markdown",
+        "code_context": false
+      }
+    ],
+    "project_pages": [],
+    "tag_counts": {
+      "planning": 73,
+      "world-model": 65,
+      "interactive": 0,
+      "reactive": 3,
+      "trajectory-prediction": 1,
+      "trajectory-scorer": 0,
+      "closed-loop": 7,
+      "counterfactual": 2,
+      "end-to-end": 22,
+      "evaluation": 6,
+      "action-conditioned": 0,
+      "diffusion": 24,
+      "reward-model": 2,
+      "OOD": 0,
+      "autoregressive": 4,
+      "benchmark": 5,
+      "latent-world-model": 6,
+      "open-loop": 2,
+      "representation": 52,
+      "risk": 1,
+      "safety": 9
+    },
+    "proposed_tags": [
+      "planning",
+      "world-model",
+      "representation",
+      "diffusion"
+    ],
+    "mojibake": 0,
+    "image_refs": 10
+  },
+  "P0043": {
+    "paper_id": "P0043",
+    "short": "OccWorld",
+    "raw_md": "papers/raw_md/P0043_OccWorld/P0043_OccWorld.raw.md",
+    "exists": true,
+    "chars": 57359,
+    "repo_urls": [
+      {
+        "url": "https://github.com/wzzheng/OccWorld",
+        "line": 19,
+        "context": "OccWorld to effectively model the evolution of the driving scenes. OccWorld also produces competitive planning results without using instance and map supervision. Code: https://github.com/wzzheng/OccW",
+        "source": "raw markdown",
+        "code_context": true
+      }
+    ],
+    "project_pages": [],
+    "tag_counts": {
+      "planning": 42,
+      "world-model": 31,
+      "interactive": 1,
+      "reactive": 0,
+      "trajectory-prediction": 1,
+      "trajectory-scorer": 0,
+      "closed-loop": 0,
+      "counterfactual": 0,
+      "end-to-end": 13,
+      "evaluation": 4,
+      "action-conditioned": 0,
+      "diffusion": 2,
+      "reward-model": 0,
+      "OOD": 0,
+      "autoregressive": 3,
+      "benchmark": 3,
+      "latent-world-model": 0,
+      "open-loop": 0,
+      "representation": 19,
+      "risk": 0,
+      "safety": 3
+    },
+    "proposed_tags": [
+      "world-model",
+      "planning",
+      "representation",
+      "end-to-end"
+    ],
+    "mojibake": 0,
+    "image_refs": 5
+  },
+  "P0044": {
+    "paper_id": "P0044",
+    "short": "DriveOccWorld",
+    "raw_md": "papers/raw_md/P0044_DriveOccWorld/P0044_DriveOccWorld.raw.md",
+    "exists": true,
+    "chars": 87400,
+    "repo_urls": [],
+    "project_pages": [
+      "https://drive-occworld.github.io/"
+    ],
+    "tag_counts": {
+      "planning": 72,
+      "world-model": 54,
+      "interactive": 1,
+      "reactive": 0,
+      "trajectory-prediction": 0,
+      "trajectory-scorer": 0,
+      "closed-loop": 0,
+      "counterfactual": 0,
+      "end-to-end": 33,
+      "evaluation": 5,
+      "action-conditioned": 0,
+      "diffusion": 8,
+      "reward-model": 0,
+      "OOD": 0,
+      "autoregressive": 4,
+      "benchmark": 6,
+      "latent-world-model": 0,
+      "open-loop": 2,
+      "representation": 16,
+      "risk": 0,
+      "safety": 13
+    },
+    "proposed_tags": [
+      "planning",
+      "world-model",
+      "end-to-end",
+      "representation"
+    ],
+    "mojibake": 0,
+    "image_refs": 10
+  },
+  "P0045": {
+    "paper_id": "P0045",
+    "short": "WoTE",
+    "raw_md": "papers/raw_md/P0045_WoTE/P0045_WoTE.raw.md",
+    "exists": true,
+    "chars": 53006,
+    "repo_urls": [],
+    "project_pages": [],
+    "tag_counts": {
+      "planning": 16,
+      "world-model": 58,
+      "interactive": 1,
+      "reactive": 1,
+      "trajectory-prediction": 6,
+      "trajectory-scorer": 0,
+      "closed-loop": 9,
+      "counterfactual": 0,
+      "end-to-end": 38,
+      "evaluation": 61,
+      "action-conditioned": 0,
+      "diffusion": 2,
+      "reward-model": 10,
+      "OOD": 0,
+      "autoregressive": 0,
+      "benchmark": 17,
+      "latent-world-model": 1,
+      "open-loop": 2,
+      "representation": 8,
+      "risk": 0,
+      "safety": 4
+    },
+    "proposed_tags": [
+      "world-model",
+      "end-to-end",
+      "evaluation",
+      "benchmark"
+    ],
+    "mojibake": 0,
+    "image_refs": 6
+  },
+  "P0046": {
+    "paper_id": "P0046",
+    "short": "World4Drive",
+    "raw_md": "papers/raw_md/P0046_World4Drive/P0046_World4Drive.raw.md",
+    "exists": true,
+    "chars": 51081,
+    "repo_urls": [
+      {
+        "url": "https://github.com/ucaszyp/World4Drive",
+        "line": 8,
+        "context": "End-to-end autonomous driving directly generates planning trajectories from raw sensor data, yet it typically relies on costly perception supervision to extract scene information. A critical research ",
+        "source": "raw markdown",
+        "code_context": false
+      }
+    ],
+    "project_pages": [],
+    "tag_counts": {
+      "planning": 51,
+      "world-model": 57,
+      "interactive": 0,
+      "reactive": 1,
+      "trajectory-prediction": 0,
+      "trajectory-scorer": 0,
+      "closed-loop": 8,
+      "counterfactual": 0,
+      "end-to-end": 31,
+      "evaluation": 2,
+      "action-conditioned": 0,
+      "diffusion": 10,
+      "reward-model": 0,
+      "OOD": 0,
+      "autoregressive": 1,
+      "benchmark": 17,
+      "latent-world-model": 15,
+      "open-loop": 4,
+      "representation": 38,
+      "risk": 0,
+      "safety": 1
+    },
+    "proposed_tags": [
+      "world-model",
+      "end-to-end",
+      "latent-world-model",
+      "planning"
+    ],
+    "mojibake": 0,
+    "image_refs": 5
+  },
+  "P0047": {
+    "paper_id": "P0047",
+    "short": "DriveWorld",
+    "raw_md": "papers/raw_md/P0047_DriveWorld/P0047_DriveWorld.raw.md",
+    "exists": true,
+    "chars": 63648,
+    "repo_urls": [],
+    "project_pages": [],
+    "tag_counts": {
+      "planning": 12,
+      "world-model": 48,
+      "interactive": 1,
+      "reactive": 0,
+      "trajectory-prediction": 2,
+      "trajectory-scorer": 0,
+      "closed-loop": 0,
+      "counterfactual": 0,
+      "end-to-end": 7,
+      "evaluation": 3,
+      "action-conditioned": 0,
+      "diffusion": 3,
+      "reward-model": 0,
+      "OOD": 0,
+      "autoregressive": 0,
+      "benchmark": 1,
+      "latent-world-model": 0,
+      "open-loop": 0,
+      "representation": 33,
+      "risk": 0,
+      "safety": 0
+    },
+    "proposed_tags": [
+      "world-model",
+      "representation",
+      "planning",
+      "end-to-end"
+    ],
+    "mojibake": 0,
+    "image_refs": 4
+  },
+  "P0048": {
+    "paper_id": "P0048",
+    "short": "LAW",
+    "raw_md": "papers/raw_md/P0048_LAW/P0048_LAW.raw.md",
+    "exists": true,
+    "chars": 58787,
+    "repo_urls": [
+      {
+        "url": "https://github.com/BraveGroup/LAW",
+        "line": 17,
+        "context": "In autonomous driving, end-to-end planners directly utilize raw sensor data, enabling them to extract richer scene features and reduce information loss compared to traditional planners. This raises a ",
+        "source": "raw markdown",
+        "code_context": false
+      }
+    ],
+    "project_pages": [],
+    "tag_counts": {
+      "planning": 13,
+      "world-model": 63,
+      "interactive": 1,
+      "reactive": 1,
+      "trajectory-prediction": 5,
+      "trajectory-scorer": 0,
+      "closed-loop": 6,
+      "counterfactual": 0,
+      "end-to-end": 32,
+      "evaluation": 1,
+      "action-conditioned": 1,
+      "diffusion": 4,
+      "reward-model": 0,
+      "OOD": 0,
+      "autoregressive": 0,
+      "benchmark": 25,
+      "latent-world-model": 39,
+      "open-loop": 4,
+      "representation": 20,
+      "risk": 0,
+      "safety": 1
+    },
+    "proposed_tags": [
+      "world-model",
+      "end-to-end",
+      "latent-world-model",
+      "benchmark"
+    ],
+    "mojibake": 0,
+    "image_refs": 6
+  },
+  "P0049": {
+    "paper_id": "P0049",
+    "short": "DriveJEPA",
+    "raw_md": "papers/raw_md/P0049_DriveJEPA/P0049_DriveJEPA.raw.md",
+    "exists": true,
+    "chars": 81841,
+    "repo_urls": [
+      {
+        "url": "https://github.com/linhanwang/Drive-JEPA",
+        "line": 15,
+        "context": "End-to-end autonomous driving increasingly leverages self-supervised video pretraining to learn transferable planning representations. However, pretraining video world models for scene understanding h",
+        "source": "raw markdown",
+        "code_context": false
+      }
+    ],
+    "project_pages": [],
+    "tag_counts": {
+      "planning": 21,
+      "world-model": 19,
+      "interactive": 3,
+      "reactive": 0,
+      "trajectory-prediction": 0,
+      "trajectory-scorer": 0,
+      "closed-loop": 5,
+      "counterfactual": 0,
+      "end-to-end": 40,
+      "evaluation": 12,
+      "action-conditioned": 1,
+      "diffusion": 16,
+      "reward-model": 0,
+      "OOD": 0,
+      "autoregressive": 1,
+      "benchmark": 7,
+      "latent-world-model": 6,
+      "open-loop": 1,
+      "representation": 26,
+      "risk": 8,
+      "safety": 10
+    },
+    "proposed_tags": [
+      "end-to-end",
+      "representation",
+      "planning",
+      "world-model"
+    ],
+    "mojibake": 0,
+    "image_refs": 7
+  },
+  "P0050": {
+    "paper_id": "P0050",
+    "short": "WorldRFT",
+    "raw_md": "papers/raw_md/P0050_WorldRFT/P0050_WorldRFT.raw.md",
+    "exists": true,
+    "chars": 73734,
+    "repo_urls": [
+      {
+        "url": "https://github.com/pengxuanyang/WorldRFT",
+        "line": 11,
+        "context": "Code — https://github.com/pengxuanyang/WorldRFT",
+        "source": "raw markdown",
+        "code_context": true
+      }
+    ],
+    "project_pages": [],
+    "tag_counts": {
+      "planning": 93,
+      "world-model": 25,
+      "interactive": 1,
+      "reactive": 0,
+      "trajectory-prediction": 6,
+      "trajectory-scorer": 0,
+      "closed-loop": 6,
+      "counterfactual": 0,
+      "end-to-end": 26,
+      "evaluation": 7,
+      "action-conditioned": 0,
+      "diffusion": 10,
+      "reward-model": 0,
+      "OOD": 0,
+      "autoregressive": 1,
+      "benchmark": 18,
+      "latent-world-model": 13,
+      "open-loop": 4,
+      "representation": 36,
+      "risk": 4,
+      "safety": 36
+    },
+    "proposed_tags": [
+      "planning",
+      "world-model",
+      "latent-world-model",
+      "representation"
+    ],
+    "mojibake": 0,
+    "image_refs": 8
+  },
+  "P0051": {
+    "paper_id": "P0051",
+    "short": "AutoJEPA",
+    "raw_md": "papers/raw_md/P0051_AutoJEPA/P0051_AutoJEPA.raw.md",
+    "exists": true,
+    "chars": 62825,
+    "repo_urls": [
+      {
+        "url": "https://github.com/NoctYang/Auto-JEPA",
+        "line": 11,
+        "context": "Existing autonomous-driving world models typically perform dense prediction of future videos, occupancy states, BEV representations, or agent motion. We argue that planning need not reconstruct the co",
+        "source": "raw markdown",
+        "code_context": false
+      }
+    ],
+    "project_pages": [],
+    "tag_counts": {
+      "planning": 30,
+      "world-model": 27,
+      "interactive": 1,
+      "reactive": 3,
+      "trajectory-prediction": 0,
+      "trajectory-scorer": 3,
+      "closed-loop": 1,
+      "counterfactual": 1,
+      "end-to-end": 22,
+      "evaluation": 14,
+      "action-conditioned": 1,
+      "diffusion": 2,
+      "reward-model": 0,
+      "OOD": 0,
+      "autoregressive": 2,
+      "benchmark": 11,
+      "latent-world-model": 8,
+      "open-loop": 0,
+      "representation": 29,
+      "risk": 1,
+      "safety": 3
+    },
+    "proposed_tags": [
+      "world-model",
+      "end-to-end",
+      "latent-world-model",
+      "planning"
+    ],
+    "mojibake": 0,
+    "image_refs": 5
+  },
+  "P0052": {
+    "paper_id": "P0052",
+    "short": "ReWorld",
+    "raw_md": "papers/raw_md/P0052_ReWorld/P0052_ReWorld.raw.md",
+    "exists": true,
+    "chars": 83432,
+    "repo_urls": [
+      {
+        "url": "https://github.com/xiaomi-research/ReWorld",
+        "line": 5,
+        "context": "Abstract—World Action Models (WAMs) unify future environment prediction with action generation for autonomous driving, yet existing approaches optimize only the final outputs, leaving intermediate rep",
+        "source": "raw markdown",
+        "code_context": false
+      }
+    ],
+    "project_pages": [],
+    "tag_counts": {
+      "planning": 43,
+      "world-model": 35,
+      "interactive": 1,
+      "reactive": 2,
+      "trajectory-prediction": 2,
+      "trajectory-scorer": 0,
+      "closed-loop": 24,
+      "counterfactual": 0,
+      "end-to-end": 12,
+      "evaluation": 3,
+      "action-conditioned": 0,
+      "diffusion": 35,
+      "reward-model": 0,
+      "OOD": 0,
+      "autoregressive": 3,
+      "benchmark": 4,
+      "latent-world-model": 1,
+      "open-loop": 0,
+      "representation": 107,
+      "risk": 0,
+      "safety": 1
+    },
+    "proposed_tags": [
+      "representation",
+      "planning",
+      "world-model",
+      "diffusion"
+    ],
+    "mojibake": 0,
+    "image_refs": 21
+  },
+  "P0053": {
+    "paper_id": "P0053",
+    "short": "WAJEPA",
+    "raw_md": "papers/raw_md/P0053_WAJEPA/P0053_WAJEPA.raw.md",
+    "exists": true,
+    "chars": 70274,
+    "repo_urls": [
+      {
+        "url": "https://github.com/AFARI-Research/WA-JEPA",
+        "line": 13,
+        "context": "Video Joint Embedding Predictive Architecture (V-JEPA) learns powerful spatiotemporal representations from video through self-supervised latent feature prediction. However, V-JEPA is built around rand",
+        "source": "raw markdown",
+        "code_context": false
+      }
+    ],
+    "project_pages": [],
+    "tag_counts": {
+      "planning": 36,
+      "world-model": 18,
+      "interactive": 1,
+      "reactive": 2,
+      "trajectory-prediction": 2,
+      "trajectory-scorer": 0,
+      "closed-loop": 15,
+      "counterfactual": 0,
+      "end-to-end": 20,
+      "evaluation": 12,
+      "action-conditioned": 2,
+      "diffusion": 3,
+      "reward-model": 0,
+      "OOD": 0,
+      "autoregressive": 2,
+      "benchmark": 7,
+      "latent-world-model": 4,
+      "open-loop": 2,
+      "representation": 45,
+      "risk": 0,
+      "safety": 3
+    },
+    "proposed_tags": [
+      "representation",
+      "planning",
+      "end-to-end",
+      "world-model"
+    ],
+    "mojibake": 0,
+    "image_refs": 7
+  },
+  "P0054": {
+    "paper_id": "P0054",
+    "short": "WhatTrulyMatters",
+    "raw_md": "papers/raw_md/P0054_WhatTrulyMatters/P0054_WhatTrulyMatters.raw.md",
+    "exists": true,
+    "chars": 53244,
+    "repo_urls": [],
+    "project_pages": [],
+    "tag_counts": {
+      "planning": 15,
+      "world-model": 0,
+      "interactive": 10,
+      "reactive": 1,
+      "trajectory-prediction": 15,
+      "trajectory-scorer": 0,
+      "closed-loop": 1,
+      "counterfactual": 0,
+      "end-to-end": 1,
+      "evaluation": 35,
+      "action-conditioned": 0,
+      "diffusion": 0,
+      "reward-model": 0,
+      "OOD": 0,
+      "autoregressive": 0,
+      "benchmark": 1,
+      "latent-world-model": 0,
+      "open-loop": 2,
+      "representation": 2,
+      "risk": 0,
+      "safety": 9
+    },
+    "proposed_tags": [
+      "trajectory-prediction",
+      "evaluation",
+      "planning",
+      "interactive"
+    ],
+    "mojibake": 0,
+    "image_refs": 13
+  },
+  "P0055": {
+    "paper_id": "P0055",
+    "short": "SLEDGE",
+    "raw_md": "papers/raw_md/P0055_SLEDGE/P0055_SLEDGE.raw.md",
+    "exists": true,
+    "chars": 53064,
+    "repo_urls": [
+      {
+        "url": "https://github.com/autonomousvision/sledge",
+        "line": 5,
+        "context": "University of Tübingen Tübingen AI Center https://github.com/autonomousvision/sledge",
+        "source": "raw markdown",
+        "code_context": true
+      }
+    ],
+    "project_pages": [],
+    "tag_counts": {
+      "planning": 21,
+      "world-model": 0,
+      "interactive": 0,
+      "reactive": 3,
+      "trajectory-prediction": 0,
+      "trajectory-scorer": 0,
+      "closed-loop": 0,
+      "counterfactual": 0,
+      "end-to-end": 2,
+      "evaluation": 6,
+      "action-conditioned": 0,
+      "diffusion": 0,
+      "reward-model": 0,
+      "OOD": 0,
+      "autoregressive": 2,
+      "benchmark": 7,
+      "latent-world-model": 0,
+      "open-loop": 2,
+      "representation": 34,
+      "risk": 1,
+      "safety": 4
+    },
+    "proposed_tags": [
+      "representation",
+      "planning",
+      "benchmark",
+      "evaluation"
+    ],
+    "mojibake": 0,
+    "image_refs": 8
+  },
+  "P0056": {
+    "paper_id": "P0056",
+    "short": "DriveArena",
+    "raw_md": "papers/raw_md/P0056_DriveArena/P0056_DriveArena.raw.md",
+    "exists": true,
+    "chars": 73497,
+    "repo_urls": [
+      {
+        "url": "https://github.com/PJLab-ADG/DriveArena",
+        "line": 19,
+        "context": "This paper presented DRIVEARENA, the first highfidelity closed-loop simulation system designed for driving agents navigating in real scenarios. DRIVEARENA features a flexible, modular architecture, al",
+        "source": "raw markdown",
+        "code_context": false
+      }
+    ],
+    "project_pages": [
+      "https://pjlab-adg.github.io/DriveArena/"
+    ],
+    "tag_counts": {
+      "planning": 13,
+      "world-model": 8,
+      "interactive": 5,
+      "reactive": 1,
+      "trajectory-prediction": 0,
+      "trajectory-scorer": 0,
+      "closed-loop": 56,
+      "counterfactual": 0,
+      "end-to-end": 10,
+      "evaluation": 27,
+      "action-conditioned": 0,
+      "diffusion": 33,
+      "reward-model": 0,
+      "OOD": 0,
+      "autoregressive": 2,
+      "benchmark": 5,
+      "latent-world-model": 0,
+      "open-loop": 30,
+      "representation": 3,
+      "risk": 0,
+      "safety": 2
+    },
+    "proposed_tags": [
+      "closed-loop",
+      "diffusion",
+      "open-loop",
+      "evaluation"
+    ],
+    "mojibake": 0,
+    "image_refs": 9
+  },
+  "P0057": {
+    "paper_id": "P0057",
+    "short": "UniAD",
+    "raw_md": "papers/raw_md/P0057_UniAD/P0057_UniAD.raw.md",
+    "exists": true,
+    "chars": 59418,
+    "repo_urls": [
+      {
+        "url": "https://github.com/OpenDriveLab/UniAD",
+        "line": 5,
+        "context": "<sup>1</sup> OpenDriveLab and OpenGVLab, Shanghai AI Laboratory <sup>2</sup> Wuhan University <sup>3</sup> SenseTime Research <sup>∗</sup>Equal contribution <sup>†</sup>Project lead https://github.com",
+        "source": "raw markdown",
+        "code_context": true
+      }
+    ],
+    "project_pages": [],
+    "tag_counts": {
+      "planning": 54,
+      "world-model": 0,
+      "interactive": 0,
+      "reactive": 0,
+      "trajectory-prediction": 4,
+      "trajectory-scorer": 0,
+      "closed-loop": 2,
+      "counterfactual": 0,
+      "end-to-end": 26,
+      "evaluation": 1,
+      "action-conditioned": 0,
+      "diffusion": 0,
+      "reward-model": 0,
+      "OOD": 0,
+      "autoregressive": 0,
+      "benchmark": 3,
+      "latent-world-model": 0,
+      "open-loop": 0,
+      "representation": 10,
+      "risk": 1,
+      "safety": 4
+    },
+    "proposed_tags": [
+      "planning",
+      "end-to-end",
+      "representation"
+    ],
+    "mojibake": 0,
+    "image_refs": 3
+  },
+  "P0058": {
+    "paper_id": "P0058",
+    "short": "VAD",
+    "raw_md": "papers/raw_md/P0058_VAD/P0058_VAD.raw.md",
+    "exists": true,
+    "chars": 52017,
+    "repo_urls": [
+      {
+        "url": "https://github.com/hustvl/VAD",
+        "line": 13,
+        "context": "Autonomous driving requires a comprehensive understanding of the surrounding environment for reliable trajectory planning. Previous works rely on dense rasterized scene representation (e.g., agent occ",
+        "source": "raw markdown",
+        "code_context": false
+      }
+    ],
+    "project_pages": [],
+    "tag_counts": {
+      "planning": 115,
+      "world-model": 0,
+      "interactive": 0,
+      "reactive": 0,
+      "trajectory-prediction": 1,
+      "trajectory-scorer": 0,
+      "closed-loop": 5,
+      "counterfactual": 0,
+      "end-to-end": 27,
+      "evaluation": 4,
+      "action-conditioned": 0,
+      "diffusion": 0,
+      "reward-model": 0,
+      "OOD": 0,
+      "autoregressive": 1,
+      "benchmark": 3,
+      "latent-world-model": 0,
+      "open-loop": 5,
+      "representation": 42,
+      "risk": 0,
+      "safety": 11
+    },
+    "proposed_tags": [
+      "representation",
+      "planning",
+      "end-to-end",
+      "safety"
+    ],
+    "mojibake": 0,
+    "image_refs": 7
+  },
+  "P0059": {
+    "paper_id": "P0059",
+    "short": "DiffusionDrive",
+    "raw_md": "papers/raw_md/P0059_DiffusionDrive/P0059_DiffusionDrive.raw.md",
+    "exists": true,
+    "chars": 53783,
+    "repo_urls": [],
+    "project_pages": [],
+    "tag_counts": {
+      "planning": 40,
+      "world-model": 2,
+      "interactive": 0,
+      "reactive": 1,
+      "trajectory-prediction": 3,
+      "trajectory-scorer": 0,
+      "closed-loop": 3,
+      "counterfactual": 0,
+      "end-to-end": 31,
+      "evaluation": 8,
+      "action-conditioned": 0,
+      "diffusion": 166,
+      "reward-model": 0,
+      "OOD": 0,
+      "autoregressive": 0,
+      "benchmark": 6,
+      "latent-world-model": 1,
+      "open-loop": 3,
+      "representation": 8,
+      "risk": 0,
+      "safety": 0
+    },
+    "proposed_tags": [
+      "end-to-end",
+      "diffusion",
+      "planning",
+      "evaluation"
+    ],
+    "mojibake": 0,
+    "image_refs": 6
+  },
+  "P0060": {
+    "paper_id": "P0060",
+    "short": "DrivoR",
+    "raw_md": "papers/raw_md/P0060_DrivoR/P0060_DrivoR.raw.md",
+    "exists": true,
+    "chars": 55801,
+    "repo_urls": [],
+    "project_pages": [],
+    "tag_counts": {
+      "planning": 21,
+      "world-model": 3,
+      "interactive": 0,
+      "reactive": 3,
+      "trajectory-prediction": 3,
+      "trajectory-scorer": 0,
+      "closed-loop": 9,
+      "counterfactual": 0,
+      "end-to-end": 23,
+      "evaluation": 7,
+      "action-conditioned": 0,
+      "diffusion": 4,
+      "reward-model": 0,
+      "OOD": 0,
+      "autoregressive": 1,
+      "benchmark": 16,
+      "latent-world-model": 1,
+      "open-loop": 0,
+      "representation": 12,
+      "risk": 1,
+      "safety": 7
+    },
+    "proposed_tags": [
+      "end-to-end",
+      "planning",
+      "benchmark",
+      "representation"
+    ],
+    "mojibake": 0,
+    "image_refs": 6
+  }
+}
