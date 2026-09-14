@@ -1,8 +1,8 @@
 # START_HERE — WAM Research Brain
 
-**Purpose:** a fresh GPT-5.6 Sol session should recover the project direction and current stage in under a minute without reconstructing old chats.
+**Purpose:** a fresh GPT-5.6 Sol session should recover the project direction and active scientific task in under a minute without reconstructing old chats.
 
-Last updated: 2026-09-14 — Wave 3 active
+Last updated: 2026-09-14 — Wave 3 active through DriveLaW
 
 ## 1. Research north star
 
@@ -14,11 +14,7 @@ Planning is the center of gravity. Perception, video generation, JEPA/latent pre
 
 **Risk field is NOT a required destination.** Prior risk/predictive-risk expertise is an optional capability pool, not a research commitment.
 
-## 2. Methodological reset
-
-The project previously moved too quickly from a small paper set to candidate gaps. That workflow is suspended.
-
-Active rule:
+## 2. Methodological rule
 
 ```text
 UNDERSTAND THE FIELD FIRST
@@ -27,7 +23,7 @@ UNDERSTAND THE FIELD FIRST
 → only then research-problem / gap discovery
 ```
 
-P1/P2-R/P3 are parked historical probes and do not organize the reading program.
+P1/P2-R/P3 are parked historical probes. No gap declaration or method design is authorized yet.
 
 ## 3. Current stage
 
@@ -35,7 +31,7 @@ P1/P2-R/P3 are parked historical probes and do not organize the reading program.
 FIELD RECONSTRUCTION — PHASE B: WAVE 3 ACTIVE
 ```
 
-Phase A is complete at census depth:
+Phase A:
 
 ```text
 60 stable IDs: P0001–P0060
@@ -46,114 +42,130 @@ broad ingestion FROZEN
 25 representative anchors FIXED
 ```
 
-Wave 1 and Wave 2 are closed. Their evidence is now a binding baseline for Wave 3.
+Wave 1 and Wave 2 are closed.
 
-## 4. What must not be collapsed
+## 4. Binding field distinctions from Waves 1–2
 
-The planning-centric taxonomy distinguishes:
+Do not collapse:
 
 ```text
-WM for controllable generation
+controllable generation
 != predictive pretraining
 != auxiliary future supervision
 != online hidden future representation
 != candidate-specific future evaluator
 != joint world-action generation
-!= WM as an RL imagination environment
+!= WM as RL imagination environment
 ```
 
 Also:
 
 ```text
-VLA/VLM planner != automatically a world model
-multimodal trajectory planner != automatically a world model
-candidate scorer != automatically a world model
-visual simulator realism != behavioral-agent realism
+conditional future != causal/interventional response
 action-conditioned != reactively supervised
 candidate-specific output != candidate-specific oracle supervision
+multimodal trajectory planner != automatically a WM
+candidate scorer != automatically a WM
+world fidelity != decision utility
+longer horizon != better planning
+generation quality != planning evidence
+WM-assisted planning != online model-based planning
 ```
 
-Evaluation regimes remain distinct:
+Evaluation regimes remain distinct: nuScenes open-loop logs; nuPlan OL/CL-NR/CL-R; NAVSIM non-reactive pseudo-simulation; Bench2Drive interactive CARLA closed loop; HUGSIM reconstructed photorealistic closed loop; real-vehicle closed loop remains sparse.
+
+## 5. Wave-2 baseline
+
+Read when needed:
 
 ```text
-nuScenes-style open-loop logs
-nuPlan OL / CL-NR / CL-R
-NAVSIM non-reactive pseudo-simulation
-Bench2Drive CARLA interactive closed loop
-HUGSIM photorealistic reconstructed closed loop
-standardized real-vehicle closed loop (currently sparse)
+landscape/PHASE_B_WAVE2_SYNTHESIS.md
+landscape/PHASE_B_WAVE2_COMPARABILITY_AUDIT.md
+audits/literature/PHASE_B_WAVE2_INTERFACE_CODE_AUDIT.md
 ```
 
-## 5. Closed-wave baseline
-
-### Wave 1 — historical/non-WM/evaluation controls
-
-Artifacts:
-
-- `landscape/PHASE_B_WAVE1_SYNTHESIS.md`
-- `landscape/PHASE_B_WAVE1_COMPARABILITY_AUDIT.md`
-
-Stable controls include: conditional prediction is not intervention; candidate ranking is an independent bottleneck; multimodal action generation is not automatically WM; prediction accuracy is not planning evidence; final planner gains must be decomposed; benchmark regime changes claim semantics.
-
-### Wave 2 — world representation and planning interfaces
-
-Artifacts:
-
-- `landscape/PHASE_B_WAVE2_SYNTHESIS.md`
-- `landscape/PHASE_B_WAVE2_COMPARABILITY_AUDIT.md`
-- `audits/literature/PHASE_B_WAVE2_INTERFACE_CODE_AUDIT.md`
-
-Stable result:
+Stable role map:
 
 ```text
 GAIA-1   = controllable generation; no operational planner interface
 Drive-WM = candidate → visual future → perception/reward → selection
 OccWorld = joint future occupancy + ego generation
 WoTE     = candidate → future BEV → learned reward → selection
-ViDAR    = future prediction as representation pretraining
-LAW      = action-aware future-latent auxiliary representation shaping
+ViDAR    = predictive pretraining
+LAW      = action-aware future-latent representation shaping
 ```
 
-Key corrections:
+Key evidence: better OccWorld reconstruction can worsen forecasting/planning; WoTE future state adds value over scorer-only but audited PDM alternative-action targets share logged surrounding-agent futures; ViDAR future decoder is not deployed; LAW future latent is training supervision, not test-time plan input.
 
-- better generation/reconstruction quality is not automatically better planning;
-- longer future horizon is not automatically better planning;
-- an online candidate-conditioned model may still lack reactive per-action oracle supervision;
-- a world-model loss can improve planning while the predicted future is absent from the deployed decision path.
+## 6. Wave 3 — current scientific state
 
-## 6. Immediate task — Wave 3
+Canonical files:
 
-Canonical plan:
+```text
+landscape/PHASE_B_WAVE3_PLAN.md
+landscape/PHASE_B_WAVE3_SYNTHESIS.md
+```
 
-`landscape/PHASE_B_WAVE3_PLAN.md`
+Status:
 
-Read comparatively in this order:
+```text
+Epona       = COMPLETE first pass
+DrivingGPT  = COMPLETE first pass
+DriveLaW    = COMPLETE first pass
+Auto-JEPA   = NEXT
+DA-WAM      = PENDING
+Think2Drive = PENDING
+```
+
+World-action unification already splits into:
 
 ```text
 Epona
-→ DrivingGPT
-→ DriveLaW
-→ Auto-JEPA
-→ DA-WAM
-→ Think2Drive
+= shared historical latent F
+→ separate trajectory/video diffusion generators
+→ visual generation can be disabled for planning
+
+DrivingGPT
+= interleaved discrete image/action language
+→ one causal next-token Transformer
+
+DriveLaW
+= Video-DiT internal denoising latent
+→ direct condition for Action DiT
+→ online generative hidden state becomes planner representation
 ```
 
-Wave-3 goal: understand what “world-action unification” actually means across:
+Important DriveLaW evidence:
 
 ```text
-shared latent / joint training
-interleaved world-action token generation
-hidden WM feature → action generation
-compressed planning-oriented predictive target
-candidate-specific future latent → scoring
-Dreamer-style WM → imagined RL policy learning
+video-pretraining scale: 85.9 → 87.0 → 87.8 → 89.1 PDMS
+BEV / VLM / video-latent condition: 84.1 / 86.5 / 89.1
+Video-DiT denoise state t=1 / 5 / 10: 89.1 / 86.9 / 23.2
 ```
 
-Start with **Epona ↔ DrivingGPT**, then use DriveLaW as the next bridge. Build one comparison matrix; do not create six isolated summaries.
+Interpret this as representation-state-specific planning utility, not as a universal fidelity law.
 
-## 7. Deep-read evidence discipline
+Do not rank Epona/DrivingGPT/DriveLaW by headline PDMS without matched split/input/training conditions.
 
-Use separately:
+## 7. Immediate task
+
+Read `state/NEXT_TASK.md`.
+
+The next paper is **Auto-JEPA**. Compare it directly against:
+
+```text
+OccWorld — better reconstruction can be worse for planning
+LAW      — predictive supervision can help without online rollout; longer horizon not monotonic
+DriveLaW — online WM hidden state can be useful, but exact latent choice matters sharply
+```
+
+Question to answer: what future information does Auto-JEPA preserve/discard, what survives at inference, and what matched evidence shows planning-oriented compression rather than generic auxiliary/pretraining benefit?
+
+Then continue `DA-WAM → Think2Drive`.
+
+## 8. Evidence discipline
+
+Always separate:
 
 ```text
 AUTHOR CLAIM
@@ -166,24 +178,14 @@ Always ask:
 ```text
 What exactly is predicted?
 What gets direct supervision?
-What future target source exists for alternative actions?
+What is the supervision source for alternative actions?
 What survives at inference?
 How does planning consume it?
-What alternative mechanism could explain the gain?
+What competing mechanism explains the gain?
 What evaluation regime supports the claim?
 ```
 
-Every anchor must receive both its strongest evidence and strongest limitation.
-
-## 8. Still forbidden
-
-```text
-no gap declaration yet
-no method design yet
-no broad paper accumulation
-no P2-R/P3 rescue program
-no forced risk-field insertion
-```
+Every anchor gets both strongest evidence and strongest limitation.
 
 ## 9. Fast new-session read order
 
@@ -191,13 +193,12 @@ no forced risk-field insertion
 1. START_HERE.md
 2. state/CURRENT_STATE.md
 3. state/NEXT_TASK.md
-4. landscape/FIELD_ATLAS.md
-5. landscape/PHASE_B_ANCHORS.md
-6. landscape/PHASE_B_WAVE2_COMPARABILITY_AUDIT.md
-7. landscape/PHASE_B_WAVE3_PLAN.md
+4. landscape/PHASE_B_WAVE3_PLAN.md
+5. landscape/PHASE_B_WAVE3_SYNTHESIS.md
+6. landscape/PHASE_B_WAVE2_COMPARABILITY_AUDIT.md  # only as control when needed
 ```
 
-Then read only the primary texts required for the active Wave-3 comparison.
+Then read only the primary texts needed for the active comparison.
 
 ## 10. Source hierarchy
 
@@ -214,7 +215,7 @@ If raw MD is ambiguous, verify against the official/canonical PDF rather than gu
 
 ## 11. Division of labor
 
-**GPT-5.6 Sol:** comparative anchor deep reads, cross-paper synthesis, atlas/cards/state maintenance, scientific judgement.
+**GPT-5.6 Sol:** comparative anchor deep reads, cross-paper synthesis, atlas/cards/state maintenance, targeted source audit only when decision-critical.
 
 **Local corpus agent:** on-demand acquisition/extraction, MinerU/QC, local code execution, datasets/checkpoints/experiments.
 
