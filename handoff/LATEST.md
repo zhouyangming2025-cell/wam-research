@@ -1,6 +1,6 @@
 # LATEST — Handoff
 
-Session: 2026-09-14 — Wave 1 and Wave 2 closed; Wave 3 active through DriveLaW.
+Session: 2026-09-14 — Waves 1–4 closed; Phase-C field synthesis first pass complete; Phase D next.
 
 ## New-session fast path
 
@@ -8,9 +8,9 @@ Session: 2026-09-14 — Wave 1 and Wave 2 closed; Wave 3 active through DriveLaW
 1. START_HERE.md
 2. state/CURRENT_STATE.md
 3. state/NEXT_TASK.md
-4. landscape/PHASE_B_WAVE2_COMPARABILITY_AUDIT.md
-5. landscape/PHASE_B_WAVE3_PLAN.md
-6. landscape/PHASE_B_WAVE3_SYNTHESIS.md
+4. landscape/PHASE_C_WAVES1_4_FIELD_SYNTHESIS.md
+5. audits/literature/RESEARCH_QA_GATE_CLOSEOUT.md
+6. landscape/PHASE_B_WAVE4_SYNTHESIS.md
 ```
 
 Do not default to P2-R/P3. Do not reload the whole corpus or old chats by default.
@@ -29,137 +29,143 @@ Active methodology:
 UNDERSTAND FIELD FIRST
 → comparative deep reads
 → cross-family synthesis
-→ only then research-problem discovery
+→ adversarial problem discovery
+→ falsification
+→ only then method design
 ```
 
-No gap/method selection is authorized yet.
-
-## Phase-A / corpus status
+## Corpus / reconstruction status
 
 ```text
 P0001–P0060 = 60 registered
 58 RAW_MD_READY
 F1–F11 coverage = PASS
 broad acquisition = FROZEN
-25 Phase-B anchors = FIXED
+
+Wave 1            CLOSED
+Wave 2            CLOSED
+Wave 3            CLOSED
+Research QA Gate  CLOSED
+Wave 4            CLOSED
+Phase C synthesis COMPLETE FIRST PASS
+Phase D           NEXT
 ```
 
-## Wave 1 — CLOSED
+## Canonical Phase-C synthesis
 
-Historical/non-WM/evaluation baseline is stable. Key controls: conditional future ≠ intervention; candidate ranking is an independent bottleneck; multimodal action generation ≠ WM; prediction accuracy ≠ planning evidence; benchmark regime changes claim semantics.
+`landscape/PHASE_C_WAVES1_4_FIELD_SYNTHESIS.md`
 
-Artifacts:
-
-- `landscape/PHASE_B_WAVE1_SYNTHESIS.md`
-- `landscape/PHASE_B_WAVE1_COMPARABILITY_AUDIT.md`
-
-## Wave 2 — CLOSED
-
-Artifacts:
-
-- `landscape/PHASE_B_WAVE2_SYNTHESIS.md`
-- `landscape/PHASE_B_WAVE2_COMPARABILITY_AUDIT.md`
-- `audits/literature/PHASE_B_WAVE2_INTERFACE_CODE_AUDIT.md`
-
-Stable distinctions:
+Its central field map is:
 
 ```text
-CONTROLLABLE GENERATION != PLANNING INTERFACE
-JOINT WORLD-ACTION GENERATION != CANDIDATE CONSEQUENCE EVALUATION
-ACTION-CONDITIONED != REACTIVELY SUPERVISED
-WM-ASSISTED PLANNING != ONLINE MODEL-BASED PLANNING
-WORLD FIDELITY != DECISION UTILITY
-LONGER HORIZON != BETTER PLANNING
-CANDIDATE-SPECIFIC OUTPUT != CANDIDATE-SPECIFIC ORACLE SUPERVISION
+I1 training-only predictive shaping
+I2 online predictive state → direct planner
+I3 joint world-action generation
+I4 planning-oriented future compression
+I5 candidate consequence evaluation
+I6 imagined environment for policy learning
+I7 learned interactive simulator
 ```
 
-Important evidence: OccWorld reconstruction/planning counterexample; WoTE `81.0→83.2→85.6` future-state ablation plus fixed-log PDM supervision semantics; ViDAR predictive-pretraining transfer; LAW source-verified training-only future-latent role.
+Planning-centric WAM is therefore not one architecture; the key variable is where predictive/world information enters the decision process.
 
-## Wave 3 — ACTIVE
-
-Canonical files:
+## Stable project-wide distinctions
 
 ```text
-landscape/PHASE_B_WAVE3_PLAN.md
-landscape/PHASE_B_WAVE3_SYNTHESIS.md
+world prediction quality != planning evidence
+future information is not automatically beneficial
+world completeness != decision relevance
+candidate-specific output != candidate-specific observed counterfactual supervision
+WM-assisted planning != online model-based planning
+action conditioning != reactive supervision != counterfactual truth
+closed-loop must be decomposed into feedback channels
+sensor photorealism != behavioral realism
+log realism != reactive robustness
+simulator quality != planner quality
 ```
 
-Status:
+## Wave-4 feedback coordinate system
 
 ```text
-Epona       = COMPLETE first pass
-DrivingGPT  = COMPLETE first pass
-DriveLaW    = COMPLETE first pass
-Auto-JEPA   = NEXT
-DA-WAM      = PENDING
-Think2Drive = PENDING
+F_e = ego-state / dynamics feedback
+F_s = sensor / viewpoint feedback
+F_a = surrounding-agent state feedback
+F_b = surrounding-agent behavioral-response feedback
 ```
 
-### Stable Wave-3 result so far
-
-`world-action unification` already has three distinct meanings:
+Key placements:
 
 ```text
-Epona
-= shared historical latent F
-→ separate TrajDiT / VisDiT
-→ visual generation can be disabled for planning
-
-DrivingGPT
-= interleaved image/action token language
-→ one causal autoregressive Transformer
-→ one next-token objective
-
-DriveLaW
-= Video-DiT denoising latent
-→ direct conditioning of Action DiT
-→ online generator hidden state becomes planner representation
+Bench2Drive    = standardized interactive CARLA policy benchmark
+HUGSIM         = reconstructed photorealistic closed-loop simulator + external actor behavior
+ORION          = VLA semantic/reasoning planner; no explicit world rollout
+ReactSim-Bench = learned behavior-WM reactivity benchmark under off-log ego behavior
+CausalDrive    = real-time learned action-conditioned reactive visual simulator
 ```
 
-Do not numerically rank their headline PDMS as a matched progression. DrivingGPT reports navmini while Epona/DriveLaW report different NAVSIM test/Navtest conditions; inputs/training also differ.
-
-### DriveLaW evidence to preserve
+ReactSim/CausalDrive boundary:
 
 ```text
-video-pretraining scale:
-0 / 76k / 3.8M / 7.6M samples
-PDMS 85.9 / 87.0 / 87.8 / 89.1
-
-representation condition:
-BEV 84.1
-VLM hidden 86.5
-Video latent 89.1
-
-denoising state:
-t=1 89.1
-t=5 86.9
-t=10 23.2
+REALISM / LOG-LIKENESS
+!= REACTIVE FEASIBILITY
+!= COUNTERFACTUAL BEHAVIORAL TRUTH
 ```
 
-Interpret the denoising ablation conservatively: planning depends sharply on which internal generative state is used; it does not alone prove a universal `lower visual fidelity = better planning` rule.
+## Important QA facts
 
-NAVSIM remains non-reactive pseudo-simulation even when papers call PDMS a closed-loop metric.
+```text
+LAW predicted future latent not consumed for current test-time action selection = CODE VERIFIED
+WoTE audited target path uses fixed logged surrounding futures                 = CODE VERIFIED
+DA-WAM directly supervises observed future only for expert-matched candidate  = PAPER VERIFIED
+DriveLaW Stage-3 updates both Video DiT and Action/Planning DiT                = PAPER + CODE VERIFIED
+DrivingGPT exact optimized NAVSIM runtime decode path                          = UNRESOLVED
+```
+
+## Phase-C evidence gaps — not research gaps
+
+```text
+1. real alternative-action surrounding-agent ground truth
+2. reactive simulator quality → planner decision quality
+3. simultaneous sensor-realistic + behaviorally validated closed loop
+4. intervention-conditioned uncertainty calibration
+5. long-horizon compounding under ego/sensor/agent/model feedback
+6. compute-normalized planning benefit
+7. representation semantics vs scale/capacity
+8. real-vehicle closed-loop validation
+9. standardized feedback-semantic reporting
+10. planner robustness to world-model error
+```
+
+No item is selected as the research problem.
 
 ## Immediate next task
 
 Read `state/NEXT_TASK.md`.
 
-Deep-read **Auto-JEPA** against OccWorld, LAW and DriveLaW to determine whether deliberately compressed predictive representations provide planning value beyond dense reconstruction/generation or generic auxiliary supervision.
-
-Then continue:
+Execute **Phase D — Adversarial Problem Discovery** and create:
 
 ```text
-DA-WAM → Think2Drive
+landscape/PHASE_D_PROBLEM_DISCOVERY_ROUND1.md
 ```
+
+Use 5–8 candidate problem statements maximum. Every candidate must be attacked by historical precedent, strongest current method, strongest non-WM explanation, counterexample, measurement feasibility and realistic evaluation relevance.
+
+Verdicts:
+
+```text
+SURVIVES / WEAK / KILLED / EVIDENCE INSUFFICIENT
+```
+
+No method proposals in Round 1.
 
 ## Still forbidden
 
 ```text
-no gap declaration
 no method design
 no broad paper accumulation
-no P2-R/P3 rescue
+no automatic P2-R/P3 revival
 no forced risk-field insertion
+no gap declaration from a missing module or missing metric alone
 ```
 
 The repo, not conversation memory, is the canonical research authority.
