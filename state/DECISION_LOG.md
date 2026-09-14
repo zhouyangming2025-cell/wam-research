@@ -4,6 +4,61 @@ Newest entry first.
 
 ---
 
+## 2026-09-14 — Waves 1–4 field reconstruction synthesized; Phase D authorized
+
+**Decision**
+
+The representative-anchor field reconstruction is sufficiently complete at first-pass level to move from understanding the field into adversarial problem discovery.
+
+```text
+Wave 1            CLOSED
+Wave 2            CLOSED
+Wave 3            CLOSED
+Research QA Gate  CLOSED
+Wave 4            CLOSED
+Phase C synthesis COMPLETE FIRST PASS
+Phase D           AUTHORIZED
+```
+
+Canonical synthesis:
+
+- `landscape/PHASE_C_WAVES1_4_FIELD_SYNTHESIS.md`
+- `landscape/PHASE_B_WAVE4_SYNTHESIS.md`
+
+**Stable field-level result**
+
+Planning-centric WAM is not one architecture. The relevant scientific variable is where predictive/world information enters the decision process:
+
+```text
+training-only predictive shaping
+online predictive state → direct planner
+joint world-action generation
+planning-oriented future compression
+candidate action → predicted future → score
+learned world → policy imagination
+learned interactive simulator
+```
+
+The synthesis also fixes the main evidence distinctions:
+
+```text
+world completeness != decision relevance
+action conditioning != reactive supervision != counterfactual truth
+candidate-specific output != candidate-specific observed counterfactual supervision
+closed-loop != one feedback regime
+sensor photorealism != behavioral realism
+log realism != reactive robustness
+simulator quality != planner decision quality
+```
+
+**Problem-discovery authorization boundary**
+
+Phase D may now evaluate recurring tensions/evidence gaps as candidate research problems, but no item is preselected. Every candidate must survive historical prior art, strong non-WM controls, simpler explanations, counterexamples, measurement feasibility and realistic closed-loop relevance.
+
+Method design remains forbidden until a problem survives falsification.
+
+---
+
 ## 2026-09-14 — Wave 2 closed; Wave 3 authorized
 
 **Decision**
