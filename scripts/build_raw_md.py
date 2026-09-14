@@ -81,6 +81,12 @@ PAPERS = [
     ("P0058", "VAD"),
     ("P0059", "DiffusionDrive"),
     ("P0060", "DrivoR"),
+    # --- Phase C.5 Core-WAM batch ---
+    ("P0061", "SeerDrive"),
+    ("P0062", "Metis"),
+    ("P0063", "DynFlowDrive"),
+    ("P0064", "Discrete-WAM"),
+    ("P0065", "GraphWorld"),
     ("P0021", "HydraMDP"),        # F10 strong non-WM control
     ("P0022", "DriveSuprim"),     # F10 strong non-WM control
     ("P0023", "iPad"),            # F10 strong non-WM control

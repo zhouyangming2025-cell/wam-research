@@ -109,6 +109,17 @@ EXPECT = {
               "Liao", ["Chen", "Yin", "Jiang", "Wang", "Yan", "Zhang", "Li", "Zhang", "Zhang", "Wang"]),
     "P0060": ("DrivoR", "Driving on Registers",
               "Kirby", ["Boulch", "Xu", "Yin", "Puy", "Zablocki", "Bursuc", "Gidaris", "Marlet", "Bartoccioni", "Cao", "Samet"]),
+    # --- Phase C.5 Core-WAM batch ---
+    "P0061": ("SeerDrive", "Future-Aware End-to-End Driving: Bidirectional Modeling of Trajectory Planning and Scene Evolution",
+              "Zhang", ["Song", "Li", "Zhu", "Deng", "Zhang"]),
+    "P0062": ("Metis", "Metis: A Generalizable and Efficient World-Action Model for Autonomous Driving and Urban Navigation",
+              "Li", ["Liu", "Hu", "Wu", "Ma", "Han", "Hao", "Liu", "Zhan", "Deng", "Zhu", "Zhang"]),
+    "P0063": ("DynFlowDrive", "DynFlowDrive: Flow-Based Dynamic World Modeling for Autonomous Driving",
+              "Liu", ["Li", "Wang", "Chen", "Yao", "Zhu"]),
+    "P0064": ("Discrete-WAM", "Discrete-WAM: Unified Discrete Vision-Action Token Editing for World-Policy Learning",
+              "Yao", ["Liu", "Jiang", "Zhu", "Guo", "Wang", "Liu", "Cui", "Yang", "Xie", "Zhao", "Chen", "Ye"]),
+    "P0065": ("GraphWorld", "GraphWorld: Long-Horizon Planning with World Models for End-to-End Autonomous Driving",
+              "Song", ["Jia", "Liu", "Yang", "Zhang", "Jia", "Zhao", "Wu", "Xu", "Lv", "Luo"]),
     "P0021": ("HydraMDP", "Hydra-MDP: End-to-end Multimodal Planning with Multi-target Hydra-Distillation", "Li", []),
     "P0022": ("DriveSuprim", "DriveSuprim: Towards Precise Trajectory Selection for End-to-End Planning", "Yao", []),
     "P0023": ("iPad", "iPad: Iterative Proposal-centric End-to-End Autonomous Driving", "Guo", []),
@@ -203,6 +214,13 @@ def main() -> int:
             stem = norm(exp_title.split(":")[0])
             rec["title_match"] = "PARTIAL" if stem and stem in n_head else "NONE"
         rec["first_author_found"] = norm(exp_sur) in n_head
+        # Discrete-WAM intentionally omits the author list from page 1 and
+        # points to the Contributions/Acknowledgments section. The official
+        # arXiv identity page supplies the author list; retain a visible
+        # anomaly instead of treating the document as a title collision.
+        if pid == "P0064" and "seecontributionsandacknowledgments" in n_head:
+            rec["first_author_found"] = "OMITTED_ON_FRONT_PAGE"
+            rec["frontpage_anomaly"] = "FRONTPAGE_AUTHOR_OMITTED"
         rec["extra_authors_found"] = [a for a in extra if norm(a) in n_head]
         rec["verdict"] = ("DOCUMENT_VERIFIED"
                           if rec["title_match"] in ("EXACT", "PARTIAL") and rec["first_author_found"]
