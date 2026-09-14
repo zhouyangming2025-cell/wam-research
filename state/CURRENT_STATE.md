@@ -1,36 +1,16 @@
 # CURRENT_STATE
 
-Last updated: 2026-09-14 — Phase C.5 Core-WAM Coverage Correction ACTIVE; WorldDrive COMPLETE
+Last updated: 2026-09-14 — Phase C.5 ACTIVE; WorldDrive + World4Drive COMPLETE; SeerDrive NEXT
 
 ## Research north star
 
 ```text
-World Model / WAM + End-to-End + Planning-centric autonomous driving
+WAM / World Model + one-stage End-to-End + Planning-centric autonomous driving
 ```
 
-Planning is the center of gravity. Risk/predictive-risk expertise is optional prior knowledge, not a required destination.
+Core 2.2 WAM is primary. WAM+VLA remains secondary/control until core-WAM coverage is stable. Risk/predictive-risk expertise is optional prior knowledge, not a required destination.
 
-## Scope priority correction
-
-The current project distinguishes:
-
-```text
-PRIMARY:
-core WAM / World Model + one-stage end-to-end planning
-
-SECONDARY CONTROL:
-WAM+VLA / VLA-centric planning
-```
-
-VLA papers remain useful as controls, but they should not consume equal priority while the core WAM branch is incomplete.
-
-Canonical correction:
-
-```text
-landscape/PURE_WAM_PRIORITY_CORRECTION.md
-```
-
-## Methodological rule in force
+## Methodology in force
 
 ```text
 FIELD UNDERSTANDING FIRST
@@ -43,17 +23,9 @@ FIELD UNDERSTANDING FIRST
 → method design
 ```
 
-P1/P2-R/P3 remain historical probes and do not organize reading.
+Phase D problem discovery remains **PAUSED**.
 
-## Current active stage
-
-```text
-PHASE C.5 — CORE-WAM COVERAGE CORRECTION
-```
-
-Phase D problem discovery is **PAUSED**.
-
-Completed foundation:
+## Completed foundation
 
 ```text
 Phase A census     CLOSED
@@ -65,29 +37,14 @@ Wave 4             CLOSED
 Phase-C synthesis  COMPLETE FIRST PASS
 ```
 
-The first-pass synthesis remains useful but is not final core-WAM coverage.
+The prior synthesis remains a provisional coordinate system, not final core-WAM coverage.
 
-## Core-WAM correction set
-
-User-provided 2.2 reading map identified:
+## Phase C.5 core-WAM correction progress
 
 ```text
-WorldDrive
-World4Drive
-SeerDrive
-Drive-JEPA
-Metis
-DynFlowDrive
-Discrete-WAM
-GraphWorld
-```
-
-Current progress:
-
-```text
-WorldDrive      COMPLETE — primary paper + official code audit
-World4Drive     NEXT
-SeerDrive       PENDING
+WorldDrive      COMPLETE
+World4Drive     COMPLETE
+SeerDrive       NEXT
 Drive-JEPA      PENDING
 Metis           PENDING
 DynFlowDrive    PENDING
@@ -95,98 +52,134 @@ Discrete-WAM    PENDING
 GraphWorld      PENDING
 ```
 
-Canonical coverage map:
+Canonical coverage:
 
 ```text
 landscape/CORE_WAM_2_2_COVERAGE_AUDIT.md
 ```
 
-## WorldDrive — stable result
-
-Canonical audit:
+Canonical new audits:
 
 ```text
 audits/literature/PHASE_C5_WORLDDRIVE_AUDIT.md
+audits/literature/PHASE_C5_WORLD4DRIVE_AUDIT.md
 ```
 
-Official repo audited at:
+## WorldDrive stable result
+
+Official source audit:
 
 ```text
 TabGuigui/WorldDrive@c375ee1e1fe86ace175609db1ed90fd6db89673b
 ```
 
-Exact mechanism:
+Mechanism:
 
 ```text
-TA-DWM trajectory-conditioned scene-generation pretraining
-→ learn shared vision + motion representation
-→ transfer/freeze visual + trajectory encoders into planner
-→ multi-modal trajectory vocabulary planner creates candidates
-→ frozen TA-DWM generates candidate-conditioned future-latent teachers during FAR training
-→ FAR distills candidate future features + learns PDMS preference ranking
-→ inference uses lightweight distilled future features to score/select trajectories
-→ no full TA-DiT diffusion future rollout at inference
+TA-DWM trajectory-conditioned generative pretraining
+→ transfer/freeze vision + motion representations
+→ multimodal candidate planner
+→ frozen TA-DWM candidate-future latent as FAR training teacher
+→ lightweight distilled future feature + ranking at inference
+→ no full diffusion rollout online
 ```
 
-This introduces a core subtype not explicit enough in the previous taxonomy:
+Subtype:
 
 ```text
 DISTILLED WORLD-MODEL FORESIGHT
 ```
 
-### Strongest matched evidence
-
-Representation inheritance:
+Strongest matched evidence:
 
 ```text
-31.4  no pretrain
-84.9  CogVideoX VAE prior
-85.8  + TA-DWM vision
-86.9  + TA-DWM motion
+31.4 no pretrain
+84.9 generic CogVideoX VAE
+85.8 + TA-DWM vision
+86.9 + TA-DWM motion
+
+86.9 base planner
+87.0 trajectory-only rewarder
+88.1 + distilled future feature
 ```
 
-Interpretation boundary:
+Important boundary: the huge representation jump is dominated by generic video/VAE pretraining; FAR also receives PDMS ranking supervision; alternative-action real future GT is unavailable.
+
+## World4Drive stable result
+
+Official source audit:
 
 ```text
-the dominant jump is generic VAE/video pretraining;
-TA-DWM-specific vision+motion representation contributes the smaller 84.9→86.9 increment.
+ucaszyp/World4Drive@cffb51adeb1f7d02b49c4b74d7262ded62a33ac8
 ```
 
-Future-aware rewarder:
+Mechanism:
 
 ```text
-86.9  base planner
-87.0  + trajectory-feature rewarder
-88.1  + distilled future feature
+current physical latent L_t
++ 6 intention queries
+→ 6 ego trajectories T^k
+→ action tokens A^k
+→ 6 intention-conditioned future world latents L_{t+n}^k
+→ ScoreNet
+→ select trajectory with highest future-latent score at inference
 ```
 
-This is meaningful evidence that candidate-conditioned future representation adds value beyond trajectory-feature-only scoring in the matched WorldDrive setup.
-
-### Supervision / causal boundary
-
-FAR uses both:
+Subtype:
 
 ```text
-TA-DWM latent alignment
-+
-PDMS preference/ranking supervision
+ONLINE LATENT FORESIGHT
 ```
 
-and alternative candidate futures are model-generated; ordinary logged data does not provide real observed surrounding-world futures for every unexecuted ego trajectory.
-
-Thus WorldDrive does not invalidate:
+Training observes only one actual future latent and chooses the predicted mode nearest to it as the target class. Therefore:
 
 ```text
-candidate-specific output != candidate-specific observed counterfactual supervision
+K candidate/intention future outputs
+!=
+K real alternative-action future labels
 ```
 
-### Evaluation boundary
+Strongest matched component evidence:
 
 ```text
-NAVSIM / NAVSIM-v2 = planning evidence under their benchmark semantics
-nuScenes            = open-loop trajectory/collision evaluation
-real-vehicle closed loop = not established
+physical priors + intentions, no WM   0.61 L2 / 0.36 collision
+physical priors + intentions + WM     0.50    / 0.16
 ```
+
+This supports the whole future-latent predictor + world-model-selector mechanism beyond multimodal intentions alone.
+
+Evaluation:
+
+```text
+nuScenes = open-loop planning
+NAVSIM   = non-reactive data-driven planning evaluation under project taxonomy
+```
+
+The released repo source audit verifies the core W4D architecture. A separate clearly identifiable NAVSIM implementation path was not established, so paper-level NAVSIM evidence is kept distinct from source-verified implementation details.
+
+## Emerging core-WAM interface axis
+
+```text
+LAW
+training-only future shaping
+
+WorldDrive
+distilled future foresight
+
+World4Drive
+online compact latent foresight
+
+DriveLaW
+online generative hidden state → action
+
+WoTE
+online future BEV → reward
+
+DA-WAM
+candidate → future latent → scorer
+```
+
+This strengthens the view that the useful planning taxonomy is **where and how future/world information enters action selection**, not simply RGB-vs-BEV-vs-latent.
 
 ## Existing stable field controls retained
 
@@ -194,30 +187,18 @@ real-vehicle closed loop = not established
 world-prediction quality != planning evidence
 future information is not automatically beneficial
 candidate-specific output != candidate-specific observed counterfactual supervision
-WM-assisted planning != full online generative model-based planning
+WM-assisted planning != full online generative rollout
 world completeness != decision relevance
-generative action modeling != world modeling
 candidate ranking/scoring is an independent bottleneck
-closed-loop must be decomposed into feedback channels
-sensor photorealism != behavioral realism
+evaluation regime is part of the claim
 reactive feasibility != counterfactual behavioral truth
-```
-
-WorldDrive strengthens rather than overturns the importance of decomposing:
-
-```text
-representation pretraining
-vs candidate generation
-vs reward/scoring
-vs future representation
-vs online generation cost
 ```
 
 ## Immediate next task
 
 See `state/NEXT_TASK.md`.
 
-Deep-read **World4Drive** from its primary paper + official code, then continue the remaining core-WAM set.
+Deep-read **SeerDrive**, specifically testing whether its claimed bidirectional scene↔planning iteration introduces a genuinely distinct WAM planning interface or mainly re-instantiates older iterative prediction-planning refinement in a future-scene latent space.
 
 ## Still forbidden
 
@@ -226,10 +207,6 @@ no problem/gap declaration
 no method design
 no broad VLA expansion
 no forced risk-field insertion
-no assuming similar paper names are identical
-no treating first-pass Phase-C synthesis as final WAM coverage
 ```
 
-## Research Brain architecture
-
-GitHub is the Research Knowledge Authority. Raw MD + figures are the persistent GPT-readable primary-text layer; canonical PDFs / official public papers remain source authority for decision-critical claims.
+GitHub remains the Research Knowledge Authority; public official papers/repos are primary evidence for decision-critical claims.
