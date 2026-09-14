@@ -92,6 +92,19 @@ def repo_pattern(hosts=REPO_HOSTS) -> str:
             + r")/[A-Za-z0-9_.\-]+/[A-Za-z0-9_.\-]+")
 
 
+def venue_label(kind: str, pdf_url: str) -> str:
+    """Readable venue string in the corpus convention, derived from the url layout, not memory."""
+    if kind == "arXiv":
+        return "arXiv preprint"
+    m = re.search(r"/content[_/]([A-Za-z]+?)[_]?(\d{4})/", pdf_url)
+    if m:
+        return f"{m.group(1).upper()} {m.group(2)}"
+    m = re.search(r"/paper_files/paper/(\d{4})/", pdf_url) or re.search(r"/paper/(\d{4})/", pdf_url)
+    if m:
+        return f"NeurIPS {m.group(1)}"
+    return kind
+
+
 def scan_one(pid: str, short: str, title: str) -> dict:
     path = os.path.join(PAPERS_DIR, f"{pid}_{short}", f"{pid}_{short}.raw.md")
     rec: dict = {"paper_id": pid, "short": short, "raw_md": os.path.relpath(path, BASE).replace(os.sep, "/"),
@@ -248,7 +261,7 @@ def main() -> int:
             entries.append(
                 f'    "{pid}": dict(short={lit(a["short"])},\n'
                 f'                  title={lit(title)},\n'
-                f'                  year={lit(year)}, first_author={lit(first)}, venue={lit(kind.replace("_camera_ready", " camera-ready").replace("arXiv", "arXiv preprint"))},\n'
+                f'                  year={lit(year)}, first_author={lit(first)}, venue={lit(venue_label(kind, a["pdf_url"]))},\n'
                 f'                  arxiv_id={lit(r.get("arxiv_version") and a["pdf_url"].split("/")[-1] or "")}, doi="NONE",\n'
                 f'                  official_url={lit(a["landing_url"])},\n'
                 f'                  code_available={lit(code)}, official_code_url={lit(curl)},\n'
