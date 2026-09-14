@@ -2,137 +2,117 @@
 
 ## 唯一下一任务
 
-> Execute the **Phase-B Wave-4 first comparative block: Bench2Drive → HUGSIM**, using the closed Research QA Gate as the evidence standard.
+> Execute the **Phase-B Wave-4 ORION audit**, using the completed Bench2Drive ↔ HUGSIM feedback decomposition as the control.
 
 Waves 1–3 and the Research QA Gate are closed. Broad corpus acquisition remains frozen.
 
-Canonical plan:
+Canonical Wave-4 artifacts:
 
 ```text
 landscape/PHASE_B_WAVE4_PLAN.md
-```
-
-## Completed immediately before this task
-
-```text
-Priority-A evidence verification A1–A8 = COMPLETE
-Research QA Gate                     = CLOSED
-Wave 4 authorization                 = GRANTED
-```
-
-Canonical QA closeout:
-
-```text
-audits/literature/RESEARCH_QA_GATE_CLOSEOUT.md
-```
-
-Important correction carried forward:
-
-```text
-DriveLaW Stage-3 planner training updates both Video DiT and Planning/Action DiT.
-Do not describe it as a frozen video feature extractor plus separately trained planner.
-```
-
-Explicit unresolved item carried forward:
-
-```text
-DrivingGPT exact optimized NAVSIM decode path = UNRESOLVED because official code link is unavailable.
-Do not assume either mandatory visual-token generation or a planning bypass.
+landscape/PHASE_B_WAVE4_SYNTHESIS.md
+audits/literature/PHASE_B_WAVE4_BENCH2DRIVE_HUGSIM_AUDIT.md
 ```
 
 ## Wave-4 status
 
 ```text
-Bench2Drive      = NEXT
-HUGSIM           = PENDING
-ORION            = PENDING
+Bench2Drive      = COMPLETE
+HUGSIM           = COMPLETE
+ORION            = NEXT
 ReactSim-Bench   = PENDING
 CausalDrive      = PENDING
 Wave 4           = OPEN
 ```
 
-## First comparative block — Bench2Drive → HUGSIM
+## Stable first-block result
 
-The first block must establish a clean evaluation/simulator baseline before reading reactive-WM claims.
+Replace binary `closed-loop` wording with four feedback axes:
 
-### Bench2Drive audit
+```text
+F_e = ego-state / dynamics feedback
+F_s = sensor / viewpoint feedback
+F_a = surrounding-agent state feedback
+F_b = surrounding-agent behavioral-response feedback
+```
+
+Bench2Drive:
+
+```text
+CARLA synthetic sensors
+F_e=yes / F_s=yes / F_a=yes
+F_b=scenario-dependent scripted/adaptive
+```
+
+HUGSIM:
+
+```text
+reconstructed photorealistic sensors
+F_e=yes / F_s=yes / F_a=yes
+F_b=regime-dependent:
+  replay=no
+  IDM/normal=controller-reactive
+  attack=explicit ego-dependent adversarial replanning
+```
+
+Therefore:
+
+```text
+photorealistic sensor realism != behavioral realism
+interactive simulator != learned real-driver response model
+```
+
+## ORION audit
+
+ORION is a VLA/semantic-reasoning control. Do not assume it is a world-model paper.
 
 Trace exactly:
 
 ```text
-1. simulator / CARLA version and benchmark protocol
-2. sensor inputs available to the policy
-3. planner/control outputs
-4. ego feedback loop
-5. surrounding-traffic behavior and whether it responds to ego
-6. scenario/route composition and long-tail events
-7. metrics and infraction semantics
-8. distinction from CARLA Leaderboard v1/v2
-9. policy evaluation frequency / runtime constraints
-10. what Bench2Drive does and does NOT validate about a world model
+1. visual / language / navigation inputs
+2. intermediate reasoning representation
+3. whether reasoning is free-form text, structured token, latent, or supervision-only
+4. trajectory/action representation
+5. exact training stages and supervision sources
+6. whether reasoning representation is consumed by the deployed planner
+7. whether there is any predictive future/world-state module
+8. whether future reasoning is about scene evolution, ego intent, affordance, or language explanation
+9. closed-loop benchmark(s) and exact feedback semantics
+10. strongest matched ablations isolating reasoning/VLA contribution
+11. strongest non-language / non-WM planning baseline
+12. runtime / planning frequency
+13. strongest evidence and strongest alternative explanation
 ```
 
-### HUGSIM audit
-
-Trace exactly:
+Required verdict:
 
 ```text
-1. scene-reconstruction representation
-2. novel-view / sensor rendering mechanism
-3. ego dynamics and pose feedback
-4. surrounding-agent replay / behavior model / reactivity
-5. whether other agents respond to ego deviation
-6. photorealism metrics vs behavioral metrics
-7. planner evaluated inside HUGSIM, if any
-8. closed-loop protocol and runtime
-9. what comes from logged scene reconstruction vs generated behavior
-10. strongest realism claim and strongest boundary
+Is ORION primarily:
+A. VLA planner,
+B. world-model planner,
+C. VLA + predictive world representation,
+or D. another mechanism?
 ```
 
-### Required comparison
+Do not allow terminology such as “reasoning” or “world understanding” to substitute for a traced data/inference path.
 
-Produce one explicit matrix:
-
-| axis | Bench2Drive | HUGSIM |
-|---|---|---|
-| ego feedback | | |
-| sensor feedback | | |
-| surrounding-agent feedback | | |
-| photorealistic rendering | | |
-| learned behavior model | | |
-| policy/planner evaluated | | |
-| main realism target | | |
-
-The synthesis must explain why:
+## After ORION
 
 ```text
-interactive closed-loop policy benchmark
-!=
-photorealistic reconstructed closed-loop simulator
-```
-
-unless the evidence shows their feedback semantics actually coincide.
-
-## Subsequent order
-
-```text
-Bench2Drive → HUGSIM
-→ ORION
-→ ReactSim-Bench
+ReactSim-Bench
 → CausalDrive
 ```
 
-ReactSim-Bench and CausalDrive must not be interpreted until the baseline meaning of feedback/reactivity has been fixed by Bench2Drive/HUGSIM.
-
-## Stop condition for first block
-
-Do not move to ORION until we can state in one unambiguous sentence for both Bench2Drive and HUGSIM:
+Those two papers must be read against both:
 
 ```text
-what the ego controls,
-what changes after the ego acts,
-what the next observation contains,
-and whether surrounding agents behaviorally respond to ego intervention.
+historical interaction controls (M2I / GameFormer / What Truly Matters)
+```
+
+and:
+
+```text
+simulator feedback controls (Bench2Drive / HUGSIM)
 ```
 
 ## Still forbidden
