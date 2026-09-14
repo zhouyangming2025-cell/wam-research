@@ -14,43 +14,30 @@ Planning is the center of gravity. Perception, video generation, JEPA/latent pre
 
 **Risk field is NOT a required destination.** Prior risk/predictive-risk expertise is an optional capability pool, not a research commitment.
 
-## 2. Critical methodological reset
+## 2. Methodological reset
 
-The project previously moved too quickly from a small paper set to candidate gaps (P1/P2-R/P3). That workflow is suspended.
+The project previously moved too quickly from a small paper set to candidate gaps. That workflow is suspended.
 
 Active rule:
 
 ```text
 UNDERSTAND THE FIELD FIRST
-→ reconstruct planning-centric WAM families and historical evolution
-→ understand representations, supervision, planner interfaces, interaction/reactivity and evaluation
-→ identify recurring trade-offs / contradictions / under-measured capabilities
-→ only then reopen research-problem / gap discovery
+→ representative comparative deep reads
+→ cross-family synthesis
+→ only then research-problem / gap discovery
 ```
 
-Canonical plan: `landscape/FIELD_RECONSTRUCTION_PLAN.md`
+P1/P2-R/P3 are parked historical probes and do not organize the reading program.
 
-Taxonomy: `landscape/PLANNING_WAM_TAXONOMY.md`
-
-Living atlas: `landscape/FIELD_ATLAS.md`
-
-## 3. Current hypothesis state
-
-Hypotheses are not driving the reading program.
+## 3. Current stage
 
 ```text
-P1_RETIRED  = retired historical hypothesis
-P2-R        = parked probe — not active search target
-P3          = parked backup probe
+FIELD RECONSTRUCTION — PHASE B: ANCHOR DEEP READS
 ```
 
-## 4. Current active stage
+Phase A is complete at census depth.
 
-```text
-FIELD RECONSTRUCTION — Phase-A closeout
-```
-
-The breadth-acquisition target has been reached:
+Corpus:
 
 ```text
 60 stable IDs: P0001–P0060
@@ -58,80 +45,147 @@ The breadth-acquisition target has been reached:
 2 lawful-source blockers: P0008 NPPC, P0020 Bahram 2016
 ```
 
-So the current task is **not more bulk ingestion**. It is to finish scientific census placement, audit family coverage, freeze Phase A, and select the representative Phase-B deep-read anchors.
+Scientific artifacts:
 
-## 5. Current map status
+- `landscape/CENSUS_PHASE_A_ROUND1.md`
+- `landscape/CENSUS_PHASE_A_ROUND2.md`
+- `landscape/FIELD_ATLAS.md`
+- `landscape/PHASE_B_ANCHORS.md`
 
-`landscape/CENSUS_PHASE_A_ROUND1.md` provisionally places roughly 45 works / benchmarks / controls across the field.
+F1–F11 coverage passes for anchor selection. Broad ingestion is **frozen**.
 
-The local agent has since added full text for:
+## 4. Core field structure established by Phase A
 
-- P0013–P0020 interactive/reactive/counterfactual branch;
-- P0021–P0034 Round-2 coverage works;
-- P0035–P0060 works already named in the Round-1 census.
+Do not collapse the following distinctions:
 
-The infrastructure is ahead of the scientific map. The newly ingested P0021–P0034 still need neutral census placement by GPT/owner.
+```text
+WM for data generation
+!= WM for predictive pretraining
+!= WM as auxiliary future supervision
+!= inference-time future representation
+!= per-candidate future evaluator
+!= joint world-action model
+!= WM as RL training simulator
+```
 
-## 6. Immediate task
+Also:
 
-Read `state/NEXT_TASK.md`.
+```text
+VLA/VLM planner != automatically a world model
+multimodal trajectory planner != automatically a world model
+candidate scorer != automatically a world model
+visual simulator realism != behavioral-agent realism
+```
 
-In short:
+Evaluation regimes remain distinct:
 
-1. census-read P0021–P0034;
-2. create `landscape/CENSUS_PHASE_A_ROUND2.md`;
-3. update `FIELD_ATLAS.md` and run an explicit F1–F11 coverage audit;
-4. add another paper only if a concrete missing family/transition remains;
-5. freeze Phase-A breadth expansion;
-6. select ~15–25 representative Phase-B anchor papers.
+```text
+nuScenes-style open-loop logs
+nuPlan OL / CL-NR / CL-R
+NAVSIM non-reactive pseudo-simulation
+Bench2Drive CARLA interactive closed loop
+HUGSIM photorealistic reconstructed closed loop
+standardized real-vehicle closed loop (currently sparse)
+```
 
-Do not design a method and do not declare a gap during this closeout.
+A key historical correction: the original nuScenes paper is a multimodal scene/perception benchmark, not an end-to-end planning benchmark; later literature retrofits planning protocols onto its logs.
 
-## 7. What the field atlas must eventually explain
+## 5. Phase-B anchor strategy
 
-A mature atlas should answer:
+Canonical set:
 
-1. What are the major planning-centric WAM families and why did each emerge?
-2. What world state does each family predict: video, BEV, occupancy, geometry, objects, latent, trajectory, reward/value, hybrid?
-3. How exactly does future information reach the planner?
-4. Which future/action branches receive real supervision and which are inferred/counterfactual?
-5. How do action conditioning, joint prediction, reactivity, contingency and game-theoretic interaction differ?
-6. What planning outputs are used: direct trajectory, candidate scoring, optimization, control, policy?
-7. What do open-loop, NAVSIM, non-reactive closed-loop, reactive closed-loop, CARLA/Bench2Drive and real-vehicle evidence actually prove?
-8. Which strong end-to-end planners succeed without an explicit world model?
-9. What trade-offs recur across multiple independent method families?
-10. Which common field claims have strong counterexamples?
+`landscape/PHASE_B_ANCHORS.md`
 
-## 8. Fast new-session read order
+25 anchors were selected to explain the field across historical interaction roots, strong non-WM controls, visual/occupancy/latent WMs, world-action models, WM-RL, VLA, reactive simulation and benchmark evolution.
+
+Secondary papers remain in the corpus and are promoted only if an anchor comparison exposes a concrete missing link.
+
+## 6. Immediate task — Wave 1
+
+Read comparatively:
+
+```text
+M2I
+GameFormer
+What Truly Matters in Trajectory Prediction?
+UniAD
+nuPlan
+NAVSIM
+DiffusionDrive
+DriveSuprim
+```
+
+Required output:
+
+`landscape/PHASE_B_WAVE1_SYNTHESIS.md`
+
+Wave 1 must establish the historical/non-WM/evaluation baseline before modern WAM gains are interpreted.
+
+Do **not** produce eight isolated summaries. For each paper trace problem, numerical representation, supervision, inference/planner interface, evaluation evidence, strongest strength, strongest limitation, what is and is not established, then synthesize across papers.
+
+## 7. Deep-read evidence discipline
+
+Use separately:
+
+```text
+AUTHOR CLAIM
+DIRECT EXPERIMENTAL EVIDENCE
+OUR INFERENCE
+```
+
+Always ask:
+
+```text
+What exactly is predicted?
+What gets direct supervision?
+What survives at inference?
+How does planning consume it?
+What alternative mechanism could explain the reported gain?
+What evaluation regime supports the claim?
+```
+
+Every anchor must receive both its strongest evidence and strongest limitation. No paper is a “supporter” or “opponent” of our research direction.
+
+## 8. Still forbidden
+
+```text
+no gap declaration yet
+no method design yet
+no broad paper accumulation
+no P2-R/P3 rescue program
+no forced risk-field insertion
+```
+
+## 9. Fast new-session read order
 
 ```text
 1. START_HERE.md
 2. state/CURRENT_STATE.md
 3. state/NEXT_TASK.md
-4. state/RESEARCH_PRINCIPLES.md
-5. landscape/FIELD_ATLAS.md
-6. landscape/CENSUS_PHASE_A_ROUND1.md
+4. landscape/FIELD_ATLAS.md
+5. landscape/PHASE_B_ANCHORS.md
+6. state/RESEARCH_PRINCIPLES.md
 ```
 
-Then read only the raw MD needed for the active census-placement or anchor-deep-read task.
+Then read only the primary texts required for the current Phase-B wave.
 
-## 9. Source hierarchy
+## 10. Source hierarchy
 
 ```text
-Official/canonical paper PDF = exact source authority
-GitHub raw MD + figures       = GPT-readable primary-text layer
-Paper Card                    = curated paper knowledge
-Field Atlas                   = cross-paper field understanding
-State files                   = canonical project decisions
-Chat                          = temporary reasoning workspace
+Official/canonical PDF       = exact source authority
+GitHub raw MD + figures      = GPT-readable primary-text layer
+Paper Card                   = curated paper understanding
+Field Atlas / wave synthesis = cross-paper understanding
+State files                  = canonical project decisions
+Chat                         = temporary reasoning workspace
 ```
 
-If raw MD is ambiguous, verify against official/canonical PDF rather than guessing.
+If raw MD is ambiguous, verify against the official/canonical PDF rather than guessing.
 
-## 10. Division of labor
+## 11. Division of labor
 
-**GPT-5.6 Sol:** census placement, field synthesis, primary-paper reading, anchor selection/deep reads, atlas/state maintenance, scientific judgement.
+**GPT-5.6 Sol:** comparative anchor deep reads, cross-paper synthesis, atlas/cards/state maintenance, scientific judgement.
 
-**Local corpus agent:** bulk acquisition, canonical local PDF archive, MinerU conversion, metadata/QC, source extraction, local code execution, datasets/checkpoints/experiments.
+**Local corpus agent:** on-demand acquisition/extraction, MinerU/QC, local code execution, datasets/checkpoints/experiments.
 
 The repo — not conversation memory — is the research authority.
