@@ -1,6 +1,6 @@
 # CURRENT_STATE
 
-Last updated: 2026-09-14 — Wave 3 CLOSED; Research QA Gate ACTIVE
+Last updated: 2026-09-14 — Research QA Gate CLOSED; Wave 4 ACTIVE
 
 ## Research north star
 
@@ -27,7 +27,7 @@ P1/P2-R/P3 remain parked historical probes and do not organize the reading progr
 ## Current active stage
 
 ```text
-RESEARCH QA GATE — WAVES 1–3
+FIELD RECONSTRUCTION — PHASE B: WAVE 4 ACTIVE
 ```
 
 Phase A remains closed:
@@ -89,7 +89,7 @@ Canonical artifacts:
 - `landscape/PHASE_B_WAVE2_COMPARABILITY_AUDIT.md`
 - `audits/literature/PHASE_B_WAVE2_INTERFACE_CODE_AUDIT.md`
 
-Stable Wave-2 distinctions:
+Stable distinctions:
 
 ```text
 CONTROLLABLE GENERATION != PLANNING INTERFACE
@@ -105,7 +105,7 @@ High-confidence source facts:
 
 ```text
 LAW test-time path discards predicted future latent  = CODE VERIFIED
-WoTE candidate target-generation uses fixed logged surrounding futures = CODE VERIFIED
+WoTE audited target path uses fixed logged surrounding futures = CODE VERIFIED
 ```
 
 ## Wave 3 — CLOSED
@@ -129,7 +129,7 @@ Canonical artifacts:
 - `audits/literature/PHASE_B_WAVE3_DAWAM_AUDIT.md`
 - `audits/literature/PHASE_B_WAVE3_THINK2DRIVE_AUDIT.md`
 
-### Stable six-way interface map
+Stable six-way interface map:
 
 ```text
 Epona
@@ -160,68 +160,102 @@ Think2Drive
 → learned closed-loop policy
 ```
 
-### Stable Wave-3 conclusions
+Stable Wave-3 conclusions:
 
 1. `world-action unification` is not one architecture; the planning-relevant variable is where predictive/world information enters the decision process.
 2. Architectural coupling strength does not equal planning effect size or causal evidence strength.
 3. Future information has no universal positive sign; representation, horizon, conditioning, planner interface and supervision jointly determine value.
-4. Planning-oriented compression is a real branch of world modeling: Auto-JEPA predicts future ego-motion intent rather than reconstructing a full future scene.
+4. Planning-oriented compression is a real branch: Auto-JEPA predicts future ego-motion intent rather than reconstructing a full future scene.
 5. DA-WAM predicts per-candidate future latents but direct observed-future supervision exists only for the expert-matched candidate.
 6. Think2Drive establishes a distinct role: the WM can act primarily as a latent imagination environment for RL policy learning rather than an online candidate evaluator.
-7. Think2Drive official ECCV 2024 PDF was directly checked for RSSM/imagination mechanism, privileged input and CARLA-v2 test results.
 
-These are field-understanding results, not gap claims.
+QA correction carried forward:
 
-## Research QA Gate — ACTIVE
+```text
+DriveLaW Stage 3 does NOT freeze the Video DiT.
+Paper + official code show trajectory fine-tuning updates both Video DiT and Planning/Action DiT;
+o future synthesis may describe DriveLaW as fixed-video-features + separately trained planner.
+```
+
+DrivingGPT runtime boundary:
+
+```text
+shared interleaved world/action causal sequence = VERIFIED
+exact optimized NAVSIM decode path              = UNRESOLVED
+```
+
+## Research QA Gate — CLOSED
 
 Canonical artifacts:
 
 ```text
 audits/literature/RESEARCH_QA_GATE_WAVES1_3.md
-audits/literature/PDF_VERIFICATION_QUEUE.md
+audits/literature/RESEARCH_QA_PRIORITY_A_PROGRESS.md
+audits/literature/RESEARCH_QA_GATE_CLOSEOUT.md
 ```
 
-Current rule:
+Priority-A outcome:
 
 ```text
-Do not begin Wave 4 until Priority-A evidence is either
-VERIFIED / CORRECTED / explicitly UNRESOLVED.
+A1 Epona      VERIFIED
+A2 OccWorld   VERIFIED
+A3 WoTE       VERIFIED + code boundary
+A4 LAW        VERIFIED + code boundary
+A5 DriveLaW   VERIFIED + CORRECTED Stage-3 semantics
+A6 Auto-JEPA  VERIFIED
+A7 DA-WAM     VERIFIED
+A8 DrivingGPT paper-level VERIFIED / exact runtime UNRESOLVED after public-source exhaustion
 ```
 
-Highest-priority checks:
+Hardened field claims:
 
 ```text
-Epona      joint-vs-trajectory-only ablation
-OccWorld   tokenizer + temporal/spatial ablations + metric footnote
-WoTE       future-state-on/off table
-LAW        action-aware/no-WM + horizon tables
-DriveLaW   pretraining/representation/denoising tables + freeze semantics
-Auto-JEPA  component/K/occlusion evidence
-DA-WAM     future-config ablation + expert-matched future supervision
-DrivingGPT optimized planning decode path
+F-01 world-prediction quality != planning evidence                         STRONGLY SUPPORTED
+F-02 future information is not automatically beneficial                    STRONGLY SUPPORTED
+F-03 candidate-specific output != candidate-specific oracle supervision     STRONGLY SUPPORTED
+F-04 WM-assisted planning != online model-based planning                    STRONGLY SUPPORTED
+F-05 architectural coupling strength != causal-evidence strength            SUPPORTED INFERENCE
+F-06 decision relevance != world completeness                              SUPPORTED FIELD TENSION
 ```
 
-The assistant should use public official PDFs/source code first. User/local PDF help is required only for inaccessible canonical evidence.
+These remain field-understanding results, not research gaps.
+
+## Wave 4 — ACTIVE
+
+Anchors:
+
+```text
+1. Bench2Drive
+2. HUGSIM
+3. ORION
+4. ReactSim-Bench
+5. CausalDrive
+```
+
+Wave-4 purpose: reconstruct the distinctions among:
+
+```text
+sensor / visual realism
+physical scene evolution
+other-agent behavior realism
+ego-action feedback
+reactivity
+closed-loop policy evaluation
+VLA / semantic reasoning
+world-model behavioral validity
+```
+
+The central question is not “which benchmark is best?” but:
+
+```text
+what causal/behavioral claim does each evaluation setup actually support?
+```
 
 ## Immediate next task
 
 See `state/NEXT_TASK.md`.
 
-Execute the Priority-A verification queue, correct any earlier synthesis if needed, then create:
-
-```text
-audits/literature/RESEARCH_QA_GATE_CLOSEOUT.md
-```
-
-Only after QA closeout may Wave 4 begin:
-
-```text
-Bench2Drive
-HUGSIM
-ORION
-ReactSim-Bench
-CausalDrive
-```
+Begin with Bench2Drive → HUGSIM as the evaluation/simulator baseline pair before reading ORION / ReactSim-Bench / CausalDrive.
 
 ## Still forbidden
 
@@ -243,7 +277,6 @@ A fresh session should read:
 START_HERE.md
 state/CURRENT_STATE.md
 state/NEXT_TASK.md
+audits/literature/RESEARCH_QA_GATE_CLOSEOUT.md
 landscape/PHASE_B_WAVE3_CLOSEOUT.md
-audits/literature/RESEARCH_QA_GATE_WAVES1_3.md
-audits/literature/PDF_VERIFICATION_QUEUE.md
 ```
