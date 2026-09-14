@@ -1,6 +1,6 @@
 # CURRENT_STATE
 
-Last updated: 2026-09-14 — Phase-B Wave-1 first comparative pass complete
+Last updated: 2026-09-14 — Wave 1 closed; Wave-2 comparative first pass + interface code audit complete
 
 ## Research north star
 
@@ -26,7 +26,7 @@ P1/P2-R/P3 remain parked historical probes and do not organize the reading progr
 ## Current active stage
 
 ```text
-FIELD RECONSTRUCTION — PHASE B: WAVE 1 IN PROGRESS
+FIELD RECONSTRUCTION — PHASE B: WAVE 2 CLOSEOUT
 ```
 
 Phase A is closed:
@@ -39,16 +39,9 @@ broad acquisition FROZEN
 25 representative Phase-B anchors selected
 ```
 
-Canonical Phase-A artifacts:
+## Wave 1 — CLOSED
 
-- `landscape/CENSUS_PHASE_A_ROUND1.md`
-- `landscape/CENSUS_PHASE_A_ROUND2.md`
-- `landscape/FIELD_ATLAS.md`
-- `landscape/PHASE_B_ANCHORS.md`
-
-## Phase-B Wave 1
-
-Wave 1 anchors:
+Anchors:
 
 ```text
 M2I
@@ -61,44 +54,93 @@ DiffusionDrive
 DriveSuprim
 ```
 
-Current synthesis:
+Canonical artifacts:
 
-`landscape/PHASE_B_WAVE1_SYNTHESIS.md`
+- `landscape/PHASE_B_WAVE1_SYNTHESIS.md`
+- `landscape/PHASE_B_WAVE1_COMPARABILITY_AUDIT.md`
 
-Status:
+Stable control rules carried forward:
+
+1. conditional future response is not automatically causal/interventional response;
+2. final planner score must be decomposed into learned representation, scorer, refinement, optimizer and rules;
+3. matched controls dominate headline SOTA tables;
+4. multimodal/diffusion action generation is not automatically world modeling;
+5. candidate ranking is an independent planning bottleneck;
+6. E2/E3/E4/E5/E6/E7 evaluation regimes are different claims;
+7. world-prediction accuracy alone is not planning evidence.
+
+## Wave 2 — comparative first pass complete
+
+Anchors:
 
 ```text
-comparative first pass = COMPLETE
-historical/control structure = ESTABLISHED
-quantitative comparability audit = PENDING
-Wave-1 final gate = OPEN
+GAIA-1
+Drive-WM
+OccWorld
+WoTE
+ViDAR
+LAW
 ```
 
-## First-pass structural understanding
+Canonical synthesis:
 
-1. **Conditional/interacting futures predate modern WAMs.** M2I explicitly predicts reactor futures conditioned on influencer futures; GameFormer iteratively reasons over agents’ future trajectories and jointly plans ego motion.
-2. **Conditional response is fragile to upstream future error.** M2I’s direct experiment improves substantially with ground-truth influencer future but can underperform marginal prediction when conditioned on a single erroneous predicted influencer future.
-3. **Interaction-aware planning gains are not architecture-pure.** GameFormer’s explicit cost-based refinement contributes a large absolute closed-loop gain; learned interaction and downstream optimization must be separated.
-4. **Prediction metrics can mis-rank downstream driving.** What Truly Matters identifies a dynamics gap and computation/latency effects; static ADE/minADE is not sufficient evidence of planner value.
-5. **Planning-oriented representations existed before WAM framing.** UniAD coordinates tracking/map/motion/occupancy around planning and demonstrates collision-vs-imitation trade-offs.
-6. **Generative planning is not synonymous with world modeling.** DiffusionDrive generates multimodal action trajectories directly; DriveSuprim scores/selects candidates precisely; neither requires an inference-time future world model.
-7. **Evaluation regimes encode different compromises.** nuPlan formalizes OL/CL-NR/CL-R planning evaluation; NAVSIM intentionally removes reactivity to preserve real sensor inputs, scale and simulation-based metrics.
+`landscape/PHASE_B_WAVE2_SYNTHESIS.md`
 
-These are baseline facts/interpretations for later WAM comparison, not research gaps.
+Decision-critical source audit:
+
+`audits/literature/PHASE_B_WAVE2_INTERFACE_CODE_AUDIT.md`
+
+### Main structural result
+
+“World model helps planning” decomposes into different mechanisms:
+
+```text
+GAIA-1   = controllable world generation; no operational planner interface
+Drive-WM = candidate → visual future → perception/reward → selection
+OccWorld = joint future occupancy + ego generation
+WoTE     = candidate → future BEV → learned reward → selection
+ViDAR    = future prediction as representation pretraining
+LAW      = action-aware future-latent auxiliary supervision
+```
+
+These are not interchangeable planning paradigms.
+
+### Strongest Wave-2 evidence/corrections
+
+1. **GAIA-1 establishes controllable generative capability, not planning value.** It does not provide an operational imagined-future planner or planning benchmark.
+2. **Drive-WM makes imagined visual futures an explicit decision object.** But its planning gain is entangled with generated-image perception, reward design and candidate quality; evaluation is not reactive closed loop.
+3. **OccWorld supplies a direct counterexample to “higher reconstruction fidelity → better planning.”** Its higher-resolution tokenizer reconstructs better but forecasts/plans worse than the default representation.
+4. **WoTE contains an unusually useful future-state ablation.** Trajectory-only `81.0 PDMS` → evaluator without future `83.2` → evaluator with future states `85.6`; future state adds value beyond scorer-only in that matched setup.
+5. **WoTE target-generation code uses NAVSIM/PDM non-reactive semantics.** Candidate ego trajectories are separately simulated/scored, but surrounding-agent observations come from one cached interpolated logged/GT future shared across candidates. Candidate-specific prediction therefore does not imply reactively supervised response.
+6. **ViDAR improves planning through predictive pretraining rather than deployed online imagination.** Future LiDAR/geometry forecasting shapes the encoder reused by downstream tasks.
+7. **LAW source code resolves the inference-path ambiguity.** The current waypoint is computed before the WM future latent; training uses future-latent reconstruction loss; test-time planning discards the returned latent outputs. LAW is therefore an action-aware future-prediction representation-shaping method, not online rollout-based action selection in the audited implementation.
+8. **Longer horizon is not monotonic.** LAW's 1.5 s target is better than 3 s and 10 s variants in the shown planning results.
+
+### Field-level distinctions now established
+
+```text
+CONTROLLABLE GENERATION != PLANNING INTERFACE
+JOINT WORLD-ACTION GENERATION != CANDIDATE CONSEQUENCE EVALUATION
+ACTION-CONDITIONED != REACTIVELY SUPERVISED
+WM-ASSISTED PLANNING != ONLINE MODEL-BASED PLANNING
+WORLD FIDELITY != DECISION UTILITY
+LONGER HORIZON != BETTER PLANNING
+```
+
+These are field-understanding results, not gap claims.
 
 ## Immediate next task
 
 See `state/NEXT_TASK.md`.
 
-Finish Wave-1 comparability audit:
+Perform a short Wave-2 comparability closeout on four remaining issues:
 
-- M2I conditional vs causal/intervention boundary;
-- GameFormer raw learned interaction vs refinement contribution;
-- UniAD exact MotionFormer/OccFormer→planner flow;
-- DiffusionDrive vs DriveSuprim matched NAVSIM conditions;
-- nuPlan vs NAVSIM protocol/version boundaries.
+- Drive-WM: separate generation quality from detector/map/reward/candidate-selection contribution as far as paper evidence permits;
+- OccWorld: normalize planning table/metric variants and identify the cleanest matched world-state comparisons;
+- ViDAR: lock exactly what pretrained components survive downstream and which matched pretraining controls support planning claims;
+- WoTE: fold the now-verified non-reactive supervision semantics into final evidence-strength grading.
 
-Then close Wave 1 and choose exact Wave-2 comparative reading order.
+Then close Wave 2 and start Wave 3 from the established interface taxonomy rather than from generic “WM” labels.
 
 ## Still forbidden
 
@@ -112,7 +154,7 @@ no forced risk-field insertion
 
 ## Research Brain architecture
 
-GitHub raw MD + figures are the persistent GPT-readable primary-text layer; canonical PDFs remain source authority where archived/available. The local agent is now on-demand infrastructure support rather than a broad-ingestion worker.
+GitHub raw MD + figures are the persistent GPT-readable primary-text layer; canonical PDFs remain source authority where archived/available. Public source repositories may be audited when a planning-interface ambiguity is decision-critical; source facts must record repo + commit + file + symbol.
 
 A fresh session should read:
 
@@ -121,6 +163,7 @@ START_HERE.md
 state/CURRENT_STATE.md
 state/NEXT_TASK.md
 landscape/FIELD_ATLAS.md
-landscape/PHASE_B_ANCHORS.md
 landscape/PHASE_B_WAVE1_SYNTHESIS.md
+landscape/PHASE_B_WAVE1_COMPARABILITY_AUDIT.md
+landscape/PHASE_B_WAVE2_SYNTHESIS.md
 ```
