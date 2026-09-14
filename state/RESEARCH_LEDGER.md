@@ -5,7 +5,7 @@ Running factual ledger of assets, research-state transitions and scientific gate
 ## Current research stage
 
 ```text
-FIELD RECONSTRUCTION — Planning-centric WAM Atlas
+FIELD RECONSTRUCTION — Phase-A closeout
 ```
 
 Canonical documents:
@@ -29,98 +29,59 @@ Canonical documents:
 World Model + End-to-End + Planning-centric
 ```
 
-Risk / predictive risk field is optional prior knowledge, not a required destination.
+Risk / predictive risk field is optional prior knowledge, not a required destination. Field understanding precedes gap hunting.
 
-As of 2026-09-14, **field understanding precedes gap hunting**. Canonical rules: `state/RESEARCH_PRINCIPLES.md`.
+## Corpus inventory
 
-## Corpus
-
-| date | batch | papers | state |
+| date | batch | IDs | state |
 |---|---|---|---|
-| 2026-09-13 | Batch 0A | 12 registered (P0001–P0012) | 11 `RAW_MD_READY` (canonical local PDF + raw MD, DOCUMENT_VERIFIED); P0008 NPPC blocked `PAYWALLED_NO_OPEN_SOURCE` |
-| 2026-09-14 | Round 2 targeted ingest (historical subqueue; F7/F8/F11 branch of the field atlas) | 8 registered (P0013–P0020) | 7 `RAW_MD_READY` (canonical local PDF + raw MD, `DOCUMENT_VERIFIED`); P0020 Bahram 2016 blocked `PAYWALLED_NO_OPEN_SOURCE`; cards are skeletons, every scientific section `PENDING SCIENTIFIC REVIEW`; no gap or novelty verdict; report: `ROUND2_TARGETED_INGEST_REPORT.md` |
+| 2026-09-13 | Batch 0A | P0001–P0012 | 11 `RAW_MD_READY`; P0008 NPPC blocked `PAYWALLED_NO_OPEN_SOURCE` |
+| 2026-09-14 | prior targeted interactive/reactive branch | P0013–P0020 | 7 `RAW_MD_READY`; P0020 Bahram 2016 blocked `PAYWALLED_NO_OPEN_SOURCE`; skeleton cards only |
+| 2026-09-14 | Census Round-2 coverage support | P0021–P0034 | 14/14 `DOCUMENT_VERIFIED` + `RAW_MD_READY`; census-depth, `NO_CARD` |
+| 2026-09-14 | Census Round-1 text-layer completion | P0035–P0060 | 26/26 `DOCUMENT_VERIFIED` + `RAW_MD_READY`; census-depth, `NO_CARD` |
 
-Important interpretation: Batch 0A is scientifically useful but **not representative of the whole field** because selection was partly hypothesis-driven.
+Current total:
+
+```text
+60 stable IDs registered: P0001–P0060
+58 RAW_MD_READY
+2 lawful-source blockers: P0008 NPPC, P0020 Bahram 2016
+```
+
+Latest support reports:
+
+- `ROUND2_TARGETED_INGEST_REPORT.md`
+- `CENSUS_ROUND2_INGEST_REPORT.md`
+- `CENSUS_ROUND1_TEXTLAYER_INGEST_REPORT.md`
+
+Important interpretation: acquisition status does not equal scientific placement or deep review. The agent deliberately did not edit owner scientific placement files.
 
 ## Scientific / methodology gates
 
 | date | gate | material | result |
 |---|---|---|---|
-| 2026-09-13 | P2-R Targeted Failure Deep Read — Round 1 | SafeDrive, BeTop, GraphAD, RiskWorld, DA-WAM | no direct observed reaction-induced action-order inversion established; retained as historical audit |
-| 2026-09-13 | Targeted Expansion Freeze | BridgeSim/ReactSim/CausalDrive/Counterfactual/CRAFT + GameFormer/M2I/Bahram | **SUPERSEDED AS ACTIVE PROGRAM** on 2026-09-14; retained as F7/F8/F11 subqueue |
-| 2026-09-14 | Field-Reconstruction Reset | research methodology | gap-first search suspended; begin neutral planning-centric WAM census + anchor deep reads |
-| 2026-09-14 | Phase-A Census Round 1 | broad cross-family placement from surveys + primary paper/project sources + existing repo evidence | ~45 unique works/benchmarks/controls provisionally placed across F1–F11; no gap verdict; Round 2 coverage holes identified |
+| 2026-09-13 | P2-R Targeted Failure Deep Read — Round 1 | SafeDrive, BeTop, GraphAD, RiskWorld, DA-WAM | no direct observed reaction-induced action-order inversion established; historical audit only |
+| 2026-09-14 | Field-Reconstruction Reset | methodology | gap-first search suspended; neutral field census + anchors activated |
+| 2026-09-14 | Phase-A Census Round 1 | ~45 placed works/benchmarks/controls | broad field skeleton established; no gap verdict |
+| 2026-09-14 | Phase-A corpus breadth threshold | P0001–P0060 | breadth target reached at infrastructure level; next gate is scientific placement closeout, not more bulk ingestion |
 
-## Field reconstruction targets
+## Active Phase-A closeout gate
 
-```text
-Phase A: ~50–80 paper census at placement/overview depth
-Phase B: ~15–25 representative anchor deep reads
-Phase C: historical + architectural + supervision + evaluation + trade-off/counterexample synthesis
-Phase D: only then reopen research-problem discovery
-```
+Immediate work:
 
-Provisional field families:
+1. census-place P0021–P0034 using the common taxonomy;
+2. create `landscape/CENSUS_PHASE_A_ROUND2.md`;
+3. update `FIELD_ATLAS.md` and audit F1–F11 coverage;
+4. freeze broad expansion unless a concrete family/transition is still missing;
+5. select a justified ~15–25 paper Phase-B anchor set.
 
-```text
-F1  visual/video generative driving world models
-F2  BEV / occupancy / geometric predictive world models
-F3  latent / JEPA / predictive-representation world models
-F4  world-model-assisted direct end-to-end planning
-F5  candidate-conditioned / action-conditioned future evaluation
-F6  unified world-action / trajectory-and-world generation
-F7  interactive prediction + planning predecessors
-F8  reactive world simulation / closed-loop policy training
-F9  reward / value / safety / cost interfaces
-F10 strong end-to-end planners without explicit world models
-F11 evaluation / benchmark / simulator papers
-```
+`Hydra-MDP++` and `NAVSIM-v2` remain unresolved optional follow-ups. They are not automatic blockers to Phase-A closeout.
 
-## Phase-A Round-1 census facts
+## Integrity notes from census ingests
 
-Round-1 record:
-
-`landscape/CENSUS_PHASE_A_ROUND1.md`
-
-Representative works now placed include:
-
-```text
-GAIA-1, DriveDreamer, Drive-WM, Vista, Epona, DrivingGPT, Policy World Model,
-WorldDrive, OccWorld, Drive-OccWorld, WoTE, World4Drive, DriveWorld, LAW,
-DriveLaW, Drive-JEPA, WorldRFT, Auto-JEPA, ReWorld, WA-JEPA, DA-WAM,
-M2I, GameFormer, What Truly Matters, BeTop, GraphAD, SLEDGE, NAVSIM,
-Bench2Drive, HUGSIM, DriveArena, BridgeSim, ReactSim-Bench, CausalDrive,
-CRAFT, SafeDrive, Gen-Drive, DriveReward, RiskWorld, NPPC, TOAD/DrivoR,
-UniAD, VAD, DiffusionDrive
-```
-
-Current provisional anchor pool is ~25 works; it is **not final** and should be reduced only after Round 2 fills missing coverage.
-
-Round-2 holes:
-
-- Hydra-MDP / DriveSuprim / iPad / VLA controls;
-- Think2Drive / WM-RL lineage;
-- ViDAR / GenAD representation-pretraining bridges where planning-relevant;
-- benchmark evolution and deployment properties;
-- uncertainty / multimodality treatment;
-- any credible real-vehicle closed-loop evidence.
-
-## Existing interactive/reactive subqueue
-
-See `state/TARGETED_READING_QUEUE.md`.
-
-It contains:
-
-- BridgeSim
-- ReactSim-Bench
-- CausalDrive
-- How Can Driving World Models Do Counterfactual Prediction?
-- CRAFT
-- GameFormer
-- M2I
-- Bahram et al. 2016
-
-These papers now populate F7/F8/F11 rather than define the whole agenda.
+- Raw-MD conversion ledger race was detected, repaired from stored artifacts, and the writer was changed to re-read before final write.
+- P0028 ViDAR has one known Markdown omission: the code URL visible on PDF page 1 is absent from extracted Markdown; provenance is preserved in the manifest/report.
+- Canonical content hashes use Python logical-byte I/O, not the host's framed native view.
 
 ## Existing cross-session evidence
 
@@ -128,25 +89,9 @@ These papers now populate F7/F8/F11 rather than define the whole agenda.
 - `evidence/LEGACY_EXPERTISE_ASSETS.md`
 - `audits/literature/P2R_TARGETED_FAILURE_DEEP_READ_ROUND1.md`
 
-Use them as prior evidence, not as a substitute for field reconstruction.
-
-## Integration gates
-
-| date | gate | status |
-|---|---|---|
-| 2026-09-13 | Integration Gate 0 | PASSED — private repo directly readable/writable by GPT-5.6 Sol |
-| 2026-09-13 | New-session Bootstrap Hardening | PASSED structurally |
-| 2026-09-14 | New-session Field-Reconstruction Update | state/start/handoff updated so fresh sessions should not default to P2-R |
-
-## Known host quirks
-
-| quirk | status |
-|---|---|
-| Windows native/.NET reads expose a +1024 framed representation while canonical Python corpus I/O reads logical document bytes | `KNOWN_HOST_QUIRK`; no further investigation planned |
-| `tempfile.mkdtemp`/named-pipe/MinerU config issues on local host | worked around in corpus scripts |
-| git schannel TLS broken on local host | local git HTTPS uses OpenSSL backend |
+Use these as prior evidence, not as substitutes for field reconstruction.
 
 ## Division of labor
 
-- **GPT-5.6 Sol:** field census, primary-paper/survey research, anchor deep reads, cross-paper synthesis, atlas/taxonomy/cards/state updates.
+- **GPT-5.6 Sol:** census placement, primary-paper reading, anchor selection/deep reads, cross-family synthesis, atlas/state maintenance.
 - **Local corpus agent:** acquisition, MinerU conversion, metadata/QC, local PDF archival/extraction, source-code execution, datasets/checkpoints/experiments.
