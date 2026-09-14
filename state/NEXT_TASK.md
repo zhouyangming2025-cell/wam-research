@@ -2,117 +2,128 @@
 
 ## 唯一下一任务
 
-> Complete the **Phase-B Wave-2 comparability / supervision-source closeout**, then decide whether Wave 2 is stable enough to close.
+> Execute the **Phase-B Wave-3 comparative deep read** and build a stable map of unified / compressed / candidate-specific / RL world-action interfaces.
 
-Wave 1 is closed. Wave-2 comparative first pass and two source-code audits are complete.
+Wave 1 and Wave 2 are closed. Broad corpus acquisition remains frozen.
 
-Current artifacts:
+Canonical Wave-3 plan:
 
-```text
-landscape/PHASE_B_WAVE2_SYNTHESIS.md
-audits/literature/PHASE_B_WAVE2_INTERFACE_CODE_AUDIT.md
-```
+`landscape/PHASE_B_WAVE3_PLAN.md`
 
-## Wave-2 anchors
+## Wave-3 anchors and order
 
 ```text
-GAIA-1
-Drive-WM
-OccWorld
-WoTE
-ViDAR
-LAW
+1. Epona
+2. DrivingGPT
+3. DriveLaW
+4. Auto-JEPA
+5. DA-WAM
+6. Think2Drive
 ```
 
-## What Wave 2 has already established
+## Why this wave exists
 
-The generic phrase `world model helps planning` hides multiple different mechanisms:
+Wave 2 established that “world model helps planning” is not one mechanism. Wave 3 now asks what happens when world knowledge and action generation become more tightly coupled.
+
+Do not use the generic label `world-action model` as explanation. Distinguish:
 
 ```text
-controllable generation                    — GAIA-1
-candidate visual future → reward selection — Drive-WM
-joint world + ego future generation        — OccWorld
-candidate future BEV → learned reward      — WoTE
-future prediction as pretraining           — ViDAR
-action-aware auxiliary latent prediction   — LAW
+shared latent + joint training
+interleaved world/action tokens
+hidden WM features consumed by action generator
+compressed planning-oriented predictive state
+candidate-specific future latent used for scoring
+latent WM used as an RL imagination environment
 ```
 
-Source audits further establish:
+## Required per-paper audit
 
-- LAW's predicted future latent is an auxiliary training signal; the audited test-time planning path does not consume it to select/refine the current trajectory.
-- WoTE's PDM multi-candidate target-generation path changes candidate ego trajectories but scores them against a cached surrounding-agent future interpolated from logged/GT tracks; it is non-reactive supervision with respect to other-agent response.
-
-## Remaining closeout — no new papers
-
-### 1. Drive-WM attribution audit
-
-From primary paper evidence, separate as far as possible:
+For each anchor, record compactly but precisely:
 
 ```text
-world-generation quality
-vs detector/map performance on generated future
-vs reward design
-vs candidate-set quality
+1. historical problem / motivation
+2. exact observation representation
+3. exact future/world representation
+4. action representation
+5. training supervision and future-target source
+6. whether unexecuted alternative actions have direct future supervision
+7. inference-time data flow
+8. whether the WM/future branch survives deployment
+9. exact planner interface
+10. multimodality/uncertainty and whether planning consumes it
+11. evaluation regime
+12. strongest matched planning evidence
+13. strongest limitation / competing explanation
+14. what the paper proves and does not prove
+15. historical transition role
 ```
 
-Do not convert the reported planning improvement into a pure “better world model” effect unless a matched ablation supports it. Record the strongest evidence and the unresolved confound explicitly.
+Maintain `AUTHOR CLAIM / DIRECT EXPERIMENTAL EVIDENCE / OUR INFERENCE` separately.
 
-### 2. OccWorld metric/comparison audit
+## Wave-3 comparison questions
 
-Normalize which rows use the same planning metric/protocol and which use alternate `†` metrics or different inputs. Identify the cleanest matched evidence for:
+The synthesis must answer:
+
+1. What is actually unified — parameters, conditioning, token sequence, latent state, loss, or decision process?
+2. Which methods use a predicted future online, and which only use predictive learning to shape a representation/policy?
+3. Is explicit/high-fidelity reconstruction necessary, or do hidden/compressed predictive states carry equal or stronger planning value?
+4. Does joint world-action modeling improve planning beyond shared representation or stronger action modeling?
+5. For candidate-specific futures, what supervision exists for non-executed alternatives?
+6. How does model-based RL differ from an online model-based planner in this literature?
+7. Which evaluation regime supports each planning claim?
+
+## Binding controls from Waves 1–2
+
+Do not forget:
 
 ```text
-temporal world modeling
-representation/tokenizer choice
-world forecasting ↔ planning relation
+conditional != causal
+candidate ranking != world modeling
+world fidelity != decision utility
+longer horizon != better planning
+generation quality != planning value
+candidate-specific output != candidate-specific oracle supervision
+WM-assisted planning != online model-based planning
 ```
 
-Preserve the already important counterexample: higher reconstruction fidelity can coexist with worse forecasting/planning.
-
-### 3. ViDAR downstream-retention audit
-
-Lock exactly:
-
-```text
-what is pretrained
-what is discarded
-what weights/features are transferred
-what downstream planner remains unchanged
-which matched pretraining ablations isolate the future-prediction benefit
-```
-
-The goal is to distinguish “world-model pretraining helps” from generic stronger initialization or LiDAR-supervised representation learning.
-
-### 4. WoTE evidence-strength grading
-
-Integrate the source-code result into the paper evidence:
-
-```text
-future-state-on/off ablation = strong evidence for future-state value under NAVSIM
-candidate-specific online WM = architecturally true
-reactively supervised other-agent response = not established in audited target pipeline
-```
-
-Do not downgrade WoTE merely because supervision is non-reactive; distinguish what it proves from what it does not prove.
+Strong non-WM controls remain active: UniAD, DiffusionDrive, DriveSuprim.
 
 ## Required output
 
-Create:
+Primary artifact:
 
-`landscape/PHASE_B_WAVE2_COMPARABILITY_AUDIT.md`
+`landscape/PHASE_B_WAVE3_SYNTHESIS.md`
 
-Then update `landscape/PHASE_B_WAVE2_SYNTHESIS.md` only where the audit changes interpretation.
+Create a code audit only if a decision-critical inference-path ambiguity cannot be resolved from paper text:
+
+`audits/literature/PHASE_B_WAVE3_INTERFACE_CODE_AUDIT.md`
+
+Do not audit code by default.
+
+## First execution block
+
+Start with:
+
+```text
+Epona ↔ DrivingGPT
+```
+
+Compare them directly on:
+
+```text
+shared latent vs shared sequence
+trajectory/world branch separation vs token interleaving
+whether generated world output feeds action selection
+training coupling vs inference coupling
+planning evidence vs generation evidence
+```
+
+Then add DriveLaW as the next bridge: hidden world-model features directly condition action generation without requiring fully rendered future output.
 
 ## Stop condition
 
-Wave 2 closes when we can answer, without hand-waving:
+Wave 3 closes when all six papers can be placed on one inference-interface map and we can explain their planning gains without saying merely “they use a world model.”
 
-1. which future-state interfaces are actually used online by planning;
-2. which planning gains are matched to future modeling rather than scorer/reward/input changes;
-3. where alternative ego-action futures receive direct supervision;
-4. whether surrounding-agent responses are factual, fixed-log, or truly reactive;
-5. what evidence supports or contradicts `higher fidelity / longer horizon → better planning`.
-
-If those are stable, close Wave 2 and start Wave 3.
+After Wave 3, proceed to Wave 4 before any gap or method selection.
 
 Do not declare a research gap. Do not design a method. Do not broaden the corpus. Do not reactivate P2-R/P3. Do not force risk-field knowledge into the interpretation.
