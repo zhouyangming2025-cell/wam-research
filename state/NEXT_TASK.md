@@ -2,7 +2,7 @@
 
 ## 唯一下一任务
 
-> Continue the **Phase-B Wave-3 comparative deep read** with **DA-WAM**, using the completed Epona ↔ DrivingGPT ↔ DriveLaW ↔ Auto-JEPA interface map as the baseline.
+> Finish the **Phase-B Wave-3 comparative deep read** with **Think2Drive**, then perform the six-paper Wave-3 synthesis closeout.
 
 Wave 1 and Wave 2 are closed. Broad corpus acquisition remains frozen.
 
@@ -12,6 +12,7 @@ Canonical Wave-3 artifacts:
 landscape/PHASE_B_WAVE3_PLAN.md
 landscape/PHASE_B_WAVE3_SYNTHESIS.md
 audits/literature/PHASE_B_WAVE3_AUTOJEPA_AUDIT.md
+audits/literature/PHASE_B_WAVE3_DAWAM_AUDIT.md
 ```
 
 ## Wave-3 status
@@ -21,123 +22,110 @@ Epona primary-text first pass       = COMPLETE
 DrivingGPT primary-text first pass  = COMPLETE
 DriveLaW primary-text first pass    = COMPLETE
 Auto-JEPA primary-text first pass   = COMPLETE
-DA-WAM                              = NEXT
-Think2Drive                         = PENDING
+DA-WAM primary-text first pass      = COMPLETE
+Think2Drive                         = NEXT
 Wave 3                              = OPEN
 ```
 
-## Stable four-way result
-
-“World-action unification” now splits into at least four mechanisms:
+## Stable five-way interface map
 
 ```text
-Epona:
-shared historical latent F
-→ separate TrajDiT / VisDiT
-→ joint training, modular generation
-→ visual generation can be disabled for planning
+Epona
+shared history latent
+→ modular trajectory / visual generation
 
-DrivingGPT:
+DrivingGPT
 interleaved image/action tokens
-→ one causal Transformer
-→ world/action unified as one driving language
+→ one causal driving language
 
-DriveLaW:
-Video-DiT denoising latent
-→ direct condition for Action DiT
-→ online generative hidden state becomes planner state
+DriveLaW
+online Video-DiT hidden state
+→ Action DiT
 
-Auto-JEPA:
-scene/history/route
-→ predicted future ego-intent latent
+Auto-JEPA
+predicted future ego-intent latent
 → trajectory-memory retrieval
 → scorer/gate
-→ final trajectory
+
+DA-WAM
+candidate_i
+→ candidate-specific future latent_i
+→ candidate-specific score_i
 ```
 
-New stable distinction introduced by Auto-JEPA:
+The DA-WAM audit adds three important corrections:
+
+1. **Candidate-specific output does not imply candidate-specific future-state ground truth.** Dense future-latent supervision is applied only to the expert-matched candidate because offline logs provide only the executed future.
+2. **Future-state gain is positive but modest over an already strong planner.** NAVSIM-v1 matched ablation: `93.31` no-future → `93.46` action-conditioned future → `93.68` with hard negatives.
+3. **Hard-negative ranking supervision is an independent contributor.** The extra `+0.22 PDMS` is comparable to the future-state increment, so final performance must not be credited wholesale to world modeling.
+
+Also important:
 
 ```text
-WORLD/SCENE FUTURE REPRESENTATION
-!=
-EGO-ACTION FUTURE REPRESENTATION
+Shared Global Future 92.81
+< No Future 93.31
 ```
 
-Auto-JEPA deliberately compresses the former into a latent target defined by future ego motion. Its strong NAVSIM result therefore supports planning-oriented compression, not classical full environment-transition modeling.
+so simply injecting a future representation can hurt when it is mismatched to the candidate decision unit.
 
-Important Auto-JEPA evidence:
+## Immediate Think2Drive audit
 
-```text
-fixed medoid intent                    52.6 PDMS
-intent retrieval + gate, no scorer    87.6
-intent + scorer, no gate              91.0
-full                                  91.3
-
-K=1 / 200 / 300:
-87.6 / 91.1 / 91.3 PDMS
-```
-
-Semantic occlusion:
-
-```text
-dynamic-agent mask mean intent change = 0.080
-matched random mask                    = 0.027
-ratio                                  = 2.97×
-dynamic-agent intervention larger      = 71.1% of samples
-```
-
-Interpret conservatively: the predicted intent is selectively sensitive to planning-relevant visual content, but this does not establish universal decision sufficiency or reactive causal understanding.
-
-## Immediate DA-WAM audit
-
-DA-WAM is now the crucial contrast because it returns from a single compressed ego-intent latent to **per-candidate future latent prediction + candidate scoring**.
+Think2Drive is the final Wave-3 anchor because it uses a world model in a fundamentally different place: **inside policy learning / imagination**, rather than as a future representation directly consumed by the deployed raw-sensor planner.
 
 Trace exactly:
 
 ```text
-1. current observation representation
-2. candidate trajectory representation
-3. how each candidate conditions the future latent
-4. exact future-latent tensor and target source
-5. which candidate(s) receive direct future-state supervision
-6. what supervision unexecuted candidates receive
-7. candidate scorer/reward/value heads and labels
-8. inference path: candidate → future latent → score → selected action
-9. whether future latent is genuinely consumed online
-10. matched ablations: no future / shared global future / current latent / action-conditioned future / hard negatives
-11. what gains are due to future-state modeling vs scorer/ranking supervision
-12. NAVSIM evaluation semantics and any reactive/closed-loop evidence
-13. strongest alternative explanation
-14. exact relation to WoTE and Auto-JEPA
+1. observation / latent state representation
+2. encoder and recurrent/dynamics state
+3. action representation
+4. transition / reward / termination prediction targets
+5. what is learned from real environment interaction vs imagined rollout
+6. how Dreamer-style imagination trains actor/value networks
+7. exact deployed-policy path at test time
+8. whether the learned world model itself runs online at deployment
+9. where planning/action supervision comes from
+10. data efficiency / interaction-budget evidence
+11. closed-loop evaluation regime and simulator semantics
+12. strongest matched ablation for world-model-based policy learning
+13. strongest alternative explanation (RL objective, privileged simulator state, reward design, curriculum, etc.)
+14. what Think2Drive adds beyond classic model-free driving RL and beyond the other five Wave-3 WAM interfaces
 ```
 
-The comparison should explicitly answer:
+The key comparison is:
 
 ```text
-Auto-JEPA:
-one scene-conditioned ego-intent latent
-→ retrieve nearby actions
-→ score candidates
+Epona / DrivingGPT / DriveLaW / Auto-JEPA / DA-WAM
+= world/future representation participates directly in the planner's inference architecture
+  to different degrees
 
-DA-WAM:
-for each candidate action
-→ predict candidate-specific future latent
-→ score candidate
+Think2Drive
+= world model primarily serves as a learned imagination environment for policy optimization
 ```
 
-Do not assume the latter is automatically more counterfactual or more behaviorally correct. Audit where its candidate-specific future supervision actually comes from.
+Verify this from primary text rather than assuming it from the Dreamer label.
 
-## Subsequent order
+## Wave-3 closeout after Think2Drive
+
+Create/finish a single six-paper comparison answering:
 
 ```text
-DA-WAM
-→ Think2Drive
+A. What exactly is unified?
+B. What predictive/world object is learned?
+C. Where does it enter action selection?
+D. Does it survive deployment?
+E. What alternative-action supervision exists?
+F. What matched evidence isolates its planning contribution?
+G. What evaluation regime supports the claim?
 ```
 
-Think2Drive will then separate a learned world used for **policy training inside imagination** from WMs whose representations/futures are directly consumed by the deployed planner.
+Then mark Wave 3 CLOSED and proceed to Wave 4:
 
-## Stop condition
-
-Wave 3 closes when all six anchors can be placed on one inference-interface map and their planning gains can be discussed without the generic explanation “they use a world model.” After Wave 3, proceed to Wave 4 before any gap or method selection.
+```text
+Bench2Drive
+HUGSIM
+ORION
+ReactSim-Bench
+CausalDrive
+```
 
 Do not declare a research gap. Do not design a method. Do not broaden the corpus. Do not reactivate P2-R/P3. Do not force risk-field knowledge into the interpretation.
