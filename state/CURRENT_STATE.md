@@ -1,6 +1,6 @@
 # CURRENT_STATE
 
-Last updated: 2026-09-14 — Research QA Gate CLOSED; Wave 4 ACTIVE
+Last updated: 2026-09-14 — Waves 1–4 CLOSED; Phase-C field synthesis first pass COMPLETE
 
 ## Research north star
 
@@ -19,28 +19,46 @@ FIELD UNDERSTANDING FIRST
 → comparative anchor deep reads
 → cross-family synthesis
 → evidence QA
-→ only then research-problem / gap discovery
+→ adversarial problem discovery
+→ falsification
+→ only then method design
 ```
 
-P1/P2-R/P3 remain parked historical probes and do not organize the reading program.
+P1/P2-R/P3 remain historical probes. They did not organize the field reconstruction and must not be revived automatically.
 
 ## Current active stage
 
 ```text
-FIELD RECONSTRUCTION — PHASE B: WAVE 4 ACTIVE
+FIELD RECONSTRUCTION — PHASE C FIRST PASS COMPLETE
+NEXT = PHASE D ADVERSARIAL PROBLEM DISCOVERY
 ```
 
-Phase A remains closed:
+Phase A status:
 
 ```text
 P0001–P0060 registered
 58 RAW_MD_READY
 F1–F11 census coverage PASS
 broad acquisition FROZEN
-25 representative Phase-B anchors selected
 ```
 
-## Wave 1 — CLOSED
+Phase B anchor program:
+
+```text
+Wave 1 CLOSED
+Wave 2 CLOSED
+Wave 3 CLOSED
+Research QA Gate CLOSED
+Wave 4 CLOSED
+```
+
+Canonical full synthesis:
+
+```text
+landscape/PHASE_C_WAVES1_4_FIELD_SYNTHESIS.md
+```
+
+## Wave 1 — historical / non-WM controls
 
 Anchors:
 
@@ -55,22 +73,18 @@ DiffusionDrive
 DriveSuprim
 ```
 
-Canonical artifacts:
-
-- `landscape/PHASE_B_WAVE1_SYNTHESIS.md`
-- `landscape/PHASE_B_WAVE1_COMPARABILITY_AUDIT.md`
-
 Stable controls:
 
-1. conditional future response is not automatically causal/interventional response;
-2. final planner score must be decomposed into representation, scorer, refinement, optimizer and rules;
-3. matched controls dominate headline SOTA tables;
-4. multimodal/diffusion action generation is not automatically world modeling;
-5. candidate ranking is an independent planning bottleneck;
-6. evaluation regimes are different claims;
-7. world-prediction accuracy alone is not planning evidence.
+```text
+conditional response != causal/interventional response
+matched controls > headline SOTA
+future prediction quality != planning evidence
+generative action != world model
+candidate ranking is an independent bottleneck
+evaluation regime is part of the scientific claim
+```
 
-## Wave 2 — CLOSED
+## Wave 2 — world prediction → planning interface
 
 Anchors:
 
@@ -83,32 +97,26 @@ ViDAR
 LAW
 ```
 
-Canonical artifacts:
-
-- `landscape/PHASE_B_WAVE2_SYNTHESIS.md`
-- `landscape/PHASE_B_WAVE2_COMPARABILITY_AUDIT.md`
-- `audits/literature/PHASE_B_WAVE2_INTERFACE_CODE_AUDIT.md`
-
 Stable distinctions:
 
 ```text
-CONTROLLABLE GENERATION != PLANNING INTERFACE
-JOINT WORLD-ACTION GENERATION != CANDIDATE CONSEQUENCE EVALUATION
-ACTION-CONDITIONED != REACTIVELY SUPERVISED
-WM-ASSISTED PLANNING != ONLINE MODEL-BASED PLANNING
-WORLD FIDELITY != DECISION UTILITY
-LONGER HORIZON != BETTER PLANNING
-CANDIDATE-SPECIFIC OUTPUT != CANDIDATE-SPECIFIC ORACLE SUPERVISION
+controllable generation != planning interface
+joint world-action generation != candidate consequence evaluation
+action-conditioned != reactively supervised
+WM-assisted planning != online model-based planning
+world fidelity != decision utility
+longer horizon != better planning
+candidate-specific output != candidate-specific oracle supervision
 ```
 
-High-confidence source facts:
+High-confidence implementation facts:
 
 ```text
-LAW test-time path discards predicted future latent  = CODE VERIFIED
-WoTE audited target path uses fixed logged surrounding futures = CODE VERIFIED
+LAW predicted future latent is not consumed for current test-time trajectory selection = CODE VERIFIED
+WoTE audited candidate target path uses fixed logged surrounding futures              = CODE VERIFIED
 ```
 
-## Wave 3 — CLOSED
+## Wave 3 — world–action coupling
 
 Anchors:
 
@@ -121,76 +129,84 @@ DA-WAM
 Think2Drive
 ```
 
-Canonical artifacts:
-
-- `landscape/PHASE_B_WAVE3_SYNTHESIS.md`
-- `landscape/PHASE_B_WAVE3_CLOSEOUT.md`
-- `audits/literature/PHASE_B_WAVE3_AUTOJEPA_AUDIT.md`
-- `audits/literature/PHASE_B_WAVE3_DAWAM_AUDIT.md`
-- `audits/literature/PHASE_B_WAVE3_THINK2DRIVE_AUDIT.md`
-
-Stable six-way interface map:
+Stable interface map:
 
 ```text
-Epona
-= shared historical predictive representation
-→ separate trajectory / visual generation heads
-
-DrivingGPT
-= interleaved image/action tokens
-→ one causal world-action language
-
-DriveLaW
-= online Video-DiT hidden state
-→ Action DiT
-
-Auto-JEPA
-= predicted future ego-intent latent
-→ trajectory-memory retrieval
-→ scorer/gate
-
-DA-WAM
-= candidate_i
-→ candidate-specific future latent_i
-→ score_i
-
-Think2Drive
-= learned latent transition/reward model
-→ imagined actor/critic rollouts
-→ learned closed-loop policy
+Epona      = shared predictive representation / modular visual+trajectory heads
+DrivingGPT = shared interleaved world-action causal sequence
+DriveLaW   = online Video-DiT hidden state → Action DiT
+Auto-JEPA  = predicted future ego intent → retrieval / scorer/gate
+DA-WAM     = candidate_i → candidate-specific future latent_i → score_i
+Think2Drive= learned latent world → imagined actor/critic rollouts → policy learning
 ```
 
-Stable Wave-3 conclusions:
-
-1. `world-action unification` is not one architecture; the planning-relevant variable is where predictive/world information enters the decision process.
-2. Architectural coupling strength does not equal planning effect size or causal evidence strength.
-3. Future information has no universal positive sign; representation, horizon, conditioning, planner interface and supervision jointly determine value.
-4. Planning-oriented compression is a real branch: Auto-JEPA predicts future ego-motion intent rather than reconstructing a full future scene.
-5. DA-WAM predicts per-candidate future latents but direct observed-future supervision exists only for the expert-matched candidate.
-6. Think2Drive establishes a distinct role: the WM can act primarily as a latent imagination environment for RL policy learning rather than an online candidate evaluator.
-
-QA correction carried forward:
+QA correction:
 
 ```text
-DriveLaW Stage 3 does NOT freeze the Video DiT.
-Paper + official code show trajectory fine-tuning updates both Video DiT and Planning/Action DiT;
-o future synthesis may describe DriveLaW as fixed-video-features + separately trained planner.
+DriveLaW Stage-3 planning fine-tuning updates both Video DiT and Planning/Action DiT.
+Do NOT describe it as frozen-video-features + separately trained planner.
 ```
 
-DrivingGPT runtime boundary:
+DrivingGPT boundary:
 
 ```text
-shared interleaved world/action causal sequence = VERIFIED
-exact optimized NAVSIM decode path              = UNRESOLVED
+shared world/action causal sequence = VERIFIED
+exact optimized NAVSIM runtime decode path = UNRESOLVED after public-source exhaustion
+```
+
+## Wave 4 — feedback / realism / reactivity
+
+Anchors:
+
+```text
+Bench2Drive
+HUGSIM
+ORION
+ReactSim-Bench
+CausalDrive
+```
+
+Canonical synthesis:
+
+```text
+landscape/PHASE_B_WAVE4_SYNTHESIS.md
+```
+
+Wave-4 feedback decomposition:
+
+```text
+F_e = ego-state / dynamics feedback
+F_s = sensor / viewpoint feedback
+F_a = surrounding-agent state feedback
+F_b = surrounding-agent behavioral-response feedback
+```
+
+Stable distinctions:
+
+```text
+photorealistic sensor realism != behavioral realism
+interactive simulator != learned real-driver response model
+log realism != reactive robustness
+reactive feasibility != counterfactual behavioral truth
+action conditioning != causal identification
+strong closed-loop planning does not require explicit world rollout
+```
+
+Key placements:
+
+```text
+Bench2Drive    = standardized interactive CARLA policy benchmark
+HUGSIM         = photorealistic reconstructed closed-loop simulator + external actor controllers
+ORION          = VLA semantic/reasoning planner, not a world-model planner
+ReactSim-Bench = learned behavior-WM reactivity measurement under external ego deviation
+CausalDrive    = real-time learned action-conditioned reactive visual simulator
 ```
 
 ## Research QA Gate — CLOSED
 
-Canonical artifacts:
+Canonical artifact:
 
 ```text
-audits/literature/RESEARCH_QA_GATE_WAVES1_3.md
-audits/literature/RESEARCH_QA_PRIORITY_A_PROGRESS.md
 audits/literature/RESEARCH_QA_GATE_CLOSEOUT.md
 ```
 
@@ -204,72 +220,88 @@ A4 LAW        VERIFIED + code boundary
 A5 DriveLaW   VERIFIED + CORRECTED Stage-3 semantics
 A6 Auto-JEPA  VERIFIED
 A7 DA-WAM     VERIFIED
-A8 DrivingGPT paper-level VERIFIED / exact runtime UNRESOLVED after public-source exhaustion
+A8 DrivingGPT paper-level VERIFIED / optimized runtime path UNRESOLVED
 ```
 
-Hardened field claims:
+## Phase-C field synthesis — COMPLETE FIRST PASS
+
+Canonical artifact:
 
 ```text
-F-01 world-prediction quality != planning evidence                         STRONGLY SUPPORTED
-F-02 future information is not automatically beneficial                    STRONGLY SUPPORTED
-F-03 candidate-specific output != candidate-specific oracle supervision     STRONGLY SUPPORTED
-F-04 WM-assisted planning != online model-based planning                    STRONGLY SUPPORTED
-F-05 architectural coupling strength != causal-evidence strength            SUPPORTED INFERENCE
-F-06 decision relevance != world completeness                              SUPPORTED FIELD TENSION
+landscape/PHASE_C_WAVES1_4_FIELD_SYNTHESIS.md
 ```
 
-These remain field-understanding results, not research gaps.
-
-## Wave 4 — ACTIVE
-
-Anchors:
+The synthesis now answers the field-reconstruction completion questions at first-pass level:
 
 ```text
-1. Bench2Drive
-2. HUGSIM
-3. ORION
-4. ReactSim-Bench
-5. CausalDrive
+major families and historical transitions                       ANSWERED
+observation→future→planner interfaces                            ANSWERED
+supervision / alternative-action limitations                    ANSWERED
+action-conditioning / reactivity / counterfactual distinctions  ANSWERED
+evaluation-regime meanings                                      ANSWERED
+strong non-WM controls                                          ANSWERED
+recurring structural trade-offs                                 ANSWERED
+counterexamples to broad claims                                 ANSWERED
+under-measured evidence properties                              ANSWERED FIRST PASS
+remaining contradictions / incomplete evidence                  MAPPED
 ```
 
-Wave-4 purpose: reconstruct the distinctions among:
+## Project-wide stable field principles
 
 ```text
-sensor / visual realism
-physical scene evolution
-other-agent behavior realism
-ego-action feedback
-reactivity
-closed-loop policy evaluation
-VLA / semantic reasoning
-world-model behavioral validity
+P-01 world-prediction quality is not itself planning evidence
+P-02 future information is not automatically beneficial
+P-03 candidate-specific output != candidate-specific observed counterfactual supervision
+P-04 WM-assisted planning != online model-based planning
+P-05 architectural coupling strength != causal-evidence strength
+P-06 decision relevance != world completeness
+P-07 generative action modeling != world modeling
+P-08 candidate ranking/scoring is an independent bottleneck
+P-09 closed-loop must be decomposed into feedback channels
+P-10 sensor photorealism != behavioral realism
+P-11 log realism != reactive robustness
+P-12 reactive feasibility != counterfactual behavioral truth
+P-13 action conditioning != causal validity
+P-14 simulator quality and planner quality require separate evidence chains
+P-15 semantic/VLA planning is a strong non-WM control for explicit-world-rollout claims
 ```
 
-The central question is not “which benchmark is best?” but:
+## Evidence gaps identified by Phase C — NOT research gaps yet
 
 ```text
-what causal/behavioral claim does each evaluation setup actually support?
+1. real alternative-action surrounding-agent ground truth
+2. reactive simulator quality → planner decision quality
+3. simultaneous sensor-realistic + behaviorally validated closed loop
+4. intervention-conditioned uncertainty calibration
+5. long-horizon compounding under ego/sensor/agent/model feedback
+6. compute-normalized planning benefit
+7. representation semantics vs scale/capacity
+8. real-vehicle closed-loop validation
+9. standardized feedback-semantic reporting
+10. planner robustness to world-model error
 ```
+
+No item is selected as the research problem yet.
 
 ## Immediate next task
 
 See `state/NEXT_TASK.md`.
 
-Begin with Bench2Drive → HUGSIM as the evaluation/simulator baseline pair before reading ORION / ReactSim-Bench / CausalDrive.
+Run **Phase D adversarial problem discovery** across the recurring tensions/evidence gaps. Every candidate must be attacked by prior art, non-WM controls, simpler explanations, counterexamples, measurement feasibility and realistic closed-loop relevance before it can survive.
 
 ## Still forbidden
 
 ```text
-no gap declaration
 no method design
-no broad paper accumulation
-no P2-R/P3 rescue program
 no forced risk-field insertion
+no automatic P2-R/P3 revival
+no choosing a gap because a module is absent
+no treating an evidence gap as a research gap without showing planning consequence
 ```
 
 ## Research Brain architecture
 
-GitHub raw MD + figures are the persistent GPT-readable primary-text layer; canonical PDFs remain source authority where archived/available. Public official PDFs and source repositories should be used directly for decision-critical verification whenever available.
+GitHub is the Research Knowledge Authority. Raw MD + figures are the persistent GPT-readable primary-text layer; canonical PDFs remain source authority where archived/available.
 
 A fresh session should read:
 
@@ -277,6 +309,6 @@ A fresh session should read:
 START_HERE.md
 state/CURRENT_STATE.md
 state/NEXT_TASK.md
+landscape/PHASE_C_WAVES1_4_FIELD_SYNTHESIS.md
 audits/literature/RESEARCH_QA_GATE_CLOSEOUT.md
-landscape/PHASE_B_WAVE3_CLOSEOUT.md
 ```
