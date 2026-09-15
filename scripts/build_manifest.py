@@ -40,6 +40,7 @@ META = {
                   arxiv_id="2506.24113", doi="10.1109/ICCV.2025.02527",
                   official_url="https://arxiv.org/abs/2506.24113",
                   code_available="YES", official_code_url="https://github.com/Kevin-thu/Epona",
+                  code_repo_id="R0009",
                   tags="world-model;planning;diffusion;autoregressive",
                   hyp="GENERAL;P3_HOLD", rel="MEDIUM",
                   note="Camera-ready front page confirms author 8 = Li Yuan, overruling the 'Yuan Li' spelling in arXiv/OpenAlex and the GitHub README. Canonical PDF differs from BOTH pre-existing local copies (Epona.pdf 5AD06198..., Epona_origin.pdf 731D0633...), so per ruling neither may serve as canonical. EVIDENCE_LEVEL=DOCUMENT_VERIFIED"),
@@ -619,7 +620,7 @@ def main():
             pdf_rel, raw_rel, lib,
             card_rel,
 
-            m["code_available"], m["official_code_url"], "",
+            m["code_available"], m["official_code_url"], m.get("code_repo_id", ""),
             reading, m["tags"], m["hyp"], m["rel"], m.get("reviewed", DATE), notes,
         ])
 
