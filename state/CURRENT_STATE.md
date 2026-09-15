@@ -1,6 +1,6 @@
 # CURRENT_STATE
 
-Last updated: **2026-09-15 — RESEARCH-DIRECTION CONVERGENCE PAUSED; BROAD WAM DEEP-READ EXPANSION ACTIVE**
+Last updated: **2026-09-15 — RESEARCH-DIRECTION CONVERGENCE PAUSED; BROAD WAM DEEP-READ EXPANSION ACTIVE; DRIVELAW COMPLETE**
 
 ## Research north star
 
@@ -52,7 +52,7 @@ The previously created tension/candidate-problem artifacts are retained only as 
 
 ---
 
-# First normalized anchor set — preliminary, not final
+# Normalized anchors — expansion now at 12
 
 ```text
 P0048 LAW           COMPLETE v2
@@ -66,9 +66,10 @@ P0062 Metis         COMPLETE v2 + paper/repo audit
 P0063 DynFlowDrive  COMPLETE v2 + paper/repo audit
 P0064 Discrete-WAM  COMPLETE v2 + paper/source-status audit
 P0065 GraphWorld    COMPLETE v2 + paper/source-status audit
+P0009 DriveLaW      COMPLETE v2 + arXiv v3 / official-source audit
 ```
 
-These eleven remain canonical comparison anchors, but they no longer define the boundary of the field.
+These anchors remain a growing comparison set; they do not define the boundary of the field.
 
 Canonical ontology remains:
 
@@ -80,6 +81,94 @@ landscape/WAM_DIMENSION_ONTOLOGY_V1_3_AMENDMENT.md
 ```
 
 Ontology V1.3 remains a working coordinate system, not a final taxonomy.
+
+DriveLaW did **not** authorize V1.4. It exposed a candidate residue:
+
+```text
+GENERATIVE-STATE TAP LOCATION / SOLVER-DEPTH OF POLICY CONDITION
+```
+
+but this remains unpromoted until another independent anchor survives back-projection.
+
+---
+
+# DriveLaW stable normalized result
+
+Canonical files:
+
+```text
+papers/deep_analysis/P0009_DRIVELAW_DEEP_ANALYSIS_V2.md
+audits/literature/PHASE_C6_DRIVELAW_AUDIT.md
+landscape/P0009_DRIVELAW_ONTOLOGY_PROJECTION.md
+landscape/WAM_COMPARISON_MATRIX_V1_3_DRIVELAW_EXTENSION.md
+```
+
+Canonical subtype:
+
+```text
+ONLINE GENERATIVE-LATENT DIRECT-POLICY WAM
+```
+
+Core deployment graph:
+
+```text
+history frames
+→ VAE-conditioned latent/noise canvas
+→ FIRST Video-DiT denoising pass
+→ cache blockwise Video-DiT hidden states
+→ Action-DiT cross-attention + action-flow refinement
+→ trajectory
+
+full future-video denoising rollout = NOT REQUIRED
+RGB future decode = NOT REQUIRED
+candidate consequence scorer = ABSENT in canonical path
+```
+
+Key source-level correction:
+
+```text
+forward:  WORLD / VIDEO HIDDEN → ACTION
+backward during action_full: ACTION LOSS → VIDEO DIT
+```
+
+Stage 3 is therefore not a frozen-video feature extractor. The released canonical training path uses an action-only loss while allowing all diffusion-model parameters to update.
+
+Strongest matched planning evidence:
+
+```text
+video pretraining scale:
+0 → 76k → 3.8M → 7.6M
+85.9 → 87.0 → 87.8 → 89.1 PDMS
+
+representation:
+BEV 84.1
+VLM 86.5
+Video latent 89.1
+
+video-denoise tap:
+step 1  89.1
+step 5  86.9
+step 10 23.2
+```
+
+Binding interpretation:
+
+```text
+more complete generative denoising
+!= better planning representation
+```
+
+Source audit also identified:
+
+```text
+paper action-flow target sign: a0-epsilon
+source target: epsilon-a0
+(the source matches the derivative of a_t=(1-t)a0+t epsilon)
+
+paper/config planning steps: 5
+current main agent forward_test: 10 hard-coded
+exact paper benchmark commit not pinned
+```
 
 ---
 
@@ -106,8 +195,8 @@ The numerical target is a working gate, not a scientific claim. Diversity and sa
 ## Wave C.6 — core planning-centric WAM expansion
 
 ```text
-P0009 DriveLaW      NEXT
-P0012 DA-WAM
+P0009 DriveLaW      COMPLETE
+P0012 DA-WAM        NEXT
 P0002 SafeDrive
 P0005 RiskWorld
 P0007 DriveReward
@@ -138,16 +227,7 @@ Queue order may change only for evidence/source dependencies or if a paper is fo
 
 # Why the next core papers materially extend coverage
 
-## DriveLaW
-
-```text
-video generator internal latent
-→ directly conditions Action DiT planner
-```
-
-This is different from Epona's sibling branches and WorldDrive's teacher/distillation lifecycle.
-
-## DA-WAM
+## DA-WAM — NEXT
 
 ```text
 N candidate trajectories
@@ -155,7 +235,19 @@ N candidate trajectories
 → one-to-one future-latent-conditioned scoring
 ```
 
-This directly pressures candidate-specific consequence / factual-supervision dimensions.
+This directly pressure-tests candidate-specific consequence / factual-supervision dimensions and provides a sharp contrast to DriveLaW's one-common-world-representation → direct-policy architecture.
+
+Mandatory DA-WAM questions:
+
+```text
+one-to-one trajectory↔future latent correspondence
+expert-matched future supervision only
+hard-negative supervision semantics
+factorized safety/value heads
+EMA target / online encoder adaptation
+candidate-specific prediction vs candidate-specific truth
+world→score interface at inference
+```
 
 ## SafeDrive
 
@@ -215,25 +307,3 @@ audits/research_synthesis/CORE_ANCHOR_SOURCE_COMPLETENESS_AUDIT.md
 ```
 
 Source certainty and scientific coverage are separate axes. New papers should be paper-normalized even when official implementation is not yet available, with source uncertainty stated explicitly.
-
----
-
-# Immediate next task
-
-Deep-read:
-
-```text
-P0009 DriveLaW
-```
-
-under the same WAM reading stack, with immediate cross-paper comparison against Epona, WorldDrive, Metis, Discrete-WAM and LAW.
-
-Still forbidden:
-
-```text
-NO final research-gap declaration
-NO research-direction ranking
-NO method architecture proposal
-NO forced risk-field insertion
-NO paper selection driven by parked candidate problems
-```
