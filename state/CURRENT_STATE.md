@@ -1,6 +1,6 @@
 # CURRENT_STATE
 
-Last updated: **2026-09-15 — Drive-JEPA stress test COMPLETE; Ontology V1.2 ACTIVE; Metis NEXT**
+Last updated: **2026-09-15 — Metis stress test COMPLETE; Ontology V1.2 RETAINED; DynFlowDrive NEXT**
 
 ## Research north star
 
@@ -56,275 +56,312 @@ P0001 Epona        COMPLETE v2
 P0042 WorldDrive   COMPLETE v2
 P0046 World4Drive  COMPLETE v2
 P0061 SeerDrive    COMPLETE v2 first pass
-P0049 Drive-JEPA   COMPLETE v2 first pass + official-source audit + full ontology projection
+P0049 Drive-JEPA   COMPLETE v2 first pass + source audit
+P0062 Metis        COMPLETE v2 first pass + paper/official-repo audit
 ```
 
-Canonical coordinate system:
+Canonical coordinate system remains:
 
 ```text
 landscape/WAM_DIMENSION_ONTOLOGY_V1.md
 landscape/WAM_DIMENSION_ONTOLOGY_V1_1_AMENDMENT.md
 landscape/WAM_DIMENSION_ONTOLOGY_V1_2_AMENDMENT.md
+```
 
+Comparison layer:
+
+```text
 landscape/WAM_COMPARISON_MATRIX_V1.md
 landscape/WAM_COMPARISON_MATRIX_V1_1_SEERDRIVE_EXTENSION.md
 landscape/WAM_COMPARISON_MATRIX_V1_2_DRIVEJEPA_EXTENSION.md
+landscape/WAM_COMPARISON_MATRIX_V1_2_METIS_EXTENSION.md
 ```
 
-Full new projection:
+New Metis artifacts:
 
 ```text
-landscape/P0049_DRIVEJEPA_ONTOLOGY_PROJECTION.md
+papers/deep_analysis/P0062_METIS_DEEP_ANALYSIS_V2.md
+audits/literature/PHASE_C5_METIS_AUDIT.md
+landscape/P0062_METIS_ONTOLOGY_PROJECTION.md
 ```
 
 ---
 
-# Drive-JEPA stable result
+# Metis stable result
 
-## Predictive-pretraining mechanism
+## Source/version boundary
 
-Drive-JEPA's V-JEPA objective is:
+Paper:
 
 ```text
-video clip
-→ random spatiotemporal masking
-→ online ViT encoder
-→ JEPA predictor
-→ masked latent prediction
-
-full target view
-→ EMA target encoder
-→ stop-gradient latent targets
+arXiv:2606.15869 v1
+submitted 2026-06-14
 ```
 
-Key scientific correction:
+Official repository:
 
 ```text
-random masked spatiotemporal latent completion
+LogosRoboticsGroup/Metis
+latest observed public commit:
+7677b62d786cff8bb2044b489bd41f3d59514b43
+```
+
+As of 2026-09-15, training/inference/evaluation implementation remains unreleased despite an earlier August release plan.
+
+Therefore:
+
+```text
+paper mechanism         PAPER-VERIFIED
+official README claims  VERIFIED
+implementation details  SOURCE-UNVERIFIED
+```
+
+Unresolved reporting inconsistency retained:
+
+```text
+main method/README VGE: Wan2.2-5B
+capacity-ablation label: Wan2.2-14B
+```
+
+Do not silently reconcile until source/configs are released.
+
+---
+
+# Metis mechanism
+
+Canonical subtype:
+
+```text
+TRAINING-ONLY ASYMMETRIC WORLD-ACTION CO-TRAINING
+→ WORLD-LOSS-SHAPED ACTION EXPERT
+→ ACTION-ONLY FLOW POLICY
+```
+
+Training graph:
+
+```text
+current observation + language + ego state
+→ Action Expert (AE)
+→ future action representation
+          ↓
+          conditions
+          ↓
+Video Generation Expert (VGE)
+→ factual future-video flow loss
+          ↓ backward gradient
+          └──────────────→ shapes AE
+```
+
+The asymmetric mask enforces:
+
+```text
+FORWARD:
+action tokens → future-video tokens     YES
+future-video tokens → action tokens     NO
+
+BACKWARD:
+video-generation loss → action expert   YES
+```
+
+This is the key scientific distinction:
+
+```text
+world→action gradient influence
 !=
-causal history-only → unseen-future world prediction
+world→action forward information flow
 ```
 
-The JEPA pretraining described in the paper is not ego-action conditioned.
-
-## Deployment lifecycle
-
-Official perception-free source verifies:
+Deployment graph:
 
 ```text
-2 front images
-→ pretrained image encoder
-→ ordinary Transformer waypoint decoder
+current observation + language + ego state
+→ action expert flow denoising
 → trajectory
 ```
 
-The deployed planner does **not** retain:
+Explicit deployed future object:
 
 ```text
-JEPA predictor
-EMA target encoder
-masked-target objective
-online predicted future latent
-world rollout
+NONE
 ```
 
-Thus Drive-JEPA's JEPA mechanism is best classified as:
-
-```text
-PREDICTIVE REPRESENTATION PRETRAINING
-→ ENCODER TRANSFER
-```
-
-rather than online world-model reasoning.
-
-## Full planner mechanism
-
-Official source verifies the perception-based planner:
-
-```text
-2 front frames + ego/status
-→ visual backbone
-→ 32 proposal features
-→ 4 shared-weight proposal-refinement passes
-→ 32 final trajectories
-→ learned PDM/EPDMS utility scorer
-→ NAVSIM-v2 temporal comfort recalibration
-→ argmax trajectory
-```
-
-Multimodal Trajectory Distillation (MTD):
-
-```text
-8192 offline trajectory vocabulary
-→ NAVSIM-v2 rule/simulator evaluation
-→ high-quality alternatives (appendix threshold EPDMS > 0.95)
-→ pseudo-teacher trajectories
-→ human + pseudo-teacher proposal supervision
-```
-
-This is candidate/policy supervision, not an online learned consequence model.
+Thus Metis is not an online `imagine future → inspect future → choose action` planner.
 
 ---
 
-# Drive-JEPA strongest evidence
+# Metis future supervision
 
-## Representation ladder
-
-Simple planning decoder, paper Table 5:
+Future-world target:
 
 ```text
-ImageNet ResNet34        76.0 PDMS
-DINOv2 ViT/L             76.1
-SigLIP ViT/L             83.4
-V-JEPA2 ViT/L            86.1
-Drive-domain JEPA ViT/L  89.0
+logged factual future video latent
 ```
 
-Interpretation:
+Action target:
 
 ```text
-strong evidence for transferable predictive video representation
-+
-useful driving-domain adaptation
-
-NOT direct evidence for online world dynamics
+logged factual trajectory/action chunk
 ```
 
-The 86.1→89.0 gain is still confounded with additional 330 h driving-domain exposure; it does not isolate a pure objective effect.
-
-## Full planner attribution ladder — NAVSIM-v2
+F07:
 
 ```text
-baseline                              84.1 EPDMS / 25% diversity / 68.2 EC
-generic V-JEPA2                       85.8       / 21%           / 74.6
-driving video pretraining             86.1       / 24%           / 69.7
-+ MTD                                 84.5       / 40%           / 47.9
-+ momentum-aware selection            87.8       / 40%           / 84.8
+CURRENT-CONTEXT + ACTION
+→ CHRONOLOGICALLY UNSEEN FUTURE VIDEO
+(flow-matched fixed-window generation)
 ```
 
-Important finding:
+Important boundary:
 
 ```text
-MTD increases candidate diversity
-but initially makes final planning worse;
-selection / temporal consistency must solve the larger candidate-support problem.
+one logged action + one factual future
+!=
+multiple observed alternative-action futures
 ```
 
-This strongly reinforces:
+No intervention-valid/reactive alternative-agent future truth is established.
+
+---
+
+# Metis strongest evidence
+
+## World-task co-training on/off
 
 ```text
-candidate support != candidate selection quality
+without video co-training   87.4 PDMS / 87.9 EPDMS
+with video co-training      89.1 PDMS / 89.5 EPDMS
 ```
 
-Pseudo-teacher count is also non-monotonic:
+Supports:
 
 ```text
-N_pseudo  0    1    2    4    8
-EPDMS    87.2 87.8 87.7 87.8 87.5
+future-video co-training benefits the reported action-policy family
+```
+
+Does not isolate:
+
+```text
+future-video fidelity
+causal dynamics accuracy
+generic auxiliary regularization
+imported video prior
+AE capacity / resolution effects
+```
+
+## Attention topology — matched 320×384
+
+```text
+Joint       87.4 navtest / 28.0 navhard EPDMS
+Isolated    88.3         / 29.4
+Asymmetric  88.8         / 31.6
+```
+
+This establishes:
+
+```text
+tighter/symmetric coupling is not automatically better
+asymmetric training coupling > full isolation in this architecture
+```
+
+Because AE cannot attend future-video tokens, the gain is not evidence of direct future-video→action reasoning.
+
+## Action denoising quality–compute curve
+
+```text
+steps   navtest EPDMS   navhard EPDMS
+1       87.2            30.4
+2       89.2            31.2
+5       89.4            31.4
+10      89.5            32.2
+```
+
+Paper latency operating points on RTX 4090:
+
+```text
+with video        1.38 s
+action-only       ~0.17 s
+```
+
+But video uses 10 denoising steps while the efficient action-only point uses 2, so the ~8× number is not a pure matched branch-removal ablation.
+
+---
+
+# Metis world-quality evidence boundary
+
+No dedicated quantitative future-video fidelity metric such as FVD/PSNR/SSIM was identified in the audited paper text; world-generation evidence is mainly qualitative.
+
+Therefore:
+
+```text
+video co-training helps planning
+!=
+better video prediction fidelity causes better planning
+```
+
+O07 remains:
+
+```text
+ABSENT direct prediction-fidelity → planning evidence
 ```
 
 ---
 
-# Drive-JEPA source/version boundary
+# Metis historical boundary
 
-Official source audited:
+Metis cites Fast-WAM and explicitly says its decoupled inference paradigm is inspired by it.
 
-```text
-linhanwang/Drive-JEPA@e21f47410b4d26b61f05f9bd23e169c0390cae2a
-```
-
-NAVSIM-v2 source verifies momentum calibration:
+Therefore the broad lifecycle:
 
 ```text
-past ego simulated states + current candidate
-→ two-frame extended comfort
-→ (14 * PDM score + 2 * comfort) / 16
-→ argmax
+world/video co-training during training
+→ skip explicit future generation at inference
 ```
 
-NAVSIM-v1 public planner file does not expose the same recalibration path. Source claims must therefore remain version-scoped.
+is not unique to Metis.
 
-Headline number correction:
+Metis-specific scientific contribution is better described as:
 
 ```text
-stale raw-paper abstract occurrence  93.7 PDMS
-current official arXiv / README       93.3 PDMS
-paper checklist                       93.3 PDMS
+Mixture-of-Transformers expert separation
++ asymmetric attention
++ action-conditioned future-video task
++ video-loss→AE gradient shaping
++ action-only flow deployment
 ```
-
-Use **93.3** as current canonical NAVSIM-v1 headline result.
 
 ---
 
-# Ontology V1.2 amendment from Drive-JEPA
+# Ontology stress-test result
 
-One new dimension survives merge/back-projection:
-
-```text
-F07  Prediction temporal / observability geometry
-```
-
-It distinguishes:
+Potential residue:
 
 ```text
-random-mask same-window spatiotemporal completion
-past/history-only → unseen future
-current → future endpoint
-recurrent next-state / autoregressive future
-partial-future-context completion
-hybrid future masking
+forward action→world
+backward world-loss→action
+without world-future→action forward dependency
 ```
 
-Drive-JEPA value:
+Existing dimensions already represent it:
 
 ```text
-RANDOM-MASK SAME-WINDOW SPATIOTEMPORAL COMPLETION
+E01/E02  forward action→world
+J04      coupling direction
+L04      gradient coupling direction
+M01-M03  training→deployment lifecycle
 ```
 
-Back-projection examples:
+Decision:
 
 ```text
-LAW         current/action → future endpoint
-WoTE        recurrent next-state future rollout
-Epona       history → unseen future generation
-WorldDrive  history+trajectory → unseen future
-World4Drive current/action → future endpoint
-SeerDrive   current/mode → final-horizon future BEV
-ViDAR       history → autoregressive future point cloud
+NO V1.3 amendment.
+Ontology V1.2 remains active.
 ```
 
-No new dimensions were added for EMA targets, encoder freezing, proposal refinement, or predictor removal because G02, C03/L05, J08 and M01–M03 already cover them.
+This is a positive stability result for the coordinate system.
 
 ---
 
-# Predictive-representation lineage sharpened
-
-```text
-ViDAR
-history → true chronological future point clouds
-→ encoder transfer
-
-LAW
-current latent + planner action → factual future latent
-→ auxiliary loss during planner training
-
-Drive-JEPA
-random masked video latent completion
-→ encoder transfer before planner
-
-Auto-JEPA
-history/current scene → future ego-trajectory intent latent
-→ predicted intent remains online as retrieval key
-
-WA-JEPA
-hybrid future masking + future latent generation + joint world/action prediction
-```
-
-This lineage is now encoded by F07 + lifecycle dimensions rather than one generic `predictive latent WM` label.
-
----
-
-# Seven-anchor mechanism map
+# Eight-anchor mechanism map
 
 ```text
 LAW
@@ -334,15 +371,13 @@ WoTE
 = candidate-conditioned recurrent future BEV → explicit utility → selection
 
 Epona
-= shared history latent → joint trajectory + visual generation
+= shared history latent → trajectory + visual generative branches
 
 WorldDrive
-= generative-WM representation inheritance
-+ heavy future teacher → distilled online future surrogate → ranking
+= heavy generative future teacher → distilled online future surrogate → ranking
 
 World4Drive
-= candidate/intention-conditioned endpoint latent
-→ factual-mode selector
+= candidate/intention-conditioned endpoint future latent → factual-mode selector
 
 SeerDrive
 = future-BEV endpoint ↔ planner-hidden-feature internal co-refinement
@@ -350,6 +385,12 @@ SeerDrive
 Drive-JEPA
 = masked-video predictive pretraining → encoder transfer
 + simulator-distilled multimodal proposals → utility/comfort selection
+
+Metis
+= action-conditioned future-video co-training
+→ video-loss gradient shapes action expert
+→ future-video branch bypassed
+→ direct action-flow policy
 ```
 
 ---
@@ -357,16 +398,14 @@ Drive-JEPA
 # Stable controls retained / strengthened
 
 ```text
-predictive objective != online dynamics model
-masked temporal completion != causal future forecasting
-world-model pretraining gain != deployed world-model reasoning
-candidate diversity != planning quality
-candidate support != candidate selection quality
-world-prediction quality != planning evidence
-future information is not automatically beneficial
-conditional future != intervention
+joint training != shared representation != shared parameters
+joint training != symmetric forward coupling
+world→action gradient influence != world→action inference flow
+world-task benefit != online future consumption
+world co-training != test-time imagination
+prediction quality != planning evidence
+action-conditioned future != intervention-valid future
 foundation-prior gain != WM-specific dynamics gain
-consequence teacher != value teacher
 evaluation regime is part of the claim
 matched controls > headline SOTA
 ```
@@ -380,8 +419,8 @@ WorldDrive      COMPLETE
 World4Drive     COMPLETE
 SeerDrive       COMPLETE
 Drive-JEPA      COMPLETE
-Metis           NEXT
-DynFlowDrive    PENDING
+Metis           COMPLETE
+DynFlowDrive    NEXT
 Discrete-WAM    PENDING
 GraphWorld      PENDING
 ```
@@ -390,7 +429,23 @@ GraphWorld      PENDING
 
 See `state/NEXT_TASK.md`.
 
-Deep-read **Metis** next, testing its claimed joint world/action training and especially whether world-generation machinery remains on the deployed action path or serves only as a training-time representation/supervision mechanism.
+Deep-read **DynFlowDrive** next. Primary stress-test question:
+
+```text
+Does rectified-flow latent dynamics provide a genuinely decision-relevant trajectory-conditioned transition process,
+or is the gain primarily generated by its stability-aware selection/supervision criterion?
+```
+
+Particular care is required to separate:
+
+```text
+flow denoising time
+physical future time
+candidate trajectory modes
+latent reconstruction
+flow-field stability score
+final action selection
+```
 
 ## Still forbidden
 
