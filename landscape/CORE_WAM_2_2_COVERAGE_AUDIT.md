@@ -2,7 +2,7 @@
 
 Last updated: 2026-09-15
 
-Status: **CORE DEEP READS ACTIVE — WorldDrive / World4Drive / SeerDrive / Drive-JEPA / Metis COMPLETE; DynFlowDrive NEXT**
+Status: **CORE DEEP READS ACTIVE — WorldDrive / World4Drive / SeerDrive / Drive-JEPA / Metis / DynFlowDrive COMPLETE; Discrete-WAM NEXT**
 
 ## Scope
 
@@ -12,9 +12,9 @@ Primary direction:
 WAM + one-stage / end-to-end autonomous driving planning
 ```
 
-`WAM + VLA` is secondary/control until the core branch is stable.
+`WAM + VLA` remains secondary/control until the core branch is stable.
 
-Phase D problem discovery remains paused.
+Phase D problem discovery remains **PAUSED**.
 
 ---
 
@@ -22,13 +22,13 @@ Phase D problem discovery remains paused.
 
 | Work | Year | Code status | Current placement | Status |
 |---|---:|---|---|---|
-| **WorldDrive** | 2026 | official code + checkpoints; audited `TabGuigui/WorldDrive@c375ee1e...` | representation inheritance + **distilled future foresight** + future-aware rewarder | **COMPLETE — CORE ANCHOR** |
-| **World4Drive** | 2025 ICCV | official code; audited `ucaszyp/World4Drive@cffb51ad...` | **online latent foresight**: intentions → trajectories → future latents → ScoreNet | **COMPLETE — CORE ANCHOR** |
-| **SeerDrive** | 2025 NeurIPS | official repo audited; public release differs from original paper mechanism | **online bidirectional feature co-refinement**: future BEV ↔ planner hidden feature | **COMPLETE — CORE ANCHOR** |
-| **Drive-JEPA** | 2026 | official NAVSIM-v1/v2 code audited at `linhanwang/Drive-JEPA@e21f474...` | **predictive representation pretraining → encoder transfer** + simulator-distilled proposal/scorer policy | **COMPLETE — BOUNDARY/CORE CONTROL ANCHOR** |
-| **Metis** | 2026 | official repo audited; implementation still unreleased as of 2026-09-15 | **training-only asymmetric world-action co-training → action-only flow policy** | **COMPLETE — CORE/LIFECYCLE ANCHOR** |
-| **DynFlowDrive** | 2026 | official repo/source status to be rechecked during audit | action-conditioned rectified-flow latent dynamics + stability-aware multi-mode selection | **NEXT** |
-| **Discrete-WAM** | 2026 | official-code status needs current recheck | unified discrete vision-action world-policy learning | PENDING |
+| **WorldDrive** | 2026 | official code + checkpoints; audited `TabGuigui/WorldDrive@c375ee1e...` | representation inheritance + distilled future foresight + future-aware rewarder | **COMPLETE — CORE ANCHOR** |
+| **World4Drive** | 2025 ICCV | official code audited | online latent foresight: intentions → trajectories → future latents → ScoreNet | **COMPLETE — CORE ANCHOR** |
+| **SeerDrive** | 2025 NeurIPS | official repo audited; public release differs from original paper mechanism | online bidirectional feature co-refinement | **COMPLETE — CORE ANCHOR** |
+| **Drive-JEPA** | 2026 | official NAVSIM-v1/v2 code audited | predictive representation pretraining → encoder transfer + simulator-distilled proposal/scorer policy | **COMPLETE — BOUNDARY/CORE CONTROL ANCHOR** |
+| **Metis** | 2026 | official repo audited; implementation unreleased as of 2026-09-15 | training-only asymmetric world-action co-training → action-only flow policy | **COMPLETE — CORE/LIFECYCLE ANCHOR** |
+| **DynFlowDrive** | 2026 | official repo audited; implementation unreleased as of 2026-09-15 | training-only trajectory-conditioned flow WM → world-derived score supervision → model-free deployment | **COMPLETE — CORE/LIFECYCLE ANCHOR** |
+| **Discrete-WAM** | 2026 | official-code status to be rechecked | unified discrete vision-action world-policy learning | **NEXT** |
 | **GraphWorld** | 2026 | official-code status needs current recheck | interaction graph + latent world state + long-horizon planning | PENDING |
 
 Canonical Phase C.5 audits:
@@ -39,6 +39,7 @@ audits/literature/PHASE_C5_WORLD4DRIVE_AUDIT.md
 audits/literature/PHASE_C5_SEERDRIVE_AUDIT.md
 audits/literature/PHASE_C5_DRIVEJEPA_AUDIT.md
 audits/literature/PHASE_C5_METIS_AUDIT.md
+audits/literature/PHASE_C5_DYNFLOWDRIVE_AUDIT.md
 ```
 
 Canonical normalized deep reads:
@@ -49,6 +50,7 @@ papers/deep_analysis/P0046_WORLD4DRIVE_DEEP_ANALYSIS_V2.md
 papers/deep_analysis/P0061_SEERDRIVE_DEEP_ANALYSIS_V2.md
 papers/deep_analysis/P0049_DRIVEJEPA_DEEP_ANALYSIS_V2.md
 papers/deep_analysis/P0062_METIS_DEEP_ANALYSIS_V2.md
+papers/deep_analysis/P0063_DYNFLOWDRIVE_DEEP_ANALYSIS_V2.md
 ```
 
 ---
@@ -59,230 +61,258 @@ papers/deep_analysis/P0062_METIS_DEEP_ANALYSIS_V2.md
 
 ```text
 trajectory-aware generative WM pretraining
-→ transfer/freeze vision + motion representations
+→ transfer/freeze visual + motion representations
 → multimodal candidate planner
-→ frozen TA-DWM candidate-future latent as training teacher
-→ lightweight distilled future representation
-→ future-aware reward / trajectory selection at inference
+→ heavy future teacher
+→ distilled lightweight future representation
+→ online future-aware ranking
 ```
-
-Strongest attribution ladder:
-
-```text
-31.4 no pretrain
-→ 84.9 generic CogVideoX VAE
-→ 85.8 + TA-DWM vision
-→ 86.9 + TA-DWM motion
-→ 87.0 trajectory-feature rewarder
-→ 88.1 + distilled future feature
-```
-
----
 
 ## World4Drive — ONLINE LATENT FORESIGHT
 
 ```text
-current physical latent
-+ six intention queries
-→ six trajectories
-→ action tokens
-→ six future latents
-→ ScoreNet
-→ select final trajectory
+current physical latent + intentions
+→ candidate trajectories
+→ candidate action tokens
+→ endpoint future latents
+→ factual-mode ScoreNet
+→ online selection
 ```
 
-One factual future latent supervises mode assignment; multiple predicted branches are not multiple observed alternative-action truths.
-
-Strongest component evidence:
-
-```text
-physical priors + intentions, no WM   0.61 L2 / 0.36 collision
-physical priors + intentions + WM     0.50    / 0.16
-```
-
----
+One factual future latent supervises branch identity; candidate-specific outputs are not candidate-specific observed counterfactual truths.
 
 ## SeerDrive — ONLINE BIDIRECTIONAL FEATURE CO-REFINEMENT
 
 ```text
-current BEV + ego/mode features
+current state + mode
 → future BEV endpoint
-→ future-aware planner
-→ refined ego/planner feature
-→ feed feature back into BEV WM
-→ update future BEV
-→ repeat internal refinement
+→ planner refinement
+→ planner hidden feature feeds back to WM
+→ updated future BEV
+→ repeated same-decision co-refinement
 ```
 
-Binding boundary:
-
 ```text
-internal world↔planner refinement
-!= physical-time rollout
-!= environment execution-feedback closed loop
+internal refinement != physical rollout != executed-environment closed loop
 ```
 
-Strongest 2×2 evidence:
+## Drive-JEPA — PREDICTIVE REPRESENTATION PRETRAINING + PROPOSAL POLICY
 
 ```text
-future-aware OFF + iterative OFF  87.1
-future-aware OFF + iterative ON   87.9
-future-aware ON  + iterative OFF  88.1
-future-aware ON  + iterative ON   88.9
-```
+random-mask V-JEPA video pretraining
+→ encoder transfer
+→ predictor removed
 
----
-
-## Drive-JEPA — PREDICTIVE REPRESENTATION PRETRAINING + SIMULATOR-DISTILLED PROPOSAL POLICY
-
-Predictive side:
-
-```text
-V-JEPA random spatiotemporal mask completion
-→ encoder + predictor + EMA target
-→ driving-video adaptation
-→ transfer encoder
-→ predictor/target branch discarded
-```
-
-Deployment side:
-
-```text
-2 front frames + ego/status
-→ 32 proposals
-→ 4 proposal-refinement passes
-→ learned PDM/EPDMS scorer
-→ temporal comfort calibration
+32 proposals
+→ repeated refinement
+→ simulator/pseudo-teacher supervision
+→ utility scorer + temporal calibration
 → argmax
 ```
 
-Key planning ladder:
-
-```text
-baseline             84.1 EPDMS / 25% diversity / 68.2 EC
-driving pretrain     86.1       / 24%           / 69.7
-+ MTD                84.5       / 40%           / 47.9
-+ momentum selection 87.8       / 40%           / 84.8
-```
-
-Control strengthened:
-
-```text
-candidate diversity != planning quality
-candidate support != candidate selection quality
-```
-
----
-
 ## Metis — TRAINING-ONLY ASYMMETRIC WORLD-ACTION CO-TRAINING
+
+```text
+training forward: action→future-video branch
+training backward: future-video loss→action expert
+inference: current context→action only
+```
+
+```text
+world→action gradient influence != world→action forward information flow
+```
+
+## DynFlowDrive — TRAINING-ONLY FLOW-DYNAMICS MODE-SUPERVISION
 
 Training:
 
 ```text
-current observation → action expert → future action representation
-                                      ↓
-                               conditions VGE
-                                      ↓
-                           factual future video
-                                      ↓ L_video
-                         gradient shapes action expert
-```
+multimodal planner
+→ candidate trajectories
 
-Asymmetric attention semantics:
+current factual world latent + candidate trajectory
+→ rectified-flow latent dynamics
+→ reconstruction + flow objectives
+→ transport-direction stability
 
-```text
-forward action→world              YES
-forward future-world→action       NO
-backward world-loss→action expert YES
+GT trajectory error + reconstruction + stability
+→ positive mode n*
+→ planner score-head supervision
 ```
 
 Deployment:
 
 ```text
-current observation + language + ego state
-→ action expert flow denoising
-→ trajectory
+current observation
+→ candidates + learned scores
+→ argmax
+
+world model / flow / future latent = REMOVED
 ```
 
-Explicit future-video generation at action deployment:
+Critical boundary:
 
 ```text
-NO
+N candidate-conditioned flow outputs
+vs
+ONE factual next-world latent target
 ```
 
-Strongest matched world-task evidence:
+Thus action-conditioned branching is not intervention-valid counterfactual supervision.
+
+---
+
+# DynFlowDrive evidence decomposition
+
+Strongest matched dynamics control:
 
 ```text
-w/o video co-training   87.9 EPDMS
-w/  video co-training   89.5 EPDMS
+Static WM   0.61 Avg L2 / 0.30 Avg CR
+Flow WM     0.59        / 0.26
 ```
 
-Strongest interaction-topology evidence at matched 320×384:
+World-feature prior:
 
 ```text
-Joint       87.4 navtest / 28.0 navhard
-Isolated    88.3         / 29.4
-Asymmetric  88.8         / 31.6
+Flow WM                    0.59 / 0.26
++ pretrained World Feature 0.57 / 0.22
 ```
 
-This demonstrates that tighter/symmetric coupling is not automatically better and that `world→action gradient influence` is distinct from `world→action forward information flow`.
-
-No dedicated quantitative future-video fidelity metric was identified; therefore:
+Selection teacher:
 
 ```text
-video co-training benefit
-!=
-world-fidelity→planning evidence
+none              0.61 / 0.30
+L2 only           0.59 / 0.24
++ reconstruction  0.58 / 0.22
++ flow stability  0.57 / 0.22
 ```
 
-Official implementation remains unreleased as of 2026-09-15, so code-level details are source-unverified.
-
-Historical control:
+This shows that the final performance is a bundle of:
 
 ```text
-Fast-WAM already explores world/video co-training with test-time future generation removed;
-Metis's contribution is the specific MoT + asymmetric-attention mechanism, not the broad lifecycle idea alone.
+predictive/world supervision
++ flow parameterization
++ imported/foundation representation
++ positive-mode assignment / score distillation
 ```
+
+The angular flow-stability term itself is a modest incremental contributor in the reported ablation.
+
+---
+
+# DynFlowDrive temporal correction and Ontology V1.3
+
+DynFlowDrive forces separation of:
+
+```text
+physical scene time τ
+rectified-flow transport coordinate s
+planner/query iteration k
+```
+
+Only physical endpoints are directly observed as world targets. Intermediate `s` states are not physically time-supervised.
+
+New stable dimension:
+
+```text
+F08  Internal transition-coordinate / physical-time alignment
+```
+
+Binding rule:
+
+```text
+K flow/diffusion steps != K physical future timesteps
+smooth latent transport != validated smooth physical evolution
+dz/ds != dz/dτ unless time identity is established
+```
+
+Back-projection distinguishes:
+
+```text
+WoTE       physically indexed predicted future transitions
+Epona      outer physical frame time + inner denoising time
+WorldDrive physical future + diffusion sampling time
+SeerDrive  internal representation refinement
+Metis      generative flow/denoising coordinate vs physical action/video horizon
+DynFlowDrive rectified-flow transport coordinate between t and t+1
+```
+
+Canonical amendment:
+
+```text
+landscape/WAM_DIMENSION_ONTOLOGY_V1_3_AMENDMENT.md
+```
+
+---
+
+# DynFlowDrive source/equation boundary
+
+Official repository:
+
+```text
+xiaolul2/DynFlowDrive
+latest observed public commit:
+c665dc577a0939543fa7abe64d28eadaec28283c
+```
+
+Implementation remains unreleased.
+
+Paper v2 contains unresolved mathematical/procedure ambiguities:
+
+```text
+Eq.7 x_s=(1-s)a+s z_{t+1}
+vs Eq.10 target (1-s)(z_{t+1}-a)
+
+training path built from noised anchor a
+vs sampling prose starting from z_t
+```
+
+These remain source-audit questions rather than silently corrected implementation facts.
+
+---
+
+# Evaluation regime correction
+
+DynFlowDrive paper calls NAVSIM `closed-loop`.
+
+Project-standard label:
+
+```text
+NAVSIM v1 = NON-REACTIVE DATA-DRIVEN / PSEUDO-SIMULATION PLANNING
+```
+
+Therefore 88.7 PDMS is planning evidence under NAVSIM, not proof of reactive alternative-agent dynamics.
+
+Headline SSR delta also contains an input confound:
+
+```text
+SSR*                            0.39 / 0.15
+DynFlowDrive(SSR)               0.35 / 0.14
+DynFlowDrive(SSR)+ego status    0.31 / 0.11
+```
+
+The more matched dynamics comparison is the 0.39→0.35 row, not the full 0.39→0.31 headline.
 
 ---
 
 # Active coordinate-system amendments
 
-Base:
-
 ```text
-landscape/WAM_DIMENSION_ONTOLOGY_V1.md
-```
+V1 base
 
-V1.1 from SeerDrive:
-
-```text
+V1.1 — SeerDrive
 J08  Inference iteration semantics
 J09  Planner→world feedback carrier
 L07  Iterative-state supervision coverage
-```
 
-V1.2 from Drive-JEPA:
-
-```text
+V1.2 — Drive-JEPA
 F07  Prediction temporal / observability geometry
+
+V1.3 — DynFlowDrive
+F08  Internal transition-coordinate / physical-time alignment
 ```
 
-Metis stress-test result:
-
-```text
-NO new dimension required.
-Ontology V1.2 remains sufficient.
-```
-
-Its distinctive asymmetry is represented by:
-
-```text
-E01/E02  action→world forward coupling
-J04      coupling direction
-L04      gradient coupling direction
-M01-M03  training→deployment lifecycle
-```
+Metis did not require a new axis; its asymmetric forward/backward coupling is already represented by E/J/L/M.
 
 ---
 
@@ -290,42 +320,31 @@ M01-M03  training→deployment lifecycle
 
 ```text
 LAW
-auxiliary future latent during planner training
-→ no future object online
+training future target → representation shaping → no future online
 
 Drive-JEPA
-masked predictive pretraining
-→ encoder transfer
-→ predictor removed
-
-Epona
-joint visual/trajectory generative training
-→ shared representation shaped
-→ visual branch optional online
+predictive pretraining → encoder transfer → no predictor online
 
 Metis
-action-conditioned future-video co-training
-→ world loss shapes action expert
-→ explicit future branch bypassed online
+future-video co-training → world-loss-shaped action expert → no future online
 
-WoTE
-compact recurrent future transition
-→ stays online
-→ explicit utility selection
+DynFlowDrive
+candidate consequence teacher → score/mode supervision → no future online
+
+Epona
+joint visual/trajectory training → shared representation → visual future optional online
 
 WorldDrive
-heavy future teacher
-→ distilled lightweight surrogate
-→ stays online for ranking
+heavy future teacher → distilled future summary → lightweight future online
 
 World4Drive
-candidate endpoint future
-→ stays online
-→ factual-mode selector
+candidate endpoint future → future-mode scorer → online future
+
+WoTE
+candidate recurrent future → utility → online future
 
 SeerDrive
-future BEV endpoint online
-↔ planner hidden feature co-refinement
+future endpoint ↔ planner hidden state → online co-refinement
 ```
 
 ---
@@ -336,25 +355,26 @@ Every remaining paper must resolve:
 
 ```text
 observation/history representation
-current-state object
+current-state object and representation provenance
 future/world target object
 F07 prediction observability geometry
+F08 internal-step / physical-time semantics
 action/intention representation
-action→world forward coupling
-world→action forward coupling
+action→world and world→action forward coupling
 world-loss→action gradient coupling
 future target / truth lineage
+counterfactual vector I01–I05
 training-stage topology
-shared representation / parameters / gradients
-what predictive/world machinery survives deployment
+representation / parameter / loss sharing
+what world machinery survives deployment
 candidate/scorer/selector contribution
 J08 iteration semantics
 J09 feedback carrier
-L07 iterative supervision where applicable
-matched controls isolating world mechanism
+L07 iterative-state supervision when relevant
+matched world-mechanism control
 prediction fidelity→planning evidence
 evaluation regime / reactivity
-source-version status
+source/version status
 proves / does-not-prove / strongest alternative explanation
 ```
 
@@ -368,9 +388,9 @@ proves / does-not-prove / strongest alternative explanation
 3. SeerDrive       COMPLETE
 4. Drive-JEPA      COMPLETE
 5. Metis           COMPLETE
-6. DynFlowDrive    NEXT
-7. Discrete-WAM
-8. GraphWorld
+6. DynFlowDrive    COMPLETE
+7. Discrete-WAM    NEXT
+8. GraphWorld      PENDING
 ```
 
 ## Current decision
@@ -381,4 +401,4 @@ Phase C.5 core-WAM correction = ACTIVE
 broad WAM+VLA expansion = DEFERRED
 ```
 
-Do not reopen Phase D until remaining core mechanisms are normalized and the WAM-only historical/interface synthesis passes comparability QA.
+Do not reopen Phase D until Discrete-WAM and GraphWorld are normalized and WAM-only comparability QA is rerun.
