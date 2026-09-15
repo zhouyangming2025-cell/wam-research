@@ -2,134 +2,115 @@
 
 ## 唯一下一任务
 
-> **Deep-read SeerDrive under `WAM_DIMENSION_ONTOLOGY_V1` and use it as the first post-ontology stress test.**
+> **Deep-read Drive-JEPA under the WAM reading skill stack + Ontology V1/V1.1, as the second post-ontology stress test.**
 
-## Current normalization status
+## Completed normalization / stress tests
 
 ```text
-P0048 LAW          COMPLETE v2 + matrix projection
-P0045 WoTE         COMPLETE v2 + matrix projection
-P0001 Epona        COMPLETE v2 + matrix projection
-P0042 WorldDrive   COMPLETE v2 + matrix projection
-P0046 World4Drive  COMPLETE v2 + matrix projection
-
-WAM_DIMENSION_ONTOLOGY_V1   COMPLETE
-WAM_COMPARISON_MATRIX_V1    COMPLETE FIRST PROJECTION
+P0048 LAW          COMPLETE v2
+P0045 WoTE         COMPLETE v2
+P0001 Epona        COMPLETE v2
+P0042 WorldDrive   COMPLETE v2
+P0046 World4Drive  COMPLETE v2
+P0061 SeerDrive    COMPLETE v2 first pass
 ```
 
-Canonical comparison system:
+Canonical method stack:
+
+```text
+landscape/WAM_READING_SKILL_STACK.md
+```
+
+Canonical coordinate system:
 
 ```text
 landscape/WAM_DIMENSION_ONTOLOGY_V1.md
+landscape/WAM_DIMENSION_ONTOLOGY_V1_1_AMENDMENT.md
 landscape/WAM_COMPARISON_MATRIX_V1.md
+landscape/WAM_COMPARISON_MATRIX_V1_1_SEERDRIVE_EXTENSION.md
 ```
 
-## Why SeerDrive is next
-
-SeerDrive appears to introduce bidirectional coupling between future-scene modeling and planning. It is therefore a strong stress test for dimensions that the first five anchors only partially exercised:
+SeerDrive artifacts:
 
 ```text
-J04 causal coupling direction
-J07 task-mode inference graph
-L02–L04 representation/parameter/gradient jointness
-F04–F06 iterative future modeling and rollout
-I01–I05 counterfactuality/reactivity
-M01–M06 future-knowledge lifecycle
+papers/deep_analysis/P0061_SEERDRIVE_DEEP_ANALYSIS_V2.md
+audits/literature/PHASE_C5_SEERDRIVE_AUDIT.md
+landscape/P0061_SEERDRIVE_ONTOLOGY_V1_PROJECTION.md
 ```
 
-The main scientific question is:
+## Why Drive-JEPA is next
 
-> Is SeerDrive genuinely a new **online bidirectional world↔planning co-refinement interface**, or is it mainly an older iterative prediction-planning refinement pattern expressed in future-scene latent space?
+Drive-JEPA is the next core-WAM coverage item and should stress a different part of the ontology than SeerDrive.
+
+Main questions:
+
+```text
+1. What exactly is the JEPA target representation?
+2. Is there an online/EMA/frozen target encoder?
+3. Does future prediction shape representation only, or remain in deployed planning?
+4. What is the action/trajectory condition, if any?
+5. What information is deliberately omitted from prediction versus reconstructed?
+6. How does JEPA differ scientifically from LAW latent prediction?
+7. How does it differ from ViDAR / Auto-JEPA / WA-JEPA predictive pretraining?
+8. Is the planner direct, candidate-based, or future-evaluator based?
+9. Which gains come from predictive objective vs backbone/pretraining/data?
+10. Does JEPA prediction quality correlate with planning quality?
+11. What target-network / stop-gradient / collapse-avoidance mechanism is used?
+12. What future horizon/object gives the strongest planning signal?
+13. Is the model learning world dynamics, representation invariance, or both?
+14. What remains at inference?
+15. What matched control isolates the JEPA-specific mechanism?
+```
 
 ## Mandatory workflow
 
-Do not write a conventional SeerDrive summary first.
-
-Use:
-
 ```text
-paper/source facts
-→ fill Ontology A–P
-→ identify mechanism residue not expressible by V1
-→ compare every important module to prior anchors and historical predecessors
-→ only then write narrative synthesis
+official paper / RAW_MD / supplement / version-locked source if needed
+→ paper-deep-reader mechanism reconstruction
+→ source/claim gate
+→ claim–evidence extraction
+→ fill all Ontology V1 + V1.1 dimensions
+→ compare every important mechanism immediately with LAW / WoTE / Epona / WorldDrive / World4Drive / SeerDrive
+→ identify ontology residue
+→ back-project any proposed new dimension before acceptance
 ```
 
-Every ontology dimension must receive a value or explicit:
+Do not assume `JEPA = world model` merely from naming. Establish:
 
 ```text
-ABSENT
-NOT REPORTED
-NOT EVALUATED
-NOT APPLICABLE
-UNCLEAR / NEEDS SOURCE AUDIT
-```
-
-## SeerDrive audit targets
-
-At minimum resolve:
-
-```text
-1. exact observation/history representation
-2. current world state vs predicted future state
-3. first trajectory/proposal generation
-4. first future-scene prediction
-5. exact world→trajectory refinement arrow
-6. exact trajectory→world refinement arrow
-7. number of iterations and weight sharing
-8. whether planning/world branches share representation, parameters and gradients
-9. future target and truth source
-10. whether future supervision is factual, candidate-specific, teacher-generated or simulated
-11. whether multiple candidates persist across iterations
-12. scorer semantics if a scorer exists
-13. whether predicted future directly changes deployed action
-14. inference-time modules and compute
-15. matched ablations for each coupling direction
-16. iteration-count ablation
-17. evaluation regime / reactivity
-18. counterfactual output vs counterfactual supervision
-19. relation to LAW / WoTE / Epona / WorldDrive / World4Drive
-20. relation to PPAD / GameFormer / earlier iterative prediction-planning methods
+predicted object
+future semantics
+supervision
+planning interface
+deployment role
 ```
 
 ## Required output
 
-Create a dimension-first deep analysis and update the matrix:
-
 ```text
-papers/deep_analysis/<SeerDrive>_DEEP_ANALYSIS_V2.md
-landscape/WAM_COMPARISON_MATRIX_V1.md
-```
-
-If SeerDrive reveals a mechanism that cannot be represented by Ontology V1, do **not** force-fit it. Instead:
-
-```text
-fill existing dimensions first
-→ document the residue
-→ propose exact new/split dimension
-→ back-project that dimension onto all five existing anchors
-→ version ontology only after the back-projection succeeds
+papers/deep_analysis/P0049_DRIVEJEPA_DEEP_ANALYSIS_V2.md
+audits/literature/PHASE_C5_DRIVEJEPA_AUDIT.md
+landscape/P0049_DRIVEJEPA_ONTOLOGY_PROJECTION.md
+comparison matrix extension/update
 ```
 
 ## Stop condition
 
-Do not move to Drive-JEPA until we can state without ambiguity:
+Do not move to Metis until we can state without ambiguity:
 
 ```text
-what object is iterated
-what arrows are genuinely bidirectional
-what is supervised at each round
-what remains online
-what is world modeling vs generic iterative decoder refinement
-what matched evidence isolates the claimed world↔planning coupling
+what JEPA predicts
+where its target comes from
+why this is different from LAW-style future-latent regression
+what action/planning information conditions prediction
+whether predictive knowledge remains online
+what evidence isolates JEPA-specific planning value
+whether a new ontology dimension is genuinely needed
 ```
 
-## After SeerDrive
-
-Unless new evidence changes priority:
+## After Drive-JEPA
 
 ```text
-Drive-JEPA
 Metis
 DynFlowDrive
 Discrete-WAM
@@ -143,5 +124,5 @@ no research-gap declaration
 no method design
 no broad VLA expansion
 no forced risk-field insertion
-no novelty conclusion from missing ontology cells
+no novelty conclusion from empty ontology cells
 ```
