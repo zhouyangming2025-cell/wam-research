@@ -2,7 +2,7 @@
 
 Last updated: 2026-09-15
 
-Status: **ACTIVE — eleven-anchor source-layer completeness gate before WAM consolidation**
+Status: **ACTIVE — thirteen-anchor source-layer completeness tracking during WAM expansion**
 
 Purpose: keep separate:
 
@@ -26,7 +26,7 @@ PARTIAL   source exists/audit exists but does not fully cover reported mechanism
 BLOCKED   implementation unavailable/not identifiable
 ```
 
-## Eleven normalized anchors
+## Thirteen normalized anchors
 
 | Paper | Paper/raw MD | Deep analysis | Official code status | Source audit status | Current source-layer judgment |
 |---|---|---|---|---|---|
@@ -41,6 +41,8 @@ BLOCKED   implementation unavailable/not identifiable
 | P0063 DynFlowDrive | PRESENT | COMPLETE | `xiaolul2/DynFlowDrive`, README/teaser only in audited state | **BLOCKED** | PAPER verified; implementation SOURCE-UNVERIFIED |
 | P0064 Discrete-WAM | PRESENT | COMPLETE | no attributable official implementation identified | **BLOCKED / MONITOR** | PAPER verified; scheduler/detach/task-routing SOURCE-UNVERIFIED |
 | P0065 GraphWorld | PRESENT | COMPLETE | no attributable official autonomous-driving implementation identified | **BLOCKED / MONITOR** | PAPER verified; graph/flow/runtime implementation SOURCE-UNVERIFIED |
+| **P0009 DriveLaW** | PRESENT | COMPLETE | `xiaomi-research/drivelaw` | **COMPLETE FIRST-PASS core training/inference audit**, `243e0e41148bdb1ae39ce1adf17d026e7cbd4348` | **SOURCE-COMPLETE for core world→policy interface, with paper-commit/version caveat** |
+| **P0012 DA-WAM** | PRESENT | COMPLETE | `LeapWM/da-wam`, README-only placeholder | **BLOCKED** | **PAPER-COMPLETE; official implementation SOURCE-UNVERIFIED** |
 
 ---
 
@@ -80,6 +82,91 @@ P0001 Epona = SOURCE-COMPLETE FOR CORE MECHANISM
 
 ---
 
+# DriveLaW source boundary
+
+Canonical audits:
+
+```text
+papers/deep_analysis/P0009_DRIVELAW_DEEP_ANALYSIS_V2.md
+audits/literature/PHASE_C6_DRIVELAW_AUDIT.md
+```
+
+Locked source used for current audit:
+
+```text
+xiaomi-research/drivelaw@243e0e41148bdb1ae39ce1adf17d026e7cbd4348
+```
+
+Core source-verified facts:
+
+```text
+planning uses Video-DiT internal block states as Action-DiT conditioning;
+canonical evaluation configs set return_action=true, return_video=false;
+planning does not require full future-video denoising or RGB decode;
+first video denoising pass stores blockwise video-state buffer;
+action refinement reuses the buffered world/generative states;
+action_full training makes both video and action portions trainable;
+released action training loop uses action loss while allowing that loss to update Video DiT.
+```
+
+Caveat:
+
+```text
+current main is later than paper submission;
+exact paper benchmark tag/commit is not pinned;
+paper/config action steps and current-main hard-coded path show a version discrepancy.
+```
+
+Final label:
+
+```text
+P0009 DriveLaW = SOURCE-COMPLETE FOR CORE INTERFACE / VERSION-PARTIAL FOR EXACT PAPER REPRODUCTION
+```
+
+---
+
+# DA-WAM source boundary
+
+Canonical audit:
+
+```text
+audits/literature/PHASE_C6_DAWAM_AUDIT.md
+```
+
+Official repository:
+
+```text
+LeapWM/da-wam@1edbe555146a2d1fe9484f5c11f120860b8a4858
+```
+
+As of 2026-09-15:
+
+```text
+README.md only
+"comming soon"
+```
+
+Therefore the following remain source-unverified:
+
+```text
+exact LoRA layer placement
+predictor implementation / tensor shapes
+scorer attention topology
+exact detach/gradient boundaries
+candidate proposal implementation
+hard-negative bank generation
+factor / utility target code
+runtime / batching behavior
+```
+
+Final label:
+
+```text
+P0012 DA-WAM = PAPER-COMPLETE / SOURCE-BLOCKED
+```
+
+---
+
 # Current blocked/monitor set
 
 ```text
@@ -87,6 +174,7 @@ P0062 Metis
 P0063 DynFlowDrive
 P0064 Discrete-WAM
 P0065 GraphWorld
+P0012 DA-WAM
 ```
 
 Do not substitute unofficial reimplementations for absent/unreleased official code.
