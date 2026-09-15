@@ -24,13 +24,14 @@ The immediate objective is to broaden and stress-test the coordinate system with
 Current normalized count:
 
 ```text
-12 papers
+13 papers
 ```
 
-Latest completed expansion anchor:
+Latest completed expansion anchors:
 
 ```text
 P0009 DriveLaW — COMPLETE
+P0012 DA-WAM   — COMPLETE
 ```
 
 ---
@@ -101,42 +102,47 @@ No Ontology V1.4 amendment; candidate residue retained:
 GENERATIVE-STATE TAP LOCATION / SOLVER-DEPTH OF POLICY CONDITION
 ```
 
-## 2. P0012 DA-WAM — NEXT
+## 2. P0012 DA-WAM — COMPLETE
 
-Why it matters:
-
-```text
-N candidate trajectories
-→ N action-conditioned future latents
-→ per-candidate factorized scorer
-```
-
-It directly pressure-tests World4Drive/WoTE/WorldDrive distinctions and explicitly acknowledges the one-factual-future limitation.
-
-Mandatory questions:
+Canonical result:
 
 ```text
-one-to-one trajectory↔future latent correspondence
-expert-matched future supervision only
-hard-negative supervision semantics
-factorized safety/value heads
-EMA target / online encoder adaptation
-candidate-specific prediction vs candidate-specific truth
-future-latent contribution beyond trajectory geometry
+ONLINE CANDIDATE-SPECIFIC FUTURE-LATENT UTILITY SCORING WAM
 ```
 
-Mandatory comparisons:
+Stable mechanism:
 
 ```text
-DA-WAM vs WoTE
-DA-WAM vs World4Drive
-DA-WAM vs WorldDrive
-DA-WAM vs SeerDrive
-DA-WAM vs Drive-JEPA
-DA-WAM vs DriveLaW
+2 historical front-camera frames
+→ V-JEPA 2.1 online encoder + LoRA
+→ 32 trajectory candidates
+→ one 0.5s future latent per candidate
+→ factorized NC/DAC/EP/TTC/Comfort + utility scorer
+→ argmax
 ```
 
-## 3. P0002 SafeDrive
+Critical supervision boundary:
+
+```text
+candidate-specific future output               YES
+candidate-specific direct future truth         NO except expert-matched branch
+all-branch factor/value/ranking supervision    YES
+reactive alternative-world truth               NO / NOT ESTABLISHED
+```
+
+Strongest matched control:
+
+```text
+No Future Prediction          93.31 PDMS
+Shared Global Future          92.81
+Current-Latent Conditioning   93.25
+Action-Conditioned Future     93.46
++ Hard Negatives              93.68
+```
+
+No Ontology V1.4 amendment. Official `LeapWM/da-wam` repository currently contains only a placeholder README, so implementation remains source-unverified.
+
+## 3. P0002 SafeDrive — NEXT
 
 Why it matters:
 
@@ -146,15 +152,27 @@ trajectory-conditioned sparse world
 → explicit collision + drivable-area safety reasoning
 ```
 
-This adds a major safety/world-planning anchor missing from the first-wave set.
+This adds a major safety/world-planning anchor missing from the existing 13-paper normalized set.
 
 Mandatory comparisons:
 
 ```text
 SafeDrive vs WoTE explicit utility
+SafeDrive vs DA-WAM factorized utility
 SafeDrive vs GraphWorld structured interaction state
 SafeDrive vs World4Drive candidate future
 SafeDrive vs RiskWorld object-level risk
+```
+
+Mandatory questions:
+
+```text
+what is the sparse world state?
+which agent/timestep objects are predicted?
+how ego trajectory conditions future interaction?
+what future truth exists for alternative ego candidates?
+what is predicted state vs rule evaluator vs learned safety/value?
+how safety information changes final planning?
 ```
 
 ## 4. P0005 RiskWorld
@@ -300,7 +318,7 @@ They may be revisited only after the expanded deep-read corpus is re-consolidate
 # Next paper
 
 ```text
-P0012 DA-WAM
+P0002 SafeDrive
 ```
 
-Reason: after DriveLaW established the `one common online generative representation → direct policy` family, DA-WAM provides the sharpest next contrast: `N candidate actions → N predicted future latents → per-candidate scoring`, while explicitly exposing the offline one-factual-future supervision limitation.
+Reason: after DriveLaW covered online generative representation→direct policy and DA-WAM covered online candidate-specific future→explicit utility scoring, SafeDrive extends the map toward structured future interaction and explicit safety reasoning.
