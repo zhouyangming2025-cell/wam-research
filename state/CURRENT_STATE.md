@@ -1,6 +1,6 @@
 # CURRENT_STATE
 
-Last updated: **2026-09-15 — RESEARCH-DIRECTION CONVERGENCE PAUSED; BROAD WAM DEEP-READ EXPANSION ACTIVE; DA-WAM COMPLETE**
+Last updated: **2026-09-15 — RESEARCH-DIRECTION CONVERGENCE PAUSED; BROAD WAM DEEP-READ EXPANSION ACTIVE; SAFEDRIVE COMPLETE**
 
 ## Research north star
 
@@ -26,11 +26,7 @@ FIELD UNDERSTANDING FIRST
 → method design
 ```
 
-## Correction after the first 11 anchors
-
-The first eleven normalized anchors were sufficient to build a useful preliminary ontology and mechanism map, but **not sufficient to converge on research problems or method directions**.
-
-Binding correction:
+Binding correction after the first 11 anchors:
 
 ```text
 11 deep anchors
@@ -48,11 +44,11 @@ method design                               FORBIDDEN
 broad literature expansion                  ACTIVE
 ```
 
-The previously created tension/candidate-problem artifacts are retained only as **parked provisional observations**. They must not determine paper selection during this phase.
+Previously created tension/candidate-problem artifacts remain parked historical observations and MUST NOT determine paper selection during this phase.
 
 ---
 
-# Normalized anchors — expansion now at 13
+# Normalized anchors — expansion now at 14
 
 ```text
 P0048 LAW           COMPLETE v2
@@ -66,13 +62,14 @@ P0062 Metis         COMPLETE v2 + paper/repo audit
 P0063 DynFlowDrive  COMPLETE v2 + paper/repo audit
 P0064 Discrete-WAM  COMPLETE v2 + paper/source-status audit
 P0065 GraphWorld    COMPLETE v2 + paper/source-status audit
-P0009 DriveLaW      COMPLETE v2 + arXiv v3 / official-source audit
-P0012 DA-WAM        COMPLETE v2 + arXiv v2 / official-repo-status audit
+P0009 DriveLaW      COMPLETE v2 + official-source audit
+P0012 DA-WAM        COMPLETE v2 + official-repo-status audit
+P0002 SafeDrive     COMPLETE v2 + NAVSIM source audit
 ```
 
-These anchors remain a growing comparison set; they do not define the boundary of the field.
+These anchors are a growing comparison set, not the field boundary.
 
-Canonical ontology remains:
+Canonical ontology:
 
 ```text
 landscape/WAM_DIMENSION_ONTOLOGY_V1.md
@@ -81,23 +78,18 @@ landscape/WAM_DIMENSION_ONTOLOGY_V1_2_AMENDMENT.md
 landscape/WAM_DIMENSION_ONTOLOGY_V1_3_AMENDMENT.md
 ```
 
-Ontology V1.3 remains a working coordinate system, not a final taxonomy.
+Ontology V1.3 remains active as a working coordinate system.
 
-DriveLaW did **not** authorize V1.4. It exposed a candidate residue:
+No V1.4 was authorized by DriveLaW, DA-WAM or SafeDrive.
+
+Residue watchlist:
 
 ```text
 GENERATIVE-STATE TAP LOCATION / SOLVER-DEPTH OF POLICY CONDITION
+SAFETY-LOCALIZATION GRANULARITY
 ```
 
-but this remains unpromoted until another independent anchor survives back-projection.
-
-DA-WAM also does **not** authorize V1.4. Its central supervision asymmetry is already represented by:
-
-```text
-G07 candidate/branch supervision coverage
-I02 alternative-action future supervision
-K05 scorer-target provenance
-```
+Both remain unpromoted until independent anchors show explanatory value beyond existing dimensions.
 
 ---
 
@@ -112,7 +104,7 @@ landscape/P0009_DRIVELAW_ONTOLOGY_PROJECTION.md
 landscape/WAM_COMPARISON_MATRIX_V1_3_DRIVELAW_EXTENSION.md
 ```
 
-Canonical subtype:
+Subtype:
 
 ```text
 ONLINE GENERATIVE-LATENT DIRECT-POLICY WAM
@@ -122,62 +114,22 @@ Core deployment graph:
 
 ```text
 history frames
-→ VAE-conditioned latent/noise canvas
 → FIRST Video-DiT denoising pass
-→ cache blockwise Video-DiT hidden states
-→ Action-DiT cross-attention + action-flow refinement
+→ cached blockwise Video-DiT hidden states
+→ Action-DiT cross-attention / flow refinement
 → trajectory
 
-full future-video denoising rollout = NOT REQUIRED
-RGB future decode = NOT REQUIRED
-candidate consequence scorer = ABSENT in canonical path
+full future-video rollout / RGB decode NOT REQUIRED
 ```
 
-Key source-level correction:
+Key correction:
 
 ```text
-forward:  WORLD / VIDEO HIDDEN → ACTION
-backward during action_full: ACTION LOSS → VIDEO DIT
+forward:  WORLD/VIDEO HIDDEN → ACTION
+backward: ACTION LOSS → VIDEO DIT in action_full stage
 ```
 
-Stage 3 is therefore not a frozen-video feature extractor. The released canonical training path uses an action-only loss while allowing all diffusion-model parameters to update.
-
-Strongest matched planning evidence:
-
-```text
-video pretraining scale:
-0 → 76k → 3.8M → 7.6M
-85.9 → 87.0 → 87.8 → 89.1 PDMS
-
-representation:
-BEV 84.1
-VLM 86.5
-Video latent 89.1
-
-video-denoise tap:
-step 1  89.1
-step 5  86.9
-step 10 23.2
-```
-
-Binding interpretation:
-
-```text
-more complete generative denoising
-!= better planning representation
-```
-
-Source audit also identified:
-
-```text
-paper action-flow target sign: a0-epsilon
-source target: epsilon-a0
-(the source matches the derivative of a_t=(1-t)a0+t epsilon)
-
-paper/config planning steps: 5
-current main agent forward_test: 10 hard-coded
-exact paper benchmark commit not pinned
-```
+Planning-optimal video representation occurs early in denoising; more complete generation is not monotonically better for planning.
 
 ---
 
@@ -192,73 +144,135 @@ landscape/P0012_DAWAM_ONTOLOGY_PROJECTION.md
 landscape/WAM_COMPARISON_MATRIX_V1_3_DAWAM_EXTENSION.md
 ```
 
-Canonical subtype:
+Subtype:
 
 ```text
 ONLINE CANDIDATE-SPECIFIC FUTURE-LATENT UTILITY SCORING WAM
 ```
 
+Core deployment:
+
+```text
+2 front-camera frames
+→ V-JEPA 2.1 online encoder + LoRA
+→ 32 trajectory candidates
+→ 32 short-horizon future latents
+→ NC/DAC/EP/TTC/Comfort + utility scorer
+→ argmax
+```
+
+Binding supervision boundary:
+
+```text
+candidate-specific future outputs                         YES
+candidate-specific direct future truths                  NO
+expert-matched future-latent truth                       YES
+other branches direct future-latent truth                NO
+all branches factor/value/ranking supervision            YES
+```
+
+Matched control:
+
+```text
+No Future 93.31
+Shared Global Future 92.81
+Current Latent 93.25
+Action-Conditioned Future 93.46
++ Hard Negatives 93.68 PDMS
+```
+
+Official implementation remains SOURCE-BLOCKED (`LeapWM/da-wam` placeholder README only in audited state).
+
+---
+
+# SafeDrive stable normalized result
+
+Canonical files:
+
+```text
+papers/deep_analysis/P0002_SAFEDRIVE_DEEP_ANALYSIS_V2.md
+audits/literature/PHASE_C6_SAFEDRIVE_AUDIT.md
+landscape/P0002_SAFEDRIVE_ONTOLOGY_PROJECTION.md
+landscape/WAM_COMPARISON_MATRIX_V1_3_SAFEDRIVE_EXTENSION.md
+```
+
+Official source:
+
+```text
+SPA-junghokim/SafeDrive@ea7791d6c2ebdeedfb6ed514f080cdfa1675b76f
+```
+
+Subtype:
+
+```text
+ONLINE TRAJECTORY-CONDITIONED SPARSE-WORLD SAFETY EVALUATOR
+```
+
 Core deployment graph:
 
 ```text
-2 historical front-camera frames
-→ V-JEPA 2.1 online encoder + LoRA
-→ current scene tokens Z_t
-→ 32 trajectory candidates
-→ 32 action embeddings a_i
-→ shared action-conditioned predictor
-→ 32 short-horizon (0.5s) future latents Zhat_i
-→ factorized scorer
-   NC / DAC / EP / TTC / Comfort + utility
-→ argmax trajectory
+camera + LiDAR + history
+→ ProposalNet: BEV / objects / 256 anchors / coarse safety
+→ candidate pruning
+→ one sparse ego-agent world per surviving ego candidate
+→ SWNet interaction + future-motion refinement
+→ FRNet
+   scene safety
+   + PwNC(agent × future time)
+   + TwDAC(future time)
+→ weighted learned safety score
+→ select trajectory
 ```
 
-Critical supervision boundary:
+Critical source-verified supervision decomposition:
 
 ```text
-32 candidate-specific future outputs                         YES
-32 direct candidate-specific future truths                  NO
-expert-matched branch direct future-latent supervision      YES
-other candidate branches direct future-latent supervision   NO
-all branches factor / utility / ranking supervision         YES
-reactive alternative-agent intervention truth               NO / NOT ESTABLISHED
+candidate-specific sparse-world output               YES
+candidate-specific PDM safety/value labels           YES
+candidate-specific pair-collision / TwDAC labels     YES
+candidate-specific alternative-agent future GT       NO
+reactive other-agent intervention truth              NO in audited NAVSIM path
 ```
 
-Strongest matched future/scoring evidence:
-
-```text
-No Future Prediction          93.31 PDMS
-Shared Global Future          92.81
-Current-Latent Conditioning   93.25
-Action-Conditioned Future     93.46
-+ Hard Negatives              93.68
-```
+The released loss code reuses the same logged surrounding-agent future targets across ego-anchor/world branches while PDM safety targets are computed separately for each ego candidate.
 
 Binding interpretation:
 
 ```text
-candidate/future one-to-one alignment is useful
-but direct incremental gain over strong no-future baseline is modest (+0.15 PDMS)
-
-hard-negative/value supervision contributes another +0.22 PDMS
+candidate-specific safety consequence supervision
+!=
+candidate-specific reactive world truth
 ```
 
-Therefore final DA-WAM performance must not be narrated as a monolithic world-model gain.
-
-Representation controls also show independent contributions from:
+Strongest matched attribution:
 
 ```text
-dense V-JEPA predictive objective
-LoRA planning adaptation
-EMA target policy
+BEV + scene-level safety       ~90.9 PDMS
+Sparse + scene-level safety    ~90.9
+Sparse + fine-grained safety    91.6
+
+scene baseline                 ~90.9
++ PwNC                          91.5
++ TwDAC                         91.4
++ both                          91.6
 ```
 
-Official source status:
+Thus the best-supported contribution is:
 
 ```text
-LeapWM/da-wam@1edbe555146a2d1fe9484f5c11f120860b8a4858
-README only: "comming soon"
-implementation SOURCE-UNVERIFIED
+structured sparse interaction representation
+×
+fine-grained safety localization
+```
+
+not sparse representation alone.
+
+Source status:
+
+```text
+NAVSIM core implementation   SOURCE-COMPLETE
+Bench2Drive result           PAPER-VERIFIED
+Bench2Drive code path        SOURCE-PARTIAL / NOT IDENTIFIED
 ```
 
 ---
@@ -276,20 +290,20 @@ Working maturity gate before another research-direction discussion:
 ```text
 ~24–30 deeply normalized papers total
 +
-multiple independent anchors across the major mechanism families
+multiple independent anchors across major mechanism families
 +
-new papers mostly map into the coordinate system without exposing major coverage blind spots
+new papers mostly map into the coordinate system without repeatedly exposing major blind spots
 ```
 
-The numerical target is a working gate, not a scientific claim. Diversity and saturation matter more than raw count.
+Diversity/saturation matter more than raw count.
 
 ## Wave C.6 — core planning-centric WAM expansion
 
 ```text
 P0009 DriveLaW      COMPLETE
 P0012 DA-WAM        COMPLETE
-P0002 SafeDrive     NEXT
-P0005 RiskWorld
+P0002 SafeDrive     COMPLETE
+P0005 RiskWorld     NEXT
 P0007 DriveReward
 ```
 
@@ -312,57 +326,42 @@ P0010 LINGO-2
 P0006 DriveGPT4
 ```
 
-Queue order may change only for evidence/source dependencies or if a paper is found to be out of scope—not because it supports a preferred hypothesis.
+Queue order may change only for source/evidence dependencies or scope correction, not because a paper supports a preferred hypothesis.
 
 ---
 
-# Why the next core papers materially extend coverage
-
-## SafeDrive — NEXT
-
-```text
-trajectory-conditioned sparse world
-→ agent/timestep future states
-→ explicit fine-grained safety reasoning
-```
-
-This provides a missing anchor where the world object is not merely an implicit visual latent and safety is not only a scalar benchmark outcome. Mandatory questions include:
-
-```text
-what exactly is the sparse world state?
-which agents/timesteps are predicted?
-how ego candidate trajectory enters the world model?
-what supervision exists for alternative trajectories?
-collision / drivable-area reasoning as explicit state vs utility?
-world-state prediction vs safety evaluator attribution?
-training graph vs inference graph?
-```
-
-## RiskWorld
+# Next coverage target — RiskWorld
 
 ```text
 object-centric latent rollout
 → future ego-object relation
-→ object-level risk
+→ object-level risk identification
 ```
 
-Boundary anchor for explicit risk-state semantics.
+RiskWorld is a boundary anchor: read it to understand explicit predicted risk state, not to force it into the planning-core family if the planning interface is absent.
 
-## DriveReward
+Immediate comparison targets:
 
 ```text
-visual context + trajectory
-→ learned semantic reward/value
-→ RL / trajectory selection
+RiskWorld vs SafeDrive
+RiskWorld vs GraphWorld
+RiskWorld vs WoTE
+RiskWorld vs LAW / World4Drive
 ```
 
-Control anchor showing that decision quality can be improved through value/reward modeling without requiring a conventional future-world rollout.
+Primary distinction to lock:
+
+```text
+risk as predicted world state
+vs
+safety/value as candidate evaluator
+vs
+safety only as benchmark outcome
+```
 
 ---
 
 # Parked provisional synthesis
-
-The following are retained for history but are not active research-direction authority:
 
 ```text
 landscape/WAM_RESEARCH_TENSIONS_V1.md
@@ -373,16 +372,16 @@ landscape/WAM_CANDIDATE_PROBLEM_OVERLAP_MATRIX_V1.md
 landscape/WAM_CANDIDATE_PROBLEM_RESEARCHABILITY_V1.md
 ```
 
-No candidate from those files may be called a project research direction until after expanded literature coverage and a second consolidation.
+These are historical/provisional only during expansion.
 
 ---
 
 # Source completeness
 
-Authority remains:
+Authority:
 
 ```text
 audits/research_synthesis/CORE_ANCHOR_SOURCE_COMPLETENESS_AUDIT.md
 ```
 
-Source certainty and scientific coverage are separate axes. New papers should be paper-normalized even when official implementation is not yet available, with source uncertainty stated explicitly.
+Source certainty and scientific coverage remain separate axes.
