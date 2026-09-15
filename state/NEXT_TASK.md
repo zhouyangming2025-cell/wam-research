@@ -2,302 +2,303 @@
 
 ## 唯一下一任务
 
-> **Convert the adversarially validated Tier-1 WAM tensions into narrow falsifiable candidate research problems, then attack novelty overlap against the nearest 2025–2026 autonomous-driving literature before any method design.**
+> **Attack CP-T5 for promotion: determine whether `episode-specific reactive counterfactual consequence validity for planning` survives a deep nearest-neighbor/source audit and has a feasible paired-intervention evaluation protocol.**
 
-Completed prerequisite:
+Current candidate ranking:
 
 ```text
-audits/research_synthesis/WAM_TIER1_TENSION_ADVERSARIAL_VALIDATION_V1.md
-landscape/WAM_RESEARCH_TENSIONS_V2_VALIDATED.md
+#1 CP-T5  SURVIVES — CANDIDATE RESEARCH PROBLEM
+#2 CP-T2  SURVIVES — CANDIDATE RESEARCH PROBLEM
+
+CP-T3     REJECT — PRIOR ART standalone
+CP-T6     REJECT — PRIOR ART standalone
 ```
 
-Validated statuses:
+Canonical candidate files:
 
 ```text
-T2  SURVIVES — NARROWED
-T3  PARTIALLY RESOLVED
-T5  PARTIALLY RESOLVED — H2 strengthened
-T6  SURVIVES — NARROWED
-```
-
----
-
-# Task 1 — Write one minimal problem statement per surviving tension
-
-Each statement must contain exactly:
-
-```text
-1. observable failure
-2. causal/mechanistic hypothesis
-3. negative control
-4. intervention variable
-5. measurable outcome
-6. falsification criterion
-```
-
-Do not start from a desired architecture.
-
----
-
-# T2 candidate-problem formulation
-
-Narrow question:
-
-> When does online action-conditioned branching provide decision information that cannot be amortized into a compact world state or policy under matched compute/data?
-
-Required experimental axis:
-
-```text
-A compact world state → direct policy
-B candidate → endpoint future → selection
-C candidate → recurrent future rollout → selection
-```
-
-Control:
-
-```text
-same perception
-same candidate support where applicable
-same data
-matched deployment latency/FLOPs
-same utility/evaluator target
-```
-
-Stratify by:
-
-```text
-interaction-response dependence
-candidate ambiguity
-OOD/rarity
-```
-
----
-
-# T3 candidate-problem formulation
-
-Narrow question:
-
-> Which future/consequence computations can be amortized into a distilled policy, and which require online recomputation?
-
-Required teacher/student test:
-
-```text
-online world/consequence teacher
-vs
-matched distilled/action-only student
-```
-
-Measure teacher-student gap against:
-
-```text
-scene rarity
-OOD distance
-interaction difficulty
-uncertainty
-candidate disagreement
-```
-
-Nearest-neighbor novelty checks must include at minimum:
-
-```text
-WPT (CVPR 2026)
-Dreamer-style policy learning from imagination
-WAM distillation / Fast-WAM / related transfer methods
-```
-
-Any candidate problem that reduces to `distill WM into policy` is already too broad / too close to prior art.
-
----
-
-# T5 candidate-problem formulation
-
-Narrow question:
-
-> How can a planning-centric WAM learn and validate intervention-correct consequences when alternative ego actions change both episode-specific outcomes and surrounding-agent responses?
-
-Mandatory distinction:
-
-```text
-conditional prediction
-interventional prediction
-episode-specific counterfactual
-reactive counterfactual
-```
-
-Nearest-neighbor novelty checks must include:
-
-```text
-How Can Driving World Models Do Counterfactual Prediction? (2026-08)
-causal confusion / intervention learning
-TrafficBots / reactive data-driven simulation
-WOSAC / Waymax
-recent counterfactual driving models
-```
-
-Do not claim novelty for merely adding alternative ego actions.
-
----
-
-# T6 candidate-problem formulation
-
-Narrow question:
-
-> What marginal planning value does explicit ego-conditioned reaction-distribution modeling add beyond a strong structured interaction representation?
-
-Required matched contrast:
-
-```text
-A structured interaction representation only
-B A + ego-conditioned mean response
-C A + ego-conditioned multi-modal reaction distribution
-```
-
-Evaluation must stratify:
-
-```text
-low response dependence
-high response dependence:
-merge / yield / negotiation / cut-in / unprotected interaction
-```
-
-Nearest-neighbor checks:
-
-```text
-M2I
-GameFormer
-DIPP / GET-DIPP
-TrafficBots
-Reaction-Uncertainty-Aware Motion Planning (2026)
-other 2025–2026 ego-conditioned prediction-planning papers
-```
-
-Any proposal that is simply `predict surrounding reactions conditioned on ego plan` is not novel.
-
----
-
-# Task 2 — Build nearest-neighbor overlap matrix
-
-Create:
-
-```text
+landscape/WAM_CANDIDATE_PROBLEMS_V1.md
 landscape/WAM_CANDIDATE_PROBLEM_OVERLAP_MATRIX_V1.md
-```
-
-For each candidate problem record:
-
-```text
-nearest paper
-same problem?
-same supervision?
-same intervention?
-same planner interface?
-same evaluation regime?
-what remains different?
-novelty risk: HIGH / MEDIUM / LOW
-```
-
-Search recency emphasis:
-
-```text
-2025–2026 first
-then older foundational work
-```
-
----
-
-# Task 3 — Researchability / falsifiability matrix
-
-Create:
-
-```text
 landscape/WAM_CANDIDATE_PROBLEM_RESEARCHABILITY_V1.md
 ```
 
-Score each candidate on:
+---
+
+# CP-T5 promotion question
+
+Candidate statement:
+
+> **Can a planning-centric WAM trained mainly on factual trajectories recover intervention-correct consequences when an alternative ego action changes both the episode-specific outcome and surrounding-agent responses?**
+
+The hypothesized failure has two independent components:
 
 ```text
-scientific importance
-prior-art overlap
-falsifiability
-required data burden
-required simulator burden
-required compute
-source-code availability
-ability to build matched controls
-risk of benchmark artifact
+A. episode-specific identification / abduction
+   The model must preserve latent facts specific to this realized episode.
+
+B. reactive intervention response
+   Surrounding agents may respond differently under the alternative ego action.
 ```
 
-Do not optimize for ease alone.
+The research problem survives only if neither component nor their planning-relevant conjunction is already adequately solved.
 
 ---
 
-# Task 4 — Determine whether any candidate can become a research gap
+# Task 1 — Deep audit the closest paper: Counterfactual Driving World Models (2026-08)
 
-A candidate can be promoted only if:
+Paper:
 
 ```text
-1. survives nearest-neighbor attack;
-2. unresolved variable is explicit;
-3. matched negative control is feasible;
-4. evaluation can distinguish competing explanations;
-5. not already answered by a different research community;
-6. planning relevance is evidenced, not assumed.
+How Can Driving World Models Do Counterfactual Prediction?
+arXiv:2608.11601
 ```
 
-Allowed labels after this task:
+Mandatory reconstruction:
 
 ```text
-REJECT — PRIOR ART
-REJECT — NOT FALSIFIABLE
+1. exact factual / alternative / reference rollout construction
+2. what latent/world variables are held fixed across paired CARLA runs
+3. whether background agents are scripted or reactive
+4. why direct p(Y | H, a') fails the counterfactual target
+5. exact abduction-inspired evidence-transfer pipeline
+6. which representative WMs are tested
+7. metrics and failure modes
+8. whether any planning downstream task is evaluated
+9. whether longer horizons / reactive agents are explicitly excluded
+10. code/data release status
+```
+
+Final boundary must state exactly what remains after this paper.
+
+---
+
+# Task 2 — Deep audit ReactSim-Bench as infrastructure and scientific control
+
+Canonical project raw source already exists:
+
+```text
+papers/raw_md/P0014_ReactSimBench/P0014_ReactSimBench.raw.md
+```
+
+Official open benchmark identified:
+
+```text
+Thinklab-SJTU/ReactSim-Bench
+```
+
+Mandatory reconstruction:
+
+```text
+1. exact AV-agent decoupled rollout protocol
+2. how the 2,636 deviated-AV scenarios are generated / filtered
+3. what counts as reactive pressure
+4. longitudinal / directional / lateral categories
+5. whether there is a unique ground-truth response for a deviated AV trajectory
+6. what metrics measure safety/feasibility vs true response accuracy
+7. which baseline behavior WMs are provided
+8. replan-frequency effects
+9. whether protocol can be reused for planning consequence validation
+10. source/data/checkpoint availability
+```
+
+Critical question:
+
+> Can ReactSim-Bench supply the **reactive intervention axis** for CP-T5, or does it only score plausible responses without matched counterfactual truth?
+
+---
+
+# Task 3 — Deep audit CausalDrive as nearest reactive world-model prior art
+
+Canonical project raw source:
+
+```text
+papers/raw_md/P0015_CausalDrive/P0015_CausalDrive.raw.md
+```
+
+Mandatory reconstruction:
+
+```text
+1. exact inputs: initial frame / ego trajectory / sociology prompt
+2. what future NPC information is deliberately withheld
+3. what `causal` / `reactive` means operationally
+4. how driving-sociology labels are produced
+5. whether identical initial state + identical ego action can yield controlled alternative NPC reactions
+6. whether reactions have factual/matched counterfactual truth or are prompt-controlled plausible variants
+7. closed-loop / RL / real-world evidence
+8. action controllability metrics
+9. reactive validity metrics
+10. code/data release status
+```
+
+Critical novelty boundary:
+
+```text
+reactive visual simulation
+!=
+episode-specific matched reactive counterfactual identification
+```
+
+Verify rather than assume this boundary.
+
+---
+
+# Task 4 — Audit ReactSim / CausalDrive / counterfactual-WM intersection
+
+Create a three-way matrix:
+
+| Property | Counterfactual-WM 2608.11601 | ReactSim-Bench | CausalDrive | CP-T5 required |
+|---|---|---|---|---|
+| same underlying episode paired across actions | | | | YES |
+| alternative ego intervention | | | | YES |
+| surrounding agents react to intervention | | | | YES |
+| matched consequence truth | | | | YES |
+| visual/latent world prediction | | | | optional / representation-dependent |
+| planning consequence use | | | | YES |
+| planning regret measurable | | | | YES |
+| open reproducible infra | | | | strongly preferred |
+
+If any single prior work already fills the CP-T5 column, reject the candidate.
+
+---
+
+# Task 5 — Latest 2026 overlap attack
+
+Search explicitly for papers combining:
+
+```text
+reactive counterfactual autonomous driving world model
+matched ego intervention ground truth
+counterfactual reactive traffic simulation
+causal driving world model planning
+interactive counterfactual planning world model
+multi-agent counterfactual world model autonomous driving
+```
+
+Must include at least:
+
+```text
+CausalDrive
+ReactSim-Bench
+How Can Driving World Models Do Counterfactual Prediction?
+World Models as Adversaries (AWM)
+Reaction-Uncertainty-Aware Motion Planning
+ProDrive
+```
+
+Do not assume our current search is exhaustive.
+
+---
+
+# Task 6 — Define a minimum paired-intervention protocol WITHOUT designing a method
+
+Specify only the experimental object:
+
+```text
+initial world state / simulator seed z
+factual ego action a
+alternative ego action a'
+fixed environment mechanism E
+
+Y(a)  = rollout(E, z, a)
+Y(a') = rollout(E, z, a')
+```
+
+For multiple a' branches, record:
+
+```text
+ego consequence
+agent response trajectories
+collision / TTC / right-of-way / progress outcome
+```
+
+Then define what a learned WAM must predict/evaluate.
+
+Do not yet choose:
+
+```text
+network architecture
+tokenization
+risk-field representation
+loss design
+```
+
+---
+
+# Task 7 — Feasibility gate
+
+Evaluate concrete infrastructure options:
+
+```text
+CARLA / Bench2Drive
+nuPlan + reactive simulator / InterPlan-like setup
+ReactSim-Bench baselines
+other open 2026 reactive simulation infrastructure
+```
+
+Score:
+
+```text
+paired-ground-truth capability
+reactivity
+scenario diversity
+planning integration
+source openness
+compute/data burden
+reproducibility
+```
+
+If unique matched reactive counterfactual truth is infeasible with accessible infrastructure, mark:
+
+```text
 HOLD — INFRA TOO HEAVY
-SURVIVES — CANDIDATE RESEARCH PROBLEM
 ```
 
-Still do not design the final method in this round.
+rather than inventing a weak proxy.
 
 ---
 
-# Specific warning for risk-aware direction
+# Required outputs
 
-The user's prior risk/risk-field expertise can become relevant only AFTER the problem survives.
-
-Do not formulate:
+Create:
 
 ```text
-we know risk field, therefore add risk field to WAM
+audits/research_synthesis/CP_T5_PROMOTION_AUDIT_V1.md
+landscape/CP_T5_NEAREST_PRIOR_ART_MATRIX_V1.md
+landscape/CP_T5_PAIRED_INTERVENTION_PROTOCOL_V1.md
 ```
 
-Instead test whether a surviving problem truly requires an explicit representation of:
+Final verdict must be one of:
 
 ```text
-risk
-reaction uncertainty
-future utility
-hazard sensitivity
+PROMOTE — CANDIDATE RESEARCH GAP
+REJECT — PRIOR ART
+REJECT — EVIDENCE DOES NOT SUPPORT PROBLEM
+HOLD — INFRA TOO HEAVY
 ```
 
-GraphWorld is the required negative control because it improves collision behavior without an explicit risk state.
+If promoted, the novelty boundary must be one sentence and falsifiable.
 
 ---
 
-# Stop condition
+# Secondary candidate
 
-This phase is complete only when:
+Do not advance CP-T2 in parallel unless CP-T5 is rejected/held or its audit exposes a direct link requiring T2.
+
+CP-T2 remains:
 
 ```text
-candidate problem statements complete
-+
-nearest-neighbor overlap matrix complete
-+
-researchability matrix complete
-+
-at least one candidate either rejected or survives with a precise novelty boundary
+When does online action-conditioned branching add information beyond compact world-state/direct-policy conditioning under matched budgets?
 ```
 
-Until then:
+---
+
+# Still forbidden in this round
 
 ```text
 NO final method architecture
-NO paper-title brainstorming
-NO novelty claim
+NO paper title
+NO claim that `risk` is the solution
+NO claim that reactive WM itself is novel
+NO claim that counterfactual conditioning itself is novel
+NO promotion without nearest-neighbor + infrastructure audit
 ```
