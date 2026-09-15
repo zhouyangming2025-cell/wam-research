@@ -21,6 +21,18 @@ The candidate-problem/tension artifacts produced after the 11-anchor synthesis a
 
 The immediate objective is to broaden and stress-test the coordinate system with additional papers selected by **coverage diversity**, not by whether they support a preferred hypothesis.
 
+Current normalized count:
+
+```text
+12 papers
+```
+
+Latest completed expansion anchor:
+
+```text
+P0009 DriveLaW — COMPLETE
+```
+
 ---
 
 # Working gate before another research-direction discussion
@@ -55,41 +67,41 @@ No final research gap or method design before the next consolidation gate.
 
 # Wave C.6 — Core planning-centric WAM expansion
 
-## 1. P0009 DriveLaW — NEXT
+## 1. P0009 DriveLaW — COMPLETE
 
-Why it matters:
-
-```text
-video world model internal latent
-→ directly conditions diffusion planner
-```
-
-This is not Epona's sibling visual/trajectory branches and not WorldDrive's teacher→distilled-future path. It directly tests whether a generative video model's internal denoising representation can serve as the planning state.
-
-Mandatory comparisons:
+Canonical result:
 
 ```text
-DriveLaW vs Epona
-DriveLaW vs WorldDrive
-DriveLaW vs Metis
-DriveLaW vs Discrete-WAM
-DriveLaW vs LAW
+ONLINE GENERATIVE-LATENT DIRECT-POLICY WAM
 ```
 
-Key questions:
+Stable mechanism:
 
 ```text
-what exact Video-DiT latent is exported?
-is the latent current/history, denoising-state, or predicted-future information?
-which denoising timestep(s) are used?
-video→planner forward dependence at inference?
-planner→video coupling?
-three-stage freezing/fine-tuning topology?
-generation fidelity→planning evidence?
-physical future time vs diffusion/flow solver time?
+history frames
+→ first-pass Video-DiT internal block states
+→ blockwise Action-DiT conditioning
+→ direct trajectory flow policy
+
+full video rollout / RGB future decode not required
 ```
 
-## 2. P0012 DA-WAM
+Key findings added to the coordinate system:
+
+```text
+forward world→action can coexist with backward action-loss→world gradient flow;
+online world-model use does not imply completed future rollout;
+planning-optimal generative state can be an EARLY denoising state;
+more complete denoising is not monotonically better for planning.
+```
+
+No Ontology V1.4 amendment; candidate residue retained:
+
+```text
+GENERATIVE-STATE TAP LOCATION / SOLVER-DEPTH OF POLICY CONDITION
+```
+
+## 2. P0012 DA-WAM — NEXT
 
 Why it matters:
 
@@ -110,6 +122,18 @@ hard-negative supervision semantics
 factorized safety/value heads
 EMA target / online encoder adaptation
 candidate-specific prediction vs candidate-specific truth
+future-latent contribution beyond trajectory geometry
+```
+
+Mandatory comparisons:
+
+```text
+DA-WAM vs WoTE
+DA-WAM vs World4Drive
+DA-WAM vs WorldDrive
+DA-WAM vs SeerDrive
+DA-WAM vs Drive-JEPA
+DA-WAM vs DriveLaW
 ```
 
 ## 3. P0002 SafeDrive
@@ -122,7 +146,7 @@ trajectory-conditioned sparse world
 → explicit collision + drivable-area safety reasoning
 ```
 
-This adds a major safety/world-planning anchor missing from the first 11.
+This adds a major safety/world-planning anchor missing from the first-wave set.
 
 Mandatory comparisons:
 
@@ -194,7 +218,7 @@ open-loop vs non-reactive pseudo-sim vs reactive closed loop
 simulation truth / evaluation truth
 ```
 
-Important: these are not to be read merely because prior candidate problem CP-T5 mentioned reactivity. They are required independently because the first 11 anchors under-cover simulation/evaluation semantics.
+Important: these are not to be read merely because prior candidate problem CP-T5 mentioned reactivity. They are required independently because the first-wave anchors under-cover simulation/evaluation semantics.
 
 BridgeSim is especially valuable as an evaluation/control paper because it decomposes open-loop→closed-loop failure into observational shift and objective mismatch rather than treating benchmark score as interchangeable evidence.
 
@@ -276,7 +300,7 @@ They may be revisited only after the expanded deep-read corpus is re-consolidate
 # Next paper
 
 ```text
-P0009 DriveLaW
+P0012 DA-WAM
 ```
 
-Reason: it is a central planning-centric WAM paper with a world→planner interface materially different from the 11-anchor set, and it has paper text plus an attributable official code repository for later source audit.
+Reason: after DriveLaW established the `one common online generative representation → direct policy` family, DA-WAM provides the sharpest next contrast: `N candidate actions → N predicted future latents → per-candidate scoring`, while explicitly exposing the offline one-factual-future supervision limitation.
