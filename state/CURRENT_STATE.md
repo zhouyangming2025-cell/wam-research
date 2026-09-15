@@ -1,6 +1,6 @@
 # CURRENT_STATE
 
-Last updated: **2026-09-15 — candidate-problem novelty attack COMPLETE; CP-T5 PRIMARY, CP-T2 SECONDARY**
+Last updated: **2026-09-15 — RESEARCH-DIRECTION CONVERGENCE PAUSED; BROAD WAM DEEP-READ EXPANSION ACTIVE**
 
 ## Research north star
 
@@ -8,379 +8,232 @@ Last updated: **2026-09-15 — candidate-problem novelty attack COMPLETE; CP-T5 
 WAM / World Model + one-stage End-to-End + Planning-centric autonomous driving
 ```
 
-Core WAM remains primary. WAM+VLA is secondary/control. Risk/predictive-risk remains optional prior knowledge, not a required destination.
-
-## Methodology in force
-
-```text
-FIELD UNDERSTANDING FIRST
-→ core-WAM coverage
-→ comparative anchor deep reads
-→ dimension-first normalization
-→ comparability/evidence QA
-→ adversarial prior-art attack
-→ falsifiable candidate-problem formulation
-→ nearest-neighbor novelty attack
-→ candidate-specific falsification / feasibility audit
-→ only then research-gap promotion
-→ only then method design
-```
-
-Current phase:
-
-```text
-Phase C.5 core-anchor stress tests          COMPLETE
-11-anchor Design Space Consolidation        COMPLETE
-Comparability / evidence QA                 COMPLETE
-Tier-1 broader-literature adversarial QA    COMPLETE
-Candidate problem formulation               COMPLETE
-2025–2026 nearest-neighbor overlap attack   COMPLETE FIRST PASS
-Researchability ranking                     COMPLETE FIRST PASS
-Final research-gap declaration              NOT YET AUTHORIZED
-Method design                               NOT YET AUTHORIZED
-```
+Core WAM remains primary. WAM+VLA is secondary/control. Risk/safety/reward/simulation papers are included when they expose mechanisms needed to understand planning-centric WAM rather than because they fit a preferred future direction.
 
 ---
 
-# Canonical synthesis artifacts
+# Methodology in force
 
 ```text
-landscape/WAM_MECHANISM_FAMILIES_V2.md
-landscape/WAM_DESIGN_SPACE_MAP_V2.md
-audits/research_synthesis/WAM_11_ANCHOR_COMPARABILITY_QA.md
-landscape/WAM_EVIDENCE_STRENGTH_MATRIX.md
-landscape/WAM_RESEARCH_TENSIONS_V2_VALIDATED.md
-audits/research_synthesis/WAM_TIER1_TENSION_ADVERSARIAL_VALIDATION_V1.md
+FIELD UNDERSTANDING FIRST
+→ broad core-WAM coverage
+→ comparative anchor deep reads
+→ dimension-first normalization
+→ periodic consolidation
+→ evidence / source QA
+→ ONLY AFTER sufficient field maturity: adversarial problem discovery
+→ falsification
+→ method design
 ```
 
-Candidate-problem layer:
+## Correction after the first 11 anchors
+
+The first eleven normalized anchors were sufficient to build a useful preliminary ontology and mechanism map, but **not sufficient to converge on research problems or method directions**.
+
+Binding correction:
 
 ```text
+11 deep anchors
+= preliminary scientific coordinate system
+!= mature field coverage
+!= authorization to promote research directions
+```
+
+Therefore:
+
+```text
+Phase D research-direction convergence      PAUSED
+candidate-problem promotion                 PAUSED
+method design                               FORBIDDEN
+broad literature expansion                  ACTIVE
+```
+
+The previously created tension/candidate-problem artifacts are retained only as **parked provisional observations**. They must not determine paper selection during this phase.
+
+---
+
+# First normalized anchor set — preliminary, not final
+
+```text
+P0048 LAW           COMPLETE v2
+P0045 WoTE          COMPLETE v2
+P0001 Epona         COMPLETE v2 + source audit
+P0042 WorldDrive    COMPLETE v2 + source audit
+P0046 World4Drive   COMPLETE v2 + core source audit
+P0061 SeerDrive     COMPLETE v2 + version/source audit
+P0049 Drive-JEPA    COMPLETE v2 + source audit
+P0062 Metis         COMPLETE v2 + paper/repo audit
+P0063 DynFlowDrive  COMPLETE v2 + paper/repo audit
+P0064 Discrete-WAM  COMPLETE v2 + paper/source-status audit
+P0065 GraphWorld    COMPLETE v2 + paper/source-status audit
+```
+
+These eleven remain canonical comparison anchors, but they no longer define the boundary of the field.
+
+Canonical ontology remains:
+
+```text
+landscape/WAM_DIMENSION_ONTOLOGY_V1.md
+landscape/WAM_DIMENSION_ONTOLOGY_V1_1_AMENDMENT.md
+landscape/WAM_DIMENSION_ONTOLOGY_V1_2_AMENDMENT.md
+landscape/WAM_DIMENSION_ONTOLOGY_V1_3_AMENDMENT.md
+```
+
+Ontology V1.3 remains a working coordinate system, not a final taxonomy.
+
+---
+
+# Active expansion plan
+
+Canonical queue:
+
+```text
+landscape/WAM_DEEP_READ_EXPANSION_QUEUE_V1.md
+```
+
+Working maturity gate before another research-direction discussion:
+
+```text
+~24–30 deeply normalized papers total
++
+multiple independent anchors across the major mechanism families
++
+new papers mostly map into the coordinate system without exposing major coverage blind spots
+```
+
+The numerical target is a working gate, not a scientific claim. Diversity and saturation matter more than raw count.
+
+## Wave C.6 — core planning-centric WAM expansion
+
+```text
+P0009 DriveLaW      NEXT
+P0012 DA-WAM
+P0002 SafeDrive
+P0005 RiskWorld
+P0007 DriveReward
+```
+
+## Wave C.7 — simulation / reactivity / evaluation controls
+
+```text
+P0003 Safe-Sim
+P0004 PROSIM
+P0013 BridgeSim
+P0014 ReactSimBench
+P0015 CausalDrive
+```
+
+## Wave C.8 — WAM+VLA / reasoning boundary controls
+
+```text
+P0008 AutoVLA
+P0011 ReCogDrive
+P0010 LINGO-2
+P0006 DriveGPT4
+```
+
+Queue order may change only for evidence/source dependencies or if a paper is found to be out of scope—not because it supports a preferred hypothesis.
+
+---
+
+# Why the next core papers materially extend coverage
+
+## DriveLaW
+
+```text
+video generator internal latent
+→ directly conditions Action DiT planner
+```
+
+This is different from Epona's sibling branches and WorldDrive's teacher/distillation lifecycle.
+
+## DA-WAM
+
+```text
+N candidate trajectories
+→ N action-conditioned future latents
+→ one-to-one future-latent-conditioned scoring
+```
+
+This directly pressures candidate-specific consequence / factual-supervision dimensions.
+
+## SafeDrive
+
+```text
+trajectory-conditioned sparse world
+→ agent/timestep future states
+→ explicit fine-grained safety reasoning
+```
+
+This provides a missing explicit safety/world/planning anchor.
+
+## RiskWorld
+
+```text
+object-centric latent rollout
+→ future ego-object relation
+→ object-level risk
+```
+
+Boundary anchor for explicit risk-state semantics.
+
+## DriveReward
+
+```text
+visual context + trajectory
+→ learned semantic reward/value
+→ RL / trajectory selection
+```
+
+Control anchor showing that decision quality can be improved through value/reward modeling without requiring a conventional future-world rollout.
+
+---
+
+# Parked provisional synthesis
+
+The following are retained for history but are not active research-direction authority:
+
+```text
+landscape/WAM_RESEARCH_TENSIONS_V1.md
+landscape/WAM_RESEARCH_TENSIONS_V2_VALIDATED.md
+audits/research_synthesis/WAM_TIER1_TENSION_ADVERSARIAL_VALIDATION_V1.md
 landscape/WAM_CANDIDATE_PROBLEMS_V1.md
 landscape/WAM_CANDIDATE_PROBLEM_OVERLAP_MATRIX_V1.md
 landscape/WAM_CANDIDATE_PROBLEM_RESEARCHABILITY_V1.md
 ```
 
-Ontology remains:
-
-```text
-WAM Ontology V1.3 — RETAINED
-```
+No candidate from those files may be called a project research direction until after expanded literature coverage and a second consolidation.
 
 ---
 
-# Candidate problem decisions after nearest-neighbor attack
+# Source completeness
 
-## CP-T2 — Conditional value of online consequence branching
-
-```text
-VERDICT: SURVIVES — CANDIDATE RESEARCH PROBLEM
-PRIORITY: #2
-NOVELTY RISK: MEDIUM
-```
-
-Minimal scientific question:
-
-> **When does online action-conditioned consequence branching add decision information that cannot be amortized into a compact world state/direct policy under matched training information and deployment budget?**
-
-Required contrast:
+Authority remains:
 
 ```text
-A compact W → direct policy
-B candidate → endpoint future → selection
-C candidate → recurrent consequence rollout → selection
+audits/research_synthesis/CORE_ANCHOR_SOURCE_COMPLETENESS_AUDIT.md
 ```
 
-Required stratification:
-
-```text
-interaction-response dependence
-candidate ambiguity
-OOD / rarity
-```
-
-2026 novelty pressure:
-
-```text
-ProDrive / ForeSight         explicit future-centric planning
-CF-VLA                      adaptive hard-scene reasoning
-UTMR                        uncertainty-triggered extra WM reranking
-```
-
-Therefore the novelty cannot be `use rollouts on hard scenes` or `trigger more reasoning under uncertainty`. The surviving contribution would have to be a matched causal decomposition of **when branching itself is information-bearing**.
-
----
-
-## CP-T3 — Non-amortizable world reasoning after distillation
-
-```text
-VERDICT: REJECT — PRIOR ART as standalone direction
-```
-
-Primary collision:
-
-```text
-WPT (CVPR 2026)
-= online WM teacher → policy/world-reward distillation → fast student
-
-Fast-WAM (2026, robotics)
-= world/video co-training → test-time future imagination can be skipped
-
-CF-VLA
-= selective hard-scene reasoning
-
-UTMR
-= uncertainty-triggered extra world-model computation
-```
-
-Residual variable retained:
-
-```text
-what consequence information is / is not amortizable?
-```
-
-This is folded into CP-T2 rather than pursued independently.
-
----
-
-## CP-T5 — Episode-specific reactive counterfactual consequences for planning
-
-```text
-VERDICT: SURVIVES — CANDIDATE RESEARCH PROBLEM
-PRIORITY: #1
-NOVELTY RISK: MEDIUM-LOW BUT FAST-MOVING
-```
-
-Minimal scientific question:
-
-> **Can a planning-centric WAM trained mainly on factual trajectories recover intervention-correct consequences when an alternative ego action changes both the episode-specific outcome and surrounding-agent responses?**
-
-Core hypothesis:
-
-```text
-history + alternative action
-is insufficient in the hard case because both:
-
-1. episode-specific latent causes must be preserved / inferred;
-2. surrounding-agent response is endogenous to the ego intervention.
-```
-
-Required paired protocol:
-
-```text
-same underlying simulated world / seed
-factual ego action a
-alternative ego action a'
-reactive environment mechanism held fixed
-→ matched Y(a), Y(a')
-```
-
-Required outcomes:
-
-```text
-factual future accuracy
-matched counterfactual accuracy
-agent reaction accuracy
-counterfactual interaction/collision outcome accuracy
-planning regret / ranking consistency
-```
-
-### Why this survives the strongest 2026 nearest neighbors
-
-`How Can Driving World Models Do Counterfactual Prediction?`:
-
-```text
-matched episode-specific counterfactual truth: YES
-surrounding-agent response to changed ego action: deliberately NO
-planning-centric reactive consequence test: NO
-```
-
-`ReactSim-Bench`:
-
-```text
-AV deviation → agent reactive response protocol: YES
-2,636 nuPlan scenarios + open benchmark code/data: YES
-matched same-episode factual/counterfactual truth: NO
-planning-regret / WAM consequence validity: NO
-```
-
-`CausalDrive`:
-
-```text
-real-time reactive visual world renderer: YES
-counterfactual reaction control / driving sociology: YES
-matched episode-specific factual↔reactive-CF identification: NOT ESTABLISHED
-```
-
-`AWM / reactive-adversarial work`:
-
-```text
-hard interactive counterfactual pressure: YES
-same scientific target as consequence-validity benchmark: NO
-```
-
-The unresolved conjunction is therefore:
-
-```text
-EPISODE-SPECIFIC COUNTERFACTUAL IDENTIFICATION
-+
-REACTIVE EGO→AGENT INTERVENTION RESPONSE
-+
-PLANNING UTILITY / REGRET
-```
-
-Important:
-
-```text
-This is NOT a claim that reactive world models are novel.
-This is NOT a claim that counterfactual world models are novel.
-```
-
----
-
-## CP-T6 — Reaction distributions beyond structured interaction representation
-
-```text
-VERDICT: REJECT — PRIOR ART as standalone direction
-```
-
-Key collision:
-
-```text
-Reaction-Uncertainty-Aware Motion Planning (2026)
-= ego-conditioned multimodal reaction prediction + tree planning
-= directly shows planning gain over unimodal conditional response baseline
-```
-
-Additional prior art:
-
-```text
-M2I
-GameFormer
-2026 ego-conditioned prediction + planning
-ProDrive
-ReactSim-Bench
-```
-
-The exact GraphWorld-like structured-only negative control remains scientifically useful, but is too thin a standalone novelty boundary.
-
-Retained variables:
-
-```text
-response dependence
-reaction multimodality / entropy
-negotiation type
-```
-
-These become stratification axes inside CP-T5 / CP-T2.
-
----
-
-# Current candidate ranking
-
-```text
-#1 CP-T5
-Episode-specific reactive counterfactual consequence validity for planning
-
-#2 CP-T2
-Conditional marginal value of online consequence branching
-```
-
-Rejected standalone:
-
-```text
-CP-T3 → merge into T2
-CP-T6 → merge into T5/T2
-```
-
----
-
-# Why CP-T5 is currently first
-
-Scientific value:
-
-```text
-very high
-```
-
-Falsifiability:
-
-```text
-very high — controlled repeated interventions can generate paired truth
-```
-
-Nearest-neighbor overlap:
-
-```text
-moderate: the pieces exist separately, the full conjunction has not been identified
-```
-
-Infrastructure burden:
-
-```text
-high
-```
-
-Promising available pieces:
-
-```text
-CARLA repeatable intervention
-ReactSim-Bench reactive protocol + open code/data
-CausalDrive evidence for real-time reactive neural simulation
-Bench2Drive / InterPlan / nuPlan-family interactive scenarios
-```
-
-Main risk:
-
-```text
-fast-moving 2026 literature may close the novelty window quickly
-```
-
----
-
-# Counterfactual vocabulary remains mandatory
-
-Always separate:
-
-```text
-conditional prediction
-interventional prediction
-episode-specific counterfactual prediction
-reactive counterfactual simulation
-```
-
-And separately report:
-
-```text
-candidate-specific output?
-candidate-specific paired truth?
-reactive other-agent truth?
-external intervention validation?
-planning utility validation?
-```
+Source certainty and scientific coverage are separate axes. New papers should be paper-normalized even when official implementation is not yet available, with source uncertainty stated explicitly.
 
 ---
 
 # Immediate next task
 
-See `state/NEXT_TASK.md`.
-
-Next phase focuses on **CP-T5 promotion attack**, not method design:
+Deep-read:
 
 ```text
-deep-audit nearest neighbors
-→ verify exact novelty boundary
-→ verify paired-intervention infrastructure feasibility
-→ decide PROMOTE / REJECT / HOLD
+P0009 DriveLaW
 ```
 
-CP-T2 remains the secondary candidate and fallback.
+under the same WAM reading stack, with immediate cross-paper comparison against Epona, WorldDrive, Metis, Discrete-WAM and LAW.
 
 Still forbidden:
 
 ```text
-NO final architecture proposal
-NO paper-title brainstorming
+NO final research-gap declaration
+NO research-direction ranking
+NO method architecture proposal
 NO forced risk-field insertion
-NO novelty claim until CP-T5 promotion gate passes
+NO paper selection driven by parked candidate problems
 ```
