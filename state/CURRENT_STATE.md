@@ -1,6 +1,6 @@
 # CURRENT_STATE
 
-Last updated: **2026-09-15 — 11-anchor WAM consolidation COMPLETE; Phase D adversarial problem discovery UNPAUSED**
+Last updated: **2026-09-15 — Tier-1 WAM adversarial validation COMPLETE; candidate-problem formulation NEXT**
 
 ## Research north star
 
@@ -18,7 +18,8 @@ FIELD UNDERSTANDING FIRST
 → comparative anchor deep reads
 → dimension-first normalization
 → comparability/evidence QA
-→ adversarial problem discovery
+→ adversarial prior-art attack
+→ falsifiable candidate-problem formulation
 → falsification
 → only then method design
 ```
@@ -26,57 +27,30 @@ FIELD UNDERSTANDING FIRST
 Current phase:
 
 ```text
-Phase C.5 core-anchor stress tests     COMPLETE
-11-anchor Design Space Consolidation   COMPLETE
-Comparability QA                       COMPLETE
-Evidence-strength QA                   COMPLETE
-Mechanism-family stabilization         COMPLETE
-Phase D adversarial problem discovery  UNPAUSED
-Final research-gap declaration         NOT YET AUTHORIZED
-Method design                          NOT YET AUTHORIZED
+Phase C.5 core-anchor stress tests       COMPLETE
+11-anchor Design Space Consolidation     COMPLETE
+Comparability / evidence QA              COMPLETE
+Tier-1 broader-literature adversarial QA COMPLETE
+Candidate research-gap declaration       NOT YET AUTHORIZED
+Method design                            NOT YET AUTHORIZED
 ```
 
 ---
 
-# 1. Eleven normalized anchors
+# Canonical anchor set
 
 ```text
-P0048 LAW           COMPLETE v2
-P0045 WoTE          COMPLETE v2
-P0001 Epona         COMPLETE v2 + source audit
-P0042 WorldDrive    COMPLETE v2 + source audit
-P0046 World4Drive   COMPLETE v2 + core source audit
-P0061 SeerDrive     COMPLETE v2 + version/source audit
-P0049 Drive-JEPA    COMPLETE v2 + source audit
-P0062 Metis         COMPLETE v2 + paper/repo audit
-P0063 DynFlowDrive  COMPLETE v2 + paper/repo audit
-P0064 Discrete-WAM  COMPLETE v2 + paper/source-status audit
-P0065 GraphWorld    COMPLETE v2 + paper/source-status audit
+LAW | WoTE | Epona | WorldDrive | World4Drive | SeerDrive
+Drive-JEPA | Metis | DynFlowDrive | Discrete-WAM | GraphWorld
 ```
 
-Canonical coordinate system:
+Canonical ontology:
 
 ```text
-landscape/WAM_DIMENSION_ONTOLOGY_V1.md
-landscape/WAM_DIMENSION_ONTOLOGY_V1_1_AMENDMENT.md
-landscape/WAM_DIMENSION_ONTOLOGY_V1_2_AMENDMENT.md
-landscape/WAM_DIMENSION_ONTOLOGY_V1_3_AMENDMENT.md
+WAM Ontology V1.3 — RETAINED
 ```
 
-Ontology decision after all 11 anchors:
-
-```text
-V1.3 RETAINED
-NO V1.4
-```
-
-The ontology now absorbs new papers without paper-specific dimension inflation.
-
----
-
-# 2. Consolidation artifacts
-
-Canonical eleven-anchor synthesis:
+Canonical synthesis:
 
 ```text
 landscape/WAM_MECHANISM_FAMILIES_V2.md
@@ -86,10 +60,11 @@ landscape/WAM_EVIDENCE_STRENGTH_MATRIX.md
 landscape/WAM_RESEARCH_TENSIONS_V1.md
 ```
 
-Latest per-paper comparison extension remains:
+Latest adversarial validation:
 
 ```text
-landscape/WAM_COMPARISON_MATRIX_V1_3_GRAPHWORLD_EXTENSION.md
+audits/research_synthesis/WAM_TIER1_TENSION_ADVERSARIAL_VALIDATION_V1.md
+landscape/WAM_RESEARCH_TENSIONS_V2_VALIDATED.md
 ```
 
 Source completeness authority:
@@ -100,315 +75,184 @@ audits/research_synthesis/CORE_ANCHOR_SOURCE_COMPLETENESS_AUDIT.md
 
 ---
 
-# 3. Stable mechanism-family map
+# Stable field-level design-space conclusions
+
+Do not use a scalar `world-model strength` notion. Keep separate:
 
 ```text
-LAW
-= future as predictive training signal
+1. environmental future-modeling strength
+2. decision relevance of the world representation
+3. training-time jointness / gradient coupling
+4. deployment-time online world dependence
+```
 
-Drive-JEPA
-= predictive representation pretraining / transfer
+Also keep separate:
 
-Epona
-= shared world representation + direct generative policy
+```text
+representation shaping
+online world-state conditioning
+online candidate consequence prediction
+explicit utility/value
+search/selection over alternatives
+```
 
-Metis
-= asymmetric world-action co-training + action-only deployment
+Training-time unification and deployment-time model-basedness remain orthogonal.
 
-Discrete-WAM
-= shared discrete world-policy backbone + policy-only primary planning
+---
 
-DynFlowDrive
-= training-only candidate consequence teacher / score supervision
+# Tier-1 tension verdicts after broader prior-art attack
 
-GraphWorld
-= online structured world-state conditioning + direct multimodal planning
+## T2 — Explicit rollout vs compact conditioning
 
-WorldDrive
-= heavy future teacher → distilled lightweight online future evaluator
+```text
+VERDICT: SURVIVES — NARROWED
+```
 
-World4Drive
-= online compact future latent + factual-mode selection
+External controls from value-equivalent modeling, value-aware model learning, DeepMDP/bisimulation, MuZero, TD-MPC2 and I2A establish that full observation-faithful world modeling is not universally necessary.
 
-WoTE
-= online recurrent consequence model + explicit utility
+Still unresolved:
 
-SeerDrive
-= online world/planner hidden co-refinement
+```text
+When does online action-conditioned branching add decision information
+that cannot be amortized into a compact world state/policy under matched compute/data?
 ```
 
 ---
 
-# 4. Core design-space conclusion
-
-The field cannot be organized by a scalar notion of `world-model strength`.
-
-At minimum, four orthogonal axes must remain separate:
+## T3 — Training-time world modeling vs deployment-time model-basedness
 
 ```text
-A. environmental/predictive modeling strength
-B. decision-relevance of world representation
-C. training-time jointness / gradient coupling
-D. deployment-time dependence on online world computation
+VERDICT: PARTIALLY RESOLVED
 ```
 
-Canonical control:
+MBPO / Dreamer-family work shows useful world-model reasoning can train a policy without per-decision online rollout. WPT (CVPR 2026) directly demonstrates autonomous-driving world-to-policy distillation with substantial inference acceleration while retaining most gains.
+
+Online planning remains strongly viable in MuZero / TD-MPC2 and in WAM anchors such as WoTE / World4Drive.
+
+Surviving question:
 
 ```text
-Discrete-WAM / Metis
-= strong training jointness, low mandatory online future dependence
-
-WoTE / World4Drive
-= less parameter unification, high online future dependence
+Which consequence information is amortizable into policy weights,
+and which must be recomputed online under uncertainty / OOD / interaction?
 ```
 
-Therefore:
+---
+
+## T5 — Factual future vs intervention-correct consequence
 
 ```text
-training-time unification
+VERDICT: PARTIALLY RESOLVED — H2 STRONGLY STRENGTHENED
+```
+
+The project rule:
+
+```text
+action-conditioned output != counterfactual truth
+```
+
+is now supported by direct external evidence, not only anchor synthesis.
+
+`How Can Driving World Models Do Counterfactual Prediction?` (arXiv:2608.11601, 2026-08) constructs matched CARLA counterfactual ground truth and shows representative direct action-conditioned driving WMs fail to recover episode-specific counterfactuals.
+
+Important remaining boundary:
+
+```text
+episode-specific short-horizon counterfactual
 !=
-deployment-time model-basedness
+reactive multi-agent intervention consequence
+```
+
+The reactive case remains unresolved.
+
+---
+
+## T6 — Structured interaction semantics vs true reactive dynamics
+
+```text
+VERDICT: SURVIVES — NARROWED
+```
+
+Prior art already includes:
+
+```text
+M2I conditional influencer→reactor prediction
+GameFormer game-theoretic interaction reasoning
+DIPP joint prediction-planning
+TrafficBots recurrent reactive simulation
+WOSAC / Waymax interactive sim-agent evaluation
+reaction-uncertainty-aware conditional planning
+```
+
+Therefore `model reactions to ego plans` is NOT a novelty claim.
+
+Surviving question:
+
+```text
+What marginal planning value does explicit ego-conditioned reaction modeling add
+beyond a strong interaction-aware latent representation,
+as response dependence / negotiation difficulty increases?
 ```
 
 ---
 
-# 5. Six distinct forms of `world helps planning`
+# New counterfactual vocabulary rule
 
-Every future paper must answer independently:
+Always distinguish:
 
 ```text
-1. representation shaping?
-2. parameter / gradient sharing?
-3. online world-state conditioning?
-4. online candidate consequence prediction?
-5. explicit consequence utility/value?
-6. search/selection over alternative actions?
+conditional prediction
+p(Y | H, a)
+
+interventional prediction
+p(Y | H, do(a))
+
+episode-specific counterfactual
+p(Y_a | H, factual evidence)
+
+reactive multi-agent counterfactual simulation
+alternative ego intervention + endogenous agent responses
 ```
 
-The phrase `world model improves planning` is no longer accepted without this decomposition.
+Never infer a higher level from action-conditioning alone.
 
 ---
 
-# 6. Future-truth / counterfactual boundary
+# Cross-tension convergence
 
-Across the 11 anchors:
+T2 + T3 + T6 now point to a deeper question:
 
-```text
-candidate/action-specific predicted output       common
-candidate-specific factual alternative truth    rare/absent
-reactive surrounding-agent intervention truth   NOT ESTABLISHED
-external intervention-validity proof             NOT ESTABLISHED
-```
+> **What future reasoning must be computed online for THIS scene, and what can be amortized into compact state/policy representations?**
 
-Binding rule:
+Potential discriminating variables:
 
 ```text
-multiple predicted futures
-!=
-multiple counterfactual truths
+interaction response dependence
+reaction uncertainty / multimodality
+scene rarity / OOD distance
+candidate ambiguity
+irreversibility / safety cost
+model confidence / epistemic uncertainty
 ```
 
-This is currently an evidence boundary, not yet a final research-gap claim.
-
----
-
-# 7. Temporal semantics stabilized
-
-Never conflate:
-
-```text
-physical future time
-history time
-world rollout step
-flow/diffusion transport coordinate
-policy denoising/editing round
-planner/world refinement iteration
-```
-
-F07/F08/J08 remain sufficient after GraphWorld.
-
-Canonical negative controls:
-
-```text
-DynFlowDrive flow s          != physical time
-GraphWorld flow coordinate   != physical time
-Discrete-WAM edit round      != physical time
-SeerDrive iteration          != physical time
-Epona diffusion step         != future frame time
-```
-
----
-
-# 8. Long-horizon correction
-
-Long-horizon must specify which object is long:
-
-```text
-trajectory output
-history context
-latent memory
-world rollout
-consequence rollout
-reactive execution horizon
-```
-
-GraphWorld provides the key negative control:
-
-```text
-6s long-horizon planning
-without
-6s explicit world rollout
-```
-
-Therefore long-horizon planning competence does not universally require long-horizon world simulation.
-
----
-
-# 9. Safety / risk / value correction
-
-Keep separate:
-
-```text
-explicit risk state / field
-explicit collision probability
-explicit utility/value head
-simulator/PDM reward supervision
-implicit safety in representation
-safety only measured at evaluation
-```
-
-GraphWorld is an important control:
-
-```text
-collision reduction
-without
-explicit risk representation or deployed utility head
-```
-
-Therefore later risk-aware hypotheses must prove value beyond better interaction modeling alone.
-
----
-
-# 10. Evaluation regime normalization
-
-Project labels:
-
-```text
-nuScenes and robustness subsets
-= OPEN LOOP
-
-NAVSIM v1/v2
-= NON-REACTIVE DATA-DRIVEN / PSEUDO-SIMULATION PLANNING
-
-Bench2Drive / CARLA
-= REACTIVE SIMULATOR CLOSED LOOP
-
-visual autoregressive generation
-= GENERATIVE ROLLOUT, not policy-environment closed loop
-```
-
-Reactive final-policy performance does not automatically validate intervention-correct internal world dynamics.
-
----
-
-# 11. Evidence-strength conclusion
-
-High-confidence findings:
-
-```text
-1. future/world knowledge can help planning without online future generation;
-2. online predicted future can improve candidate selection/ranking;
-3. training jointness and online model-basedness are independent;
-4. multiple future branches do not imply counterfactual truth;
-5. internal solver/refinement depth is not physical horizon;
-6. long-horizon planning does not require explicit long world rollout;
-7. lower collision does not imply explicit risk-state learning.
-```
-
-Still unresolved at field level:
-
-```text
-generic world fidelity → planning causality
-explicit rollout vs compact state under matched compute/data
-training-only world knowledge vs online model-basedness on hard/OOD cases
-factual-future learning vs intervention-correct consequence prediction
-structured interaction representation vs true reactive dynamics
-explicit utility/risk vs implicit/direct decision under matched architecture
-```
-
----
-
-# 12. Scientific tensions now authorized for adversarial validation
-
-Canonical file:
-
-```text
-landscape/WAM_RESEARCH_TENSIONS_V1.md
-```
-
-Tier-1 tensions:
-
-```text
-T2 explicit consequence rollout vs compact world-state conditioning
-T3 training-time world modeling vs deployment-time model-basedness
-T5 factual-future learning vs intervention-correct consequence modeling
-T6 structured interaction semantics vs true reactive dynamics
-```
-
-These are **not research gaps yet**.
-
-Next phase must search broader literature/prior art and design falsification tests before novelty claims.
-
----
-
-# 13. Source certainty
-
-High source completeness:
-
-```text
-LAW
-WoTE decision-critical path
-Epona core mechanism
-WorldDrive core mechanism
-World4Drive core mechanism
-Drive-JEPA first-pass paths
-```
-
-Partial/by-design:
-
-```text
-SeerDrive — public code is a later WoTE-integrated variant
-World4Drive — NAVSIM branch equivalence remains partial
-```
-
-Source-blocked/monitor:
-
-```text
-Metis
-DynFlowDrive
-Discrete-WAM
-GraphWorld
-```
-
-Do not replace absent official implementations with unofficial reimplementations as mechanism evidence.
+This is an organizing scientific question, NOT yet a method proposal.
 
 ---
 
 # Immediate next task
 
-See:
+See `state/NEXT_TASK.md`.
+
+Next phase:
 
 ```text
-state/NEXT_TASK.md
+candidate-problem formulation + nearest-neighbor 2025–2026 overlap check
 ```
-
-The next task is **adversarial validation of Tier-1 scientific tensions against broader literature and falsification logic**.
 
 Still forbidden:
 
 ```text
-NO final research-gap declaration
+NO final research-gap declaration yet
 NO method architecture proposal
 NO forced risk-field insertion
-NO novelty claim from empty ontology cells
+NO novelty claim from terminology alone
 ```
