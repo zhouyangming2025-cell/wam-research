@@ -1,6 +1,6 @@
 # CURRENT_STATE
 
-Last updated: **2026-09-15 — Tier-1 WAM adversarial validation COMPLETE; candidate-problem formulation NEXT**
+Last updated: **2026-09-15 — candidate-problem novelty attack COMPLETE; CP-T5 PRIMARY, CP-T2 SECONDARY**
 
 ## Research north star
 
@@ -20,221 +20,344 @@ FIELD UNDERSTANDING FIRST
 → comparability/evidence QA
 → adversarial prior-art attack
 → falsifiable candidate-problem formulation
-→ falsification
+→ nearest-neighbor novelty attack
+→ candidate-specific falsification / feasibility audit
+→ only then research-gap promotion
 → only then method design
 ```
 
 Current phase:
 
 ```text
-Phase C.5 core-anchor stress tests       COMPLETE
-11-anchor Design Space Consolidation     COMPLETE
-Comparability / evidence QA              COMPLETE
-Tier-1 broader-literature adversarial QA COMPLETE
-Candidate research-gap declaration       NOT YET AUTHORIZED
-Method design                            NOT YET AUTHORIZED
+Phase C.5 core-anchor stress tests          COMPLETE
+11-anchor Design Space Consolidation        COMPLETE
+Comparability / evidence QA                 COMPLETE
+Tier-1 broader-literature adversarial QA    COMPLETE
+Candidate problem formulation               COMPLETE
+2025–2026 nearest-neighbor overlap attack   COMPLETE FIRST PASS
+Researchability ranking                     COMPLETE FIRST PASS
+Final research-gap declaration              NOT YET AUTHORIZED
+Method design                               NOT YET AUTHORIZED
 ```
 
 ---
 
-# Canonical anchor set
-
-```text
-LAW | WoTE | Epona | WorldDrive | World4Drive | SeerDrive
-Drive-JEPA | Metis | DynFlowDrive | Discrete-WAM | GraphWorld
-```
-
-Canonical ontology:
-
-```text
-WAM Ontology V1.3 — RETAINED
-```
-
-Canonical synthesis:
+# Canonical synthesis artifacts
 
 ```text
 landscape/WAM_MECHANISM_FAMILIES_V2.md
 landscape/WAM_DESIGN_SPACE_MAP_V2.md
 audits/research_synthesis/WAM_11_ANCHOR_COMPARABILITY_QA.md
 landscape/WAM_EVIDENCE_STRENGTH_MATRIX.md
-landscape/WAM_RESEARCH_TENSIONS_V1.md
-```
-
-Latest adversarial validation:
-
-```text
-audits/research_synthesis/WAM_TIER1_TENSION_ADVERSARIAL_VALIDATION_V1.md
 landscape/WAM_RESEARCH_TENSIONS_V2_VALIDATED.md
+audits/research_synthesis/WAM_TIER1_TENSION_ADVERSARIAL_VALIDATION_V1.md
 ```
 
-Source completeness authority:
+Candidate-problem layer:
 
 ```text
-audits/research_synthesis/CORE_ANCHOR_SOURCE_COMPLETENESS_AUDIT.md
+landscape/WAM_CANDIDATE_PROBLEMS_V1.md
+landscape/WAM_CANDIDATE_PROBLEM_OVERLAP_MATRIX_V1.md
+landscape/WAM_CANDIDATE_PROBLEM_RESEARCHABILITY_V1.md
+```
+
+Ontology remains:
+
+```text
+WAM Ontology V1.3 — RETAINED
 ```
 
 ---
 
-# Stable field-level design-space conclusions
+# Candidate problem decisions after nearest-neighbor attack
 
-Do not use a scalar `world-model strength` notion. Keep separate:
-
-```text
-1. environmental future-modeling strength
-2. decision relevance of the world representation
-3. training-time jointness / gradient coupling
-4. deployment-time online world dependence
-```
-
-Also keep separate:
+## CP-T2 — Conditional value of online consequence branching
 
 ```text
-representation shaping
-online world-state conditioning
-online candidate consequence prediction
-explicit utility/value
-search/selection over alternatives
+VERDICT: SURVIVES — CANDIDATE RESEARCH PROBLEM
+PRIORITY: #2
+NOVELTY RISK: MEDIUM
 ```
 
-Training-time unification and deployment-time model-basedness remain orthogonal.
+Minimal scientific question:
+
+> **When does online action-conditioned consequence branching add decision information that cannot be amortized into a compact world state/direct policy under matched training information and deployment budget?**
+
+Required contrast:
+
+```text
+A compact W → direct policy
+B candidate → endpoint future → selection
+C candidate → recurrent consequence rollout → selection
+```
+
+Required stratification:
+
+```text
+interaction-response dependence
+candidate ambiguity
+OOD / rarity
+```
+
+2026 novelty pressure:
+
+```text
+ProDrive / ForeSight         explicit future-centric planning
+CF-VLA                      adaptive hard-scene reasoning
+UTMR                        uncertainty-triggered extra WM reranking
+```
+
+Therefore the novelty cannot be `use rollouts on hard scenes` or `trigger more reasoning under uncertainty`. The surviving contribution would have to be a matched causal decomposition of **when branching itself is information-bearing**.
 
 ---
 
-# Tier-1 tension verdicts after broader prior-art attack
-
-## T2 — Explicit rollout vs compact conditioning
+## CP-T3 — Non-amortizable world reasoning after distillation
 
 ```text
-VERDICT: SURVIVES — NARROWED
+VERDICT: REJECT — PRIOR ART as standalone direction
 ```
 
-External controls from value-equivalent modeling, value-aware model learning, DeepMDP/bisimulation, MuZero, TD-MPC2 and I2A establish that full observation-faithful world modeling is not universally necessary.
-
-Still unresolved:
+Primary collision:
 
 ```text
-When does online action-conditioned branching add decision information
-that cannot be amortized into a compact world state/policy under matched compute/data?
+WPT (CVPR 2026)
+= online WM teacher → policy/world-reward distillation → fast student
+
+Fast-WAM (2026, robotics)
+= world/video co-training → test-time future imagination can be skipped
+
+CF-VLA
+= selective hard-scene reasoning
+
+UTMR
+= uncertainty-triggered extra world-model computation
+```
+
+Residual variable retained:
+
+```text
+what consequence information is / is not amortizable?
+```
+
+This is folded into CP-T2 rather than pursued independently.
+
+---
+
+## CP-T5 — Episode-specific reactive counterfactual consequences for planning
+
+```text
+VERDICT: SURVIVES — CANDIDATE RESEARCH PROBLEM
+PRIORITY: #1
+NOVELTY RISK: MEDIUM-LOW BUT FAST-MOVING
+```
+
+Minimal scientific question:
+
+> **Can a planning-centric WAM trained mainly on factual trajectories recover intervention-correct consequences when an alternative ego action changes both the episode-specific outcome and surrounding-agent responses?**
+
+Core hypothesis:
+
+```text
+history + alternative action
+is insufficient in the hard case because both:
+
+1. episode-specific latent causes must be preserved / inferred;
+2. surrounding-agent response is endogenous to the ego intervention.
+```
+
+Required paired protocol:
+
+```text
+same underlying simulated world / seed
+factual ego action a
+alternative ego action a'
+reactive environment mechanism held fixed
+→ matched Y(a), Y(a')
+```
+
+Required outcomes:
+
+```text
+factual future accuracy
+matched counterfactual accuracy
+agent reaction accuracy
+counterfactual interaction/collision outcome accuracy
+planning regret / ranking consistency
+```
+
+### Why this survives the strongest 2026 nearest neighbors
+
+`How Can Driving World Models Do Counterfactual Prediction?`:
+
+```text
+matched episode-specific counterfactual truth: YES
+surrounding-agent response to changed ego action: deliberately NO
+planning-centric reactive consequence test: NO
+```
+
+`ReactSim-Bench`:
+
+```text
+AV deviation → agent reactive response protocol: YES
+2,636 nuPlan scenarios + open benchmark code/data: YES
+matched same-episode factual/counterfactual truth: NO
+planning-regret / WAM consequence validity: NO
+```
+
+`CausalDrive`:
+
+```text
+real-time reactive visual world renderer: YES
+counterfactual reaction control / driving sociology: YES
+matched episode-specific factual↔reactive-CF identification: NOT ESTABLISHED
+```
+
+`AWM / reactive-adversarial work`:
+
+```text
+hard interactive counterfactual pressure: YES
+same scientific target as consequence-validity benchmark: NO
+```
+
+The unresolved conjunction is therefore:
+
+```text
+EPISODE-SPECIFIC COUNTERFACTUAL IDENTIFICATION
++
+REACTIVE EGO→AGENT INTERVENTION RESPONSE
++
+PLANNING UTILITY / REGRET
+```
+
+Important:
+
+```text
+This is NOT a claim that reactive world models are novel.
+This is NOT a claim that counterfactual world models are novel.
 ```
 
 ---
 
-## T3 — Training-time world modeling vs deployment-time model-basedness
+## CP-T6 — Reaction distributions beyond structured interaction representation
 
 ```text
-VERDICT: PARTIALLY RESOLVED
+VERDICT: REJECT — PRIOR ART as standalone direction
 ```
 
-MBPO / Dreamer-family work shows useful world-model reasoning can train a policy without per-decision online rollout. WPT (CVPR 2026) directly demonstrates autonomous-driving world-to-policy distillation with substantial inference acceleration while retaining most gains.
-
-Online planning remains strongly viable in MuZero / TD-MPC2 and in WAM anchors such as WoTE / World4Drive.
-
-Surviving question:
+Key collision:
 
 ```text
-Which consequence information is amortizable into policy weights,
-and which must be recomputed online under uncertainty / OOD / interaction?
+Reaction-Uncertainty-Aware Motion Planning (2026)
+= ego-conditioned multimodal reaction prediction + tree planning
+= directly shows planning gain over unimodal conditional response baseline
+```
+
+Additional prior art:
+
+```text
+M2I
+GameFormer
+2026 ego-conditioned prediction + planning
+ProDrive
+ReactSim-Bench
+```
+
+The exact GraphWorld-like structured-only negative control remains scientifically useful, but is too thin a standalone novelty boundary.
+
+Retained variables:
+
+```text
+response dependence
+reaction multimodality / entropy
+negotiation type
+```
+
+These become stratification axes inside CP-T5 / CP-T2.
+
+---
+
+# Current candidate ranking
+
+```text
+#1 CP-T5
+Episode-specific reactive counterfactual consequence validity for planning
+
+#2 CP-T2
+Conditional marginal value of online consequence branching
+```
+
+Rejected standalone:
+
+```text
+CP-T3 → merge into T2
+CP-T6 → merge into T5/T2
 ```
 
 ---
 
-## T5 — Factual future vs intervention-correct consequence
+# Why CP-T5 is currently first
+
+Scientific value:
 
 ```text
-VERDICT: PARTIALLY RESOLVED — H2 STRONGLY STRENGTHENED
+very high
 ```
 
-The project rule:
+Falsifiability:
 
 ```text
-action-conditioned output != counterfactual truth
+very high — controlled repeated interventions can generate paired truth
 ```
 
-is now supported by direct external evidence, not only anchor synthesis.
-
-`How Can Driving World Models Do Counterfactual Prediction?` (arXiv:2608.11601, 2026-08) constructs matched CARLA counterfactual ground truth and shows representative direct action-conditioned driving WMs fail to recover episode-specific counterfactuals.
-
-Important remaining boundary:
+Nearest-neighbor overlap:
 
 ```text
-episode-specific short-horizon counterfactual
-!=
-reactive multi-agent intervention consequence
+moderate: the pieces exist separately, the full conjunction has not been identified
 ```
 
-The reactive case remains unresolved.
-
----
-
-## T6 — Structured interaction semantics vs true reactive dynamics
+Infrastructure burden:
 
 ```text
-VERDICT: SURVIVES — NARROWED
+high
 ```
 
-Prior art already includes:
+Promising available pieces:
 
 ```text
-M2I conditional influencer→reactor prediction
-GameFormer game-theoretic interaction reasoning
-DIPP joint prediction-planning
-TrafficBots recurrent reactive simulation
-WOSAC / Waymax interactive sim-agent evaluation
-reaction-uncertainty-aware conditional planning
+CARLA repeatable intervention
+ReactSim-Bench reactive protocol + open code/data
+CausalDrive evidence for real-time reactive neural simulation
+Bench2Drive / InterPlan / nuPlan-family interactive scenarios
 ```
 
-Therefore `model reactions to ego plans` is NOT a novelty claim.
-
-Surviving question:
+Main risk:
 
 ```text
-What marginal planning value does explicit ego-conditioned reaction modeling add
-beyond a strong interaction-aware latent representation,
-as response dependence / negotiation difficulty increases?
+fast-moving 2026 literature may close the novelty window quickly
 ```
 
 ---
 
-# New counterfactual vocabulary rule
+# Counterfactual vocabulary remains mandatory
 
-Always distinguish:
+Always separate:
 
 ```text
 conditional prediction
-p(Y | H, a)
-
 interventional prediction
-p(Y | H, do(a))
-
-episode-specific counterfactual
-p(Y_a | H, factual evidence)
-
-reactive multi-agent counterfactual simulation
-alternative ego intervention + endogenous agent responses
+episode-specific counterfactual prediction
+reactive counterfactual simulation
 ```
 
-Never infer a higher level from action-conditioning alone.
-
----
-
-# Cross-tension convergence
-
-T2 + T3 + T6 now point to a deeper question:
-
-> **What future reasoning must be computed online for THIS scene, and what can be amortized into compact state/policy representations?**
-
-Potential discriminating variables:
+And separately report:
 
 ```text
-interaction response dependence
-reaction uncertainty / multimodality
-scene rarity / OOD distance
-candidate ambiguity
-irreversibility / safety cost
-model confidence / epistemic uncertainty
+candidate-specific output?
+candidate-specific paired truth?
+reactive other-agent truth?
+external intervention validation?
+planning utility validation?
 ```
-
-This is an organizing scientific question, NOT yet a method proposal.
 
 ---
 
@@ -242,17 +365,22 @@ This is an organizing scientific question, NOT yet a method proposal.
 
 See `state/NEXT_TASK.md`.
 
-Next phase:
+Next phase focuses on **CP-T5 promotion attack**, not method design:
 
 ```text
-candidate-problem formulation + nearest-neighbor 2025–2026 overlap check
+deep-audit nearest neighbors
+→ verify exact novelty boundary
+→ verify paired-intervention infrastructure feasibility
+→ decide PROMOTE / REJECT / HOLD
 ```
+
+CP-T2 remains the secondary candidate and fallback.
 
 Still forbidden:
 
 ```text
-NO final research-gap declaration yet
-NO method architecture proposal
+NO final architecture proposal
+NO paper-title brainstorming
 NO forced risk-field insertion
-NO novelty claim from terminology alone
+NO novelty claim until CP-T5 promotion gate passes
 ```
