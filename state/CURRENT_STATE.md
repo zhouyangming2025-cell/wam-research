@@ -1,6 +1,6 @@
 # CURRENT_STATE
 
-Last updated: **2026-09-15 — RESEARCH-DIRECTION CONVERGENCE PAUSED; BROAD WAM DEEP-READ EXPANSION ACTIVE; DRIVELAW COMPLETE**
+Last updated: **2026-09-15 — RESEARCH-DIRECTION CONVERGENCE PAUSED; BROAD WAM DEEP-READ EXPANSION ACTIVE; DA-WAM COMPLETE**
 
 ## Research north star
 
@@ -52,7 +52,7 @@ The previously created tension/candidate-problem artifacts are retained only as 
 
 ---
 
-# Normalized anchors — expansion now at 12
+# Normalized anchors — expansion now at 13
 
 ```text
 P0048 LAW           COMPLETE v2
@@ -67,6 +67,7 @@ P0063 DynFlowDrive  COMPLETE v2 + paper/repo audit
 P0064 Discrete-WAM  COMPLETE v2 + paper/source-status audit
 P0065 GraphWorld    COMPLETE v2 + paper/source-status audit
 P0009 DriveLaW      COMPLETE v2 + arXiv v3 / official-source audit
+P0012 DA-WAM        COMPLETE v2 + arXiv v2 / official-repo-status audit
 ```
 
 These anchors remain a growing comparison set; they do not define the boundary of the field.
@@ -89,6 +90,14 @@ GENERATIVE-STATE TAP LOCATION / SOLVER-DEPTH OF POLICY CONDITION
 ```
 
 but this remains unpromoted until another independent anchor survives back-projection.
+
+DA-WAM also does **not** authorize V1.4. Its central supervision asymmetry is already represented by:
+
+```text
+G07 candidate/branch supervision coverage
+I02 alternative-action future supervision
+K05 scorer-target provenance
+```
 
 ---
 
@@ -172,6 +181,88 @@ exact paper benchmark commit not pinned
 
 ---
 
+# DA-WAM stable normalized result
+
+Canonical files:
+
+```text
+papers/deep_analysis/P0012_DAWAM_DEEP_ANALYSIS_V2.md
+audits/literature/PHASE_C6_DAWAM_AUDIT.md
+landscape/P0012_DAWAM_ONTOLOGY_PROJECTION.md
+landscape/WAM_COMPARISON_MATRIX_V1_3_DAWAM_EXTENSION.md
+```
+
+Canonical subtype:
+
+```text
+ONLINE CANDIDATE-SPECIFIC FUTURE-LATENT UTILITY SCORING WAM
+```
+
+Core deployment graph:
+
+```text
+2 historical front-camera frames
+→ V-JEPA 2.1 online encoder + LoRA
+→ current scene tokens Z_t
+→ 32 trajectory candidates
+→ 32 action embeddings a_i
+→ shared action-conditioned predictor
+→ 32 short-horizon (0.5s) future latents Zhat_i
+→ factorized scorer
+   NC / DAC / EP / TTC / Comfort + utility
+→ argmax trajectory
+```
+
+Critical supervision boundary:
+
+```text
+32 candidate-specific future outputs                         YES
+32 direct candidate-specific future truths                  NO
+expert-matched branch direct future-latent supervision      YES
+other candidate branches direct future-latent supervision   NO
+all branches factor / utility / ranking supervision         YES
+reactive alternative-agent intervention truth               NO / NOT ESTABLISHED
+```
+
+Strongest matched future/scoring evidence:
+
+```text
+No Future Prediction          93.31 PDMS
+Shared Global Future          92.81
+Current-Latent Conditioning   93.25
+Action-Conditioned Future     93.46
++ Hard Negatives              93.68
+```
+
+Binding interpretation:
+
+```text
+candidate/future one-to-one alignment is useful
+but direct incremental gain over strong no-future baseline is modest (+0.15 PDMS)
+
+hard-negative/value supervision contributes another +0.22 PDMS
+```
+
+Therefore final DA-WAM performance must not be narrated as a monolithic world-model gain.
+
+Representation controls also show independent contributions from:
+
+```text
+dense V-JEPA predictive objective
+LoRA planning adaptation
+EMA target policy
+```
+
+Official source status:
+
+```text
+LeapWM/da-wam@1edbe555146a2d1fe9484f5c11f120860b8a4858
+README only: "comming soon"
+implementation SOURCE-UNVERIFIED
+```
+
+---
+
 # Active expansion plan
 
 Canonical queue:
@@ -196,8 +287,8 @@ The numerical target is a working gate, not a scientific claim. Diversity and sa
 
 ```text
 P0009 DriveLaW      COMPLETE
-P0012 DA-WAM        NEXT
-P0002 SafeDrive
+P0012 DA-WAM        COMPLETE
+P0002 SafeDrive     NEXT
 P0005 RiskWorld
 P0007 DriveReward
 ```
@@ -227,29 +318,7 @@ Queue order may change only for evidence/source dependencies or if a paper is fo
 
 # Why the next core papers materially extend coverage
 
-## DA-WAM — NEXT
-
-```text
-N candidate trajectories
-→ N action-conditioned future latents
-→ one-to-one future-latent-conditioned scoring
-```
-
-This directly pressure-tests candidate-specific consequence / factual-supervision dimensions and provides a sharp contrast to DriveLaW's one-common-world-representation → direct-policy architecture.
-
-Mandatory DA-WAM questions:
-
-```text
-one-to-one trajectory↔future latent correspondence
-expert-matched future supervision only
-hard-negative supervision semantics
-factorized safety/value heads
-EMA target / online encoder adaptation
-candidate-specific prediction vs candidate-specific truth
-world→score interface at inference
-```
-
-## SafeDrive
+## SafeDrive — NEXT
 
 ```text
 trajectory-conditioned sparse world
@@ -257,7 +326,17 @@ trajectory-conditioned sparse world
 → explicit fine-grained safety reasoning
 ```
 
-This provides a missing explicit safety/world/planning anchor.
+This provides a missing anchor where the world object is not merely an implicit visual latent and safety is not only a scalar benchmark outcome. Mandatory questions include:
+
+```text
+what exactly is the sparse world state?
+which agents/timesteps are predicted?
+how ego candidate trajectory enters the world model?
+what supervision exists for alternative trajectories?
+collision / drivable-area reasoning as explicit state vs utility?
+world-state prediction vs safety evaluator attribution?
+training graph vs inference graph?
+```
 
 ## RiskWorld
 
