@@ -2,7 +2,7 @@
 
 ## 唯一下一任务
 
-> **Deep-read P0002 SafeDrive as the third paper in Wave C.6, using the existing WAM reading stack. Keep research-direction convergence paused.**
+> **Deep-read P0005 RiskWorld as the fourth paper in Wave C.6. Treat it as an explicit-risk/world-state boundary anchor; keep research-direction convergence paused.**
 
 Canonical expansion plan:
 
@@ -22,38 +22,38 @@ method design                      FORBIDDEN
 Current normalized count:
 
 ```text
-13 anchors complete
-DriveLaW = COMPLETE
-DA-WAM   = COMPLETE
-SafeDrive = NEXT
+14 anchors complete
+DriveLaW  = COMPLETE
+DA-WAM    = COMPLETE
+SafeDrive = COMPLETE
+RiskWorld = NEXT
 ```
 
 ---
 
-# Why SafeDrive is next
+# Why RiskWorld is next
 
-SafeDrive is selected for coverage diversity, not because it supports a preferred research hypothesis.
+RiskWorld is selected for coverage diversity, not because it supports a preferred hypothesis.
 
-It introduces a different world/planning interface:
+It is expected to occupy a boundary position:
 
 ```text
-trajectory-conditioned sparse world representation
-→ explicit agent/timestep future interaction states
-→ fine-grained safety reasoning
-→ planning decision
+object-centric latent world state
+→ temporal rollout / future ego-object relation
+→ explicit object-level risk identification
 ```
+
+The key question is whether `risk` is itself a predicted world-state variable, a downstream evaluator, a handcrafted label, or a planning value proxy.
 
 This is materially different from:
 
 ```text
-WoTE       recurrent BEV consequence + utility
-World4Drive compact candidate future + factual-mode score
-GraphWorld  structured interaction state + direct policy
-DA-WAM      candidate-specific latent + factorized utility scorer
-RiskWorld   object-centric risk prediction boundary anchor
+SafeDrive   candidate-specific sparse world → learned safety evaluator
+WoTE        recurrent future BEV → utility
+DA-WAM      candidate future latent → factorized utility
+GraphWorld  structured world state → direct policy
+World4Drive future latent → factual-mode score
 ```
-
-SafeDrive therefore pressure-tests whether explicit structured safety/world states add scientific distinctions not captured by implicit latent consequence features.
 
 ---
 
@@ -64,254 +64,227 @@ SafeDrive therefore pressure-tests whether explicit structured safety/world stat
 Resolve:
 
 ```text
-canonical paper version
-official repository / project page
+canonical paper/version
+official repository/project page
 code-release state
-paper↔code version relation
+paper↔code relation
 ```
 
-Lock a commit if code exists.
+Lock a commit if official implementation exists.
 
-## 2. Host planner first
+## 2. Problem boundary
 
-Reconstruct before the world model:
+Before calling it a planning WAM, determine:
 
 ```text
-observation
-→ planner representation
-→ ego trajectory / candidate trajectories
+Is RiskWorld primarily:
+- world model?
+- risk prediction model?
+- planning model?
+- simulator?
+- representation learner?
 ```
 
-Determine whether SafeDrive is:
+If no action-selection interface exists, keep it as a boundary anchor rather than forcing it into the core planner family.
 
-```text
-direct policy
-candidate bank + scorer
-trajectory refinement
-or hybrid
-```
-
-## 3. Sparse world representation
-
-Trace exactly what `sparse world` means:
-
-```text
-object / agent tokens?
-map elements?
-BEV points?
-future occupancy?
-interaction states?
-```
-
-Record:
-
-```text
-state granularity
-agent identity persistence
-map representation
-future-time indexing
-```
-
-Do not use `world state` as a generic label.
-
-## 4. Action / trajectory → world coupling
-
-For every predicted future object, determine:
-
-```text
-what ego trajectory/action conditions the predictor?
-how is the action injected?
-are multiple candidate actions predicted separately?
-are parameters shared across branches?
-```
-
-Mandatory counterfactual distinction:
-
-```text
-candidate-specific output?
-candidate-specific factual future target?
-reactive surrounding-agent truth?
-```
-
-## 5. Agent/timestep future prediction
+## 3. Observation and object-centric state
 
 Reconstruct:
 
 ```text
-current agent state
-+ ego trajectory
-→ future agent/world states
+sensor/history input
+→ object extraction / slots / tracks
+→ latent object state
+→ scene/world state
 ```
 
-Determine:
+Determine exactly what one object state contains and whether identity persists across time.
+
+## 4. Dynamics / rollout
+
+Trace:
 
 ```text
-prediction horizon
+current latent state
+→ transition / RSSM / recurrent dynamics
+→ future latent/object states
+```
+
+Lock:
+
+```text
 physical timestep
-single endpoint vs sequence
-which agents are modeled
-whether future states are geometric, semantic, occupancy, latent, or mixed
+prediction horizon
+teacher forcing vs free rollout
+stochastic vs deterministic state
+latent prior/posterior structure
 ```
 
-Use F04/F05/F07/F08.
+Use F04/F05/F06/F07/F08.
 
-## 6. Explicit safety reasoning
+## 5. Ego-action conditioning
 
-Trace every safety variable separately:
+Force explicit answers:
 
 ```text
-collision
-road/drivable-area compliance
-TTC / distance margin
-agent interaction risk
-other rule constraints
+Does ego trajectory/action condition future dynamics?
+How is it represented/injected?
+Does changing ego action create a different predicted world?
+Are alternative actions supervised?
 ```
 
-For each, answer:
+Do not infer counterfactual capability from recurrent prediction alone.
+
+## 6. Risk representation
+
+For each risk quantity identify:
 
 ```text
-predicted world state?
-hand-computed evaluator?
-learned safety head?
-reward/value target?
-training-only label?
-online decision variable?
+object-level or scene-level?
+current or future?
+probability / score / binary class / continuous field?
+learned or rule-derived?
+supervision source?
+calibrated or only discriminative?
 ```
 
-Do not collapse all of these into `risk`.
-
-## 7. World → planning interface
-
-Determine whether SafeDrive uses future/world information to:
+Separate:
 
 ```text
-condition a direct planner
-score candidates
-refine trajectories
-reject unsafe proposals
-or supervise training only
+predicted risk state
+vs safety/value evaluator
+vs benchmark collision metric
 ```
 
-Draw separate training and inference graphs.
+## 7. Future ego-object relation
 
-## 8. Supervision truth
-
-For each future agent/world branch, identify:
+If RiskWorld derives risk from future relational states, reconstruct:
 
 ```text
-logged factual future
-simulator future
-pseudo-label
-rule-derived target
-expert trajectory
-hard-negative target
+predicted ego state
+predicted object state
+relative geometry / interaction
+→ risk
 ```
 
-If multiple ego candidates exist, explicitly test whether one factual environment future is reused across candidates.
+Determine whether risk is decoded from latent state or analytically computed from predicted geometry.
 
-## 9. Strongest matched ablations
+## 8. Planning interface
+
+Determine whether risk/world output is actually consumed by:
+
+```text
+trajectory generator
+candidate scorer
+MPC/search
+policy conditioning
+or no planner at all
+```
+
+If absent, write `PLANNING INTERFACE = ABSENT` rather than extrapolating a use case.
+
+## 9. Supervision truth
+
+Audit:
+
+```text
+factual logged future
+risk labels
+collision labels
+near-miss/TTC/RSS-style labels
+synthetic/simulator targets
+alternative-action future truth
+reactive surrounding-agent truth
+```
+
+## 10. Strongest matched ablations
 
 Prioritize controls isolating:
 
 ```text
-base planner
-+ sparse world modeling
-+ action conditioning
-+ safety module
-+ fine-grained agent/timestep reasoning
+object-centric vs scene-global representation
+dynamics rollout vs no rollout
+risk decoder / risk supervision
+prediction horizon
+action conditioning if present
 ```
 
-Separate representation gain from safety-evaluator gain.
+Do not use headline metric gains as a monolithic `world-model gain`.
 
-## 10. Evaluation regime
+## 11. Evaluation regime
 
-Classify each result as:
+Classify separately:
 
 ```text
-open-loop
-NAVSIM non-reactive pseudo-simulation
-reactive simulator closed-loop
-real-car closed-loop
+risk prediction evaluation
+future prediction evaluation
+open-loop planning evaluation
+NAVSIM pseudo-simulation
+reactive closed loop
 ```
 
-Do not use the paper's label without auditing benchmark semantics.
+Do not treat risk-classification accuracy as planning validation.
 
-## 11. Full Ontology V1.3 projection
+## 12. Full Ontology V1.3 projection
 
-Force-fill A–P with explicit:
+Force-fill A–P with explicit absence/status values.
 
-```text
-ABSENT
-NOT REPORTED
-NOT EVALUATED
-NOT APPLICABLE
-SOURCE-UNVERIFIED
-```
-
-Any proposed new dimension must survive merge testing and back-projection across prior anchors.
+Any proposed V1.4 dimension must survive merge testing and back-projection.
 
 ---
 
-# Required immediate cross-paper comparisons
+# Required immediate comparisons
 
 ```text
-SafeDrive vs WoTE
-SafeDrive vs DA-WAM
-SafeDrive vs GraphWorld
-SafeDrive vs World4Drive
-SafeDrive vs RiskWorld
+RiskWorld vs SafeDrive
+RiskWorld vs GraphWorld
+RiskWorld vs WoTE
+RiskWorld vs DA-WAM
+RiskWorld vs LAW / World4Drive
 ```
 
-Key questions:
+Especially answer:
 
 ```text
-Is SafeDrive's `safety` an explicit world variable, a value function, or a rule evaluator?
-Does it model other-agent response or only factual/logged motion?
-Does agent/timestep structure add more than an implicit latent future?
-Is safety gain attributable to world prediction or to explicit metric supervision?
+SafeDrive: safety is evaluator semantics attached to candidate sparse worlds.
+RiskWorld: is risk actually part of the predicted world state?
+
+GraphWorld: structured interaction latent conditions policy.
+RiskWorld: does structured/object latent instead decode risk?
+
+WoTE/DA-WAM: future helps choose an ego candidate.
+RiskWorld: is there any comparable decision interface at all?
 ```
 
 ---
 
 # Required artifacts
 
-After the deep read create at minimum:
+Create at minimum:
 
 ```text
-papers/deep_analysis/P0002_SAFEDRIVE_DEEP_ANALYSIS_V2.md
-audits/literature/PHASE_C6_SAFEDRIVE_AUDIT.md
-landscape/P0002_SAFEDRIVE_ONTOLOGY_PROJECTION.md
-landscape/WAM_COMPARISON_MATRIX_V1_3_SAFEDRIVE_EXTENSION.md
+papers/deep_analysis/P0005_RISKWORLD_DEEP_ANALYSIS_V2.md
+audits/literature/PHASE_C6_RISKWORLD_AUDIT.md
+landscape/P0005_RISKWORLD_ONTOLOGY_PROJECTION.md
+landscape/WAM_COMPARISON_MATRIX_V1_3_RISKWORLD_EXTENSION.md
 ```
 
-Update state/queue only after mechanism and evidence are stable.
+Update state/queue/source completeness only after mechanism is stable.
 
 ---
 
-# After SafeDrive
-
-Current core queue:
+# After RiskWorld
 
 ```text
-P0005 RiskWorld
 P0007 DriveReward
 ```
 
-Then proceed into simulation/reactivity/evaluation and WAM+VLA control waves.
+Then proceed to simulation/reactivity/evaluation controls and WAM+VLA boundary controls.
 
 ---
 
 # Guardrail
 
-This remains literature expansion.
+This remains field reconstruction / literature expansion.
 
-Do not turn SafeDrive/DA-WAM into a project research direction.
-
-The question remains:
-
-```text
-What mechanisms actually exist in the field,
-how are they supervised,
-how are they deployed,
-and what evidence isolates their contribution?
-```
+Do not turn SafeDrive or RiskWorld into a project research direction.
