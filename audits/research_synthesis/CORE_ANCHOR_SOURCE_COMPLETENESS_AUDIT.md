@@ -13,7 +13,7 @@ paper text available
 != source-code mechanism verified
 ```
 
-The project repository is a research brain, not a mirror of every external codebase. Full external repositories should remain outside GitHub under ignored/local paths such as `repos/`; the canonical GitHub record should preserve repository provenance, audited commit, decision-critical files/functions, source facts, and unresolved implementation questions.
+Canonical intent remains to preserve provenance, audited commit, decision-critical files/functions, source facts, and unresolved implementation questions. A local/exported source snapshot may exist under `repos/`, but scientific completeness is determined by the audit record rather than mere code presence.
 
 ## Status legend
 
@@ -32,7 +32,7 @@ PARTIAL   source exists/audit exists but does not fully cover the paper's report
 |---|---|---|---|---|---|
 | P0048 LAW | PRESENT | COMPLETE | `BraveGroup/LAW` | **COMPLETE**, commit `b2f6a784247072923c477ab92324d3aa5a9759bf` | HIGH completeness |
 | P0045 WoTE | PRESENT | COMPLETE | `liyingyanUCAS/WoTE` | **COMPLETE for decision-critical target/reactivity path**, commit `298957c128a91d41a1c6075bd0bb6e7e845e093f` | HIGH completeness |
-| P0001 Epona | PRESENT | COMPLETE | **PUBLIC OFFICIAL CODE EXISTS: `Kevin-thu/Epona`** | **MISSING dedicated commit-locked source audit** | **ACTIONABLE GAP** |
+| P0001 Epona | PRESENT | COMPLETE | `Kevin-thu/Epona` | **COMPLETE for core mechanism**, commit `69b24c55f5ab8b3ffde8fa55e9f833bfe64d2c68` | **SOURCE-COMPLETE for planning/world interface** |
 | P0042 WorldDrive | PRESENT | COMPLETE | `TabGuigui/WorldDrive` | COMPLETE/CORE audited, commit `c375ee1e1fe86ace175609db1ed90fd6db89673b` | HIGH completeness |
 | P0046 World4Drive | PRESENT | COMPLETE | `ucaszyp/World4Drive` | COMPLETE core-interface audit, commit `cffb51adeb1f7d02b49c4b74d7262ded62a33ac8`; NAVSIM implementation equivalence remains PARTIAL | HIGH with benchmark-branch caveat |
 | P0061 SeerDrive | PRESENT | COMPLETE | `LogosRoboticsGroup/SeerDrive` | COMPLETE version/source audit for released implementation | **PARTIAL by design:** released code integrates WoTE-style online evaluation and removes the original paper's iterative interaction, so code cannot be used as a drop-in verification of the paper graph |
@@ -43,19 +43,46 @@ PARTIAL   source exists/audit exists but does not fully cover the paper's report
 
 ## Immediate conclusion
 
-The source layer is **not fully complete**.
+The source layer is **not globally complete**, but the previously actionable Epona gap is now closed.
 
-However, the missing cases split into two fundamentally different classes:
+### A. Closed actionable gap — Epona
 
-### A. Actionable now
+Canonical audit:
 
 ```text
-P0001 Epona
+audits/literature/PHASE_C5_EPONA_SOURCE_AUDIT.md
+evidence/P0001_EPONA_SOURCE_EVIDENCE.md
 ```
 
-An official implementation is publicly available and appears substantial (`configs/`, `models/`, `dataset/`, `data_preparation/`, `scripts/`, checkpoints/inference instructions). The project currently lacks a LAW/WoTE-style commit-locked code audit for Epona. This should be filled before claiming paper+code completeness for the first ten anchors.
+Locked source:
 
-Secondary optional follow-up:
+```text
+Kevin-thu/Epona@69b24c55f5ab8b3ffde8fa55e9f833bfe64d2c68
+```
+
+Source-verified core conclusions:
+
+```text
+shared STT/MST representation feeds TrajDiT and visual FluxDiT;
+planning trajectory is produced before the visual branch and can run with traj_only=True;
+future visual output is not consumed by same-step planning;
+training visual condition is factual/logged future ego motion;
+self-generated rollout uses predicted ego motion to condition visual generation;
+visual loss backpropagates into shared STT/MST but not directly into TrajDiT parameters;
+long rollout recurs on generated visual latents + predicted ego motion;
+outer physical-frame rollout is distinct from inner diffusion/flow sampling iterations;
+training includes periodic detached self-generated multi-forward conditioning, so it is not pure teacher forcing.
+```
+
+Final label:
+
+```text
+P0001 Epona = SOURCE-COMPLETE FOR CORE MECHANISM
+```
+
+Non-blocking residuals remain around exact checkpoint/table parity and runtime reproduction.
+
+### B. Secondary optional follow-up
 
 ```text
 P0046 World4Drive NAVSIM branch equivalence
@@ -63,7 +90,7 @@ P0046 World4Drive NAVSIM branch equivalence
 
 The core implementation is already source-verified. Only attempt a further NAVSIM-specific audit if a distinct released NAVSIM implementation can be identified; do not downgrade the completed core audit merely because that branch is not found.
 
-### B. Not currently fillable from source
+### C. Not currently fillable from official source
 
 ```text
 P0062 Metis
@@ -79,42 +106,25 @@ OFFICIAL-README-VERIFIED where applicable
 SOURCE-UNVERIFIED
 ```
 
-These should enter a periodic source-release watchlist rather than block field reconstruction indefinitely.
+These belong on a periodic source-release watchlist rather than blocking field reconstruction indefinitely.
 
-## Epona source-audit targets
+## Source snapshot governance note
 
-The Epona agent audit should resolve at minimum:
-
-```text
-1. exact official repo HEAD/commit audited
-2. MST/history encoder data flow
-3. exact construction of shared historical latent F
-4. TrajDiT inputs/outputs and trajectory generation path
-5. VisDiT inputs/outputs and action-conditioning carrier
-6. whether TrajDiT output directly conditions VisDiT and at which tensor/interface
-7. training loss attachment and gradient paths into MST/shared F
-8. trainability/freeze state of encoder, MST, TrajDiT, VisDiT, VAE/DCAE components
-9. planning inference path: whether VisDiT is instantiated/executed/disabled and whether any visual-future tensor is consumed by trajectory generation
-10. simulation/video rollout path and autoregressive state update
-11. teacher forcing vs self-generated context across rollout/training
-12. sampling/denoising iteration semantics vs physical-frame time
-13. source support for the paper's claim that pure planning can disable visual generation
-14. code/paper mismatches, stale configs, or multiple task modes
-15. exact checkpoint/config corresponding to reported planning experiments when identifiable
-```
-
-Required source-evidence format:
+On 2026-09-15 an Epona source snapshot was imported under:
 
 ```text
-repo + locked commit
-→ file path
-→ class/function
-→ minimal code fact
-→ scientific implication
-→ unresolved boundary
+repos/Epona/
+wam-research commit a9926b905247505df01ddc4ce28fb71b193303d9
 ```
 
-Do not paste whole source files into the research repository.
+This differs from the earlier convention that external repositories remain only local/ignored. The snapshot is MIT-licensed and commit-pinned, so there is no immediate scientific-evidence problem, but repository-governance policy should be normalized later:
+
+```text
+Option A: keep selected official source snapshots vendored and manifest them consistently;
+Option B: restore external repos to local-only and retain only audit/evidence Markdown in wam-research.
+```
+
+Do not mix the two policies silently across anchors.
 
 ## Canonical source-completeness rule going forward
 
