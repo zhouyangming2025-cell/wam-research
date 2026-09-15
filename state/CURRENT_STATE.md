@@ -1,6 +1,6 @@
 # CURRENT_STATE
 
-Last updated: **2026-09-15 — Dimension-first normalization ACTIVE; Ontology V1 COMPLETE; Comparison Matrix V1 NEXT**
+Last updated: **2026-09-15 — Dimension-first normalization COMPLETE V1; core-WAM coverage correction resumes with SeerDrive**
 
 ## Research north star
 
@@ -39,11 +39,11 @@ Phase-C synthesis  COMPLETE FIRST PASS
 Phase C.5          ACTIVE
 ```
 
-The prior field synthesis remains a useful provisional coordinate system, but the project now treats **uniform mechanism/evidence comparability** as a mandatory gate before problem discovery.
+The prior field synthesis remains a useful provisional coordinate system. Uniform mechanism/evidence comparability is now a mandatory gate before problem discovery.
 
-## Dimension-first anchor normalization
+## Dimension-first anchor normalization — V1 complete
 
-The first five ontology-discovery anchors are complete:
+The five ontology-discovery anchors are normalized:
 
 ```text
 P0048 LAW          COMPLETE v2
@@ -63,7 +63,14 @@ papers/deep_analysis/P0042_WORLDDRIVE_DEEP_ANALYSIS_V2.md
 papers/deep_analysis/P0046_WORLD4DRIVE_DEEP_ANALYSIS_V2.md
 ```
 
-Dimension-discovery sources:
+Canonical dimension system:
+
+```text
+landscape/WAM_DIMENSION_ONTOLOGY_V1.md
+landscape/WAM_COMPARISON_MATRIX_V1.md
+```
+
+Discovery history retained in:
 
 ```text
 landscape/WAM_DIMENSION_DISCOVERY_LOG.md
@@ -71,15 +78,9 @@ landscape/WAM_DIMENSION_DISCOVERY_ADDENDUM_EPONA_WORLDDRIVE.md
 landscape/WAM_DIMENSION_DISCOVERY_ADDENDUM_WORLD4DRIVE.md
 ```
 
-## Ontology V1 status
+## Ontology V1
 
-Created:
-
-```text
-landscape/WAM_DIMENSION_ONTOLOGY_V1.md
-```
-
-Ontology V1 is a stable extensible baseline, not a closed universe. It organizes the comparison space into 16 families:
+Ontology V1 contains 16 stable comparison families and 94 stable dimensions:
 
 ```text
 A  problem / role of world knowledge
@@ -100,7 +101,17 @@ O  evaluation regime / evidence attribution
 P  safety / uncertainty / interaction / physical validity
 ```
 
-Binding ontology corrections:
+Every anchor must fill every dimension or explicitly use:
+
+```text
+ABSENT
+NOT REPORTED
+NOT EVALUATED
+NOT APPLICABLE
+UNCLEAR / NEEDS SOURCE AUDIT
+```
+
+Binding corrections:
 
 ```text
 action-conditioned != WM-based action selection
@@ -113,9 +124,7 @@ consequence teacher != value teacher
 prediction fidelity != decision relevance
 ```
 
-Every anchor must fill every stable dimension with a value or explicit `ABSENT / NOT REPORTED / NOT EVALUATED / NOT APPLICABLE / UNCLEAR`.
-
-## Five-anchor mechanism sanity map
+## Five-anchor mechanism map
 
 ```text
 LAW
@@ -145,7 +154,7 @@ World4Drive
 → trajectory selection
 ```
 
-## Stable evidence controls retained
+## Stable field controls retained
 
 ```text
 world-prediction quality != planning evidence
@@ -161,32 +170,47 @@ conditional future != intervention
 multimodal action generation != world modeling
 ```
 
-## Current core-WAM coverage correction queue
+## Matrix V1 QA result
 
-New-paper reading is temporarily paused until the first comparison matrix is complete.
+`WAM_COMPARISON_MATRIX_V1.md` successfully projects all five anchors across all ontology dimensions. No new paper-specific residue forced an immediate ontology redesign.
 
-After normalization:
+Known weak cells retained explicitly for future source audit:
 
 ```text
-SeerDrive       NEXT NEW ANCHOR
-Drive-JEPA      PENDING
-Metis           PENDING
-DynFlowDrive    PENDING
-Discrete-WAM    PENDING
-GraphWorld      PENDING
+LAW          exact runtime / some host-specific input details
+WoTE         full sensor-to-action latency vs reported candidate-module latency
+Epona        source-code verification + fastest-sampling planning quality
+WorldDrive   behavioral validity of teacher counterfactuals
+World4Drive  exact end-to-end latency + separate NAVSIM implementation equivalence
 ```
+
+These are unresolved cells, not hidden assumptions.
+
+## Core-WAM coverage correction resumes
+
+Next new anchor:
+
+```text
+SeerDrive
+```
+
+Then, unless evidence changes priority:
+
+```text
+Drive-JEPA
+Metis
+DynFlowDrive
+Discrete-WAM
+GraphWorld
+```
+
+Every new anchor must first be filled into Ontology V1, and may extend/split a dimension only when a mechanism cannot be represented by the existing system.
 
 ## Immediate next task
 
 See `state/NEXT_TASK.md`.
 
-Build:
-
-```text
-landscape/WAM_COMPARISON_MATRIX_V1.md
-```
-
-Project LAW / WoTE / Epona / WorldDrive / World4Drive across the Ontology V1 dimensions, grouped by family rather than as one unreadable flat table.
+Deep-read **SeerDrive** using Ontology V1, with special attention to whether its claimed bidirectional scene↔planning iteration is genuinely new or re-instantiates older iterative prediction-planning refinement.
 
 ## Still forbidden
 
