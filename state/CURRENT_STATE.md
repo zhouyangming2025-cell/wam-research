@@ -1,6 +1,6 @@
 # CURRENT_STATE
 
-Last updated: **2026-09-15 — Metis stress test COMPLETE; Ontology V1.2 RETAINED; DynFlowDrive NEXT**
+Last updated: **2026-09-15 — DynFlowDrive stress test COMPLETE; Ontology V1.3 ACTIVE; Discrete-WAM NEXT**
 
 ## Research north star
 
@@ -8,7 +8,7 @@ Last updated: **2026-09-15 — Metis stress test COMPLETE; Ontology V1.2 RETAINE
 WAM / World Model + one-stage End-to-End + Planning-centric autonomous driving
 ```
 
-Core 2.2 WAM is primary. WAM+VLA remains secondary/control. Risk/predictive-risk is optional prior knowledge, not a required destination.
+Core 2.2 WAM remains primary. WAM+VLA is secondary/control. Risk/predictive-risk remains optional prior knowledge, not a required destination.
 
 ## Methodology in force
 
@@ -25,7 +25,7 @@ FIELD UNDERSTANDING FIRST
 
 Phase D remains **PAUSED**.
 
-## Canonical reading method
+Canonical reading stack:
 
 ```text
 paper-deep-reader
@@ -35,7 +35,7 @@ academic-research-agent source/claim gate
 → source/version discipline + claim/evidence separation
 
 literature-reading-and-synthesis
-→ claim-evidence extraction + immediate cross-paper comparison
+→ immediate cross-paper scientific comparison
 
 WAM Ontology
 → full projection + residue/back-projection gate
@@ -47,7 +47,9 @@ Authority:
 landscape/WAM_READING_SKILL_STACK.md
 ```
 
-## Dimension-first normalization status
+---
+
+# Dimension-first normalization status
 
 ```text
 P0048 LAW          COMPLETE v2
@@ -58,14 +60,16 @@ P0046 World4Drive  COMPLETE v2
 P0061 SeerDrive    COMPLETE v2 first pass
 P0049 Drive-JEPA   COMPLETE v2 first pass + source audit
 P0062 Metis        COMPLETE v2 first pass + paper/official-repo audit
+P0063 DynFlowDrive COMPLETE v2 first pass + paper/official-repo audit
 ```
 
-Canonical coordinate system remains:
+Canonical coordinate system:
 
 ```text
 landscape/WAM_DIMENSION_ONTOLOGY_V1.md
 landscape/WAM_DIMENSION_ONTOLOGY_V1_1_AMENDMENT.md
 landscape/WAM_DIMENSION_ONTOLOGY_V1_2_AMENDMENT.md
+landscape/WAM_DIMENSION_ONTOLOGY_V1_3_AMENDMENT.md
 ```
 
 Comparison layer:
@@ -75,322 +79,286 @@ landscape/WAM_COMPARISON_MATRIX_V1.md
 landscape/WAM_COMPARISON_MATRIX_V1_1_SEERDRIVE_EXTENSION.md
 landscape/WAM_COMPARISON_MATRIX_V1_2_DRIVEJEPA_EXTENSION.md
 landscape/WAM_COMPARISON_MATRIX_V1_2_METIS_EXTENSION.md
+landscape/WAM_COMPARISON_MATRIX_V1_3_DYNFLOWDRIVE_EXTENSION.md
 ```
 
-New Metis artifacts:
+DynFlowDrive artifacts:
 
 ```text
-papers/deep_analysis/P0062_METIS_DEEP_ANALYSIS_V2.md
-audits/literature/PHASE_C5_METIS_AUDIT.md
-landscape/P0062_METIS_ONTOLOGY_PROJECTION.md
+papers/deep_analysis/P0063_DYNFLOWDRIVE_DEEP_ANALYSIS_V2.md
+audits/literature/PHASE_C5_DYNFLOWDRIVE_AUDIT.md
+landscape/P0063_DYNFLOWDRIVE_ONTOLOGY_PROJECTION.md
 ```
 
 ---
 
-# Metis stable result
+# DynFlowDrive stable result
 
 ## Source/version boundary
 
-Paper:
-
 ```text
-arXiv:2606.15869 v1
-submitted 2026-06-14
+paper: arXiv:2603.19675v2, 2026-05-03
+official repo: xiaolul2/DynFlowDrive
+latest observed public commit: c665dc577a0939543fa7abe64d28eadaec28283c
 ```
 
-Official repository:
-
-```text
-LogosRoboticsGroup/Metis
-latest observed public commit:
-7677b62d786cff8bb2044b489bd41f3d59514b43
-```
-
-As of 2026-09-15, training/inference/evaluation implementation remains unreleased despite an earlier August release plan.
+As of 2026-09-15 the official repo still exposes only README/teaser and states that code will be released once accepted.
 
 Therefore:
 
 ```text
-paper mechanism         PAPER-VERIFIED
-official README claims  VERIFIED
-implementation details  SOURCE-UNVERIFIED
+paper architecture/equations/ablations  PAPER-VERIFIED
+implementation details                 SOURCE-UNVERIFIED
 ```
 
-Unresolved reporting inconsistency retained:
+Two paper-level ambiguities remain unresolved until code release:
 
 ```text
-main method/README VGE: Wan2.2-5B
-capacity-ablation label: Wan2.2-14B
+Eq.7:  x_s=(1-s)a+s z_{t+1}
+→ mathematically dx_s/ds=z_{t+1}-a
+
+Eq.10 target written as:
+(1-s)(z_{t+1}-a)
+
+and:
+training interpolation starts from stochastic anchor a,
+while sampling prose says integration starts from current latent z_t.
 ```
 
-Do not silently reconcile until source/configs are released.
+Do not silently repair these by inference.
+
+## Canonical mechanism
+
+```text
+TRAINING-ONLY FLOW-DYNAMICS MODE-SUPERVISION WAM
+```
+
+Training:
+
+```text
+current observation
+→ multimodal planner
+→ candidate trajectories + score head
+
+current factual world latent + candidate trajectory
+→ rectified-flow latent world model
+→ predicted transport path / endpoint
+→ reconstruction + flow objectives
+→ flow-direction stability
+
+GT trajectory error
++ factual-latent reconstruction
++ flow stability
+→ hybrid criterion C_n
+→ n* positive candidate
+→ supervise planner score head
+```
+
+Deployment:
+
+```text
+current observation
+→ candidate trajectories + learned scores
+→ argmax
+
+world model       = OFF
+future latent      = NOT COMPUTED
+flow integration   = NOT COMPUTED
+flow stability     = NOT COMPUTED
+```
+
+Thus DynFlowDrive is **not** an online candidate→future→score planner.
 
 ---
 
-# Metis mechanism
+# DynFlowDrive strongest scientific correction
 
-Canonical subtype:
-
-```text
-TRAINING-ONLY ASYMMETRIC WORLD-ACTION CO-TRAINING
-→ WORLD-LOSS-SHAPED ACTION EXPERT
-→ ACTION-ONLY FLOW POLICY
-```
-
-Training graph:
+Three time axes are distinct:
 
 ```text
-current observation + language + ego state
-→ Action Expert (AE)
-→ future action representation
-          ↓
-          conditions
-          ↓
-Video Generation Expert (VGE)
-→ factual future-video flow loss
-          ↓ backward gradient
-          └──────────────→ shapes AE
+physical scene time τ
+!= rectified-flow transport coordinate s
+!= planner/query refinement iteration k
 ```
 
-The asymmetric mask enforces:
+Only physical endpoints `t` and `t+1` are observed as world-state targets. Intermediate `s` states are internal transport/solver states.
+
+Binding control:
 
 ```text
-FORWARD:
-action tokens → future-video tokens     YES
-future-video tokens → action tokens     NO
+smooth latent path over s
+!= validated smooth physical evolution over τ
 
-BACKWARD:
-video-generation loss → action expert   YES
+dz/ds
+!= dz/dτ
+unless physical-time identity is explicitly established
 ```
 
-This is the key scientific distinction:
+This motivated Ontology V1.3:
 
 ```text
-world→action gradient influence
-!=
-world→action forward information flow
+F08  Internal transition-coordinate / physical-time alignment
 ```
 
-Deployment graph:
+DynFlowDrive value:
 
 ```text
-current observation + language + ego state
-→ action expert flow denoising
-→ trajectory
+RECTIFIED-FLOW TRANSPORT COORDINATE BETWEEN PHYSICAL ENDPOINTS;
+INTERMEDIATE s STATES ARE NOT PHYSICALLY TIME-SUPERVISED
 ```
 
-Explicit deployed future object:
-
-```text
-NONE
-```
-
-Thus Metis is not an online `imagine future → inspect future → choose action` planner.
+F08 back-projects meaningfully onto Epona, WorldDrive, Metis, WoTE, SeerDrive and other anchors and therefore passes the ontology extension gate.
 
 ---
 
-# Metis future supervision
-
-Future-world target:
+# DynFlowDrive supervision and counterfactual boundary
 
 ```text
-logged factual future video latent
+N candidate trajectories
+→ N candidate-conditioned flow fields / outputs
+
+but factual world target from logs
+= ONE next world latent z_{t+1}
 ```
-
-Action target:
-
-```text
-logged factual trajectory/action chunk
-```
-
-F07:
-
-```text
-CURRENT-CONTEXT + ACTION
-→ CHRONOLOGICALLY UNSEEN FUTURE VIDEO
-(flow-matched fixed-window generation)
-```
-
-Important boundary:
-
-```text
-one logged action + one factual future
-!=
-multiple observed alternative-action futures
-```
-
-No intervention-valid/reactive alternative-agent future truth is established.
-
----
-
-# Metis strongest evidence
-
-## World-task co-training on/off
-
-```text
-without video co-training   87.4 PDMS / 87.9 EPDMS
-with video co-training      89.1 PDMS / 89.5 EPDMS
-```
-
-Supports:
-
-```text
-future-video co-training benefits the reported action-policy family
-```
-
-Does not isolate:
-
-```text
-future-video fidelity
-causal dynamics accuracy
-generic auxiliary regularization
-imported video prior
-AE capacity / resolution effects
-```
-
-## Attention topology — matched 320×384
-
-```text
-Joint       87.4 navtest / 28.0 navhard EPDMS
-Isolated    88.3         / 29.4
-Asymmetric  88.8         / 31.6
-```
-
-This establishes:
-
-```text
-tighter/symmetric coupling is not automatically better
-asymmetric training coupling > full isolation in this architecture
-```
-
-Because AE cannot attend future-video tokens, the gain is not evidence of direct future-video→action reasoning.
-
-## Action denoising quality–compute curve
-
-```text
-steps   navtest EPDMS   navhard EPDMS
-1       87.2            30.4
-2       89.2            31.2
-5       89.4            31.4
-10      89.5            32.2
-```
-
-Paper latency operating points on RTX 4090:
-
-```text
-with video        1.38 s
-action-only       ~0.17 s
-```
-
-But video uses 10 denoising steps while the efficient action-only point uses 2, so the ~8× number is not a pure matched branch-removal ablation.
-
----
-
-# Metis world-quality evidence boundary
-
-No dedicated quantitative future-video fidelity metric such as FVD/PSNR/SSIM was identified in the audited paper text; world-generation evidence is mainly qualitative.
 
 Therefore:
 
 ```text
-video co-training helps planning
-!=
-better video prediction fidelity causes better planning
+candidate-specific world output                    YES
+candidate-specific observed alternative future GT NO
+reactive surrounding-agent truth                  NO / NOT ESTABLISHED
+external intervention-validity evidence           ABSENT
 ```
 
-O07 remains:
+Continuous candidate-conditioned flow does not solve the alternative-action supervision problem.
+
+---
+
+# DynFlowDrive strongest matched evidence
+
+## Static WM → Flow WM
 
 ```text
-ABSENT direct prediction-fidelity → planning evidence
+Static WM   0.61 Avg L2 / 0.30 Avg CR
+Flow WM     0.59        / 0.26
+```
+
+This reasonably isolates a benefit from the rectified-flow parameterization inside the authors' framework.
+
+## Representation prior
+
+```text
+Flow WM                    0.59 / 0.26
++ pretrained World Feature 0.57 / 0.22
+```
+
+Thus foundation representation quality remains an independent contribution.
+
+## Selection criterion ladder
+
+```text
+none              0.61 / 0.30
+L2 only           0.59 / 0.24
++ reconstruction  0.58 / 0.22
++ flow stability  0.57 / 0.22
+```
+
+The full selection teacher matters substantially, but the final angular flow-stability term itself has only a modest incremental effect.
+
+## Flow integration steps
+
+```text
+steps   Avg L2   Avg CR
+1       0.60     0.28
+3       0.59     0.23
+5       0.57     0.22
+10      0.59     0.24
+```
+
+This is a **solver/teacher-resolution curve**, not a future-horizon curve.
+
+---
+
+# Headline-comparison correction
+
+The highlighted SSR delta is not fully matched:
+
+```text
+SSR*                             0.39 L2 / 0.15 CR
+DynFlowDrive(SSR)                0.35    / 0.14
+DynFlowDrive(SSR) + ego status   0.31    / 0.11
+```
+
+The 0.31/0.11 row includes extra ego-status input. The more defensible matched WM comparison is approximately:
+
+```text
+0.39 → 0.35 L2
+0.15 → 0.14 CR
+```
+
+This strengthens:
+
+```text
+matched controls > headline SOTA deltas
 ```
 
 ---
 
-# Metis historical boundary
+# Evaluation-regime correction
 
-Metis cites Fast-WAM and explicitly says its decoupled inference paradigm is inspired by it.
+The paper calls NAVSIM `closed-loop`.
 
-Therefore the broad lifecycle:
-
-```text
-world/video co-training during training
-→ skip explicit future generation at inference
-```
-
-is not unique to Metis.
-
-Metis-specific scientific contribution is better described as:
+Project-standard classification remains:
 
 ```text
-Mixture-of-Transformers expert separation
-+ asymmetric attention
-+ action-conditioned future-video task
-+ video-loss→AE gradient shaping
-+ action-only flow deployment
+NAVSIM v1
+= NON-REACTIVE DATA-DRIVEN / PSEUDO-SIMULATION PLANNING
 ```
+
+Therefore DynFlowDrive's 88.7 PDMS supports strong planning performance under NAVSIM's non-reactive regime, but does **not** validate reactive surrounding-agent responses or intervention-correct world dynamics.
 
 ---
 
-# Ontology stress-test result
-
-Potential residue:
-
-```text
-forward action→world
-backward world-loss→action
-without world-future→action forward dependency
-```
-
-Existing dimensions already represent it:
-
-```text
-E01/E02  forward action→world
-J04      coupling direction
-L04      gradient coupling direction
-M01-M03  training→deployment lifecycle
-```
-
-Decision:
-
-```text
-NO V1.3 amendment.
-Ontology V1.2 remains active.
-```
-
-This is a positive stability result for the coordinate system.
-
----
-
-# Eight-anchor mechanism map
+# Nine-anchor mechanism map
 
 ```text
 LAW
-= action-aware future-latent auxiliary representation shaping
-
-WoTE
-= candidate-conditioned recurrent future BEV → explicit utility → selection
-
-Epona
-= shared history latent → trajectory + visual generative branches
-
-WorldDrive
-= heavy generative future teacher → distilled online future surrogate → ranking
-
-World4Drive
-= candidate/intention-conditioned endpoint future latent → factual-mode selector
-
-SeerDrive
-= future-BEV endpoint ↔ planner-hidden-feature internal co-refinement
+= action-aware future-latent auxiliary shaping
+→ no future online
 
 Drive-JEPA
-= masked-video predictive pretraining → encoder transfer
-+ simulator-distilled multimodal proposals → utility/comfort selection
+= masked predictive pretraining → encoder transfer
+→ no predictor online
 
 Metis
 = action-conditioned future-video co-training
-→ video-loss gradient shapes action expert
-→ future-video branch bypassed
-→ direct action-flow policy
+→ world-loss-shaped action expert
+→ no future online
+
+DynFlowDrive
+= candidate-conditioned flow consequence teacher
+→ world-derived score/mode supervision
+→ no future online
+
+Epona
+= shared history latent → trajectory + visual generative branches
+→ visual future optional online
+
+WorldDrive
+= heavy future teacher → distilled lightweight future surrogate
+→ future summary online
+
+World4Drive
+= candidate/intention endpoint future → factual-mode selector
+→ future online
+
+WoTE
+= candidate recurrent future BEV → explicit utility
+→ future online
+
+SeerDrive
+= future BEV ↔ planner hidden-feature co-refinement
+→ future online
 ```
 
 ---
@@ -398,15 +366,17 @@ Metis
 # Stable controls retained / strengthened
 
 ```text
-joint training != shared representation != shared parameters
-joint training != symmetric forward coupling
-world→action gradient influence != world→action inference flow
-world-task benefit != online future consumption
-world co-training != test-time imagination
-prediction quality != planning evidence
-action-conditioned future != intervention-valid future
-foundation-prior gain != WM-specific dynamics gain
-evaluation regime is part of the claim
+rectified-flow time != physical time
+continuous latent transport != continuous physical dynamics
+smooth dz/ds != smooth dz/dτ
+solver-step depth != future-horizon depth
+world-derived score supervision != online world evaluation
+training-time consequence model may disappear entirely at deployment
+candidate-conditioned future != counterfactual truth
+foundation latent gain != flow-dynamics gain
+selection-teacher gain != consequence-model gain
+prediction fidelity != planning evidence
+NAVSIM non-reactive != reactive closed loop
 matched controls > headline SOTA
 ```
 
@@ -420,8 +390,8 @@ World4Drive     COMPLETE
 SeerDrive       COMPLETE
 Drive-JEPA      COMPLETE
 Metis           COMPLETE
-DynFlowDrive    NEXT
-Discrete-WAM    PENDING
+DynFlowDrive    COMPLETE
+Discrete-WAM    NEXT
 GraphWorld      PENDING
 ```
 
@@ -429,23 +399,7 @@ GraphWorld      PENDING
 
 See `state/NEXT_TASK.md`.
 
-Deep-read **DynFlowDrive** next. Primary stress-test question:
-
-```text
-Does rectified-flow latent dynamics provide a genuinely decision-relevant trajectory-conditioned transition process,
-or is the gain primarily generated by its stability-aware selection/supervision criterion?
-```
-
-Particular care is required to separate:
-
-```text
-flow denoising time
-physical future time
-candidate trajectory modes
-latent reconstruction
-flow-field stability score
-final action selection
-```
+Deep-read **Discrete-WAM** next, focusing on what `unified discrete world-policy learning` means at the token, parameter, loss, autoregressive process and deployment levels.
 
 ## Still forbidden
 
@@ -457,4 +411,4 @@ no forced risk-field insertion
 no novelty conclusion from missing ontology cells
 ```
 
-GitHub remains the Research Knowledge Authority; official papers/repos are primary evidence for decision-critical claims.
+GitHub remains the Research Knowledge Authority; official papers/repos remain primary evidence for decision-critical claims.
