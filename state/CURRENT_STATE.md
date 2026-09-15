@@ -1,6 +1,6 @@
 # CURRENT_STATE
 
-Last updated: **2026-09-15 — DynFlowDrive stress test COMPLETE; Ontology V1.3 ACTIVE; Discrete-WAM NEXT**
+Last updated: **2026-09-15 — Discrete-WAM stress test COMPLETE; Ontology V1.3 RETAINED; GraphWorld NEXT**
 
 ## Research north star
 
@@ -52,15 +52,16 @@ landscape/WAM_READING_SKILL_STACK.md
 # Dimension-first normalization status
 
 ```text
-P0048 LAW          COMPLETE v2
-P0045 WoTE         COMPLETE v2
-P0001 Epona        COMPLETE v2
-P0042 WorldDrive   COMPLETE v2
-P0046 World4Drive  COMPLETE v2
-P0061 SeerDrive    COMPLETE v2 first pass
-P0049 Drive-JEPA   COMPLETE v2 first pass + source audit
-P0062 Metis        COMPLETE v2 first pass + paper/official-repo audit
-P0063 DynFlowDrive COMPLETE v2 first pass + paper/official-repo audit
+P0048 LAW           COMPLETE v2
+P0045 WoTE          COMPLETE v2
+P0001 Epona         COMPLETE v2
+P0042 WorldDrive    COMPLETE v2
+P0046 World4Drive   COMPLETE v2
+P0061 SeerDrive     COMPLETE v2 first pass
+P0049 Drive-JEPA    COMPLETE v2 first pass + source audit
+P0062 Metis         COMPLETE v2 first pass + paper/repo audit
+P0063 DynFlowDrive  COMPLETE v2 first pass + paper/repo audit
+P0064 Discrete-WAM  COMPLETE v2 first pass + paper/source-status audit
 ```
 
 Canonical coordinate system:
@@ -80,326 +81,394 @@ landscape/WAM_COMPARISON_MATRIX_V1_1_SEERDRIVE_EXTENSION.md
 landscape/WAM_COMPARISON_MATRIX_V1_2_DRIVEJEPA_EXTENSION.md
 landscape/WAM_COMPARISON_MATRIX_V1_2_METIS_EXTENSION.md
 landscape/WAM_COMPARISON_MATRIX_V1_3_DYNFLOWDRIVE_EXTENSION.md
+landscape/WAM_COMPARISON_MATRIX_V1_3_DISCRETE_WAM_EXTENSION.md
 ```
 
-DynFlowDrive artifacts:
+Discrete-WAM artifacts:
 
 ```text
-papers/deep_analysis/P0063_DYNFLOWDRIVE_DEEP_ANALYSIS_V2.md
-audits/literature/PHASE_C5_DYNFLOWDRIVE_AUDIT.md
-landscape/P0063_DYNFLOWDRIVE_ONTOLOGY_PROJECTION.md
+papers/deep_analysis/P0064_DISCRETE_WAM_DEEP_ANALYSIS_V2.md
+audits/literature/PHASE_C5_DISCRETE_WAM_AUDIT.md
+landscape/P0064_DISCRETE_WAM_ONTOLOGY_PROJECTION.md
 ```
 
 ---
 
-# DynFlowDrive stable result
+# Discrete-WAM stable result
 
 ## Source/version boundary
 
 ```text
-paper: arXiv:2603.19675v2, 2026-05-03
-official repo: xiaolul2/DynFlowDrive
-latest observed public commit: c665dc577a0939543fa7abe64d28eadaec28283c
+paper: Discrete-WAM: Unified Discrete Vision-Action Token Editing for World-Policy Learning
+arXiv:2606.05645v2
+v2: 2026-06-09
 ```
 
-As of 2026-09-15 the official repo still exposes only README/teaser and states that code will be released once accepted.
+As of 2026-09-15 no official implementation repository attributable to the paper/authors was identified in the audit.
 
 Therefore:
 
 ```text
-paper architecture/equations/ablations  PAPER-VERIFIED
-implementation details                 SOURCE-UNVERIFIED
+paper architecture / appendix / ablations   PAPER-VERIFIED
+exact code implementation                   SOURCE-UNVERIFIED
 ```
-
-Two paper-level ambiguities remain unresolved until code release:
-
-```text
-Eq.7:  x_s=(1-s)a+s z_{t+1}
-→ mathematically dx_s/ds=z_{t+1}-a
-
-Eq.10 target written as:
-(1-s)(z_{t+1}-a)
-
-and:
-training interpolation starts from stochastic anchor a,
-while sampling prose says integration starts from current latent z_t.
-```
-
-Do not silently repair these by inference.
 
 ## Canonical mechanism
 
 ```text
-TRAINING-ONLY FLOW-DYNAMICS MODE-SUPERVISION WAM
+SHARED-BACKBONE MULTI-TASK DISCRETE WORLD-POLICY PRETRAINING
+→ HIERARCHICAL DECISION-CONDITIONED ACTION TOKEN EDITING
+→ POLICY-ONLY PLANNING INFERENCE
 ```
 
-Training:
+Training/capability graph:
 
 ```text
-current observation
-→ multimodal planner
-→ candidate trajectories + score head
-
-current factual world latent + candidate trajectory
-→ rectified-flow latent world model
-→ predicted transport path / endpoint
-→ reconstruction + flow objectives
-→ flow-direction stability
-
-GT trajectory error
-+ factual-latent reconstruction
-+ flow stability
-→ hybrid criterion C_n
-→ n* positive candidate
-→ supervise planner score head
+visual VQ tokens            action acceleration tokens
+(separate vocabulary)       (separate vocabulary)
+          \                  /
+           shared decoder-only Transformer
+                    ↓
+world modeling / policy modeling / interleaved world-policy modeling
 ```
 
-Deployment:
+Primary NAVSIM planning graph:
 
 ```text
-current observation
-→ candidate trajectories + learned scores
-→ argmax
+current context
+→ decision token
+→ parallel / iterative action-token editing
+→ trajectory
 
-world model       = OFF
-future latent      = NOT COMPUTED
-flow integration   = NOT COMPUTED
-flow stability     = NOT COMPUTED
+future visual-token generation = NOT REQUIRED
 ```
 
-Thus DynFlowDrive is **not** an online candidate→future→score planner.
+Thus Discrete-WAM is **not** an online `generate future world → score consequence → choose action` planner.
 
 ---
 
-# DynFlowDrive strongest scientific correction
+# `Unified` correction
 
-Three time axes are distinct:
-
-```text
-physical scene time τ
-!= rectified-flow transport coordinate s
-!= planner/query refinement iteration k
-```
-
-Only physical endpoints `t` and `t+1` are observed as world-state targets. Intermediate `s` states are internal transport/solver states.
-
-Binding control:
+The audited paper does **not** use one literal world/action codebook.
 
 ```text
-smooth latent path over s
-!= validated smooth physical evolution over τ
-
-dz/ds
-!= dz/dτ
-unless physical-time identity is explicitly established
+visual vocabulary      ≈ 16,384 VQ entries
+action vocabulary      = 60×60 ≈ 3,600 acceleration prototypes
+decision vocabulary    ≈ 400 high-level behavior candidates
 ```
 
-This motivated Ontology V1.3:
+What is shared:
 
 ```text
-F08  Internal transition-coordinate / physical-time alignment
+common Transformer hidden interface
+shared decoder/backbone parameters
+shared/mixed token sequence capability
+joint multitask losses/gradients
+world-policy generative task
 ```
 
-DynFlowDrive value:
+What is not shared:
 
 ```text
-RECTIFIED-FLOW TRANSPORT COORDINATE BETWEEN PHYSICAL ENDPOINTS;
-INTERMEDIATE s STATES ARE NOT PHYSICALLY TIME-SUPERVISED
+visual/action codebook
+visual/action physical semantics
+mandatory world-generation path at planning deployment
 ```
 
-F08 back-projects meaningfully onto Epona, WorldDrive, Metis, WoTE, SeerDrive and other anchors and therefore passes the ontology extension gate.
+Binding rule:
+
+```text
+shared discrete framework != shared codebook
+```
 
 ---
 
-# DynFlowDrive supervision and counterfactual boundary
+# World-action coupling
+
+World task:
 
 ```text
-N candidate trajectories
-→ N candidate-conditioned flow fields / outputs
+current/history context + future action tokens
+→ future visual tokens
+```
 
-but factual world target from logs
-= ONE next world latent z_{t+1}
+World-policy task conceptually interleaves:
+
+```text
+A_{t+1}, V_{t+1}, A_{t+2}, V_{t+2}, ...
+```
+
+Thus:
+
+```text
+same-step action → world           YES
+prior world → later action context YES in joint world-policy generation
+```
+
+But primary planning inference is:
+
+```text
+current context → decision → action tokens
+```
+
+so:
+
+```text
+training/model jointness
+!= deployment online world dependence
+```
+
+---
+
+# Counterfactual boundary
+
+The paper perturbs actions and obtains different generated futures / surprise signals.
+
+```text
+action-specific generated world output        YES
+per-action observed alternative future truth  NO
+reactive surrounding-agent truth              NO / NOT ESTABLISHED
+external intervention-validity evidence       ABSENT
 ```
 
 Therefore:
 
 ```text
-candidate-specific world output                    YES
-candidate-specific observed alternative future GT NO
-reactive surrounding-agent truth                  NO / NOT ESTABLISHED
-external intervention-validity evidence           ABSENT
+action-conditioned alternative generation
+!= intervention-correct counterfactual dynamics
 ```
 
-Continuous candidate-conditioned flow does not solve the alternative-action supervision problem.
+Surprise can be a useful model-sensitivity / safety proxy without being ground-truth causal validation.
 
 ---
 
-# DynFlowDrive strongest matched evidence
+# Strongest evidence decomposition
 
-## Static WM → Flow WM
-
-```text
-Static WM   0.61 Avg L2 / 0.30 Avg CR
-Flow WM     0.59        / 0.26
-```
-
-This reasonably isolates a benefit from the rectified-flow parameterization inside the authors' framework.
-
-## Representation prior
+## World/pretraining control
 
 ```text
-Flow WM                    0.59 / 0.26
-+ pretrained World Feature 0.57 / 0.22
+From scratch   89.8 EPDMS
+FT             89.7
+LoRA-SFT       90.0
 ```
 
-Thus foundation representation quality remains an independent contribution.
+Critical qualifier: the LoRA-SFT pretraining row is described as vision-oriented world-policy pretraining with teacher-forced future actions and only vision prediction losses before LoRA policy finetuning.
 
-## Selection criterion ladder
+Therefore this table does **not** cleanly isolate the full joint world+action pretraining objective.
+
+## Decision-modeling control
 
 ```text
-none              0.61 / 0.30
-L2 only           0.59 / 0.24
-+ reconstruction  0.58 / 0.22
-+ flow stability  0.57 / 0.22
+Base       84.7 EPDMS
+Base-D_t   87.2
 ```
 
-The full selection teacher matters substantially, but the final angular flow-stability term itself has only a modest incremental effect.
+This +2.5 control is a much stronger isolated contributor than the cleanest world-pretraining delta.
 
-## Flow integration steps
+## Post-training ladder
 
 ```text
-steps   Avg L2   Avg CR
-1       0.60     0.28
-3       0.59     0.23
-5       0.57     0.22
-10      0.59     0.24
+SFT       89.1
+SFT-D_t   90.0
+RL        90.4
 ```
 
-This is a **solver/teacher-resolution curve**, not a future-horizon curve.
+Final performance is therefore a bundle of:
+
+```text
+world/vision-oriented pretraining
++ high-level decision prior
++ action discretization
++ token editing
++ LoRA adaptation
++ RL/post-training
++ shared Transformer capacity
+```
+
+Do not report 90.4 as a monolithic world-model gain.
 
 ---
 
-# Headline-comparison correction
+# World-generation evidence
 
-The highlighted SSR delta is not fully matched:
+Reported short-horizon generation includes approximately:
 
 ```text
-SSR*                             0.39 L2 / 0.15 CR
-DynFlowDrive(SSR)                0.35    / 0.14
-DynFlowDrive(SSR) + ego status   0.31    / 0.11
+FID 6.6
+FVD 80.0
+4 s / 8-frame setting
 ```
 
-The 0.31/0.11 row includes extra ego-status input. The more defensible matched WM comparison is approximately:
+This establishes strong visual-generation capability.
+
+It does **not** establish:
 
 ```text
-0.39 → 0.35 L2
-0.15 → 0.14 CR
+better visual-generation fidelity
+→ better planning
 ```
 
-This strengthens:
+because no matched monotonic fidelity→EPDMS relation is demonstrated.
+
+---
+
+# Temporal correction
+
+Discrete-WAM contains two separate axes:
 
 ```text
-matched controls > headline SOTA deltas
+physical future index h
+→ interleaved A_h / V_h sequence
+
+editing round r
+→ discrete-diffusion / token-refinement iteration
+```
+
+Binding rule:
+
+```text
+more token-edit rounds
+!= longer physical future horizon
+```
+
+F07:
+
+```text
+current/history + action → chronologically unseen future visual tokens
+```
+
+F08:
+
+```text
+physical future positions are distinct from internal token-edit solver rounds
 ```
 
 ---
 
-# Evaluation-regime correction
+# Ontology stress-test result
 
-The paper calls NAVSIM `closed-loop`.
-
-Project-standard classification remains:
+Discrete-WAM exposes a genuine residue:
 
 ```text
-NAVSIM v1
-= NON-REACTIVE DATA-DRIVEN / PSEUDO-SIMULATION PLANNING
+shared codebook
+vs
+separate modality vocabularies embedded in one shared hidden/sequence space
 ```
 
-Therefore DynFlowDrive's 88.7 PDMS supports strong planning performance under NAVSIM's non-reactive regime, but does **not** validate reactive surrounding-agent responses or intervention-correct world dynamics.
+But prior core anchors are overwhelmingly continuous-latent, so back-projection would mostly be `NOT APPLICABLE` and currently lacks sufficient cross-paper discriminatory value.
+
+Decision:
+
+```text
+Ontology V1.3 RETAINED
+NO V1.4 AMENDMENT
+```
+
+Residue watchlist:
+
+```text
+Discrete representation alignment topology
+(shared codebook / disjoint vocabularies / common hidden interface)
+```
+
+Re-test after another discrete-token anchor.
+
+World/action generation order does not justify a new axis because it is already represented by:
+
+```text
+F04 + E02 + J04 + F08
+```
 
 ---
 
-# Nine-anchor mechanism map
+# Ten-anchor mechanism map
 
 ```text
 LAW
-= action-aware future-latent auxiliary shaping
+future-latent auxiliary shaping
 → no future online
 
 Drive-JEPA
-= masked predictive pretraining → encoder transfer
+masked predictive pretraining → encoder transfer
 → no predictor online
 
 Metis
-= action-conditioned future-video co-training
-→ world-loss-shaped action expert
+action-conditioned future-video co-training
+→ world-loss-shaped policy
 → no future online
 
 DynFlowDrive
-= candidate-conditioned flow consequence teacher
-→ world-derived score/mode supervision
+candidate flow consequence teacher
+→ world-derived score supervision
 → no future online
 
+Discrete-WAM
+shared discrete world/policy multitask pretraining
+→ shared backbone + decision/action token policy
+→ no future visual required in primary planning
+
 Epona
-= shared history latent → trajectory + visual generative branches
+joint visual+trajectory generation
+→ shared F
 → visual future optional online
 
 WorldDrive
-= heavy future teacher → distilled lightweight future surrogate
-→ future summary online
+heavy future teacher → distilled lightweight future
+→ future online
 
 World4Drive
-= candidate/intention endpoint future → factual-mode selector
+candidate endpoint future → factual-mode selector
 → future online
 
 WoTE
-= candidate recurrent future BEV → explicit utility
+candidate recurrent future → explicit utility
 → future online
 
 SeerDrive
-= future BEV ↔ planner hidden-feature co-refinement
+future BEV ↔ planner hidden state co-refinement
 → future online
+```
+
+Key new synthesis:
+
+```text
+training-time unification strength
+and
+deployment-time model-basedness
+are orthogonal axes
 ```
 
 ---
 
-# Stable controls retained / strengthened
+# Evaluation regime
 
 ```text
-rectified-flow time != physical time
-continuous latent transport != continuous physical dynamics
-smooth dz/ds != smooth dz/dτ
-solver-step depth != future-horizon depth
-world-derived score supervision != online world evaluation
-training-time consequence model may disappear entirely at deployment
-candidate-conditioned future != counterfactual truth
-foundation latent gain != flow-dynamics gain
-selection-teacher gain != consequence-model gain
-prediction fidelity != planning evidence
-NAVSIM non-reactive != reactive closed loop
-matched controls > headline SOTA
+NAVSIM v1/v2
+= NON-REACTIVE DATA-DRIVEN / PSEUDO-SIMULATION PLANNING
 ```
+
+Reported 92.2 PDMS / 90.4 EPDMS support strong planning performance under that regime, not reactive surrounding-agent world validity.
 
 ---
 
 # Phase C.5 coverage queue
 
 ```text
-WorldDrive      COMPLETE
-World4Drive     COMPLETE
-SeerDrive       COMPLETE
-Drive-JEPA      COMPLETE
-Metis           COMPLETE
-DynFlowDrive    COMPLETE
-Discrete-WAM    NEXT
-GraphWorld      PENDING
+WorldDrive       COMPLETE
+World4Drive      COMPLETE
+SeerDrive        COMPLETE
+Drive-JEPA       COMPLETE
+Metis            COMPLETE
+DynFlowDrive     COMPLETE
+Discrete-WAM     COMPLETE
+GraphWorld       NEXT
 ```
 
 ## Immediate next task
 
 See `state/NEXT_TASK.md`.
 
-Deep-read **Discrete-WAM** next, focusing on what `unified discrete world-policy learning` means at the token, parameter, loss, autoregressive process and deployment levels.
+Deep-read **GraphWorld** next under the same skill stack + Ontology V1.3.
 
 ## Still forbidden
 
@@ -408,7 +477,7 @@ no research-gap declaration
 no method design
 no broad VLA expansion
 no forced risk-field insertion
-no novelty conclusion from missing ontology cells
+no novelty conclusion from empty ontology cells
 ```
 
-GitHub remains the Research Knowledge Authority; official papers/repos remain primary evidence for decision-critical claims.
+Phase D remains **PAUSED** until GraphWorld normalization and WAM-only comparability QA are complete.
