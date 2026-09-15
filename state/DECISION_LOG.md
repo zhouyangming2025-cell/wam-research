@@ -6,6 +6,121 @@ Newest entry first.
 
 ---
 
+## 2026-09-15 — Drive-JEPA normalized; predictive completion separated from causal future forecasting; Ontology V1.2 authorized
+
+**Decision**
+
+P0049 Drive-JEPA completed the second post-ontology stress test using the WAM reading skill stack, official paper and version-locked source audit.
+
+Canonical artifacts:
+
+```text
+papers/deep_analysis/P0049_DRIVEJEPA_DEEP_ANALYSIS_V2.md
+audits/literature/PHASE_C5_DRIVEJEPA_AUDIT.md
+landscape/P0049_DRIVEJEPA_ONTOLOGY_PROJECTION.md
+landscape/WAM_COMPARISON_MATRIX_V1_2_DRIVEJEPA_EXTENSION.md
+landscape/WAM_DIMENSION_ONTOLOGY_V1_2_AMENDMENT.md
+```
+
+**Stable mechanism judgment**
+
+Drive-JEPA must not be summarized as an online future-world evaluator. Its predictive component is:
+
+```text
+V-JEPA random spatiotemporal masked latent prediction
+→ driving-domain video pretraining
+→ transfer visual encoder into planner
+→ JEPA predictor / EMA target branch discarded
+```
+
+The deployed full planner is separately:
+
+```text
+32 proposals
+→ 4 shared-weight proposal refinements
+→ human + simulator-selected pseudo-teacher supervision
+→ learned PDM/EPDMS utility scorer
+→ temporal comfort calibration in NAVSIM-v2 release
+→ argmax
+```
+
+Therefore its canonical subtype is:
+
+```text
+PREDICTIVE REPRESENTATION PRETRAINING
++ SIMULATOR-DISTILLED PROPOSAL POLICY
+```
+
+It is retained as a core/boundary anchor because it separates `world/predictive knowledge learned during pretraining` from `world consequence prediction used online`.
+
+**Ontology correction**
+
+One new dimension survived back-projection:
+
+```text
+F07 Prediction temporal / observability geometry
+```
+
+It distinguishes:
+
+```text
+random-mask same-window spatiotemporal completion
+past/history-only → unseen future
+current → future endpoint
+recurrent next-state / autoregressive future
+partial-future-context completion
+hybrid future masking
+```
+
+Back-projection succeeded on LAW, WoTE, Epona, WorldDrive, World4Drive, SeerDrive and ViDAR.
+
+No duplicate dimensions were added for EMA targets, predictor removal, encoder freezing/fine-tuning or repeated proposal refinement because G02, M01–M03, C03/L05 and J08 already represent them.
+
+**Evidence boundary**
+
+Strong evidence supports that V-JEPA-family predictive video representation and driving-domain adaptation improve downstream planning representations. The paper/source do **not** establish that Drive-JEPA deploys a causal world-transition model or that random-mask completion is equivalent to history-only future forecasting.
+
+The full planning score is a bundle of:
+
+```text
+predictive visual representation
++
+multimodal candidate support
++
+simulator-derived utility supervision
++
+temporal selection
+```
+
+and must not be reported as a monolithic `world-model gain`.
+
+**Additional control strengthened**
+
+Drive-JEPA Table-6 ablation shows:
+
+```text
+MTD increases diversity 24% → 40%
+but EPDMS falls 86.1 → 84.5 and EC falls 69.7 → 47.9;
+adding momentum-aware selection raises EPDMS to 87.8 and EC to 84.8.
+```
+
+Thus:
+
+```text
+candidate diversity != planning quality
+candidate support != candidate selection quality
+```
+
+**Next**
+
+```text
+Metis
+```
+
+Phase D remains **PAUSED**. No research-gap declaration or method design is authorized.
+
+---
+
 ## 2026-09-15 — Five-anchor dimension-first synthesis complete; Ontology V1 authorized
 
 **Decision**
