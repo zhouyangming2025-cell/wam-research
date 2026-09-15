@@ -2,303 +2,270 @@
 
 ## 唯一下一任务
 
-> **Attack CP-T5 for promotion: determine whether `episode-specific reactive counterfactual consequence validity for planning` survives a deep nearest-neighbor/source audit and has a feasible paired-intervention evaluation protocol.**
+> **Deep-read P0009 DriveLaW under the existing WAM reading stack, as the first paper in a broader literature-expansion phase. Do not promote research directions from the first 11 anchors.**
 
-Current candidate ranking:
+Canonical expansion plan:
 
 ```text
-#1 CP-T5  SURVIVES — CANDIDATE RESEARCH PROBLEM
-#2 CP-T2  SURVIVES — CANDIDATE RESEARCH PROBLEM
-
-CP-T3     REJECT — PRIOR ART standalone
-CP-T6     REJECT — PRIOR ART standalone
+landscape/WAM_DEEP_READ_EXPANSION_QUEUE_V1.md
 ```
 
-Canonical candidate files:
+Current phase:
 
 ```text
-landscape/WAM_CANDIDATE_PROBLEMS_V1.md
-landscape/WAM_CANDIDATE_PROBLEM_OVERLAP_MATRIX_V1.md
-landscape/WAM_CANDIDATE_PROBLEM_RESEARCHABILITY_V1.md
+broad WAM literature expansion     ACTIVE
+research-direction convergence     PAUSED
+candidate-problem promotion        PAUSED
+method design                      FORBIDDEN
 ```
 
 ---
 
-# CP-T5 promotion question
+# Why DriveLaW is next
 
-Candidate statement:
-
-> **Can a planning-centric WAM trained mainly on factual trajectories recover intervention-correct consequences when an alternative ego action changes both the episode-specific outcome and surrounding-agent responses?**
-
-The hypothesized failure has two independent components:
+DriveLaW introduces a world→planning interface that is materially different from several first-wave anchors:
 
 ```text
-A. episode-specific identification / abduction
-   The model must preserve latent facts specific to this realized episode.
-
-B. reactive intervention response
-   Surrounding agents may respond differently under the alternative ego action.
+DriveLaW-Video
+→ internal / mid-denoising video latent
+→ DriveLaW-Act diffusion planner
+→ trajectory
 ```
 
-The research problem survives only if neither component nor their planning-relevant conjunction is already adequately solved.
-
----
-
-# Task 1 — Deep audit the closest paper: Counterfactual Driving World Models (2026-08)
-
-Paper:
+The key question is not whether DriveLaW is strong, but exactly what planning information is transferred from the generative video model and how this differs from:
 
 ```text
-How Can Driving World Models Do Counterfactual Prediction?
-arXiv:2608.11601
-```
-
-Mandatory reconstruction:
-
-```text
-1. exact factual / alternative / reference rollout construction
-2. what latent/world variables are held fixed across paired CARLA runs
-3. whether background agents are scripted or reactive
-4. why direct p(Y | H, a') fails the counterfactual target
-5. exact abduction-inspired evidence-transfer pipeline
-6. which representative WMs are tested
-7. metrics and failure modes
-8. whether any planning downstream task is evaluated
-9. whether longer horizons / reactive agents are explicitly excluded
-10. code/data release status
-```
-
-Final boundary must state exactly what remains after this paper.
-
----
-
-# Task 2 — Deep audit ReactSim-Bench as infrastructure and scientific control
-
-Canonical project raw source already exists:
-
-```text
-papers/raw_md/P0014_ReactSimBench/P0014_ReactSimBench.raw.md
-```
-
-Official open benchmark identified:
-
-```text
-Thinklab-SJTU/ReactSim-Bench
-```
-
-Mandatory reconstruction:
-
-```text
-1. exact AV-agent decoupled rollout protocol
-2. how the 2,636 deviated-AV scenarios are generated / filtered
-3. what counts as reactive pressure
-4. longitudinal / directional / lateral categories
-5. whether there is a unique ground-truth response for a deviated AV trajectory
-6. what metrics measure safety/feasibility vs true response accuracy
-7. which baseline behavior WMs are provided
-8. replan-frequency effects
-9. whether protocol can be reused for planning consequence validation
-10. source/data/checkpoint availability
-```
-
-Critical question:
-
-> Can ReactSim-Bench supply the **reactive intervention axis** for CP-T5, or does it only score plausible responses without matched counterfactual truth?
-
----
-
-# Task 3 — Deep audit CausalDrive as nearest reactive world-model prior art
-
-Canonical project raw source:
-
-```text
-papers/raw_md/P0015_CausalDrive/P0015_CausalDrive.raw.md
-```
-
-Mandatory reconstruction:
-
-```text
-1. exact inputs: initial frame / ego trajectory / sociology prompt
-2. what future NPC information is deliberately withheld
-3. what `causal` / `reactive` means operationally
-4. how driving-sociology labels are produced
-5. whether identical initial state + identical ego action can yield controlled alternative NPC reactions
-6. whether reactions have factual/matched counterfactual truth or are prompt-controlled plausible variants
-7. closed-loop / RL / real-world evidence
-8. action controllability metrics
-9. reactive validity metrics
-10. code/data release status
-```
-
-Critical novelty boundary:
-
-```text
-reactive visual simulation
-!=
-episode-specific matched reactive counterfactual identification
-```
-
-Verify rather than assume this boundary.
-
----
-
-# Task 4 — Audit ReactSim / CausalDrive / counterfactual-WM intersection
-
-Create a three-way matrix:
-
-| Property | Counterfactual-WM 2608.11601 | ReactSim-Bench | CausalDrive | CP-T5 required |
-|---|---|---|---|---|
-| same underlying episode paired across actions | | | | YES |
-| alternative ego intervention | | | | YES |
-| surrounding agents react to intervention | | | | YES |
-| matched consequence truth | | | | YES |
-| visual/latent world prediction | | | | optional / representation-dependent |
-| planning consequence use | | | | YES |
-| planning regret measurable | | | | YES |
-| open reproducible infra | | | | strongly preferred |
-
-If any single prior work already fills the CP-T5 column, reject the candidate.
-
----
-
-# Task 5 — Latest 2026 overlap attack
-
-Search explicitly for papers combining:
-
-```text
-reactive counterfactual autonomous driving world model
-matched ego intervention ground truth
-counterfactual reactive traffic simulation
-causal driving world model planning
-interactive counterfactual planning world model
-multi-agent counterfactual world model autonomous driving
-```
-
-Must include at least:
-
-```text
-CausalDrive
-ReactSim-Bench
-How Can Driving World Models Do Counterfactual Prediction?
-World Models as Adversaries (AWM)
-Reaction-Uncertainty-Aware Motion Planning
-ProDrive
-```
-
-Do not assume our current search is exhaustive.
-
----
-
-# Task 6 — Define a minimum paired-intervention protocol WITHOUT designing a method
-
-Specify only the experimental object:
-
-```text
-initial world state / simulator seed z
-factual ego action a
-alternative ego action a'
-fixed environment mechanism E
-
-Y(a)  = rollout(E, z, a)
-Y(a') = rollout(E, z, a')
-```
-
-For multiple a' branches, record:
-
-```text
-ego consequence
-agent response trajectories
-collision / TTC / right-of-way / progress outcome
-```
-
-Then define what a learned WAM must predict/evaluate.
-
-Do not yet choose:
-
-```text
-network architecture
-tokenization
-risk-field representation
-loss design
+Epona       shared historical F + sibling trajectory/visual branches
+WorldDrive  world-model pretraining + teacher/distilled future representation
+LAW         future latent as auxiliary training signal
+Metis       action→world co-training + action-only deployment
+Discrete-WAM shared world/policy backbone but planning-only task path
 ```
 
 ---
 
-# Task 7 — Feasibility gate
+# Mandatory reconstruction
 
-Evaluate concrete infrastructure options:
+## 1. Source/version boundary
 
-```text
-CARLA / Bench2Drive
-nuPlan + reactive simulator / InterPlan-like setup
-ReactSim-Bench baselines
-other open 2026 reactive simulation infrastructure
-```
-
-Score:
+Resolve:
 
 ```text
-paired-ground-truth capability
-reactivity
-scenario diversity
-planning integration
-source openness
-compute/data burden
-reproducibility
+canonical paper version
+official repo attribution: xiaomiresearch/drivelaw
+code-release state
+paper↔code version relation
 ```
 
-If unique matched reactive counterfactual truth is infeasible with accessible infrastructure, mark:
+Lock a commit if implementation is available.
+
+## 2. Exact representation path
+
+Trace:
 
 ```text
-HOLD — INFRA TOO HEAVY
+historical observations
+→ spatiotemporal VAE
+→ Video DiT denoising states
+→ selected latent / hidden feature h_t*
+→ Action DiT conditioning
+→ trajectory
 ```
 
-rather than inventing a weak proxy.
+Determine whether the planner consumes:
+
+```text
+encoded history latent
+predicted future latent
+mid-denoising hidden state
+final denoised video latent
+multiple denoising stages
+```
+
+Do not call all of these `future latent` interchangeably.
+
+## 3. Temporal semantics
+
+Separate:
+
+```text
+physical video time
+video prediction horizon
+diffusion / rectified-flow solver time t
+selected denoising timestep t*
+Action-DiT flow/denoising iteration
+planning trajectory horizon
+```
+
+Use F07/F08/J08.
+
+## 4. Training topology
+
+Reconstruct the three-stage curriculum exactly:
+
+```text
+what is trained first?
+what is frozen?
+what is fine-tuned?
+when does planner see video-model latent?
+does planner loss update the video generator?
+does video-generation loss update the planner?
+```
+
+This is critical because the paper explicitly motivates its training strategy as avoiding gradient interference.
+
+## 5. Inference graph
+
+Determine exactly what runs during planning inference:
+
+```text
+VAE encoder?
+Video DiT partial denoising?
+full future video generation?
+video decoder?
+Action DiT?
+```
+
+Key question:
+
+> Does planning require generating a future video, or only extracting an internal generative representation?
+
+## 6. Coupling direction
+
+Force separate answers:
+
+```text
+video/world → planner forward information flow?
+planner/action → video world conditioning?
+planner loss → video model gradient?
+video loss → planner gradient?
+```
+
+Do not equate shared latent interface with bidirectional coupling.
+
+## 7. Evidence / attribution
+
+Find strongest matched controls for:
+
+```text
+video-generator latent vs BEV/VLM/current visual feature
+which denoising timestep is best
+pretrained video prior contribution
+three-stage curriculum contribution
+world-generation objective contribution
+Action-DiT contribution
+```
+
+Do not attribute final NAVSIM score to `world model` as one monolithic factor.
+
+## 8. Generation fidelity → planning
+
+The paper reports strong FID/FVD and planning results. Check whether it actually demonstrates:
+
+```text
+better video fidelity
+→ better planning
+```
+
+or only that both are strong in the same model.
+
+## 9. Deployment compute
+
+Record:
+
+```text
+number of active video denoising steps during planning
+Action-DiT steps
+FPS / latency
+whether RGB decoding is skipped
+whether full future video synthesis is skipped
+```
+
+## 10. Full Ontology V1.3 projection
+
+Force-fill A–P including explicit:
+
+```text
+ABSENT
+NOT REPORTED
+NOT EVALUATED
+NOT APPLICABLE
+SOURCE-UNVERIFIED
+```
+
+if needed.
 
 ---
 
-# Required outputs
+# Required immediate cross-paper comparisons
 
-Create:
+For every major DriveLaW mechanism, compare immediately:
 
 ```text
-audits/research_synthesis/CP_T5_PROMOTION_AUDIT_V1.md
-landscape/CP_T5_NEAREST_PRIOR_ART_MATRIX_V1.md
-landscape/CP_T5_PAIRED_INTERVENTION_PROTOCOL_V1.md
+DriveLaW vs Epona
+DriveLaW vs WorldDrive
+DriveLaW vs LAW
+DriveLaW vs Metis
+DriveLaW vs Discrete-WAM
 ```
 
-Final verdict must be one of:
+Especially answer:
 
 ```text
-PROMOTE — CANDIDATE RESEARCH GAP
-REJECT — PRIOR ART
-REJECT — EVIDENCE DOES NOT SUPPORT PROBLEM
-HOLD — INFRA TOO HEAVY
-```
-
-If promoted, the novelty boundary must be one sentence and falsifiable.
-
----
-
-# Secondary candidate
-
-Do not advance CP-T2 in parallel unless CP-T5 is rejected/held or its audit exposes a direct link requiring T2.
-
-CP-T2 remains:
-
-```text
-When does online action-conditioned branching add information beyond compact world-state/direct-policy conditioning under matched budgets?
+Is DriveLaW really more tightly coupled than Epona?
+Is its video latent an online future object or a generative feature extractor?
+Is this closer to WorldDrive representation inheritance or online future use?
+Does the planning loss shape the video model?
+What remains active at deployment?
 ```
 
 ---
 
-# Still forbidden in this round
+# Required artifacts
+
+After the deep read create at minimum:
 
 ```text
-NO final method architecture
-NO paper title
-NO claim that `risk` is the solution
-NO claim that reactive WM itself is novel
-NO claim that counterfactual conditioning itself is novel
-NO promotion without nearest-neighbor + infrastructure audit
+papers/deep_analysis/P0009_DRIVELAW_DEEP_ANALYSIS_V2.md
+audits/literature/PHASE_C6_DRIVELAW_AUDIT.md
+landscape/P0009_DRIVELAW_ONTOLOGY_PROJECTION.md
+```
+
+Extend the cross-paper matrix only after the mechanism is stable.
+
+If source code is public and sufficiently complete, perform a commit-locked source audit rather than relying only on README claims.
+
+---
+
+# After DriveLaW
+
+Current core queue:
+
+```text
+P0012 DA-WAM
+P0002 SafeDrive
+P0005 RiskWorld
+P0007 DriveReward
+```
+
+Then proceed into simulation/reactivity/evaluation and WAM+VLA control waves defined in the expansion queue.
+
+---
+
+# Guardrail
+
+Do not use DriveLaW to revive any parked research candidate.
+
+This phase asks:
+
+```text
+What does the field contain?
+How do mechanisms differ?
+What evidence supports them?
+```
+
+not:
+
+```text
+What should our method be?
 ```
