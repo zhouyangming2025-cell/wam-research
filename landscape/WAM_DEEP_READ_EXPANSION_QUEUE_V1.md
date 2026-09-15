@@ -17,36 +17,35 @@ Binding correction:
 != enough to promote a research direction
 ```
 
-The candidate-problem/tension artifacts produced after the 11-anchor synthesis are retained only as **parked provisional observations**. They MUST NOT drive paper selection or method design during this expansion phase.
-
-The immediate objective is to broaden and stress-test the coordinate system with additional papers selected by **coverage diversity**, not by whether they support a preferred hypothesis.
+Parked candidate-problem/tension artifacts MUST NOT drive paper selection during this phase. Selection is based on coverage diversity and mechanism-family saturation.
 
 Current normalized count:
 
 ```text
-13 papers
+14 papers
 ```
 
 Latest completed expansion anchors:
 
 ```text
-P0009 DriveLaW — COMPLETE
-P0012 DA-WAM   — COMPLETE
+P0009 DriveLaW  — COMPLETE
+P0012 DA-WAM    — COMPLETE
+P0002 SafeDrive — COMPLETE
 ```
 
 ---
 
 # Working gate before another research-direction discussion
 
-Use both a count gate and a diversity gate.
-
-Working count target:
-
 ```text
 ~24–30 deeply normalized papers total
++
+multiple independent anchors across major mechanism families
++
+new papers mostly map into the coordinate system without repeatedly exposing major blind spots
 ```
 
-This is not a magic threshold. The real stop condition is that the major mechanism families below have multiple independent anchors and new papers mostly map into existing dimensions without repeatedly exposing major blind spots.
+The count is a working gate, not a magic threshold. Diversity and saturation matter more than raw count.
 
 Required diversity:
 
@@ -62,7 +61,7 @@ alternative world representations
 training-only vs deployment-time world knowledge
 ```
 
-No final research gap or method design before the next consolidation gate.
+No final gap declaration or method design before the next consolidation gate.
 
 ---
 
@@ -70,138 +69,110 @@ No final research gap or method design before the next consolidation gate.
 
 ## 1. P0009 DriveLaW — COMPLETE
 
-Canonical result:
-
 ```text
 ONLINE GENERATIVE-LATENT DIRECT-POLICY WAM
+history → first Video-DiT pass → cached block states → Action-DiT → trajectory
 ```
 
-Stable mechanism:
+Key coordinate additions:
 
 ```text
-history frames
-→ first-pass Video-DiT internal block states
-→ blockwise Action-DiT conditioning
-→ direct trajectory flow policy
-
-full video rollout / RGB future decode not required
-```
-
-Key findings added to the coordinate system:
-
-```text
-forward world→action can coexist with backward action-loss→world gradient flow;
-online world-model use does not imply completed future rollout;
-planning-optimal generative state can be an EARLY denoising state;
-more complete denoising is not monotonically better for planning.
-```
-
-No Ontology V1.4 amendment; candidate residue retained:
-
-```text
-GENERATIVE-STATE TAP LOCATION / SOLVER-DEPTH OF POLICY CONDITION
+forward world→action can coexist with backward action-loss→world gradient;
+full future-video rollout not required for online world use;
+early tapped generative states can be more planning-relevant than later denoised states.
 ```
 
 ## 2. P0012 DA-WAM — COMPLETE
 
-Canonical result:
-
 ```text
 ONLINE CANDIDATE-SPECIFIC FUTURE-LATENT UTILITY SCORING WAM
-```
-
-Stable mechanism:
-
-```text
-2 historical front-camera frames
-→ V-JEPA 2.1 online encoder + LoRA
-→ 32 trajectory candidates
-→ one 0.5s future latent per candidate
-→ factorized NC/DAC/EP/TTC/Comfort + utility scorer
-→ argmax
+32 candidates → 32 short future latents → factorized utility → argmax
 ```
 
 Critical supervision boundary:
 
 ```text
-candidate-specific future output               YES
-candidate-specific direct future truth         NO except expert-matched branch
-all-branch factor/value/ranking supervision    YES
-reactive alternative-world truth               NO / NOT ESTABLISHED
+candidate-specific outputs                         YES
+candidate-specific direct future truth             NO except expert-matched branch
+all-branch factor/value/rank labels                YES
+reactive alternative-world truth                   NO / NOT ESTABLISHED
 ```
 
-Strongest matched control:
+## 3. P0002 SafeDrive — COMPLETE
 
 ```text
-No Future Prediction          93.31 PDMS
-Shared Global Future          92.81
-Current-Latent Conditioning   93.25
-Action-Conditioned Future     93.46
-+ Hard Negatives              93.68
+ONLINE TRAJECTORY-CONDITIONED SPARSE-WORLD SAFETY EVALUATOR
+candidate → sparse ego-agent world → fine-grained safety → select
 ```
 
-No Ontology V1.4 amendment. Official `LeapWM/da-wam` repository currently contains only a placeholder README, so implementation remains source-unverified.
+Critical source-verified boundary:
 
-## 3. P0002 SafeDrive — NEXT
+```text
+candidate-specific sparse worlds                   YES
+candidate-specific PDM safety/value labels         YES
+candidate-specific pair-collision/TwDAC labels     YES
+candidate-specific alternative-agent future GT     NO
+reactive other-agent truth in NAVSIM path          NO
+```
+
+Strongest attribution:
+
+```text
+BEV + scene-level safety       ~90.9 PDMS
+Sparse + scene-level safety    ~90.9
+Sparse + fine-grained safety    91.6
+```
+
+Thus sparse representation alone is not isolated as superior; the supported contribution is sparse structure × localized safety reasoning.
+
+No Ontology V1.4 amendment.
+
+## 4. P0005 RiskWorld — NEXT
+
+Boundary anchor rather than automatically a core planner paper.
 
 Why it matters:
 
 ```text
-trajectory-conditioned sparse world
-→ agent/timestep-level future interaction states
-→ explicit collision + drivable-area safety reasoning
+object-centric latent rollout
+→ future ego-object relation
+→ object-level risk identification
 ```
 
-This adds a major safety/world-planning anchor missing from the existing 13-paper normalized set.
-
-Mandatory comparisons:
+Mandatory distinctions:
 
 ```text
-SafeDrive vs WoTE explicit utility
-SafeDrive vs DA-WAM factorized utility
-SafeDrive vs GraphWorld structured interaction state
-SafeDrive vs World4Drive candidate future
-SafeDrive vs RiskWorld object-level risk
+risk as predicted world state
+vs safety as evaluator/value
+vs benchmark collision outcome
 ```
 
 Mandatory questions:
 
 ```text
-what is the sparse world state?
-which agent/timestep objects are predicted?
-how ego trajectory conditions future interaction?
-what future truth exists for alternative ego candidates?
-what is predicted state vs rule evaluator vs learned safety/value?
-how safety information changes final planning?
+object state and identity persistence
+RSSM/recurrent dynamics semantics
+physical future horizon
+whether ego action conditions dynamics
+risk-label provenance
+risk decoder vs analytic risk computation
+whether any planner consumes the output
+prediction evidence vs planning evidence
 ```
 
-## 4. P0005 RiskWorld
-
-Boundary anchor rather than pure planner paper.
-
-Why it matters:
+Mandatory comparisons:
 
 ```text
-object-centric RSSM-style latent rollout
-→ future ego-object relation
-→ object-level risk identification
+RiskWorld vs SafeDrive
+RiskWorld vs GraphWorld
+RiskWorld vs WoTE
+RiskWorld vs DA-WAM
+RiskWorld vs LAW / World4Drive
 ```
-
-Use it to distinguish:
-
-```text
-risk as explicit predicted state
-vs safety as evaluator/reward
-vs safety only observed in benchmark metrics
-```
-
-Do not force it into the planning-core family if the planning interface is absent.
 
 ## 5. P0007 DriveReward
 
-Value/reward control anchor.
-
-Why it matters:
+Value/reward control anchor:
 
 ```text
 trajectory + visual context
@@ -209,13 +180,11 @@ trajectory + visual context
 → RL / test-time trajectory selection
 ```
 
-It broadens the value/utility side beyond world-state prediction and prevents us from assuming that future-world modeling is the only way to improve trajectory evaluation.
+Purpose: prevent the atlas from assuming future-world prediction is the only route to better trajectory evaluation.
 
 ---
 
 # Wave C.7 — Simulation / reactivity / evaluation controls
-
-Deep-read after core C.6, unless a C.6 paper requires one as immediate context.
 
 ```text
 P0003 Safe-Sim
@@ -236,21 +205,11 @@ open-loop vs non-reactive pseudo-sim vs reactive closed loop
 simulation truth / evaluation truth
 ```
 
-Important: these are not to be read merely because prior candidate problem CP-T5 mentioned reactivity. They are required independently because the first-wave anchors under-cover simulation/evaluation semantics.
-
-BridgeSim is especially valuable as an evaluation/control paper because it decomposes open-loop→closed-loop failure into observational shift and objective mismatch rather than treating benchmark score as interchangeable evidence.
-
-ReactSim-Bench is especially valuable as a benchmark anchor because it explicitly evaluates world-agent reactions when the AV deviates from the log.
-
-CausalDrive is valuable as a world-simulator anchor because it removes oracle future-NPC layouts and targets real-time reactive visual generation.
+These papers are required because the current anchor set still under-covers simulator/evaluation semantics, not because of a parked candidate hypothesis.
 
 ---
 
 # Wave C.8 — WAM+VLA / reasoning boundary controls
-
-Secondary to core WAM, but necessary before claiming full field understanding.
-
-Initial queue:
 
 ```text
 P0008 AutoVLA
@@ -268,13 +227,9 @@ understand reward/post-training/reasoning interfaces
 avoid calling every future-aware VLA a world model
 ```
 
-Add more WAM+VLA papers only when they expose a mechanism not covered by these controls.
-
 ---
 
 # Reading protocol for every added paper
-
-Use the same WAM reading stack:
 
 ```text
 paper-deep-reader reconstruction
@@ -286,21 +241,19 @@ paper-deep-reader reconstruction
 → residue/back-projection test
 ```
 
-Every important mechanism must immediately trigger:
+Every important mechanism must trigger:
 
 ```text
 1. What exactly does this module do?
 2. Which prior anchors perform the same scientific function?
-3. Is the implementation/supervision/deployment role actually the same?
-4. What is the strongest matched evidence that this module matters?
+3. Are implementation, supervision and deployment roles actually the same?
+4. What is the strongest matched evidence it matters?
 5. What does the paper NOT establish?
 ```
 
 ---
 
 # Parked work
-
-The following files remain in the repo as historical/provisional synthesis, but are **NOT ACTIVE RESEARCH-DIRECTION AUTHORITY** during literature expansion:
 
 ```text
 landscape/WAM_RESEARCH_TENSIONS_V1.md
@@ -311,14 +264,14 @@ landscape/WAM_CANDIDATE_PROBLEM_OVERLAP_MATRIX_V1.md
 landscape/WAM_CANDIDATE_PROBLEM_RESEARCHABILITY_V1.md
 ```
 
-They may be revisited only after the expanded deep-read corpus is re-consolidated.
+Historical/provisional only until the expanded corpus is reconsolidated.
 
 ---
 
 # Next paper
 
 ```text
-P0002 SafeDrive
+P0005 RiskWorld
 ```
 
-Reason: after DriveLaW covered online generative representation→direct policy and DA-WAM covered online candidate-specific future→explicit utility scoring, SafeDrive extends the map toward structured future interaction and explicit safety reasoning.
+Reason: after SafeDrive established `candidate-specific structured world → explicit safety evaluator`, RiskWorld is the next coverage-control needed to determine what it means for **risk itself** to be part of a predicted world state rather than merely a scoring target.
