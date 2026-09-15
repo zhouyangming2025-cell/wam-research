@@ -1,0 +1,63 @@
+{
+  "schema_version": 5,
+  "paper": {
+    "title": "REPLACE_ME",
+    "authors": [],
+    "venue": "REPLACE_ME",
+    "version": "REPLACE_ME",
+    "sources": [
+      {
+        "type": "pdf",
+        "location": "REPLACE_ME",
+        "sha256": "REPLACE_ME",
+        "role": "primary"
+      }
+    ],
+    "page_convention": "1-based PDF page numbers"
+  },
+  "reader_profile": {
+    "domain": "REPLACE_ME",
+    "selected_lenses": [
+      "REPLACE_ME"
+    ],
+    "audience": "broad-to-expert",
+    "entry_level": "novice",
+    "technical_ceiling": "doctoral",
+    "goal": "understand",
+    "depth": "deep",
+    "delivery": "explain",
+    "language": "REPLACE_ME"
+  },
+  "explanation": {
+    "strategy": "intuition-to-precision",
+    "define_terms_on_first_use": true,
+    "report_structure": "six-section",
+    "key_visual_policy": "all-key-visuals"
+  },
+  "execution": {
+    "visual_mode": "REPLACE_ME",
+    "visual_verification": "REPLACE_ME",
+    "text_evidence_sources": []
+  },
+  "visual_coverage": {
+    "total_numbered": "REPLACE_ME",
+    "key": "REPLACE_ME",
+    "key_explained": "REPLACE_ME"
+  },
+  "claims": [
+    {
+      "id": "C1",
+      "claim": "REPLACE_ME",
+      "status": "strong",
+      "inference": false,
+      "evidence": [
+        {
+          "type": "figure",
+          "locator": "Figure 1, PDF p.1",
+          "note": "REPLACE_ME"
+        }
+      ],
+      "caveats": []
+    }
+  ]
+}

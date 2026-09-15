@@ -1,0 +1,7 @@
+interface:
+  display_name: "Agent Paper Reader"
+  short_description: "Audit AI agent papers against their evidence"
+  brand_color: "#2563EB"
+  default_prompt: "Use $agent-paper-reader to explain or compare these AI agent papers. Tie important claims to source locators, separate evidence from interpretation, audit baseline fairness, and state what remains unproven."
+policy:
+  allow_implicit_invocation: true

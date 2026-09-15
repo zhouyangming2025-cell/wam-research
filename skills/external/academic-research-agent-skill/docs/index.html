@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Academic Research Agent Skill for PhD Students - Claude Skills for Research Papers</title>
+    <meta
+      name="description"
+      content="Claude-compatible academic research agent skill for PhD/Master students: literature review, research paper planning, novelty checks, and claim verification."
+    />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#1f4e79" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Academic Research Agent Skill" />
+    <meta
+      property="og:description"
+      content="Claude-compatible agent research skills for literature review, research paper planning, novelty checks, and claim verification."
+    />
+    <meta property="og:image" content="assets/social-preview.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Academic Research Agent Skill" />
+    <meta
+      name="twitter:description"
+      content="Claude skills for research paper workflows: literature grounding, novelty gates, experiment planning, reviewer simulation, and claim verification."
+    />
+    <meta name="twitter:image" content="assets/social-preview.png" />
+    <link rel="canonical" href="https://ngtiendong.github.io/Academic-Research-Agent-Skill/" />
+    <link rel="stylesheet" href="styles.css" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareSourceCode",
+        "name": "Academic Research Agent Skill",
+        "alternateName": "Research Agent Skill",
+        "description": "Claude-compatible academic research agent skill for Master and PhD students: literature review, research paper planning, novelty checks, experiment planning, reviewer simulation, and claim verification.",
+        "programmingLanguage": "Markdown",
+        "applicationCategory": "Research tool",
+        "audience": {
+          "@type": "Audience",
+          "audienceType": "Master students, PhD students, researchers, research engineers"
+        },
+        "codeRepository": "https://github.com/ngtiendong/Academic-Research-Agent-Skill",
+        "license": "https://opensource.org/licenses/MIT"
+      }
+    </script>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="#top">Academic Research Agent Skill</a>
+      <nav aria-label="Page navigation">
+        <a href="#abstract">Abstract</a>
+        <a href="#tools">Tools</a>
+        <a href="#workflow">Workflow</a>
+        <a href="#protocol">Protocol</a>
+        <a href="#start">Start</a>
+        <a class="nav-github" href="https://github.com/ngtiendong/Academic-Research-Agent-Skill">GitHub</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="paper-hero">
+        <p class="venue">Claude-Compatible Academic Research Skill · Agent Research Workflow</p>
+        <h1>Academic Research Agent Skill</h1>
+        <p class="subtitle">
+          A human-guided research agent skill for PhD and Master students in computer science,
+          AI, mathematics, engineering, and related technical fields.
+        </p>
+        <p class="authors">
+          Claude skills for research paper workflows: literature review, novelty checks, mathematical
+          formalization, experiment planning, reviewer simulation, and claim verification.
+        </p>
+        <div class="github-cta" aria-label="GitHub repository actions">
+          <a class="github-primary" href="https://github.com/ngtiendong/Academic-Research-Agent-Skill">
+            Star on GitHub
+          </a>
+          <a class="github-secondary" href="https://github.com/ngtiendong/Academic-Research-Agent-Skill#readme">
+            View README
+          </a>
+          <iframe
+            src="https://ghbtns.com/github-btn.html?user=ngtiendong&amp;repo=Academic-Research-Agent-Skill&amp;type=star&amp;count=true&amp;size=large"
+            title="Star Academic Research Agent Skill on GitHub"
+            width="170"
+            height="30"
+            loading="lazy"
+          ></iframe>
+        </div>
+        <div class="resource-row" aria-label="Project resources">
+          <a href="https://github.com/ngtiendong/Academic-Research-Agent-Skill">GitHub</a>
+          <a href="https://github.com/ngtiendong/Academic-Research-Agent-Skill/blob/main/SKILL.md">Skill</a>
+          <a href="https://github.com/ngtiendong/Academic-Research-Agent-Skill/tree/main/.claude/commands">Prompts</a>
+          <a href="https://github.com/ngtiendong/Academic-Research-Agent-Skill/blob/main/docs/TOOLS.md">Tools</a>
+          <a href="https://github.com/ngtiendong/Academic-Research-Agent-Skill/tree/main/examples">Examples</a>
+          <a href="#citation">Citation</a>
+        </div>
+      </section>
+
+      <figure class="hero-figure">
+        <img src="assets/Hero%20Image.png" alt="Student-centered research agent workflow overview" />
+        <figcaption>
+          Overview. The student researcher remains central while agents assist with literature analysis,
+          formalization, code planning, validation, and reviewer-style feedback.
+        </figcaption>
+      </figure>
+
+      <section id="abstract" class="content-section">
+        <h2>Abstract</h2>
+        <p>
+          Academic Research Agent Skill is a reusable workflow for students who want to collaborate with AI
+          agents without delegating research judgment to the machine. It structures early-stage
+          technical research around explicit artifacts and gates: scope definition, source inspection,
+          literature grounding, mathematical formalization, novelty review, Research Reality Gates, feasibility testing, experiment planning,
+          reviewer simulation, and claim verification.
+        </p>
+        <p>
+          The skill is intentionally human-guided. Agents expand the student's capacity to read,
+          compare, critique, plan, and verify; the student defines goals, makes decisions, approves
+          scope, judges novelty, and owns final claims. The result is a traceable research process
+          suitable for Master thesis work, PhD projects, and technical research training.
+        </p>
+        <p>
+          It fits Claude skill for PhD student workflows, Claude skills for research paper planning,
+          agent research skills, academic research agent use cases, and auto research paper
+          alternatives where evidence and human approval still matter.
+        </p>
+      </section>
+
+      <section class="content-section contribution-section">
+        <h2>Key Ideas</h2>
+        <div class="contribution-grid">
+          <article>
+            <span>1</span>
+            <h3>Human approval gates</h3>
+            <p>Scope, novelty, reality promotion, full-run execution, and claims require explicit student approval.</p>
+          </article>
+          <article>
+            <span>2</span>
+            <h3>Evidence before claims</h3>
+            <p>Sources must be inspected before they support literature or method claims.</p>
+          </article>
+          <article>
+            <span>3</span>
+            <h3>Research artifacts</h3>
+            <p>Each step creates durable outputs that can be reviewed, revised, and reused.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="tools" class="content-section">
+        <h2>Tool-Assisted Paper Ingestion</h2>
+        <p>
+          The workflow is intended for real technical literature review, where papers are not only
+          discussed in chat but processed into inspectable artifacts. Academic Research Agent Skill supports
+          a tool layer for downloading PDFs, converting papers to Markdown, reading figures and
+          tables, and building source analysis matrices.
+        </p>
+        <div class="tool-grid">
+          <article>
+            <h3>Paper downloader</h3>
+            <p>Collect PDFs from source lists, arXiv links, DOI pages, or curated reading lists.</p>
+          </article>
+          <article>
+            <h3>PDF-to-Markdown</h3>
+            <p>Convert dense papers into searchable notes that agents and students can inspect.</p>
+          </article>
+          <article>
+            <h3>Figure/table reader</h3>
+            <p>Extract captions, crops, and surrounding context for visual evidence analysis.</p>
+          </article>
+          <article>
+            <h3>Source matrix</h3>
+            <p>Compare papers by problem, method, dataset, metric, result, limitation, and relevance.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="workflow" class="content-section">
+        <h2>Research Workflow</h2>
+        <p>
+          The workflow follows the structure of an academic project page rather than a product
+          landing page. Each stage corresponds to a research artifact and a decision point.
+        </p>
+        <figure class="wide-figure">
+          <img src="assets/Research%20Lifecycle%20Visual.png" alt="Research lifecycle from idea to evidence-traced research" />
+          <figcaption>
+            Figure 1. From idea to evidence-traced research. The workflow combines agent work with
+            human approval gates for scope, novelty, reality promotion, full-run execution, and claim verification.
+          </figcaption>
+        </figure>
+      </section>
+
+      <section id="protocol" class="content-section two-column">
+        <div>
+          <h2>Human-Agent Protocol</h2>
+          <p>
+            The protocol separates researcher responsibilities from agent responsibilities. This
+            prevents the common failure mode where generated text looks polished but hides weak
+            novelty, missing baselines, or unsupported claims.
+          </p>
+          <ul class="check-list">
+            <li>The student defines research intent and constraints.</li>
+            <li>The agent prepares artifacts, alternatives, and critiques.</li>
+            <li>The student approves gates before moving forward.</li>
+            <li>Claims are linked to inspected sources or experiment artifacts.</li>
+          </ul>
+        </div>
+        <figure class="side-figure">
+          <img src="assets/Human-Agent%20Collaboration%20Diagram.png" alt="Human researcher and agent team collaboration protocol" />
+          <figcaption>Figure 2. Human researcher, agent team, and shared evidence artifacts.</figcaption>
+        </figure>
+      </section>
+
+      <section id="artifacts" class="content-section">
+        <h2>Artifacts</h2>
+        <p>
+          The skill turns conversation into research artifacts. These files make progress inspectable
+          by the student, advisor, lab, or a future agent session.
+        </p>
+        <table class="artifact-table">
+          <thead>
+            <tr>
+              <th>Artifact</th>
+              <th>Purpose</th>
+              <th>Gate</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>02_Scope.md</code></td>
+              <td>Research question, contributions, assumptions, non-goals.</td>
+              <td>Scope approval</td>
+            </tr>
+            <tr>
+              <td><code>05_Lit_Grounding.md</code></td>
+              <td>Closest prior work, baselines, and evidence matrix.</td>
+              <td>Literature readiness</td>
+            </tr>
+            <tr>
+              <td><code>paper_notes/*.md</code></td>
+              <td>PDF-to-Markdown notes generated from downloaded papers.</td>
+              <td>Source inspection</td>
+            </tr>
+            <tr>
+              <td><code>figure_tables/</code></td>
+              <td>Figure/table crops, captions, and visual evidence analysis.</td>
+              <td>Visual evidence review</td>
+            </tr>
+            <tr>
+              <td><code>06_Math_Formalization.md</code></td>
+              <td>Definitions, objectives, constraints, and implementation mapping.</td>
+              <td>Formal clarity</td>
+            </tr>
+            <tr>
+              <td><code>Novelty Gate Report</code></td>
+              <td>Harsh review of whether the contribution is more than method-on-domain.</td>
+              <td>Continue, revise, or stop</td>
+            </tr>
+            <tr>
+              <td><code>20_Reality_Gate.md</code></td>
+              <td>Evidence audit of the real unit, metric, intervention, access path, valid yield, and claim dependencies.</td>
+              <td>Block, feasibility pilot only, execution ready, or full-run ready</td>
+            </tr>
+            <tr>
+              <td><code>23_Feasibility_Pilot_Protocol.md</code></td>
+              <td>Smallest claim-eligible falsifier with frozen acceptance and stop criteria.</td>
+              <td>Stop, narrow, replace, or promote</td>
+            </tr>
+            <tr>
+              <td><code>12_Code_Execution_Plan.md</code></td>
+              <td>Reality-cleared interfaces, datasets, baselines, metrics, runs, and reproducibility.</td>
+              <td>Implementation approval</td>
+            </tr>
+            <tr>
+              <td><code>Claim Verification</code></td>
+              <td>Trace each factual claim to a source, formal artifact, or result.</td>
+              <td>Draft readiness</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="content-section">
+        <h2>Learning Loop</h2>
+        <p>
+          The target user is not a passive prompt sender. The skill is designed to help students learn
+          the shape of research by repeatedly drafting, critiquing, grounding, deciding, and revising.
+        </p>
+        <figure class="wide-figure">
+          <img src="assets/Learning%20Loop%20Illustration.png" alt="Learning loop for a student using a research agent" />
+          <figcaption>
+            Figure 3. Research training loop: question, artifact, critique, source check, decision,
+            revision, and learning.
+          </figcaption>
+        </figure>
+      </section>
+
+      <section id="start" class="content-section start-panel">
+        <h2>Getting Started</h2>
+        <p>Clone the repository and ask your AI assistant to follow the skill instructions.</p>
+        <pre><code>git clone https://github.com/ngtiendong/Academic-Research-Agent-Skill
+cd Academic-Research-Agent-Skill
+cp config/language.example.yaml config/language.yaml</code></pre>
+        <p>Then ask:</p>
+        <pre><code>Read SKILL.md, CLAUDE.md, and my_topic.md.
+Use Academic Research Agent Skill to help me scope this research idea.
+Do not skip human decision gates.</code></pre>
+      </section>
+
+      <section id="citation" class="content-section citation-section">
+        <h2>Citation</h2>
+        <p>If this workflow helps your research or teaching, cite the repository:</p>
+        <pre><code>@software{research_agent_skill_2026,
+  title  = {Academic Research Agent Skill},
+  author = {Nguyen, Tien Dong},
+  year   = {2026},
+  url    = {https://github.com/ngtiendong/Academic-Research-Agent-Skill}
+}</code></pre>
+      </section>
+    </main>
+
+    <footer class="page-footer">
+      <span>Academic Research Agent Skill</span>
+      <a href="https://github.com/ngtiendong/Academic-Research-Agent-Skill">GitHub Repository</a>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ngtiendong.github.io/Academic-Research-Agent-Skill/sitemap.xml

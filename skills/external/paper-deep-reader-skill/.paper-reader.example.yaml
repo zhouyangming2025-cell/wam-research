@@ -1,0 +1,22 @@
+domain: auto
+audience: broad-to-expert
+goal: understand
+depth: deep
+delivery: explain
+language: auto
+visual_mode: auto
+
+reader_background:
+  primary_field: ""
+  familiar_topics: []
+  unfamiliar_topics: []
+  entry_level: novice
+  technical_ceiling: doctoral
+
+preferences:
+  explanation_layers: intuitive-then-technical
+  define_terms_on_first_use: true
+  equation_detail: teaching
+  statistics_detail: teaching
+  key_visual_coverage: all
+  embed_key_visuals: true
