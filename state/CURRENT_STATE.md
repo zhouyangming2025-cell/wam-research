@@ -1,6 +1,6 @@
 # CURRENT_STATE
 
-Last updated: 2026-09-14 — Phase C.5 ACTIVE; WorldDrive + World4Drive COMPLETE; SeerDrive NEXT
+Last updated: **2026-09-15 — Dimension-first normalization ACTIVE; Ontology V1 COMPLETE; Comparison Matrix V1 NEXT**
 
 ## Research north star
 
@@ -16,6 +16,7 @@ Core 2.2 WAM is primary. WAM+VLA remains secondary/control until core-WAM covera
 FIELD UNDERSTANDING FIRST
 → complete core-WAM coverage
 → comparative anchor deep reads
+→ DIMENSION-FIRST normalization
 → WAM-only synthesis
 → evidence QA
 → only then adversarial problem discovery
@@ -35,153 +36,116 @@ Wave 3             CLOSED
 Research QA Gate   CLOSED
 Wave 4             CLOSED
 Phase-C synthesis  COMPLETE FIRST PASS
+Phase C.5          ACTIVE
 ```
 
-The prior synthesis remains a provisional coordinate system, not final core-WAM coverage.
+The prior field synthesis remains a useful provisional coordinate system, but the project now treats **uniform mechanism/evidence comparability** as a mandatory gate before problem discovery.
 
-## Phase C.5 core-WAM correction progress
+## Dimension-first anchor normalization
+
+The first five ontology-discovery anchors are complete:
 
 ```text
-WorldDrive      COMPLETE
-World4Drive     COMPLETE
-SeerDrive       NEXT
-Drive-JEPA      PENDING
-Metis           PENDING
-DynFlowDrive    PENDING
-Discrete-WAM    PENDING
-GraphWorld      PENDING
+P0048 LAW          COMPLETE v2
+P0045 WoTE         COMPLETE v2
+P0001 Epona        COMPLETE v2
+P0042 WorldDrive   COMPLETE v2
+P0046 World4Drive  COMPLETE v2
 ```
 
-Canonical coverage:
+Canonical deep analyses:
 
 ```text
-landscape/CORE_WAM_2_2_COVERAGE_AUDIT.md
+papers/deep_analysis/P0048_LAW_DEEP_ANALYSIS_V2.md
+papers/deep_analysis/P0045_WOTE_DEEP_ANALYSIS_V2.md
+papers/deep_analysis/P0001_EPONA_DEEP_ANALYSIS_V2.md
+papers/deep_analysis/P0042_WORLDDRIVE_DEEP_ANALYSIS_V2.md
+papers/deep_analysis/P0046_WORLD4DRIVE_DEEP_ANALYSIS_V2.md
 ```
 
-Canonical new audits:
+Dimension-discovery sources:
 
 ```text
-audits/literature/PHASE_C5_WORLDDRIVE_AUDIT.md
-audits/literature/PHASE_C5_WORLD4DRIVE_AUDIT.md
+landscape/WAM_DIMENSION_DISCOVERY_LOG.md
+landscape/WAM_DIMENSION_DISCOVERY_ADDENDUM_EPONA_WORLDDRIVE.md
+landscape/WAM_DIMENSION_DISCOVERY_ADDENDUM_WORLD4DRIVE.md
 ```
 
-## WorldDrive stable result
+## Ontology V1 status
 
-Official source audit:
+Created:
 
 ```text
-TabGuigui/WorldDrive@c375ee1e1fe86ace175609db1ed90fd6db89673b
+landscape/WAM_DIMENSION_ONTOLOGY_V1.md
 ```
 
-Mechanism:
+Ontology V1 is a stable extensible baseline, not a closed universe. It organizes the comparison space into 16 families:
 
 ```text
-TA-DWM trajectory-conditioned generative pretraining
-→ transfer/freeze vision + motion representations
-→ multimodal candidate planner
-→ frozen TA-DWM candidate-future latent as FAR training teacher
-→ lightweight distilled future feature + ranking at inference
-→ no full diffusion rollout online
+A  problem / role of world knowledge
+B  observation and current-state representation
+C  representation provenance / imported priors
+D  action / intention / candidate space
+E  action → world coupling
+F  dynamics / future temporal modeling
+G  future supervision / truth sources
+H  multimodal branch identity / assignment
+I  counterfactuality / reactivity
+J  world → planning interface
+K  scorer / decision semantics
+L  training topology / jointness / gradients
+M  future-knowledge lifecycle / deployment path
+N  compute / pruning / latency
+O  evaluation regime / evidence attribution
+P  safety / uncertainty / interaction / physical validity
 ```
 
-Subtype:
+Binding ontology corrections:
 
 ```text
-DISTILLED WORLD-MODEL FORESIGHT
+action-conditioned != WM-based action selection
+joint modeling != shared representation != shared gradients != online feedback
+candidate-specific output != candidate-specific alternative-future supervision
+future→score != necessarily utility/value
+foundation-prior gain != WM-specific future-model gain
+online/offline is too coarse; future knowledge has a lifecycle
+consequence teacher != value teacher
+prediction fidelity != decision relevance
 ```
 
-Strongest matched evidence:
+Every anchor must fill every stable dimension with a value or explicit `ABSENT / NOT REPORTED / NOT EVALUATED / NOT APPLICABLE / UNCLEAR`.
 
-```text
-31.4 no pretrain
-84.9 generic CogVideoX VAE
-85.8 + TA-DWM vision
-86.9 + TA-DWM motion
-
-86.9 base planner
-87.0 trajectory-only rewarder
-88.1 + distilled future feature
-```
-
-Important boundary: the huge representation jump is dominated by generic video/VAE pretraining; FAR also receives PDMS ranking supervision; alternative-action real future GT is unavailable.
-
-## World4Drive stable result
-
-Official source audit:
-
-```text
-ucaszyp/World4Drive@cffb51adeb1f7d02b49c4b74d7262ded62a33ac8
-```
-
-Mechanism:
-
-```text
-current physical latent L_t
-+ 6 intention queries
-→ 6 ego trajectories T^k
-→ action tokens A^k
-→ 6 intention-conditioned future world latents L_{t+n}^k
-→ ScoreNet
-→ select trajectory with highest future-latent score at inference
-```
-
-Subtype:
-
-```text
-ONLINE LATENT FORESIGHT
-```
-
-Training observes only one actual future latent and chooses the predicted mode nearest to it as the target class. Therefore:
-
-```text
-K candidate/intention future outputs
-!=
-K real alternative-action future labels
-```
-
-Strongest matched component evidence:
-
-```text
-physical priors + intentions, no WM   0.61 L2 / 0.36 collision
-physical priors + intentions + WM     0.50    / 0.16
-```
-
-This supports the whole future-latent predictor + world-model-selector mechanism beyond multimodal intentions alone.
-
-Evaluation:
-
-```text
-nuScenes = open-loop planning
-NAVSIM   = non-reactive data-driven planning evaluation under project taxonomy
-```
-
-The released repo source audit verifies the core W4D architecture. A separate clearly identifiable NAVSIM implementation path was not established, so paper-level NAVSIM evidence is kept distinct from source-verified implementation details.
-
-## Emerging core-WAM interface axis
+## Five-anchor mechanism sanity map
 
 ```text
 LAW
-training-only future shaping
-
-WorldDrive
-distilled future foresight
-
-World4Drive
-online compact latent foresight
-
-DriveLaW
-online generative hidden state → action
+= action-aware future prediction as auxiliary representation shaping
+→ future output not consumed by deployed action selection
 
 WoTE
-online future BEV → reward
+= multi-candidate recurrent future BEV
+→ explicit imitation/simulator utility
+→ online selection
 
-DA-WAM
-candidate → future latent → scorer
+Epona
+= shared historical world representation
+→ direct generative trajectory policy
++ sibling visual-future generator
+→ visual future not required by planning inference
+
+WorldDrive
+= generative-WM representation inheritance
++ heavy future teacher
+→ distilled lightweight future surrogate
+→ online preference/ranking
+
+World4Drive
+= six intention-conditioned compact future latents online
+→ factual-future/mode ScoreNet
+→ trajectory selection
 ```
 
-This strengthens the view that the useful planning taxonomy is **where and how future/world information enters action selection**, not simply RGB-vs-BEV-vs-latent.
-
-## Existing stable field controls retained
+## Stable evidence controls retained
 
 ```text
 world-prediction quality != planning evidence
@@ -192,13 +156,37 @@ world completeness != decision relevance
 candidate ranking/scoring is an independent bottleneck
 evaluation regime is part of the claim
 reactive feasibility != counterfactual behavioral truth
+matched controls > headline SOTA
+conditional future != intervention
+multimodal action generation != world modeling
+```
+
+## Current core-WAM coverage correction queue
+
+New-paper reading is temporarily paused until the first comparison matrix is complete.
+
+After normalization:
+
+```text
+SeerDrive       NEXT NEW ANCHOR
+Drive-JEPA      PENDING
+Metis           PENDING
+DynFlowDrive    PENDING
+Discrete-WAM    PENDING
+GraphWorld      PENDING
 ```
 
 ## Immediate next task
 
 See `state/NEXT_TASK.md`.
 
-Deep-read **SeerDrive**, specifically testing whether its claimed bidirectional scene↔planning iteration introduces a genuinely distinct WAM planning interface or mainly re-instantiates older iterative prediction-planning refinement in a future-scene latent space.
+Build:
+
+```text
+landscape/WAM_COMPARISON_MATRIX_V1.md
+```
+
+Project LAW / WoTE / Epona / WorldDrive / World4Drive across the Ontology V1 dimensions, grouped by family rather than as one unreadable flat table.
 
 ## Still forbidden
 
@@ -207,6 +195,7 @@ no problem/gap declaration
 no method design
 no broad VLA expansion
 no forced risk-field insertion
+no novelty conclusion from missing cells
 ```
 
-GitHub remains the Research Knowledge Authority; public official papers/repos are primary evidence for decision-critical claims.
+GitHub remains the Research Knowledge Authority; official papers/repos remain primary evidence for decision-critical claims.
