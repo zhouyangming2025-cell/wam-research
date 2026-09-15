@@ -37,8 +37,8 @@ A dimension should survive only if it helps distinguish scientifically meaningfu
 
 ```text
 P0048 LAW          COMPLETE v2 first pass
-P0045 WoTE         NEXT
-P0001 Epona        PENDING dimension-first rebuild
+P0045 WoTE         COMPLETE v2 first pass
+P0001 Epona        NEXT — dimension-first rebuild
 P0042 WorldDrive   existing strong audit; needs re-projection into discovered dimensions
 P0046 World4Drive  existing strong audit; needs re-projection into discovered dimensions
 ```
@@ -112,17 +112,151 @@ The paper visualizes a case where LAW captures scene information missed by VAD a
 
 ---
 
+# WoTE pressure test — dimensions added or split
+
+Source analysis: `papers/deep_analysis/P0045_WOTE_DEEP_ANALYSIS_V2.md`
+
+WoTE confirms that the LAW dimensions are useful but also shows that several are too coarse. The following entries are new discovery axes or required splits.
+
+| ID | New/refined dimension | WoTE position | Why LAW alone could not expose it |
+|---|---|---|---|
+| WOTE-D01 | **Candidate source** | K-means trajectory anchors from expert logs | LAW has no action-set construction problem. |
+| WOTE-D02 | **Candidate count / branching breadth** | 256 default; 64/128/256 ablated | Online evaluator quality depends on how many alternatives exist. |
+| WOTE-D03 | **Candidate refinement** | anchor query cross-attends current BEV and predicts residual | Separate fixed motion vocabulary from scene-conditioned candidate adaptation. |
+| WOTE-D04 | **Candidate diversity / support coverage** | anchor vocabulary covers multiple driving modes | A perfect evaluator cannot select an absent action. |
+| WOTE-D05 | **Train/test candidate distribution** | training uses precomputed labels on anchors; inference evaluates refined trajectories | Evaluator can face action distributions not exactly matching supervision set. |
+| WOTE-D06 | **Action-space generalization** | trained with 256 anchors, tested with 1024 unseen anchors; paper reports improvement | Need distinguish memorized vocabulary score from a function generalizing over actions. |
+| WOTE-D07 | **Branch persistence through rollout** | each candidate keeps a separate recurrent world branch | Multi-action branching can terminate early, merge, or persist across horizon. |
+| WOTE-D08 | **Environment-state vs action-state transition** | WM predicts both future BEV state and updated action embedding | Dynamics may evolve world only, ego only, or coupled state/action. |
+| WOTE-D09 | **Transition interval** | intermediate future around 2 s in reported NAVSIM configuration | Total horizon alone hides temporal discretization. |
+| WOTE-D10 | **Rollout depth / recurrence count** | recurrent 0→2→4 s outperforms direct 0→4 s | Multi-step imagination creates both richer temporal signal and error-compounding risk. |
+| WOTE-D11 | **Intermediate-state consumption** | reward model consumes concatenated current + future states | Some systems use endpoint only; others evaluate full imagined sequence. |
+| WOTE-D12 | **Free-running rollout exposure** | predicted state/action fed back recurrently | Teacher-forcing vs free-running affects deployment error accumulation. |
+| WOTE-D13 | **Consequence model vs value model separation** | BEV WM predicts consequence; Reward Model values it | Future prediction and decision scoring are independent bottlenecks. |
+| WOTE-D14 | **Evaluator input scope** | current BEV + future BEVs + action sequence | Scorer may see only current state, endpoint future, full rollout, or trajectory embeddings. |
+| WOTE-D15 | **Value/reward semantics** | imitation + NC/DAC/TTC/comfort/progress | “Good future” is a design choice, not inherent in the world state. |
+| WOTE-D16 | **Reward decomposition** | separate imitation and five simulation reward heads | Safety, legality, comfort and progress can conflict and should not be collapsed. |
+| WOTE-D17 | **Reward aggregation rule** | hand-weighted nonlinear/log combination | World-model planner includes a utility-composition design beyond dynamics. |
+| WOTE-D18 | **State-truth source** | simulator/BEV semantic maps | Split from generic `future-target provenance`. |
+| WOTE-D19 | **Value-truth source** | simulator rules + expert imitation | State supervision and value supervision may come from different oracles. |
+| WOTE-D20 | **Simulator role** | training-time target/teacher, not deployed simulator | Distinguish external simulator used for labels from learned world model deployed online. |
+| WOTE-D21 | **Other-agent response source** | cached/interpolated logged GT tracks in audited NAVSIM/PDM path | Candidate-specific ego simulation does not mean candidate-specific surrounding response. |
+| WOTE-D22 | **Supervision reactivity** | non-reactive surrounding-agent target semantics in audited path | Counterfactuality needs explicit reactivity dimension. |
+| WOTE-D23 | **Counterfactual evidence level** | multiple candidate branches + ego-specific simulated scores, but no reactive alternative-agent oracle | Binary counterfactual yes/no is inadequate. |
+| WOTE-D24 | **World-model vs evaluator attribution** | scorer without future already improves 81.0→83.2; future adds 83.2→85.6 | Planning gain must be decomposed between generator, evaluator and future state. |
+| WOTE-D25 | **Utility-signal complementarity** | imitation-only 83.5, simulation-only 83.6, combined 85.6 PDMS | Multiple objectives can contribute differently to planning metrics. |
+| WOTE-D26 | **Candidate breadth × rollout depth compute frontier** | 256 parallel branches, recurrent rollout, compact 8×8 BEV state | Online WM design is constrained by product of action breadth, state richness and temporal depth. |
+| WOTE-D27 | **Parallelization strategy** | candidate state-action pairs processed in parallel on GPU | Same theoretical planner can differ materially in deployment feasibility. |
+| WOTE-D28 | **End-to-end latency accounting** | paper reports ~18.7 ms for 256-trajectory setup on L20 | Need distinguish module latency from complete sensor-to-action system latency. |
+| WOTE-D29 | **Semantic-state decoding supervision** | predicted BEV latent decoded to semantic map for focal-loss supervision | A latent may be constrained through an explicit semantic decoder even if reward uses latent features. |
+| WOTE-D30 | **Closed-loop claim regime vs training oracle regime** | NAVSIM training supervision non-reactive; Bench2Drive used for reactive closed-loop evaluation | Training-world semantics and evaluation-world semantics are separate dimensions. |
+
+## WoTE forces four major splits of LAW dimensions
+
+### Split A — `action multiplicity` → action-set system
+
+```text
+candidate source
+candidate count
+candidate refinement
+candidate diversity/support
+train/test action support
+branch persistence
+```
+
+### Split B — `future target provenance` → three truth sources
+
+```text
+world/state truth source
+value/reward truth source
+other-agent response truth source
+```
+
+A system can have rich candidate-specific state/reward labels while still lacking candidate-specific reactive agent behavior.
+
+### Split C — `decision semantics` → consequence / valuation / utility composition
+
+```text
+world/consequence predictor
+→ evaluator/value model
+→ final utility aggregation
+```
+
+The three are separately learnable and separately fallible.
+
+### Split D — `deployment imagination cost` → planning compute frontier
+
+```text
+candidate breadth
+× transition steps
+× state size/richness
+× dynamics cost
+× evaluator cost
+```
+
+This will be essential when comparing WoTE, World4Drive and WorldDrive.
+
+---
+
+# Counterfactual ladder — provisional v0
+
+LAW + WoTE show that `counterfactual = yes/no` is unusably coarse. Use this provisional ladder until further anchors challenge it:
+
+```text
+CF0  no action-conditioned future
+CF1  single action-conditioned factual future prediction
+CF2  multiple candidate-conditioned model future outputs
+CF3  candidate-specific ego simulation/reward under fixed/logged other-agent futures
+CF4  candidate-specific reactive simulator targets where other agents respond to ego intervention
+CF5  externally validated behavioral intervention accuracy / real counterfactual evidence
+```
+
+Current provisional placement:
+
+```text
+LAW                         ≈ CF1
+WoTE model outputs          ≈ CF2
+WoTE audited NAVSIM targets ≈ CF3
+```
+
+Important: a paper can occupy different levels for **model output form**, **training supervision**, and **evaluation evidence**. These must be recorded separately.
+
+---
+
+# Strongest LAW ↔ WoTE contrast discovered so far
+
+| Axis | LAW | WoTE |
+|---|---|---|
+| primary bottleneck | representation quality | candidate ranking quality |
+| future role | training teacher/regularizer | deployed decision variable |
+| action branches | one planner output | many candidate trajectories |
+| future dynamics | one target latent | recurrent candidate-specific BEV sequence |
+| online consequence valuation | absent | explicit Reward Model |
+| value truth | not applicable | expert imitation + simulator metrics |
+| state truth | one factual future latent | simulator/semantic BEV supervision for ego candidates |
+| other-agent alternative response | no | fixed/logged in audited NAVSIM/PDM target path |
+| strongest evidence | auxiliary/action-condition matched ablation | scorer ± future matched ablation |
+| compute design | no online future consumption | many parallel branches under latency budget |
+
+This comparison supports a larger historical hypothesis to test later:
+
+> The important evolution is not simply `latent → BEV` or `small WM → large WM`; it is the migration of future information from **representation learning** into an explicit **consequence → value → action-selection loop**.
+
+This remains a hypothesis until Epona, WorldDrive and World4Drive are projected under the same axes.
+
+---
+
 # Cross-paper hypotheses to test next — NOT conclusions
 
-These are questions generated by LAW and must be challenged by WoTE/Epona/WorldDrive/World4Drive.
-
-1. **Training teacher → online evaluator may be a major historical transition.** Test whether online future consumption adds value beyond a strong scorer.
-2. **Action conditioning is too coarse a label.** Test whether action provenance, branching, injection and alternative-world supervision explain meaningful method differences.
-3. **Future representation quality is not the same as decision value.** Test using OccWorld/WorldDrive/WoTE evidence.
-4. **Counterfactuality needs levels rather than yes/no.** Test candidate-specific output, candidate-specific supervision, reactive-agent response and intervention validity separately.
-5. **World-state substrate may matter less than interface semantics.** Compare BEV/video/latent systems that nevertheless serve the same evaluator or representation-teacher role.
-6. **Deployment cost shapes architecture.** Compare LAW training-only future prediction, WoTE online BEV rollout, World4Drive compact latent online foresight and WorldDrive distillation.
-7. **Uncertainty/risk are not explicit in LAW.** Do not call this a research gap until other anchors are analyzed under the same dimension.
+1. **Training teacher → online evaluator may be a major historical transition.** LAW and WoTE now support opposite ends; WorldDrive/World4Drive may reveal intermediate/hybrid forms.
+2. **Action conditioning is too coarse a label.** Action provenance, branching, injection, support and supervision explain much more.
+3. **Future representation quality is not the same as decision value.** WoTE's separate Reward Model makes this explicit; OccWorld/WorldDrive provide counterexamples/controls.
+4. **Counterfactuality needs levels and separate output/supervision/evaluation columns.** WoTE proves why.
+5. **World-state substrate may matter less than interface semantics, but operational cost constrains substrate choice.** WoTE chooses compact BEV partly because it must branch online.
+6. **Deployment cost shapes architecture.** Compare LAW training-only future prediction, WoTE online BEV rollout, World4Drive compact latent foresight and WorldDrive distillation.
+7. **Risk/safety may reside in valuation rather than world state.** WoTE explicitly predicts NC/TTC/etc. in reward heads while its world state is BEV. This warns against assuming risk must be encoded as an explicit world-state channel.
+8. **Candidate generation may be as important as world prediction.** WorldDrive/World4Drive must be checked for candidate-vocabulary dependence.
+9. **Simulator supervision can fill offline counterfactual gaps but imports simulator semantics/bias.** Later papers must be checked for teacher-source assumptions.
 
 ---
 
