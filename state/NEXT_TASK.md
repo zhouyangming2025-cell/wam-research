@@ -2,20 +2,21 @@
 
 ## 唯一下一任务
 
-> **Deep-read Discrete-WAM under the WAM reading skill stack + Ontology V1/V1.1/V1.2/V1.3, as the next core-WAM stress test.**
+> **Deep-read GraphWorld under the WAM reading skill stack + Ontology V1/V1.1/V1.2/V1.3, as the final planned Phase C.5 core-WAM stress test before WAM-only comparability QA.**
 
 ## Completed normalization / stress tests
 
 ```text
-P0048 LAW          COMPLETE v2
-P0045 WoTE         COMPLETE v2
-P0001 Epona        COMPLETE v2
-P0042 WorldDrive   COMPLETE v2
-P0046 World4Drive  COMPLETE v2
-P0061 SeerDrive    COMPLETE v2 first pass
-P0049 Drive-JEPA   COMPLETE v2 first pass
-P0062 Metis        COMPLETE v2 first pass
-P0063 DynFlowDrive COMPLETE v2 first pass
+P0048 LAW           COMPLETE v2
+P0045 WoTE          COMPLETE v2
+P0001 Epona         COMPLETE v2
+P0042 WorldDrive    COMPLETE v2
+P0046 World4Drive   COMPLETE v2
+P0061 SeerDrive     COMPLETE v2 first pass
+P0049 Drive-JEPA    COMPLETE v2 first pass
+P0062 Metis         COMPLETE v2 first pass
+P0063 DynFlowDrive  COMPLETE v2 first pass
+P0064 Discrete-WAM  COMPLETE v2 first pass
 ```
 
 Canonical method stack:
@@ -33,48 +34,50 @@ landscape/WAM_DIMENSION_ONTOLOGY_V1_2_AMENDMENT.md
 landscape/WAM_DIMENSION_ONTOLOGY_V1_3_AMENDMENT.md
 ```
 
-Current comparison layer:
+Latest comparison layer:
 
 ```text
-landscape/WAM_COMPARISON_MATRIX_V1.md
-landscape/WAM_COMPARISON_MATRIX_V1_1_SEERDRIVE_EXTENSION.md
-landscape/WAM_COMPARISON_MATRIX_V1_2_DRIVEJEPA_EXTENSION.md
-landscape/WAM_COMPARISON_MATRIX_V1_2_METIS_EXTENSION.md
-landscape/WAM_COMPARISON_MATRIX_V1_3_DYNFLOWDRIVE_EXTENSION.md
+landscape/WAM_COMPARISON_MATRIX_V1_3_DISCRETE_WAM_EXTENSION.md
 ```
 
-DynFlowDrive artifacts:
+Discrete-WAM artifacts:
 
 ```text
-papers/deep_analysis/P0063_DYNFLOWDRIVE_DEEP_ANALYSIS_V2.md
-audits/literature/PHASE_C5_DYNFLOWDRIVE_AUDIT.md
-landscape/P0063_DYNFLOWDRIVE_ONTOLOGY_PROJECTION.md
+papers/deep_analysis/P0064_DISCRETE_WAM_DEEP_ANALYSIS_V2.md
+audits/literature/PHASE_C5_DISCRETE_WAM_AUDIT.md
+landscape/P0064_DISCRETE_WAM_ONTOLOGY_PROJECTION.md
 ```
 
 ---
 
-# Why Discrete-WAM is next
+# Why GraphWorld is next
 
-Discrete-WAM is currently positioned as a **unified discrete vision-action world-policy model**, but that phrase is too coarse to be scientifically useful.
-
-The next audit must determine whether `unified` means any or all of:
+GraphWorld (`arXiv:2606.16274v1`) claims to improve **long-horizon planning** through:
 
 ```text
-same tokenizer / codebook?
-same token sequence?
-same autoregressive Transformer?
-same hidden representation?
-same parameters?
-same training loss?
-same causal sequence factorization?
-world tokens conditioning action tokens online?
-action tokens conditioning future-world tokens online?
-both world and action tokens generated at deployment?
+Ego-Centric Interaction Graph
++
+latent world state
++
+World-State-Conditioned Planning
 ```
 
-The core question is:
+The paper's abstract further says the latent world state captures interaction dynamics and safety-relevant semantics.
 
-> **Does Discrete-WAM genuinely make world evolution and policy actions part of one deployed generative process, or does it merely place discretized world/action targets under partially shared training machinery?**
+These claims directly pressure-test dimensions that the prior anchors only partially cover:
+
+```text
+explicit multi-agent interaction representation
+world-state semantics vs generic scene latent
+long-horizon planning vs merely longer trajectory output
+safety-relevant representation vs explicit risk/value modeling
+reactive-agent truth vs relational feature modeling
+world-state persistence / transition dynamics
+```
+
+The central question is:
+
+> **Does GraphWorld actually learn a predictive/dynamic world state that changes long-horizon decisions, or does it mainly build a stronger interaction-aware current-scene representation and call that a world model?**
 
 ---
 
@@ -83,167 +86,163 @@ The core question is:
 Resolve at minimum:
 
 ```text
-1. sensor/history input and current-scene representation
-2. vision/world tokenizer architecture and codebook provenance
-3. action tokenizer / trajectory discretization and codebook provenance
-4. whether world and action share token vocabulary or only a Transformer
-5. exact token sequence ordering during training
-6. exact causal attention mask / visibility graph
-7. what future-world token represents physically
-8. what action token represents physically
-9. world-token target truth source
-10. action-token / policy target truth source
-11. whether future world is history-only predicted, action-conditioned, jointly generated, or autoregressive with action
-12. F07 prediction temporal/observability geometry
-13. F08 internal generative-token time vs physical future time
-14. world→action forward information path during training
-15. action→world forward information path during training
-16. world→action / action→world paths at inference
-17. shared representations vs shared parameters vs shared loss/gradients
-18. whether world and action tokens are both generated at deployment
-19. if world token generation can be skipped, what remains of world knowledge
-20. autoregressive order: world-first, action-first, interleaved, parallel, iterative, or hierarchical
-21. candidate/action multimodality and branch semantics
-22. consequence truth under alternative action tokens
-23. scorer/value model presence or absence
-24. online generation latency and token count
-25. matched ablations isolating discretization, world tokens, action tokens, and joint training
-26. prediction/token quality → planning relevance evidence
-27. source/version status
-28. evaluation regime / reactivity
-29. relation to DrivingGPT / Epona / Metis / DriveLaW / DynFlowDrive / World4Drive
+1. exact sensor/history inputs on nuScenes / NAVSIM / Bench2Drive
+2. ego/agent node construction and graph update rules
+3. how neighbors are selected / pruned / ranked
+4. node and edge semantics
+5. whether graph state is current-only, predictive, recurrent, or explicitly transitioned in time
+6. exact object called `world state`
+7. whether world state has a factual future target
+8. whether there is a transition/dynamics operator
+9. F07 prediction observability geometry
+10. F08 internal-step / physical-time semantics
+11. what `long horizon` means numerically and mechanistically
+12. whether longer trajectory horizon is the only long-horizon change
+13. whether the world state is predicted into the future or only conditions a longer planner
+14. planner→world and world→planner forward interfaces
+15. interaction graph→planning-query information path
+16. whether other-agent reactions are predicted or only encoded
+17. candidate/action representation and multimodality
+18. action-conditioned world prediction, if any
+19. counterfactual vector I01–I05
+20. risk/safety semantics: explicit state, value, loss, or only interpretation
+21. world-state supervision truth source
+22. policy/value supervision truth source
+23. training topology / shared parameters / gradient coupling
+24. what world machinery remains at inference
+25. matched ablations isolating interaction graph, world state, horizon and planner changes
+26. strongest collision/safety matched control
+27. short-horizon vs long-horizon ablation
+28. prediction/world-state quality → planning evidence
+29. source/version/code status
+30. evaluation-regime correction across nuScenes/NAVSIM/Bench2Drive
 ```
 
 ---
 
-# Required semantic attack: `unified` is vector-valued
+# Required semantic attack 1 — `world state`
 
 Do not accept:
 
 ```text
-world + action tokens in one paper
-→ unified world-action model
+interaction-aware latent
+→ world model
 ```
 
-Instead explicitly fill:
+Trace:
 
 ```text
-representation sharing
-parameter sharing
-tokenizer/codebook sharing
-sequence sharing
-attention visibility
-loss/gradient coupling
-physical-time coupling
-active-together-at-inference
+current observations
+→ graph / latent state
+→ transition or update operator
+→ future/world target, if any
+→ planner use
 ```
 
-A shared Transformer with separate vocabularies and masked information paths is scientifically different from one joint world-action token process.
+Then classify:
+
+```text
+CURRENT SCENE REPRESENTATION
+PREDICTIVE FUTURE STATE
+RECURRENT DYNAMICAL STATE
+INTERACTION MEMORY
+VALUE / SAFETY STATE
+HYBRID
+```
+
+A strong current interaction encoder is scientifically different from a learned future world transition.
 
 ---
 
-# Required discrete-token attack
-
-For every discrete latent/token, trace:
-
-```text
-continuous source object
-→ tokenizer / quantizer
-→ codebook index
-→ token sequence position
-→ prediction loss
-→ decoder / downstream use
-```
-
-Then ask:
-
-```text
-what semantics are preserved by quantization?
-what reconstruction information is lost?
-are world/action codebooks aligned or independent?
-does token likelihood have planning semantics?
-```
-
-Do not infer that discrete tokens are planning-relevant merely because they are efficiently autoregressive.
-
----
-
-# Required temporal attack
-
-Use both:
-
-```text
-F07 — what temporal information is visible when predicting target tokens?
-F08 — does internal generation index correspond to physical scene time?
-```
+# Required semantic attack 2 — `long horizon`
 
 Separate:
 
 ```text
-physical world timestep
-AR token position
-denoising / refinement step
-world/action alternation step
+longer output trajectory horizon
+longer observation/history context
+multi-step predicted world horizon
+persistent latent memory
+multi-stage planner refinement
+reactive closed-loop horizon
 ```
 
-Token generation order must not be confused with physical dynamics order.
+Do not infer long-horizon reasoning merely from a longer waypoint vector.
+
+Use:
+
+```text
+F04/F05/F07/F08
+J08
+P06
+```
+
+to record what actually becomes long.
 
 ---
 
-# Required counterfactual attack
+# Required semantic attack 3 — interaction and safety
 
-If alternative action tokens generate alternative world tokens, fill:
+GraphWorld explicitly claims interaction dynamics and safety-relevant semantics.
+
+Force separate answers:
 
 ```text
-candidate-specific world output?
-per-action factual/simulated consequence target?
-reactive surrounding-agent truth?
-intervention-validity evidence?
+explicit graph relation?                   yes/no
+other-agent future prediction?             yes/no
+other-agent response to ego alternatives?  yes/no
+reactive-agent ground truth?                yes/no
+explicit risk variable?                    yes/no
+explicit collision/value objective?        yes/no
+safety improvement measured?               yes/no
 ```
 
-Again:
+Binding control:
 
 ```text
-action token controls future generation
-!= true counterfactual dynamics
+interaction-aware representation
+!= reactive interaction dynamics
+
+collision reduction
+!= explicit learned risk representation
 ```
 
 ---
 
-# Required comparisons
+# Required cross-paper comparisons
 
 Especially compare:
 
 ```text
-DrivingGPT
-= multimodal autoregressive world/action token modeling
+GraphWorld vs SeerDrive
+= interaction/world state vs future-BEV/planner co-refinement
 
-Epona
-= shared history latent + separate trajectory/visual generative branches
+GraphWorld vs WoTE
+= graph relational state vs explicit recurrent future consequence + utility
 
-Metis
-= specialized world/action experts + asymmetric training coupling + action-only deployment
+GraphWorld vs World4Drive
+= safety/interaction latent vs candidate-conditioned endpoint future
 
-DynFlowDrive
-= candidate-conditioned world teacher removed at deployment
+GraphWorld vs LAW
+= current/interaction representation shaping vs explicit factual future-latent auxiliary prediction
 
-DriveLaW
-= online learned world hidden state participates directly in action generation
+GraphWorld vs Epona
+= graph state + planner conditioning vs shared generative world latent
 
-World4Drive
-= compact candidate endpoint future + online selector
+GraphWorld vs CausalDrive / GameFormer / M2I controls
+= explicit interaction modeling without automatically granting WAM status
 ```
 
-The objective is to determine whether Discrete-WAM occupies a genuinely different interface/lifecycle cell or is a discretized implementation of an already known mechanism.
+The objective is to distinguish **world-model-specific mechanism** from strong graph-based interaction modeling inherited from prediction/planning literature.
 
 ---
 
 # Required workflow
 
 ```text
-official paper / RAW_MD / supplement / official repo
-→ mechanism + formula + token-sequence reconstruction
+official paper / PDF / HTML / official repo if available
 → source/version gate
+→ mechanism + formula + graph-flow reconstruction
 → claim/evidence extraction
 → fill all Ontology V1 + V1.1 + V1.2 + V1.3 dimensions
 → immediate horizontal comparison
@@ -254,39 +253,38 @@ official paper / RAW_MD / supplement / official repo
 ## Required output
 
 ```text
-papers/deep_analysis/P0064_DISCRETE_WAM_DEEP_ANALYSIS_V2.md
-audits/literature/PHASE_C5_DISCRETE_WAM_AUDIT.md
-landscape/P0064_DISCRETE_WAM_ONTOLOGY_PROJECTION.md
+papers/deep_analysis/P0065_GRAPHWORLD_DEEP_ANALYSIS_V2.md
+audits/literature/PHASE_C5_GRAPHWORLD_AUDIT.md
+landscape/P0065_GRAPHWORLD_ONTOLOGY_PROJECTION.md
 comparison matrix extension/update
 ```
 
-Add a new ontology dimension only if existing axes cannot express a scientifically important distinction and the residue survives back-projection.
+Add a new ontology dimension only if existing axes cannot express a scientifically important distinction and the residue survives cross-paper back-projection.
 
 ---
 
 # Stop condition
 
-Do not move to GraphWorld until we can state without ambiguity:
+Do not close Phase C.5 until we can state without ambiguity:
 
 ```text
-what exactly is discrete;
-how world/action tokens are produced and supervised;
-what `unified` means in representation/parameters/sequence/gradients;
-what the training token order is;
-what the inference token order is;
-whether world tokens causally affect action selection online;
-whether action tokens causally condition world prediction online;
-whether both branches remain active at deployment;
-what physical time each generated token corresponds to;
-what consequence truth exists under alternative actions;
-which ablation isolates the world-policy coupling;
+what GraphWorld calls a world state;
+whether that state is predictive/dynamical or current interaction representation;
+what exact mechanism makes planning long-horizon;
+how graph relations enter planning;
+whether other agents are predicted/reactive;
+where safety semantics actually live;
+which ablation isolates graph/world/horizon contributions;
+what survives into deployment;
 what is proven vs author framing.
 ```
 
-## After Discrete-WAM
+## After GraphWorld
 
 ```text
-GraphWorld
+WAM-only comparability QA
+→ consolidate the ten/eleven-anchor design-space map
+→ only then decide whether Phase D problem discovery may reopen
 ```
 
 ## Still forbidden
