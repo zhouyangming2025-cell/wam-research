@@ -2,7 +2,7 @@
 
 ## 唯一下一任务
 
-> **Deep-read P0012 DA-WAM as the second paper in Wave C.6, using the existing WAM reading stack. Keep research-direction convergence paused.**
+> **Deep-read P0002 SafeDrive as the third paper in Wave C.6, using the existing WAM reading stack. Keep research-direction convergence paused.**
 
 Canonical expansion plan:
 
@@ -22,40 +22,38 @@ method design                      FORBIDDEN
 Current normalized count:
 
 ```text
-12 anchors complete
-DriveLaW = latest completed anchor
-DA-WAM   = NEXT
+13 anchors complete
+DriveLaW = COMPLETE
+DA-WAM   = COMPLETE
+SafeDrive = NEXT
 ```
 
 ---
 
-# Why DA-WAM is next
+# Why SafeDrive is next
 
-DA-WAM introduces an interface almost orthogonal to DriveLaW:
+SafeDrive is selected for coverage diversity, not because it supports a preferred research hypothesis.
 
-```text
-DriveLaW:
-one common generative world representation
-→ direct trajectory policy
-
-DA-WAM:
-N candidate trajectories
-→ N action-conditioned future latents
-→ one-to-one future-latent-conditioned scoring
-→ select candidate
-```
-
-This makes DA-WAM a strong pressure test for the current distinctions among:
+It introduces a different world/planning interface:
 
 ```text
-candidate-specific future output
-candidate-specific future truth
-future representation learning
-future-conditioned scoring
-explicit decision factors / utility
-hard-negative safety supervision
-online world-model consumption
+trajectory-conditioned sparse world representation
+→ explicit agent/timestep future interaction states
+→ fine-grained safety reasoning
+→ planning decision
 ```
+
+This is materially different from:
+
+```text
+WoTE       recurrent BEV consequence + utility
+World4Drive compact candidate future + factual-mode score
+GraphWorld  structured interaction state + direct policy
+DA-WAM      candidate-specific latent + factorized utility scorer
+RiskWorld   object-centric risk prediction boundary anchor
+```
+
+SafeDrive therefore pressure-tests whether explicit structured safety/world states add scientific distinctions not captured by implicit latent consequence features.
 
 ---
 
@@ -67,212 +65,180 @@ Resolve:
 
 ```text
 canonical paper version
-official repo: https://github.com/LeapWM/da-wam
+official repository / project page
+code-release state
 paper↔code version relation
-latest public commit / code completeness
 ```
 
-Lock a source commit if implementation is available.
+Lock a commit if code exists.
 
-## 2. Host planner and candidate construction
+## 2. Host planner first
 
-Reconstruct before touching the world model:
+Reconstruct before the world model:
 
 ```text
-current observation X_t
+observation
 → planner representation
-→ N trajectory candidates tau_i
+→ ego trajectory / candidate trajectories
+```
+
+Determine whether SafeDrive is:
+
+```text
+direct policy
+candidate bank + scorer
+trajectory refinement
+or hybrid
+```
+
+## 3. Sparse world representation
+
+Trace exactly what `sparse world` means:
+
+```text
+object / agent tokens?
+map elements?
+BEV points?
+future occupancy?
+interaction states?
+```
+
+Record:
+
+```text
+state granularity
+agent identity persistence
+map representation
+future-time indexing
+```
+
+Do not use `world state` as a generic label.
+
+## 4. Action / trajectory → world coupling
+
+For every predicted future object, determine:
+
+```text
+what ego trajectory/action conditions the predictor?
+how is the action injected?
+are multiple candidate actions predicted separately?
+are parameters shared across branches?
+```
+
+Mandatory counterfactual distinction:
+
+```text
+candidate-specific output?
+candidate-specific factual future target?
+reactive surrounding-agent truth?
+```
+
+## 5. Agent/timestep future prediction
+
+Reconstruct:
+
+```text
+current agent state
++ ego trajectory
+→ future agent/world states
 ```
 
 Determine:
 
 ```text
-how candidates are generated
-N / candidate support
-whether candidates are anchors, diffusion samples or refined proposals
-whether scoring and proposal features are shared
+prediction horizon
+physical timestep
+single endpoint vs sequence
+which agents are modeled
+whether future states are geometric, semantic, occupancy, latent, or mixed
 ```
 
-## 3. Online / EMA predictive representation adaptation
+Use F04/F05/F07/F08.
 
-Trace:
+## 6. Explicit safety reasoning
+
+Trace every safety variable separately:
 
 ```text
-online encoder E_theta(X_t) → Z_t
-EMA target encoder E_bar(X_{t+Delta}) → Z_{t+Delta}
+collision
+road/drivable-area compliance
+TTC / distance margin
+agent interaction risk
+other rule constraints
 ```
 
-Determine exactly:
+For each, answer:
 
 ```text
-what is pretrained (V-JEPA 2.1?)
-what LoRA/adapters are trained
-what remains frozen
-whether planner/scorer gradients update the online encoder
-how EMA target is updated
-whether predictive loss persists throughout planner optimization
+predicted world state?
+hand-computed evaluator?
+learned safety head?
+reward/value target?
+training-only label?
+online decision variable?
 ```
 
-## 4. One-to-one trajectory ↔ future latent path
+Do not collapse all of these into `risk`.
 
-For every candidate `tau_i`, reconstruct:
+## 7. World → planning interface
+
+Determine whether SafeDrive uses future/world information to:
 
 ```text
-tau_i → action representation a_i
-(Z_t, a_i) → shared predictor P_phi
-→ candidate-specific future latent Zhat_i
+condition a direct planner
+score candidates
+refine trajectories
+reject unsafe proposals
+or supervise training only
 ```
 
-Mandatory distinction:
+Draw separate training and inference graphs.
+
+## 8. Supervision truth
+
+For each future agent/world branch, identify:
 
 ```text
-N candidate-specific predictions       YES/NO
-N factual alternative future targets   YES/NO
+logged factual future
+simulator future
+pseudo-label
+rule-derived target
+expert trajectory
+hard-negative target
 ```
 
-Do not allow the first to imply the second.
+If multiple ego candidates exist, explicitly test whether one factual environment future is reused across candidates.
 
-## 5. Factual-future supervision coverage
+## 9. Strongest matched ablations
 
-The paper explicitly acknowledges the offline-log limitation.
-
-Lock down:
+Prioritize controls isolating:
 
 ```text
-expert trajectory tau_exp
-→ nearest candidate i*
-→ only Zhat_i* receives dense future-latent target?
+base planner
++ sparse world modeling
++ action conditioning
++ safety module
++ fine-grained agent/timestep reasoning
 ```
 
-Then determine what all non-expert candidates receive:
+Separate representation gain from safety-evaluator gain.
+
+## 10. Evaluation regime
+
+Classify each result as:
 
 ```text
-factor labels
-utility labels
-ranking loss
-hard-negative supervision
-no future-latent supervision
+open-loop
+NAVSIM non-reactive pseudo-simulation
+reactive simulator closed-loop
+real-car closed-loop
 ```
 
-This is central to the counterfactual vector.
+Do not use the paper's label without auditing benchmark semantics.
 
-## 6. Future-latent-conditioned scorer
+## 11. Full Ontology V1.3 projection
 
-Trace exact scorer inputs:
-
-```text
-current latent Z_t
-+ action representation a_i
-+ predicted future latent Zhat_i
-→ scorer S_psi
-→ interpretable planning factors q_i
-+ overall utility score s_i
-```
-
-Determine:
-
-```text
-factor semantics
-utility target provenance
-ranking target provenance
-how final score aggregates factors
-whether future latent can be ablated while keeping same scorer capacity
-```
-
-## 7. Safety-critical hard negatives
-
-Reconstruct exactly:
-
-```text
-how hard negatives are generated / selected
-what makes them expert-proximate
-which safety dimensions differ
-whether future-latent supervision is attached to them
-whether they train factor heads, score ranking, or both
-```
-
-Compare immediately with:
-
-```text
-DriveSuprim / BeyondDrive-style negative mining
-WoTE explicit utility supervision
-World4Drive factual-mode matching
-```
-
-## 8. Inference graph
-
-Verify deployment path:
-
-```text
-online encoder
-→ N candidate trajectories
-→ N future-latent predictions
-→ future-conditioned scorer
-→ argmax
-```
-
-EMA target network and observed future must be absent.
-
-Measure/record:
-
-```text
-N
-predictor cost per candidate
-shared batching
-latency/FPS
-future-latent dimensionality
-```
-
-## 9. Counterfactual vector
-
-Force explicit answers:
-
-```text
-I01 candidate-specific future output?
-I02 candidate-specific alternative-future supervision?
-I03 intervention truth for unexecuted candidates?
-I04 reactive other-agent response truth?
-I05 external intervention-validity evidence?
-```
-
-Expected pressure point:
-
-```text
-one-to-one prediction architecture
-!= one-to-one factual future supervision
-```
-
-## 10. Strongest matched ablations
-
-Prioritize controls that isolate:
-
-```text
-frozen predictive encoder vs continued JEPA adaptation
-shared future latent vs per-candidate future latent
-trajectory-only scorer vs + future latent
-future latent without factorization vs factorized scorer
-without hard negatives vs + hard negatives
-EMA target / predictive loss contribution
-```
-
-Do not use headline SOTA delta as primary evidence.
-
-## 11. Evaluation regime
-
-Separate:
-
-```text
-NAVSIM-v1
-NAVSIM-v2
-open-loop / non-reactive pseudo-simulation semantics
-any actual reactive closed-loop evidence
-```
-
-Do not upgrade NAVSIM results into reactive intervention validation.
-
-## 12. Full Ontology V1.3 projection
-
-Force-fill A–P and explicitly record:
+Force-fill A–P with explicit:
 
 ```text
 ABSENT
@@ -282,31 +248,27 @@ NOT APPLICABLE
 SOURCE-UNVERIFIED
 ```
 
-Residue must survive merge testing and back-projection before any V1.4 proposal.
+Any proposed new dimension must survive merge testing and back-projection across prior anchors.
 
 ---
 
 # Required immediate cross-paper comparisons
 
-For every important DA-WAM mechanism, compare:
-
 ```text
-DA-WAM vs WoTE
-DA-WAM vs World4Drive
-DA-WAM vs WorldDrive
-DA-WAM vs SeerDrive
-DA-WAM vs Drive-JEPA
-DA-WAM vs DriveLaW
+SafeDrive vs WoTE
+SafeDrive vs DA-WAM
+SafeDrive vs GraphWorld
+SafeDrive vs World4Drive
+SafeDrive vs RiskWorld
 ```
 
 Key questions:
 
 ```text
-Is DA-WAM genuinely more candidate-specific than World4Drive, or only architecturally?
-Does its one-to-one future/scorer path have one-to-one supervision truth?
-Is continued JEPA adaptation materially different from Drive-JEPA frozen/pretrained transfer?
-Are factor heads true utility/value modeling or proxy classification?
-Does predicted future add information beyond trajectory geometry/current scene?
+Is SafeDrive's `safety` an explicit world variable, a value function, or a rule evaluator?
+Does it model other-agent response or only factual/logged motion?
+Does agent/timestep structure add more than an implicit latent future?
+Is safety gain attributable to world prediction or to explicit metric supervision?
 ```
 
 ---
@@ -316,53 +278,40 @@ Does predicted future add information beyond trajectory geometry/current scene?
 After the deep read create at minimum:
 
 ```text
-papers/deep_analysis/P0012_DAWAM_DEEP_ANALYSIS_V2.md
-audits/literature/PHASE_C6_DAWAM_AUDIT.md
-landscape/P0012_DAWAM_ONTOLOGY_PROJECTION.md
-landscape/WAM_COMPARISON_MATRIX_V1_3_DAWAM_EXTENSION.md
+papers/deep_analysis/P0002_SAFEDRIVE_DEEP_ANALYSIS_V2.md
+audits/literature/PHASE_C6_SAFEDRIVE_AUDIT.md
+landscape/P0002_SAFEDRIVE_ONTOLOGY_PROJECTION.md
+landscape/WAM_COMPARISON_MATRIX_V1_3_SAFEDRIVE_EXTENSION.md
 ```
 
-Update:
-
-```text
-state/CURRENT_STATE.md
-state/NEXT_TASK.md
-landscape/WAM_DEEP_READ_EXPANSION_QUEUE_V1.md
-state/DECISION_LOG.md
-```
-
-only after the mechanism is stable.
+Update state/queue only after mechanism and evidence are stable.
 
 ---
 
-# After DA-WAM
+# After SafeDrive
 
 Current core queue:
 
 ```text
-P0002 SafeDrive
 P0005 RiskWorld
 P0007 DriveReward
 ```
 
-Then proceed into simulation/reactivity/evaluation and WAM+VLA control waves defined in the expansion queue.
+Then proceed into simulation/reactivity/evaluation and WAM+VLA control waves.
 
 ---
 
 # Guardrail
 
-Do not use DA-WAM or DriveLaW to revive parked research candidates.
+This remains literature expansion.
 
-This phase asks:
+Do not turn SafeDrive/DA-WAM into a project research direction.
 
-```text
-What does the field contain?
-How do mechanisms differ?
-What evidence supports them?
-```
-
-not:
+The question remains:
 
 ```text
-What should our method be?
+What mechanisms actually exist in the field,
+how are they supervised,
+how are they deployed,
+and what evidence isolates their contribution?
 ```
