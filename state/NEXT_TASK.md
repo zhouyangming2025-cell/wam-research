@@ -2,7 +2,7 @@
 
 ## 唯一下一任务
 
-> **Deep-read Metis under the WAM reading skill stack + Ontology V1/V1.1/V1.2, as the next core-WAM stress test.**
+> **Deep-read DynFlowDrive under the WAM reading skill stack + Ontology V1/V1.1/V1.2, as the next core-WAM stress test.**
 
 ## Completed normalization / stress tests
 
@@ -14,6 +14,7 @@ P0042 WorldDrive   COMPLETE v2
 P0046 World4Drive  COMPLETE v2
 P0061 SeerDrive    COMPLETE v2 first pass
 P0049 Drive-JEPA   COMPLETE v2 first pass
+P0062 Metis        COMPLETE v2 first pass
 ```
 
 Canonical method stack:
@@ -28,147 +29,215 @@ Canonical coordinate system:
 landscape/WAM_DIMENSION_ONTOLOGY_V1.md
 landscape/WAM_DIMENSION_ONTOLOGY_V1_1_AMENDMENT.md
 landscape/WAM_DIMENSION_ONTOLOGY_V1_2_AMENDMENT.md
+```
 
+Current comparison layer:
+
+```text
 landscape/WAM_COMPARISON_MATRIX_V1.md
 landscape/WAM_COMPARISON_MATRIX_V1_1_SEERDRIVE_EXTENSION.md
 landscape/WAM_COMPARISON_MATRIX_V1_2_DRIVEJEPA_EXTENSION.md
+landscape/WAM_COMPARISON_MATRIX_V1_2_METIS_EXTENSION.md
 ```
 
-Drive-JEPA artifacts:
+Metis artifacts:
 
 ```text
-papers/deep_analysis/P0049_DRIVEJEPA_DEEP_ANALYSIS_V2.md
-audits/literature/PHASE_C5_DRIVEJEPA_AUDIT.md
-landscape/P0049_DRIVEJEPA_ONTOLOGY_PROJECTION.md
+papers/deep_analysis/P0062_METIS_DEEP_ANALYSIS_V2.md
+audits/literature/PHASE_C5_METIS_AUDIT.md
+landscape/P0062_METIS_ONTOLOGY_PROJECTION.md
 ```
 
-## Why Metis is next
+## Why DynFlowDrive is next
 
-Metis is currently placed as:
+DynFlowDrive claims that ordinary latent world models use static endpoint regression, while its rectified-flow dynamics model represents the **continuous transition process** of the latent world under candidate trajectories.
+
+Its initial paper-level graph is:
 
 ```text
-joint world/action training
-→ action-only inference
+current multi-view observation
+→ scene representation
+→ multi-mode trajectory proposals
+
+current latent world state + candidate trajectory
+→ rectified-flow velocity field
+→ progressive latent-state transition
+
+flow/reconstruction/stability information
+→ stability-aware multi-mode selection/supervision
+→ final trajectory
 ```
 
-That placement is decision-relevant but still too coarse. The main task is to reconstruct whether world generation is:
+This directly stress-tests several ontology distinctions that Metis did not:
 
 ```text
-a shared generative process with action,
-a training-only auxiliary target,
-a representation-shaping teacher,
-or an online decision mechanism.
+flow denoising time vs physical future time
+endpoint state vs transition path
+candidate-specific future vs true alternative-action future
+world dynamics vs selector/scorer contribution
+prediction stability vs planning utility
 ```
 
-The key scientific question is:
+## Primary scientific question
 
-> **Does Metis genuinely unify world and action modeling at the mechanism level, or does it train them jointly while deployment collapses to an action-only policy whose world branch no longer participates in action selection?**
+> **Does DynFlowDrive obtain its planning gain because rectified-flow world dynamics genuinely capture trajectory-conditioned scene evolution, or because the learned flow field provides a useful stability/selection regularizer over trajectory modes?**
+
+The paper must not be allowed to answer this question with architecture language alone.
 
 ## Mandatory audit targets
 
 Resolve at minimum:
 
 ```text
-1. observation/history representation
-2. world-state / future-world substrate
-3. action representation
-4. exact world target and target truth source
-5. exact action target / policy supervision
-6. whether world and action tokens share backbone, latent space, parameters or only training schedule
-7. whether losses jointly update the same representation
-8. action→world and world→action arrows during training
-9. action→world and world→action arrows during inference
-10. whether future/world tokens are generated at action-only deployment
-11. whether action-only inference still internally consumes world hidden states
-12. training-stage topology and any freeze/distillation stages
-13. F07 prediction temporal/observability geometry
-14. autoregressive / diffusion / flow / token-generation factorization
-15. candidate vs direct policy interface
-16. source/version status, especially if code remains unavailable
-17. matched ablations isolating world/action jointness
-18. strongest alternative explanation for gains
-19. planning evaluation regime and world-generation evaluation regime
-20. relation to Epona / DriveLaW / LAW / Drive-JEPA / WorldDrive
+1. observation/history representation and sensor inputs
+2. planner scene representation vs world-model latent representation
+3. provenance/freeze status of the foundation encoder used for world features
+4. candidate trajectory construction and number of modes
+5. exact action representation entering the world model
+6. exact future latent target and ground-truth lineage
+7. rectified-flow state, flow-time variable and velocity target
+8. what one integration/flow step means scientifically
+9. whether flow time corresponds to physical scene time or only transport/denoising time
+10. whether future scene time is one endpoint, multiple timestamps, or progressive latent path
+11. F07 prediction temporal/observability geometry
+12. whether each candidate gets its own action-conditioned latent transition
+13. whether candidate branches have alternative-action factual supervision
+14. how `stability` is mathematically defined from the flow field
+15. what latent reconstruction discrepancy contributes
+16. how ground-truth trajectory error enters stability-aware selection/training
+17. whether the selector is training-only supervision or remains online at inference
+18. whether claimed “no additional inference overhead” means WM is removed, distilled, or reused only during training
+19. J08 iteration semantics: flow integration vs physical-time rollout vs planner refinement
+20. J09 planner→world carrier
+21. L07 supervision coverage across flow/integration states
+22. strongest matched ablation: static regression vs flow dynamics vs stability selector
+23. direct evidence that better flow/world prediction yields better planning
+24. source-code/repo status and version lock
+25. evaluation regime on nuScenes vs NAVSIM
+26. relation to LAW / WoTE / World4Drive / SeerDrive / Metis
 ```
 
-## Required comparison attacks
+## Required semantic attack: `flow` is overloaded
 
-Do not accept `joint world-action model` as one binary label. Explicitly distinguish:
+Do not accept wording such as `progressive world evolution` until the following are separated:
 
 ```text
-shared representation?
-shared parameters?
-shared latent/token space?
-shared generative process?
-shared gradients?
-world→action online feedback?
-action→world online conditioning?
-world branch required at action inference?
+physical time τ
+= future scene timestamp
+
+flow / ODE transport time s
+= interpolation/integration variable used to transform latent/noise/state
+
+planner iteration k
+= candidate-query refinement or selection iteration
 ```
 
-Compare especially with:
+A continuous path in flow-time does **not automatically mean** the model has supervised every physical intermediate future state.
+
+The audit must trace exact tensor targets and timestamps.
+
+## Required selector attack
+
+DynFlowDrive explicitly introduces a stability-aware multi-mode selector. Therefore every planning gain must be decomposed into at least:
 
 ```text
-Epona
-= shared historical latent + separate trajectory/visual generative branches;
-visual future optional for planning
-
-Drive-JEPA
-= predictive pretraining transferred to encoder;
-predictor absent from action inference
-
-LAW
-= future prediction shapes planner representation during training;
-future output not consumed online
-
-WorldDrive
-= heavy world teacher transformed into lightweight online future surrogate
-
-DriveLaW
-= online learned world hidden state participates directly in action generation
+base multi-mode planner
+→ + static/endpoint latent world prediction if available
+→ + rectified-flow dynamics
+→ + stability criterion
+→ + reconstruction criterion
+→ + final mode supervision/selection
 ```
 
-## Mandatory workflow
+If ablations do not isolate these pieces cleanly, record the unresolved bundle rather than assigning all gain to the dynamic world model.
+
+## Required counterfactual attack
+
+Candidate-conditioned latent transitions must be checked against:
 
 ```text
-official paper / RAW_MD / supplement / official repo if available
-→ mechanism reconstruction
+candidate-specific output?
+YES/NO
+
+candidate-specific observed future truth?
+YES/NO
+
+reactive surrounding-agent responses under each candidate?
+YES/NO
+
+external intervention-validity test?
+YES/NO
+```
+
+Do not infer counterfactual correctness from candidate-conditioned flow generation.
+
+## Required workflow
+
+```text
+official paper / RAW_MD / supplement / official repo
+→ mechanism + formula reconstruction
 → source/version gate
 → claim–evidence extraction
-→ fill all Ontology dimensions including J08/J09/L07/F07
+→ full Ontology V1 + V1.1 + V1.2 projection
 → immediate horizontal comparison
 → residue test
-→ back-project any proposed new dimension before ontology extension
+→ back-project any proposed dimension before ontology extension
 ```
 
-If source code is still unavailable, record exact claims as `paper-verified / source-unverified`; do not invent implementation details.
+## Required comparisons
+
+Especially compare with:
+
+```text
+LAW
+= action-aware future endpoint latent, auxiliary training signal
+
+WoTE
+= candidate-conditioned recurrent BEV transition → explicit utility
+
+World4Drive
+= candidate/intention-conditioned endpoint latent → ScoreNet
+
+SeerDrive
+= endpoint future BEV ↔ planner hidden feature co-refinement
+
+Metis
+= rectified/flow formulation used for action/video generation,
+but future-video branch removed from action inference
+```
+
+The key question is whether DynFlowDrive creates a genuinely different **world dynamics object**, a different **decision criterion**, or both.
 
 ## Required output
 
 ```text
-papers/deep_analysis/<METIS>_DEEP_ANALYSIS_V2.md
-audits/literature/PHASE_C5_METIS_AUDIT.md
-landscape/<METIS>_ONTOLOGY_PROJECTION.md
+papers/deep_analysis/P0063_DYNFLOWDRIVE_DEEP_ANALYSIS_V2.md
+audits/literature/PHASE_C5_DYNFLOWDRIVE_AUDIT.md
+landscape/P0063_DYNFLOWDRIVE_ONTOLOGY_PROJECTION.md
 comparison matrix extension/update
 ```
 
+Add a new ontology dimension only if a residue cannot be represented by the existing axes and survives back-projection.
+
 ## Stop condition
 
-Do not move to DynFlowDrive until we can state without ambiguity:
+Do not move to Discrete-WAM until we can state without ambiguity:
 
 ```text
-what “joint world-action” actually means in tensors/gradients;
-what world information survives into action deployment;
-whether action-only inference still uses an implicit world hidden state;
-what F07 prediction obligation is learned;
-which matched evidence isolates joint world/action training;
-what is proven vs only author framing.
+what physical future object DynFlowDrive predicts;
+what the rectified-flow variable actually represents;
+whether progressive flow states correspond to physical intermediate futures;
+how candidate trajectory conditions world evolution;
+what truth supervises candidate-conditioned futures;
+what stability means mathematically;
+whether WM/stability logic remains online;
+which ablation isolates flow dynamics from selector design;
+what is proven vs author framing.
 ```
 
-## After Metis
+## After DynFlowDrive
 
 ```text
-DynFlowDrive
 Discrete-WAM
 GraphWorld
 ```
