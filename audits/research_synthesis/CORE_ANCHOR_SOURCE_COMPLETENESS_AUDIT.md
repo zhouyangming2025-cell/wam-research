@@ -2,9 +2,9 @@
 
 Last updated: 2026-09-15
 
-Status: **ACTIVE — source-layer completeness gate before GraphWorld**
+Status: **ACTIVE — eleven-anchor source-layer completeness gate before WAM consolidation**
 
-Purpose: separate four different notions that must not be conflated:
+Purpose: keep separate:
 
 ```text
 paper text available
@@ -13,39 +13,38 @@ paper text available
 != source-code mechanism verified
 ```
 
-Canonical intent remains to preserve provenance, audited commit, decision-critical files/functions, source facts, and unresolved implementation questions. A local/exported source snapshot may exist under `repos/`, but scientific completeness is determined by the audit record rather than mere code presence.
+Scientific completeness is determined by provenance + evidence audit, not merely by whether a source tree is present under `repos/`.
 
 ## Status legend
 
 ```text
-PAPER     canonical/raw paper text available in wam-research
+PAPER     canonical/raw paper text available
 ANALYSIS  normalized deep analysis available
 CODE      attributable official implementation exists publicly
-AUDIT     decision-critical implementation paths audited at a locked commit
-BLOCKED   source audit cannot currently be completed because implementation is unavailable/not identifiable
-PARTIAL   source exists/audit exists but does not fully cover the paper's reported mechanism/benchmark branch
+AUDIT     decision-critical source paths audited at locked commit
+PARTIAL   source exists/audit exists but does not fully cover reported mechanism/benchmark branch
+BLOCKED   implementation unavailable/not identifiable
 ```
 
-## Ten normalized anchors
+## Eleven normalized anchors
 
 | Paper | Paper/raw MD | Deep analysis | Official code status | Source audit status | Current source-layer judgment |
 |---|---|---|---|---|---|
-| P0048 LAW | PRESENT | COMPLETE | `BraveGroup/LAW` | **COMPLETE**, commit `b2f6a784247072923c477ab92324d3aa5a9759bf` | HIGH completeness |
-| P0045 WoTE | PRESENT | COMPLETE | `liyingyanUCAS/WoTE` | **COMPLETE for decision-critical target/reactivity path**, commit `298957c128a91d41a1c6075bd0bb6e7e845e093f` | HIGH completeness |
-| P0001 Epona | PRESENT | COMPLETE | `Kevin-thu/Epona` | **COMPLETE for core mechanism**, commit `69b24c55f5ab8b3ffde8fa55e9f833bfe64d2c68` | **SOURCE-COMPLETE for planning/world interface** |
-| P0042 WorldDrive | PRESENT | COMPLETE | `TabGuigui/WorldDrive` | COMPLETE/CORE audited, commit `c375ee1e1fe86ace175609db1ed90fd6db89673b` | HIGH completeness |
-| P0046 World4Drive | PRESENT | COMPLETE | `ucaszyp/World4Drive` | COMPLETE core-interface audit, commit `cffb51adeb1f7d02b49c4b74d7262ded62a33ac8`; NAVSIM implementation equivalence remains PARTIAL | HIGH with benchmark-branch caveat |
-| P0061 SeerDrive | PRESENT | COMPLETE | `LogosRoboticsGroup/SeerDrive` | COMPLETE version/source audit for released implementation | **PARTIAL by design:** released code integrates WoTE-style online evaluation and removes the original paper's iterative interaction, so code cannot be used as a drop-in verification of the paper graph |
-| P0049 Drive-JEPA | PRESENT | COMPLETE | `linhanwang/Drive-JEPA` | COMPLETE first-pass source audit across released NAVSIM paths | HIGH completeness |
-| P0062 Metis | PRESENT | COMPLETE | official repo attributable, but implementation code not released in audited state | **BLOCKED** | PAPER/README verified; implementation SOURCE-UNVERIFIED |
-| P0063 DynFlowDrive | PRESENT | COMPLETE | `xiaolul2/DynFlowDrive`, repo currently README/teaser level in audited state | **BLOCKED** | PAPER verified; implementation SOURCE-UNVERIFIED |
-| P0064 Discrete-WAM | PRESENT | COMPLETE | no attributable official implementation repository identified in current audit | **BLOCKED / MONITOR** | PAPER verified; code-level scheduler/detach/task-sampling SOURCE-UNVERIFIED |
+| P0048 LAW | PRESENT | COMPLETE | `BraveGroup/LAW` | **COMPLETE**, `b2f6a784247072923c477ab92324d3aa5a9759bf` | HIGH |
+| P0045 WoTE | PRESENT | COMPLETE | `liyingyanUCAS/WoTE` | **COMPLETE for decision-critical target/reactivity path**, `298957c128a91d41a1c6075bd0bb6e7e845e093f` | HIGH |
+| P0001 Epona | PRESENT | COMPLETE | `Kevin-thu/Epona` | **COMPLETE for core mechanism**, `69b24c55f5ab8b3ffde8fa55e9f833bfe64d2c68` | **SOURCE-COMPLETE for planning/world interface** |
+| P0042 WorldDrive | PRESENT | COMPLETE | `TabGuigui/WorldDrive` | COMPLETE/CORE, `c375ee1e1fe86ace175609db1ed90fd6db89673b` | HIGH |
+| P0046 World4Drive | PRESENT | COMPLETE | `ucaszyp/World4Drive` | COMPLETE core interface, `cffb51adeb1f7d02b49c4b74d7262ded62a33ac8`; NAVSIM branch equivalence PARTIAL | HIGH with benchmark-branch caveat |
+| P0061 SeerDrive | PRESENT | COMPLETE | `LogosRoboticsGroup/SeerDrive` | COMPLETE version/source audit for released implementation | **PARTIAL by design:** public code is WoTE-integrated variant, not clean original-paper iterative graph |
+| P0049 Drive-JEPA | PRESENT | COMPLETE | `linhanwang/Drive-JEPA` | COMPLETE first-pass source audit across released NAVSIM paths | HIGH |
+| P0062 Metis | PRESENT | COMPLETE | attributable official repo, implementation unreleased in audited state | **BLOCKED** | PAPER/README verified; implementation SOURCE-UNVERIFIED |
+| P0063 DynFlowDrive | PRESENT | COMPLETE | `xiaolul2/DynFlowDrive`, README/teaser only in audited state | **BLOCKED** | PAPER verified; implementation SOURCE-UNVERIFIED |
+| P0064 Discrete-WAM | PRESENT | COMPLETE | no attributable official implementation identified | **BLOCKED / MONITOR** | PAPER verified; scheduler/detach/task-routing SOURCE-UNVERIFIED |
+| P0065 GraphWorld | PRESENT | COMPLETE | no attributable official autonomous-driving implementation identified | **BLOCKED / MONITOR** | PAPER verified; graph/flow/runtime implementation SOURCE-UNVERIFIED |
 
-## Immediate conclusion
+---
 
-The source layer is **not globally complete**, but the previously actionable Epona gap is now closed.
-
-### A. Closed actionable gap — Epona
+# Epona actionable gap — CLOSED
 
 Canonical audit:
 
@@ -60,18 +59,17 @@ Locked source:
 Kevin-thu/Epona@69b24c55f5ab8b3ffde8fa55e9f833bfe64d2c68
 ```
 
-Source-verified core conclusions:
+Core verified facts:
 
 ```text
-shared STT/MST representation feeds TrajDiT and visual FluxDiT;
-planning trajectory is produced before the visual branch and can run with traj_only=True;
+shared STT/MST feature feeds TrajDiT and visual FluxDiT;
+planning can run traj_only=True and skip visual generation;
 future visual output is not consumed by same-step planning;
-training visual condition is factual/logged future ego motion;
-self-generated rollout uses predicted ego motion to condition visual generation;
-visual loss backpropagates into shared STT/MST but not directly into TrajDiT parameters;
-long rollout recurs on generated visual latents + predicted ego motion;
-outer physical-frame rollout is distinct from inner diffusion/flow sampling iterations;
-training includes periodic detached self-generated multi-forward conditioning, so it is not pure teacher forcing.
+training visual condition uses factual/logged ego motion;
+self-generated rollout uses predicted motion to condition visual generation;
+visual loss shapes shared STT/MST but not TrajDiT directly;
+long rollout feeds generated visual latent + predicted ego motion back into the next physical step;
+outer physical rollout != inner diffusion/flow solver iteration.
 ```
 
 Final label:
@@ -80,25 +78,20 @@ Final label:
 P0001 Epona = SOURCE-COMPLETE FOR CORE MECHANISM
 ```
 
-Non-blocking residuals remain around exact checkpoint/table parity and runtime reproduction.
+---
 
-### B. Secondary optional follow-up
-
-```text
-P0046 World4Drive NAVSIM branch equivalence
-```
-
-The core implementation is already source-verified. Only attempt a further NAVSIM-specific audit if a distinct released NAVSIM implementation can be identified; do not downgrade the completed core audit merely because that branch is not found.
-
-### C. Not currently fillable from official source
+# Current blocked/monitor set
 
 ```text
 P0062 Metis
 P0063 DynFlowDrive
 P0064 Discrete-WAM
+P0065 GraphWorld
 ```
 
-Do not substitute unofficial reimplementations for missing official code. Retain explicit states:
+Do not substitute unofficial reimplementations for absent/unreleased official code.
+
+Use:
 
 ```text
 PAPER-VERIFIED
@@ -106,29 +99,70 @@ OFFICIAL-README-VERIFIED where applicable
 SOURCE-UNVERIFIED
 ```
 
-These belong on a periodic source-release watchlist rather than blocking field reconstruction indefinitely.
+and keep them on periodic source-release watch.
 
-## Source snapshot governance note
+---
 
-On 2026-09-15 an Epona source snapshot was imported under:
+# Secondary partial item
+
+```text
+P0046 World4Drive NAVSIM branch equivalence
+```
+
+Core mechanism is already source-verified. A separate NAVSIM source reconciliation is optional and must not downgrade the completed core audit merely because that implementation branch has not been identified.
+
+---
+
+# GraphWorld source boundary
+
+Canonical paper audit:
+
+```text
+audits/literature/PHASE_C5_GRAPHWORLD_AUDIT.md
+```
+
+As of 2026-09-15:
+
+```text
+raw paper / figures       PRESENT
+paper mechanism audit     COMPLETE FIRST PASS
+official implementation  NOT IDENTIFIED
+```
+
+Important false-positive guard:
+
+```text
+google-research/graphworld
+```
+
+is an unrelated synthetic graph-learning benchmark and must not be attached to the autonomous-driving GraphWorld paper.
+
+---
+
+# Source snapshot governance note
+
+An Epona source snapshot was imported under:
 
 ```text
 repos/Epona/
 wam-research commit a9926b905247505df01ddc4ce28fb71b193303d9
 ```
 
-This differs from the earlier convention that external repositories remain only local/ignored. The snapshot is MIT-licensed and commit-pinned, so there is no immediate scientific-evidence problem, but repository-governance policy should be normalized later:
+This differs from the earlier convention of keeping external source checkouts local/ignored. The snapshot is MIT-licensed and commit-pinned, so there is no immediate evidence-integrity issue, but repository-governance policy should eventually be normalized:
 
 ```text
-Option A: keep selected official source snapshots vendored and manifest them consistently;
-Option B: restore external repos to local-only and retain only audit/evidence Markdown in wam-research.
+A. vendor selected official source snapshots intentionally
+or
+B. keep external source local and store only provenance + audit evidence
 ```
 
-Do not mix the two policies silently across anchors.
+Do not mix the two policies accidentally.
 
-## Canonical source-completeness rule going forward
+---
 
-For every new core anchor, record independently:
+# Canonical source-completeness rule going forward
+
+For every core anchor record independently:
 
 ```text
 canonical paper/version
@@ -142,7 +176,7 @@ inference code available?
 evaluation code available?
 checkpoint/config available?
 source audit complete?
-paper↔code mechanism consistency?
+paper↔code consistency?
 unresolved source questions
 ```
 
@@ -155,4 +189,4 @@ SOURCE-PARTIAL
 SOURCE-BLOCKED
 ```
 
-No paper should be called simply `COMPLETE` when source-level evidence is decision-critical unless the relevant completeness qualifier is explicit.
+No paper should be called simply `COMPLETE` when source-level evidence is decision-critical unless the qualifier is explicit.
