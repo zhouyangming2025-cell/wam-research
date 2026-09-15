@@ -6,6 +6,141 @@ Newest entry first.
 
 ---
 
+## 2026-09-15 — Metis normalized; asymmetric world-action co-training separated from online world reasoning; Ontology V1.2 retained
+
+**Decision**
+
+P0062 Metis completed the next post-ontology stress test using the WAM reading skill stack, paper equations/appendix, official repository state and dimension-first back-projection.
+
+Canonical artifacts:
+
+```text
+papers/deep_analysis/P0062_METIS_DEEP_ANALYSIS_V2.md
+audits/literature/PHASE_C5_METIS_AUDIT.md
+landscape/P0062_METIS_ONTOLOGY_PROJECTION.md
+landscape/WAM_COMPARISON_MATRIX_V1_2_METIS_EXTENSION.md
+```
+
+**Source/version boundary**
+
+```text
+paper: arXiv:2606.15869 v1
+official repo: LogosRoboticsGroup/Metis
+latest observed public commit: 7677b62d786cff8bb2044b489bd41f3d59514b43
+```
+
+As of 2026-09-15, the official repository still does not expose training/inference/evaluation implementation despite an earlier August release plan. Therefore implementation details remain `SOURCE-UNVERIFIED`.
+
+An unresolved reporting inconsistency is retained rather than repaired by inference:
+
+```text
+main method/README VGE: Wan2.2-5B
+expert-capacity table labels: Wan2.2-14B
+```
+
+**Stable mechanism judgment**
+
+Metis must not be summarized as an online future-video planner. Its asymmetric training graph is:
+
+```text
+FORWARD:
+current context → action expert → action representation → future-video expert
+future-video → action expert = MASKED
+
+BACKWARD:
+future-video loss → VGE → action expert through action-conditioned dependence
+
+DEPLOYMENT:
+current context → action expert flow denoising → trajectory
+explicit future-video generation = bypassed
+```
+
+Canonical subtype:
+
+```text
+TRAINING-ONLY ASYMMETRIC WORLD-ACTION CO-TRAINING
+→ WORLD-LOSS-SHAPED ACTION EXPERT
+→ ACTION-ONLY FLOW POLICY
+```
+
+This adds an important stable distinction:
+
+```text
+world→action gradient influence
+!=
+world→action forward information flow
+```
+
+**Strongest evidence**
+
+World-task co-training:
+
+```text
+w/o video co-training   87.4 PDMS / 87.9 EPDMS
+w/  video co-training   89.1 PDMS / 89.5 EPDMS
+```
+
+Matched attention topology at 320×384:
+
+```text
+Joint       87.4 navtest / 28.0 navhard EPDMS
+Isolated    88.3         / 29.4
+Asymmetric  88.8         / 31.6
+```
+
+Therefore tighter/symmetric coupling is not automatically better; the asymmetric training route is useful relative to full isolation in the reported architecture.
+
+No dedicated quantitative future-video fidelity metric was identified, so:
+
+```text
+video co-training benefit
+!=
+proof that better world-prediction fidelity causes better planning
+```
+
+**Historical boundary**
+
+Metis cites Fast-WAM and describes the decoupled inference formulation as inspired by it. The broad principle:
+
+```text
+world/video co-training during training
+→ skip explicit future generation at inference
+```
+
+is therefore prior art. Metis's differentiating mechanism is the specific MoT expert separation + asymmetric attention + video-loss→AE gradient route, not the lifecycle idea alone.
+
+**Ontology stress-test result**
+
+No new dimension survived residue testing. Metis's distinctive directional asymmetry is already expressible by:
+
+```text
+E01/E02  action→world forward conditioning
+J04      causal/computational coupling direction
+L04      gradient coupling direction
+M01-M03  future-knowledge lifecycle / model transformation
+```
+
+Therefore:
+
+```text
+Ontology V1.2 remains active.
+NO V1.3 amendment is authorized from Metis.
+```
+
+This is treated as evidence that the ontology is becoming stable rather than requiring paper-specific growth.
+
+**Next**
+
+```text
+DynFlowDrive
+```
+
+Primary next stress test: separate rectified-flow transport time from physical future time and isolate flow-dynamics contribution from stability-aware trajectory selection.
+
+Phase D remains **PAUSED**. No research-gap declaration or method design is authorized.
+
+---
+
 ## 2026-09-15 — Drive-JEPA normalized; predictive completion separated from causal future forecasting; Ontology V1.2 authorized
 
 **Decision**
