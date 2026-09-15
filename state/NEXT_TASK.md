@@ -2,104 +2,155 @@
 
 ## 唯一下一任务
 
-> Deep-read **SeerDrive** as the third core anchor in **Phase C.5 — Core-WAM Coverage Correction**.
+> **Dimension-first deep-read Epona** as the third ontology-discovery anchor, before resuming broad Phase C.5 coverage.
 
-Canonical coverage audit:
+## Why the task changed
 
-```text
-landscape/CORE_WAM_2_2_COVERAGE_AUDIT.md
-```
-
-Completed audits:
+The project identified a quality bottleneck more fundamental than missing-paper coverage:
 
 ```text
-audits/literature/PHASE_C5_WORLDDRIVE_AUDIT.md
-audits/literature/PHASE_C5_WORLD4DRIVE_AUDIT.md
+many papers exist
+but single-paper analysis is uneven
++ important mechanisms are not projected onto one shared dimension space
++ paper-specific narratives hide absent/weak dimensions
+→ premature field synthesis becomes unreliable
 ```
 
-## Status
+Therefore broad core-WAM expansion is temporarily paused while the project rebuilds the understanding layer on representative anchors.
+
+This is not a reversal of `FIELD UNDERSTANDING FIRST`; it is a stricter implementation of it.
+
+## Active ontology-discovery sequence
 
 ```text
-Phase D           PAUSED
-Phase C.5         ACTIVE
-WorldDrive        COMPLETE
-World4Drive       COMPLETE
-SeerDrive         NEXT
-Drive-JEPA        PENDING
-Metis             PENDING
-DynFlowDrive      PENDING
-Discrete-WAM      PENDING
-GraphWorld        PENDING
+P0048 LAW          COMPLETE — dimension-first v2
+P0045 WoTE         COMPLETE — dimension-first v2
+P0001 Epona        NEXT
+P0042 WorldDrive   strong audit exists → re-project after Epona
+P0046 World4Drive  strong audit exists → re-project after Epona
 ```
 
-## Stable comparison carried forward
+Canonical working artifacts:
 
 ```text
-LAW
-= training-only future-latent shaping
-
-WorldDrive
-= DISTILLED FORESIGHT:
-  full generative future teacher during training
-  → lightweight candidate future surrogate at inference
-
-World4Drive
-= ONLINE LATENT FORESIGHT:
-  six intentions → six trajectories → six future latents
-  → ScoreNet → select
-
-WoTE
-= online future BEV rollout → reward
-
-DriveLaW
-= online world-generator hidden state → direct action generator
-
-DA-WAM
-= candidate → future latent → score
+papers/deep_analysis/P0048_LAW_DEEP_ANALYSIS_V2.md
+papers/deep_analysis/P0045_WOTE_DEEP_ANALYSIS_V2.md
+landscape/WAM_DIMENSION_DISCOVERY_LOG.md
 ```
 
-## SeerDrive audit target
-
-The paper appears to introduce bidirectional coupling between future-scene modeling and planning. Trace exactly:
+External reading-method references now available:
 
 ```text
-1. scene representation: RGB/BEV/latent and temporal history
-2. first planning trajectory/proposals
-3. first future-scene prediction
-4. direction future scene → trajectory refinement
-5. direction planned trajectory → future scene refinement
-6. number of iterative rounds and whether weights are shared
-7. exact future supervision and whether it is factual or candidate-specific
-8. inference-time loop: what remains online and how much computation it costs
-9. trajectory multimodality / candidate selection mechanism
-10. matched ablations for each coupling direction and iteration count
-11. evaluation regime(s), horizon, latency
-12. relation to PPAD/GameFormer iterative prediction-planning predecessors
-13. relation to LAW/World4Drive/WoTE/DA-WAM
-14. strongest evidence and strongest simpler explanation
+skills/external/paper-deep-reader-skill/
+skills/external/agent-paper-reader/
 ```
 
-Required classification:
+Their useful mechanisms are adopted as a pilot, but the project adds a WAM-specific requirement:
+
+> Every module/design choice must immediately trigger a horizontal comparison: who else performs the same scientific function, how, with what supervision/interface/evidence, and what does that reveal as a comparison dimension?
+
+## Epona audit target
+
+Do **not** read Epona as a video-generation paper only. Reconstruct its exact world/action architecture and test every existing dimension even when Epona does not emphasize it.
+
+At minimum trace:
 
 ```text
-Is SeerDrive primarily:
-A. iterative predictive representation refinement,
-B. bidirectional online world↔planning co-refinement,
-C. candidate consequence evaluation,
-D. another mechanism?
+1. exact input/history modalities and temporal span
+2. shared representation F: how it is constructed and what semantics it is trained to preserve
+3. MST or equivalent fusion mechanism: inputs, outputs, token/query structure
+4. TrajDiT: trajectory target, stochastic process, conditioning, supervision
+5. VisDiT: visual-future target, stochastic process, conditioning, supervision
+6. whether trajectory and visual branches share parameters, latent state, losses, or only conditioning context
+7. exact trajectory → visual-future action-conditioning path
+8. whether visual future ever feeds back into trajectory selection/refinement at inference
+9. whether trajectory generation itself is considered part of the world model or an attached planner
+10. training graph vs deployed inference graph
+11. joint loss: which gradients couple world representation and trajectory policy
+12. multimodality: trajectory modes, visual modes, coupling between them
+13. factual vs candidate-specific vs counterfactual supervision
+14. other-agent interaction/reactivity semantics
+15. prediction horizon / trajectory horizon / autoregressive rollout horizon
+16. world-state representation and dynamics operator
+17. inference latency and whether visual generation is needed to obtain the plan
+18. evaluation: visual generation evidence vs planning evidence must be separated
+19. matched ablations that isolate joint modeling, action conditioning, trajectory branch, visual branch
+20. relation to LAW, WoTE, WorldDrive and World4Drive on every relevant discovered axis
 ```
 
-Historical novelty must be separated from older iterative prediction-planning concepts such as PPAD/GameFormer.
+## Special Epona questions generated by LAW + WoTE
+
+```text
+A. Is Epona consequence→value→selection like WoTE, or joint action/world generation without an explicit evaluator?
+B. Does visual future causally change the selected trajectory, or are both outputs siblings conditioned on a shared past latent?
+C. If trajectory conditions VisDiT, is this one-way action→world coupling or genuinely bidirectional world↔action reasoning?
+D. What is the source of trajectory multimodality, and is visual multimodality aligned to trajectory modes?
+E. Does Epona have an explicit value/reward semantics at all?
+F. What is the counterfactual level of its multiple/generated futures?
+G. Is visual realism a planning mechanism or a separately trained/evaluated capability?
+H. Compared with LAW, what moves from auxiliary prediction into central generative modeling?
+I. Compared with WoTE, what is lost/gained by joint generation without explicit candidate reward?
+```
+
+## Required output
+
+Create:
+
+```text
+papers/deep_analysis/P0001_EPONA_DEEP_ANALYSIS_V2.md
+```
+
+Then update:
+
+```text
+landscape/WAM_DIMENSION_DISCOVERY_LOG.md
+```
+
+Rules:
+
+```text
+- fill existing dimensions even if result is ABSENT / NOT REPORTED / NOT EVALUATED
+- add dimensions only when a real scientific choice cannot be expressed by existing axes
+- split overly coarse dimensions when Epona exposes hidden distinctions
+- separate AUTHOR CLAIM / DIRECT EVIDENCE / OUR INFERENCE / UNPROVEN
+- no novelty/gap conclusion yet
+```
 
 ## Stop condition
 
-Do not move to Drive-JEPA until the full deployed SeerDrive loop can be stated without ambiguity and its world-model contribution is separated from generic iterative decoder/refinement gains.
+Do not freeze `WAM_DIMENSION_ONTOLOGY_V1.md` yet.
+
+Epona is complete only when:
+
+```text
+shared representation
++ trajectory generation
++ visual generation
++ action/world conditioning directions
++ training/inference graphs
++ evidence boundaries
+```
+
+can be stated without ambiguity and compared explicitly with LAW + WoTE.
+
+After Epona, re-project WorldDrive and World4Drive. Only then perform the first ontology merge/split pass.
+
+## Deferred work
+
+```text
+SeerDrive       DEFERRED until ontology-discovery pass completes
+Drive-JEPA      DEFERRED
+Metis           DEFERRED
+DynFlowDrive    DEFERRED
+Discrete-WAM    DEFERRED
+GraphWorld      DEFERRED
+```
 
 ## Still forbidden
 
 ```text
-no gap/problem selection
+no research-gap declaration
 no method design
-no broad VLA expansion
 no forced risk-field insertion
+no conclusion from missing dimensions before prior-art check
 ```
