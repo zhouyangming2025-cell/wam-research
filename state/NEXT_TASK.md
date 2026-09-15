@@ -2,183 +2,133 @@
 
 ## 唯一下一任务
 
-> **Merge/split the dimensions discovered from LAW + WoTE + Epona + WorldDrive + World4Drive and build the first stable WAM comparison ontology + matrix.**
+> **Deep-read SeerDrive under `WAM_DIMENSION_ONTOLOGY_V1` and use it as the first post-ontology stress test.**
 
-## Current status
-
-```text
-P0048 LAW          COMPLETE v2
-P0045 WoTE         COMPLETE v2
-P0001 Epona        COMPLETE v2
-P0042 WorldDrive   COMPLETE v2
-P0046 World4Drive  COMPLETE v2
-```
-
-Canonical deep analyses:
+## Current normalization status
 
 ```text
-papers/deep_analysis/P0048_LAW_DEEP_ANALYSIS_V2.md
-papers/deep_analysis/P0045_WOTE_DEEP_ANALYSIS_V2.md
-papers/deep_analysis/P0001_EPONA_DEEP_ANALYSIS_V2.md
-papers/deep_analysis/P0042_WORLDDRIVE_DEEP_ANALYSIS_V2.md
-papers/deep_analysis/P0046_WORLD4DRIVE_DEEP_ANALYSIS_V2.md
+P0048 LAW          COMPLETE v2 + matrix projection
+P0045 WoTE         COMPLETE v2 + matrix projection
+P0001 Epona        COMPLETE v2 + matrix projection
+P0042 WorldDrive   COMPLETE v2 + matrix projection
+P0046 World4Drive  COMPLETE v2 + matrix projection
+
+WAM_DIMENSION_ONTOLOGY_V1   COMPLETE
+WAM_COMPARISON_MATRIX_V1    COMPLETE FIRST PROJECTION
 ```
 
-Dimension-discovery sources:
-
-```text
-landscape/WAM_DIMENSION_DISCOVERY_LOG.md
-landscape/WAM_DIMENSION_DISCOVERY_ADDENDUM_EPONA_WORLDDRIVE.md
-landscape/WAM_DIMENSION_DISCOVERY_ADDENDUM_WORLD4DRIVE.md
-```
-
-## Why synthesis is mandatory now
-
-The five anchors expose fundamentally different ways future/world knowledge enters planning:
-
-```text
-LAW
-= future prediction as auxiliary representation shaping
-
-WoTE
-= online candidate consequence rollout → explicit utility/reward → selection
-
-Epona
-= shared world representation + direct generative trajectory policy;
-  visual future is a sibling branch, not required by planning inference
-
-WorldDrive
-= generative-WM representation inheritance
-  + heavy future teacher → distilled lightweight future surrogate → online ranking
-
-World4Drive
-= direct online compact candidate future latent
-  → factual-future/mode ScoreNet → selection
-```
-
-Continuing to add papers before consolidating these discoveries would reproduce the original repository problem: many paper notes but no stable comparison coordinates.
-
-## Required outputs
-
-Create:
+Canonical comparison system:
 
 ```text
 landscape/WAM_DIMENSION_ONTOLOGY_V1.md
 landscape/WAM_COMPARISON_MATRIX_V1.md
 ```
 
-### Output 1 — WAM_DIMENSION_ONTOLOGY_V1.md
+## Why SeerDrive is next
 
-Do not simply concatenate the >60 provisional discovery dimensions. Perform an explicit merge/split pass.
-
-Each stable dimension must contain:
+SeerDrive appears to introduce bidirectional coupling between future-scene modeling and planning. It is therefore a strong stress test for dimensions that the first five anchors only partially exercised:
 
 ```text
-Dimension name
-Scientific question
-Why it matters
-Allowed / typical values
-How to distinguish similar values
-Evidence required
-Common misclassification traps
-Anchor examples
+J04 causal coupling direction
+J07 task-mode inference graph
+L02–L04 representation/parameter/gradient jointness
+F04–F06 iterative future modeling and rollout
+I01–I05 counterfactuality/reactivity
+M01–M06 future-knowledge lifecycle
 ```
 
-Recommended high-level families to pressure-test, not blindly accept:
+The main scientific question is:
+
+> Is SeerDrive genuinely a new **online bidirectional world↔planning co-refinement interface**, or is it mainly an older iterative prediction-planning refinement pattern expressed in future-scene latent space?
+
+## Mandatory workflow
+
+Do not write a conventional SeerDrive summary first.
+
+Use:
 
 ```text
-A. problem / role of world knowledge
-B. observation and current-state representation
-C. representation provenance / foundation priors
-D. action and candidate space
-E. action→world conditioning
-F. dynamics / future temporal modeling
-G. future supervision / truth sources
-H. multimodal branch assignment
-I. counterfactuality / reactivity
-J. world→planning interface
-K. scorer / utility semantics
-L. training topology / gradient coupling
-M. future-knowledge lifecycle / deployment path
-N. compute / pruning / latency
-O. evaluation regime / evidence attribution
-P. safety / uncertainty / risk semantics
+paper/source facts
+→ fill Ontology A–P
+→ identify mechanism residue not expressible by V1
+→ compare every important module to prior anchors and historical predecessors
+→ only then write narrative synthesis
 ```
 
-Do not force every family to survive if dimensions can be merged more cleanly.
-
-### Output 2 — WAM_COMPARISON_MATRIX_V1.md
-
-Project all five anchors into the same ontology.
-
-Rules:
+Every ontology dimension must receive a value or explicit:
 
 ```text
-1. Every stable dimension must be filled for every anchor.
-2. Use ABSENT / NOT REPORTED / NOT EVALUATED / NOT APPLICABLE explicitly.
-3. A paper cannot stay inside its own preferred narrative.
-4. Separate AUTHOR CLAIM / DIRECT EVIDENCE / OUR INFERENCE where interpretation is disputed.
-5. Counterfactuality must at least separate:
-   - candidate-specific output
-   - alternative-action supervision
-   - reactive other-agent response evidence
-6. Scorer semantics must distinguish utility/value from factual-consistency/mode matching.
-7. Representation gains must separate imported foundation priors from WM-specific future-model learning.
-8. Planning gains must use strongest matched controls, not headline SOTA deltas.
+ABSENT
+NOT REPORTED
+NOT EVALUATED
+NOT APPLICABLE
+UNCLEAR / NEEDS SOURCE AUDIT
 ```
 
-## Mandatory merge/split tests
+## SeerDrive audit targets
 
-Before freezing ontology v1, explicitly test these discoveries:
+At minimum resolve:
 
 ```text
-1. `action-conditioned` is too coarse:
-   provenance / representation / multiplicity / injection / support need separation.
+1. exact observation/history representation
+2. current world state vs predicted future state
+3. first trajectory/proposal generation
+4. first future-scene prediction
+5. exact world→trajectory refinement arrow
+6. exact trajectory→world refinement arrow
+7. number of iterations and weight sharing
+8. whether planning/world branches share representation, parameters and gradients
+9. future target and truth source
+10. whether future supervision is factual, candidate-specific, teacher-generated or simulated
+11. whether multiple candidates persist across iterations
+12. scorer semantics if a scorer exists
+13. whether predicted future directly changes deployed action
+14. inference-time modules and compute
+15. matched ablations for each coupling direction
+16. iteration-count ablation
+17. evaluation regime / reactivity
+18. counterfactual output vs counterfactual supervision
+19. relation to LAW / WoTE / Epona / WorldDrive / World4Drive
+20. relation to PPAD / GameFormer / earlier iterative prediction-planning methods
+```
 
-2. `joint world-action modeling` is too coarse:
-   shared representation / parameters / gradients / online causal feedback need separation.
+## Required output
 
-3. `counterfactual` is too coarse:
-   output branching / supervision branching / behavioral reactivity need separation.
+Create a dimension-first deep analysis and update the matrix:
 
-4. `future→score` is too coarse:
-   utility / risk / imitation / factual consistency / mode posterior need separation.
+```text
+papers/deep_analysis/<SeerDrive>_DEEP_ANALYSIS_V2.md
+landscape/WAM_COMPARISON_MATRIX_V1.md
+```
 
-5. `world-model gain` is too coarse:
-   foundation prior / predictive representation / candidate generator / evaluator / future state contribution need attribution.
+If SeerDrive reveals a mechanism that cannot be represented by Ontology V1, do **not** force-fit it. Instead:
 
-6. `online vs offline WM` is too coarse:
-   future-knowledge lifecycle must represent discard, sibling branch, direct online transition, and teacher→student distillation.
-
-7. `future representation` is too coarse:
-   endpoint / sequence / recurrent rollout / distilled summary and current-vs-future state must be separated.
+```text
+fill existing dimensions first
+→ document the residue
+→ propose exact new/split dimension
+→ back-project that dimension onto all five existing anchors
+→ version ontology only after the back-projection succeeds
 ```
 
 ## Stop condition
 
-Do not resume new-paper reading until we can take an arbitrary new WAM paper and systematically answer, under one shared coordinate system:
+Do not move to Drive-JEPA until we can state without ambiguity:
 
 ```text
-what world/current state it represents
-where that representation came from
-what actions/candidates it considers
-how actions condition future prediction
-what future object it predicts
-how that future is supervised
-whether alternatives have real/simulated/reactive truth
-how world information changes the final action
-what the scorer actually means
-where future knowledge lives at deployment
-what computation is paid online
-what experiment truly isolates the claimed mechanism
+what object is iterated
+what arrows are genuinely bidirectional
+what is supervised at each round
+what remains online
+what is world modeling vs generic iterative decoder refinement
+what matched evidence isolates the claimed world↔planning coupling
 ```
 
-## After ontology + matrix
+## After SeerDrive
 
-Resume core-WAM coverage correction in this order unless new evidence changes priority:
+Unless new evidence changes priority:
 
 ```text
-SeerDrive
 Drive-JEPA
 Metis
 DynFlowDrive
@@ -186,13 +136,12 @@ Discrete-WAM
 GraphWorld
 ```
 
-Every new anchor must be projected into ontology v1 and is allowed to add/split dimensions if genuinely necessary.
-
 ## Still forbidden
 
 ```text
 no research-gap declaration
 no method design
+no broad VLA expansion
 no forced risk-field insertion
-no novelty conclusion from missing cells
+no novelty conclusion from missing ontology cells
 ```
