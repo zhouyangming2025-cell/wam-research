@@ -2,397 +2,275 @@
 
 ## 唯一下一任务
 
-> **Perform WAM 11-anchor Design Space Consolidation + comparability/evidence QA before any research-gap declaration or method design.**
+> **Adversarially validate the Tier-1 WAM scientific tensions against broader literature and falsification logic before any research-gap or method proposal.**
 
-GraphWorld is now the final completed planned Phase C.5 core-WAM stress test.
+The 11-anchor consolidation gate is now complete.
 
-Completed anchor set:
-
-```text
-P0048 LAW
-P0045 WoTE
-P0001 Epona
-P0042 WorldDrive
-P0046 World4Drive
-P0061 SeerDrive
-P0049 Drive-JEPA
-P0062 Metis
-P0063 DynFlowDrive
-P0064 Discrete-WAM
-P0065 GraphWorld
-```
-
-Canonical coordinate system remains:
+Completed synthesis artifacts:
 
 ```text
-landscape/WAM_DIMENSION_ONTOLOGY_V1.md
-landscape/WAM_DIMENSION_ONTOLOGY_V1_1_AMENDMENT.md
-landscape/WAM_DIMENSION_ONTOLOGY_V1_2_AMENDMENT.md
-landscape/WAM_DIMENSION_ONTOLOGY_V1_3_AMENDMENT.md
-```
-
-Latest comparison layer:
-
-```text
-landscape/WAM_COMPARISON_MATRIX_V1_3_GRAPHWORLD_EXTENSION.md
-```
-
-GraphWorld artifacts:
-
-```text
-papers/deep_analysis/P0065_GRAPHWORLD_DEEP_ANALYSIS_V2.md
-audits/literature/PHASE_C5_GRAPHWORLD_AUDIT.md
-landscape/P0065_GRAPHWORLD_ONTOLOGY_PROJECTION.md
-```
-
----
-
-# Why consolidation is now higher value than reading paper 12
-
-The eleven anchors now span the main planning-centric WAM mechanisms:
-
-```text
-predictive auxiliary representation
-predictive pretraining / transfer
-shared world representation + direct policy
-world-loss-shaped action policy
-training-only consequence teacher
-shared discrete world-policy model
-online structured world-state conditioning
-online distilled consequence representation
-online compact future-mode selection
-online recurrent consequence + explicit utility
-online future/planner co-refinement
-```
-
-Continuing paper accumulation before consolidating would increase coverage but decrease coordinate clarity.
-
-The next phase must answer:
-
-> **Which papers are actually comparable on the same scientific axis, and which apparent disagreements are artifacts of different representation, supervision, deployment or evaluation regimes?**
-
----
-
-# Required outputs
-
-Create at minimum:
-
-```text
+landscape/WAM_MECHANISM_FAMILIES_V2.md
 landscape/WAM_DESIGN_SPACE_MAP_V2.md
 audits/research_synthesis/WAM_11_ANCHOR_COMPARABILITY_QA.md
 landscape/WAM_EVIDENCE_STRENGTH_MATRIX.md
-landscape/WAM_MECHANISM_FAMILIES_V2.md
-```
-
-Optional if justified:
-
-```text
 landscape/WAM_RESEARCH_TENSIONS_V1.md
 ```
 
-Do **not** yet create final research gaps/method proposals. `RESEARCH_TENSIONS` may state contradictions or unresolved scientific tensions only.
+Canonical coordinate system remains Ontology V1.3.
 
 ---
 
-# Task 1 — Rebuild the design space from mechanisms, not substrates
+# Why the next step changes
 
-Do not organize mainly as:
+The anchor set is now sufficiently normalized that reading paper 12 by default has lower value than attacking the scientific tensions already exposed.
+
+The objective is no longer:
 
 ```text
-RGB / BEV / latent / token / graph
+find another interesting mechanism
 ```
 
-Those are representation substrates, not the highest-level planning mechanism.
-
-Primary mechanism families should be derived from planning interface, e.g.:
+but:
 
 ```text
-A. future-as-training signal
-B. predictive representation pretraining / inheritance
-C. shared world representation + direct policy
-D. training-only world consequence teacher / label generator
-E. online world-state-conditioned direct policy
-F. online distilled future consequence evaluator
-G. online compact future-mode selector
-H. online recurrent consequence model + explicit utility
-I. online world/planner internal co-refinement
-J. shared world-policy generative backbone with planning-only deployment
-```
-
-Then place every anchor with evidence.
-
----
-
-# Task 2 — Separate six forms of `world helps planning`
-
-Force every paper into explicit answers:
-
-```text
-1. representation shaping?
-2. parameter/gradient sharing?
-3. online world state conditioning?
-4. online candidate consequence prediction?
-5. explicit utility/value over consequence?
-6. search/selection over alternative actions?
-```
-
-No paper may be summarized simply as:
-
-```text
-world model improves planning
+determine whether an apparent tension is already resolved by prior art,
+merely benchmark-specific,
+or genuinely survives adversarial falsification.
 ```
 
 ---
 
-# Task 3 — Build a future-truth taxonomy
+# Tier-1 tensions to validate
 
-For each anchor separate:
+## T2 — Explicit consequence rollout vs compact world-state conditioning
+
+Competing hypotheses:
 
 ```text
-future object predicted
-future target provenance
-one factual future vs alternative futures
-candidate-specific output?
-candidate-specific supervision?
-reactive other-agent truth?
-external intervention validation?
+H1 explicit action-conditioned rollout is necessary for hard interactive decisions
+H2 compact decision-relevant world state is sufficient for most decisions
 ```
 
-Mandatory control:
+Core anchors:
 
 ```text
-multiple predicted futures
-!=
-multiple counterfactual truths
+WoTE / WorldDrive / World4Drive
+vs
+GraphWorld / Epona
+```
+
+Required broader search:
+
+```text
+model-based RL / latent planning
+MPC / value-equivalent models
+policy distillation from world models
+compact sufficient-state / bisimulation-like representations
+end-to-end AD consequence modeling
+```
+
+Mandatory question:
+
+> Has the field already tested rollout-vs-compact-conditioning under matched compute/data and interaction difficulty?
+
+---
+
+## T3 — Training-time world modeling vs deployment-time model-basedness
+
+Competing hypotheses:
+
+```text
+H1 world modeling is mainly useful as a training regularizer / representation teacher
+H2 online world inference is necessary for rare, OOD, or interaction-heavy decisions
+```
+
+Core anchors:
+
+```text
+LAW / Drive-JEPA / Metis / DynFlowDrive / Discrete-WAM
+vs
+WorldDrive / World4Drive / WoTE / SeerDrive / GraphWorld
+```
+
+Required broader search:
+
+```text
+world-model distillation
+policy learning from imagined data
+Dreamer-style latent planning vs actor-only deployment
+teacher-student model-based control
+test-time planning vs compiled policy
+```
+
+Mandatory question:
+
+> Under matched training information, what failures remain after world knowledge is compressed into policy parameters?
+
+---
+
+## T5 — Factual-future learning vs intervention-correct consequence modeling
+
+Competing hypotheses:
+
+```text
+H1 large factual datasets + action conditioning generalize adequately to intervention consequences
+H2 observational/factual training is insufficient when ego action changes other agents' responses
+```
+
+Core anchors:
+
+```text
+World4Drive / Epona / Metis / DynFlowDrive / Discrete-WAM
+WoTE as partial pseudo-simulation control
+```
+
+Required broader search:
+
+```text
+causal world models
+counterfactual prediction
+interactive motion forecasting
+game-theoretic prediction
+reactive simulation
+interventional imitation / offline RL
+causal representation learning for control
+```
+
+Mandatory question:
+
+> Is there direct evidence that factual future prediction accuracy transfers to intervention-response accuracy in autonomous driving?
+
+---
+
+## T6 — Structured interaction semantics vs true reactive dynamics
+
+Competing hypotheses:
+
+```text
+H1 strong interaction representation captures most practical safety benefit
+H2 negotiation-heavy scenarios require explicit response-to-ego modeling
+```
+
+Core anchors:
+
+```text
+GraphWorld
+vs
+WoTE / reactive-simulation literature
+```
+
+Required broader search:
+
+```text
+interactive prediction
+joint multi-agent forecasting
+conditional response prediction
+negotiation / merging / yielding
+closed-loop reactive simulation
+multi-agent planning
+```
+
+Mandatory question:
+
+> On which scenario classes does static/observational interaction encoding fail relative to ego-conditioned reactive prediction?
+
+---
+
+# Required output
+
+Create:
+
+```text
+audits/research_synthesis/WAM_TIER1_TENSION_ADVERSARIAL_REVIEW.md
+```
+
+For each tension include:
+
+```text
+1. exact competing hypotheses
+2. broader prior-art search space
+3. strongest evidence for H1
+4. strongest evidence for H2
+5. benchmark/evaluation confounds
+6. whether the tension survives prior art
+7. falsification experiment
+8. minimum data/simulator/source requirements
+9. novelty risk
+10. verdict:
+   RESOLVED / PARTIALLY RESOLVED / SURVIVES / INSUFFICIENT EVIDENCE
+```
+
+Optional supporting file if needed:
+
+```text
+landscape/WAM_TIER1_PRIOR_ART_MATRIX.md
 ```
 
 ---
 
-# Task 4 — Build the deployment lifecycle map
+# Search policy
 
-For each paper draw:
+Do not restrict the search to papers already in the 11-anchor set.
 
-```text
-TRAINING GRAPH
-→ knowledge transformation / distillation / transfer
-→ DEPLOYMENT GRAPH
-```
-
-Key families already exposed:
+Use broader adjacent literatures when scientifically relevant:
 
 ```text
-LAW: auxiliary predictor → discarded output
-Drive-JEPA: JEPA predictor → encoder transfer
-Epona: joint visual/trajectory training → planning can skip visual generator
-Metis: world co-training → action-only deployment
-DynFlowDrive: flow WM teacher → score head deployment
-Discrete-WAM: shared world-policy pretraining → action-only planning task
-WorldDrive: heavy generative teacher → lightweight online future surrogate
-GraphWorld: compact online structured world state retained
-World4Drive: compact future predictor retained
-WoTE: recurrent transition retained
-SeerDrive: internal world/planner loop retained
+autonomous-driving WAM
+interactive motion prediction
+reactive simulation
+model-based RL
+latent dynamics / value-equivalent models
+counterfactual/causal learning
+planning distillation
+multi-agent decision making
 ```
+
+But every imported paper must be used for a specific tension/question, not added merely to enlarge the corpus.
 
 ---
 
-# Task 5 — Temporal-coordinate QA
+# Evidence policy
 
-Use F07/F08/J08 to distinguish:
+Prioritize:
 
 ```text
-physical future time
-history time
-world-rollout step
-flow/diffusion transport time
-policy denoising/editing time
-planner/world refinement iteration
+matched ablations
+controlled benchmark comparisons
+source-code evidence
+intervention/reactive evaluation
+negative results
 ```
 
-Create a cross-paper table.
-
-Mandatory rule:
+over:
 
 ```text
-more solver/refinement steps
-!=
-longer physical prediction horizon
+headline SOTA tables
+author positioning
+survey taxonomy alone
 ```
 
-GraphWorld and DynFlowDrive are especially important controls here.
-
----
-
-# Task 6 — Long-horizon taxonomy
-
-Separate:
+Keep benchmark regimes normalized:
 
 ```text
-longer trajectory output
-longer history context
-persistent latent memory
-multi-step world prediction
-longer consequence rollout
-reactive closed-loop execution horizon
-```
-
-Use GraphWorld as the key negative control:
-
-```text
-6s long-horizon planning
-without 6s explicit world rollout
-```
-
----
-
-# Task 7 — Safety / risk / value separation
-
-For every anchor distinguish:
-
-```text
-explicit risk state / field
-explicit collision probability
-explicit utility/value head
-simulator/PDM reward supervision
-implicit safety in representation
-safety only measured in evaluation
-```
-
-Do not equate:
-
-```text
-lower collision rate
-with
-explicit learned risk representation
-```
-
-This is especially important before later considering any risk-aware WAM direction.
-
----
-
-# Task 8 — Evaluation-regime normalization
-
-Every benchmark/result must be normalized as:
-
-```text
-open-loop offline
+open-loop
 non-reactive pseudo-simulation
-reactive simulator closed-loop
-real-world closed-loop
-visual autoregressive rollout only
+reactive simulator closed loop
+real-world closed loop
 ```
-
-Binding examples:
-
-```text
-NAVSIM ≠ reactive closed loop
-Bench2Drive/CARLA = reactive simulator closed loop
-visual rollout ≠ policy-environment closed loop
-```
-
-Then identify which scientific claims each regime can and cannot support.
-
----
-
-# Task 9 — Evidence-strength matrix
-
-For each central mechanism claim, grade evidence by:
-
-```text
-A. direct matched ablation
-B. source-code verified mechanism
-C. paper equation/architecture only
-D. headline cross-paper comparison
-E. author interpretation only
-```
-
-Track source status separately:
-
-```text
-SOURCE-COMPLETE
-SOURCE-PARTIAL
-SOURCE-BLOCKED
-```
-
-Current source-blocked/monitor examples include:
-
-```text
-Metis implementation
-DynFlowDrive implementation
-Discrete-WAM implementation
-GraphWorld implementation
-```
-
-Do not penalize a scientific mechanism merely because code is unreleased; instead lower implementation-certainty separately.
-
----
-
-# Task 10 — Strongest matched controls per paper
-
-For each anchor record only the most decision-relevant matched controls, e.g.:
-
-```text
-LAW           ± latent future auxiliary
-WoTE          evaluator no-future → + predicted future
-Epona         trajectory-only → joint visual/trajectory
-WorldDrive    trajectory rewarder → + distilled future feature
-World4Drive   same priors/intentions, no-WM → + WM
-SeerDrive     future-aware × iterative 2×2
-Drive-JEPA    representation pretrain / proposal-selection decomposition
-Metis         no video co-train → video co-train; joint/isolated/asymmetric
-DynFlowDrive  static WM → flow WM; selection-factor decomposition
-Discrete-WAM  scratch/FT/pretrain + decision/RL controls
-GraphWorld    baseline→ECIG→WSCP; Stage I→II; diffusion→flow; dense→ego-star
-```
-
-Do not use best headline SOTA result as the primary evidence if a matched internal control exists.
-
----
-
-# Task 11 — Produce scientific tensions, not gaps
-
-Only after the matrices are clean, extract tensions such as:
-
-```text
-better world fidelity vs better planning relevance
-explicit consequence rollout vs compact representation conditioning
-training-time world modeling vs online model-basedness
-stronger jointness vs stronger deployment dependence
-more future detail vs decision relevance
-more candidate diversity vs selection quality
-more solver steps vs planning quality
-factual-future prediction vs intervention consequence validity
-structured interaction semantics vs true reactive dynamics
-```
-
-Each tension must contain:
-
-```text
-supporting anchors
-contradicting/control anchors
-evidence strength
-what is genuinely unresolved
-what experiment would falsify each interpretation
-```
-
-Do not call a tension a `research gap` yet.
 
 ---
 
 # Stop condition
 
-Phase D may only be unpaused after:
+A Tier-1 tension can advance toward `candidate research problem` only if:
 
 ```text
-11-anchor comparability QA complete
-+
-evidence-strength matrix complete
-+
-mechanism families stable
-+
-major terminology/evaluation mismatches normalized
-+
-source-status caveats recorded
+1. it survives broader prior-art attack;
+2. the unresolved part is stated narrowly;
+3. a falsifying experiment is feasible;
+4. success/failure criteria are measurable;
+5. the claim is not merely an ontology empty cell;
+6. there is evidence that solving it matters for planning.
 ```
 
 Until then:
@@ -400,5 +278,6 @@ Until then:
 ```text
 NO final research-gap declaration
 NO method design
-NO forced risk-field proposal
+NO claim that risk field is the solution
+NO novelty claim
 ```
