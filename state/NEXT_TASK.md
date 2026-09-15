@@ -2,7 +2,7 @@
 
 ## 唯一下一任务
 
-> **Deep-read P0009 DriveLaW under the existing WAM reading stack, as the first paper in a broader literature-expansion phase. Do not promote research directions from the first 11 anchors.**
+> **Deep-read P0012 DA-WAM as the second paper in Wave C.6, using the existing WAM reading stack. Keep research-direction convergence paused.**
 
 Canonical expansion plan:
 
@@ -19,27 +19,42 @@ candidate-problem promotion        PAUSED
 method design                      FORBIDDEN
 ```
 
----
-
-# Why DriveLaW is next
-
-DriveLaW introduces a world→planning interface that is materially different from several first-wave anchors:
+Current normalized count:
 
 ```text
-DriveLaW-Video
-→ internal / mid-denoising video latent
-→ DriveLaW-Act diffusion planner
-→ trajectory
+12 anchors complete
+DriveLaW = latest completed anchor
+DA-WAM   = NEXT
 ```
 
-The key question is not whether DriveLaW is strong, but exactly what planning information is transferred from the generative video model and how this differs from:
+---
+
+# Why DA-WAM is next
+
+DA-WAM introduces an interface almost orthogonal to DriveLaW:
 
 ```text
-Epona       shared historical F + sibling trajectory/visual branches
-WorldDrive  world-model pretraining + teacher/distilled future representation
-LAW         future latent as auxiliary training signal
-Metis       action→world co-training + action-only deployment
-Discrete-WAM shared world/policy backbone but planning-only task path
+DriveLaW:
+one common generative world representation
+→ direct trajectory policy
+
+DA-WAM:
+N candidate trajectories
+→ N action-conditioned future latents
+→ one-to-one future-latent-conditioned scoring
+→ select candidate
+```
+
+This makes DA-WAM a strong pressure test for the current distinctions among:
+
+```text
+candidate-specific future output
+candidate-specific future truth
+future representation learning
+future-conditioned scoring
+explicit decision factors / utility
+hard-negative safety supervision
+online world-model consumption
 ```
 
 ---
@@ -52,138 +67,212 @@ Resolve:
 
 ```text
 canonical paper version
-official repo attribution: xiaomiresearch/drivelaw
-code-release state
+official repo: https://github.com/LeapWM/da-wam
 paper↔code version relation
+latest public commit / code completeness
 ```
 
-Lock a commit if implementation is available.
+Lock a source commit if implementation is available.
 
-## 2. Exact representation path
+## 2. Host planner and candidate construction
+
+Reconstruct before touching the world model:
+
+```text
+current observation X_t
+→ planner representation
+→ N trajectory candidates tau_i
+```
+
+Determine:
+
+```text
+how candidates are generated
+N / candidate support
+whether candidates are anchors, diffusion samples or refined proposals
+whether scoring and proposal features are shared
+```
+
+## 3. Online / EMA predictive representation adaptation
 
 Trace:
 
 ```text
-historical observations
-→ spatiotemporal VAE
-→ Video DiT denoising states
-→ selected latent / hidden feature h_t*
-→ Action DiT conditioning
-→ trajectory
+online encoder E_theta(X_t) → Z_t
+EMA target encoder E_bar(X_{t+Delta}) → Z_{t+Delta}
 ```
 
-Determine whether the planner consumes:
+Determine exactly:
 
 ```text
-encoded history latent
-predicted future latent
-mid-denoising hidden state
-final denoised video latent
-multiple denoising stages
+what is pretrained (V-JEPA 2.1?)
+what LoRA/adapters are trained
+what remains frozen
+whether planner/scorer gradients update the online encoder
+how EMA target is updated
+whether predictive loss persists throughout planner optimization
 ```
 
-Do not call all of these `future latent` interchangeably.
+## 4. One-to-one trajectory ↔ future latent path
 
-## 3. Temporal semantics
+For every candidate `tau_i`, reconstruct:
+
+```text
+tau_i → action representation a_i
+(Z_t, a_i) → shared predictor P_phi
+→ candidate-specific future latent Zhat_i
+```
+
+Mandatory distinction:
+
+```text
+N candidate-specific predictions       YES/NO
+N factual alternative future targets   YES/NO
+```
+
+Do not allow the first to imply the second.
+
+## 5. Factual-future supervision coverage
+
+The paper explicitly acknowledges the offline-log limitation.
+
+Lock down:
+
+```text
+expert trajectory tau_exp
+→ nearest candidate i*
+→ only Zhat_i* receives dense future-latent target?
+```
+
+Then determine what all non-expert candidates receive:
+
+```text
+factor labels
+utility labels
+ranking loss
+hard-negative supervision
+no future-latent supervision
+```
+
+This is central to the counterfactual vector.
+
+## 6. Future-latent-conditioned scorer
+
+Trace exact scorer inputs:
+
+```text
+current latent Z_t
++ action representation a_i
++ predicted future latent Zhat_i
+→ scorer S_psi
+→ interpretable planning factors q_i
++ overall utility score s_i
+```
+
+Determine:
+
+```text
+factor semantics
+utility target provenance
+ranking target provenance
+how final score aggregates factors
+whether future latent can be ablated while keeping same scorer capacity
+```
+
+## 7. Safety-critical hard negatives
+
+Reconstruct exactly:
+
+```text
+how hard negatives are generated / selected
+what makes them expert-proximate
+which safety dimensions differ
+whether future-latent supervision is attached to them
+whether they train factor heads, score ranking, or both
+```
+
+Compare immediately with:
+
+```text
+DriveSuprim / BeyondDrive-style negative mining
+WoTE explicit utility supervision
+World4Drive factual-mode matching
+```
+
+## 8. Inference graph
+
+Verify deployment path:
+
+```text
+online encoder
+→ N candidate trajectories
+→ N future-latent predictions
+→ future-conditioned scorer
+→ argmax
+```
+
+EMA target network and observed future must be absent.
+
+Measure/record:
+
+```text
+N
+predictor cost per candidate
+shared batching
+latency/FPS
+future-latent dimensionality
+```
+
+## 9. Counterfactual vector
+
+Force explicit answers:
+
+```text
+I01 candidate-specific future output?
+I02 candidate-specific alternative-future supervision?
+I03 intervention truth for unexecuted candidates?
+I04 reactive other-agent response truth?
+I05 external intervention-validity evidence?
+```
+
+Expected pressure point:
+
+```text
+one-to-one prediction architecture
+!= one-to-one factual future supervision
+```
+
+## 10. Strongest matched ablations
+
+Prioritize controls that isolate:
+
+```text
+frozen predictive encoder vs continued JEPA adaptation
+shared future latent vs per-candidate future latent
+trajectory-only scorer vs + future latent
+future latent without factorization vs factorized scorer
+without hard negatives vs + hard negatives
+EMA target / predictive loss contribution
+```
+
+Do not use headline SOTA delta as primary evidence.
+
+## 11. Evaluation regime
 
 Separate:
 
 ```text
-physical video time
-video prediction horizon
-diffusion / rectified-flow solver time t
-selected denoising timestep t*
-Action-DiT flow/denoising iteration
-planning trajectory horizon
+NAVSIM-v1
+NAVSIM-v2
+open-loop / non-reactive pseudo-simulation semantics
+any actual reactive closed-loop evidence
 ```
 
-Use F07/F08/J08.
+Do not upgrade NAVSIM results into reactive intervention validation.
 
-## 4. Training topology
+## 12. Full Ontology V1.3 projection
 
-Reconstruct the three-stage curriculum exactly:
-
-```text
-what is trained first?
-what is frozen?
-what is fine-tuned?
-when does planner see video-model latent?
-does planner loss update the video generator?
-does video-generation loss update the planner?
-```
-
-This is critical because the paper explicitly motivates its training strategy as avoiding gradient interference.
-
-## 5. Inference graph
-
-Determine exactly what runs during planning inference:
-
-```text
-VAE encoder?
-Video DiT partial denoising?
-full future video generation?
-video decoder?
-Action DiT?
-```
-
-Key question:
-
-> Does planning require generating a future video, or only extracting an internal generative representation?
-
-## 6. Coupling direction
-
-Force separate answers:
-
-```text
-video/world → planner forward information flow?
-planner/action → video world conditioning?
-planner loss → video model gradient?
-video loss → planner gradient?
-```
-
-Do not equate shared latent interface with bidirectional coupling.
-
-## 7. Evidence / attribution
-
-Find strongest matched controls for:
-
-```text
-video-generator latent vs BEV/VLM/current visual feature
-which denoising timestep is best
-pretrained video prior contribution
-three-stage curriculum contribution
-world-generation objective contribution
-Action-DiT contribution
-```
-
-Do not attribute final NAVSIM score to `world model` as one monolithic factor.
-
-## 8. Generation fidelity → planning
-
-The paper reports strong FID/FVD and planning results. Check whether it actually demonstrates:
-
-```text
-better video fidelity
-→ better planning
-```
-
-or only that both are strong in the same model.
-
-## 9. Deployment compute
-
-Record:
-
-```text
-number of active video denoising steps during planning
-Action-DiT steps
-FPS / latency
-whether RGB decoding is skipped
-whether full future video synthesis is skipped
-```
-
-## 10. Full Ontology V1.3 projection
-
-Force-fill A–P including explicit:
+Force-fill A–P and explicitly record:
 
 ```text
 ABSENT
@@ -193,30 +282,31 @@ NOT APPLICABLE
 SOURCE-UNVERIFIED
 ```
 
-if needed.
+Residue must survive merge testing and back-projection before any V1.4 proposal.
 
 ---
 
 # Required immediate cross-paper comparisons
 
-For every major DriveLaW mechanism, compare immediately:
+For every important DA-WAM mechanism, compare:
 
 ```text
-DriveLaW vs Epona
-DriveLaW vs WorldDrive
-DriveLaW vs LAW
-DriveLaW vs Metis
-DriveLaW vs Discrete-WAM
+DA-WAM vs WoTE
+DA-WAM vs World4Drive
+DA-WAM vs WorldDrive
+DA-WAM vs SeerDrive
+DA-WAM vs Drive-JEPA
+DA-WAM vs DriveLaW
 ```
 
-Especially answer:
+Key questions:
 
 ```text
-Is DriveLaW really more tightly coupled than Epona?
-Is its video latent an online future object or a generative feature extractor?
-Is this closer to WorldDrive representation inheritance or online future use?
-Does the planning loss shape the video model?
-What remains active at deployment?
+Is DA-WAM genuinely more candidate-specific than World4Drive, or only architecturally?
+Does its one-to-one future/scorer path have one-to-one supervision truth?
+Is continued JEPA adaptation materially different from Drive-JEPA frozen/pretrained transfer?
+Are factor heads true utility/value modeling or proxy classification?
+Does predicted future add information beyond trajectory geometry/current scene?
 ```
 
 ---
@@ -226,23 +316,30 @@ What remains active at deployment?
 After the deep read create at minimum:
 
 ```text
-papers/deep_analysis/P0009_DRIVELAW_DEEP_ANALYSIS_V2.md
-audits/literature/PHASE_C6_DRIVELAW_AUDIT.md
-landscape/P0009_DRIVELAW_ONTOLOGY_PROJECTION.md
+papers/deep_analysis/P0012_DAWAM_DEEP_ANALYSIS_V2.md
+audits/literature/PHASE_C6_DAWAM_AUDIT.md
+landscape/P0012_DAWAM_ONTOLOGY_PROJECTION.md
+landscape/WAM_COMPARISON_MATRIX_V1_3_DAWAM_EXTENSION.md
 ```
 
-Extend the cross-paper matrix only after the mechanism is stable.
+Update:
 
-If source code is public and sufficiently complete, perform a commit-locked source audit rather than relying only on README claims.
+```text
+state/CURRENT_STATE.md
+state/NEXT_TASK.md
+landscape/WAM_DEEP_READ_EXPANSION_QUEUE_V1.md
+state/DECISION_LOG.md
+```
+
+only after the mechanism is stable.
 
 ---
 
-# After DriveLaW
+# After DA-WAM
 
 Current core queue:
 
 ```text
-P0012 DA-WAM
 P0002 SafeDrive
 P0005 RiskWorld
 P0007 DriveReward
@@ -254,7 +351,7 @@ Then proceed into simulation/reactivity/evaluation and WAM+VLA control waves def
 
 # Guardrail
 
-Do not use DriveLaW to revive any parked research candidate.
+Do not use DA-WAM or DriveLaW to revive parked research candidates.
 
 This phase asks:
 
