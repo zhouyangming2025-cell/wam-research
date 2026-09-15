@@ -2,7 +2,7 @@
 
 ## 唯一下一任务
 
-> **Re-project World4Drive under the dimension-first WAM framework** as the fifth ontology-discovery anchor.
+> **Merge/split the dimensions discovered from LAW + WoTE + Epona + WorldDrive + World4Drive and build the first stable WAM comparison ontology + matrix.**
 
 ## Current status
 
@@ -11,189 +11,171 @@ P0048 LAW          COMPLETE v2
 P0045 WoTE         COMPLETE v2
 P0001 Epona        COMPLETE v2
 P0042 WorldDrive   COMPLETE v2
-P0046 World4Drive  NEXT — dimension-first re-projection
+P0046 World4Drive  COMPLETE v2
 ```
 
-Canonical analyses:
+Canonical deep analyses:
 
 ```text
 papers/deep_analysis/P0048_LAW_DEEP_ANALYSIS_V2.md
 papers/deep_analysis/P0045_WOTE_DEEP_ANALYSIS_V2.md
 papers/deep_analysis/P0001_EPONA_DEEP_ANALYSIS_V2.md
 papers/deep_analysis/P0042_WORLDDRIVE_DEEP_ANALYSIS_V2.md
-landscape/WAM_DIMENSION_DISCOVERY_LOG.md
-landscape/WAM_DIMENSION_DISCOVERY_ADDENDUM_EPONA_WORLDDRIVE.md
+papers/deep_analysis/P0046_WORLD4DRIVE_DEEP_ANALYSIS_V2.md
 ```
 
-Existing World4Drive audit:
+Dimension-discovery sources:
 
 ```text
-audits/literature/PHASE_C5_WORLD4DRIVE_AUDIT.md
+landscape/WAM_DIMENSION_DISCOVERY_LOG.md
+landscape/WAM_DIMENSION_DISCOVERY_ADDENDUM_EPONA_WORLDDRIVE.md
+landscape/WAM_DIMENSION_DISCOVERY_ADDENDUM_WORLD4DRIVE.md
 ```
 
-## Why World4Drive is the final pre-ontology anchor
+## Why synthesis is mandatory now
 
-The four completed anchors now expose four different future-knowledge lifecycles:
+The five anchors expose fundamentally different ways future/world knowledge enters planning:
 
 ```text
 LAW
 = future prediction as auxiliary representation shaping
 
 WoTE
-= compact learned world transition stays online
-  → recurrent candidate future → reward → select
+= online candidate consequence rollout → explicit utility/reward → selection
 
 Epona
-= visual future jointly shapes shared historical latent
-  → direct generative trajectory policy at planning inference
+= shared world representation + direct generative trajectory policy;
+  visual future is a sibling branch, not required by planning inference
 
 WorldDrive
-= heavy generative future teacher
-  → distilled compact future surrogate
-  → online candidate reward/ranking
+= generative-WM representation inheritance
+  + heavy future teacher → distilled lightweight future surrogate → online ranking
+
+World4Drive
+= direct online compact candidate future latent
+  → factual-future/mode ScoreNet → selection
 ```
 
-World4Drive appears to provide a fifth configuration:
+Continuing to add papers before consolidating these discoveries would reproduce the original repository problem: many paper notes but no stable comparison coordinates.
 
-```text
-candidate/intention trajectory
-→ compact predicted future world latent online
-→ ScoreNet
-→ select trajectory
-```
-
-But its supervision is unusual: K predicted candidate futures are compared against one factual observed future latent. This must be analyzed without calling it true counterfactual supervision.
-
-## World4Drive re-projection target
-
-Trace and compare at minimum:
-
-```text
-1. current physical/world latent construction
-2. spatial/depth foundation prior contribution
-3. semantic/VLM prior contribution
-4. temporal-history aggregation
-5. intention vocabulary construction and support
-6. number K of intentions/candidates and how each candidate is produced
-7. candidate trajectory representation → action token
-8. exact candidate-specific future-latent predictor
-9. whether future prediction is one-step, recurrent, deterministic, stochastic
-10. whether K future branches share parameters/queries
-11. exact observed future latent used as target
-12. how one factual future supervises K candidate-conditioned outputs
-13. reconstruction/alignment loss and which candidate receives it
-14. ScoreNet target construction
-15. whether ScoreNet learns value, factual-mode matching, or both
-16. candidate trajectory supervision and winner selection
-17. consequence truth source vs value/classification truth source
-18. counterfactual output level vs counterfactual supervision level
-19. other-agent reactivity evidence
-20. inference graph: what future computation remains active online
-21. future-object explicitness and deployment cost
-22. candidate generation vs future predictor vs ScoreNet attribution
-23. representation-prior attribution vs WM attribution
-24. strongest matched ablations
-25. relation to LAW/WoTE/Epona/WorldDrive on every stable dimension
-```
-
-## Special hypotheses to test
-
-### H1 — World4Drive may be online latent foresight, but not true alternative-future supervision
-
-Audit the distinction:
-
-```text
-K candidate-specific predicted future latents = YES
-K observed/simulated ground-truth alternative futures = likely NO
-```
-
-Do not infer causal counterfactual correctness from branch multiplicity.
-
-### H2 — ScoreNet may be closer to mode/factual-future matching than consequence value estimation
-
-Existing audit indicates the training target is based on which predicted future latent is closest to the single factual future latent.
-
-Test whether the deployed score means:
-
-```text
-“this action leads to a good/safe future”
-```
-
-or more narrowly:
-
-```text
-“this candidate's predicted future most resembles the factual demonstrated future”
-```
-
-This distinction is central when comparing World4Drive with WoTE/WorldDrive reward models.
-
-### H3 — foundation priors may explain part of the gain independently of future modeling
-
-Separate:
-
-```text
-metric-depth prior
-semantic/VLM prior
-temporal latent construction
-future prediction
-ScoreNet selection
-```
-
-before assigning performance gains to the world model.
-
-### H4 — World4Drive may force a new split between `value` and `factual-consistency score`
-
-Current ontology has consequence model vs value model. World4Drive may show that the post-future scorer can instead learn **which imagined mode matches the observed demonstration**, which is not identical to safety/utility value.
-
-If confirmed, add a distinct dimension:
-
-```text
-scorer semantics:
-utility/value
-imitation/factual consistency
-mode posterior
-risk/safety
-hybrid
-```
-
-## Required output
+## Required outputs
 
 Create:
 
 ```text
-papers/deep_analysis/P0046_WORLD4DRIVE_DEEP_ANALYSIS_V2.md
+landscape/WAM_DIMENSION_ONTOLOGY_V1.md
+landscape/WAM_COMPARISON_MATRIX_V1.md
 ```
 
-and record any new/split dimensions in the discovery addendum.
+### Output 1 — WAM_DIMENSION_ONTOLOGY_V1.md
+
+Do not simply concatenate the >60 provisional discovery dimensions. Perform an explicit merge/split pass.
+
+Each stable dimension must contain:
+
+```text
+Dimension name
+Scientific question
+Why it matters
+Allowed / typical values
+How to distinguish similar values
+Evidence required
+Common misclassification traps
+Anchor examples
+```
+
+Recommended high-level families to pressure-test, not blindly accept:
+
+```text
+A. problem / role of world knowledge
+B. observation and current-state representation
+C. representation provenance / foundation priors
+D. action and candidate space
+E. action→world conditioning
+F. dynamics / future temporal modeling
+G. future supervision / truth sources
+H. multimodal branch assignment
+I. counterfactuality / reactivity
+J. world→planning interface
+K. scorer / utility semantics
+L. training topology / gradient coupling
+M. future-knowledge lifecycle / deployment path
+N. compute / pruning / latency
+O. evaluation regime / evidence attribution
+P. safety / uncertainty / risk semantics
+```
+
+Do not force every family to survive if dimensions can be merged more cleanly.
+
+### Output 2 — WAM_COMPARISON_MATRIX_V1.md
+
+Project all five anchors into the same ontology.
+
+Rules:
+
+```text
+1. Every stable dimension must be filled for every anchor.
+2. Use ABSENT / NOT REPORTED / NOT EVALUATED / NOT APPLICABLE explicitly.
+3. A paper cannot stay inside its own preferred narrative.
+4. Separate AUTHOR CLAIM / DIRECT EVIDENCE / OUR INFERENCE where interpretation is disputed.
+5. Counterfactuality must at least separate:
+   - candidate-specific output
+   - alternative-action supervision
+   - reactive other-agent response evidence
+6. Scorer semantics must distinguish utility/value from factual-consistency/mode matching.
+7. Representation gains must separate imported foundation priors from WM-specific future-model learning.
+8. Planning gains must use strongest matched controls, not headline SOTA deltas.
+```
+
+## Mandatory merge/split tests
+
+Before freezing ontology v1, explicitly test these discoveries:
+
+```text
+1. `action-conditioned` is too coarse:
+   provenance / representation / multiplicity / injection / support need separation.
+
+2. `joint world-action modeling` is too coarse:
+   shared representation / parameters / gradients / online causal feedback need separation.
+
+3. `counterfactual` is too coarse:
+   output branching / supervision branching / behavioral reactivity need separation.
+
+4. `future→score` is too coarse:
+   utility / risk / imitation / factual consistency / mode posterior need separation.
+
+5. `world-model gain` is too coarse:
+   foundation prior / predictive representation / candidate generator / evaluator / future state contribution need attribution.
+
+6. `online vs offline WM` is too coarse:
+   future-knowledge lifecycle must represent discard, sibling branch, direct online transition, and teacher→student distillation.
+
+7. `future representation` is too coarse:
+   endpoint / sequence / recurrent rollout / distilled summary and current-vs-future state must be separated.
+```
 
 ## Stop condition
 
-World4Drive is complete only when we can state without ambiguity:
+Do not resume new-paper reading until we can take an arbitrary new WAM paper and systematically answer, under one shared coordinate system:
 
 ```text
-what each of K future latents means
-what supervises each branch
-what ScoreNet's probability/score semantically represents
-why the selected trajectory is preferred
-what part is genuinely world modeling
-what part is intention/candidate generation
-what part is factual-future matching/value learning
+what world/current state it represents
+where that representation came from
+what actions/candidates it considers
+how actions condition future prediction
+what future object it predicts
+how that future is supervised
+whether alternatives have real/simulated/reactive truth
+how world information changes the final action
+what the scorer actually means
+where future knowledge lives at deployment
+what computation is paid online
+what experiment truly isolates the claimed mechanism
 ```
 
-## After World4Drive — mandatory synthesis before new papers
+## After ontology + matrix
 
-Do NOT immediately move to SeerDrive.
-
-First perform:
-
-```text
-LAW + WoTE + Epona + WorldDrive + World4Drive
-→ merge/split provisional dimensions
-→ WAM_DIMENSION_ONTOLOGY_V1.md
-→ WAM_COMPARISON_MATRIX_V1.md
-```
-
-Only then resume:
+Resume core-WAM coverage correction in this order unless new evidence changes priority:
 
 ```text
 SeerDrive
@@ -203,6 +185,8 @@ DynFlowDrive
 Discrete-WAM
 GraphWorld
 ```
+
+Every new anchor must be projected into ontology v1 and is allowed to add/split dimensions if genuinely necessary.
 
 ## Still forbidden
 
