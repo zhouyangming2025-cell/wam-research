@@ -6,6 +6,175 @@ Newest entry first.
 
 ---
 
+## 2026-09-15 — DynFlowDrive normalized; flow transport separated from physical time; Ontology V1.3 authorized
+
+**Decision**
+
+P0063 DynFlowDrive completed the next Phase C.5 dimension-first stress test using the WAM reading skill stack, arXiv v2, official repository state, matched-ablation decomposition and ontology residue/back-projection.
+
+Canonical artifacts:
+
+```text
+papers/deep_analysis/P0063_DYNFLOWDRIVE_DEEP_ANALYSIS_V2.md
+audits/literature/PHASE_C5_DYNFLOWDRIVE_AUDIT.md
+landscape/P0063_DYNFLOWDRIVE_ONTOLOGY_PROJECTION.md
+landscape/WAM_COMPARISON_MATRIX_V1_3_DYNFLOWDRIVE_EXTENSION.md
+landscape/WAM_DIMENSION_ONTOLOGY_V1_3_AMENDMENT.md
+```
+
+**Source/version boundary**
+
+```text
+paper: arXiv:2603.19675v2, 2026-05-03
+official repo: xiaolul2/DynFlowDrive
+latest observed public commit: c665dc577a0939543fa7abe64d28eadaec28283c
+```
+
+As of 2026-09-15, the official repository still contains only README/teaser material and states that code will be released once accepted. Implementation-level gradient, solver and freeze details therefore remain `SOURCE-UNVERIFIED`.
+
+Two paper-level mathematical/procedure ambiguities are retained rather than repaired by inference:
+
+```text
+Eq.7:
+x_s = (1-s)a + s z_{t+1}
+→ mathematically dx_s/ds = z_{t+1}-a
+
+Eq.10 target as written:
+(1-s)(z_{t+1}-a)
+
+and:
+training constructs a noised anchor a,
+while sampling prose says integration starts from current latent z_t.
+```
+
+**Stable mechanism judgment**
+
+DynFlowDrive must not be summarized as an online `candidate→future→score` planner. Its canonical lifecycle is:
+
+```text
+TRAINING:
+multimodal planner → candidate trajectories
+candidate + current world latent → rectified-flow consequence model
+→ reconstruction / flow / transport-stability signals
++ GT trajectory error
+→ hybrid positive mode n*
+→ supervise planner score head
+
+DEPLOYMENT:
+current observation → candidates + learned scores → argmax
+world model / future latent / flow integration = REMOVED
+```
+
+Canonical subtype:
+
+```text
+TRAINING-ONLY FLOW-DYNAMICS MODE-SUPERVISION WAM
+```
+
+**Counterfactual boundary**
+
+```text
+N candidate-conditioned flow outputs        YES
+N observed alternative-action future truths NO
+reactive other-agent response truth          NO / NOT ESTABLISHED
+```
+
+All candidate-conditioned flow branches ultimately reference one factual next-world latent from the logged sequence. Action conditioning and continuous flow therefore do not establish intervention-valid counterfactual dynamics.
+
+**Strongest matched evidence**
+
+World-model parameterization:
+
+```text
+Static WM   0.61 Avg L2 / 0.30 Avg CR
+Flow WM     0.59        / 0.26
+```
+
+Representation prior:
+
+```text
+Flow WM                    0.59 / 0.26
++ pretrained World Feature 0.57 / 0.22
+```
+
+Mode-selection teacher:
+
+```text
+none              0.61 / 0.30
+L2 only           0.59 / 0.24
++ reconstruction  0.58 / 0.22
++ flow stability  0.57 / 0.22
+```
+
+Thus the final gain is a bundle of flow parameterization, foundation latent quality, future-state supervision and world-derived positive-mode/score supervision. The final angular flow-stability term is only a modest incremental contributor in the reported ablation.
+
+**Ontology correction**
+
+One new dimension survived merge testing and back-projection:
+
+```text
+F08 — Internal transition-coordinate / physical-time alignment
+```
+
+It distinguishes:
+
+```text
+physical future-time transitions
+vs
+internal diffusion/flow/transport coordinates
+vs
+internal representation refinement
+```
+
+DynFlowDrive value:
+
+```text
+RECTIFIED-FLOW TRANSPORT COORDINATE BETWEEN t AND t+1;
+INTERMEDIATE s STATES ARE NOT PHYSICALLY TIME-SUPERVISED
+```
+
+Binding controls:
+
+```text
+K flow/diffusion steps != K future physical timesteps
+smooth latent transport != validated smooth physical evolution
+dz/ds != dz/dτ unless s is explicitly identified with physical time τ
+```
+
+Back-projection changes interpretation for WoTE, Epona, WorldDrive, SeerDrive, Metis and other anchors, so Ontology V1.3 is authorized.
+
+**Evaluation correction**
+
+The paper calls NAVSIM `closed-loop`; the project-standard label remains:
+
+```text
+NAVSIM v1 = NON-REACTIVE DATA-DRIVEN / PSEUDO-SIMULATION PLANNING
+```
+
+Therefore 88.7 PDMS does not validate reactive alternative-agent dynamics.
+
+The headline SSR improvement also contains an input confound:
+
+```text
+SSR*                            0.39 / 0.15
+DynFlowDrive(SSR)               0.35 / 0.14
+DynFlowDrive(SSR)+ego status    0.31 / 0.11
+```
+
+The more matched WM delta is the 0.39→0.35 row rather than the full 0.39→0.31 headline.
+
+**Next**
+
+```text
+Discrete-WAM
+```
+
+The next stress test will decompose `unified discrete world-policy learning` into tokenizer/codebook sharing, sequence factorization, parameter sharing, attention visibility, gradient coupling, physical-time semantics and deployment graph.
+
+Phase D remains **PAUSED**. No research-gap declaration or method design is authorized.
+
+---
+
 ## 2026-09-15 — Metis normalized; asymmetric world-action co-training separated from online world reasoning; Ontology V1.2 retained
 
 **Decision**
