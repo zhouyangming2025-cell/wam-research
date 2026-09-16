@@ -181,7 +181,7 @@ No simultaneous video-generation loss is established for the final action adapta
     O(t) -- current encoder --> W(t) [TRAIN; PAPER FACT + CODE FACT]
     O(t+1) -- future encoder --> F(factual future latent) [TRAIN; PAPER FACT + CODE FACT]
     W(t) + A{k} -- candidate-conditioned predictor --> F{k}(predicted future latent) [TRAIN; PAPER FACT + CODE FACT]
-    A{1…6} + A(factual) -- nearest-trajectory match --> R_train(index j) [TRAIN; PAPER FACT]
+    F{1…6} + F(factual) -- latent MSE and argmin --> R_train(index j) [TRAIN; PAPER FACT]
     F{j} + F(factual) -- future reconstruction --> L_future [TRAIN; PAPER FACT]
     V{1…6} + j -- focal classification --> L_score [TRAIN; PAPER FACT]
     A{j} + A(factual) -- selected trajectory imitation --> L_plan [TRAIN; PAPER FACT]
@@ -210,25 +210,28 @@ Heavy trajectory-aware diffusion and future image generation are absent from the
 
 ### 6.2 WD-PLAN learning DAG
 
-Teacher stage:
+World-model pretraining and representation-transfer stage:
 
     O(t) + A(factual or conditioned trajectory) -- trajectory-aware diffusion world model --> F_teacher(future latent) [TRAIN; PAPER FACT]
     O(t+1) -- factual future encoding/noise target --> world diffusion objective [TRAIN; PAPER FACT]
-    inherited visual and motion encoders -- frozen --> teacher training boundary [TRAIN; PAPER FACT]
+    world diffusion objective -- update --> TA-DWM visual/motion/generative parameters [TRAIN; PAPER FACT]
+    pretrained TA-DWM visual and motion encoders -- transfer and freeze --> planner representation [TRAIN; PAPER FACT]
+    planner imitation/simulation/offset losses -- update --> proposal/scoring planner [TRAIN; PAPER FACT]
 
-Distillation and ranking stage:
+FAR joint distillation-and-ranking stage:
 
     W + A{k} -- frozen heavy teacher --> F_teacher{k} [TRAIN; PAPER FACT + CODE FACT]
     W + A{k} -- lightweight predictor --> Ftilde{k} [TRAIN; PAPER FACT + CODE FACT]
     Ftilde{k} + stopgrad(F_teacher{k}) -- alignment --> L_align [TRAIN; PAPER FACT]
     A{k} -- simulator/oracle PDMS ordering --> pairwise preference labels [TRAIN; PAPER FACT]
     V{k} + preference labels -- Bradley–Terry ranking --> L_rank [TRAIN; PAPER FACT]
-    L_align + L_rank -- gradient --> lightweight future predictor and reward head [TRAIN; PAPER FACT]
+    L_align || L_rank -- joint gradient in the same FAR stage --> lightweight future predictor and reward head [TRAIN; PAPER FACT]
 
 Boundary facts:
 
 - Runtime consequence evaluation uses a distilled future surrogate, not the heavy teacher.
 - Candidate-specific teacher outputs are generated conditionally; they are not K separately observed futures.
+- Distillation and preference ranking are complementary objectives within FAR training; they are not evidenced as two sequential FAR stages.
 
 ## 7. P0045 — WoTE
 

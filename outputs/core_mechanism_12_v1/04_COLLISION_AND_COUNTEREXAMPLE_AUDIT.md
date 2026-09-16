@@ -1,6 +1,6 @@
 # Core Mechanism 12 — Phase 3 Collision and Counterexample Audit
 
-Status: first-pass ontology attack completed before reading the old V1 drafts. A second-pass completeness correction for semantic decision→action hierarchy is recorded here and traced in 05_ONTOLOGY_REVISION_VERDICT.md.
+Status: ontology attack completed before reading the old V1 drafts, then corrected after the independent first-six human review. The semantic decision→action correction and later evidence corrections are traced in `05_ONTOLOGY_REVISION_VERDICT.md` and `08_FIRST_SIX_HUMAN_REVIEW_VERDICT.md`.
 
 ## 1. Executive audit result
 
@@ -70,23 +70,29 @@ Verdict: C=MODIFY gate; keep carrier categories.
 
 ### 3.1 Mutual exclusivity
 
-X1/X2/X3/X4 are mutually exclusive per incoming carrier edge:
+X1/X2/X3/X4 are mutually exclusive per incoming carrier edge in one lifecycle and training stage:
 
 - X1: fixed external/factual control;
 - X2: one policy-predicted control;
 - X3: candidate-keyed control with preserved k;
 - X4: joint/interleaved variables.
 
-They are not necessarily exclusive across lifecycle. Epona self-rollout is the decisive counterexample: @T uses factual motion X1 while @R uses predicted motion X2. [PAPER FACT + CODE FACT]
+They are not necessarily exclusive across lifecycle or training stage. Epona is the decisive counterexample: base training uses factual motion X1, periodic chain-of-forward training uses detached predicted motion X2, and runtime may use predicted X2 or external X1 depending on mode. [PAPER FACT + CODE FACT]
 
 Required syntax:
 
-    X = {@T:X1, @R:X2}
+    X(C2@T,base)=X1
+    X(C3@T,chain)=X2
+    X(C3@R,self)=X2
 
 If multiple carriers exist, bind X to the carrier record:
 
     X(C2@T)=X1
     X(C3@R)=X2
+
+Lifecycle-only shorthand is invalid when two carriers share a lifecycle. For example, W4D must record `X(C1@B)=N/A` and `X(C2@B)=X3`; writing only `@B:X3` falsely suggests that the current-state carrier itself is candidate-indexed.
+
+Stage-only shorthand is also invalid when one carrier architecture receives different controls in different training stages. WorldDrive requires `X(C2_teacher@T,pretrain)=X1` and `X(C2_teacher@T,FAR)=X3`.
 
 ### 3.2 X versus P
 
@@ -205,7 +211,8 @@ Retained semantic atoms:
 - VW world/future fidelity;
 - VY dynamics/physical validity;
 - VP model confidence/likelihood;
-- VX unknown.
+- VX known resolver with unknown criterion semantics.
+- UNKNOWN resolver applicability and/or criterion not established.
 
 Demoted attributes:
 
@@ -216,7 +223,7 @@ Demoted attributes:
 
 | Artifact | Compared objects | Semantic atoms | Measure/provenance | Composition | Information preserved? |
 |---|---|---|---|---|---|
-| World4Drive | candidate trajectory/mode vs factual expert trajectory | VM | nearest geometric match creates score label j | single learned score | yes; future reconstruction remains L/C evidence, not mislabelled VW resolver |
+| World4Drive | candidate future latent vs factual future latent | VW | latent MSE creates target class j; separate trajectory L1 shapes T{j} | single learned score | yes; ScoreNet's label is future-world agreement, not nearest trajectory geometry |
 | WorldDrive | candidates vs simulator/oracle planning outcomes | VU | PDMS ordering; pairwise preference | pairwise_preference(VU) | yes |
 | WoTE | candidate rollout/outcome vs imitation and simulator component labels | VM + VD | logged expert plus safety/comfort/progress-related labels | learned/weighted fusion; exact formula bounded | yes |
 | Drive-JEPA PB2 | current candidate vs EPDMS, and candidate vs previous-cycle trajectory comfort | VU + VD[comfort] | EPDMS plus previous-cycle temporal reference | (14·VU+2·comfort)/16 | yes |
@@ -272,10 +279,10 @@ Verdict: T=MODIFY value grammar; keep four clock fields.
 | Artifact | Ordered program | Gradient/retention distinction |
 |---|---|---|
 | LAW-PF | joint action/future training → deploy planner | predicted waypoint conditions future latent; target detached; future branch dropped |
-| EPO-PLAN | sibling action and visual losses on shared MST → deploy action path | factual motion conditions visual loss; no predicted-action→visual edge in standard training |
+| EPO-PLAN | sibling action and visual losses on shared MST + detached chain-of-forward curriculum → deploy action path | factual motion conditions the base visual loss; predicted motion/context appears only in the detached chain curriculum; visual path is bypassed at planning deployment |
 | METIS-PLAN | joint action/video training → deploy action-only | predicted action tokens condition visual expert; paper asserts video-loss gradient to action expert; visual expert bypassed |
 | DJEPA-PF | predictive video pretrain → downstream planner training → deploy encoder/planner | EMA target and predictor dropped; encoder frozen/no-grad by default |
-| WD-PLAN | heavy teacher training → future-surrogate distillation → preference/scorer training → deploy surrogate/reward | LT must precede LC; teacher dropped |
+| WD-PLAN | TA-DWM pretraining → frozen representation transfer/planner training → joint FAR distillation and preference ranking → deploy surrogate/reward | LP precedes FAR; LT and LC are parallel FAR objectives; teacher generator is dropped |
 | DFD-PLAN | candidate world-flow training → hybrid winner labels → score supervision → deploy scorer | LC compresses train-time world criterion; world model dropped |
 | DWAM-JOINT | world pretrain → shared world-action sequence learning → joint generation deployment | action/world tokens share one coupled sequence; not sibling heads |
 
@@ -334,7 +341,7 @@ Additional constraints required:
 
 13. D1 requires at least one C@R ancestor of A* and excludes the D2 candidate-consequence resolver pattern.
 14. PB requires A* to exist; generation-only D5 uses P=N/A.
-15. PU implies V is VX or N/A depending whether a resolver is known to exist.
+15. PU implies `V=UNKNOWN` when resolver applicability is itself unresolved. VX is legal only when a resolver is known to exist but its criterion semantics are unknown; N/A is legal only when the mode type rules out a resolver.
 16. A current-only C1 makes X@R=N/A unless a separate future/joint carrier is present.
 
 No semantically false signature remains legal under these additions in the 21-artifact projection.
@@ -346,8 +353,8 @@ No semantically false signature remains legal under these additions in the 21-ar
 | Group | Shared fields | Different fields | Mechanism or implementation difference? | Collision verdict |
 |---|---|---|---|---|
 | LAW-PF ↔ DJEPA-PF ↔ METIS-PLAN | D∅,P∅,V=N/A | X: predicted-action vs unconditioned; T: Metis Ts; L: LA vs LP; detailed C/L | mechanism differences | no complete collision |
-| LAW-PF ↔ EPO-PLAN | C2@T,D∅,P∅,V=N/A | X2 vs X1; T; LA vs LS | mechanism difference in gradient/control edge | correctly split |
-| W4D ↔ WD ↔ WoTE | X3,D2,PB | C endpoint/current vs surrogate vs horizon; V VM vs VU vs VM+VD; Th; L | mechanism differences | correctly split |
+| LAW-PF ↔ EPO-PLAN | C2@T,D∅,P∅,V=N/A | Epona additionally has C3@T chain context; X2 action-mediated loss vs Epona X1 base/X2 detached curriculum; T; LA vs LS | mechanism difference in gradient/control edge and training carrier | correctly split |
+| W4D ↔ WD ↔ WoTE | candidate-bound X3,D2,PB | C endpoint/current vs surrogate vs horizon; V VW vs VU vs VM+VD; Th; L | mechanism differences | correctly split |
 | SEER-PAPER ↔ SEER-CODE | C1+C2,X3 | D3 vs D2; Tr; P/V known only in code | paper/code mechanism difference | correctly split |
 | DLAW-PAPER ↔ GW-PLAN | D1,P no verified consequence resolver | C4 vs C1(+train C2); X; Ts audit; P unknown in GW; L | mechanism difference, not representation | correctly split |
 | DFD ↔ DJEPA-PB1/PB2 | D∅,PB,LC family | V hybrid world/expert/dynamics vs utility vs utility+comfort; C/X training; Tc | mechanism difference | correctly split |
@@ -368,8 +375,8 @@ No other pair has a fully identical revised signature with equally resolved fiel
 ### 9.3 Near-collisions that would have failed under a coarser ontology
 
 - LAW-PF and Metis would collide under “training-only future branch” unless X, T, and full L are retained.
-- W4D and WorldDrive would collide under “candidate future scoring” unless direct versus surrogate C, V target, and LT→LC are retained.
-- W4D and WoTE would collide unless endpoint versus horizon C/Th and VM versus decomposed VD are retained.
+- W4D and WorldDrive would collide under “candidate future scoring” unless direct versus surrogate C, VW versus VU, and LP→joint(LT,LC) are retained.
+- W4D and WoTE would collide unless endpoint versus horizon C/Th and VW versus VM+VD are retained.
 - Seer paper/code would collide under paper title or “future-aware planner” labels.
 - DFD and Drive-JEPA PB would collide under “world/simulator trains scorer” unless V provenance and C/X training records are retained.
 
@@ -509,8 +516,8 @@ Result: pass.
 
 These failures are not repaired by invention:
 
-1. SEER-PAPER final resolver remains PU/VX.
-2. GW-PLAN final resolver remains PU/VX.
+1. SEER-PAPER final resolver remains PU with V=UNKNOWN.
+2. GW-PLAN final resolver remains PU with V=UNKNOWN.
 3. LAW-PB exact detach topology remains UNKNOWN.
 4. W4D exact future-loss gradient into proposal path remains UNKNOWN by config.
 5. Metis, DynFlowDrive, Discrete-WAM, and GraphWorld lack executable source verification.

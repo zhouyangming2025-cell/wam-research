@@ -1,13 +1,13 @@
 # Core Mechanism 12 — Phase 3 Twenty-One Artifact Projections
 
-Status: complete first-pass projection of all 21 frozen artifacts. Projection was performed before reading the old V1 drafts.
+Status: complete projection of all 21 frozen artifacts, corrected after the independent first-six human review. The original projection was performed before reading the old V1 drafts.
 
 ## 1. Projection rules used after first-pass attacks
 
 The Phase 2 C–X–D–P–V–T–L structure is retained provisionally, with five mechanical corrections discovered during projection:
 
 1. C1 requires a stateful world operation or explicit temporal/relational world grounding; ordinary BEV/perception features do not qualify merely from detection/map supervision.
-2. X is lifecycle-qualified: X={@T:value, @R:value}. A category is exclusive per carrier edge and lifecycle, not necessarily per whole artifact.
+2. X is carrier-, lifecycle-, and when necessary stage-qualified: `X(carrier@life,stage)=value`. A category is exclusive per incoming carrier edge in one lifecycle/stage, not necessarily per whole artifact.
 3. P is widened to action formation and commitment: direct/implicit, semantic hierarchy, or explicit candidate commitment. The old P2/P3/P4 variants are projected as PB plus ordered audit attributes such as prefilter, postselect_refine, and rescore.
 4. V uses semantic target atoms plus provenance, measure, and composition. Geometric error and previous-cycle reference are attributes, not standalone semantic atoms.
 5. T records clock topology as present/absent/UNKNOWN. Exact solver steps, horizon length, and refinement rounds are audit parameters.
@@ -49,7 +49,8 @@ Revised V atoms:
     VW world/future fidelity
     VY dynamics or physical validity
     VP model confidence/likelihood
-    VX unknown criterion
+    VX known resolver, unknown criterion
+    UNKNOWN resolver applicability or criterion cannot yet be established
 
 T core:
 
@@ -75,16 +76,16 @@ The full ordered L program, not the macro list, is authoritative.
 |---|---|---|---|---|---|---|---|---|
 | LAW-PF | C2@T | @T:X2; @R:N/A | D∅ | P∅ | N/A | ∅,∅,∅,∅ | LA | HIGH |
 | LAW-PB | C2@T | @T:X2; @R:N/A | D∅ | P∅ | N/A | ∅,∅,∅,∅ | LA + perception stages | MEDIUM |
-| EPO-PLAN | C2@T | @T:X1; @R:N/A | D∅ | P∅ | N/A | present,∅,∅,∅ | LS | HIGH |
-| EPO-SELF | C2@T + C3@R | @T:X1; @R:X2 | D5 | N/A | N/A | present,∅,present,∅ | LS + detached chain-forward | HIGH |
-| EPO-CTRL | C2@T + C3@R | @T:X1; @R:X1 | D5 | N/A | N/A | present,∅,present,∅ | LS | HIGH |
-| DLAW-PAPER | C4@B | @R:X∅ | D1 | P∅ | N/A | present,∅,∅,∅ | LG | HIGH |
-| DLAW-CODE | C4@B | @R:X∅ | D1 | P∅ | N/A | present,∅,∅,∅ | LG | HIGH |
-| W4D-PLAN | C1@B + C2@B | @T:X3; @R:X3 | D2 | PB | VM | ∅,∅,∅,∅ | joint graph; LA route partly UNKNOWN | MEDIUM-HIGH |
-| WD-PLAN | C2@T direct + C2@R surrogate | @T:X3; @R:X3 | D2 | PB[prefilter] | VU | ∅,∅,∅,∅ | LT→LC | HIGH |
-| WOTE-PLAN | C1@B + C3@B | @T:X3; @R:X3 | D2 | PB | fusion(VM,VD) | ∅,∅,present,∅ | retained joint graph + LC | HIGH |
-| SEER-PAPER | C1@B + C2@B | @T:X3; @R:X3 | D3 | PU | VX | ∅,present,∅,∅ | retained joint graph/LA | MEDIUM |
-| SEER-CODE | C1@B + C2@B | @T:X3; @R:X3 | D2 | PB[postselect_refine,no_rescore] | fusion(VM,VD) | ∅,∅,∅,∅ | retained joint graph + LC | HIGH |
+| EPO-PLAN | C2@T base + C3@T chain | X(C2@T,base)=X1; X(C3@T,chain)=X2; @R:N/A | D∅ | P∅ | N/A | present,∅,∅,∅ | LS + detached chain-forward | HIGH |
+| EPO-SELF | C2@T base + C3@B | X(C2@T,base)=X1; X(C3@T,chain)=X2; X(C3@R)=X2 | D5 | N/A | N/A | present,∅,present,∅ | LS + detached chain-forward | HIGH |
+| EPO-CTRL | C2@T base + C3@T chain + C3@R controlled | X(C2@T,base)=X1; X(C3@T,chain)=X2; X(C3@R,controlled)=X1 | D5 | N/A | N/A | present,∅,present,∅ | LS + detached chain-forward | HIGH |
+| DLAW-PAPER | C4@B | X(C4@T)=X∅; X(C4@R)=X∅ | D1 | P∅ | N/A | present,∅,∅,∅ | LG | HIGH |
+| DLAW-CODE | C4@B | X(C4@T)=X∅; X(C4@R)=X∅ | D1 | P∅ | N/A | present,∅,∅,∅ | LG | HIGH |
+| W4D-PLAN | C1@B + C2@B | X(C1@B)=N/A; X(C2@B)=X3 | D2 | PB | VW | ∅,∅,∅,∅ | joint graph; LA route partly UNKNOWN | MEDIUM-HIGH |
+| WD-PLAN | C2@T direct + C2@R surrogate | X(C2@T,pretrain)=X1; X(C2@T,FAR)=X3; X(C2@R)=X3 | D2 | PB[prefilter] | VU | ∅,∅,∅,∅ | LP→joint(LT,LC) | HIGH |
+| WOTE-PLAN | C1@B + C3@B | X(C1@B)=N/A; X(C3@B)=X3 | D2 | PB | fusion(VM,VD) | ∅,∅,present,∅ | retained joint graph + LC | HIGH |
+| SEER-PAPER | C1@B + C2@B | X(C1@B)=N/A; X(C2@B)=X3 | D3 | PU | UNKNOWN | ∅,present,∅,∅ | retained joint graph/LA | MEDIUM |
+| SEER-CODE | C1@B + C2@B | X(C1@B)=N/A; X(C2@B)=X3 | D2 | PB[postselect_refine,no_rescore] | fusion(VM,VD) | ∅,∅,∅,∅ | retained joint graph + LC | HIGH |
 | DJEPA-PF | C2@T | @T:X∅; @R:N/A | D∅ | P∅ | N/A | ∅,∅,∅,∅ | LP | HIGH |
 | DJEPA-PB1 | C2@T | @T:X∅; @R:N/A | D∅ | PB | VU | ∅,∅,∅,∅ | LP→LC | HIGH |
 | DJEPA-PB2 | C2@T | @T:X∅; @R:N/A | D∅ | PB | weighted(VU,VD-comfort@previous-cycle) | ∅,∅,∅,present | LP→LC | HIGH |
@@ -93,7 +94,7 @@ The full ordered L program, not the macro list, is authoritative.
 | DWAM-POLICY | C5@T | @T:X4; @R:N/A | D∅ | PH | N/A | present,∅,∅,∅ | LQ→finetune→LR | MEDIUM |
 | DWAM-WORLD | C3@R | @R:X1 | D5 | N/A | N/A | present,∅,present,∅ | world/LQ pretraining | MEDIUM |
 | DWAM-JOINT | C5@B | @T:X4; @R:X4 | D4 | P∅ | N/A | present,∅,present,∅ | LQ | MEDIUM |
-| GW-PLAN | C1@B + C2@T | @T:X∅; @R:N/A | D1 | PU | VX | present,∅,∅,∅ | LS + stopped temporal consistency | MEDIUM |
+| GW-PLAN | C1@B + C2@T | X(C1@B)=N/A; X(C2@T)=X∅ | D1 | PU | UNKNOWN | present,∅,∅,∅ | LS + stopped temporal consistency | MEDIUM |
 
 Here @T means TRAIN_ONLY or training lifecycle, @R means runtime, and @B means both. Exact paper/source boundaries follow.
 
@@ -129,20 +130,20 @@ Here @T means TRAIN_ONLY or training lifecycle, @R means runtime, and @B means b
 
 - Artifact: EPO-PLAN; ICCV 2025 paper copy, exact arXiv revision UNKNOWN; Kevin-thu/Epona at 69b24c…; planning-only evaluation.
 - Evidence boundary: source step_eval with traj_only behavior is included.
-- C: C2@T{direct}. Future visual latent is learned but visual DiT is skipped in planning-only deployment. [PAPER FACT: papers/raw_md/P0001_Epona/P0001_Epona.raw.md; CODE FACT: audits/literature/PHASE_C5_EPONA_SOURCE_AUDIT.md]
-- X: {@T:X1, @R:N/A}. Standard visual training uses factual future pose/yaw, not TrajDiT output. [PAPER FACT + CODE FACT]
+- C: C2@T{direct,base} + C3@T{direct,chain}. Base visual training predicts one factual next endpoint; periodic chain-of-forward training generates and reuses an ordered detached self-context. Both are absent from planning-only deployment. [PAPER FACT: papers/raw_md/P0001_Epona/P0001_Epona.raw.md; CODE FACT: audits/literature/PHASE_C5_EPONA_SOURCE_AUDIT.md]
+- X: {X(C2@T,base)=X1, X(C3@T,chain)=X2, @R:N/A}. Base visual training uses factual future pose/yaw, while chain-of-forward training reuses detached model-predicted motion and visual contexts. [PAPER FACT + CODE FACT]
 - D: D∅. Runtime history/MST→TrajDiT→trajectory. [PAPER FACT + CODE FACT]
 - P: P∅. Action-flow samples are not a verified bank/resolver or semantic hierarchy. [CODE FACT + OUR INFERENCE]
 - V: N/A because P=P∅. [OUR INFERENCE]
 - T: Ts=present for action-flow solving; Tr/Th/Tc=absent. Solver count is an audit parameter. [PAPER FACT + CODE FACT]
-- L: joint_train(L_action→θTraj,θMST || factual_motion→visual DiT→L_visual→θVis,θMST) => retain{encoders,MST,TrajDiT}/bypass{VisDiT}. Family=LS. [PAPER FACT + CODE FACT]
+- L: joint_train(L_action→θTraj,θMST || factual_motion→visual DiT→L_visual→θVis,θMST) plus periodic detached chain-of-forward self-context curriculum => retain{encoders,MST,TrajDiT}/bypass{VisDiT}. Family=LS plus detached chain-forward. [PAPER FACT + CODE FACT]
 - Confidence: HIGH.
 
 ### 3.4 EPO-SELF
 
 - Artifact: EPO-SELF; same paper/source boundary; self-generated visual rollout.
-- C: C2@T{direct} + C3@R{direct}. One-step visual learning supports a recurrent ordered rollout at runtime. [PAPER FACT + CODE FACT, Epona sources]
-- X: {@T:X1, @R:X2}. Training uses factual motion; runtime TrajDiT-predicted first-step motion controls the next visual state. [PAPER FACT + CODE FACT]
+- C: C2@T{direct,base} + C3@B{direct}. One-step factual visual learning is augmented by a train-time detached chain-of-forward sequence, and the same carrier type forms the recurrent ordered runtime rollout. [PAPER FACT + CODE FACT, Epona sources]
+- X: {X(C2@T,base)=X1, X(C3@T,chain)=X2, X(C3@R,self)=X2}. Base training uses factual motion; chain training and runtime self-rollout use model-predicted motion, detached only in the train-time context handoff. [PAPER FACT + CODE FACT]
 - D: D5. Generated future visual sequence is the declared mode output/context; this is not the planning-only A*. [PAPER FACT + CODE FACT]
 - P: N/A because this generation mode has no action-commitment task.
 - V: N/A because P=N/A.
@@ -153,20 +154,20 @@ Here @T means TRAIN_ONLY or training lifecycle, @R means runtime, and @B means b
 ### 3.5 EPO-CTRL
 
 - Artifact: EPO-CTRL; same paper/source boundary; externally controlled visual rollout.
-- C: C2@T + C3@R. [PAPER FACT + CODE FACT, Epona sources]
-- X: {@T:X1, @R:X1}. Factual poses supervise training and externally supplied pose/yaw controls deployment rollout. [PAPER FACT + CODE FACT]
+- C: C2@T{base} + C3@T{chain} + C3@R{controlled}. The shared training program contains factual one-step prediction and detached self-generated chain contexts; deployment emits an externally controlled horizon. [PAPER FACT + CODE FACT, Epona sources]
+- X: {X(C2@T,base)=X1, X(C3@T,chain)=X2, X(C3@R,controlled)=X1}. Factual poses supervise base training, predicted motion drives the chain curriculum, and supplied pose/yaw controls deployment rollout. [PAPER FACT + CODE FACT]
 - D: D5; A*=N/A because control is supplied. [PAPER FACT + CODE FACT]
 - P: N/A because external control replaces action commitment.
 - V: N/A because P=N/A.
 - T: Ts=present, Tr=absent, Th=present, Tc=absent. [PAPER FACT + CODE FACT]
-- L: shared Epona LS program; deploy/retain visual generation path, TrajDiT not required for this mode. [CODE FACT]
+- L: shared Epona LS program plus periodic detached chain-of-forward curriculum; deploy/retain visual generation path, while TrajDiT is not required to supply control in this mode. [CODE FACT]
 - Confidence: HIGH.
 
 ### 3.6 DLAW-PAPER
 
 - Artifact: DLAW-PAPER; arXiv:2512.23421v3/CVPR 2026; paper planning path.
 - C: C4@B{internal}. Cached first-denoising Video-DiT block states are grounded by video generation and consumed by Action DiT. [PAPER FACT: papers/raw_md/P0009_DriveLaW/P0009_DriveLaW.raw.md, Fig. 1 and action-planning section]
-- X: {@R:X∅}. The generative carrier is observation/noise conditioned; action consumes it rather than conditioning it. [PAPER FACT]
+- X: {X(C4@T)=X∅, X(C4@R)=X∅}. The generative carrier is observation/noise/history conditioned in pretraining and planning; action consumes it rather than conditioning it. [PAPER FACT]
 - D: D1. C4→Action DiT→A*. [PAPER FACT]
 - P: P∅. Action DiT forms the trajectory without semantic hierarchy or explicit resolver. [PAPER FACT]
 - V: N/A because P=P∅. [OUR INFERENCE]
@@ -178,7 +179,7 @@ Here @T means TRAIN_ONLY or training lifecycle, @R means runtime, and @B means b
 
 - Artifact: DLAW-CODE; official source at 243e0e…; released planning path.
 - C: C4@B{internal}. Released planning consumes early Video-DiT block states. [CODE FACT: audits/literature/PHASE_C6_DRIVELAW_AUDIT.md]
-- X: {@R:X∅}. No candidate/action control conditions the carrier. [CODE FACT]
+- X: {X(C4@T)=X∅, X(C4@R)=X∅}. No future candidate/action control conditions the carrier in either lifecycle. [CODE FACT]
 - D: D1. C4 conditions the released Action DiT path. [CODE FACT]
 - P: P∅. Solver states do not form an identity-preserving bank/resolver. [CODE FACT + OUR INFERENCE]
 - V: N/A because P=P∅. [OUR INFERENCE]
@@ -191,31 +192,31 @@ Here @T means TRAIN_ONLY or training lifecycle, @R means runtime, and @B means b
 
 - Artifact: W4D-PLAN; ICCV 2025/arXiv:2507.00603; official source at cffb51….
 - C: C1@B{direct} + C2@B{direct}. The physical current latent participates in an explicit candidate-conditioned world transition; F{k} is a separate future endpoint record. [PAPER FACT: papers/raw_md/P0046_World4Drive/P0046_World4Drive.raw.md; CODE FACT: audits/literature/PHASE_C5_WORLD4DRIVE_AUDIT.md]
-- X: {@T:X3, @R:X3}. Candidate identity k conditions F{k} and survives to scoring. [PAPER FACT + CODE FACT]
+- X: {X(C1@B)=N/A, X(C2@B)=X3}. Candidate identity k conditions F{k} and survives to scoring; it does not index the current world carrier. [PAPER FACT + CODE FACT]
 - D: D2. A{k}→F{k}→V{k}→argmax→A*. [PAPER FACT + CODE FACT]
 - P: PB. Six intention/candidate identities reach one resolver. [PAPER FACT + CODE FACT]
-- V: single(VM){referent=factual/expert trajectory; label_measure=nearest geometric trajectory; provenance=winner index j}. Future reconstruction shapes F but does not by itself change the resolver target to VW. [PAPER FACT]
+- V: single(VW){compared_objects=predicted candidate future latent F{k}, factual future latent F_hat; measure=MSE latent distance; provenance=factual logged future; target_class=j=argmin_k distance}. The separate L1 loss on T{j} shapes the selected proposal but does not define ScoreNet's class label. [PAPER FACT]
 - T: all core clocks absent. Candidate parallelism is not a clock. [OUR INFERENCE]
-- L: joint_train(factual future→L_future on selected F{j} || nearest expert candidate→L_score || trajectory/perception losses). A{k}→F{k} is known; whether L_future reaches θA in every config is UNKNOWN. retain{current/future world path,planner,scorer}. Family=LA/LU + LC. [PAPER FACT; CODE boundary U-009]
+- L: compute j=argmin_k ||F{k}-F_hat||² from the factual future; joint_train(L_recon on F{j} || focal L_score against j || L1 trajectory loss on T{j} || perception/semantic losses). A{k}→F{k} is known; whether L_recon reaches θA in every config is UNKNOWN. retain{current/future world path,planner,scorer}. Family=LA/LU + LC. [PAPER FACT; CODE boundary U-009]
 - Confidence: MEDIUM-HIGH.
 
 ### 3.9 WD-PLAN
 
 - Artifact: WD-PLAN; arXiv:2603.14948; official source at c375ee….
 - C: C2@T{direct teacher} + C2@R{distilled surrogate}. Distillation changes realization, not the temporal carrier category. [PAPER FACT: papers/raw_md/P0042_WorldDrive/P0042_WorldDrive.raw.md; CODE FACT: audits/literature/PHASE_C5_WORLDDRIVE_AUDIT.md]
-- X: {@T:X3, @R:X3}. Candidate trajectory indexes teacher future and deployed surrogate. [PAPER FACT + CODE FACT]
+- X: {X(C2@T{direct},pretrain)=X1, X(C2@T{direct},FAR)=X3, X(C2@R{surrogate})=X3}. Factual/conditioned motion trains TA-DWM; candidate k indexes frozen-teacher targets during FAR and the deployed surrogate. [PAPER FACT + CODE FACT]
 - D: D2. A{k}→surrogate F{k}→reward V{k}→argmax. [PAPER FACT + CODE FACT]
 - P: PB with audit attribute prefilter=top-K. Removing the filter changes compute/search support but not criterion semantics or commitment operator. [PAPER FACT + OUR INFERENCE]
 - V: pairwise_preference(VU){referent=planning outcome; provenance=PDMS/oracle ordering}. [PAPER FACT]
 - T: all core clocks absent. Heavy diffusion solver is not in deployed planning. [PAPER FACT + CODE FACT]
-- L: pretrain(TA-DWM future teacher); distill(LT: stopgrad F_teacher{k}→F_surrogate{k}); train(LC: PDMS preferences→reward head); deploy retain{proposal path,surrogate,reward}/drop{heavy TA-DWM}. Order=LT→LC, not an unordered set. [PAPER FACT + CODE FACT]
+- L: pretrain(TA-DWM); transfer/freeze its visual and motion encoders into the planner and train the proposal path (LP); then train FAR with joint objectives [LT: stopgrad F_teacher{k}→F_surrogate{k} || LC: PDMS preferences→reward head]; deploy retain{transferred encoders,proposal path,surrogate,reward}/drop{heavy TA-DWM generator}. Family=LP→joint(LT,LC). [PAPER FACT + CODE FACT]
 - Confidence: HIGH.
 
 ### 3.10 WOTE-PLAN
 
 - Artifact: WOTE-PLAN; raw paper revision UNKNOWN; official source at 298957….
 - C: C1@B{direct} + C3@B{direct}. Current semantic BEV is the source of recurrent candidate-conditioned future BEV/action states. [PAPER FACT: papers/raw_md/P0045_WoTE/P0045_WoTE.raw.md; CODE FACT: audits/literature/PHASE_B_WAVE2_INTERFACE_CODE_AUDIT.md]
-- X: {@T:X3, @R:X3}. Candidate ego state/trajectory indexes each rollout. [PAPER FACT + CODE FACT]
+- X: {X(C1@B)=N/A, X(C3@B)=X3}. Candidate ego state/trajectory indexes each future rollout, not the current BEV carrier. [PAPER FACT + CODE FACT]
 - D: D2. Multi-step F{k,h} supplies candidate reward before argmax. [PAPER FACT + CODE FACT]
 - P: PB. [PAPER FACT + CODE FACT]
 - V: learned_fusion(VM,VD[safety,comfort,progress/rule-related components]){provenance=expert imitation plus simulator labels; surroundings=fixed/logged in inspected setup}. Exact paper sign wording remains bounded. [PAPER FACT + CODE FACT]
@@ -227,10 +228,10 @@ Here @T means TRAIN_ONLY or training lifecycle, @R means runtime, and @B means b
 
 - Artifact: SEER-PAPER; NeurIPS 2025/arXiv link 2510.11092; paper iterative mechanism.
 - C: C1@B + C2@B. [PAPER FACT: papers/raw_md/P0061_SeerDrive/P0061_SeerDrive.raw.md]
-- X: {@T:X3, @R:X3}. Mode/candidate action and future BEV identity are aligned during feedback and WTA supervision. [PAPER FACT]
+- X: {X(C1@B)=N/A, X(C2@B)=X3}. Mode/candidate action and future BEV identity are aligned during feedback and WTA supervision. [PAPER FACT]
 - D: D3. A{m,r}→F{m,r}→A{m,r+1}, repeated within one decision. [PAPER FACT]
 - P: PU. Multimode outputs exist, but the exact deployed final resolver is not fixed by available evidence. [UNKNOWN U-015]
-- V: VX because P is unresolved; do not import released-code rewards into the paper artifact. [UNKNOWN]
+- V: UNKNOWN because P is unresolved and the available evidence does not establish both resolver existence and criterion semantics; do not import released-code rewards into the paper artifact. [UNKNOWN]
 - T: Ts=absent, Tr=present, Th=absent, Tc=absent. Future endpoint prediction per round is not a physical-horizon rollout. [PAPER FACT + OUR INFERENCE]
 - L: joint_train(current/future semantic losses || trajectory losses at iterative heads; WTA-aligned mode) with end-to-end gradients through rounds => retain{world/planner reciprocal path}. Family=LA plus retained joint graph. [PAPER FACT]
 - Confidence: MEDIUM due final resolver.
@@ -239,7 +240,7 @@ Here @T means TRAIN_ONLY or training lifecycle, @R means runtime, and @B means b
 
 - Artifact: SEER-CODE; initial official release at 1cfb7ec…; WoTE-integrated evaluator/refiner.
 - C: C1@B + C2@B. [CODE FACT: audits/literature/PHASE_C5_SEERDRIVE_AUDIT.md]
-- X: {@T:X3, @R:X3}. [CODE FACT]
+- X: {X(C1@B)=N/A, X(C2@B)=X3}. [CODE FACT]
 - D: D2. A{k}→one-endpoint F{k}→decomposed V{k}→argmax; selected F{k*} then refines A{k*}. [CODE FACT]
 - P: PB{postselect_refine=yes,rescore=no}. The fixed selected index is not reconsidered. [CODE FACT]
 - V: learned_fusion(VM,VD){provenance=imitation and simulator reward labels}. [CODE FACT]
@@ -347,10 +348,10 @@ Here @T means TRAIN_ONLY or training lifecycle, @R means runtime, and @B means b
 
 - Artifact: GW-PLAN; arXiv:2606.16274v1; paper-only planning path.
 - C: C1@B{direct} + C2@T{direct target}. C1 is admitted because ECIG/GRU produces entity-relational world nodes, a world-flow operator refines them, explicit temporal consistency grounds them, and planning consumes them. The stopped t+1 world target is training-only. [PAPER FACT: papers/raw_md/P0065_GraphWorld/P0065_GraphWorld.raw.md]
-- X: {@T:X∅,@R:N/A}. The temporal target is factual/observation-derived rather than action-controlled; runtime has no future/joint carrier. [PAPER FACT]
+- X: {X(C1@B)=N/A, X(C2@T)=X∅}. The temporal target is factual/observation-derived rather than action-controlled; the runtime current-world carrier is not an action-indexed consequence. [PAPER FACT]
 - D: D1. Current structured world→mode reweighting/planning queries→trajectory. [PAPER FACT]
 - P: PU. Multimodal planning outputs exist, but final ego-mode commitment is not established. [UNKNOWN U-027]
-- V: VX because the exact resolver target is unknown. [UNKNOWN]
+- V: UNKNOWN because final resolver existence/role and its criterion semantics are not established together. [UNKNOWN]
 - T: Ts=present for two-step internal flow transport; Tr/Th/Tc=absent. Two is an audit parameter, not a physical horizon. [PAPER FACT]
 - L: stage1 joint_train(detection/map/motion/planning→θshared,θworld); stage2 LN temporal_consistency(W_t,stopgrad(W_t+1)) plus task losses; deploy retain{ECIG,GRU,current-world flow,planner}/drop{physical t+1 target branch}. Family=LS+LN. [PAPER FACT]
 - Confidence: MEDIUM due source absence and resolver.

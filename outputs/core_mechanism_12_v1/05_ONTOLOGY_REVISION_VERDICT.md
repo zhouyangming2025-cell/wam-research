@@ -1,6 +1,6 @@
 # Core Mechanism 12 — Phase 3 Ontology Revision Verdict
 
-Status: second-pass verdict. The 21-artifact projection and counterexample audit were completed before the three historical V1 documents were read.
+Status: second-pass verdict, corrected after the independent first-six human review. The 21-artifact projection and counterexample audit were completed before the three historical V1 documents were read; the later human review corrected W4D's V projection, WorldDrive's L and stage-specific X program, Epona's train-time chain carrier, multi-carrier X notation, and PU/V UNKNOWN handling.
 
 Historical competitors reviewed:
 
@@ -89,11 +89,11 @@ Do not split WorldDrive’s surrogate into a new temporal class; retain C2 with 
 
 ### 3.2 X — MODIFY
 
-Keep X1–X4 semantics. Require:
+Keep X1–X4 semantics. Require carrier, lifecycle, and when needed stage binding:
 
-    X(carrier@lifecycle)=value
+    X(carrier@lifecycle,stage)=value
 
-This represents Epona’s @T:X1 and @R:X2 without inventing a hybrid class.
+This represents Epona's base-train X1, chain-train X2, and runtime X1/X2 modes—and WorldDrive's pretrain X1 versus FAR X3—without inventing hybrid classes.
 
 Do not merge with P:
 
@@ -147,6 +147,12 @@ Every V record must include:
     target provenance
     measure
     composition/weights/order/filter
+
+Epistemic rule:
+
+- `VX` means a resolver is known to exist but its semantic target is unknown.
+- literal `UNKNOWN` means resolver applicability and/or criterion cannot yet be established because P=PU.
+- `N/A` is used only when the task/topology rules out a resolver.
 
 ### 3.6 T — MODIFY
 
@@ -286,7 +292,7 @@ Add LG and LR.
 
 Why the old unordered Learning set fails:
 
-- WorldDrive requires LT→LC order;
+- WorldDrive requires TA-DWM pretraining and representation transfer before FAR, while FAR's LT and LC objectives are joint rather than sequential: `LP→joint(LT,LC)`;
 - LP→LC differs from LC→finetune;
 - LAW and Metis share LA family but have non-isomorphic parameter/attention/target graphs;
 - retain/drop cannot be recovered from a set.
@@ -377,6 +383,7 @@ Reasons it exceeds bare S1:
 - mandated internal collisions and invariance tests were run;
 - known false encodings were revised rather than hidden;
 - old V1 was tested after independent reconstruction and contributed only one primary-DAG-validated completeness fix.
+- the first-six human gate found and corrected fifteen field/encoding errors rather than accepting the generated worksheet verbatim.
 
 Reasons it does not reach S2:
 
@@ -387,3 +394,5 @@ Reasons it does not reach S2:
 - no external new-paper blind test exists.
 
 Phase 3 verdict: retain the revised ontology as an S1+ research instrument, not a stable S2 domain map.
+
+Normative-use rule: classify new artifacts from `09_ONTOLOGY_SPEC_S1_PLUS.md`; retain `02_ONTOLOGY_SPEC.md` only as the Phase 2 evolution record.
