@@ -2,7 +2,7 @@
 
 **Purpose:** a fresh GPT-5.6 Sol session should recover the project direction and active scientific task in under a minute without reconstructing old chats.
 
-Last updated: 2026-09-14 — Wave 3 active through DriveLaW
+Last updated: **2026-09-16 — 16 normalized anchors; Wave C.6 closed; Wave C.7 active; SAFE-SIM next**
 
 ## 1. Research north star
 
@@ -10,43 +10,89 @@ Last updated: 2026-09-14 — Wave 3 active through DriveLaW
 World Model + End-to-End + Planning-centric autonomous driving
 ```
 
-Planning is the center of gravity. Perception, video generation, JEPA/latent prediction, VLA, safety/risk modeling and simulation matter only insofar as they affect planning capability, decision quality, closed-loop behavior, or scientific understanding of planning.
+Planning is the center of gravity. Perception, video generation, JEPA/latent prediction, VLA, safety/risk modeling, reward learning and simulation matter only insofar as they affect planning capability, decision quality, closed-loop behavior, or scientific understanding of planning.
 
 **Risk field is NOT a required destination.** Prior risk/predictive-risk expertise is an optional capability pool, not a research commitment.
+
+---
 
 ## 2. Methodological rule
 
 ```text
 UNDERSTAND THE FIELD FIRST
-→ representative comparative deep reads
+→ broad comparative deep reads
+→ dimension-first normalization
 → cross-family synthesis
-→ only then research-problem / gap discovery
+→ only after sufficient maturity: research-problem discovery
+→ falsification
+→ method design
 ```
 
-P1/P2-R/P3 are parked historical probes. No gap declaration or method design is authorized yet.
-
-## 3. Current stage
+Binding status:
 
 ```text
-FIELD RECONSTRUCTION — PHASE B: WAVE 3 ACTIVE
+research-direction convergence   PAUSED
+candidate-problem promotion      PAUSED
+method design                    FORBIDDEN
+literature expansion             ACTIVE
 ```
 
-Phase A:
+Working maturity gate:
 
 ```text
-60 stable IDs: P0001–P0060
-58 RAW_MD_READY
-2 lawful-source blockers: P0008 NPPC, P0020 Bahram 2016
-F1–F11 coverage PASS
-broad ingestion FROZEN
-25 representative anchors FIXED
+~24–30 normalized papers
++
+major-family diversity
++
+ontology saturation / diminishing new residues
 ```
 
-Wave 1 and Wave 2 are closed.
+Paper selection is coverage-driven, not hypothesis-driven.
 
-## 4. Binding field distinctions from Waves 1–2
+---
 
-Do not collapse:
+## 3. Current scientific state
+
+Normalized anchor count:
+
+```text
+16
+```
+
+Current comparison set:
+
+```text
+P0048 LAW
+P0045 WoTE
+P0001 Epona
+P0042 WorldDrive
+P0046 World4Drive
+P0061 SeerDrive
+P0049 Drive-JEPA
+P0062 Metis
+P0063 DynFlowDrive
+P0064 Discrete-WAM
+P0065 GraphWorld
+P0009 DriveLaW
+P0012 DA-WAM
+P0002 SafeDrive
+P0005 RiskWorld
+P0007 DriveReward
+```
+
+Canonical ontology:
+
+```text
+WAM_DIMENSION_ONTOLOGY V1.3
+```
+
+No V1.4 is currently authorized.
+
+---
+
+## 4. Binding distinctions already established
+
+Never collapse:
 
 ```text
 controllable generation
@@ -55,7 +101,8 @@ controllable generation
 != online hidden future representation
 != candidate-specific future evaluator
 != joint world-action generation
-!= WM as RL imagination environment
+!= direct value/reward modeling
+!= reactive traffic simulation
 ```
 
 Also:
@@ -63,107 +110,200 @@ Also:
 ```text
 conditional future != causal/interventional response
 action-conditioned != reactively supervised
-candidate-specific output != candidate-specific oracle supervision
+candidate-specific output != candidate-specific future-world truth
 multimodal trajectory planner != automatically a WM
 candidate scorer != automatically a WM
+explicit risk predictor != trajectory value model
 world fidelity != decision utility
 longer horizon != better planning
 generation quality != planning evidence
-WM-assisted planning != online model-based planning
+world rollout depth != planner-coupling strength
 ```
 
-Evaluation regimes remain distinct: nuScenes open-loop logs; nuPlan OL/CL-NR/CL-R; NAVSIM non-reactive pseudo-simulation; Bench2Drive interactive CARLA closed loop; HUGSIM reconstructed photorealistic closed loop; real-vehicle closed loop remains sparse.
-
-## 5. Wave-2 baseline
-
-Read when needed:
+Evaluation regimes remain distinct:
 
 ```text
-landscape/PHASE_B_WAVE2_SYNTHESIS.md
-landscape/PHASE_B_WAVE2_COMPARABILITY_AUDIT.md
-audits/literature/PHASE_B_WAVE2_INTERFACE_CODE_AUDIT.md
+nuScenes open-loop logs
+nuPlan OL / CL-NR / CL-R
+NAVSIM non-reactive data-driven pseudo-simulation
+Bench2Drive interactive CARLA closed loop
+HUGSIM reconstructed photorealistic closed loop
+traffic-simulator closed-loop behavioral evaluation
+real-vehicle closed loop
 ```
 
-Stable role map:
+---
+
+## 5. Latest completed wave — C.6
 
 ```text
-GAIA-1   = controllable generation; no operational planner interface
-Drive-WM = candidate → visual future → perception/reward → selection
-OccWorld = joint future occupancy + ego generation
-WoTE     = candidate → future BEV → learned reward → selection
-ViDAR    = predictive pretraining
-LAW      = action-aware future-latent representation shaping
+P0009 DriveLaW      COMPLETE
+P0012 DA-WAM        COMPLETE
+P0002 SafeDrive     COMPLETE
+P0005 RiskWorld     COMPLETE
+P0007 DriveReward   COMPLETE
 ```
 
-Key evidence: better OccWorld reconstruction can worsen forecasting/planning; WoTE future state adds value over scorer-only but audited PDM alternative-action targets share logged surrounding-agent futures; ViDAR future decoder is not deployed; LAW future latent is training supervision, not test-time plan input.
-
-## 6. Wave 3 — current scientific state
-
-Canonical files:
+C.6 forced separation of several mechanisms that had previously been easy to narrate as one generic `world-model benefit`:
 
 ```text
-landscape/PHASE_B_WAVE3_PLAN.md
-landscape/PHASE_B_WAVE3_SYNTHESIS.md
+online generative hidden representation
+candidate-specific future latent
+candidate-specific safety consequence
+factual future risk prediction
+direct semantic value/reward learning
 ```
 
-Status:
+The latest control, DriveReward, establishes:
 
 ```text
-Epona       = COMPLETE first pass
-DrivingGPT  = COMPLETE first pass
-DriveLaW    = COMPLETE first pass
-Auto-JEPA   = NEXT
-DA-WAM      = PENDING
-Think2Drive = PENDING
+current/short-history visual context + candidate trajectory
+→ learned factorized semantic reward
+→ RL reward teacher OR test-time scorer
 ```
 
-World-action unification already splits into:
+without an explicit future-world state.
+
+Its reported evidence is stronger for **training-time RL reward** than online reranking:
 
 ```text
-Epona
-= shared historical latent F
-→ separate trajectory/video diffusion generators
-→ visual generation can be disabled for planning
-
-DrivingGPT
-= interleaved discrete image/action language
-→ one causal next-token Transformer
-
-DriveLaW
-= Video-DiT internal denoising latent
-→ direct condition for Action DiT
-→ online generative hidden state becomes planner representation
+AdaThinkDrive Original     90.3 PDMS
+Best-of-4                  93.0
+DriveReward                90.5
 ```
 
-Important DriveLaW evidence:
+Therefore:
 
 ```text
-video-pretraining scale: 85.9 → 87.0 → 87.8 → 89.1 PDMS
-BEV / VLM / video-latent condition: 84.1 / 86.5 / 89.1
-Video-DiT denoise state t=1 / 5 / 10: 89.1 / 86.9 / 23.2
+future/world modeling
+!=
+value/reward modeling
 ```
 
-Interpret this as representation-state-specific planning utility, not as a universal fidelity law.
-
-Do not rank Epona/DrivingGPT/DriveLaW by headline PDMS without matched split/input/training conditions.
-
-## 7. Immediate task
-
-Read `state/NEXT_TASK.md`.
-
-The next paper is **Auto-JEPA**. Compare it directly against:
+Canonical DriveReward artifacts:
 
 ```text
-OccWorld — better reconstruction can be worse for planning
-LAW      — predictive supervision can help without online rollout; longer horizon not monotonic
-DriveLaW — online WM hidden state can be useful, but exact latent choice matters sharply
+papers/deep_analysis/P0007_DRIVEREWARD_DEEP_ANALYSIS_V2.md
+audits/literature/PHASE_C6_DRIVEREWARD_AUDIT.md
+landscape/P0007_DRIVEREWARD_ONTOLOGY_PROJECTION.md
+landscape/WAM_COMPARISON_MATRIX_V1_3_DRIVEREWARD_EXTENSION.md
 ```
 
-Question to answer: what future information does Auto-JEPA preserve/discard, what survives at inference, and what matched evidence shows planning-oriented compression rather than generic auxiliary/pretraining benefit?
+---
 
-Then continue `DA-WAM → Think2Drive`.
+## 6. Current wave — C.7 simulation / reactivity controls
 
-## 8. Evidence discipline
+Correct queue:
+
+```text
+P0066 SAFE-SIM       RESERVED / INGEST NEXT
+P0067 ProSim         RESERVED / INGEST PENDING
+P0013 BridgeSim      RAW_MD_READY / DEEP READ PENDING
+P0014 ReactSimBench  RAW_MD_READY / DEEP READ PENDING
+P0015 CausalDrive    RAW_MD_READY / DEEP READ PENDING
+```
+
+Purpose:
+
+```text
+reactive environment modeling
+behavior simulation
+log replay vs endogenous reaction
+generative simulator vs planning WAM
+simulation / intervention truth
+evaluation-regime semantics
+```
+
+Feedback coordinates to track:
+
+```text
+F_e = ego-state / dynamics feedback
+F_s = sensor / viewpoint feedback
+F_a = surrounding-agent state feedback
+F_b = surrounding-agent behavioral-response feedback
+```
+
+A closed-loop simulator is not automatically evidence of causally correct counterfactual response.
+
+---
+
+## 7. Stable-ID integrity correction
+
+On 2026-09-16 the expansion queue was audited and corrected.
+
+Existing corpus IDs are immutable. In particular:
+
+```text
+P0003 = GraphAD
+P0004 = BeTop
+P0006 = GenDrive
+P0010 = TOAD
+P0011 = SensitivityShaping
+```
+
+The old queue had accidentally reused these IDs for future targets.
+
+New reservations:
+
+```text
+P0066 SAFE-SIM
+P0067 ProSim
+P0068 AutoVLA
+P0069 ReCogDrive
+P0070 LINGO-2
+P0071 DriveGPT4
+```
+
+See:
+
+```text
+audits/research_synthesis/REPO_STATE_INTEGRITY_AUDIT_20260916.md
+```
+
+Reserved IDs are not yet ingested corpus entries.
+
+---
+
+## 8. Immediate task
+
+Read:
+
+```text
+state/NEXT_TASK.md
+```
+
+The unique next task is:
+
+```text
+P0066 SAFE-SIM
+```
+
+Before deep reading:
+
+```text
+register corpus ID
+verify canonical paper/version
+verify attributable official source/code
+create readable raw primary-text layer
+```
+
+Then reconstruct exactly:
+
+```text
+what closes the loop
+which agents react to whom
+what is generated once vs regenerated each step
+how diffusion/adversarial guidance relates to physical time
+what realism evidence exists
+what counterfactual truth does NOT exist
+how traffic simulation differs from planning WAM
+```
+
+Then compare directly against ProSim, RiskWorld, SafeDrive, WoTE/DA-WAM and closed-loop benchmarks where appropriate.
+
+---
+
+## 9. Evidence discipline
 
 Always separate:
 
@@ -176,47 +316,62 @@ OUR INFERENCE
 Always ask:
 
 ```text
-What exactly is predicted?
+What exactly is represented / predicted?
 What gets direct supervision?
-What is the supervision source for alternative actions?
+What is the truth source?
 What survives at inference?
 How does planning consume it?
+Which feedback loop is actually closed?
 What competing mechanism explains the gain?
 What evaluation regime supports the claim?
 ```
 
 Every anchor gets both strongest evidence and strongest limitation.
 
-## 9. Fast new-session read order
+---
+
+## 10. Fast new-session read order
 
 ```text
 1. START_HERE.md
 2. state/CURRENT_STATE.md
 3. state/NEXT_TASK.md
-4. landscape/PHASE_B_WAVE3_PLAN.md
-5. landscape/PHASE_B_WAVE3_SYNTHESIS.md
-6. landscape/PHASE_B_WAVE2_COMPARABILITY_AUDIT.md  # only as control when needed
+4. landscape/WAM_DEEP_READ_EXPANSION_QUEUE_V1.md
+5. landscape/WAM_DIMENSION_ONTOLOGY_V1.md
+6. landscape/WAM_DIMENSION_ONTOLOGY_V1_1_AMENDMENT.md
+7. landscape/WAM_DIMENSION_ONTOLOGY_V1_2_AMENDMENT.md
+8. landscape/WAM_DIMENSION_ONTOLOGY_V1_3_AMENDMENT.md
 ```
 
-Then read only the primary texts needed for the active comparison.
+For recent state-integrity history:
 
-## 10. Source hierarchy
+```text
+audits/research_synthesis/REPO_STATE_INTEGRITY_AUDIT_20260916.md
+```
+
+Then read only the primary texts and normalized anchors required for the active comparison.
+
+---
+
+## 11. Source hierarchy
 
 ```text
 Official/canonical PDF       = exact source authority
 GitHub raw MD + figures      = GPT-readable primary-text layer
-Paper Card                   = curated paper understanding
-Wave synthesis / Field Atlas = cross-paper understanding
-State files                  = canonical project decisions
+Deep analysis / Paper Card   = curated paper understanding
+Ontology / comparison matrix = normalized cross-paper understanding
+State files                  = canonical research decisions
 Chat                         = temporary reasoning workspace
 ```
 
-If raw MD is ambiguous, verify against the official/canonical PDF rather than guessing.
+If raw MD is ambiguous, verify against the official/canonical PDF or attributable source rather than guessing.
 
-## 11. Division of labor
+---
 
-**GPT-5.6 Sol:** comparative anchor deep reads, cross-paper synthesis, atlas/cards/state maintenance, targeted source audit only when decision-critical.
+## 12. Division of labor
 
-**Local corpus agent:** on-demand acquisition/extraction, MinerU/QC, local code execution, datasets/checkpoints/experiments.
+**GPT-5.6 Sol:** comparative deep reads, cross-paper synthesis, ontology/state maintenance, targeted source/code audit, direct GitHub write-back.
+
+**Local corpus agent:** bulk acquisition/extraction, MinerU/QC, local code execution, datasets/checkpoints/experiments.
 
 The repo — not conversation memory — is the research authority.
