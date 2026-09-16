@@ -1,6 +1,6 @@
 # CURRENT_STATE
 
-Last updated: **2026-09-15 — RESEARCH-DIRECTION CONVERGENCE PAUSED; BROAD WAM DEEP-READ EXPANSION ACTIVE; RISKWORLD COMPLETE**
+Last updated: **2026-09-16 — DRIVEREWARD COMPLETE; 16 NORMALIZED ANCHORS; WAVE C.7 ACTIVE; STATE/ID INTEGRITY REPAIRED**
 
 ## Research north star
 
@@ -26,16 +26,7 @@ FIELD UNDERSTANDING FIRST
 → method design
 ```
 
-Binding correction after the first 11 anchors:
-
-```text
-11 deep anchors
-= preliminary scientific coordinate system
-!= mature field coverage
-!= authorization to promote research directions
-```
-
-Therefore:
+Binding status:
 
 ```text
 research-direction convergence      PAUSED
@@ -44,11 +35,21 @@ method design                       FORBIDDEN
 broad literature expansion          ACTIVE
 ```
 
-Previously created tension/candidate-problem artifacts remain parked historical observations and MUST NOT determine paper selection during this phase.
+The working maturity gate remains:
+
+```text
+~24–30 deeply normalized papers
++
+multiple independent anchors across major mechanism families
++
+ontology saturation / diminishing new residues
+```
+
+Diversity and saturation matter more than raw count.
 
 ---
 
-# Normalized anchors — expansion now at 15
+# Canonical normalized anchors — 16
 
 ```text
 P0048 LAW           COMPLETE v2
@@ -66,6 +67,7 @@ P0009 DriveLaW      COMPLETE v2 + official-source audit
 P0012 DA-WAM        COMPLETE v2 + official-repo-status audit
 P0002 SafeDrive     COMPLETE v2 + NAVSIM source audit
 P0005 RiskWorld     COMPLETE v2 + paper/source-status audit
+P0007 DriveReward   COMPLETE v2 + reward/value boundary audit
 ```
 
 These anchors are a growing comparison set, not the field boundary.
@@ -79,270 +81,212 @@ landscape/WAM_DIMENSION_ONTOLOGY_V1_2_AMENDMENT.md
 landscape/WAM_DIMENSION_ONTOLOGY_V1_3_AMENDMENT.md
 ```
 
-Ontology V1.3 remains active. No V1.4 is authorized by DriveLaW, DA-WAM, SafeDrive or RiskWorld.
+Current ontology:
+
+```text
+V1.3 ACTIVE
+NO V1.4 authorized by DriveLaW / DA-WAM / SafeDrive / RiskWorld / DriveReward
+```
 
 Residue watchlist:
 
 ```text
 GENERATIVE-STATE TAP LOCATION / SOLVER-DEPTH OF POLICY CONDITION
 SAFETY-LOCALIZATION GRANULARITY
+DISCRETE REPRESENTATION ALIGNMENT TOPOLOGY
 ```
-
-RiskWorld did not add an irreducible residue; it strongly exercised existing risk/planning/counterfactual axes.
 
 ---
 
-# Latest expansion anchors
-
-## P0009 DriveLaW
-
-Subtype:
-
-```text
-ONLINE GENERATIVE-LATENT DIRECT-POLICY WAM
-```
-
-Core result:
-
-```text
-history frames
-→ first Video-DiT denoising pass
-→ cached blockwise generative hidden states
-→ Action-DiT cross-attention / flow refinement
-→ trajectory
-
-full future-video rollout / RGB decode NOT REQUIRED
-```
-
-Key correction:
-
-```text
-forward:  WORLD/VIDEO HIDDEN → ACTION
-backward: ACTION LOSS → VIDEO DIT in action_full stage
-```
-
-## P0012 DA-WAM
-
-Subtype:
-
-```text
-ONLINE CANDIDATE-SPECIFIC FUTURE-LATENT UTILITY SCORING WAM
-```
-
-Critical supervision boundary:
-
-```text
-candidate-specific future output              YES
-candidate-specific direct future truth        NO except expert-matched branch
-all-branch factor/value/ranking supervision   YES
-reactive alternative-world truth              NO / NOT ESTABLISHED
-```
-
-Strong matched control:
-
-```text
-No Future 93.31
-Action-Conditioned Future 93.46
-+ Hard Negatives 93.68 PDMS
-```
-
-Official implementation remains SOURCE-BLOCKED.
-
-## P0002 SafeDrive
-
-Subtype:
-
-```text
-ONLINE TRAJECTORY-CONDITIONED SPARSE-WORLD SAFETY EVALUATOR
-```
-
-Core supervision decomposition:
-
-```text
-candidate-specific sparse world               YES
-candidate-specific PDM safety/value labels    YES
-candidate-specific pair collision/TwDAC       YES
-candidate-specific reactive-agent future GT   NO
-```
-
-Binding interpretation:
-
-```text
-candidate-specific safety consequence supervision
-!= candidate-specific reactive world truth
-```
-
-Source status:
-
-```text
-NAVSIM core      SOURCE-COMPLETE
-Bench2Drive      PAPER-VERIFIED / SOURCE-PARTIAL
-```
-
-## P0005 RiskWorld
+# Latest scientific correction — P0007 DriveReward
 
 Canonical files:
 
 ```text
-papers/deep_analysis/P0005_RISKWORLD_DEEP_ANALYSIS_V2.md
-audits/literature/PHASE_C6_RISKWORLD_AUDIT.md
-landscape/P0005_RISKWORLD_ONTOLOGY_PROJECTION.md
-landscape/WAM_COMPARISON_MATRIX_V1_3_RISKWORLD_EXTENSION.md
+papers/deep_analysis/P0007_DRIVEREWARD_DEEP_ANALYSIS_V2.md
+audits/literature/PHASE_C6_DRIVEREWARD_AUDIT.md
+landscape/P0007_DRIVEREWARD_ONTOLOGY_PROJECTION.md
+landscape/WAM_COMPARISON_MATRIX_V1_3_DRIVEREWARD_EXTENSION.md
 ```
 
-Subtype:
+Canonical subtype:
 
 ```text
-OBJECT-CENTRIC FACTUAL-RELATION ROLLOUT RISK WORLD MODEL
+VLM-BASED CANDIDATE VALUE / REWARD MODEL
 ```
 
-Core inference graph:
+Core mechanism:
 
 ```text
-16-frame front RGB + object tracks + ego motion
-→ frozen V-JEPA2 global/object features
-→ structured object/ego state + relation attention
-→ one relation-aware latent token per object
-→ RSSM-style 60-step / 3 s physical future rollout
-→ future relative position / distance / temporal-risk curve
-→ pooled object-risk probability
-→ risk-source identification
+visual/current-or-short-history context
++ navigation / ego state
++ candidate trajectory
+→ InternVL3-1B semantic evaluator
++ VGGT geometry grounding during training
+→ reasoning + factorized reward
+→ RL reward teacher OR test-time candidate scorer
 ```
 
 Critical boundary:
 
 ```text
-explicit learned risk state                  YES
-recurrent physical future rollout            YES
-hypothetical ego-action conditioning         NO
-online world→planner consumption             NO
-trajectory selection                         NO
-reactive intervention truth                  NO
+candidate-specific value/reward             YES
+explicit predicted future world             NO
+candidate-specific future-world truth       NO
+reactive intervention truth                 NO
 ```
 
-Supervision:
+Planning evidence decomposition:
 
 ```text
-logged future ego/object tracks
-→ future relative geometry targets
-
-RiskBench risk-object/event annotations
-→ final object-risk label + shaped temporal-risk curve
+training-time RL reward interface   STRONGER EVIDENCE
+online test-time reranking          POSITIVE BUT SMALL REPORTED GAIN
 ```
 
-Strongest matched future-model evidence:
+AdaThinkDrive selection result:
 
 ```text
-w/o future rollout      60.2 F1 / 5.9 FA
-w/o future supervision  61.6 / 4.4
-Deterministic GRU       62.0 / 6.0
-RiskWorld               63.0 / 2.1
+Original       90.3 PDMS
+Best-of-4      93.0
+DriveReward    90.5
 ```
 
-Representation effects are larger (`w/o world features` = 50.6 F1), but those bundle the imported V-JEPA2 prior and must not be narrated as pure RSSM dynamics gain.
-
-Planning-aware LBC masking shows that selected objects can preserve planning-relevant information, but the paper explicitly does **not** demonstrate an integrated RiskWorld→planner performance gain.
-
-Source status:
+Thus DriveReward strengthens a project-wide causal distinction:
 
 ```text
-arXiv:2608.21414v1                  PAPER-VERIFIED
-official implementation             NOT IDENTIFIED
-KevinWjk/RiskWorld                   FALSE POSITIVE (Alpamayo 1.5 README)
+future/world modeling
+!=
+value/reward modeling
 ```
 
-Therefore:
-
-```text
-P0005 RiskWorld = PAPER-COMPLETE / SOURCE-BLOCKED-MONITOR
-```
+A planner can absorb useful consequence/value information without deploying an explicit future-world state.
 
 ---
 
-# Active expansion plan
-
-Canonical queue:
-
-```text
-landscape/WAM_DEEP_READ_EXPANSION_QUEUE_V1.md
-```
-
-Working maturity gate before another research-direction discussion:
-
-```text
-~24–30 deeply normalized papers total
-+
-multiple independent anchors across major mechanism families
-+
-new papers mostly map into the coordinate system without repeatedly exposing major blind spots
-```
-
-Diversity/saturation matter more than raw count.
-
-## Wave C.6 — core planning-centric WAM expansion
+# Wave C.6 status
 
 ```text
 P0009 DriveLaW      COMPLETE
 P0012 DA-WAM        COMPLETE
 P0002 SafeDrive     COMPLETE
 P0005 RiskWorld     COMPLETE
-P0007 DriveReward   NEXT
+P0007 DriveReward   COMPLETE
 ```
 
-## Wave C.7 — simulation / reactivity / evaluation controls
+Wave C.6 is now **CLOSED**.
+
+Its strongest collective lesson is not one architecture winner, but a separation of roles:
 
 ```text
-P0003 Safe-Sim
-P0004 PROSIM
-P0013 BridgeSim
-P0014 ReactSimBench
-P0015 CausalDrive
+representation shaping
+future consequence prediction
+explicit safety/risk prediction
+direct value/reward learning
+candidate scoring
+training-time teacher knowledge
+online deployed world knowledge
 ```
 
-## Wave C.8 — WAM+VLA / reasoning boundary controls
-
-```text
-P0008 AutoVLA
-P0011 ReCogDrive
-P0010 LINGO-2
-P0006 DriveGPT4
-```
-
-Queue order may change only for source/evidence dependencies or scope correction, not because a paper supports a preferred hypothesis.
+These must remain independent causal axes.
 
 ---
 
-# Next coverage target — DriveReward
+# Wave C.7 — ACTIVE
 
-DriveReward is a value/reward control anchor:
-
-```text
-visual/current context + trajectory
-→ learned semantic reward/value
-→ RL / trajectory selection or reranking
-```
-
-It is needed to distinguish:
+Purpose:
 
 ```text
-future-world modeling
-vs
-trajectory valuation / reward learning
+simulation / reactivity / evaluation controls
 ```
 
-Immediate comparisons:
+Correct queue after stable-ID audit:
 
 ```text
-DriveReward vs WoTE
-DriveReward vs DA-WAM
-DriveReward vs SafeDrive
-DriveReward vs RiskWorld
-DriveReward vs Drive-JEPA / WorldDrive
+P0066 SAFE-SIM       RESERVED / INGEST NEXT
+P0067 ProSim         RESERVED / INGEST PENDING
+P0013 BridgeSim      RAW_MD_READY / DEEP READ PENDING
+P0014 ReactSimBench  RAW_MD_READY / DEEP READ PENDING
+P0015 CausalDrive    RAW_MD_READY / DEEP READ PENDING
 ```
+
+Critical questions:
+
+```text
+what actually closes the loop?
+which feedback channels exist?
+which agents respond endogenously to ego intervention?
+what is replayed vs generated vs regenerated?
+what counts as reactive behavioral evidence?
+how does simulator realism relate to planner-quality evidence?
+```
+
+Project feedback coordinate system remains:
+
+```text
+F_e = ego-state / dynamics feedback
+F_s = sensor / viewpoint feedback
+F_a = surrounding-agent state feedback
+F_b = surrounding-agent behavioral-response feedback
+```
+
+---
+
+# Stable-ID integrity correction
+
+Audit:
+
+```text
+audits/research_synthesis/REPO_STATE_INTEGRITY_AUDIT_20260916.md
+```
+
+Existing IDs are immutable. The old expansion queue incorrectly attempted to reuse occupied IDs.
+
+Verified existing identities include:
+
+```text
+P0003 GraphAD
+P0004 BeTop
+P0006 GenDrive
+P0010 TOAD
+P0011 SensitivityShaping
+```
+
+Reserved new targets:
+
+```text
+P0066 SAFE-SIM
+P0067 ProSim
+P0068 AutoVLA
+P0069 ReCogDrive
+P0070 LINGO-2
+P0071 DriveGPT4
+```
+
+Reserved means **not yet ingested**. Registration into `CORPUS_MANIFEST.csv` must occur with source ingestion.
+
+---
+
+# Current source / evidence priority
+
+For every next paper:
+
+```text
+canonical paper/version
+→ attributable official repo/source if available
+→ readable raw primary text
+→ source/code audit where mechanism-critical
+→ normalized deep read
+→ ontology projection
+→ comparison extension
+```
+
+Never infer source implementation details from paper prose when code is unavailable.
 
 ---
 
 # Parked provisional synthesis
+
+These remain historical/provisional and must not determine paper selection during expansion:
 
 ```text
 landscape/WAM_RESEARCH_TENSIONS_V1.md
@@ -353,16 +297,20 @@ landscape/WAM_CANDIDATE_PROBLEM_OVERLAP_MATRIX_V1.md
 landscape/WAM_CANDIDATE_PROBLEM_RESEARCHABILITY_V1.md
 ```
 
-These remain historical/provisional only during expansion.
-
 ---
 
-# Source completeness
+# Canonical next task
 
-Authority:
+Read:
 
 ```text
-audits/research_synthesis/CORE_ANCHOR_SOURCE_COMPLETENESS_AUDIT.md
+state/NEXT_TASK.md
 ```
 
-Source certainty and scientific coverage remain separate axes.
+Current target:
+
+```text
+P0066 SAFE-SIM
+```
+
+First perform source/ingestion gate, then normalized deep read. Do not reopen Phase D.
