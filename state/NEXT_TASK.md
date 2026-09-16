@@ -2,18 +2,12 @@
 
 ## 唯一下一任务
 
-> **Ingest and deep-read P0066 SAFE-SIM as the first Wave C.7 simulation/reactivity control. Keep research-direction convergence paused.**
+> **Verify, ingest and deep-read P0067 ProSim as the second Wave C.7 reactive-simulation control. Keep research-direction convergence paused.**
 
 Canonical expansion plan:
 
 ```text
 landscape/WAM_DEEP_READ_EXPANSION_QUEUE_V1.md
-```
-
-Integrity audit:
-
-```text
-audits/research_synthesis/REPO_STATE_INTEGRITY_AUDIT_20260916.md
 ```
 
 Current phase:
@@ -30,97 +24,101 @@ method design                      FORBIDDEN
 Current normalized count:
 
 ```text
-16 anchors complete
-DriveLaW     COMPLETE
-DA-WAM       COMPLETE
-SafeDrive    COMPLETE
-RiskWorld    COMPLETE
-DriveReward  COMPLETE
-SAFE-SIM     NEXT / NOT YET INGESTED
+17 anchors complete
+SAFE-SIM COMPLETE
+ProSim NEXT / NOT YET NORMALIZED
 ```
 
 ---
 
-# Why SAFE-SIM is next
+# Why ProSim is next
 
-The first 16 anchors have already shown that these are different scientific objects:
-
-```text
-future-world prediction
-explicit risk prediction
-direct value/reward modeling
-candidate scoring
-planner coupling
-```
-
-The next under-covered axis is **reactivity**.
-
-SAFE-SIM is selected to force the project to distinguish:
+SAFE-SIM established one strong form of reactivity:
 
 ```text
-planning WAM
-vs
-generative traffic simulator
+external ego planner
+→ current ego plan enters learned agent generator/guidance
+→ surrounding trajectories regenerate
+→ physical environment advances
+→ ego and agents replan
 ```
 
-and:
+But SAFE-SIM is safety-critical and explicitly adversarial. One paper is not enough to infer the general structure of reactive learned simulators.
+
+ProSim is selected as an independent control because it emphasizes:
 
 ```text
-logged / factual future modeling
-vs
-closed-loop endogenous behavioral response
+promptable / controllable multi-agent closed-loop simulation
 ```
 
-The target paper is:
+rather than primarily planner-specific collision generation.
+
+Primary comparison:
 
 ```text
-SAFE-SIM: Safety-Critical Closed-Loop Traffic Simulation with Diffusion-Controllable Adversaries
-ECCV 2024
-arXiv:2401.00391
+SAFE-SIM
+= planner-conditioned adversarial reactive simulation
+
+ProSim
+= promptable interactive traffic simulation
 ```
 
-Stable ID correction:
+The central question is:
 
-```text
-P0003 is already GraphAD
-SAFE-SIM therefore receives reserved ID P0066
-```
+> Which parts of SAFE-SIM's feedback/reactivity topology are generic to learned closed-loop traffic simulation, and which are artifacts of its adversarial guidance design?
 
 ---
 
 # Pre-read source gate — mandatory
 
-Before scientific normalization:
+Before normalization:
 
 ```text
-1. register P0066 in corpus manifest
-2. verify canonical paper/version
-3. verify official project / attributable code repository
-4. create papers/raw_md/P0066_SafeSim/ readable primary-text layer
-5. record source status
+1. verify canonical ProSim paper/version/venue
+2. identify attributable official project/code repository
+3. pin source version/commit if code exists
+4. create papers/raw_md/P0067_ProSim/ readable source note/layer
+5. attempt canonical manifest registration; if connector/encoding blocks safe mutation, record an explicit pending note rather than corrupting the manifest
 ```
-
-Do not create a fake source-complete status if paper/code ingestion is partial.
 
 ---
 
 # Mandatory reconstruction
 
-## 1. Simulator state and agent representation
+## 1. Simulator state / representation
 
-Reconstruct exactly:
+Answer exactly:
 
 ```text
-scenario history
-+ map / agent states / planner state
-→ simulated agent-policy representation
+what is the current scene representation?
+what agent/map/history context is encoded?
+what does each generated token / trajectory / action represent?
 ```
 
-Determine whether the model predicts joint futures once or repeatedly replans each agent in closed loop.
+## 2. Prompt semantics
 
-## 2. What actually closes the loop?
+Separate all prompt/control types:
 
-Trace feedback carriers:
+```text
+agent motion prompt
+route / waypoint prompt
+goal / destination
+text / semantic prompt if any
+scene-level constraint
+interaction condition
+```
+
+For each ask:
+
+```text
+training-time or inference-time?
+hard condition or soft guidance?
+per-agent or scene-level?
+```
+
+## 3. Closed-loop feedback graph
+
+Force-fill:
 
 ```text
 F_e = ego-state / dynamics feedback
@@ -129,189 +127,137 @@ F_a = surrounding-agent state feedback
 F_b = surrounding-agent behavioral-response feedback
 ```
 
-For each, answer:
+Reconstruct one full loop and identify which actors replan after the environment changes.
+
+## 4. Joint interaction modeling
+
+Determine whether ProSim:
 
 ```text
-present?
-source?
-updated each step?
-learned or simulator-owned?
+predicts agents independently
+predicts agents jointly
+uses autoregressive inter-agent conditioning
+uses scene-level latent/token interaction
 ```
 
-## 3. Diffusion / adversarial control semantics
+and whether changing ego behavior can change surrounding behavior within the deployed simulator.
+
+## 5. Training truth
 
 Separate:
 
 ```text
-diffusion denoising coordinate
-physical simulation time
-closed-loop replanning frequency
-adversarial guidance objective
-partial diffusion control
+logged factual behavior supervision
+prompt augmentation / synthetic conditions
+alternative-action supervision
+reactive intervention-response truth
 ```
 
-Never interpret denoising steps as physical future time.
+Do not call model-generated response `counterfactual ground truth`.
 
-## 4. Reactivity truth
+## 6. Inference-time generation
 
-Force explicit answers:
+Trace:
 
 ```text
-Do non-ego agents respond to changed ego behavior?
-Are those responses generated autoregressively / closed-loop?
-What evidence says they are realistic rather than merely collision-inducing?
-Is there any ground-truth intervention-response pair?
+current scene
+→ prompt / conditioning
+→ future/action generation
+→ action execution
+→ scene update
+→ regeneration
 ```
 
-Important boundary:
+Separate model decoding/autoregression coordinates from physical simulation time.
 
-```text
-reactive simulator behavior
-!=
-causally identified counterfactual truth
-```
-
-## 5. Safety-critical generation
-
-Audit how the adversarial agent is controlled:
-
-```text
-collision objective
-collision type
-aggressiveness
-plausibility / realism constraint
-partial diffusion
-```
-
-Identify which constraints preserve data-likelihood realism and which explicitly optimize planner failure.
-
-## 6. Training graph
+## 7. Evaluation
 
 Separate:
 
 ```text
-behavior-model training
-scenario diffusion training
-guidance at inference
-planner under evaluation
+open-loop prediction quality
+closed-loop behavior realism
+collision/off-road validity
+interaction metrics
+prompt controllability
+planner-evaluation usefulness
 ```
 
-Track whether planner gradients enter the simulator or adversarial generation process.
+Identify whether ProSim validates reactions to changed ego behavior or only aggregate rollout distributions.
 
-## 7. Inference / rollout graph
-
-Reconstruct one full closed-loop episode:
-
-```text
-initial logged scenario
-→ generate / update traffic actions
-→ planner acts
-→ simulator advances
-→ all relevant agents observe updated state
-→ regenerate / react
-→ repeat
-```
-
-Specify exact replanning/update cadence if reported.
-
-## 8. Evaluation regime
-
-Separate:
-
-```text
-realism / distribution metrics
-controllability metrics
-collision / safety-critical generation success
-planner evaluation
-closed-loop behavioral validity
-```
-
-Do not treat higher planner failure rate as proof of more realistic simulation.
-
-## 9. Immediate cross-paper comparison
+## 8. Immediate cross-paper comparison
 
 Mandatory:
 
 ```text
-SAFE-SIM vs RiskWorld
-SAFE-SIM vs SafeDrive
-SAFE-SIM vs WoTE / DA-WAM
-SAFE-SIM vs HUGSIM / Bench2Drive where relevant
-SAFE-SIM vs ProSim (next Wave C.7 anchor)
+ProSim vs SAFE-SIM
+ProSim vs RiskWorld
+ProSim vs SafeDrive
+ProSim vs WoTE / DA-WAM
+ProSim vs BridgeSim / ReactSimBench where evidence allows
 ```
 
-Primary scientific distinction:
-
-```text
-WAM asks how future knowledge improves ego planning.
-SAFE-SIM asks how to generate realistic/reactive traffic environments for planner evaluation.
-```
-
-But shared mechanisms such as action conditioning, rollout, feedback and counterfactuality must be compared symmetrically.
-
-## 10. Full Ontology V1.3 projection
+## 9. Full Ontology V1.3 projection
 
 Force-fill A–P.
 
 Residue watch:
 
 ```text
-Does simulator-level reactivity expose an irreducible dimension not represented by I04/I05, J09, O01/O07 or P04?
+Does prompt-conditioned multi-agent simulation expose a new dimension beyond existing action provenance, feedback, reactivity and truth-source axes?
 ```
 
-Do not create V1.4 unless a true residue survives back-projection.
+Do not create V1.4 unless a genuine irreducible residue survives back-projection.
 
 ---
 
 # Required artifacts
 
-After ingestion:
-
 ```text
-papers/deep_analysis/P0066_SAFESIM_DEEP_ANALYSIS_V2.md
-audits/literature/PHASE_C7_SAFESIM_AUDIT.md
-landscape/P0066_SAFESIM_ONTOLOGY_PROJECTION.md
-landscape/WAM_COMPARISON_MATRIX_V1_3_SAFESIM_EXTENSION.md
+papers/deep_analysis/P0067_PROSIM_DEEP_ANALYSIS_V2.md
+audits/literature/PHASE_C7_PROSIM_AUDIT.md
+landscape/P0067_PROSIM_ONTOLOGY_PROJECTION.md
+landscape/WAM_COMPARISON_MATRIX_V1_3_PROSIM_EXTENSION.md
 ```
 
-If official code is usable, additionally create/update source audit under:
+If official source is usable, also create:
 
 ```text
-audits/literature/
+audits/literature/P0067_PROSIM_SOURCE_CODE_AUDIT.md
 ```
-
-with exact source/commit boundary.
 
 ---
 
 # Stop condition
 
-SAFE-SIM is complete only when:
+ProSim is complete only when:
 
 ```text
 source/version gate resolved
 +
+prompt/control semantics explicit
++
 closed-loop feedback graph explicit
 +
-reactivity vs counterfactual-truth distinction explicit
+interaction/reactivity mechanism explicit
 +
-strongest realism/controllability evidence attributed
+truth-source boundary explicit
++
+strongest matched evidence and limitations explicit
 +
 full A–P ontology projection complete
 +
-comparison against planning WAM anchors complete
+comparison against SAFE-SIM complete
 ```
 
 Then advance to:
 
 ```text
-P0067 ProSim
+P0013 BridgeSim
 ```
 
 ---
 
 # Guardrail
 
-This is still field reconstruction / literature expansion.
-
-Do not use SAFE-SIM to prematurely justify a research direction. Its role is to improve the coordinate system for reactivity, simulator truth and feedback semantics.
+Continue field reconstruction. Do not reopen research-direction convergence after ProSim.
