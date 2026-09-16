@@ -2,7 +2,7 @@
 
 ## 唯一下一任务
 
-> **Deep-read P0007 DriveReward as the fifth paper in Wave C.6. Treat it as a value/reward control anchor; keep research-direction convergence paused.**
+> **Ingest and deep-read P0066 SAFE-SIM as the first Wave C.7 simulation/reactivity control. Keep research-direction convergence paused.**
 
 Canonical expansion plan:
 
@@ -10,10 +10,18 @@ Canonical expansion plan:
 landscape/WAM_DEEP_READ_EXPANSION_QUEUE_V1.md
 ```
 
+Integrity audit:
+
+```text
+audits/research_synthesis/REPO_STATE_INTEGRITY_AUDIT_20260916.md
+```
+
 Current phase:
 
 ```text
 broad WAM literature expansion     ACTIVE
+Wave C.6                           CLOSED
+Wave C.7                           ACTIVE
 research-direction convergence     PAUSED
 candidate-problem promotion        PAUSED
 method design                      FORBIDDEN
@@ -22,154 +30,288 @@ method design                      FORBIDDEN
 Current normalized count:
 
 ```text
-15 anchors complete
-DriveLaW  = COMPLETE
-DA-WAM    = COMPLETE
-SafeDrive = COMPLETE
-RiskWorld = COMPLETE
-DriveReward = NEXT
+16 anchors complete
+DriveLaW     COMPLETE
+DA-WAM       COMPLETE
+SafeDrive    COMPLETE
+RiskWorld    COMPLETE
+DriveReward  COMPLETE
+SAFE-SIM     NEXT / NOT YET INGESTED
 ```
 
 ---
 
-# Why DriveReward is next
+# Why SAFE-SIM is next
 
-DriveReward is selected for coverage diversity. It is a control anchor for the hypothesis-independent question:
-
-```text
-Can planning quality improve through learned semantic reward/value
-without predicting an explicit future world state?
-```
-
-This is needed to prevent the WAM atlas from conflating:
+The first 16 anchors have already shown that these are different scientific objects:
 
 ```text
-future-world modeling
-with
-trajectory valuation / reward modeling
+future-world prediction
+explicit risk prediction
+direct value/reward modeling
+candidate scoring
+planner coupling
 ```
 
-Immediate comparisons:
+The next under-covered axis is **reactivity**.
+
+SAFE-SIM is selected to force the project to distinguish:
 
 ```text
-DriveReward vs WoTE
-DriveReward vs DA-WAM
-DriveReward vs SafeDrive
-DriveReward vs RiskWorld
-DriveReward vs Drive-JEPA / WorldDrive
+planning WAM
+vs
+generative traffic simulator
 ```
+
+and:
+
+```text
+logged / factual future modeling
+vs
+closed-loop endogenous behavioral response
+```
+
+The target paper is:
+
+```text
+SAFE-SIM: Safety-Critical Closed-Loop Traffic Simulation with Diffusion-Controllable Adversaries
+ECCV 2024
+arXiv:2401.00391
+```
+
+Stable ID correction:
+
+```text
+P0003 is already GraphAD
+SAFE-SIM therefore receives reserved ID P0066
+```
+
+---
+
+# Pre-read source gate — mandatory
+
+Before scientific normalization:
+
+```text
+1. register P0066 in corpus manifest
+2. verify canonical paper/version
+3. verify official project / attributable code repository
+4. create papers/raw_md/P0066_SafeSim/ readable primary-text layer
+5. record source status
+```
+
+Do not create a fake source-complete status if paper/code ingestion is partial.
 
 ---
 
 # Mandatory reconstruction
 
-## 1. Source/version boundary
-
-Resolve canonical paper, project/repository, code-release state and audited commit if implementation exists.
-
-## 2. Input and trajectory representation
+## 1. Simulator state and agent representation
 
 Reconstruct exactly:
 
 ```text
-visual/current context
-+ ego trajectory / action proposal
-→ reward/value model input
+scenario history
++ map / agent states / planner state
+→ simulated agent-policy representation
 ```
 
-Determine whether future world state is generated at all.
+Determine whether the model predicts joint futures once or repeatedly replans each agent in closed loop.
 
-## 3. Reward semantics
+## 2. What actually closes the loop?
 
-For every reward component identify:
+Trace feedback carriers:
 
 ```text
-safety
-progress
-comfort
-rule compliance
-human preference
-semantic quality
-planning score
+F_e = ego-state / dynamics feedback
+F_s = sensor / viewpoint feedback
+F_a = surrounding-agent state feedback
+F_b = surrounding-agent behavioral-response feedback
 ```
 
-and its target provenance.
+For each, answer:
 
-## 4. Training graph
+```text
+present?
+source?
+updated each step?
+learned or simulator-owned?
+```
+
+## 3. Diffusion / adversarial control semantics
 
 Separate:
 
 ```text
-supervised reward learning
-preference learning
-VLM/generative reasoning
-RL/post-training
-planner/policy training
+diffusion denoising coordinate
+physical simulation time
+closed-loop replanning frequency
+adversarial guidance objective
+partial diffusion control
 ```
 
-Track which modules receive which gradients.
+Never interpret denoising steps as physical future time.
 
-## 5. Inference graph
-
-Determine whether reward is used for:
-
-```text
-candidate ranking
-trajectory reranking
-RL policy only
-search / optimization
-training-only supervision
-```
-
-## 6. World-model boundary
+## 4. Reactivity truth
 
 Force explicit answers:
 
 ```text
-Is any future environment state predicted?
-Is the reward model a consequence model or a value model?
-Does it consume predicted future or only current context + trajectory?
+Do non-ego agents respond to changed ego behavior?
+Are those responses generated autoregressively / closed-loop?
+What evidence says they are realistic rather than merely collision-inducing?
+Is there any ground-truth intervention-response pair?
 ```
 
-## 7. Supervision truth
-
-Audit reward labels / preference labels / simulator metrics / human or VLM teacher signals separately.
-
-## 8. Strongest matched ablations
-
-Prioritize controls isolating:
+Important boundary:
 
 ```text
-base planner
-+ reward model
-+ semantic/VLM reasoning
-+ RL/post-training
-+ test-time reranking if present
+reactive simulator behavior
+!=
+causally identified counterfactual truth
 ```
 
-## 9. Evaluation regime
+## 5. Safety-critical generation
 
-Separate open-loop, NAVSIM pseudo-simulation, reactive closed loop and real-car evidence.
+Audit how the adversarial agent is controlled:
+
+```text
+collision objective
+collision type
+aggressiveness
+plausibility / realism constraint
+partial diffusion
+```
+
+Identify which constraints preserve data-likelihood realism and which explicitly optimize planner failure.
+
+## 6. Training graph
+
+Separate:
+
+```text
+behavior-model training
+scenario diffusion training
+guidance at inference
+planner under evaluation
+```
+
+Track whether planner gradients enter the simulator or adversarial generation process.
+
+## 7. Inference / rollout graph
+
+Reconstruct one full closed-loop episode:
+
+```text
+initial logged scenario
+→ generate / update traffic actions
+→ planner acts
+→ simulator advances
+→ all relevant agents observe updated state
+→ regenerate / react
+→ repeat
+```
+
+Specify exact replanning/update cadence if reported.
+
+## 8. Evaluation regime
+
+Separate:
+
+```text
+realism / distribution metrics
+controllability metrics
+collision / safety-critical generation success
+planner evaluation
+closed-loop behavioral validity
+```
+
+Do not treat higher planner failure rate as proof of more realistic simulation.
+
+## 9. Immediate cross-paper comparison
+
+Mandatory:
+
+```text
+SAFE-SIM vs RiskWorld
+SAFE-SIM vs SafeDrive
+SAFE-SIM vs WoTE / DA-WAM
+SAFE-SIM vs HUGSIM / Bench2Drive where relevant
+SAFE-SIM vs ProSim (next Wave C.7 anchor)
+```
+
+Primary scientific distinction:
+
+```text
+WAM asks how future knowledge improves ego planning.
+SAFE-SIM asks how to generate realistic/reactive traffic environments for planner evaluation.
+```
+
+But shared mechanisms such as action conditioning, rollout, feedback and counterfactuality must be compared symmetrically.
 
 ## 10. Full Ontology V1.3 projection
 
-Force-fill A–P. Do not add V1.4 unless a genuinely irreducible dimension survives back-projection.
+Force-fill A–P.
+
+Residue watch:
+
+```text
+Does simulator-level reactivity expose an irreducible dimension not represented by I04/I05, J09, O01/O07 or P04?
+```
+
+Do not create V1.4 unless a true residue survives back-projection.
 
 ---
 
 # Required artifacts
 
+After ingestion:
+
 ```text
-papers/deep_analysis/P0007_DRIVEREWARD_DEEP_ANALYSIS_V2.md
-audits/literature/PHASE_C6_DRIVEREWARD_AUDIT.md
-landscape/P0007_DRIVEREWARD_ONTOLOGY_PROJECTION.md
-landscape/WAM_COMPARISON_MATRIX_V1_3_DRIVEREWARD_EXTENSION.md
+papers/deep_analysis/P0066_SAFESIM_DEEP_ANALYSIS_V2.md
+audits/literature/PHASE_C7_SAFESIM_AUDIT.md
+landscape/P0066_SAFESIM_ONTOLOGY_PROJECTION.md
+landscape/WAM_COMPARISON_MATRIX_V1_3_SAFESIM_EXTENSION.md
+```
+
+If official code is usable, additionally create/update source audit under:
+
+```text
+audits/literature/
+```
+
+with exact source/commit boundary.
+
+---
+
+# Stop condition
+
+SAFE-SIM is complete only when:
+
+```text
+source/version gate resolved
++
+closed-loop feedback graph explicit
++
+reactivity vs counterfactual-truth distinction explicit
++
+strongest realism/controllability evidence attributed
++
+full A–P ontology projection complete
++
+comparison against planning WAM anchors complete
+```
+
+Then advance to:
+
+```text
+P0067 ProSim
 ```
 
 ---
 
 # Guardrail
 
-This remains field reconstruction / literature expansion.
+This is still field reconstruction / literature expansion.
 
-Do not reopen research-direction convergence after RiskWorld or DriveReward.
+Do not use SAFE-SIM to prematurely justify a research direction. Its role is to improve the coordinate system for reactivity, simulator truth and feedback semantics.
