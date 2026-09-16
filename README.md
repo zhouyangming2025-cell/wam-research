@@ -19,6 +19,17 @@ The repo is designed so a fresh GPT-5.6 Sol session can recover the project with
 
 A copy-ready fresh-session prompt is in `handoff/NEW_SESSION_PROMPT.md`.
 
+## Isolated task: 12-paper core-mechanism ontology
+
+An independent handoff package for reconstructing the WAM + one-stage E2E core-mechanism ontology from 12 fixed papers is available at:
+
+```text
+handoff/core_mechanism_12/README.md
+handoff/core_mechanism_12/GPT6_TASK_PROMPT.md
+```
+
+This task does **not** replace the live field-reconstruction state above. Its existing A/B/C/D signatures are historical drafts to falsify, not canonical answers.
+
 ## Current research stage
 
 ```text
