@@ -3,6 +3,8 @@
 ```text
 接管 private GitHub repo：zhouyangming2025-cell/wam-research。
 
+先切换到分支 `codex/gpt6-mechanism-handoff`；除非该分支已被合并，否则不要从默认 `main` 读取本任务。
+
 本次只执行一个隔离任务：基于指定 12 篇论文，建立“World Model + 一段式端到端自动驾驶”的核心机制本体。不要继续仓库原有的文献扩展队列，不做 gap hunting，不设计新方法，也不要把现有 A/B/C/D 当作答案。
 
 先依次完整读取：
