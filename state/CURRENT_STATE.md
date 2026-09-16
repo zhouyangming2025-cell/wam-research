@@ -1,6 +1,6 @@
 # CURRENT_STATE
 
-Last updated: **2026-09-16 — DRIVEREWARD COMPLETE; 16 NORMALIZED ANCHORS; WAVE C.7 ACTIVE; STATE/ID INTEGRITY REPAIRED**
+Last updated: **2026-09-16 — SAFE-SIM COMPLETE; 17 NORMALIZED ANCHORS; WAVE C.7 ACTIVE; PROSIM NEXT**
 
 ## Research north star
 
@@ -10,9 +10,7 @@ WAM / World Model + one-stage End-to-End + Planning-centric autonomous driving
 
 Core WAM remains primary. Risk/safety/reward/simulation/VLA papers are included when they expose mechanisms required to understand planning-centric WAM; they are not selected to support a preferred future method.
 
----
-
-# Methodology in force
+## Methodology in force
 
 ```text
 FIELD UNDERSTANDING FIRST
@@ -35,7 +33,7 @@ method design                       FORBIDDEN
 broad literature expansion          ACTIVE
 ```
 
-The working maturity gate remains:
+Working maturity gate:
 
 ```text
 ~24–30 deeply normalized papers
@@ -49,7 +47,7 @@ Diversity and saturation matter more than raw count.
 
 ---
 
-# Canonical normalized anchors — 16
+# Canonical normalized anchors — 17
 
 ```text
 P0048 LAW           COMPLETE v2
@@ -68,233 +66,211 @@ P0012 DA-WAM        COMPLETE v2 + official-repo-status audit
 P0002 SafeDrive     COMPLETE v2 + NAVSIM source audit
 P0005 RiskWorld     COMPLETE v2 + paper/source-status audit
 P0007 DriveReward   COMPLETE v2 + reward/value boundary audit
+P0066 SAFE-SIM      COMPLETE v2 + official source/code audit
 ```
 
-These anchors are a growing comparison set, not the field boundary.
-
-Canonical ontology remains:
-
-```text
-landscape/WAM_DIMENSION_ONTOLOGY_V1.md
-landscape/WAM_DIMENSION_ONTOLOGY_V1_1_AMENDMENT.md
-landscape/WAM_DIMENSION_ONTOLOGY_V1_2_AMENDMENT.md
-landscape/WAM_DIMENSION_ONTOLOGY_V1_3_AMENDMENT.md
-```
-
-Current ontology:
+Canonical ontology:
 
 ```text
 V1.3 ACTIVE
-NO V1.4 authorized by DriveLaW / DA-WAM / SafeDrive / RiskWorld / DriveReward
-```
-
-Residue watchlist:
-
-```text
-GENERATIVE-STATE TAP LOCATION / SOLVER-DEPTH OF POLICY CONDITION
-SAFETY-LOCALIZATION GRANULARITY
-DISCRETE REPRESENTATION ALIGNMENT TOPOLOGY
+NO V1.4 authorized by SAFE-SIM
 ```
 
 ---
 
-# Latest scientific correction — P0007 DriveReward
+# Latest scientific correction — P0066 SAFE-SIM
 
 Canonical files:
 
 ```text
-papers/deep_analysis/P0007_DRIVEREWARD_DEEP_ANALYSIS_V2.md
-audits/literature/PHASE_C6_DRIVEREWARD_AUDIT.md
-landscape/P0007_DRIVEREWARD_ONTOLOGY_PROJECTION.md
-landscape/WAM_COMPARISON_MATRIX_V1_3_DRIVEREWARD_EXTENSION.md
+papers/raw_md/P0066_SafeSim/P0066_SafeSim.source_note.md
+papers/deep_analysis/P0066_SAFESIM_DEEP_ANALYSIS_V2.md
+audits/literature/P0066_SAFESIM_SOURCE_CODE_AUDIT.md
+audits/literature/PHASE_C7_SAFESIM_AUDIT.md
+landscape/P0066_SAFESIM_ONTOLOGY_PROJECTION.md
+landscape/WAM_COMPARISON_MATRIX_V1_3_SAFESIM_EXTENSION.md
 ```
 
 Canonical subtype:
 
 ```text
-VLM-BASED CANDIDATE VALUE / REWARD MODEL
+REACTIVE CLOSED-LOOP TRAFFIC BEHAVIOR SIMULATOR
++
+PLANNER-CONDITIONED ADVERSARIAL DIFFUSION GENERATOR
 ```
 
-Core mechanism:
+Core closed loop:
 
 ```text
-visual/current-or-short-history context
-+ navigation / ego state
-+ candidate trajectory
-→ InternVL3-1B semantic evaluator
-+ VGGT geometry grounding during training
-→ reasoning + factorized reward
-→ RL reward teacher OR test-time candidate scorer
+current scene
+→ ego planner produces current ego future plan
+→ ego plan explicitly enters reactive-agent generation/guidance
+→ non-ego trajectories are generated / guided / filtered
+→ joint actions execute in physical environment
+→ new scene state
+→ planner and reactive agents replan
+→ repeat
 ```
 
-Critical boundary:
+Code-verified feedback:
 
 ```text
-candidate-specific value/reward             YES
-explicit predicted future world             NO
-candidate-specific future-world truth       NO
-reactive intervention truth                 NO
+F_e ego-state/dynamics feedback                 YES
+F_a surrounding-agent state feedback           YES
+F_b surrounding behavioral-response feedback   YES
+F_s sensor/viewpoint photorealistic feedback   NO / NOT CORE
 ```
 
-Planning evidence decomposition:
+Critical truth boundary:
 
 ```text
-training-time RL reward interface   STRONGER EVIDENCE
-online test-time reranking          POSITIVE BUT SMALL REPORTED GAIN
+reactive model-generated response              YES
+paired real intervention-response truth        NO
+causal counterfactual identification           NO
 ```
 
-AdaThinkDrive selection result:
+SAFE-SIM therefore establishes a stronger reactivity level than fixed/logged-future WAM branches without establishing real counterfactual truth.
+
+Diffusion semantics:
 
 ```text
-Original       90.3 PDMS
-Best-of-4      93.0
-DriveReward    90.5
+K=100 denoising steps
+!= physical future time
+!= closed-loop episode steps
 ```
 
-Thus DriveReward strengthens a project-wide causal distinction:
+Paper experiment replans planner + reactive agents at 2 Hz.
+
+Partial diffusion:
 
 ```text
-future/world modeling
-!=
-value/reward modeling
+collision-type proposal
+→ partially noise in diffusion coordinate
+→ guided denoise
+→ controllable adversarial trajectory
 ```
 
-A planner can absorb useful consequence/value information without deploying an explicit future-world state.
+Strongest ablation lesson:
+
+```text
+partial diffusion ↑ collision diversity
+regularization ↓ pathological/off-road adversarial behavior
+more collision generation != better simulator
+```
+
+SAFE-SIM's main realism evidence is distributional trajectory-profile similarity, not paired intervention-response validation.
 
 ---
 
-# Wave C.6 status
+# Cross-paper synthesis after 17 anchors
+
+The corpus now separates at least these mechanisms:
 
 ```text
-P0009 DriveLaW      COMPLETE
-P0012 DA-WAM        COMPLETE
-P0002 SafeDrive     COMPLETE
-P0005 RiskWorld     COMPLETE
-P0007 DriveReward   COMPLETE
+training-only predictive representation shaping
+online world/latent representation for policy
+candidate-specific future consequence prediction
+explicit risk/safety modeling
+direct value/reward modeling
+external reactive world simulation
 ```
 
-Wave C.6 is now **CLOSED**.
-
-Its strongest collective lesson is not one architecture winner, but a separation of roles:
+The latest pair of controls is especially useful:
 
 ```text
-representation shaping
-future consequence prediction
-explicit safety/risk prediction
-direct value/reward learning
-candidate scoring
-training-time teacher knowledge
-online deployed world knowledge
+DriveReward
+= direct value/reward without explicit future world
+
+SAFE-SIM
+= explicit interactive behavior simulation outside planner
 ```
 
-These must remain independent causal axes.
+A planner can therefore receive consequence knowledge through very different interfaces.
+
+Reactivity/counterfactual ladder currently supported by anchors:
+
+```text
+Level 0  factual logged future only                     RiskWorld-type
+Level 1  output changes with hypothetical ego action    many action-conditioned WAMs
+Level 2  surrounding behavior regenerates after ego change  SAFE-SIM
+Level 3  paired real intervention-response truth        not yet established
+```
+
+This is a truth/feedback classification, not a quality ranking.
 
 ---
 
 # Wave C.7 — ACTIVE
 
-Purpose:
-
 ```text
-simulation / reactivity / evaluation controls
-```
-
-Correct queue after stable-ID audit:
-
-```text
-P0066 SAFE-SIM       RESERVED / INGEST NEXT
-P0067 ProSim         RESERVED / INGEST PENDING
+P0066 SAFE-SIM       COMPLETE
+P0067 ProSim         NEXT / SOURCE GATE PENDING
 P0013 BridgeSim      RAW_MD_READY / DEEP READ PENDING
 P0014 ReactSimBench  RAW_MD_READY / DEEP READ PENDING
 P0015 CausalDrive    RAW_MD_READY / DEEP READ PENDING
 ```
 
-Critical questions:
+Wave C.7 purpose:
 
 ```text
-what actually closes the loop?
+reactive environment modeling
+behavior simulation
+log replay vs endogenous reaction
+generative simulator vs planning WAM
+simulation / intervention truth
+evaluation-regime semantics
+```
+
+Carry-forward questions:
+
+```text
+what closes the loop?
 which feedback channels exist?
-which agents respond endogenously to ego intervention?
-what is replayed vs generated vs regenerated?
-what counts as reactive behavioral evidence?
-how does simulator realism relate to planner-quality evidence?
-```
-
-Project feedback coordinate system remains:
-
-```text
-F_e = ego-state / dynamics feedback
-F_s = sensor / viewpoint feedback
-F_a = surrounding-agent state feedback
-F_b = surrounding-agent behavioral-response feedback
+what is generated once vs regenerated?
+what supervises behavior under changed ego action?
+what metric validates reaction quality?
+does realism mean distributional similarity or intervention validity?
 ```
 
 ---
 
-# Stable-ID integrity correction
+# Source / manifest status
 
-Audit:
-
-```text
-audits/research_synthesis/REPO_STATE_INTEGRITY_AUDIT_20260916.md
-```
-
-Existing IDs are immutable. The old expansion queue incorrectly attempted to reuse occupied IDs.
-
-Verified existing identities include:
+SAFE-SIM paper and official code are verified; official repo was audited at:
 
 ```text
-P0003 GraphAD
-P0004 BeTop
-P0006 GenDrive
-P0010 TOAD
-P0011 SensitivityShaping
+27c96a84e7bf5fbca4b47f6edde386811d76c6e7
 ```
 
-Reserved new targets:
+A normal full local raw-MD extraction is still pending.
+
+`CORPUS_MANIFEST.csv` could not be safely edited through the GitHub text connector because it is not exposed as UTF-8 text. Registration is therefore explicitly pending local reconciliation:
 
 ```text
-P0066 SAFE-SIM
-P0067 ProSim
-P0068 AutoVLA
-P0069 ReCogDrive
-P0070 LINGO-2
-P0071 DriveGPT4
+manifests/P0066_SAFESIM_REGISTRATION_PENDING.md
 ```
 
-Reserved means **not yet ingested**. Registration into `CORPUS_MANIFEST.csv` must occur with source ingestion.
-
----
-
-# Current source / evidence priority
-
-For every next paper:
+Stable ID remains binding:
 
 ```text
-canonical paper/version
-→ attributable official repo/source if available
-→ readable raw primary text
-→ source/code audit where mechanism-critical
-→ normalized deep read
-→ ontology projection
-→ comparison extension
+P0066 = SAFE-SIM
+P0067 = ProSim
+P0068 = AutoVLA
+P0069 = ReCogDrive
+P0070 = LINGO-2
+P0071 = DriveGPT4
 ```
-
-Never infer source implementation details from paper prose when code is unavailable.
 
 ---
 
 # Parked provisional synthesis
 
-These remain historical/provisional and must not determine paper selection during expansion:
+Research-direction artifacts remain historical/provisional during expansion.
 
 ```text
-landscape/WAM_RESEARCH_TENSIONS_V1.md
-landscape/WAM_RESEARCH_TENSIONS_V2_VALIDATED.md
-audits/research_synthesis/WAM_TIER1_TENSION_ADVERSARIAL_VALIDATION_V1.md
-landscape/WAM_CANDIDATE_PROBLEMS_V1.md
-landscape/WAM_CANDIDATE_PROBLEM_OVERLAP_MATRIX_V1.md
-landscape/WAM_CANDIDATE_PROBLEM_RESEARCHABILITY_V1.md
+research-direction convergence = PAUSED
+problem promotion              = PAUSED
+method design                  = FORBIDDEN
 ```
 
 ---
@@ -310,7 +286,7 @@ state/NEXT_TASK.md
 Current target:
 
 ```text
-P0066 SAFE-SIM
+P0067 ProSim
 ```
 
-First perform source/ingestion gate, then normalized deep read. Do not reopen Phase D.
+First verify source/version/code and ingest a readable source layer; then deep-read as the second independent reactive-simulation anchor.
