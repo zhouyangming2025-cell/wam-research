@@ -7,7 +7,7 @@ Status: **ACTIVE — LITERATURE EXPANSION BEFORE RESEARCH-DIRECTION CONVERGENCE*
 ## Binding rule
 
 ```text
-16 normalized anchors
+17 normalized anchors
 = stronger coordinate system
 != mature field understanding
 != authorization to promote research direction
@@ -15,38 +15,7 @@ Status: **ACTIVE — LITERATURE EXPANSION BEFORE RESEARCH-DIRECTION CONVERGENCE*
 
 Paper selection remains coverage-driven, not hypothesis-driven.
 
-Current normalized count:
-
-```text
-16 papers
-```
-
-Latest completed expansion anchors:
-
-```text
-P0009 DriveLaW     — COMPLETE
-P0012 DA-WAM       — COMPLETE
-P0002 SafeDrive    — COMPLETE
-P0005 RiskWorld    — COMPLETE
-P0007 DriveReward  — COMPLETE
-```
-
-Stable-ID integrity rule:
-
-```text
-existing corpus IDs are immutable
-new not-yet-ingested targets receive IDs after P0065
-```
-
-See:
-
-```text
-audits/research_synthesis/REPO_STATE_INTEGRITY_AUDIT_20260916.md
-```
-
----
-
-# Working gate before another research-direction discussion
+Working gate before another research-direction discussion:
 
 ```text
 ~24–30 deeply normalized papers total
@@ -56,7 +25,7 @@ multiple independent anchors across major mechanism families
 new papers mostly map into the coordinate system without repeatedly exposing major blind spots
 ```
 
-Required diversity:
+Required diversity remains:
 
 ```text
 planning-centric online WAM interfaces
@@ -72,164 +41,184 @@ training-only vs deployment-time world knowledge
 
 ---
 
-# Wave C.6 — Core planning-centric WAM expansion — CLOSED
-
-## P0009 DriveLaW — COMPLETE
+# Wave C.6 — CLOSED
 
 ```text
-history → early Video-DiT hidden states → Action-DiT → direct trajectory
+P0009 DriveLaW      COMPLETE
+P0012 DA-WAM        COMPLETE
+P0002 SafeDrive     COMPLETE
+P0005 RiskWorld     COMPLETE
+P0007 DriveReward   COMPLETE
 ```
 
-## P0012 DA-WAM — COMPLETE
-
-```text
-32 ego candidates → candidate-specific 0.5s future latents → explicit factor/utility scorer → argmax
-```
-
-Direct future truth exists only for the expert-matched branch; all branches receive value/ranking supervision.
-
-## P0002 SafeDrive — COMPLETE
-
-```text
-ego candidate → sparse ego-agent world → fine-grained agent×time safety → trajectory selection
-```
-
-Candidate-specific safety consequence labels exist; candidate-specific reactive agent futures do not.
-
-## P0005 RiskWorld — COMPLETE
-
-```text
-observed history
-→ object-centric relation-aware current state
-→ RSSM-style 60-step / 3s physical future rollout
-→ future relative position / distance / temporal-risk sequence
-→ object risk source
-```
-
-Boundary:
-
-```text
-explicit risk prediction             YES
-future physical rollout              YES
-ego action-candidate conditioning     NO
-online planning consumption           NO
-reactive intervention truth           NO
-```
-
-## P0007 DriveReward — COMPLETE
-
-Canonical subtype:
-
-```text
-VLM-BASED CANDIDATE VALUE / REWARD MODEL
-```
-
-Mechanism:
-
-```text
-visual/current context + trajectory
-→ learned semantic factorized reward/value
-→ RL reward teacher OR test-time candidate scorer
-```
-
-Critical boundary:
-
-```text
-candidate-specific value              YES
-explicit predicted future world       NO
-alternative-action world truth        NO
-reactive intervention truth           NO
-```
-
-Strongest planning evidence is the training-time RL reward interface; the reported AdaThinkDrive online scoring gain is only +0.2 PDMS versus +2.7 Best-of-N oracle headroom.
-
-C.6 synthesis consequence:
+C.6 established that these mechanisms must remain separate:
 
 ```text
 future/world modeling
-and
+risk/safety modeling
 value/reward modeling
-must remain separate causal axes
+candidate scoring
+training-time teacher knowledge
+online deployed world knowledge
 ```
 
 ---
 
 # Wave C.7 — Simulation / reactivity / evaluation controls — ACTIVE
 
-Existing corpus anchors:
+## P0066 SAFE-SIM — COMPLETE
+
+Canonical subtype:
 
 ```text
-P0013 BridgeSim       — RAW_MD_READY / DEEP READ PENDING
-P0014 ReactSimBench   — RAW_MD_READY / DEEP READ PENDING
-P0015 CausalDrive     — RAW_MD_READY / DEEP READ PENDING
+REACTIVE CLOSED-LOOP TRAFFIC BEHAVIOR SIMULATOR
++
+PLANNER-CONDITIONED ADVERSARIAL DIFFUSION GENERATOR
 ```
 
-New targets requiring ingestion:
+Mechanism:
 
 ```text
-P0066 SAFE-SIM       — RESERVED / INGEST NEXT
-P0067 ProSim         — RESERVED / INGEST PENDING
+current scene
+→ external ego planner → ego plan
+→ learned reactive non-ego diffusion + planner-conditioned guidance
+→ selected actions
+→ physical environment update
+→ new scene
+→ repeat
 ```
 
-Important correction from the 2026-09-15 queue:
+Feedback:
 
 ```text
-P0003 is GraphAD, not SAFE-SIM
-P0004 is BeTop, not ProSim
+F_e YES
+F_a YES
+F_b YES
+F_s NO / not photorealistic core
 ```
+
+Critical boundary:
+
+```text
+model-generated reactive response        YES
+paired real intervention-response truth  NO
+```
+
+Scientific lesson:
+
+```text
+reactive closed-loop generation
+is stronger than fixed/logged conditional future prediction
+but weaker than intervention-grounded counterfactual truth
+```
+
+Key attribution lesson:
+
+```text
+more induced collisions != better simulator
+```
+
+because stronger adversarial pressure can also increase invalid/off-road behavior and slightly worsen aggregate realism.
+
+Canonical files:
+
+```text
+papers/deep_analysis/P0066_SAFESIM_DEEP_ANALYSIS_V2.md
+audits/literature/P0066_SAFESIM_SOURCE_CODE_AUDIT.md
+audits/literature/PHASE_C7_SAFESIM_AUDIT.md
+landscape/P0066_SAFESIM_ONTOLOGY_PROJECTION.md
+landscape/WAM_COMPARISON_MATRIX_V1_3_SAFESIM_EXTENSION.md
+```
+
+Ontology:
+
+```text
+V1.3 RETAINED
+NO V1.4
+```
+
+Source status:
+
+```text
+paper verified
+official source/code verified
+full local raw-MD extraction pending
+canonical CSV manifest reconciliation pending because current file is not exposed as UTF-8 text
+```
+
+See:
+
+```text
+manifests/P0066_SAFESIM_REGISTRATION_PENDING.md
+```
+
+## P0067 ProSim — NEXT
 
 Purpose:
 
 ```text
-reactive environment modeling
-behavior simulation
-log-replay vs endogenous reaction
-generative simulator vs planning WAM
-open-loop vs non-reactive pseudo-sim vs reactive closed loop
-simulation/evaluation truth
+second independent reactive-simulation anchor
+```
+
+Main comparison pressure:
+
+```text
+SAFE-SIM
+= safety-critical planner-conditioned adversarial closed loop
+
+ProSim
+= promptable / controllable multi-agent closed-loop simulation
+```
+
+The key question is whether SAFE-SIM's reactivity findings generalize beyond collision-seeking adversarial guidance.
+
+Mandatory questions for ProSim:
+
+```text
+what is promptable / controllable?
+what is jointly generated?
+how are non-ego agents conditioned on ego / one another?
+what is re-generated each closed-loop step?
+what data supervises interaction?
+what is the actual feedback carrier?
+what metrics validate realism and reactivity?
+is planner evaluation performed or is simulation quality the endpoint?
+```
+
+## Existing later C.7 anchors
+
+```text
+P0013 BridgeSim       RAW_MD_READY / DEEP READ PENDING
+P0014 ReactSimBench   RAW_MD_READY / DEEP READ PENDING
+P0015 CausalDrive     RAW_MD_READY / DEEP READ PENDING
 ```
 
 Recommended order:
 
 ```text
-P0066 SAFE-SIM
-→ P0067 ProSim
+P0067 ProSim
 → P0013 BridgeSim
 → P0014 ReactSimBench
 → P0015 CausalDrive
 ```
 
-This ordering moves from controllable closed-loop traffic generation toward increasingly explicit learned reactivity / behavioral-validity questions.
-
 ---
 
 # Wave C.8 — WAM+VLA / reasoning boundary controls
 
-Targets not yet in raw corpus; IDs reserved sequentially:
+Reserved targets:
 
 ```text
-P0068 AutoVLA       — RESERVED / INGEST PENDING
-P0069 ReCogDrive    — RESERVED / INGEST PENDING
-P0070 LINGO-2       — RESERVED / INGEST PENDING
-P0071 DriveGPT4     — RESERVED / INGEST PENDING
+P0068 AutoVLA       RESERVED / INGEST PENDING
+P0069 ReCogDrive    RESERVED / INGEST PENDING
+P0070 LINGO-2       RESERVED / INGEST PENDING
+P0071 DriveGPT4     RESERVED / INGEST PENDING
 ```
 
-Important correction from the 2026-09-15 queue:
+Stable-ID rule remains binding:
 
 ```text
-P0006 = GenDrive
-P0010 = TOAD
-P0011 = SensitivityShaping
-those IDs must not be reused
-```
-
-Purpose:
-
-```text
-separate world-model benefit from language/reasoning prior
-separate generative planning from VLM/VLA semantic reasoning
-understand reward/post-training/reasoning interfaces
-avoid calling every future-aware VLA a world model
+existing corpus IDs are immutable
 ```
 
 ---
@@ -256,11 +245,18 @@ strongest matched evidence
 what the paper does NOT prove
 ```
 
+For C.7 specifically, every paper must also explicitly fill:
+
+```text
+F_e / F_s / F_a / F_b
+observational future truth
+model-generated response
+intervention-response truth
+```
+
 ---
 
 # Parked work
-
-All research-tension / candidate-problem artifacts remain historical/provisional until the expanded corpus is reconsolidated.
 
 ```text
 research-direction convergence = PAUSED
@@ -273,15 +269,15 @@ method design                  = FORBIDDEN
 # Next task
 
 ```text
-P0066 SAFE-SIM
+P0067 ProSim
 ```
 
-Required pre-read gate:
+Required source gate:
 
 ```text
-register stable ID
 verify canonical paper/version
-verify attributable official source/code
-create raw readable source layer
+verify attributable official project/code
+create readable source layer / source note
+record source status
 then deep-read
 ```
