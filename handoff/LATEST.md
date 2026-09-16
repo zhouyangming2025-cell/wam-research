@@ -1,6 +1,6 @@
 # LATEST — Handoff
 
-Session: 2026-09-14 — Waves 1–4 closed; Phase-C field synthesis first pass complete; Phase D next.
+Session: **2026-09-16 — DriveReward normalized; 16 anchors; repository state/ID integrity repaired; Wave C.7 SAFE-SIM next.**
 
 ## New-session fast path
 
@@ -8,12 +8,13 @@ Session: 2026-09-14 — Waves 1–4 closed; Phase-C field synthesis first pass c
 1. START_HERE.md
 2. state/CURRENT_STATE.md
 3. state/NEXT_TASK.md
-4. landscape/PHASE_C_WAVES1_4_FIELD_SYNTHESIS.md
-5. audits/literature/RESEARCH_QA_GATE_CLOSEOUT.md
-6. landscape/PHASE_B_WAVE4_SYNTHESIS.md
+4. landscape/WAM_DEEP_READ_EXPANSION_QUEUE_V1.md
+5. audits/research_synthesis/REPO_STATE_INTEGRITY_AUDIT_20260916.md
 ```
 
-Do not default to P2-R/P3. Do not reload the whole corpus or old chats by default.
+Do not default to old Phase-D, P2-R/P3, or pre-expansion handoffs. Do not reload old chats by default.
+
+---
 
 ## Research identity
 
@@ -21,70 +22,178 @@ Do not default to P2-R/P3. Do not reload the whole corpus or old chats by defaul
 World Model + End-to-End + Planning-centric autonomous driving
 ```
 
-Risk-field / predictive-risk expertise is optional prior knowledge, not a required destination.
+Risk/safety/reward/simulation/VLA are comparison/control families when they illuminate planning-centric WAM; none is a required research destination.
 
 Active methodology:
 
 ```text
 UNDERSTAND FIELD FIRST
-→ comparative deep reads
+→ broad comparative deep reads
+→ dimension-first normalization
 → cross-family synthesis
-→ adversarial problem discovery
+→ ONLY AFTER maturity gate: adversarial problem discovery
 → falsification
-→ only then method design
+→ method design
 ```
 
-## Corpus / reconstruction status
+Current guardrails:
 
 ```text
-P0001–P0060 = 60 registered
-58 RAW_MD_READY
-F1–F11 coverage = PASS
-broad acquisition = FROZEN
-
-Wave 1            CLOSED
-Wave 2            CLOSED
-Wave 3            CLOSED
-Research QA Gate  CLOSED
-Wave 4            CLOSED
-Phase C synthesis COMPLETE FIRST PASS
-Phase D           NEXT
+research-direction convergence   PAUSED
+candidate-problem promotion      PAUSED
+method design                    FORBIDDEN
+literature expansion             ACTIVE
 ```
 
-## Canonical Phase-C synthesis
+---
 
-`landscape/PHASE_C_WAVES1_4_FIELD_SYNTHESIS.md`
-
-Its central field map is:
+## Current normalized state
 
 ```text
-I1 training-only predictive shaping
-I2 online predictive state → direct planner
-I3 joint world-action generation
-I4 planning-oriented future compression
-I5 candidate consequence evaluation
-I6 imagined environment for policy learning
-I7 learned interactive simulator
+16 anchors complete
+Ontology V1.3 active
+Wave C.6 closed
+Wave C.7 active
 ```
 
-Planning-centric WAM is therefore not one architecture; the key variable is where predictive/world information enters the decision process.
-
-## Stable project-wide distinctions
+Latest C.6 bundle:
 
 ```text
-world prediction quality != planning evidence
-future information is not automatically beneficial
-world completeness != decision relevance
-candidate-specific output != candidate-specific observed counterfactual supervision
-WM-assisted planning != online model-based planning
-action conditioning != reactive supervision != counterfactual truth
-closed-loop must be decomposed into feedback channels
-sensor photorealism != behavioral realism
-log realism != reactive robustness
-simulator quality != planner quality
+P0009 DriveLaW
+P0012 DA-WAM
+P0002 SafeDrive
+P0005 RiskWorld
+P0007 DriveReward
 ```
 
-## Wave-4 feedback coordinate system
+DriveReward canonical artifacts:
+
+```text
+papers/deep_analysis/P0007_DRIVEREWARD_DEEP_ANALYSIS_V2.md
+audits/literature/PHASE_C6_DRIVEREWARD_AUDIT.md
+landscape/P0007_DRIVEREWARD_ONTOLOGY_PROJECTION.md
+landscape/WAM_COMPARISON_MATRIX_V1_3_DRIVEREWARD_EXTENSION.md
+```
+
+---
+
+## Latest scientific correction
+
+DriveReward provides the current clean control for:
+
+```text
+candidate-specific learned value/reward
+!=
+explicit candidate-specific future-world prediction
+```
+
+Mechanism:
+
+```text
+visual/current-or-short-history context
++ route / ego state
++ candidate trajectory
+→ VLM semantic evaluator
+→ factorized reward + reasoning
+→ RL reward teacher OR test-time scorer
+```
+
+Evidence balance:
+
+```text
+training-time RL reward use       strong positive evidence
+online test-time reranking        positive but small reported gain
+```
+
+AdaThinkDrive:
+
+```text
+Original      90.3 PDMS
+Best-of-4     93.0
+DriveReward   90.5
+```
+
+Therefore planning gains must be decomposed across:
+
+```text
+representation
+candidate support
+future consequence prediction
+risk/safety prediction
+value/reward modeling
+post-training
+online inference-time selection
+```
+
+rather than called one generic `world-model gain`.
+
+---
+
+## Stable-ID integrity repair
+
+The 2026-09-15 expansion queue had accidentally reused occupied paper IDs.
+
+Existing identities are immutable:
+
+```text
+P0003 GraphAD
+P0004 BeTop
+P0006 GenDrive
+P0010 TOAD
+P0011 SensitivityShaping
+```
+
+Corrected new reservations:
+
+```text
+P0066 SAFE-SIM
+P0067 ProSim
+P0068 AutoVLA
+P0069 ReCogDrive
+P0070 LINGO-2
+P0071 DriveGPT4
+```
+
+BridgeSim / ReactSimBench / CausalDrive remain correctly registered as:
+
+```text
+P0013 BridgeSim
+P0014 ReactSimBench
+P0015 CausalDrive
+```
+
+Audit:
+
+```text
+audits/research_synthesis/REPO_STATE_INTEGRITY_AUDIT_20260916.md
+```
+
+Reserved IDs are not yet ingested; register them in the corpus manifest when primary sources are ingested.
+
+---
+
+## Current Wave C.7 queue
+
+```text
+P0066 SAFE-SIM       RESERVED / INGEST NEXT
+P0067 ProSim         RESERVED / INGEST PENDING
+P0013 BridgeSim      RAW_MD_READY / DEEP READ PENDING
+P0014 ReactSimBench  RAW_MD_READY / DEEP READ PENDING
+P0015 CausalDrive    RAW_MD_READY / DEEP READ PENDING
+```
+
+Wave C.7 purpose:
+
+```text
+reactive environment modeling
+behavior simulation
+log replay vs endogenous reaction
+generative simulator vs planning WAM
+simulation / intervention truth
+evaluation-regime semantics
+```
+
+Feedback coordinates:
 
 ```text
 F_e = ego-state / dynamics feedback
@@ -93,79 +202,66 @@ F_a = surrounding-agent state feedback
 F_b = surrounding-agent behavioral-response feedback
 ```
 
-Key placements:
+Binding warning:
 
 ```text
-Bench2Drive    = standardized interactive CARLA policy benchmark
-HUGSIM         = reconstructed photorealistic closed-loop simulator + external actor behavior
-ORION          = VLA semantic/reasoning planner; no explicit world rollout
-ReactSim-Bench = learned behavior-WM reactivity benchmark under off-log ego behavior
-CausalDrive    = real-time learned action-conditioned reactive visual simulator
+closed-loop generation
+!=
+causally identified counterfactual behavioral truth
 ```
 
-ReactSim/CausalDrive boundary:
-
-```text
-REALISM / LOG-LIKENESS
-!= REACTIVE FEASIBILITY
-!= COUNTERFACTUAL BEHAVIORAL TRUTH
-```
-
-## Important QA facts
-
-```text
-LAW predicted future latent not consumed for current test-time action selection = CODE VERIFIED
-WoTE audited target path uses fixed logged surrounding futures                 = CODE VERIFIED
-DA-WAM directly supervises observed future only for expert-matched candidate  = PAPER VERIFIED
-DriveLaW Stage-3 updates both Video DiT and Action/Planning DiT                = PAPER + CODE VERIFIED
-DrivingGPT exact optimized NAVSIM runtime decode path                          = UNRESOLVED
-```
-
-## Phase-C evidence gaps — not research gaps
-
-```text
-1. real alternative-action surrounding-agent ground truth
-2. reactive simulator quality → planner decision quality
-3. simultaneous sensor-realistic + behaviorally validated closed loop
-4. intervention-conditioned uncertainty calibration
-5. long-horizon compounding under ego/sensor/agent/model feedback
-6. compute-normalized planning benefit
-7. representation semantics vs scale/capacity
-8. real-vehicle closed-loop validation
-9. standardized feedback-semantic reporting
-10. planner robustness to world-model error
-```
-
-No item is selected as the research problem.
+---
 
 ## Immediate next task
 
 Read `state/NEXT_TASK.md`.
 
-Execute **Phase D — Adversarial Problem Discovery** and create:
+Execute:
 
 ```text
-landscape/PHASE_D_PROBLEM_DISCOVERY_ROUND1.md
+P0066 SAFE-SIM source gate
+→ register / ingest readable primary source
+→ verify official code attribution
+→ normalized deep read
+→ full Ontology V1.3 projection
+→ compare against ProSim / RiskWorld / SafeDrive / WoTE / DA-WAM
 ```
 
-Use 5–8 candidate problem statements maximum. Every candidate must be attacked by historical precedent, strongest current method, strongest non-WM explanation, counterexample, measurement feasibility and realistic evaluation relevance.
-
-Verdicts:
+Target paper:
 
 ```text
-SURVIVES / WEAK / KILLED / EVIDENCE INSUFFICIENT
+SAFE-SIM: Safety-Critical Closed-Loop Traffic Simulation with Diffusion-Controllable Adversaries
+ECCV 2024
+arXiv:2401.00391
 ```
 
-No method proposals in Round 1.
+Do not reopen research-direction convergence after SAFE-SIM. Continue Wave C.7 unless the ontology exposes a genuinely irreducible residue requiring consolidation.
 
-## Still forbidden
+---
+
+## Evidence discipline
+
+Always separate:
 
 ```text
-no method design
-no broad paper accumulation
-no automatic P2-R/P3 revival
-no forced risk-field insertion
-no gap declaration from a missing module or missing metric alone
+AUTHOR CLAIM
+DIRECT EXPERIMENTAL EVIDENCE
+OUR INFERENCE
 ```
+
+For reactive/simulator papers ask:
+
+```text
+what closes the loop?
+which feedback carrier is updated?
+which agents react to ego?
+what is generated once vs regenerated?
+what truth supervises behavior under changed ego action?
+what proves realism?
+what proves planning relevance?
+what remains only conditional generation rather than intervention truth?
+```
+
+---
 
 The repo, not conversation memory, is the canonical research authority.
