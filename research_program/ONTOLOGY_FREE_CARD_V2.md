@@ -17,7 +17,61 @@ Artifact ID:
 Mode/task path:
 Evidence tier: Tier 1 / Tier 2 / Tier 3
 Reading depth: RD0 / RD1 / RD2 / RD3 / RD4
+
+Runtime role:
+runtime decision / training improvement / representation transfer / simulation / generation only
+
+World dependency type:
+none / training-only predictive / online predictive state / online rollout / candidate-conditioned consequence / joint generation
+
+Action commitment relation:
+before world / after world / through world / independent / unknown
 ```
+
+## D01.1 field semantics
+
+The three fields in the identity block are mandatory for every artifact or mode at RD2+. They are artifact-level descriptors, not paper-level adjectives. If one paper contains multiple terminal products or lifecycle roles, create separate artifact records before assigning these fields.
+
+`Runtime role` answers what the artifact is doing in the system being audited:
+
+| value | use when |
+|---|---|
+| `runtime decision` | the artifact's predictive/world operation is part of the deployed action, trajectory, candidate resolver, or policy decision path |
+| `training improvement` | the predictive/world operation primarily supplies imagined experience, reward/return, policy updates, or action-learning supervision and is not required by the final deployed action path |
+| `representation transfer` | a predictive objective or model produces parameters/features transferred into a planner, while the predictive operation itself is not required at deployment |
+| `simulation` | the artifact's terminal product is an environment/world response used to evaluate or train another policy, rather than the policy's own final action |
+| `generation only` | the artifact generates future scenes, frames, states, or trajectories as its terminal product, without an evidenced final action commitment in that mode |
+
+`World dependency type` records the strongest separately traceable predictive/world operation on the artifact path:
+
+| value | use when |
+|---|---|
+| `none` | no separately traceable predictive/world operation affects the artifact; ordinary encoding or direct action denoising is insufficient |
+| `training-only predictive` | future/state prediction exists only as a pretraining, auxiliary, target, or co-training operation and is removed/bypassed before deployment |
+| `online predictive state` | a predicted or updated world/state object is retained online and conditions action formation without explicit candidate-specific consequence branches |
+| `online rollout` | a runtime or training-time action-conditioned transition is iterated over a horizon to obtain imagined states, rewards, or policy-learning returns |
+| `candidate-conditioned consequence` | separately identified candidate actions/trajectories index predicted consequences that are consumed by a common evaluation, optimization, or commitment step |
+| `joint generation` | ego action/trajectory and other world entities are generated in one coupled future object, with the generated joint object itself serving as the artifact's operative world interface |
+
+Use the first value that describes the artifact's decisive world dependency. Do not upgrade `training-only predictive` to an online value because a decoder or target branch exists in the training graph. Do not use `joint generation` for an ordinary action distribution unless other world entities or future scene variables are jointly generated.
+
+`Action commitment relation` records where the terminal action becomes committed relative to the world operation named above:
+
+| value | use when |
+|---|---|
+| `before world` | the terminal action/trajectory is committed before the predictive/world operation begins; the later world output is diagnostic, auxiliary, or post-hoc |
+| `after world` | a world/state/future or candidate consequence is materialized first and the final action/trajectory is then selected, decoded, or optimized from it |
+| `through world` | action and world are jointly or iteratively updated, or the action/policy is learned through world-mediated transitions/returns such that neither side is a simple preceding auxiliary |
+| `independent` | the final action path does not depend on the separately described world operation, including a deployment action path after a training-only predictive branch is removed |
+| `unknown` | the source does not resolve the order or causal dependence |
+
+For `training improvement`, interpret this field at the operative training mechanism and add the deployment residue in Sections 8–9. For `representation transfer`, the default deployment relation is usually `independent`; use `through world` only when the transferred representation is still updated jointly with the action path in the audited artifact. For `simulation` and `generation only`, write `not applicable` in the terminal-action sentence and use `unknown` only if the artifact also claims an action path whose relation is unresolved.
+
+These fields do not replace the detailed DAG, lifecycle, future-construction, action-formation, learning, deployment-residue, or evidence sections below. They are a compact routing layer that prevents training-time prediction, representation transfer, online world use, simulation, and generation-only outputs from being counted as the same mechanism.
+
+### D01.1 recording rule
+
+Record exactly one controlled value for each field per artifact. If two values appear necessary, the artifact split is probably too coarse. Preserve the tension in `Unknowns` or the evidence ledger rather than inventing a compound value. A paper-level summary may list several artifact records, but must not collapse them into one paper-level value.
 
 ## Scope decision
 
