@@ -79,6 +79,8 @@ life        = @T train-only | @R runtime-only | @B both | @U unknown
 realization = direct | surrogate | generative_internal | unknown
 ```
 
+`C5` may be candidate-indexed as `C5[k]` when each jointly born world–action sample retains its candidate identity through a downstream resolver. The key identifies the joint carrier; it does not by itself imply an action-conditioned input.
+
 Multiple semantically distinct carriers require multiple records. Representation substrate—RGB, BEV, latent, token, hidden state—does not change C.
 
 ## 5. X — carrier control/branching interface
@@ -115,13 +117,23 @@ Research question: how does a runtime carrier causally affect the declared termi
 |---|---|
 | D∅ | no runtime C carrier influences A* |
 | D1 | runtime carrier → one policy/action path → A* |
-| D2 | A{k} → candidate consequence F{k} → resolver → A* |
+| D2 | candidate consequence → resolver → A*; see the two admissible forms below |
 | D3 | action → consequence → revised action, repeated within one decision before commitment |
-| D4 | one joint world–action generation/editing process emits both |
+| D4 | one joint world–action generation/editing process directly emits the committed world/action output |
 | D5 | consequence generation is the terminal mode output; A* may be N/A |
 | DU | route unknown |
 
 Internal network depth, denoising iterations, and physical-time rollout do not by themselves create D3.
+
+For candidate resolution, D2 has two legal forms:
+
+```text
+A{k} → C2/C3{k} → V{k} → resolver → A*
+
+C5{k} = (world{k}, action{k}) → V{k} → resolver → A*
+```
+
+The first form is an action-conditioned consequence and normally uses `X3` on the candidate consequence. The second form is a jointly born candidate and uses `X4` on `C5{k}`. If multiple joint candidates enter a common resolver, the final route is `D2`, not `D4`. `D4` is reserved for direct joint emission without a downstream common resolver. No additional D code is introduced.
 
 ## 7. P — action formation and commitment topology
 
@@ -260,9 +272,9 @@ pretrain TA-DWM
 
 ## 11. Global type constraints
 
-1. D2 requires a runtime C2/C3-like consequence, X3 on that carrier, PB, and a non-N/A V.
+1. D2 requires either (a) a runtime C2/C3 candidate consequence with X3 on that carrier, or (b) a candidate-indexed runtime C5 joint consequence with X4 on that carrier; both forms require identity preservation, PB, a non-N/A V, and a declared A*.
 2. D3 requires action→carrier and carrier→action edges plus Tr=present.
-3. D4 requires C5 and X4.
+3. D4 requires C5 and X4 when one joint process directly emits the committed world/action output; if multiple C5 candidates enter a common resolver, use D2 instead.
 4. D5 permits A*=N/A and normally uses P=N/A for generation-only modes.
 5. A train-only carrier cannot support D1–D4.
 6. PB may exist without a runtime world carrier; then D may be D∅ and V still applies.

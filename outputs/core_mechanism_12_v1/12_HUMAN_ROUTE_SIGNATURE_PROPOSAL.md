@@ -99,10 +99,12 @@ Research question:
 | `W2` | internal future-generative state | runtime `C4`, normally through `D1` |
 | `W3` | future endpoint consequence | runtime `C2` used by the output route |
 | `W4` | future-horizon consequence sequence | runtime `C3`; `Th` normally present when it is a physical future sequence |
-| `W5` | joint world–action carrier | runtime `C5` through `D4` |
+| `W5` | joint world–action carrier | runtime `C5` through `D4` or candidate-resolution `D2` |
 | `WU` | online world role cannot be determined | runtime carrier identity or ancestry unresolved |
 
 Only carriers that pass the four-part gate in `09_ONTOLOGY_SPEC_S1_PLUS.md` may enter W. Ordinary encoder features, BEV perception features, or map/detection states do not become `W1` merely because planning consumes them.
+
+`RB + W5` is a legal combination when candidate-indexed joint world–action carriers enter a downstream common resolver. `RJ + W5` remains the signature for joint world–action emission without such a resolver. The R code is determined by final commitment topology; W5 records the carrier semantics.
 
 When several runtime carriers exist, W records the most downstream world object that explains the decision route:
 
@@ -211,14 +213,15 @@ The human signature is not expected to reconstruct every X binding or clock. Tho
 2. `R0` and `RH` normally require `E0` because no separate resolver is present.
 3. `RR` may coexist with `E?` when reciprocal refinement is known but final commitment is unresolved.
 4. `RJ` requires `W5`.
-5. `RG` requires an online world/consequence output and normally uses `E0`; record self/external control when mode identity depends on it.
-6. `W3` or `W4` with `RB` requires candidate-preserving `X3` in the audit record.
-7. `W0` does not forbid `RB`: a train-time world criterion may be compressed into a deployed scorer, as in Drive-JEPA PB or DynFlowDrive.
-8. A training-only carrier cannot justify `W1–W5`.
-9. Supporting `C1` states may be omitted from primary W only when a later consequence carrier dominates the same route; they remain mandatory below the compression layer.
-10. Audit `UNKNOWN` may project only to an honest known coarse class or to `RU/WU/E?`; it may never become verified absence.
-11. Solver, reciprocal, horizon, and cross-cycle clocks are not silently conflated. R/W preserve `Tr` and `Th` when route-defining; `Ts` and `Tc` remain audit fields unless they change R, W, or E semantics.
-12. Identical human signatures assert only functional route-family equivalence, not code identity or full typed-DAG isomorphism.
+5. `RB + W5` is legal when runtime `C5[k]` candidates reach a common resolver; `RJ + W5` is reserved for direct joint emission without that resolver.
+6. `RG` requires an online world/consequence output and normally uses `E0`; record self/external control when mode identity depends on it.
+7. `W3` or `W4` with `RB` requires candidate-preserving `X3` in the audit record.
+8. `W0` does not forbid `RB`: a train-time world criterion may be compressed into a deployed scorer, as in Drive-JEPA PB or DynFlowDrive.
+9. A training-only carrier cannot justify `W1–W5`.
+10. Supporting `C1` states may be omitted from primary W only when a later consequence carrier dominates the same route; they remain mandatory below the compression layer.
+11. Audit `UNKNOWN` may project only to an honest known coarse class or to `RU/WU/E?`; it may never become verified absence.
+12. Solver, reciprocal, horizon, and cross-cycle clocks are not silently conflated. R/W preserve `Tr` and `Th` when route-defining; `Ts` and `Tc` remain audit fields unless they change R, W, or E semantics.
+13. Identical human signatures assert only functional route-family equivalence, not code identity or full typed-DAG isomorphism.
 
 ## 9. Equivalence levels after compression
 
