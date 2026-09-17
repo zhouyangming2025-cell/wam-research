@@ -2,7 +2,7 @@
 
 Last updated: 2026-09-16
 
-Status: **PAPER VERIFIED + OFFICIAL CODE VERIFIED; FULL LOCAL RAW-MD EXTRACTION NOT YET INGESTED**
+Status: **PAPER VERIFIED + OFFICIAL CODE VERIFIED + FULL LOCAL MINERU RAW-MD EXTRACTION INGESTED**
 
 Stable ID:
 
@@ -175,4 +175,20 @@ causally identified counterfactual truth   NO
 
 ## Raw text status
 
-A complete local MinerU/raw-Markdown extraction has not been copied into this repository in this session. The canonical ECVA paper and official source are sufficient for the current deep-read/source audit, but corpus tooling should later replace/supplement this note with the normal full local extraction if required.
+The complete local MinerU/raw-Markdown extraction is now available at:
+
+```text
+papers/raw_md/P0066_SafeSim/P0066_SafeSim.raw.md
+papers/raw_md/P0066_SafeSim/images/
+```
+
+Acquisition and conversion record:
+
+```text
+source PDF: ECVA ECCV 2024 paper PDF
+pages: 17
+MinerU return code: 0
+PDF SHA256: 7a092e02de9f03031ff51660966d0a94c66635682cda2e6970375f6c21f92b2e
+```
+
+The source PDF remains local and is not tracked in Git; the repository stores the generated Markdown and referenced images only.
