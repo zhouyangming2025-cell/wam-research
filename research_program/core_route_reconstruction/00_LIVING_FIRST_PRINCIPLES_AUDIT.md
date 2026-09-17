@@ -786,3 +786,274 @@ Current confidence-weighted judgments:
 **No new ontology is accepted by this document.**
 
 The current task is field reconstruction, not taxonomy closure.
+
+---
+
+## 18. 2026-09-17 — New audit principle: preserve paper-family identity before splitting by visible mechanism differences
+
+### Observation
+
+Drive-JEPA creates a serious warning case for the current ontology strategy.
+
+The paper presents Driving Video Pretraining, proposal generation / multimodal trajectory distillation, and momentum-aware trajectory selection as parts of one coherent framework. Its perception-free setting (PF) and proposal-based setting (PB) are not introduced as two unrelated scientific paradigms. They are better understood as different realizations / evaluation paths within the same broader Drive-JEPA research program: scalable predictive representation learning for planning, with the complete framework further addressing multimodal trajectory supervision and selection.
+
+However, the old route projection can make:
+
+- Drive-JEPA PF appear close to LAW / Epona-like direct-output systems;
+- Drive-JEPA PB appear close to proposal-selection / candidate-resolver systems;
+
+and therefore split PF and PB farther apart than the paper's own scientific framing, while potentially placing PF near papers whose central research question is quite different.
+
+This is a **major audit alarm**.
+
+It does not prove PF and PB must be one route. A paper can genuinely instantiate more than one mechanism route. But if an ontology repeatedly destroys strong paper-family coherence, we must ask whether the ontology is separating on secondary implementation structure instead of the scientific mechanism that the authors are actually advancing.
+
+### Prior assumption challenged
+
+Previous work implicitly assumed:
+
+> If two modes have materially different commitment topology or runtime causal graphs, they may be assigned different route identities even when they come from one paper.
+
+This remains useful for artifact bookkeeping, but it is insufficient for reconstructing **research routes**.
+
+A research route is not necessarily identical to a runtime artifact topology.
+
+### New distinction: artifact difference vs research-route difference
+
+We need to separate two questions:
+
+1. **Artifact question:** How does this exact mode/path produce its output? PF and PB can legitimately differ here.
+2. **Research-route question:** What core scientific idea is the paper advancing about how world modeling should improve one-stage planning? PF and PB may still belong to the same higher-level research route if they are two instantiations of the same central thesis.
+
+Therefore:
+
+> Different artifacts inside one paper are evidence of mechanism variation, but they are **not automatically evidence of different research routes**.
+
+This is an important correction to the project's earlier artifact-first classification practice.
+
+### Drive-JEPA as a stress test
+
+For Drive-JEPA, a plausible paper-level core thesis is:
+
+> Learn planning-useful predictive representations efficiently at scale, then build a planner that can exploit those representations under realistic multimodal supervision.
+
+PF tests whether the predictive representation alone transfers to a simple planner.
+
+PB adds a richer planner, simulator-distilled multimodal proposals, and a selection mechanism.
+
+The difference between PF and PB is real and should be preserved. But the difference may be best represented as **internal specialization within one larger route/family**, rather than as evidence that PF and PB belong to unrelated top-level routes.
+
+This must be audited against the paper's ablations and framing before any conclusion is accepted.
+
+### Why Epona is an important contrast
+
+Epona's central thesis is different in kind:
+
+> Learn a shared temporal world latent through autoregressive-diffusion world modeling so that world generation and trajectory generation are jointly supported by the same learned temporal structure, with planning-only inference available when video output is disabled.
+
+Even if a Drive-JEPA PF deployment graph and an Epona planning graph both end in a direct trajectory, their **scientific bridge from world modeling to planning** is different.
+
+Therefore an ontology that places Drive-JEPA PF and Epona close merely because both eventually produce a trajectory without an online candidate resolver is probably grouping on the wrong abstraction level.
+
+This is stronger evidence that old R-like commitment topology cannot by itself define the main research route.
+
+---
+
+## 19. New candidate audit model: common ancestor -> major branch -> paper-specific innovation
+
+A useful conceptual model was proposed:
+
+- Paper 1: `a + b + e`
+- Paper 2: `a + c + g`
+- Paper 3: `a + c + f`
+- Paper 4: `a + c + h`
+- Paper 5: `a + b + j`
+
+This should **not** be turned into a formula or imposed taxonomy.
+
+Its value is methodological.
+
+### Interpretation
+
+`a` represents a common research foundation shared across the target domain, for example:
+
+> world-model capability is deliberately connected to one-stage/end-to-end planning.
+
+`b` and `c` represent possible **major scientific branches**: different answers to a central field-level question.
+
+`e/f/g/h/j` represent more local innovations that distinguish individual papers or subfamilies without necessarily defining top-level routes.
+
+The important idea is hierarchical rather than algebraic:
+
+> Papers may share a deep common ancestor, split at one major scientific decision, then diverge again through paper-specific mechanisms.
+
+This may fit the literature better than a flat Cartesian code.
+
+### Critical warning
+
+Do not assume every paper has exactly `a + one major branch + one unique point`.
+
+Real papers may combine two major branches, introduce a bridge between existing branches, operate at a different abstraction level, contain multiple planning programs, mainly innovate representation rather than planning route, mainly compress or distill an existing route, or challenge the premise of an earlier branch.
+
+Therefore this model is an **audit lens**, not a schema.
+
+---
+
+## 20. Route reconstruction should become relational and hierarchical, not coordinate-first
+
+The new working question is no longer:
+
+> Which values does this paper take on R, W, E, and L?
+
+Instead ask, in order:
+
+### Step 1 — Common scientific ancestor
+
+What central WAM+one-stage premise does the paper share with its nearest relatives?
+
+Candidate examples include predictive/world learning for planning representations, action-conditioned consequence reasoning, coupling world generation with action generation, or world-policy alignment in a shared representation/task space. These are hypotheses, not accepted families.
+
+### Step 2 — Main scientific fork
+
+What key question does the paper answer differently from its closest relatives?
+
+Candidate examples:
+
+- Should future/world computation remain online or be compiled into the planner?
+- Should world generation and action planning be parallel, chained, reciprocal, or deliberately decoupled?
+- Should candidate choice depend on explicit rollout, distilled future surrogate, or learned evaluation residue?
+- Should world-policy alignment happen through auxiliary prediction, representation transfer, shared latent, or unified token modeling?
+
+Again: these are candidate forks discovered from papers, not axes to impose.
+
+### Step 3 — Paper-specific innovation
+
+What is distinctive to this paper but may not justify a new route?
+
+Examples include momentum penalty, reward decomposition, BEV vs latent realization, specific temporal objectives, trajectory vocabularies, distillation targets, and flow/diffusion implementation.
+
+Some may later prove route-defining. They should start as local innovations, not headline classes.
+
+### Step 4 — Core-Bridge Deletion Test
+
+Delete the suspected major bridge.
+
+Ask:
+
+> Does the paper collapse into its nearest sibling / baseline, or does its main scientific identity remain intact?
+
+If deleting feature X leaves the central thesis intact, X is unlikely to define a top-level route.
+
+If deleting X turns the method into a different neighboring paper family or destroys the claimed contribution, X is a strong route candidate.
+
+### Step 5 — Family-Coherence Test
+
+Before accepting a split, ask:
+
+> Does this split make papers/modes that the literature itself treats as one coherent research program look artificially unrelated?
+
+Drive-JEPA PF/PB is the first explicit stress test.
+
+A split can still be valid, but it must earn that split with strong mechanism evidence.
+
+### Step 6 — Cross-Paper Contrast Test
+
+Before accepting a merge, ask:
+
+> Does this merge erase a scientific disagreement that the papers themselves explicitly motivate?
+
+Examples include DriveLaW vs Epona-like parallel coupling, Metis vs tightly coupled world/action generation, and SeerDrive vs one-shot future-aware planning.
+
+This protects against over-merging from superficial commonality.
+
+---
+
+## 21. Two complementary deletion tests are now required
+
+The earlier Core-Bridge Deletion Test should be retained, but expanded into two levels.
+
+### 21.1 Within-paper deletion test
+
+For paper P, remove mechanism X.
+
+Ask:
+
+> Does P lose the central contribution claimed by its authors?
+
+This identifies what is indispensable **inside the paper**.
+
+### 21.2 Between-paper collapse test
+
+For paper P, remove mechanism X.
+
+Ask:
+
+> Which neighboring paper / baseline does P become most similar to after removal?
+
+This identifies whether X actually defines a **branch point in the literature**.
+
+Examples:
+
+- Removing reciprocal feedback from SeerDrive may collapse it toward one-shot future-aware planning.
+- Removing a particular reward term from WoTE leaves explicit candidate-conditioned world rollout + reward selection intact, so that reward term is not branch-defining.
+- Removing proposal-based PB components from Drive-JEPA may leave the same predictive-pretraining thesis tested in PF, suggesting PB could be a specialization of the Drive-JEPA family rather than an unrelated top-level route.
+
+This between-paper collapse test is potentially more powerful than simple feature deletion because it reconstructs **where the paper sits in the research genealogy**.
+
+---
+
+## 22. New negative rule: do not reward an ontology for splitting things
+
+Previous ontology work sometimes treated collision avoidance as inherently good: if two papers can be separated by another axis, the ontology appears to gain explanatory power.
+
+This is unsafe.
+
+A taxonomy can be wrong by **over-separating** just as easily as by over-merging.
+
+Therefore every proposed split now needs to answer:
+
+1. What scientifically important disagreement does the split preserve?
+2. Would the papers' own problem statements recognize this disagreement?
+3. Does the Core-Bridge Deletion Test support it?
+4. Does the between-paper collapse test support it?
+5. Does the split survive implementation substitution?
+6. Does it preserve reasonable family coherence?
+
+If not, the distinction should remain a profile/local innovation rather than a route boundary.
+
+---
+
+## 23. Current audit stance after the Drive-JEPA warning
+
+High-confidence update:
+
+> **The old ontology should no longer be used as the primary lens for discovering routes.**
+
+It remains useful as a structured record of mechanism facts and as a source of hypotheses, but not as the discovery engine.
+
+High-confidence update:
+
+> **Runtime commitment topology is not sufficient to determine research-route identity.**
+
+Drive-JEPA PF/PB provides a strong stress case; Epona provides an important contrast.
+
+Medium/high-confidence update:
+
+> **Research routes are likely hierarchical and genealogical: shared thesis -> major scientific fork -> local realization.**
+
+But the exact hierarchy is deliberately unresolved.
+
+High-confidence update:
+
+> **Paper-family coherence is now an explicit audit signal, not a cosmetic consideration.**
+
+Low-confidence / unresolved:
+
+- whether Drive-JEPA PF and PB should ultimately share one CoreRoute;
+- what the actual major branch containing Drive-JEPA should be called;
+- whether the `a/b/c/...` intuition will survive broader corpus pressure;
+- how many hierarchy levels the field genuinely needs.
+
+No ontology changes follow automatically from this section.
+
+The immediate task remains reconstruction of paper relationships and branch points, not code assignment.
