@@ -55,6 +55,16 @@ The cross-paper comparison is performed only after all three records exist. It c
 
 For human review, the existing source-first facts are projected onto the frozen five-question frame. This projection is an audit view, not a new ontology, route taxonomy, matrix, or additional paper record. The Chinese brief is the review entry point; the source-first records remain the evidence-bearing records.
 
+The questions are operationally separated as follows:
+
+| Question | What it is allowed to answer | What it must not absorb |
+|---|---|---|
+| Q1. Where is the future-related computation? | The module, branch, interface, or process in which future-related computation occurs | Whether that computation is retained at deployment; whether it is a training or online role |
+| Q2. What is the future object, target, or intermediate representation? | The predicted future object/target, or an intermediate representation of a future-generation process | Whether the representation is a physical future state when the evidence only establishes a hidden/process representation |
+| Q3. Does the future-related signal enter the forward action chain? | Whether it is consumed by action generation or candidate selection | Whether the module remains installed at deployment if its output is not consumed |
+| Q4. What role does the mechanism play? | Training-time shaping, online single-path conditioning, or online candidate-consequence evaluation/selection | The exact list of modules retained or removed at deployment |
+| Q5. What remains at deployment? | The modules, modes, and future-related computations retained, bypassed, or removed | A new claim about where the mechanism is conceptually located |
+
 The relationship to the legacy fields is:
 
 | Existing source-first field | Five-question coverage |
@@ -64,7 +74,7 @@ The relationship to the legacy fields is:
 | Candidate identity and resolver status | Q3/Q4: whether future is used for candidate-specific consequence evaluation or selection |
 | Training objective and deployment lifecycle | Q4: lifecycle/decision role; Q5: deployment residue |
 
-Every Q1–Q5 answer must retain its evidence label, `UNKNOWN`, `NOT REPORTED`, and mode/version splits. The projection must not convert a training target into an online planner input, or a future-generation branch into candidate-consequence evaluation without candidate identity and resolver evidence.
+Every Q1–Q5 answer must retain its evidence label, `UNKNOWN`, `NOT REPORTED`, and mode/version splits. The projection must not convert a training target into an online planner input, an intermediate hidden/process representation into an explicit physical future state, or a future-generation branch into candidate-consequence evaluation without candidate identity and resolver evidence.
 
 ## 4. Evidence labels
 

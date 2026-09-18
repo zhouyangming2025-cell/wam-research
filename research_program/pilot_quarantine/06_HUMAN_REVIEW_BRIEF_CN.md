@@ -14,9 +14,9 @@
 
 | 论文 | 五问实际答案摘要 | 暂定判定 |
 |---|---|---|
-| LAW | Q1：训练期 action-aware latent/world-model 分支；Q2：未来 visual latent；Q3：不进入部署动作链；Q4：训练期表示塑造/辅助预测；Q5：部署保留直接 waypoint/trajectory path，future 输出不被消费 | 训练期 future supervision；未发现在线候选后果评估 |
-| Epona | Q1：共享历史时空表示连接 TrajDiT 与 VisDiT；Q2：未来 ego trajectory 与下一帧 visual latent/frame；Q3：没有证据表明 visual future 反馈到轨迹生成或选择；Q4：联合训练，并存规划与视觉 rollout 模式；Q5：按模式决定是否保留 VisDiT | 多模式联合系统；不能简化成“未来视频给 planner 打分” |
-| DriveLaW | Q1：Video-DiT 去噪过程的 hidden-state 接口；Q2：中间视频 hidden representation；Q3：前向进入 Action-DiT，但未发现 candidate-specific feedback；Q4：在线单路径动作条件；Q5：保留部分 Video-DiT hidden computation 与 Action-DiT，不保留完整 RGB 生成 | 在线 future representation conditioning；不是候选后果评估 |
+| LAW | Q1：训练期 action-conditioned future-latent prediction 分支；Q2：未来 visual latent；Q3：不进入部署动作链；Q4：训练期表示塑造/辅助预测；Q5：部署保留直接 waypoint/trajectory path，future 输出不被消费 | 训练期 future supervision；未发现在线候选后果评估 |
+| Epona | Q1：共享历史时空表示、TrajDiT 与 VisDiT 的相应计算分支；Q2：未来 ego trajectory 与下一帧 visual latent/frame；Q3：没有证据表明 visual future 反馈到轨迹生成或选择；Q4：联合训练、单路径轨迹生成和视觉 rollout；Q5：按模式决定是否保留 VisDiT | 多模式联合系统；不能简化成“未来视频给 planner 打分” |
+| DriveLaW | Q1：Video-DiT 去噪过程及其 video-to-action hidden-state 接口；Q2：视频生成过程的中间 hidden representation，不是已被证明的显式 future state/target；Q3：该 hidden signal 前向进入 Action-DiT，但未发现 candidate-specific feedback；Q4：在线单路径动作条件；Q5：保留部分 Video-DiT hidden computation 与 Action-DiT，不保留完整 RGB 生成 | 在线 future-related representation conditioning；不是候选后果评估 |
 
 这张表是人工审查的直接入口；如果只想确认五问测试是否产生了可区分结果，先看这里即可。`UNKNOWN`、模式依赖和证据边界仍以第 6 节及三份 source-first record 为准。
 
@@ -133,11 +133,11 @@
 
 | 五问 | LAW | Epona | DriveLaW |
 |---|---|---|---|
-| 1. 未来预测在哪里发生？ | 训练期 action-aware latent/world-model 分支 | 共享历史时空表示连接 TrajDiT 与 VisDiT；视觉 future 在独立 rollout 模式中发生 | Video-DiT 去噪过程的内部 hidden-state 接口 |
-| 2. 未来表示/目标是什么？ | 未来 visual latent | 未来 ego trajectory + 下一帧 visual latent/frame | 选定去噪阶段的 Video-DiT hidden representation |
-| 3. 未来是否进入动作链？ | 部署路径中没有；只进入训练图 | 没有证据表明生成 visual future 反向进入轨迹生成/选择 | 是，hidden state 前向条件化 Action-DiT |
-| 4. 未来机制承担什么角色？ | 训练期表示塑造/辅助预测 | 联合训练 + 单路径轨迹生成 + 可独立视觉 rollout | 在线单路径动作条件，同时由分阶段训练支撑 |
-| 5. 部署时保留什么？ | 直接 waypoint/trajectory path；future 输出不被消费 | 规划模式可跳过 VisDiT；世界生成模式保留视觉 rollout | 保留部分 Video-DiT hidden computation，不保留完整 RGB 视频生成 |
+| 1. 未来相关计算位于哪里？ | 训练期 action-conditioned future-latent prediction 分支 | 共享历史时空表示、TrajDiT 与 VisDiT 的相应计算分支 | Video-DiT 去噪过程及其 video-to-action hidden-state 接口 |
+| 2. 未来对象、目标或中间表征是什么？ | 未来 visual latent | 未来 ego trajectory + 下一帧 visual latent/frame | 视频生成过程的中间 hidden representation；不是已被证明的显式 future state/target |
+| 3. 未来相关信号是否进入动作链？ | 部署路径中没有；只进入训练图 | 没有证据表明生成 visual future 反向进入轨迹生成/选择 | 是，hidden signal 前向条件化 Action-DiT |
+| 4. 未来机制承担什么角色？ | 训练期表示塑造/辅助预测 | 联合训练、单路径轨迹生成和视觉 rollout | 在线单路径动作条件，同时由分阶段训练支撑 |
+| 5. 部署时保留什么？ | 直接 waypoint/trajectory path；future 输出不被消费 | 规划模式可跳过 VisDiT；世界生成模式保留视觉 rollout | 保留部分 Video-DiT hidden computation 与 Action-DiT，不保留完整 RGB 视频生成 |
 
 ### 6.1 验证结果（暂定）
 
@@ -145,16 +145,16 @@
 2. **没有被共同接口压平：**三篇都没有被错误归入“候选 future → score → select”，因为 Q3–Q5 能明确显示它们没有被证据确认存在 candidate-specific consequence resolver。
 3. **模式分裂可处理：**Epona 的规划模式与视觉 rollout 模式需要在 Q1/Q4/Q5 中并列记录，说明五问能够表达模式依赖，而不是迫使论文只有一个部署答案。
 4. **未知项仍可保留：**DriveLaW 的精确 denoising cadence、Epona 视觉 future 的因果含义、LAW future loss 的独立因果贡献仍然保留为未决问题。
-5. **初步未发现轴碰撞：**Q1/Q2 区分“计算位置”和“预测对象”；Q3/Q4 区分“前向动作使用”和“生命周期角色”；Q4/Q5 区分“作用”与“部署残留”。
+5. **发现并收紧一个答案级重叠：**旧写法中 Q1 混入了训练/rollout 生命周期，导致 Q1 与 Q5 的答案部分重叠；这属于操作化措辞问题，暂不足以证明两轴应合并。收紧后，Q1 只记录计算位置，Q5 只记录部署残留；Q1/Q2、Q3/Q4、Q4/Q5 的职责仍可分开。
 
 本节仍待人工审查；下方最小删除测试是基于现有 source-first 证据进行的内部验证，不代表已经通过人工审查。
 
-### 6.2 最小删除测试（内部验证草案）
+### 6.2 最小桥接删除测试（内部验证草案）
 
-| 论文 | 删除的五问中识别出的桥接 | 系统是否仍可运行 | 是否仍是原论文的方法 | 判断 |
+| 论文 | 删除的五问中识别出的桥接 | 能否构造不含该 bridge 的规划主干 | 是否仍是原论文的方法 | 判断 |
 |---|---|---|---|---|
-| LAW | 删除 waypoint-conditioned future visual-latent prediction/loss | 可以，直接 planner 仍可输出轨迹 | 否；失去 LAW 用 action-aware future latent 塑造规划表示的核心回答 | 五问能识别训练期核心桥接 |
-| Epona | 删除共享历史表示与 TrajDiT/VisDiT 的统一关系 | 可以保留单独轨迹生成器或单独视频生成器 | 否；失去统一轨迹—视觉生成系统，但必须保留模式差异 | 五问需要允许一个论文有多个 future mode |
-| DriveLaW | 删除 Video-DiT hidden state → Action-DiT 的前向连接 | 可以让 Action-DiT 独立生成轨迹 | 否；失去“视频生成器内部动态表示直接进入 planner”的核心回答 | 五问能识别在线 hidden-state bridge |
+| LAW | 删除 waypoint-conditioned future visual-latent prediction/loss | 可以保留或重新构造不含该分支的直接 planner 主干；未执行原始 checkpoint 的删改重跑 | 否；失去 LAW 用 action-conditioned future latent 塑造规划表示的核心回答 | 五问能识别训练期核心桥接 |
+| Epona | 删除共享历史表示与 TrajDiT/VisDiT 的统一关系 | 可以分别保留或重建轨迹生成主干、视觉生成主干；可能需要替代输入或重训 | 否；失去统一轨迹—视觉生成系统，但必须保留模式差异 | 五问能识别多模式统一桥接 |
+| DriveLaW | 删除 Video-DiT hidden signal → Action-DiT 的前向连接 | 可以概念上保留或重建独立 Action-DiT 主干，但需要替代输入或重训 | 否；失去“视频生成过程表征直接进入 planner”的核心回答 | 五问能识别在线 hidden-state bridge |
 
-删除测试说明：三篇都满足“删掉桥接后系统仍可能运行，但论文身份发生改变”。这说明五问不是把未来机制当作存在性标签，而是在定位它与动作链和部署生命周期的关系。该测试仍属于内部验证草案，最终状态待人工审查。
+删除测试说明：这里是基于机制图的结构/身份测试，不是对原始 checkpoint 的可运行性重跑，也不是性能消融。它只支持“删除该 bridge 后，不能再声称复现原论文机制”；不支持“该 bridge 对性能提升具有因果必要性”。
