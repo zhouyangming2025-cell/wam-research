@@ -158,3 +158,33 @@
 | DriveLaW | 删除 Video-DiT hidden signal → Action-DiT 的前向连接 | 可以概念上保留或重建独立 Action-DiT 主干，但需要替代输入或重训 | 否；失去“视频生成过程表征直接进入 planner”的核心回答 | 五问能识别在线 hidden-state bridge |
 
 删除测试说明：这里是基于机制图的结构/身份测试，不是对原始 checkpoint 的可运行性重跑，也不是性能消融。它只支持“删除该 bridge 后，不能再声称复现原论文机制”；不支持“该 bridge 对性能提升具有因果必要性”。
+
+## 7. 五问扩展试点：WoTE / World4Drive
+
+状态：`FIVE-QUESTION-EXTENSION-READY-FOR-REVIEW`
+
+本节只把五问投影到已经完成并通过人工审查的 WoTE、World4Drive source-first 记录，用来观察框架能否推广。它不是新 ontology、路线标签或全量矩阵。
+
+| 五问 | WoTE | World4Drive |
+|---|---|---|
+| Q1. 未来相关计算位于哪里？ | 候选条件化的 recurrent BEV world-model rollout，位于候选动作与 Reward Model 之间。 | 候选条件化 future-query/world-model 分支，位于 action token 与 World Model Selector/ScoreNet 之间。 |
+| Q2. 未来对象、目标或中间表征是什么？ | 每个候选对应的多步 BEV future states 与候选动作；不是 RGB 视频。 | 固定时刻 t+n 的候选 future latent；不是已被证明的多步 BEV rollout 或物理未来状态。 |
+| Q3. 未来相关信号是否进入动作链？ | 是。每个候选的 BEV future 进入 Reward Model，并改变最高 reward 选择。 | 是。每个候选的 future latent 进入 ScoreNet，并改变最终 argmax 轨迹选择。 |
+| Q4. 未来机制承担什么角色？ | 在线候选后果评估与选择；训练时还使用 simulator-derived future/reward supervision 和 imitation 相关信号。 | 在线候选评分与选择；训练主要围绕与一条 factual future latent 的匹配、ScoreNet 和轨迹监督；不能升级为反应式反事实评估。 |
+| Q5. 部署时保留什么？ | 候选生成/修正、recurrent BEV rollout、Reward Model 和最高 reward resolver 均保留。审计的 NAVSIM/PDM 路径中，周围车辆未来仍是共享 logged/GT 轨迹，不是针对每个自车干预重新反应的未来。 | 候选生成、action tokens、candidate-conditioned future-latent predictor、ScoreNet 和 resolver 保留；factual future target 只用于训练，部署时不可用。 |
+
+证据边界：WoTE 的候选自车 future 预测和在线选择得到支持，但审计路径没有证明反应式周围车辆反事实监督；World4Drive 的候选 future latent 和在线 ScoreNet 选择得到支持，但一条 factual future latent 不等于每个替代动作的真实 future ground truth。
+
+### 7.1 这次扩展的效果
+
+1. **对前三篇的区分成立。** LAW、Epona、DriveLaW 的当前审计没有确认“候选 future → resolver → 选择”；WoTE 和 World4Drive 都确认了 future-related signal 在部署时进入候选选择。五问因此能把“训练期 future supervision/在线单路径条件”与“在线候选后果评估”分开。
+2. **WoTE 与 World4Drive 没有被 Q3–Q5 压成同一种机制。** 两者 Q3、Q5 都为“是/保留”，但 Q1/Q2 保留了关键差异：WoTE 是多步 recurrent BEV future + Reward Model，World4Drive 是固定时刻 future latent + ScoreNet。
+3. **五问单独仍不够表达监督语义。** 如果只保留“future 是否进入选择”，二者会显得过于相似；必须并列记录 future provenance：WoTE 的候选 BEV rollout 与 simulator/reward 监督，以及 World4Drive 的单一 factual future latent matching。
+4. **Q1/Q5 的修复在扩展中没有再次碰撞。** Q1 只记录模块/接口位置，Q5 只记录部署残留；生命周期不再混入 Q1。
+5. **新增的是验证结果，不是新分类轴。** 当前最小可行框架是“Q1–Q5 + 必要的证据边界/来源注记”，而不是把 future 表示、监督来源或候选后果类型另立成路线 ontology。
+
+### 7.2 暂定结论
+
+五问可以推广到这两篇核心候选评估论文，并产生有用区分；但它们不是单独完成技术路线比较的充分描述。五问负责定位 future-related computation 与部署因果位置，source-first 记录中的 bridge、future semantics 和 provenance 负责防止不同机制被共同的 `candidate → future representation → score/reward → select` 末端结构压平。
+
+本节仍等待人工审查；不据此扩展到其余论文，不修改 ontology、路线或全量矩阵。

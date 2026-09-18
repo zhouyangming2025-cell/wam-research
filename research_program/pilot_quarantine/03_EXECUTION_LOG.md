@@ -28,6 +28,7 @@ Baseline: `368c9a848e241bfb7bf2e2d61242269d5e438af6`
 | P10 five-question collision and deletion test | `READY-FOR-REVIEW` | Q1/Q2, Q3/Q4, and Q4/Q5 collisions were checked against the three records; the existing core-bridge deletion evidence was re-expressed as a five-question deletion test. No new axis, route label, matrix, or ontology change was needed. |
 | P11 five-question result visibility repair | `COMPLETE-LOCAL` | The existing Chinese brief now exposes the three-paper results before the detailed appendix, and the frozen protocol explicitly maps legacy B3–B7 evidence fields to Q1–Q5. Validation status remains `READY-FOR-REVIEW`; no new layer was created. |
 | P12 five-question wording and deletion-test repair | `READY-FOR-REVIEW` | Q1 was separated from Q5 by removing lifecycle content from the computation-location question; DriveLaW hidden-state wording and LAW's action-conditioned future-latent wording were tightened; the deletion test was demoted from runnable-system language to a mechanism-identity test. No new axis, route label, matrix, or ontology change was made. |
+| P13 five-question extension pilot | `READY-FOR-REVIEW` | The repaired Q1–Q5 frame was projected onto the accepted WoTE and World4Drive source-first records. The extension separates training-only/online single-path mechanisms from online candidate selection, and distinguishes WoTE's recurrent BEV rollout from World4Drive's fixed-time factual-future latent matching. No new axis, route label, matrix, or ontology change was made. |
 
 ## Mutation audit
 
