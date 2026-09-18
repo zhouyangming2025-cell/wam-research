@@ -29,20 +29,21 @@ Baseline: `368c9a848e241bfb7bf2e2d61242269d5e438af6`
 | P11 five-question result visibility repair | `COMPLETE-LOCAL` | The existing Chinese brief now exposes the three-paper results before the detailed appendix, and the frozen protocol explicitly maps legacy B3–B7 evidence fields to Q1–Q5. Validation status remains `READY-FOR-REVIEW`; no new layer was created. |
 | P12 five-question wording and deletion-test repair | `READY-FOR-REVIEW` | Q1 was separated from Q5 by removing lifecycle content from the computation-location question; DriveLaW hidden-state wording and LAW's action-conditioned future-latent wording were tightened; the deletion test was demoted from runnable-system language to a mechanism-identity test. No new axis, route label, matrix, or ontology change was made. |
 | P13 five-question extension pilot | `READY-FOR-REVIEW` | The repaired Q1–Q5 frame was projected onto the accepted WoTE and World4Drive source-first records. The extension separates training-only/online single-path mechanisms from online candidate selection, and distinguishes WoTE's recurrent BEV rollout from World4Drive's fixed-time factual-future latent matching. No new axis, route label, matrix, or ontology change was made. |
+| P14 canonical-12 five-question projection | `READY-FOR-REVIEW` | The repaired Q1–Q5 frame was extended to all frozen canonical-12 records. Six new source-first records were created for Drive-JEPA, SeerDrive, Metis, DynFlowDrive, Discrete-WAM, and GraphWorld; WorldDrive received its Q1–Q5 projection. The full Chinese review brief records cross-paper collisions, source/version boundaries, and the result `PASS-WITH-BOUNDARY`. No ontology, route label, or matrix was modified. |
 
 ## Mutation audit
 
 - Existing raw paper Markdown: unchanged.
 - Existing code audits: unchanged.
 - Existing cards, deep analyses, route maps, ontology, and state files: unchanged.
-- Files added: only under `research_program/pilot_quarantine/`; WoTE continuation added its record/brief/source appendix, World4Drive added one source-first record plus one Chinese review brief, WorldDrive added one source-first record plus one Chinese review brief, and P8 adds one core-bridge review record.
+- Files added: only under `research_program/pilot_quarantine/`; the original three-paper records and review files remain, the WoTE/World4Drive/WorldDrive records were extended, and six additional source-first records plus one full-12 Chinese review brief were added. No raw paper, code audit, ontology, route map, or matrix file was modified.
 - Deletions: none.
 
 ## Current interpretation boundary
 
 The source-first records are working records, not final scientific conclusions. `AUTHOR CLAIM` remains separate from `PAPER FACT`, and all unresolved deployment or causal questions remain visible.
 
-WoTE, World4Drive, and WorldDrive are the fourth, fifth, and sixth source-first records in the controlled pilot. WoTE is the first positive control; World4Drive is a candidate-selection contrast; WorldDrive is a teacher-to-surrogate candidate-selection contrast. They are evidence records, not a six-paper route classification, and none has been added to the ontology, route taxonomy, or global matrix.
+WoTE, World4Drive, and WorldDrive were the first candidate-selection extensions; the current controlled scope now contains source-first Q1–Q5 projections for all canonical-12 papers. This is a full evidence projection, not a twelve-paper route classification, and none has been added to the ontology, route taxonomy, or global matrix.
 
 ## Latest scope decisions
 
@@ -57,3 +58,4 @@ These decisions consolidate the latest pilot discussion; they do not create a ne
 - WorldDrive remains review-ready: its earlier shared-interface wording is now demoted to a terminal deployment observation. Its TA-DWM representation inheritance and teacher → FAR surrogate lifecycle must be evaluated as the core bridge, not treated as a minor comparison note. It is not added to the crosswalk or promoted as a route before human review.
 - P8 review correction: `candidate → future representation → score/reward → select` is retained only as a terminal deployment-structure observation. It is not evidence of route equivalence. The six papers must be compared first by their indispensable core bridge and deletion-test result.
 - No new paper audit is authorized until the six-paper core-bridge review is accepted. No matrix or ontology modification is authorized by P8.
+- P14 scope extension is explicitly limited to Q1–Q5 projection and source-first evidence records. It does not reopen the frozen three-paper protocol as a route/ontology phase, and it does not authorize a new matrix or route synthesis.
