@@ -1,46 +1,40 @@
 # wam-research
 
-Persistent research workspace for **planning-centric World-Action Models (WAM) in autonomous driving**.
+Persistent research workspace for **World Model + one-stage End-to-End + planning-centric autonomous driving**.
 
-## 唯一入口
-
-每次恢复工作只按这个顺序读取：
+## 唯一恢复入口
 
 ```text
-1. state/CURRENT_STATE.md    当前目标、边界和已确认事实
-2. state/NEXT_TASK.md        唯一正在执行的任务
-3. manifests/CORPUS_MANIFEST.csv → 对应 papers/raw_md / audits
+1. state/CURRENT_STATE.md
+2. state/NEXT_TASK.md
+3. manifests / raw paper / source-code audit / deep analysis required by that task
 ```
 
-`START_HERE.md`、`handoff/LATEST.md` 和旧的 field/taxonomy/route 文档不再独立声明“当前状态”；它们只保存历史上下文或证据线索。
+不从旧 taxonomy、route map、handoff、状态标题或聊天记忆推断当前任务。
 
-## 当前工作边界
+## 当前主程序与边界
 
-固定核心集为 12 篇：Epona、DriveLaW、WorldDrive、WoTE、World4Drive、LAW、Drive-JEPA、SeerDrive、Metis、DynFlowDrive、Discrete-WAM、GraphWorld。
+```text
+FIELD RECONSTRUCTION — Planning-centric WAM Atlas
+17 normalized anchors; Wave C.7 (simulation / reactivity / evaluation) remains active.
+SAFE-SIM is complete; P0067 ProSim resumes after the present evidence-consolidation gate.
+```
 
-当前任务是：在不丢失原文、代码审计与有效比较观察的前提下，清理重复入口和历史性总结，并从可追溯证据重建这 12 篇的规划技术路线。不得把旧 taxonomy、D01/D02、路线图或状态标题自动当作当前结论。
+固定 12 篇（Epona、DriveLaW、WorldDrive、WoTE、World4Drive、LAW、Drive-JEPA、SeerDrive、Metis、DynFlowDrive、Discrete-WAM、GraphWorld）是当前**机制证据收口子任务**：它用于核验跨论文技术路线，不取代更广的 field reconstruction，也不授权最终 taxonomy、研究问题或方法设计。
 
 ## 证据顺序
 
 ```text
 论文原文 / 固定代码 / 数据与评测配置
-→ 单篇 source/code audit 与 deep analysis（保留其边界）
+→ source-code audit 与 deep analysis（保留其范围与版本边界）
 → 跨论文比较
-→ 历史 taxonomy、路线图、hand-off 与状态快照
+→ 历史 taxonomy、路线图、状态快照、handoff
 ```
 
-缺证据时保留 `UNKNOWN`。训练期未来监督、在线状态条件、候选后果评估与世界—规划迭代不得混为一种“world model benefit”。
+训练期未来监督、在线世界状态、候选后果评估、世界—规划迭代和外部反应式仿真必须分开；缺证据时保留 `UNKNOWN`。
 
-## 目录职责
+## 当前清理规则
 
-```text
-manifests/          语料索引
-papers/raw_md/      可读原始文本层
-papers/deep_analysis/ 与 audits/   受证据边界约束的解释与核验
-state/              当前决策、当前任务与历史决策记录
-landscape/          历史性比较/地图；非当前状态入口
-hypotheses/         历史或暂停的研究问题
-handoff/            会话辅助；非当前状态入口
-```
+不删除 raw Markdown、来源/代码审计、带独立定位的 deep analysis、manifest、实验记录和决策历史。派生 matrix、ontology amendment、paper card、路线图和导航文档必须先完成“独有证据是否已有存活来源”的核对，才可合并、归档或删除。
 
-研究问题发现与方法设计仍暂停；仓库首先服务于可核验的领域理解与 12 篇机制比较。
+研究问题发现、候选问题提升和方法设计仍暂停。
