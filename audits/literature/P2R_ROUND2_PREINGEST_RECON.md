@@ -171,4 +171,4 @@ This absence at abstract level is **not evidence of a gap**. It only justifies f
 
 ## 9. Next action
 
-Ingest A1–A5 + H1–H3 according to `state/TARGETED_READING_QUEUE.md`, then replace this reconnaissance with primary-text Paper Cards and a Round-2 adversarial audit.
+Ingest A1–A5 + H1–H3 according to `state/TARGETED_READING_QUEUE.md`, then replace this reconnaissance with primary-text deep analyses and a Round-2 adversarial audit; do not create a parallel paper-card layer.

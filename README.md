@@ -51,6 +51,6 @@ SAFE-SIM 的完整 raw Markdown 与图像也已恢复到 `papers/raw_md/P0066_Sa
 
 ## 当前清理规则
 
-不删除 raw Markdown、来源/代码审计、带独立定位的 deep analysis、manifest、实验记录和决策历史。派生 matrix、ontology amendment、paper card、路线图和导航文档必须先完成“独有证据是否已有存活来源”的核对，才可合并、归档或删除。
+不删除 raw Markdown、来源/代码审计、带独立定位的 deep analysis、manifest、实验记录和决策历史。派生 matrix、ontology amendment、paper-card、路线图和导航文档必须先完成“独有证据是否已有存活来源”的核对，才可合并、归档或删除；paper-card 层目前已退役。
 
 研究问题发现、候选问题提升和方法设计仍暂停。

@@ -290,6 +290,6 @@ state/NEXT_TASK.md
 manifests/CORPUS_MANIFEST.csv
 ```
 
-Use deep analyses, raw MD, source audits and historical records only when the live task requires them. \`DECISION_LOG\`, \`RESEARCH_LEDGER\`, \`landscape/\`, \`hypotheses/\`, \`audits/\` and \`papers/cards/\` retain evidence or history; none overrides the live state above.
+Use deep analyses, raw MD, source audits and historical records only when the live task requires them. `DECISION_LOG`, `RESEARCH_LEDGER`, `landscape/`, `hypotheses/` and `audits/` retain evidence or history; none overrides the live state above. The former `papers/cards/` layer is retired.
 
 Conversation summaries are temporary. The repo is canonical.

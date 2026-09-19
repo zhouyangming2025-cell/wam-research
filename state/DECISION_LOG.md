@@ -749,7 +749,7 @@ Source hierarchy:
 ```text
 1. official/canonical PDF = exact authority
 2. GitHub raw Markdown + figures = GPT-readable source layer
-3. Paper Card = curated paper understanding
+3. Deep analysis / source audit = curated paper understanding (the former Paper Card layer was later retired)
 4. Field Atlas = cross-paper field understanding
 5. state files = canonical research decisions
 6. chat = temporary reasoning

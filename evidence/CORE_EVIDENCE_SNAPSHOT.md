@@ -1,6 +1,6 @@
 # CORE_EVIDENCE_SNAPSHOT
 
-Purpose: compact cross-session memory of the strongest paper-level findings that materially shaped P1/P2-R/P3. This is **not** a substitute for Paper Cards or primary-text re-reading.
+Purpose: compact cross-session memory of the strongest paper-level findings that materially shaped P1/P2-R/P3. This is **not** a substitute for the canonical deep analyses, source audits, or primary-text re-reading.
 
 Last updated: 2026-09-13
 
@@ -59,6 +59,6 @@ DriveLaW, Epona and P3-related evidence motivate the question, but the broad for
 
 ## Current caution
 
-Do not quote fine-grained `LEGACY_DEEP_READ` numbers from this snapshot as publication evidence. Before using a number, ablation, or exact mechanism in a final argument, open the corresponding raw MD / canonical PDF and upgrade the item into a Paper Card with explicit source locations.
+Do not quote fine-grained `LEGACY_DEEP_READ` numbers from this snapshot as publication evidence. Before using a number, ablation, or exact mechanism in a final argument, open the corresponding raw MD / canonical PDF and upgrade the item into the corresponding canonical deep analysis or source audit with explicit source locations.
 
 The snapshot exists to prevent cross-session forgetting, not to bypass verification.

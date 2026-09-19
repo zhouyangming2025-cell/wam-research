@@ -195,9 +195,8 @@ $env:CORPUS_BATCH = 'census2'
 2. **Tags and relevance**: census-depth records are tagged from their own text and carry
    `decision_relevance=LOW` with `GENERAL` hypothesis tags, because P1/P2-R/P3 are parked.
    Say if you want a different convention for breadth records.
-3. **Cards**: these records deliberately have no paper cards (cards are a deep-read artifact),
-   so their manifest rows carry a `NO_CARD` note. Batch-0A records P0003–P0007, P0008, P0009 and
-   P0011 are in the same state: their manifest rows previously pointed at card files that do
-   not exist on disk, and that was corrected in this batch.
+3. **Paper-card layer (retired)**: these records deliberately have no paper cards, so their
+   manifest rows carry a `NO_CARD` note. Current scientific synthesis uses deep analyses and
+   source audits; the legacy manifest field is retained only for provenance.
 4. **Anchor pool**: if you freeze the 15–25 anchor works, the same pipeline can give the whole
    anchor set a local text layer before Phase B deep reads begin.

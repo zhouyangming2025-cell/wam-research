@@ -5,13 +5,14 @@ every hash and count below is copied out of those ledgers, never retyped.
 
 **Scope.** The eight records frozen in `state/TARGETED_READING_QUEUE.md` and requested by
 `agent/prompts/ROUND2_TARGETED_INGEST.md`: acquisition, canonical PDF, MinerU raw-MD text
-layer, provenance/QC facts and card skeletons.
+layer and provenance/QC facts. The card skeletons mentioned by this historical report were
+never a scientific evidence layer and are not retained in the current tree.
 
 **Explicitly not in scope, and absent from every artifact produced here.** No scientific
 reading was performed: no observed-failure verdict, no hypothesis impact, no prior-art
-occupancy judgement and no research verdict is recorded. Every scientific section of every
-card is `PENDING SCIENTIFIC REVIEW` (deep-read / GPT-5.6 Sol work). No method design and no
-risk-field idea was produced.
+occupancy judgement and no research verdict is recorded. Every scientific section of the
+historical card skeletons was `PENDING SCIENTIFIC REVIEW` (deep-read / GPT-5.6 Sol work). No
+method design and no risk-field idea was produced.
 
 **Stop condition.** Reached: 7 records are `RAW_MD_READY`; 1 record (P0020) carries a
 specific lawful acquisition blocker.
@@ -190,26 +191,18 @@ recorded in the card but leaves the field `UNKNOWN` rather than `YES`.
 
 - `papers/raw_md/P0013_BridgeSim/P0013_BridgeSim.raw.md`
 - `papers/raw_md/P0013_BridgeSim/images/` (17 files)
-- `papers/cards/P0013_BridgeSim.md`
 - `papers/raw_md/P0014_ReactSimBench/P0014_ReactSimBench.raw.md`
 - `papers/raw_md/P0014_ReactSimBench/images/` (11 files)
-- `papers/cards/P0014_ReactSimBench.md`
 - `papers/raw_md/P0015_CausalDrive/P0015_CausalDrive.raw.md`
 - `papers/raw_md/P0015_CausalDrive/images/` (2 files)
-- `papers/cards/P0015_CausalDrive.md`
 - `papers/raw_md/P0016_CounterfactualPred/P0016_CounterfactualPred.raw.md`
 - `papers/raw_md/P0016_CounterfactualPred/images/` (4 files)
-- `papers/cards/P0016_CounterfactualPred.md`
 - `papers/raw_md/P0017_CRAFT/P0017_CRAFT.raw.md`
 - `papers/raw_md/P0017_CRAFT/images/` (14 files)
-- `papers/cards/P0017_CRAFT.md`
 - `papers/raw_md/P0018_GameFormer/P0018_GameFormer.raw.md`
 - `papers/raw_md/P0018_GameFormer/images/` (9 files)
-- `papers/cards/P0018_GameFormer.md`
 - `papers/raw_md/P0019_M2I/P0019_M2I.raw.md`
 - `papers/raw_md/P0019_M2I/images/` (6 files)
-- `papers/cards/P0019_M2I.md`
-- `papers/cards/P0020_Bahram2016.md`
 - `experiment_logs/mineru_P0013.log`
 - `experiment_logs/mineru_P0014.log`
 - `experiment_logs/mineru_P0015.log`
@@ -249,6 +242,6 @@ authority), `papers/quarantine/**` (MinerU intermediates), any checkpoint or dat
 2. **P0020 is unreadable as stored.** It stays `INDEX_BACKED` / `DISCOVERED` with no PDF and
    no raw MD, exactly like P0008 NPPC. Options are an authorised copy through the owner's
    institutional access, or accepting the record as permanently index-level.
-3. **Card skeletons are infrastructure only.** Filling sections 1-12 and 14 is the deep-read
-   task; the reading queue order was not changed by this ingest.
-
+3. **Historical card skeletons were infrastructure only.** Filling sections 1-12 and 14 was
+   the deep-read task; that layer is retired and the reading queue order was not changed by
+   this ingest.

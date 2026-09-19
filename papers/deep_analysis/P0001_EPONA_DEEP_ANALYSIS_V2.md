@@ -3,7 +3,7 @@
 > Paper: **Epona: Autoregressive Diffusion World Model for Autonomous Driving**  
 > Purpose: determine whether Epona is online imagined-future planning, joint world/action generation, predictive representation learning, or a distinct hybrid; pressure-test LAW/WoTE dimensions rather than accepting the paper's “world model as planner” phrasing at face value.  
 > Source inspected: `papers/raw_md/P0001_Epona/P0001_Epona.raw.md` (ICCV 2025 camera-ready text layer in repo).  
-> Existing card `papers/cards/P0001_Epona.md` was only a skeleton and is not treated as scientific evidence.
+> A former paper-card skeleton was not treated as scientific evidence; it has since been retired. This deep analysis is the canonical synthesis artifact.
 
 ---
 
