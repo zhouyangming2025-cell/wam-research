@@ -2,7 +2,7 @@
 
 Last updated: 2026-09-15
 
-Status: **FIFTH-ANCHOR DISCOVERY COMPLETE — ready for ontology merge/split pass**
+Status: **HISTORICAL DISCOVERY ADDENDUM — retained for provenance; its useful dimension definitions were consolidated into the ontology baseline.**
 
 Source:
 
