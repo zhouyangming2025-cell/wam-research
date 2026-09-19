@@ -2,7 +2,7 @@
 
 Last updated: 2026-09-15
 
-Status: **COMPARABILITY GATE — precondition for any research-gap declaration**
+Status: **HISTORICAL ELEVEN-ANCHOR COMPARABILITY GATE — retained for evidence; not current 12-paper authority.**
 
 Anchors:
 
