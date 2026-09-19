@@ -62,7 +62,9 @@ raw MD 中图像可保留为：
 
 但不要因此认为 MD 等价于 PDF。
 
-## Paper Card 生成策略
+## Paper Card 生成策略（历史规则，已停用）
+
+当前不再生成 paper cards。仅在 raw/source evidence 已审计后更新现有 deep analysis；不要恢复平行 card/template 层。
 
 ### 自动生成允许
 
@@ -109,7 +111,7 @@ decision_relevance = HIGH
 
 ```text
 ingest(batch-01): add 25 core WAM papers to corpus index
-cards(batch-01): add reviewed research cards
+deep-analysis(batch-01): update reviewed evidence in the canonical per-paper analysis
 audit(P2R): update reactive counterfactual evidence
 ```
 

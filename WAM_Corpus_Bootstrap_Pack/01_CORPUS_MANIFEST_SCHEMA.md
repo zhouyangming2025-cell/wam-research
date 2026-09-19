@@ -23,7 +23,7 @@
 | `pdf_local_path` | 本地/NAS PDF 路径 |
 | `raw_md_local_path` | PDF→MD 路径 |
 | `library_status` | `NONE/PDF/MD/PDF+MD` |
-| `github_card_path` | Research Card 路径 |
+| `github_card_path` | Legacy field; no current card is generated. Canonical synthesis is under `papers/deep_analysis/` and `audits/literature/`. |
 | `code_available` | `YES/NO/UNKNOWN` |
 | `official_code_url` | 官方源码 |
 | `code_repo_id` | 对应 CODE_REPO_MANIFEST 的 ID |

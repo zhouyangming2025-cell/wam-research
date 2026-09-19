@@ -70,9 +70,9 @@ local/NAS/papers/raw_md/
 
 如果文件体积合理，也可以放 GitHub 的 `raw_text/`，但不是必须。
 
-### C. Research Card
+### C. Research synthesis (current) / historical card policy
 
-不是论文全文，而是研究知识卡。
+旧 Research Card 层曾用于承载研究知识，但它与 deep analysis/source audit 重复，已从工作树退役。当前 canonical synthesis 只保留每篇论文一个 deep analysis；只有存在独立版本/源码证据时才保留 source/code audit。
 
 作用：
 
@@ -84,7 +84,7 @@ local/NAS/papers/raw_md/
 保存位置：
 
 ```text
-GitHub wam-research/papers/cards/
+GitHub wam-research/papers/deep_analysis/ 与 audits/literature/
 ```
 
 ---
@@ -97,7 +97,7 @@ GitHub wam-research/papers/cards/
 P0042/
 ├── Canonical PDF      -> local/NAS + Library
 ├── Raw MD             -> local/NAS (+ Library)
-└── Research Card      -> GitHub
+└── Deep analysis      -> GitHub；必要时再加 source/code audit
 ```
 
 通过 `paper_id` 串联，而不是靠文件名猜。
@@ -189,7 +189,8 @@ state/NEXT_TASK.md
 ```text
 hypotheses/<CURRENT>.md
 evidence/<relevant>.md
-papers/cards/<relevant>.md
+papers/deep_analysis/<relevant>_DEEP_ANALYSIS_V2.md
+audits/literature/<relevant>_AUDIT.md (only when independently needed)
 ```
 
 只有证据不足时才回 Library 的 raw MD / PDF。

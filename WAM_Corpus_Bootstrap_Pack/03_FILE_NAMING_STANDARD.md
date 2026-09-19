@@ -33,12 +33,13 @@ PXXXX_DriveLaW.raw.md
 
 > 这是自动转换全文，不是研究卡片。
 
-## 4. Research Card
+## 4. Research Card（历史规则，已退役）
 
-GitHub：
+当前不再生成 `papers/cards/`。使用：
 
 ```text
-papers/cards/P0001_Epona.md
+papers/deep_analysis/P0001_EPONA_DEEP_ANALYSIS_V2.md
+audits/literature/<phase>_EPONA_AUDIT.md
 ```
 
 不要写 `.raw`。
