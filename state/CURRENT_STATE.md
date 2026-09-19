@@ -2,38 +2,31 @@
 
 Last updated: **2026-09-19**
 
-## 当前唯一研究方向
+## 主程序
 
 ```text
-清理既有研究工作区，并从固定 12 篇 planning-centric WAM 论文的可追溯证据中重建技术路线。
+FIELD RECONSTRUCTION — Planning-centric WAM Atlas
+17 normalized anchors
+Wave C.7 simulation / reactivity / evaluation ACTIVE
+SAFE-SIM COMPLETE
+P0067 ProSim = next scientific paper task after the consolidation gate
 ```
 
-固定 12 篇：P0001 Epona、P0009 DriveLaW、P0042 WorldDrive、P0045 WoTE、P0046 World4Drive、P0048 LAW、P0049 Drive-JEPA、P0061 SeerDrive、P0062 Metis、P0063 DynFlowDrive、P0064 Discrete-WAM、P0065 GraphWorld。
+研究方向收敛、候选问题提升和方法设计仍为 `PAUSED / FORBIDDEN`。当前不把任何历史 taxonomy、route family 或风险方向当作项目结论。
 
-## 已确认的工作边界
+## 当前收口子任务
 
-- 原文、固定代码、manifest、source/code audit 和带来源定位的 deep analysis 是要保留的证据资产。
-- 旧 taxonomy、comparison-matrix extension、route map、D01/D02、field-wave、handoff 和历史状态标题均不能自动构成当前结论。
-- 当前不扩张语料、不继续 ProSim/仿真波次、不做研究问题发现或方法设计。
-- 同一论文的 artifact / inference mode 必须分开；训练期世界监督、在线世界状态、候选未来后果和世界—规划迭代不是同一种机制。
+固定 12 篇 planning-centric WAM（P0001、P0009、P0042、P0045、P0046、P0048、P0049、P0061–P0065）的证据收口与跨论文机制核验。
 
-## 当前尚未作出的结论
+这项子任务的目的，是恢复并核对可追溯的训练图、部署图、future 对象、candidate/selector、artifact/mode、代码版本与评测边界；它**不**把 12 篇单独升级为完整 field 的代表性样本，也**不**提前宣布技术路线。
 
-尚未授权任何最终的 12 篇路线分类。五问体系只是读取协议；历史六类机制程序只是待反例检验的假说。缺少原文或固定代码支撑时必须写 `UNKNOWN`。
+## 权威与保留规则
 
-## 当前权威顺序
-
-```text
-论文原文 / 固定代码 / 数据与评测配置
-→ 单篇审计与深读（按其证据边界）
-→ 跨论文比较
-→ 旧路线图、taxonomy、状态快照与 handoff
-```
+- raw paper、固定代码、manifest、source/code audit、deep analysis 与实验/决策记录为保留层。
+- 历史 matrix、ontology、路线图和 branch 中的综合，只能作为待核验的方法/假说；其状态标题不构成当前批准。
+- 五问是来源优先的读取接口；六个机制程序是待证伪的跨论文假说；二者都不是最终 taxonomy。
+- 同一论文的 paper / release / inference mode 必须分开。`UNKNOWN`、`NOT REPORTED` 和 `EVIDENCE BOUNDARY` 是有效结论。
 
 ## 当前任务
 
-见 `state/NEXT_TASK.md`。当前任务完成前，不新增研究分支、独立总结或并行路线文档。
-
-## 历史材料的读取方式
-
-`state/RESEARCH_LEDGER.md` 和 `state/DECISION_LOG.md` 保留时间线与证据出处；`landscape/` 保留比较与领域地图；它们均不得覆盖本文件。
+见 `state/NEXT_TASK.md`。在该任务完成前，不再进行新的派生文档删除。
