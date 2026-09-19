@@ -6,6 +6,18 @@ Newest entry first.
 
 > Integrity note — 2026-09-15: this file had been accidentally truncated during an earlier update. The recoverable project decisions below have been restored conservatively from the project state/history. When a later decision supersedes an earlier one, both are retained and explicitly marked rather than deleting history.
 
+## 2026-09-19 — Retire two superseded landscape navigation memos
+
+The standalone `landscape/SURVEY_SEED_MAP.md` was merged into the existing
+`landscape/CENSUS_PHASE_A_ROUND1_SOURCES.md`: its three survey sources were unique
+there and are now retained in the source register. The standalone
+`landscape/PURE_WAM_PRIORITY_CORRECTION.md` was retired because its scope decision
+and core-WAM correction queue are already preserved in this decision log and in the
+current-state/anchor records. No raw paper, source/code audit, deep analysis,
+manifest, experiment log or scientific decision was removed. The historical
+`landscape/WAM_DEEP_READ_EXPANSION_QUEUE_V1.md` remains retained for wave/ID
+provenance and is not a current entry point.
+
 ## 2026-09-19 — Non-main branch audit closed; main remains sole working entry
 
 **Decision**

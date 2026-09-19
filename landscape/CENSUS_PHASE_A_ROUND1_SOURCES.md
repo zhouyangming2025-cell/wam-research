@@ -16,8 +16,11 @@ venue open-access / proceedings page
 ## Surveys / navigation
 
 - Tu et al., **The Role of World Models in Shaping Autonomous Driving: A Comprehensive Survey** — Frontiers of Computer Science, 2026: https://journal.hep.com.cn/fcs/EN/10.1007/s11704-026-60102-1
+- Feng, Wang, Yang, **A Survey of World Models for Autonomous Driving** — arXiv:2501.11260: https://arxiv.org/abs/2501.11260
+- Li, Zhang, Zhao, **Ranging from prediction to planning via machine learning approaches for autonomous driving: a survey** — Artificial Intelligence Review, 2026: https://link.springer.com/article/10.1007/s10462-026-11604-8
 - **Planning-Oriented End-to-End Autonomous Driving: Architectures, Evaluation, and Emerging Paradigms**, arXiv:2608.20111: https://arxiv.org/abs/2608.20111
 - **World Models for Autonomous Driving: An Initial Survey**, IEEE T-IV 2024: https://ieeexplore.ieee.org/document/10522953/
+- Yin & Tian, **World models in autonomous driving: A review and outlook** — Journal of Harbin Institute of Technology, 2025: https://hit.alljournals.cn/hitxb_cn/article/html/20251211
 
 ## Visual / video WM
 
