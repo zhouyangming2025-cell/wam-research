@@ -2,7 +2,7 @@
 
 Last updated: 2026-09-15
 
-Status: **ELEVEN-ANCHOR EXTENSION — ONTOLOGY V1.3 RETAINED**
+Status: **HISTORICAL PROJECTION SNAPSHOT — not current state or final route authority; retain only as a traceable comparison aid.**
 
 Anchors:
 
