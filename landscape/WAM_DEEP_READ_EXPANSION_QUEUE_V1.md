@@ -1,13 +1,13 @@
 # WAM Deep-Read Expansion Queue V1
 
-Last updated: 2026-09-16
+Last updated: 2026-09-19
 
 Status: **HISTORICAL EXPANSION QUEUE — retained for ID/provenance; current work is controlled by `state/NEXT_TASK.md`.**
 
 ## Binding rule
 
 ```text
-17 normalized anchors
+18 normalized anchors
 = stronger coordinate system
 != mature field understanding
 != authorization to promote research direction
@@ -152,39 +152,74 @@ See:
 manifests/P0066_SAFESIM_REGISTRATION_PENDING.md
 ```
 
-## P0067 ProSim — NEXT
+## P0067 ProSim — COMPLETE
 
 Purpose:
 
-```text
+~~~
 second independent reactive-simulation anchor
-```
+~~~
 
-Main comparison pressure:
+Canonical subtype:
 
-```text
-SAFE-SIM
-= safety-critical planner-conditioned adversarial closed loop
+~~~
+PROMPTABLE CLOSED-LOOP TRAFFIC BEHAVIOR SIMULATOR
++ SOFT MULTIMODAL AGENT/SCENE CONTROL
+~~~
 
-ProSim
-= promptable / controllable multi-agent closed-loop simulation
-```
+Verified mechanism:
 
-The key question is whether SAFE-SIM's reactivity findings generalize beyond collision-seeking adversarial guidance.
+~~~
+map + agent histories
+→ shared scene tokens
+→ soft per-agent/scene prompts
+→ parallel k-step policy chunks
+→ generated controlled-agent histories
+→ refreshed scene tokens
+→ repeat
+~~~
 
-Mandatory questions for ProSim:
+Feedback:
 
-```text
-what is promptable / controllable?
-what is jointly generated?
-how are non-ego agents conditioned on ego / one another?
-what is re-generated each closed-loop step?
-what data supervises interaction?
-what is the actual feedback carrier?
-what metrics validate realism and reactivity?
-is planner evaluation performed or is simulation quality the endpoint?
-```
+~~~
+F_e YES
+F_a YES
+F_b YES across generated-agent chunks
+F_s NO / not sensor-rendering core
+~~~
 
+Critical boundary:
+
+~~~
+logged future and prompt-aligned imitation truth
+model-generated response
+no paired real intervention-response truth
+~~~
+
+Release caveats:
+
+~~~
+public default MODEL.BPTT=False
+README says full training pipeline is unreleased
+trajdata callback is TODO; GPU/distributed path is the auditable path
+~~~
+
+Canonical files:
+
+~~~
+papers/raw_md/P0067_ProSim/P0067_ProSim.source_note.md
+papers/deep_analysis/P0067_PROSIM_DEEP_ANALYSIS_V2.md
+audits/literature/PHASE_C7_PROSIM_AUDIT.md
+manifests/P0067_PROSIM_REGISTRATION_PENDING.md
+~~~
+
+Ontology:
+
+~~~
+V1.3 retained
+no V1.4
+no separate projection
+~~~
 ## Existing later C.7 anchors
 
 ```text
@@ -196,8 +231,7 @@ P0015 CausalDrive     RAW_MD_READY / DEEP READ PENDING
 Recommended order:
 
 ```text
-P0067 ProSim
-→ P0013 BridgeSim
+P0013 BridgeSim
 → P0014 ReactSimBench
 → P0015 CausalDrive
 ```
@@ -269,7 +303,7 @@ method design                  = FORBIDDEN
 # Next task
 
 ```text
-P0067 ProSim
+P0013 BridgeSim
 ```
 
 Required source gate:
