@@ -244,8 +244,8 @@ version map + AUTHOR CLAIM / DIRECT EVIDENCE / OUR INFERENCE
 [literature synthesis]
 module-by-module horizontal comparison
         ↓
-[WAM Ontology]
-A–P full projection
+[WAM comparison inside the deep analysis]
+A–P fields + residue test
         ↓
 [residue gate]
 keep / merge / split new dimensions
@@ -258,9 +258,9 @@ Canonical outputs for an Anchor/Decision paper:
 ```text
 papers/deep_analysis/<ID>_<PAPER>_DEEP_ANALYSIS_V2.md
 audits/literature/<PHASE>_<PAPER>_AUDIT.md
-landscape/<ID>_<PAPER>_ONTOLOGY_V1_PROJECTION.md
-comparison matrix extension/update
 state update
+
+Any A–P normalization and residue test belongs inside the deep analysis. Do not create a separate ontology projection or per-paper comparison-matrix extension.
 ```
 
 ---
