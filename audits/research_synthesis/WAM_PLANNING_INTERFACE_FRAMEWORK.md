@@ -78,6 +78,19 @@ DriveLaW / GraphWorld / SeerDrive
 
 The deletion test therefore remains local to each deep analysis: remove the claimed bridge and ask whether the paper is still the same method. A row may be revised only when the underlying raw text or pinned source audit changes.
 
+## External-survey pressure-test boundary
+
+The five questions were not invented from the old driving-only matrices. A separate exploratory audit consulted broad world-model/control lineages (including Dyna, predictive-state/value-prediction methods, latent planning, Dreamer/MuZero and TD-MPC families) and recent world-model surveys. Its useful methodological result is retained here without importing another corpus layer:
+
+```text
+artifact/mode/deployment route must be separated;
+ontology-free mechanism reconstruction precedes labels;
+training-world use must be separated from deployment-world use;
+holdout/collision tests are required before promoting a new axis or route.
+```
+
+That pass is a pressure test, not a complete primary-source review and not an authorization to add `interaction`, `uncertainty`, a route family, or a research problem. The current interface keeps only the evidence-discipline consequences; the raw/deep/source chain remains authoritative.
+
 ## Reading order
 
 ```text
