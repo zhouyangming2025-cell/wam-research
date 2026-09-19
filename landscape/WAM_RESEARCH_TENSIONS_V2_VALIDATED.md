@@ -2,7 +2,7 @@
 
 Last updated: 2026-09-15
 
-Status: **TIER-1 PRIOR-ART ATTACK COMPLETE — CANDIDATE-PROBLEM FORMULATION NEXT**
+Status: **HISTORICAL PRIOR-ART / TENSION AUDIT — retained for evidence and counterexamples; not the current task or an authorization to formulate a research problem.**
 
 Authority:
 
@@ -10,7 +10,7 @@ Authority:
 audits/research_synthesis/WAM_TIER1_TENSION_ADVERSARIAL_VALIDATION_V1.md
 ```
 
-This file supersedes the Tier-1 verdicts in `WAM_RESEARCH_TENSIONS_V1.md` while preserving V1 as the pre-adversarial record.
+This file retains the post-adversarial tension record. The former pre-adversarial V1 snapshot was removed from the working tree after its useful history was preserved in Git; this file must still be read against its cited audits and primary sources.
 
 ---
 
