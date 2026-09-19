@@ -90,7 +90,7 @@ papers/raw_md/P0066_SafeSim/P0066_SafeSim.source_note.md
 papers/deep_analysis/P0066_SAFESIM_DEEP_ANALYSIS_V2.md
 audits/literature/P0066_SAFESIM_SOURCE_CODE_AUDIT.md
 audits/literature/PHASE_C7_SAFESIM_AUDIT.md
-landscape/P0066_SAFESIM_ONTOLOGY_PROJECTION.md
+A–P normalized fields retained in the SAFE-SIM deep analysis; no separate projection artifact is canonical.
 landscape/WAM_COMPARISON_MATRIX_V1.md (historical comparison snapshot; no per-paper extension is canonical)
 ```
 
