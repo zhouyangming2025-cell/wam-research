@@ -2,7 +2,7 @@
 
 Last updated: 2026-09-15
 
-Status: **ACTIVE — dimensions are provisional; ontology is deliberately NOT frozen**
+Status: **HISTORICAL DISCOVERY LOG — retained as provenance; the consolidated ontology is a historical comparison baseline, not current route authority.**
 
 ## Purpose
 
