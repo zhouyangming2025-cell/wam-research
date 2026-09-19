@@ -2,7 +2,7 @@
 
 Last updated: 2026-09-15
 
-Status: **V1 STABLE BASELINE — extensible, not frozen forever**
+Status: **HISTORICAL CONSOLIDATED BASELINE — retains useful comparison dimensions, but is not current state or final route authority.**
 
 Scope:
 
@@ -623,3 +623,65 @@ landscape/WAM_COMPARISON_MATRIX_V1.md
 The matrix must project LAW / WoTE / Epona / WorldDrive / World4Drive across the stable IDs above, grouped by family rather than as one unreadable 80-column table.
 
 After that, resume new core-WAM anchors. Every new anchor must be projected into Ontology V1 and may only extend it through the extension rule above.
+
+---
+
+# 9. Consolidated fields formerly split across V1.1–V1.3
+
+These fields are retained here so this ontology no longer requires a chain of amendment snapshots. They remain comparison questions, not route labels or a claim that every paper has an online world model.
+
+## J08 — Inference iteration semantics
+
+**Scientific question:** when a paper says the model/planner “iterates,” what scientific state advances in one iteration?
+
+**Typical values:** `NONE / one-shot`; `PHYSICAL-TIME LATENT ROLLOUT`; `AUTOREGRESSIVE OBSERVATION ROLLOUT`; `INTERNAL WORLD↔PLANNER CO-REFINEMENT`; `GENERATIVE DENOISING ITERATION`; `SEARCH / OPTIMIZATION ITERATION`; `ENVIRONMENT EXECUTION-FEEDBACK ITERATION`; `HYBRID`.
+
+**Evidence rule:** trace tensors between consecutive iterations. Determine whether physical time, an environment observation, an executed action, or only hidden features change.
+
+**Misclassification warning:** `N` internal refinement passes are neither `N` future timesteps nor `N` closed-loop interactions. SeerDrive is an `INTERNAL WORLD↔PLANNER CO-REFINEMENT` case; WoTE is a physically indexed latent rollout case.
+
+## J09 — Planner→world feedback carrier
+
+**Scientific question:** when planning influences world prediction, what exact object is fed back?
+
+**Typical values:** `NONE`; `EXPERT/LOGGED ACTION`; `PREDICTED/CANDIDATE TRAJECTORY`; `EGO STATE / POSE`; `PLANNER HIDDEN FEATURE / QUERY`; `INTENTION / MODE TOKEN`; `EXECUTED CONTROL`; `NEW OBSERVATION AFTER EXECUTION`; `HYBRID`.
+
+**Evidence rule:** identify the precise inference-time numerical object entering the world/dynamics model from the planning side.
+
+**Misclassification warning:** a planner hidden feature or mode token is not an executed intervention. SeerDrive’s documented carrier is a planner/ego-mode feature.
+
+## L07 — Iterative-state supervision coverage
+
+**Scientific question:** when recurrent/refinement iterations exist, which intermediate states receive direct loss?
+
+**Typical values:** `NOT APPLICABLE`; `FINAL ITERATION ONLY`; `ALL ITERATIONS`; `SELECTED ITERATIONS`; `SELF-CONSISTENCY ONLY`; `MIXED`; `NOT REPORTED`.
+
+**Evidence rule:** trace loss attachment to iteration-indexed world/planner outputs. The difference between final-only and all-iteration supervision is a training-coupling fact, not merely an implementation detail. SeerDrive reports supervision at all refinement iterations.
+
+## F07 — Prediction temporal / observability geometry
+
+**Scientific question:** at the moment a target is predicted, which temporal parts of the sample are visible and which are held out?
+
+**Typical values:** `NOT APPLICABLE`; `RANDOM-MASK SAME-WINDOW SPATIOTEMPORAL COMPLETION`; `PAST/HISTORY-ONLY → UNSEEN FUTURE`; `CURRENT → FUTURE ENDPOINT`; `RECURRENT NEXT-STATE / AUTOREGRESSIVE FUTURE`; `PARTIAL-FUTURE-CONTEXT COMPLETION`; `HYBRID FUTURE MASKING`; `FULL-EPISODE / TRAJECTORY JOINT GENERATION`; `UNCLEAR / NOT REPORTED`.
+
+**Evidence rule:** record visible and masked frames/tokens, whether future tokens are visible, whether only history/current information is available, and whether prediction is recursively fed forward.
+
+**Misclassification warning:** temporal masking is not automatically causal future forecasting; predictive representation is not automatically an online world-transition model. Action condition, substrate, model class, factorization, horizon, uncertainty and target-network handling remain in E01/E02, F01–F06 and G02.
+
+## F08 — Internal transition-coordinate / physical-time alignment
+
+**Scientific question:** if a dynamics model has intermediate states indexed by an internal variable, what does that variable mean relative to physical scene time?
+
+**Typical values:** `NOT APPLICABLE / DIRECT ENDPOINT`; `PHYSICALLY INDEXED FUTURE TIME`; `AUTOREGRESSIVE PHYSICAL FRAME TIME`; `GENERATIVE DENOISING / TRANSPORT COORDINATE`; `PHYSICALLY INDEXED OUTER TIME + INTERNAL GENERATIVE TIME`; `INTERNAL REPRESENTATION REFINEMENT`; `MIXED / HIERARCHICAL`; `UNCLEAR / NOT REPORTED`.
+
+**Evidence rule:** for intermediate index `r`, establish whether it maps to a real/simulator timestamp and target, executes an action/environment transition, or is only a denoising/interpolation/solver coordinate.
+
+**Misclassification warning:** `K` flow/diffusion steps are not `K` future physical timesteps; smooth latent transport is not validation of smooth physical evolution; `dz/ds` is not `dz/dτ` unless the paper identifies `s` with physical time. DynFlowDrive’s flow coordinate is a transport coordinate, whereas WoTE’s recurrent states advance predicted physical time.
+
+## Relation between F08 and J08
+
+`F08` records what an internal world/dynamics coordinate means relative to physical time. `J08` records what advances across repeated inference iterations in the decision graph. Use both: DynFlowDrive has a training-time flow coordinate but no deployed world-model iteration; SeerDrive has internal world–planner feature refinement; an outer physical rollout may itself contain internal diffusion/flow steps.
+
+## 10. Current use
+
+This document is a retained historical comparison instrument. Use the source-first records in `papers/raw_md/`, relevant source/code audits and deep analyses before applying any dimension. Do not treat dimension values as a final technical-route classification.
