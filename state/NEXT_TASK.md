@@ -217,21 +217,24 @@ Do not create V1.4 unless a genuine irreducible residue survives back-projection
 
 ---
 
-# Required artifacts
+# Planned artifacts — not yet present
+
+These are outputs of the ProSim task, not current repository files. Do not treat their absence as a broken state or create them during cleanup:
 
 ```text
-papers/deep_analysis/P0067_PROSIM_DEEP_ANALYSIS_V2.md
-audits/literature/PHASE_C7_PROSIM_AUDIT.md
-landscape/P0067_PROSIM_ONTOLOGY_PROJECTION.md
-landscape/WAM_COMPARISON_MATRIX_V1_3_PROSIM_EXTENSION.md
+P0067_PROSIM_DEEP_ANALYSIS_V2.md
+PHASE_C7_PROSIM_AUDIT.md
+P0067_PROSIM_ONTOLOGY_PROJECTION.md
+WAM_COMPARISON_MATRIX_V1_3_PROSIM_EXTENSION.md
 ```
 
-If official source is usable, also create:
+If official source is usable, the same task may additionally produce:
 
 ```text
-audits/literature/P0067_PROSIM_SOURCE_CODE_AUDIT.md
+P0067_PROSIM_SOURCE_CODE_AUDIT.md
 ```
 
+Create only the minimum artifacts required by the evidence actually found; do not pre-create templates or parallel summaries.
 ---
 
 # Stop condition
