@@ -2,7 +2,7 @@
 
 Last updated: 2026-09-14
 
-Status: **ACTIVE — initial register complete; targeted PDF verification pending**
+Status: **HISTORICAL QA REGISTER — retain evidence boundaries; any remaining PDF checks are conditional on reusing the claim.**
 
 Purpose: prevent field-level conclusions from silently upgrading paper language, OCR-derived tables, proxy metrics, or our inference into hard facts.
 
