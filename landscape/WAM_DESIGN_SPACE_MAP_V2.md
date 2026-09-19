@@ -2,7 +2,7 @@
 
 Last updated: 2026-09-15
 
-Status: **ELEVEN-ANCHOR CONSOLIDATED SCIENTIFIC MAP**
+Status: **HISTORICAL ELEVEN-ANCHOR MAP — retained for comparison; not current 12-paper authority. DriveLaW and later additions are outside this snapshot.**
 
 Anchors:
 
