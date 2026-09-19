@@ -2,7 +2,7 @@
 
 Date: 2026-09-13
 
-Status: **ABSTRACT / PROJECT-PAGE RECONNAISSANCE ONLY**. This is not a deep read and must not be used as a final scientific verdict. Full papers must be ingested and read before upgrading claims.
+Status: **HISTORICAL ABSTRACT / PROJECT-PAGE RECONNAISSANCE ONLY**. This is not a deep read and must not be used as a final scientific verdict. Full papers must be ingested and read before upgrading claims.
 
 Purpose: rank the targeted papers by discrimination value and identify what each can or cannot answer before spending deep-read effort.
 

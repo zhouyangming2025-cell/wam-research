@@ -2,7 +2,7 @@
 
 Last updated: 2026-09-14
 
-Status: **CONDITIONAL EVIDENCE QUEUE — execute only when a listed numeric/detail claim is reused; not a current research direction.**
+Status: **HISTORICAL CONDITIONAL EVIDENCE QUEUE — execute only when a listed numeric/detail claim is reused; not a current research direction.**
 
 Principle:
 
@@ -12,7 +12,7 @@ Verify only evidence points that carry field-level conclusions or remain OCR/sou
 Use public official/venue PDFs first; request user/local extraction only when public access is unavailable.
 ```
 
-## Priority A — must verify before Wave 4
+## Priority A — verify before reusing a listed claim
 
 | priority | paper | exact evidence point | why it matters | preferred source |
 |---:|---|---|---|---|
@@ -25,7 +25,7 @@ Use public official/venue PDFs first; request user/local extraction only when pu
 | A7 | **DA-WAM** | future-configuration ablation; expert-matched predictive-loss wording | carries candidate-specific-future attribution and supervision-boundary conclusion | canonical public paper/PDF |
 | A8 | **DrivingGPT** | exact deployment planning decode path, especially whether intervening visual-token generation is bypassed | affects inference-coupling taxonomy | public source code if available; PDF cannot alone resolve if unspecified |
 
-## Priority B — verify before final Phase-B field synthesis if numerically cited
+## Priority B — verify before reusing a listed numerical claim
 
 ```text
 M2I conditional GT-vs-predicted influencer table

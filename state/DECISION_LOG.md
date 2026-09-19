@@ -532,9 +532,9 @@ paper collection
 
 Artifacts added at the time:
 
-- `RESEARCH_MAP.md`
-- `landscape/WAM_TAXONOMY.md`
-- `hypotheses/RISK_AWARE_WORLD_MODEL.md`
+- `RESEARCH_MAP.md` (historical artifact, no longer tracked)
+- `landscape/PLANNING_WAM_TAXONOMY.md` (retained historical field-placement taxonomy; original name was `WAM_TAXONOMY.md`)
+- `hypotheses/RISK_AWARE_WORLD_MODEL.md` (historical artifact, no longer tracked)
 
 **Later correction**
 

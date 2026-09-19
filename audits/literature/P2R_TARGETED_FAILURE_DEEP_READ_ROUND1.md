@@ -2,7 +2,7 @@
 
 Date: 2026-09-13
 
-Status: **scientific review started**. This round uses only primary-text material already present in this private repo. It does **not** claim that P2-R is a confirmed gap.
+Status: **HISTORICAL TARGETED REVIEW — P2-R is parked and this round never established a confirmed gap.** This round uses only primary-text material already present in this private repo.
 
 ## 1. Question under test
 

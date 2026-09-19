@@ -2,7 +2,7 @@
 
 Last updated: 2026-09-14
 
-Status: **BINDING SCOPE CORRECTION BEFORE PHASE D**
+Status: **HISTORICAL SCOPE CORRECTION — retained as a boundary; current program and next task are controlled by `state/CURRENT_STATE.md` and `state/NEXT_TASK.md`.**
 
 ## 1. Why this correction exists
 

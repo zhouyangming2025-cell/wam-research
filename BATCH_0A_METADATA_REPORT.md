@@ -274,7 +274,7 @@ detect : Import-Csv row/column count + enum validation against 01_CORPUS_MANIFES
 fix    : separator corrected in both rows (first attempt under-corrected → re-checked → fixed)
 verify : rows=12, columns=21, unique paper_id=12,
          invalid reading_status=0, invalid decision_relevance=0, invalid library_status=0,
-         empty notes=0, github_card_path matching papers/cards/P*=12
+         empty notes=0, legacy github_card_path matching papers/cards/P*=12
 re-verify after metadata merge: same checks, all 0; first_author resolved 11/12
 ```
 

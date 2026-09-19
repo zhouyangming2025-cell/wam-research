@@ -2,7 +2,7 @@
 
 Last updated: 2026-09-14
 
-Status: **CLOSED — Wave 4 AUTHORIZED**
+Status: **HISTORICAL CLOSEOUT — the prior Wave-4 authorization was later superseded by the field-reconstruction pause.**
 
 Purpose: close the post-Wave-3 evidence-reliability gate before expanding into closed-loop / simulation-realism / VLA / reactivity anchors.
 

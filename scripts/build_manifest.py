@@ -603,13 +603,10 @@ def main():
         if r.get("qc") == "RAW_MD_QC_FAIL":
             notes += f" RAW_MD_QC_FAIL: {r.get('qc_detail')}."
 
-        # Never claim a card that does not exist on disk: Phase-A census records are
-        # ingested at placement depth only, and cards are a deep-read artifact.
-        repo_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        card_rel = f"papers/cards/{pid}_{short}.md"
-        if not os.path.exists(os.path.join(repo_root, card_rel.replace("/", os.sep))):
-            card_rel = ""
-            notes += " NO_CARD: no card file exists on disk for this record (card creation is a deep-read step)."
+        # Keep the legacy schema column blank. The former paper-card layer is retired;
+        # current scientific synthesis lives in deep analyses and source/code audits.
+        card_rel = ""
+        notes += " NO_CARD: legacy github_card_path field is blank because the paper-card layer is retired."
 
         rows.append([
             pid, m["title"], m["year"], m["first_author"], m["venue"],

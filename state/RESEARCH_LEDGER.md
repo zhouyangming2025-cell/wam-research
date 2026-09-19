@@ -212,7 +212,7 @@ Use these as prior evidence, not substitutes for field reconstruction.
 
 ## Division of labor
 
-- **GPT-5.6 Sol:** comparative anchor deep reads, cross-family synthesis, problem-discovery/falsification, atlas/cards/state maintenance, targeted source audit when scientifically necessary.
+- **GPT-5.6 Sol:** comparative anchor deep reads, cross-family synthesis, problem-discovery/falsification, atlas/deep-analysis/state maintenance, targeted source audit when scientifically necessary.
 - **Local corpus agent:** on-demand acquisition/extraction, MinerU/QC, local source-code execution, datasets/checkpoints/experiments.
 
 Broad corpus acquisition remains frozen unless Phase D identifies a concrete missing prior-art or measurement link.

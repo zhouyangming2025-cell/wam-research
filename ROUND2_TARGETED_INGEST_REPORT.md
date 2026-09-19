@@ -213,7 +213,6 @@ recorded in the card but leaves the field `UNKNOWN` rather than `YES`.
 - `manifests/batch_round2_download_results.json`
 - `manifests/batch_round2_frontpage_verification.json`
 - `manifests/batch_round2_rawmd_results.json`
-- `scripts/build_round2_cards.py`
 - `scripts/build_round2_report.py`
 - `ROUND2_TARGETED_INGEST_REPORT.md` (this file)
 
