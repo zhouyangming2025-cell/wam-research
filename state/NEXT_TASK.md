@@ -2,38 +2,40 @@
 
 ## 唯一下一任务
 
-> **在原位清理重复的路线 / taxonomy 输出：以现有 `landscape/WAM_COMPARISON_MATRIX_V1.md` 为检查起点，逐项核对其剩余 7 份核心论文 V1.1–V1.3 extension 是否仍有独立证据价值。**
+> **对固定 12 篇逐篇重核原文与现有 deep analysis / source audit；只有在每条结论可追溯后，才原位修订唯一的 `landscape/WAM_COMPARISON_MATRIX_V1.md`。**
 
-这不是新一轮总结，也不创建新文件。目标是减少派生文档入口：每个 extension 最终只能是以下之一：
+不新建路线表、extension、branch 或 taxonomy 版本。`WAM_COMPARISON_MATRIX_V1.md` 目前只是五篇锚点的历史基线，不是当前结论；若证据不足，保留 `UNKNOWN`，不能用旧 V1.1–V1.3 快照补齐。
+
+## 每篇必须先核对的事实
 
 ```text
-保留：含有未在 raw / audit / deep analysis 中保存的可定位证据
-并入：其唯一有效事实已回写到现有主矩阵或对应单篇 audit / deep analysis
-归档：保留历史但从 README / state / handoff / 当前任务中取消入口
-删除：确认没有独立证据，且全部有效内容已有存活来源
+1. 训练图：未来/世界对象、监督、梯度与教师
+2. 部署图：真实保留的模块、输入、动作接口与删去的模块
+3. future 对象：视觉、BEV、latent、关系状态、候选后果或仅训练目标
+4. candidate / score / selector：是否存在，谁拥有最终行动选择权
+5. artifact / mode / paper-code 版本边界
+6. 评测与反应性边界
 ```
 
-## 先做的核验
+## 允许的结果
 
-1. 读取 `landscape/WAM_COMPARISON_MATRIX_V1.md` 与所有 `WAM_COMPARISON_MATRIX_V1_1–V1_3_*_EXTENSION.md`。
-2. 对每份 extension 列出其独有的：原文定位、代码定位、训练/部署图、artifact/mode 区分、或跨论文反例。
-3. 若仅重复旧 taxonomy 标签、状态宣言或从已有 audit 改写的结论，取消其入口；不得为保留它而再建汇总文件。
-4. 先完成证据去重，再决定是否删除文件；原文、代码审计与带独立证据的深读不属于本轮删除对象。
+```text
+可证实的论文事实 / 代码事实
+有边界的跨论文比较
+明确标出的 OUR INFERENCE
+UNKNOWN / NOT REPORTED
+```
+
+## 不允许的结果
+
+```text
+以“是否有 world model”“是否预测未来”“是否联合训练”直接命名路线；
+把训练期未来监督写成在线 rollout；
+把视频解码、离线可视化或固定 logged future 写成部署期反应式推演；
+把同一论文不同 artifact/mode 压成一行；
+先写路线名、再补证据。
+```
 
 ## 停止条件
 
-```text
-每一份 matrix extension 都已有明确处置；
-任何要删除的条目均有存活的原文/代码/审计出处；
-README、CURRENT_STATE、NEXT_TASK、START_HERE、LATEST 不再指向多个“当前”路线；
-没有新增分支、文件、taxonomy 版本或路线命名。
-```
-
-## 禁止事项
-
-```text
-不把历史 V1/V1.3/D01/D02 代码重命名后继续使用；
-不将 ProSim 或其他扩展论文重新设为当前任务；
-不根据摘要补全 UNKNOWN；
-不在完成去重前提出最终技术路线。
-```
+12 篇的证据边界均已重核；保留的唯一比较矩阵可清楚区分论文事实、代码事实、推断与未知；只有出现至少两个可复核成员的因果分叉，才讨论技术路线。
