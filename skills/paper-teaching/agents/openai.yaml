@@ -1,0 +1,4 @@
+interface:
+  display_name: "Paper Teaching"
+  short_description: "Progressive, evidence-grounded technical paper teaching"
+  default_prompt: "Use $paper-teaching to teach this paper progressively from its main idea to mechanisms, computation, mathematics, and evidence."

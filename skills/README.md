@@ -1,4 +1,12 @@
-# External research skills
+# Research skills
+
+## Native skill
+
+| Skill | Role |
+|---|---|
+| [`paper-teaching`](paper-teaching/SKILL.md) | Progressive, evidence-grounded paper teaching that separates semantic understanding, mechanism and data flow, concrete computation, mathematical prerequisites, evidence review, and selective cross-paper comparison. |
+
+## External reference skills
 
 本目录保存外部 GitHub research skill 的源码快照，供 `wam-research` 设计和对照使用。
 
