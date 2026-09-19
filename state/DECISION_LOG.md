@@ -438,7 +438,7 @@ World4Drive  COMPLETE v2
 NEXT:
 merge/split dimensions
 → WAM_DIMENSION_ONTOLOGY_V1.md
-→ WAM_COMPARISON_MATRIX_V1.md
+→ audits/research_synthesis/WAM_PLANNING_INTERFACE_FRAMEWORK.md (provisional review interface)
 ```
 
 **Methodological rule added**
@@ -507,7 +507,7 @@ GraphWorld      PENDING
 
 Canonical coverage file:
 
-- `landscape/CORE_WAM_2_2_COVERAGE_AUDIT.md`
+- `state/CURRENT_STATE.md` (the older coverage checkpoint was retired after consolidation)
 
 Canonical new audits:
 
@@ -561,7 +561,7 @@ Phase D           AUTHORIZED
 Canonical synthesis:
 
 - `landscape/PHASE_C_WAVES1_4_FIELD_SYNTHESIS.md`
-- `landscape/PHASE_B_WAVE4_SYNTHESIS.md`
+- retained detailed Wave-4 audits under `audits/literature/`
 
 Stable planning-interface taxonomy from that synthesis:
 
@@ -595,7 +595,6 @@ Any candidate problem must survive historical prior art, strong non-WM controls,
 
 **Artifacts**
 
-- `landscape/PHASE_B_WAVE2_SYNTHESIS.md`
 - `landscape/PHASE_B_WAVE2_COMPARABILITY_AUDIT.md`
 - `audits/literature/PHASE_B_WAVE2_INTERFACE_CODE_AUDIT.md`
 
@@ -662,8 +661,7 @@ method design CLOSED
 Canonical artifacts:
 
 - `landscape/CENSUS_PHASE_A_ROUND2.md`
-- `landscape/FIELD_ATLAS.md`
-- `landscape/PHASE_B_ANCHORS.md`
+- `landscape/PHASE_C_WAVES1_4_FIELD_SYNTHESIS.md`
 
 Representative controls/history anchors included:
 

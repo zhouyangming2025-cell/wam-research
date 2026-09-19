@@ -127,7 +127,6 @@ papers/deep_analysis/P0066_SAFESIM_DEEP_ANALYSIS_V2.md
 audits/literature/P0066_SAFESIM_SOURCE_CODE_AUDIT.md
 audits/literature/PHASE_C7_SAFESIM_AUDIT.md
 A–P normalized fields retained in the SAFE-SIM deep analysis; no separate projection artifact is canonical.
-landscape/WAM_COMPARISON_MATRIX_V1.md (historical comparison snapshot; no per-paper extension is canonical)
 ```
 
 Ontology:
@@ -142,7 +141,7 @@ Source status:
 ```text
 paper verified
 official source/code verified
-full local raw-MD extraction pending
+full local raw-MD extraction present at `papers/raw_md/P0066_SafeSim/`
 canonical CSV manifest reconciliation pending because current file is not exposed as UTF-8 text
 ```
 

@@ -16,9 +16,9 @@
 | [Academic Research Agent Skill](https://github.com/ngtiendong/Academic-Research-Agent-Skill) | `external/academic-research-agent-skill/` | 研究流程总框架：reality / novelty / claim gates | 提炼 gate 语言和 evidence contract，不整包启用 |
 | [Paper Deep Reader Skill](https://github.com/Linwei-Chen/paper-deep-reader-skill) | `external/paper-deep-reader-skill/` | 单篇论文精读、图表和公式讲解 | 作为 `paper-reader` 的主要参考 |
 | [Agent Paper Reader](https://github.com/chuyanchu/agent-paper-reader) | `external/agent-paper-reader/` | claim-evidence、复现性、反证实验 | 作为 `evidence-audit` 的主要参考 |
-| [Agent Skills for Academic Research](https://github.com/jjfroehlich/agent-skills-for-academic-research) | `external/{career-development,data-visualization-and-figures,grant-writing,literature-reading-and-synthesis,mentoring-management-and-lab-culture,publishing-and-peer-review,research-strategy-and-project-design,scientific-communication,scientific-feedback,scientific-writing}/` | 学术工作流 skill 集合 | 优先抽取 literature reading、research strategy、scientific feedback、peer review |
+| [Agent Skills for Academic Research](https://github.com/jjfroehlich/agent-skills-for-academic-research) | `external/literature-reading-and-synthesis/` | claim-evidence 与文献综合 | 作为跨论文证据综合参考 |
 
-当前共 13 个包含 `SKILL.md` 的目录。第四个来源是 10 个子 skill 的集合，不是一个单独的 skill。
+当前只保留与论文精读和证据审计直接相关的 4 个参考 bundle。原先下载的 career、grant、publishing、communication、feedback、writing、visualization、mentoring 与 project-design 快照不属于当前证据链，已从工作树移除；Git 历史仍保留其来源，不把它们当作研究入口。
 
 ## 建议的 WAM 融合方案
 
@@ -26,9 +26,8 @@
 
 1. `paper-reader`：单篇精读；输出必须带 page / section / figure / table locator。
 2. `evidence-audit`：逐条 claim → evidence → limitation → reproduction check。
-3. `literature-ledger`：把精读结果写入统一矩阵，并与现有 paper ID、raw MD 和 manifest 对齐。
-4. `research-analysis`：在用户明确要求时执行 reality、novelty、feasibility 和 reviewer gates。
-5. `research-gap`：仅在已有证据充分且用户要求研究方向判断时运行，不能在 ingest 阶段触发。
+3. `literature-ledger`：把精读结果写入现有 paper ID、raw MD、deep analysis 和 manifest；不再创建平行矩阵层。
+4. `research-analysis`：仅在用户明确要求研究方向判断时执行；当前保持暂停。
 
 ## 分阶段落地
 
@@ -41,4 +40,3 @@
 ## 当前推荐优先级
 
 `agent-paper-reader`（证据审查） → `paper-deep-reader-skill`（单篇精读） → `academic-research-agent-skill`（总流程 gates） → academic-research 集合中的 literature / strategy / feedback 子 skill。
-

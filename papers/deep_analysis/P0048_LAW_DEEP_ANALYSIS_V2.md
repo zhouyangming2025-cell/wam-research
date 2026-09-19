@@ -2,7 +2,7 @@
 
 > Paper: **LAW: Enhancing End-to-End Autonomous Driving with Latent World Model**  
 > Purpose: rebuild LAW from mechanism/evidence first principles and use every important design choice as an immediate cross-paper comparison trigger.  
-> Sources inspected: `papers/raw_md/P0048_LAW/P0048_LAW.raw.md`; `audits/literature/PHASE_B_WAVE2_INTERFACE_CODE_AUDIT.md`; `landscape/PHASE_B_WAVE2_SYNTHESIS.md`.  
+> Sources inspected: `papers/raw_md/P0048_LAW/P0048_LAW.raw.md`; `audits/literature/PHASE_B_WAVE2_INTERFACE_CODE_AUDIT.md`; `landscape/PHASE_B_WAVE2_COMPARABILITY_AUDIT.md`.  
 > Reading protocol: adapted from `skills/external/paper-deep-reader-skill/` + `skills/external/agent-paper-reader/`, extended with a WAM-specific **dimension-first cross-paper rule**.
 
 ---
@@ -611,7 +611,7 @@ This section is deliberately not a final comparison matrix; it records the quest
 
 # 8. Dimensions discovered or sharpened by LAW
 
-These are **provisional dimensions**, not ontology v1. They enter `landscape/WAM_DIMENSION_DISCOVERY_LOG.md` and may be split/merged after WoTE, Epona, WorldDrive and World4Drive.
+These are **provisional dimensions**, not route labels. They were consolidated into `landscape/WAM_DIMENSION_ONTOLOGY_V1.md`; the five-question review interface records the remaining deployment distinctions without creating a per-paper projection layer.
 
 ### A. World-state semantics
 What does the latent/world state represent, and what information is it optimized to preserve?

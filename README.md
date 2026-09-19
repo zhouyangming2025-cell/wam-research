@@ -22,6 +22,8 @@ SAFE-SIM and ProSim are complete; P0013 BridgeSim is next.
 
 固定 12 篇（Epona、DriveLaW、WorldDrive、WoTE、World4Drive、LAW、Drive-JEPA、SeerDrive、Metis、DynFlowDrive、Discrete-WAM、GraphWorld）是当前机制证据收口子任务：它用于核验跨论文技术路线，不取代更广的 field reconstruction，也不授权最终 taxonomy、研究问题或方法设计。
 
+固定 12 篇的唯一横向复核接口（仍属临时雏形）是 `audits/research_synthesis/WAM_PLANNING_INTERFACE_FRAMEWORK.md`。它只回答 Q1–Q5：未来计算位于哪里、未来对象是什么、是否前向进入动作链、承担什么角色、部署保留什么；完整证据仍回到 raw/deep/source 文件。
+
 ## 证据顺序
 
 ~~~
@@ -42,6 +44,8 @@ audits/literature/PHASE_C7_PROSIM_AUDIT.md
 ~~~
 
 ProSim 是 promptable closed-loop traffic behavior simulator：有共享 scene-token 反馈与生成代理之间的下一 chunk 反应，但没有 paired real intervention-response truth；发布默认配置也不证明完整 BPTT 或完整训练管线可复现。manifest 注册因 CSV 非 UTF-8 暂挂，见 manifests/P0067_PROSIM_REGISTRATION_PENDING.md。
+
+SAFE-SIM 的完整 raw Markdown 与图像也已恢复到 `papers/raw_md/P0066_SafeSim/`；只有 CSV 登记仍待本地编码安全复核，见 `manifests/P0066_SAFESIM_REGISTRATION_PENDING.md`。
 
 ## 当前清理规则
 

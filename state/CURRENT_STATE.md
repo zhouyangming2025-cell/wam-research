@@ -2,6 +2,8 @@
 
 > **2026-09-19 operational note.** Field Reconstruction, the normalized anchor set and Wave C.7 remain active. The fixed canonical-12 mechanism audit is closed as a consolidation gate; it does not authorize route conclusions or method design. SAFE-SIM and ProSim are now complete. Continue with state/NEXT_TASK.md.
 
+The only compact cross-paper review surface for that gate is `audits/research_synthesis/WAM_PLANNING_INTERFACE_FRAMEWORK.md` (Q1–Q5, provisional and non-authoritative). Do not create a second projection or matrix layer.
+
 Last substantive scientific update: **2026-09-19 — P0067 ProSim COMPLETE; 18 NORMALIZED ANCHORS; WAVE C.7 ACTIVE**
 
 ## Research north star

@@ -24,14 +24,15 @@ Research QA Gate: Waves 1–3 Priority-A verification CLOSED
 Canonical source artifacts:
 
 ```text
-landscape/PHASE_B_WAVE1_SYNTHESIS.md
 landscape/PHASE_B_WAVE1_COMPARABILITY_AUDIT.md
-landscape/PHASE_B_WAVE2_SYNTHESIS.md
 landscape/PHASE_B_WAVE2_COMPARABILITY_AUDIT.md
 audits/literature/PHASE_B_WAVE2_INTERFACE_CODE_AUDIT.md
-landscape/PHASE_B_WAVE3_CLOSEOUT.md
 audits/literature/RESEARCH_QA_GATE_CLOSEOUT.md
-landscape/PHASE_B_WAVE4_SYNTHESIS.md
+audits/literature/PHASE_B_WAVE3_AUTOJEPA_AUDIT.md
+audits/literature/PHASE_B_WAVE4_BENCH2DRIVE_HUGSIM_AUDIT.md
+audits/literature/PHASE_B_WAVE4_CAUSALDRIVE_AUDIT.md
+audits/literature/PHASE_B_WAVE4_ORION_AUDIT.md
+audits/literature/PHASE_B_WAVE4_REACTSIMBENCH_AUDIT.md
 ```
 
 This document reconstructs the field. It is **not** a gap claim and does not authorize method design.

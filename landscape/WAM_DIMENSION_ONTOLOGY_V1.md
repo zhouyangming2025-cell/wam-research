@@ -1,6 +1,6 @@
 # WAM_DIMENSION_ONTOLOGY_V1
 
-Last updated: 2026-09-15
+Last updated: 2026-09-19
 
 Status: **HISTORICAL CONSOLIDATED BASELINE — retains useful comparison dimensions, but is not current state or final route authority.**
 
@@ -28,9 +28,7 @@ papers/deep_analysis/P0045_WOTE_DEEP_ANALYSIS_V2.md
 papers/deep_analysis/P0001_EPONA_DEEP_ANALYSIS_V2.md
 papers/deep_analysis/P0042_WORLDDRIVE_DEEP_ANALYSIS_V2.md
 papers/deep_analysis/P0046_WORLD4DRIVE_DEEP_ANALYSIS_V2.md
-landscape/WAM_DIMENSION_DISCOVERY_LOG.md
-landscape/WAM_DIMENSION_DISCOVERY_ADDENDUM_EPONA_WORLDDRIVE.md
-landscape/WAM_DIMENSION_DISCOVERY_ADDENDUM_WORLD4DRIVE.md
+audits/research_synthesis/WAM_PLANNING_INTERFACE_FRAMEWORK.md (provisional five-question review surface)
 ```
 
 ---
@@ -614,15 +612,13 @@ Do not silently change the meaning of an existing ID.
 
 # 8. Immediate use
 
-Next artifact:
+Current use:
 
 ```text
-landscape/WAM_COMPARISON_MATRIX_V1.md
+audits/research_synthesis/WAM_PLANNING_INTERFACE_FRAMEWORK.md
 ```
 
-The matrix must project LAW / WoTE / Epona / WorldDrive / World4Drive across the stable IDs above, grouped by family rather than as one unreadable 80-column table.
-
-After that, resume new core-WAM anchors. Every new anchor must be projected into Ontology V1 and may only extend it through the extension rule above.
+The five-question file is a provisional review interface over the raw/deep/source evidence. It does not replace this historical coordinate baseline, authorize a route taxonomy, or require a separate matrix/projection for each paper. New anchors remain in their deep analysis; any residue must pass the back-projection rule above before this baseline is amended.
 
 ---
 

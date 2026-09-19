@@ -11,9 +11,7 @@ Detailed census passes:
 - `landscape/CENSUS_PHASE_A_ROUND1.md`
 - `landscape/CENSUS_PHASE_A_ROUND2.md`
 
-Final Phase-B anchor set:
-
-- `landscape/PHASE_B_ANCHORS.md`
+The former Phase-B anchor set is historical; current anchor authority is the normalized list in `state/CURRENT_STATE.md`.
 
 ## 1. Field boundary
 
@@ -347,11 +345,9 @@ Method design: CLOSED
 Phase B anchor deep reads: AUTHORIZED
 ```
 
-Final anchor set and redundancy rationale:
+Final anchor set and redundancy rationale are superseded by the normalized list in `state/CURRENT_STATE.md`.
 
-`landscape/PHASE_B_ANCHORS.md`
-
-## 7. Phase-B entry point
+## 7. Historical Phase-B entry point
 
 Start with **Wave 1**:
 

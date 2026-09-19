@@ -2,7 +2,7 @@
 
 > Paper: **End-to-End Driving with Online Trajectory Evaluation via BEV World Model**  
 > Purpose: pressure-test the LAW-derived dimensions and discover decision-level WAM dimensions that only become visible once future prediction is consumed online.  
-> Sources inspected: `papers/raw_md/P0045_WoTE/P0045_WoTE.raw.md`; `audits/literature/PHASE_B_WAVE2_INTERFACE_CODE_AUDIT.md`; `landscape/PHASE_B_WAVE2_SYNTHESIS.md`.  
+> Sources inspected: `papers/raw_md/P0045_WoTE/P0045_WoTE.raw.md`; `audits/literature/PHASE_B_WAVE2_INTERFACE_CODE_AUDIT.md`; `landscape/PHASE_B_WAVE2_COMPARABILITY_AUDIT.md`.  
 > Reading protocol: `paper-deep-reader` + evidence-gate ideas from `agent-paper-reader`, extended by the project's dimension-first cross-paper rule.
 
 ---

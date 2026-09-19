@@ -1,6 +1,6 @@
 # P0066 SAFE-SIM — Manifest Registration Pending
 
-Last updated: 2026-09-16
+Last updated: 2026-09-19
 
 Status: **STABLE ID RESERVED + SCIENTIFIC NORMALIZATION COMPLETE; CANONICAL CSV REGISTRATION PENDING LOCAL RECONCILIATION**
 
@@ -39,6 +39,8 @@ Local corpus agent action:
 Current in-repo source layer:
 
 ```text
+papers/raw_md/P0066_SafeSim/P0066_SafeSim.raw.md
+papers/raw_md/P0066_SafeSim/images/
 papers/raw_md/P0066_SafeSim/P0066_SafeSim.source_note.md
 ```
 
@@ -49,7 +51,6 @@ papers/deep_analysis/P0066_SAFESIM_DEEP_ANALYSIS_V2.md
 audits/literature/P0066_SAFESIM_SOURCE_CODE_AUDIT.md
 audits/literature/PHASE_C7_SAFESIM_AUDIT.md
 A–P normalized fields retained in the SAFE-SIM deep analysis; no separate projection artifact is canonical.
-landscape/WAM_COMPARISON_MATRIX_V1.md (historical comparison snapshot; no per-paper extension is canonical)
 ```
 
 Official source status:
@@ -58,5 +59,5 @@ Official source status:
 paper verified
 official code verified
 code ref pinned at 27c96a84e7bf5fbca4b47f6edde386811d76c6e7
-full local raw-MD extraction pending normal corpus-agent ingestion
+full local raw-MD extraction present; CSV registration remains pending local reconciliation
 ```

@@ -1,64 +1,91 @@
-# WAM Planning Interface Framework
+# Provisional WAM Five-Question Review Interface
 
-## Purpose
+Status: **PROVISIONAL REVIEW INTERFACE — not a route taxonomy, ontology authority, or method-design license**
 
-This document defines a cross-paper analysis framework for world-model-based autonomous driving planning. The goal is not to summarize papers by their own section structure, but to analyze where future modeling is placed inside the planning system.
+Last updated: **2026-09-19**
 
-## Central Question
+## Why this file exists
 
-The key question is:
+The canonical-12 audit needs one compact cross-paper review surface. This file replaces the old generic five-dimension framework with the five questions that survived the LAW → Epona → DriveLaW → WoTE → World4Drive → WorldDrive pilot and the canonical-12 pressure test.
 
-> Why does a method predict the future, and where does that future enter the planning loop?
+It is an interface over existing evidence, not a new per-paper projection layer. The evidence chain remains:
 
-A unified abstraction is:
+```text
+papers/raw_md/<paper>/
+        → papers/deep_analysis/<paper>_DEEP_ANALYSIS_V2.md
+        → audits/literature/<paper-or-phase>_AUDIT.md (when source/version evidence matters)
+        → this compact review surface
+```
 
-`Current World + Action -> Future World Representation -> Planning`
+Do not read a row below as a final route label. Read it together with the linked deep analysis, the source/code boundary, and the paper's core bridge.
 
-## Dimension 1: World Model Role
+## Fixed questions
 
-| Method type | Role |
-|---|---|
-| Future as training signal | Future prediction improves representation/planner learning |
-| Future as evaluator | Future prediction scores candidate decisions |
-| Future as generator | Future generation models possible world evolution |
-| Future as decision representation | Future-aware latent becomes planning state |
+| Question | Record only | Do not silently infer |
+|---|---|---|
+| **Q1. Where is future-related computation?** | Module, branch, interface, or process location. | Whether it survives deployment. |
+| **Q2. What is the future object/target/intermediate representation?** | Prediction target, future-generation process, or intermediate representation. | A physical future state when the paper only exposes a latent/process target. |
+| **Q3. Does the future-related signal enter the forward action chain?** | Whether action generation or candidate selection consumes it. | Deployment use merely because a training branch exists. |
+| **Q4. What role does the future mechanism play?** | Training shaping, online single-path conditioning, candidate consequence evaluation/selection, world–planner refinement, or another evidence-backed role. | That all online use is candidate evaluation. |
+| **Q5. What remains at deployment?** | Retained, bypassed, or removed modules/modes and future computation. | One paper having one answer when modes or paper/release artifacts differ. |
 
-## Dimension 2: Planner Relationship
+Every answer must preserve `PAPER FACT`, `CODE FACT`, `OUR INFERENCE`, `UNKNOWN`, `NOT REPORTED`, and `EVIDENCE BOUNDARY` when applicable. In particular, a generated response is not paired real intervention truth, and a future latent is not automatically a world state.
 
-Important distinction:
+## Canonical-12 compact projection
 
-- Training-only world model: future prediction affects gradients but not inference.
-- Decision-time world model: future prediction directly influences action selection.
+The table is deliberately compressed. The full mechanism, bridge, provenance, and uncertainty remain in each deep analysis.
 
-## Dimension 3: Action Role
+| ID / paper | Q1–Q2: location → future object | Q3–Q5: action-chain use → role → deployment remainder |
+|---|---|---|
+| **P0048 LAW** | Training action-conditioned future-latent branch → waypoint-conditioned future visual latent. | **No** → training-only action-aware representation shaping → waypoint/trajectory path remains; future output is not consumed. |
+| **P0001 Epona** | Shared spatiotemporal representation with TrajDiT/VisDiT branches → future ego trajectory and next-frame visual latent/frame. | No evidence that visual rollout feeds planning → joint training plus mode-specific single-path generation → planning can bypass VisDiT; rollout mode retains it. |
+| **P0009 DriveLaW** | Video-DiT denoising and video-to-action hidden-state interface → intermediate video hidden representation. | **Yes, single path** → hidden-state conditioning of Action-DiT, not candidate feedback → partial Video-DiT hidden computation plus Action-DiT; full RGB generation is not required. |
+| **P0045 WoTE** | Candidate-conditioned recurrent BEV rollout between candidate action and reward model → multi-step candidate BEV states/actions. | **Yes, candidate selection** → online candidate consequence scoring → candidate generator/refiner, recurrent rollout, reward model, resolver. Surrounding-agent future is not established as reactive in the audited path. |
+| **P0046 World4Drive** | Candidate future-query/world-model branch and ScoreNet → fixed-time candidate future latent. | **Yes, candidate selection** → factual-future consistency/mode matching → candidate generator, predictor, ScoreNet, resolver; factual future target is unavailable. |
+| **P0042 WorldDrive** | Training TA-DWM teacher and deployment FAR surrogate → teacher future latent/scene representation, then candidate-conditioned surrogate. | **Yes, candidate selection** → teacher-to-surrogate distillation and future-aware reward → planner/FAR/surrogate/reward/resolver remain; heavy teacher is off. |
+| **P0061 SeerDrive** | Paper: BEV world model ↔ future-aware planner; release: WoTE-like reward path → paper future BEV/future ego feature; release reward-related representation. | Paper: yes, iterative feedback; release: yes, evaluator path → paper world–planner co-refinement; release variant is not the paper loop → preserve artifact/version split; do not conflate them. |
+| **P0049 Drive-JEPA** | Masked video-latent pretraining branch → masked spatiotemporal latent target, not confirmed chronological physical future. | **No** → predictive representation pretraining plus simulator-distilled proposal utility → encoder/proposal scorer remains; JEPA predictor is off-line. |
+| **P0012 DA-WAM** | Training future-video expert ↔ action expert token interface → action-conditioned future-video latent tokens (logged factual future). | **No direct future read at inference** → asymmetric world-loss-shaped action policy; gradients, not future evaluation, couple them → action expert/denoising remains; future-video path is bypassed. |
+| **P0063 DynFlowDrive** | Training candidate-conditioned flow world model and stability criterion → latent endpoint/flow path for a factual next-step target; flow time is not physical time. | **No at deployment** → world-derived candidate-label/selector teacher → candidates + learned score head + argmax remain; world model/future latent are off. |
+| **P0064 Discrete-WAM** | Shared Transformer world/world-policy token editing and separate decision/action editing → future visual tokens, future action tokens, decision tokens. | Mandatory planning path does not require future visual generation/scorer → multi-task pretraining plus hierarchical action-token editing → decision/action editing and decoding remain; future visual mode is optional. |
+| **P0065 GraphWorld** | ECIG/GRU interaction encoder and flow-refined world-state branch → current structured `W_cur`, future-oriented `W_tgt`, refined latent. | **Yes, state-conditioned planning** → online structured world-state modulation, not candidate-specific resolver → ECIG/history/map state, short refinement, residual/importance modulation, planning heads. |
 
-Trajectory may be:
+## What the projection does and does not separate
 
-1. output of planner;
-2. condition of world model;
-3. candidate variable evaluated by world model;
-4. part of joint future generation.
+It reliably separates:
 
-## Dimension 4: Future Supervision
+1. training-only future supervision from deployment-time consumption;
+2. single-path conditioning, structured-state modulation, candidate selection, and iterative world–planner feedback;
+3. factual logged targets, simulator/teacher-derived signals, and unresolved intervention truth;
+4. paper/release or mode-dependent deployment boundaries.
 
-Important audit questions:
+It does **not** by itself supply a final technical route. In particular:
 
-- What is the future target?
-- Is it RGB, BEV, latent representation, trajectory, or reward-related state?
-- Is the supervision observational or counterfactual?
+```text
+World4Drive / WorldDrive / WoTE
+  share a candidate → future representation → score/select terminal shape,
+  but not the same future semantics or supervision.
 
-## Dimension 5: Main Research Bottleneck
+LAW / DA-WAM / DynFlowDrive
+  can all look training-only at Q3,
+  but their indispensable training bridges are different.
 
-The key unresolved problem is not future prediction alone:
+DriveLaW / GraphWorld / SeerDrive
+  all expose online future-related computation,
+  but hidden conditioning, structured-state modulation,
+  and world–planner refinement are not interchangeable.
+```
 
-`P(Future | History)`
+The deletion test therefore remains local to each deep analysis: remove the claimed bridge and ask whether the paper is still the same method. A row may be revised only when the underlying raw text or pinned source audit changes.
 
-but:
+## Reading order
 
-`P(Future | History, Candidate Action)`
+```text
+state/CURRENT_STATE.md
+→ state/NEXT_TASK.md
+→ this interface for the five-question cross-paper scan
+→ the relevant raw Markdown
+→ the relevant deep analysis and source/code audit
+```
 
-because autonomous driving requires evaluating alternative futures.
-
-## Final Analysis Principle
-
-Future prediction should be evaluated by its position in the decision pipeline, not only by the prediction modality.
+Five-question status: **PASS-WITH-BOUNDARY**. It is a review interface and a useful embryo for later route reconstruction; it is not the route itself.

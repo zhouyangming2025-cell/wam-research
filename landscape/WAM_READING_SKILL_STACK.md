@@ -1,6 +1,6 @@
 # WAM Reading Skill Stack
 
-Last updated: 2026-09-15
+Last updated: 2026-09-19
 
 Status: **ACTIVE WAM-NATIVE METHOD CONTRACT**
 
@@ -10,7 +10,7 @@ Purpose: convert the external reference skills under `skills/external/` into a c
 
 # 1. Governing principle
 
-External skills are **method references**, not canonical scientific authority.
+External skills are **method references**, not canonical scientific authority. The working tree keeps only four bundles that directly support paper reading or evidence control: `paper-deep-reader-skill`, `academic-research-agent-skill`, `literature-reading-and-synthesis`, and `agent-paper-reader`. Generic writing, grant, career, visualization, mentoring, feedback, publishing, and project-design snapshots were removed from the active tree because they are not part of the current evidence chain.
 
 Use them selectively:
 
@@ -333,7 +333,7 @@ DEFAULT ON:
 paper-deep-reader
 academic-research-agent source/claim gate
 literature-reading-and-synthesis
-WAM Ontology / Matrix
+WAM Ontology baseline + provisional five-question review interface
 
 CONDITIONAL:
 source-code audit when a decision-critical ambiguity exists

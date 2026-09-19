@@ -17,9 +17,8 @@ LAW
 
 Purpose: determine how strongly each paper supports the claim that **future/world modeling itself** improves planning, rather than a competing mechanism such as reward design, state representation, pretraining initialization, candidate scoring, or benchmark choice.
 
-This audit supplements:
+This audit is the retained matched-evidence record for Wave 2. The former narrative synthesis was retired after its evidence was consolidated here, together with:
 
-- `landscape/PHASE_B_WAVE2_SYNTHESIS.md`
 - `audits/literature/PHASE_B_WAVE2_INTERFACE_CODE_AUDIT.md`
 
 ---

@@ -6,12 +6,13 @@ Status: **CLOSED — Wave 4 AUTHORIZED**
 
 Purpose: close the post-Wave-3 evidence-reliability gate before expanding into closed-loop / simulation-realism / VLA / reactivity anchors.
 
-Canonical detailed records:
+Canonical detailed record:
 
 ```text
 audits/literature/RESEARCH_QA_GATE_WAVES1_3.md
-audits/literature/RESEARCH_QA_PRIORITY_A_PROGRESS.md
 ```
+
+The former Priority-A progress snapshot was a one-time working log; its claim verdicts are retained in this closeout and the detailed register, so it is not a second entry point.
 
 ## 1. Gate verdict
 

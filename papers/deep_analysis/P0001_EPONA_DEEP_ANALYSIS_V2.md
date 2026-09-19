@@ -690,7 +690,7 @@ This table demonstrates why a single category such as `world-model-assisted plan
 
 # 14. Dimensions Epona adds or sharpens
 
-The following should be merged into `WAM_DIMENSION_DISCOVERY_LOG.md` after this read.
+The following were treated as residue candidates during this read and are now consolidated in `landscape/WAM_DIMENSION_ONTOLOGY_V1.md`; they are not a separate projection artifact.
 
 ## New dimensions
 

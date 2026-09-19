@@ -951,7 +951,7 @@ Next step must be:
 ```text
 merge/split all provisional dimensions
 → WAM_DIMENSION_ONTOLOGY_V1.md
-→ WAM_COMPARISON_MATRIX_V1.md
+→ audits/research_synthesis/WAM_PLANNING_INTERFACE_FRAMEWORK.md (provisional five-question review)
 ```
 
 Do not resume new-paper acquisition before this synthesis is complete.
