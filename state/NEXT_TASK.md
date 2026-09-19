@@ -1,33 +1,269 @@
 # NEXT_TASK
 
-## 唯一下一任务
+## 当前清理闸门
 
-> **完成“删除前证据复核”：对当前已删/拟删的派生文档逐条比对其 Git 历史、raw paper、source/code audit、deep analysis 与现存主文档，判定其独有内容是否已有存活来源。**
+> **在开始 ProSim 前，完成对已删/拟删派生文档的证据复核：每一项独有事实必须能定位到存活的 raw paper、source/code audit、deep analysis 或经核验的主文档。没有完成此复核，不再删除派生材料。**
 
-这是一道清理闸门，不是新一轮总结，也不创建新文件、分支、taxonomy 或路线标签。
+这项闸门只收口冗余，不改变 Field Reconstruction、17 anchors、Wave C.7 或 ProSim 的科学优先级。
 
-## 工作顺序
+## 闸门后唯一下一任务
 
-1. 复核已删除的 12 份 matrix extension 与 3 份 ontology amendment：将其中的每个独有事实分成“已在存活证据层出现 / 只在派生快照出现 / 仅为历史推断”。
-2. 对只在派生快照出现、但有明确原文或代码定位的事实，原位补入对应既有 deep analysis 或 source audit；无定位的历史推断不提升为事实。
-3. 审计 `papers/cards/`、早期 route / map / output 文档：先区分独有证据、可复用方法、纯重复摘要、已暂停猜想，再决定保留、归档或删除。
-4. 只有上述复核完成后，才继续逐篇核验固定 12 篇，并最终原位修订唯一的比较基线。
+> **Verify, ingest and deep-read P0067 ProSim as the second Wave C.7 reactive-simulation control. Keep research-direction convergence paused.**
 
-## 禁止事项
+Canonical expansion plan:
 
 ```text
-不得继续删除派生文档，直到该文件的独有事实已完成来源核对；
-不得以 git 历史可恢复为由跳过价值判断；
-不得把历史分支的 READY / STABLE / normative 写成当前结论；
-不得将 12 篇审计取代 Field Reconstruction 或取消 ProSim 队列；
-不得开始研究问题或方法设计。
+landscape/WAM_DEEP_READ_EXPANSION_QUEUE_V1.md
 ```
 
-## 完成条件
+Current phase:
 
 ```text
-每一项删除都有可追溯的证据处置记录；
-当前 main 的单一入口、主程序和子任务不冲突；
-剩余的派生材料均有明确用途，或已被取消当前权威；
-随后恢复 P0067 ProSim 的 source gate 与深读。
+broad WAM literature expansion     ACTIVE
+Wave C.6                           CLOSED
+Wave C.7                           ACTIVE
+research-direction convergence     PAUSED
+candidate-problem promotion        PAUSED
+method design                      FORBIDDEN
 ```
+
+Current normalized count:
+
+```text
+17 anchors complete
+SAFE-SIM COMPLETE
+ProSim NEXT / NOT YET NORMALIZED
+```
+
+---
+
+# Why ProSim is next
+
+SAFE-SIM established one strong form of reactivity:
+
+```text
+external ego planner
+→ current ego plan enters learned agent generator/guidance
+→ surrounding trajectories regenerate
+→ physical environment advances
+→ ego and agents replan
+```
+
+But SAFE-SIM is safety-critical and explicitly adversarial. One paper is not enough to infer the general structure of reactive learned simulators.
+
+ProSim is selected as an independent control because it emphasizes:
+
+```text
+promptable / controllable multi-agent closed-loop simulation
+```
+
+rather than primarily planner-specific collision generation.
+
+Primary comparison:
+
+```text
+SAFE-SIM
+= planner-conditioned adversarial reactive simulation
+
+ProSim
+= promptable interactive traffic simulation
+```
+
+The central question is:
+
+> Which parts of SAFE-SIM's feedback/reactivity topology are generic to learned closed-loop traffic simulation, and which are artifacts of its adversarial guidance design?
+
+---
+
+# Pre-read source gate — mandatory
+
+Before normalization:
+
+```text
+1. verify canonical ProSim paper/version/venue
+2. identify attributable official project/code repository
+3. pin source version/commit if code exists
+4. create papers/raw_md/P0067_ProSim/ readable source note/layer
+5. attempt canonical manifest registration; if connector/encoding blocks safe mutation, record an explicit pending note rather than corrupting the manifest
+```
+
+---
+
+# Mandatory reconstruction
+
+## 1. Simulator state / representation
+
+Answer exactly:
+
+```text
+what is the current scene representation?
+what agent/map/history context is encoded?
+what does each generated token / trajectory / action represent?
+```
+
+## 2. Prompt semantics
+
+Separate all prompt/control types:
+
+```text
+agent motion prompt
+route / waypoint prompt
+goal / destination
+text / semantic prompt if any
+scene-level constraint
+interaction condition
+```
+
+For each ask:
+
+```text
+training-time or inference-time?
+hard condition or soft guidance?
+per-agent or scene-level?
+```
+
+## 3. Closed-loop feedback graph
+
+Force-fill:
+
+```text
+F_e = ego-state / dynamics feedback
+F_s = sensor / viewpoint feedback
+F_a = surrounding-agent state feedback
+F_b = surrounding-agent behavioral-response feedback
+```
+
+Reconstruct one full loop and identify which actors replan after the environment changes.
+
+## 4. Joint interaction modeling
+
+Determine whether ProSim:
+
+```text
+predicts agents independently
+predicts agents jointly
+uses autoregressive inter-agent conditioning
+uses scene-level latent/token interaction
+```
+
+and whether changing ego behavior can change surrounding behavior within the deployed simulator.
+
+## 5. Training truth
+
+Separate:
+
+```text
+logged factual behavior supervision
+prompt augmentation / synthetic conditions
+alternative-action supervision
+reactive intervention-response truth
+```
+
+Do not call model-generated response `counterfactual ground truth`.
+
+## 6. Inference-time generation
+
+Trace:
+
+```text
+current scene
+→ prompt / conditioning
+→ future/action generation
+→ action execution
+→ scene update
+→ regeneration
+```
+
+Separate model decoding/autoregression coordinates from physical simulation time.
+
+## 7. Evaluation
+
+Separate:
+
+```text
+open-loop prediction quality
+closed-loop behavior realism
+collision/off-road validity
+interaction metrics
+prompt controllability
+planner-evaluation usefulness
+```
+
+Identify whether ProSim validates reactions to changed ego behavior or only aggregate rollout distributions.
+
+## 8. Immediate cross-paper comparison
+
+Mandatory:
+
+```text
+ProSim vs SAFE-SIM
+ProSim vs RiskWorld
+ProSim vs SafeDrive
+ProSim vs WoTE / DA-WAM
+ProSim vs BridgeSim / ReactSimBench where evidence allows
+```
+
+## 9. Full Ontology V1.3 projection
+
+Force-fill A–P.
+
+Residue watch:
+
+```text
+Does prompt-conditioned multi-agent simulation expose a new dimension beyond existing action provenance, feedback, reactivity and truth-source axes?
+```
+
+Do not create V1.4 unless a genuine irreducible residue survives back-projection.
+
+---
+
+# Required artifacts
+
+```text
+papers/deep_analysis/P0067_PROSIM_DEEP_ANALYSIS_V2.md
+audits/literature/PHASE_C7_PROSIM_AUDIT.md
+landscape/P0067_PROSIM_ONTOLOGY_PROJECTION.md
+landscape/WAM_COMPARISON_MATRIX_V1_3_PROSIM_EXTENSION.md
+```
+
+If official source is usable, also create:
+
+```text
+audits/literature/P0067_PROSIM_SOURCE_CODE_AUDIT.md
+```
+
+---
+
+# Stop condition
+
+ProSim is complete only when:
+
+```text
+source/version gate resolved
++
+prompt/control semantics explicit
++
+closed-loop feedback graph explicit
++
+interaction/reactivity mechanism explicit
++
+truth-source boundary explicit
++
+strongest matched evidence and limitations explicit
++
+full A–P ontology projection complete
++
+comparison against SAFE-SIM complete
+```
+
+Then advance to:
+
+```text
+P0013 BridgeSim
+```
+
+---
+
+# Guardrail
+
+Continue field reconstruction. Do not reopen research-direction convergence after ProSim.
