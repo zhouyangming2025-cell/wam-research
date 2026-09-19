@@ -5,7 +5,7 @@
 ```text
 接管 GitHub 仓库 zhouyangming2025-cell/wam-research。
 
-不要从聊天记忆、START_HERE、LATEST handoff、旧 taxonomy、旧路线图或状态标题推断当前任务。
+不要从聊天记忆、旧 taxonomy、旧路线图、历史 handoff 或状态标题推断当前任务。
 
 只按顺序读取：
 1. README.md
