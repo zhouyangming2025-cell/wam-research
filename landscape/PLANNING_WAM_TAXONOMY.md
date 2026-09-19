@@ -1,5 +1,7 @@
 # PLANNING_WAM_TAXONOMY
 
+Status: **HISTORICAL FIELD-PLACEMENT TAXONOMY — retained for census provenance; not current state or final route authority.**
+
 Last updated: 2026-09-14
 
 Purpose: provide a neutral coordinate system for understanding planning-centric driving world models before gap hunting.

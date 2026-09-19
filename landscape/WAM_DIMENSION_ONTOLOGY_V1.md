@@ -423,7 +423,8 @@ This family is one of the main products of the five-anchor synthesis.
 
 # 4. Canonical five-anchor mechanism profiles
 
-These are not substitutes for the detailed matrix; they provide a sanity check for the ontology.
+These are not substitutes for the underlying deep analyses and source audits; they provide a
+sanity check for the ontology.
 
 ## LAW
 

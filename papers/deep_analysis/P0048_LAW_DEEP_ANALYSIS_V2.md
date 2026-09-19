@@ -2,7 +2,7 @@
 
 > Paper: **LAW: Enhancing End-to-End Autonomous Driving with Latent World Model**  
 > Purpose: rebuild LAW from mechanism/evidence first principles and use every important design choice as an immediate cross-paper comparison trigger.  
-> Sources inspected: `papers/raw_md/P0048_LAW/P0048_LAW.raw.md`; `audits/literature/PHASE_B_WAVE2_INTERFACE_CODE_AUDIT.md`; `landscape/PHASE_B_WAVE2_COMPARABILITY_AUDIT.md`.  
+> Sources inspected: `papers/raw_md/P0048_LAW/P0048_LAW.raw.md`; `audits/literature/PHASE_B_WAVE2_INTERFACE_CODE_AUDIT.md`; `landscape/PHASE_B_WAVE2_COMPARABILITY_AUDIT.md`.
 > Reading protocol: adapted from `skills/external/paper-deep-reader-skill/` + `skills/external/agent-paper-reader/`, extended with a WAM-specific **dimension-first cross-paper rule**.
 
 ---

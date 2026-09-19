@@ -1,5 +1,8 @@
 # BATCH_0A_METADATA_REPORT
 
+Status: **HISTORICAL INGEST PROVENANCE — the paper-card target mentioned below was never a
+scientific evidence layer and is retired from the current tree.**
+
 Scope: Batch 0A = Ledger entries 1–12 (Epona … DA-WAM).
 Objective of this batch: metadata resolution + dedup + Paper ID allocation ONLY.
 **No PDF was downloaded. No file was moved. No upstream asset was modified.**

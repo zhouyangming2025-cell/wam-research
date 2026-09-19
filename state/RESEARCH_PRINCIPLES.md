@@ -45,9 +45,13 @@ Canonical reconstruction plan:
 
 `landscape/FIELD_RECONSTRUCTION_PLAN.md`
 
-Canonical taxonomy:
+Historical field-placement taxonomy (retained for census provenance; not current state or route authority):
 
 `landscape/PLANNING_WAM_TAXONOMY.md`
+
+The retained comparison coordinate baseline is `landscape/WAM_DIMENSION_ONTOLOGY_V1.md`; the
+only compact cross-paper review surface is the provisional Q1–Q5 interface named in
+`state/CURRENT_STATE.md`.
 
 ## 3. Prior expertise is an asset, not a destination
 

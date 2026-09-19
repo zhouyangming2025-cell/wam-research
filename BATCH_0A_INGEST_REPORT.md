@@ -1,5 +1,8 @@
 # BATCH 0A INGEST REPORT
 
+Status: **HISTORICAL INGEST PROVENANCE — any paper-card references below describe the old
+pipeline only; the card layer is retired and is not a current entry or evidence surface.**
+
 **Scope executed**: Batch 0A only — `P0001`–`P0012` (12 papers).
 **Pipeline stages**: Step 4 canonical PDF acquisition → Step 5–7 MinerU raw MD → Step 8 provenance reconciliation.
 **Date**: 2026-09-13.
