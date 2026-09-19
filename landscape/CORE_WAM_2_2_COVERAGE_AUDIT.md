@@ -2,7 +2,7 @@
 
 Last updated: 2026-09-15
 
-Status: **CORE DEEP READS ACTIVE — through Discrete-WAM COMPLETE; GraphWorld NEXT**
+Status: **HISTORICAL COVERAGE CHECKPOINT — superseded by current state and 12-paper consolidation.**
 
 ## Scope
 
