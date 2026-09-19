@@ -281,20 +281,15 @@ Do not optimize the reading list to prove or kill P2-R. The field reconstruction
 
 ## 16. Research-state authority
 
-Scientific decisions live in this repo, especially:
+The live operational order is deliberately small:
 
 ```text
-START_HERE.md
+README.md
 state/CURRENT_STATE.md
-state/DECISION_LOG.md
 state/NEXT_TASK.md
-state/RESEARCH_LEDGER.md
-state/RESEARCH_PRINCIPLES.md
-landscape/
-hypotheses/
-audits/
-papers/cards/
-handoff/LATEST.md
+manifests/CORPUS_MANIFEST.csv
 ```
+
+Use deep analyses, raw MD, source audits and historical records only when the live task requires them. \`DECISION_LOG\`, \`RESEARCH_LEDGER\`, \`landscape/\`, \`hypotheses/\`, \`audits/\` and \`papers/cards/\` retain evidence or history; none overrides the live state above.
 
 Conversation summaries are temporary. The repo is canonical.
