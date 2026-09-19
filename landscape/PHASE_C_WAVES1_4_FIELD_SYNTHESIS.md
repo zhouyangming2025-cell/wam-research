@@ -2,7 +2,7 @@
 
 Last updated: 2026-09-14
 
-Status: **PHASE-C FIRST-PASS COMPLETE — READY FOR PROBLEM-DISCOVERY GATE**
+Status: **HISTORICAL PHASE-C SYNTHESIS — problem discovery remains paused; retain comparative evidence only.**
 
 Scope:
 
