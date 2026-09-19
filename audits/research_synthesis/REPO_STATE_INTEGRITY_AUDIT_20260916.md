@@ -180,8 +180,9 @@ P0007 DriveReward has now completed the required C.6 normalization bundle:
 ```text
 papers/deep_analysis/P0007_DRIVEREWARD_DEEP_ANALYSIS_V2.md
 audits/literature/PHASE_C6_DRIVEREWARD_AUDIT.md
-landscape/P0007_DRIVEREWARD_ONTOLOGY_PROJECTION.md
-landscape/WAM_COMPARISON_MATRIX_V1_3_DRIVEREWARD_EXTENSION.md
+papers/deep_analysis/P0007_DRIVEREWARD_DEEP_ANALYSIS_V2.md
+audits/literature/PHASE_C6_DRIVEREWARD_AUDIT.md
+(The derived projection and matrix extension were later removed after evidence consolidation.)
 ```
 
 Active normalized count:
