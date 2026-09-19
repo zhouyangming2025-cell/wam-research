@@ -2,7 +2,7 @@
 
 Last updated: 2026-09-14
 
-Status: **ACTIVE — Wave 3 authorized after Wave-2 closeout**
+Status: **HISTORICAL WAVE-3 PLAN — retained for method-comparison provenance; no longer authorizes work.**
 
 Wave 3 anchors:
 
