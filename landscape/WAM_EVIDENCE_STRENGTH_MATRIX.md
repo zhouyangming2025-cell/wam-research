@@ -2,7 +2,7 @@
 
 Last updated: 2026-09-15
 
-Status: **ELEVEN-ANCHOR EVIDENCE QA**
+Status: **HISTORICAL ELEVEN-ANCHOR EVIDENCE QA — retained for evidence; not current 12-paper authority. DriveLaW and later additions are outside this snapshot.**
 
 Purpose: separate scientific evidence strength from source-code availability and from headline benchmark performance.
 
