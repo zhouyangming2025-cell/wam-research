@@ -6,6 +6,32 @@ Newest entry first.
 
 > Integrity note — 2026-09-15: this file had been accidentally truncated during an earlier update. The recoverable project decisions below have been restored conservatively from the project state/history. When a later decision supersedes an earlier one, both are retained and explicitly marked rather than deleting history.
 
+## 2026-09-19 — Non-main branch audit closed; main remains sole working entry
+
+**Decision**
+
+All 15 non-`main` remote refs were audited against `origin/main` at the cleanup head. `codex/preserve-research-foundation` is tree-identical to `main`; the other 14 refs are pre-cleanup historical snapshots. Their 445 branch-only paths are dominated by repeated retired layers rather than missing primary evidence:
+
+```text
+skills/                  generic/external skill snapshots
+research_program/        census, ontology-regression, blind-test and process layers
+outputs/                 provisional mechanism/route compression layer
+landscape/               superseded projections and matrices
+handoff/, templates      process/navigation artifacts
+scripts/                 retired card/handoff generators
+```
+
+**Value decisions**
+
+1. `codex/canonical12-mechanism-reconstruction` contains a useful but explicitly provisional reconstruction: scoped artifacts, deployment/training lifecycle, candidate identity, paper/release boundaries, and collision tests. Its route compression remains `RECONSTRUCTED-BUT-NOT-NORMATIVE`; human acceptance and an unseen-paper test were pending. It is **not** restored as a route-map layer. The reusable guardrails were merged in place into `audits/research_synthesis/WAM_PLANNING_INTERFACE_FRAMEWORK.md`.
+2. `codex/pilot-quarantine-law-epona-drivelaw` contains the full-12 Chinese Q1–Q5 review brief and source-first records. They duplicate the current compact Q1–Q5 interface and the 12 deep analyses; no second review surface was merged.
+3. The seven branch-only `papers/raw_md/*/*.pdftext.md` files are alternate Poppler extractions for non-canonical papers. The current `.raw.md` files already provide the canonical text layer and audited mechanism sections; no missing evidence justified retaining a duplicate extraction.
+4. Repeated ontology, matrix, card, handoff, template and generic-skill material remains historical. No raw paper, source/code audit, independent deep analysis, manifest, experiment log, or decision history was deleted in this audit.
+
+**Operating boundary**
+
+`main` remains the sole working branch and sole compact entry path. Non-`main` refs are retained as recovery history, not parallel workspaces; this audit does not revive their provisional route conclusions or create a new branch/layer.
+
 ---
 
 ## 2026-09-15 — DynFlowDrive normalized; flow transport separated from physical time; Ontology V1.3 authorized
