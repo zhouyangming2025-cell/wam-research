@@ -15,7 +15,7 @@ Your task is **source completeness and paper-text completeness only**. Do not re
 Before acting, read:
 
 ```text
-START_HERE.md
+README.md
 state/CURRENT_STATE.md
 state/NEXT_TASK.md
 state/RESEARCH_PRINCIPLES.md
@@ -48,19 +48,21 @@ Canonical PDFs also remain local/NAS only and must not be committed.
 
 ---
 
-# Scope: current ten anchors
+# Scope: current canonical 12 anchors
 
 ```text
-P0048 LAW
-P0045 WoTE
 P0001 Epona
+P0009 DriveLaW
 P0042 WorldDrive
+P0045 WoTE
 P0046 World4Drive
-P0061 SeerDrive
+P0048 LAW
 P0049 Drive-JEPA
+P0061 SeerDrive
 P0062 Metis
 P0063 DynFlowDrive
 P0064 Discrete-WAM
+P0065 GraphWorld
 ```
 
 ---
