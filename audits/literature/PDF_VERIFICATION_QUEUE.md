@@ -2,7 +2,7 @@
 
 Last updated: 2026-09-14
 
-Status: **ACTIVE — targeted verification only**
+Status: **CONDITIONAL EVIDENCE QUEUE — execute only when a listed numeric/detail claim is reused; not a current research direction.**
 
 Principle:
 
