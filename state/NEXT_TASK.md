@@ -2,7 +2,7 @@
 
 ## 唯一下一任务
 
-> **在原位清理重复的路线 / taxonomy 输出：以现有 `landscape/WAM_COMPARISON_MATRIX_V1.md` 为检查起点，逐项核对其 12 份 V1.1–V1.3 extension 是否仍有独立证据价值。**
+> **在原位清理重复的路线 / taxonomy 输出：以现有 `landscape/WAM_COMPARISON_MATRIX_V1.md` 为检查起点，逐项核对其剩余 7 份核心论文 V1.1–V1.3 extension 是否仍有独立证据价值。**
 
 这不是新一轮总结，也不创建新文件。目标是减少派生文档入口：每个 extension 最终只能是以下之一：
 
