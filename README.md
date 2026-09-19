@@ -1,144 +1,46 @@
 # wam-research
 
-Cross-session Research Brain for **World Model + End-to-End + Planning-centric autonomous driving**.
+Persistent research workspace for **planning-centric World-Action Models (WAM) in autonomous driving**.
 
-Text and extracted figures only — canonical PDFs remain local/NAS when archived.
+## 唯一入口
 
-## New session: start here
-
-```text
-1. START_HERE.md
-2. state/CURRENT_STATE.md
-3. state/NEXT_TASK.md
-4. state/RESEARCH_PRINCIPLES.md
-5. landscape/FIELD_RECONSTRUCTION_PLAN.md
-6. landscape/FIELD_ATLAS.md
-```
-
-The repo is designed so a fresh GPT-5.6 Sol session can recover the project without re-reading old chats.
-
-A copy-ready fresh-session prompt is in `handoff/NEW_SESSION_PROMPT.md`.
-
-## Current research stage
+每次恢复工作只按这个顺序读取：
 
 ```text
-FIELD RECONSTRUCTION — Planning-centric WAM Atlas
+1. state/CURRENT_STATE.md    当前目标、边界和已确认事实
+2. state/NEXT_TASK.md        唯一正在执行的任务
+3. manifests/CORPUS_MANIFEST.csv → 对应 papers/raw_md / audits
 ```
 
-The project has deliberately paused hypothesis-first gap hunting. P1/P2-R/P3 are retained as historical probes, but they no longer organize the reading program.
+`START_HERE.md`、`handoff/LATEST.md` 和旧的 field/taxonomy/route 文档不再独立声明“当前状态”；它们只保存历史上下文或证据线索。
 
-Current principle:
+## 当前工作边界
+
+固定核心集为 12 篇：Epona、DriveLaW、WorldDrive、WoTE、World4Drive、LAW、Drive-JEPA、SeerDrive、Metis、DynFlowDrive、Discrete-WAM、GraphWorld。
+
+当前任务是：在不丢失原文、代码审计与有效比较观察的前提下，清理重复入口和历史性总结，并从可追溯证据重建这 12 篇的规划技术路线。不得把旧 taxonomy、D01/D02、路线图或状态标题自动当作当前结论。
+
+## 证据顺序
 
 ```text
-understand the field
-→ map major method families / historical transitions / planning interfaces / supervision / evaluation
-→ synthesize recurring trade-offs and contradictions
-→ only then reopen problem/gap discovery
+论文原文 / 固定代码 / 数据与评测配置
+→ 单篇 source/code audit 与 deep analysis（保留其边界）
+→ 跨论文比较
+→ 历史 taxonomy、路线图、hand-off 与状态快照
 ```
 
-## Research scope
+缺证据时保留 `UNKNOWN`。训练期未来监督、在线状态条件、候选后果评估与世界—规划迭代不得混为一种“world model benefit”。
+
+## 目录职责
 
 ```text
-World Model + End-to-End + Planning-centric
+manifests/          语料索引
+papers/raw_md/      可读原始文本层
+papers/deep_analysis/ 与 audits/   受证据边界约束的解释与核验
+state/              当前决策、当前任务与历史决策记录
+landscape/          历史性比较/地图；非当前状态入口
+hypotheses/         历史或暂停的研究问题
+handoff/            会话辅助；非当前状态入口
 ```
 
-Planning is the center of gravity. Risk/safety modeling, perception, generation, VLA and representation learning matter only insofar as they contribute to planning capability or explain planning behavior.
-
-**Risk field is optional, not a required destination.**
-
-## Field reconstruction
-
-Canonical documents:
-
-```text
-landscape/FIELD_RECONSTRUCTION_PLAN.md
-landscape/PLANNING_WAM_TAXONOMY.md
-landscape/FIELD_ATLAS.md
-```
-
-Planned depth:
-
-```text
-~50–80 paper field census
-~15–25 representative anchor deep reads
-cross-family synthesis
-then research-problem discovery
-```
-
-This avoids both blind gap guessing from too few papers and undigested 100+ paper accumulation.
-
-## Hypothesis status
-
-```text
-P1_RETIRED = retired historical hypothesis
-P2-R       = parked probe, not active search target
-P3         = parked backup probe
-```
-
-Historical P2-R work remains available under `hypotheses/` and `audits/literature/`.
-
-## Repository layout
-
-```text
-START_HERE.md                         one-file new-session bootstrap
-state/CURRENT_STATE.md               current project stage/state
-state/NEXT_TASK.md                   single next task + stop condition
-state/RESEARCH_PRINCIPLES.md         canonical scientific operating rules
-state/DECISION_LOG.md                decision provenance
-state/RESEARCH_LEDGER.md             factual corpus/gate ledger
-landscape/                           field reconstruction plan, taxonomy, atlas
-hypotheses/                          historical/parked hypotheses
-papers/cards/                        curated per-paper scientific cards
-papers/raw_md/<PXXXX_Short>/         MinerU raw Markdown + images
-audits/literature/                   cross-paper scientific audits
-evidence/                            compact evidence snapshots / legacy capability assets
-manifests/CORPUS_MANIFEST.csv        corpus registry
-handoff/LATEST.md                    latest session handoff
-handoff/NEW_SESSION_PROMPT.md        copy-ready fresh-session bootstrap
-scripts/                             ingestion/verification scripts
-experiment_logs/                     conversion logs
-```
-
-## Source hierarchy
-
-```text
-Official/canonical PDF       = exact source authority
-GitHub raw MD + figures      = GPT-readable primary-text layer
-Paper Card                   = curated paper understanding
-Field Atlas                  = cross-paper field understanding
-State files                  = canonical research decisions
-Chat                         = temporary reasoning workspace
-```
-
-If raw MD is ambiguous, verify against official/canonical PDF rather than guessing.
-
-## Scientific discipline
-
-Every anchor paper must be assessed symmetrically:
-
-```text
-what problem it actually solves
-why its design made sense
-exact observation → future → planner data flow
-what is supervised vs inferred
-strongest direct evidence
-strongest limitation / alternative explanation
-what it proves
-what it does NOT prove
-historical role / trade-off
-relation to later supporting or contradicting work
-```
-
-Use `AUTHOR CLAIM`, `DIRECT EXPERIMENTAL EVIDENCE`, and `OUR INFERENCE` separately.
-
-## Corpus state
-
-Batch 0A contains 12 registered papers; 11 are readable as raw MD in this repo. Existing papers are useful anchors but are **not** treated as a representative sample of the field because they were partly selected to test earlier hypotheses.
-
-## Division of labor
-
-**GPT-5.6 Sol:** field census, deep reading, cross-paper synthesis, atlas/taxonomy maintenance, scientific judgement, direct GitHub write-back.
-
-**Local corpus agent:** bulk acquisition, local PDF archive, MinerU conversion, metadata/QC, local source extraction, code execution, datasets/checkpoints/experiments.
-
-The repo — not conversation history — is the canonical research memory.
+研究问题发现与方法设计仍暂停；仓库首先服务于可核验的领域理解与 12 篇机制比较。
