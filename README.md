@@ -12,6 +12,8 @@ Persistent research workspace for **World Model + one-stage End-to-End + plannin
 
 不从旧 taxonomy、route map、handoff、状态标题或聊天记忆推断当前任务。
 
+远端旧分支只作为审计历史，不是平行工作入口；工作树与当前状态只认 `main`。旧分支中的 route / ontology / matrix 草稿未被恢复为当前结论。
+
 ## 当前主程序与边界
 
 ~~~
