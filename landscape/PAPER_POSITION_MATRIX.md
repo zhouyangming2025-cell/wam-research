@@ -1,5 +1,7 @@
 # WAM Paper Position Matrix
 
+> Historical four-paper position snapshot. It is not a complete core-12 matrix and does not define current state.
+
 Purpose: compare representative methods by scientific position, not by publication order.
 
 | Paper | World Model Role | Future Object | Planning Interface | Main Contribution | Main Limitation |
