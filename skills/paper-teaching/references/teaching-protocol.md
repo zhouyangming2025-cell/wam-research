@@ -9,6 +9,7 @@ Before answering, write an internal map with five fields:
 | Field | Question |
 |---|---|
 | Learner state | What can the learner already explain without copying the teacher's words? |
+| Established ledger | Which definitions, distinctions, and causal links must not be retaught? |
 | Paper mainline | What single causal path carries the paper's central idea? |
 | Dependency graph | Which concepts must be understood before the next requested detail? |
 | Evidence boundary | Which claims are verified, inferred, or still unchecked? |
@@ -16,7 +17,25 @@ Before answering, write an internal map with five fields:
 
 Choose one next gate. Do not optimize for covering pages; optimize for making that gate reconstructable.
 
-## 2. Phase A — semantic orientation
+## 2. Control repetition and concept load
+
+Before drafting each round, create this internal three-line budget:
+
+```text
+Established — reference only:
+New — one primary mechanism, up to two supporting concepts:
+Deferred — explicitly exclude from this round:
+```
+
+Apply these rules:
+
+1. **Reference, do not replay.** Refer to established material in the shortest phrase that reconnects the chain. Do not reproduce its definition, table, example, formula, or conclusion.
+2. **One representation per fact.** Explain a fact once in the most useful form. Do not repeat the same content as prose, a table, a flow diagram, and a closing recap.
+3. **One main mechanism per round.** A mechanism is a causal operation the learner must be able to reconstruct, such as corruption, embedding lookup, attention routing, target construction, or parameter update. These are separate rounds unless the learner already knows the supporting operations.
+4. **No defensive over-explanation.** Do not add adjacent background merely because it may become relevant later. Put it in `Deferred`.
+5. **Repair locally.** If the learner questions one link, remove downstream material and fix that link; do not restart the surrounding chapter.
+
+## 3. Phase A — semantic orientation
 
 Start with one concrete task instance. Establish:
 
@@ -30,7 +49,7 @@ Avoid architecture names until their role is clear. Mark broad historical statem
 
 Exit condition: the learner can explain the problem and proposal in ordinary language and can state one thing the proposal does not prove.
 
-## 3. Phase B — mechanism and data flow
+## 4. Phase B — mechanism and data flow
 
 Trace one example through the pipeline. For every task mode or stage, record:
 
@@ -53,7 +72,7 @@ Do not infer sequential training merely because a paper lists several objectives
 
 Exit condition: the learner can narrate one sample's path and identify which outputs create learning signals for which shared or separate parameters.
 
-## 4. Phase C — representation choices
+## 5. Phase C — representation choices
 
 For every key representation, answer four questions:
 
@@ -66,9 +85,9 @@ Then run one counterfactual using the nearest alternative. For example, if a met
 
 Exit condition: the learner can explain both the advantage and the cost of the chosen representation.
 
-## 5. Phase D — concrete computation trace
+## 6. Phase D — concrete computation trace
 
-### 5.1 Start with a notation ledger
+### 6.1 Start with a notation ledger
 
 Use stable names such as:
 
@@ -86,7 +105,7 @@ Use stable names such as:
 
 Adapt names to the paper, but never reuse one symbol for two roles.
 
-### 5.2 Keep a shape ledger
+### 6.2 Keep a shape ledger
 
 At each step state:
 
@@ -96,13 +115,29 @@ At each step state:
 - which axis has semantic meaning;
 - whether the value is observed, sampled, predicted, or learned.
 
-### 5.3 Use realistic examples
+### 6.3 Use realistic examples
 
 Retain the actual structure and show sparse values. Example: say the vocabulary has 16,384 candidates, then display the target probabilities for token IDs 831, 4207, and 12501 plus the residual mass. This preserves the distinction between a candidate ID and its probability while keeping arithmetic readable.
 
-### 5.4 Training trace checklist
+Before using numbers, state their provenance once:
 
-Walk through one training item in this order:
+- `paper value` for a reported configuration or result;
+- `teaching construction` for an invented value used to expose a mechanism;
+- `inference` for a value or behavior deduced from stated facts;
+- `unknown` when the source does not determine it.
+
+Then ask whether the example exposes a computation or only decorates a verbal claim. A useful numerical example must do at least one of the following:
+
+- distinguish namespaces that are easy to confuse;
+- show how an output changes when an input changes;
+- make a target, loss, normalization, shape, or update directly traceable;
+- preserve a real structural property that a tiny toy example would destroy.
+
+Otherwise omit the numbers.
+
+### 6.4 Training trace checklist
+
+Use the following as a multi-round map, not as a requirement to cover everything in one answer:
 
 1. raw sample;
 2. encoding or tokenization;
@@ -118,7 +153,7 @@ Walk through one training item in this order:
 
 For every loss, answer: “If this term decreases, what observable behavior is being encouraged?”
 
-### 5.5 Inference trace checklist
+### 6.5 Inference trace checklist
 
 Walk through:
 
@@ -134,7 +169,7 @@ If confidence is the maximum predicted probability, say that it is confidence in
 
 Exit condition: the learner can reproduce the trace with dimensions and can point to where each target and update originates.
 
-## 6. Phase E — bounded foundation detours
+## 7. Phase E — bounded foundation detours
 
 Open a detour when the learner asks “why does this formula do that?”, confuses a scalar result with a function, or cannot identify what a derivative is taken with respect to.
 
@@ -157,7 +192,7 @@ Teach one dependency at a time. Each detour must include:
 
 Do not use “the optimizer handles it” to hide the computation. Do not derive every theorem either; stop at the depth needed for the learner's current question.
 
-## 7. Phase F — evidence and scientific interpretation
+## 8. Phase F — evidence and scientific interpretation
 
 Maintain a claim ledger when the explanation includes novelty, superiority, or historical comparison:
 
@@ -171,7 +206,7 @@ Maintain a claim ledger when the explanation includes novelty, superiority, or h
 
 When evidence does not isolate a component, say that the result supports the full system rather than proving that component caused the gain.
 
-## 8. Phase G — selective cross-paper comparison
+## 9. Phase G — selective cross-paper comparison
 
 Compare mechanisms, not paper titles. First identify the axis under discussion, then group only relevant works into families such as:
 
@@ -192,7 +227,7 @@ Use three labels:
 
 Never infer uniqueness from absence in a small reading list.
 
-## 9. Confusion recovery audit
+## 10. Confusion recovery audit
 
 When an explanation fails, inspect these likely causes before adding another example:
 
@@ -206,10 +241,14 @@ When an explanation fails, inspect these likely causes before adding another exa
 - A scalar loss value was confused with the loss function.
 - A paper statement was confused with the teacher's inference.
 - A comparison included irrelevant papers or overstated scope.
+- Established content was repeated in anticipation of confusion rather than because confusion was observed.
+- The same claim was presented in several formats without adding a new relationship.
+- Invented numbers created a concrete appearance without exposing a calculation.
+- A simplified account changed “not visible because of masking” into “not present in the computation.”
 
 Fix the earliest cause, not the latest visible symptom.
 
-## 10. Preserve state across rounds
+## 11. Preserve state across rounds
 
 End a long teaching turn with an internal handoff in this form:
 
@@ -222,4 +261,4 @@ Do not introduce yet:
 Next reconstruction check:
 ```
 
-The next turn should begin at the recorded gate. Do not restart the paper and do not promise to connect everything in a single future response.
+The next turn should begin at the recorded gate. Do not restart the paper, replay the `Established` entries, or promise to connect everything in a single future response. A closing handoff is state, not a second summary: record only what changed during the current round.
