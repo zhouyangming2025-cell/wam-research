@@ -23,7 +23,7 @@ Move a technical research idea toward evidence-traced, falsifiable work while ke
 4. Read the smallest authoritative evidence set required for that decision.
 5. State the current gate, allowed work, prohibited work, and next decisive action.
 
-Read [workflow.md](references/workflow.md) for lifecycle decisions. Read [reality_gate.md](references/reality_gate.md) before reframing, implementation planning, or any feasibility-sensitive experiment. Read the project-local file naming rule before creating or renaming artifacts.
+Read [workflow.md](references/workflow.md) for lifecycle decisions and [source_grounding.md](references/source_grounding.md) for source/evidence labels. The broader upstream gate references were intentionally not retained in this trimmed snapshot. Read the project-local file naming rule before creating or renaming artifacts.
 
 ## Default workflow
 
@@ -89,10 +89,5 @@ For substantial work, return:
 Load only what the task needs:
 
 - [workflow.md](references/workflow.md): lifecycle and stage transitions.
-- [reality_gate.md](references/reality_gate.md): scientific, engineering, and paper-viability certificates.
-- [roles.md](references/roles.md): role ownership and escalation.
 - [source_grounding.md](references/source_grounding.md): source labels and evidence rules.
-- [tool_layer.md](references/tool_layer.md): tool-assisted ingestion contracts.
-- [novelty_gate.md](references/novelty_gate.md): closest-competitor and novelty checks.
-- [experiments.md](references/experiments.md): feasibility, pilot, full-run, and result rules.
-- [language.md](references/language.md): output language policy.
+- The upstream reality, novelty, experiment, role, tool and language references were not retained in this trimmed snapshot; do not infer that they are available locally.

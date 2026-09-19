@@ -26,8 +26,8 @@ nothing about P2-R, and no reading order or scientific verdict is implied by it.
 
 **Date span.** Acquisition, conversion and verification ran across the 2026-09-13 →
 2026-09-14 boundary (downloads late on 09-13, conversions and verification after midnight),
-so the batch ledgers and the manifest carry the label 2026-09-13 while this report and the
-cards are stamped with the completion date.
+so the batch ledgers and the manifest carry the label 2026-09-13 while this report is stamped
+with the completion date.
 
 ---
 
@@ -179,7 +179,7 @@ recorded in the card but leaves the field `UNKNOWN` rather than `YES`.
    this pass. Their `source_version` is therefore `arXiv_v1`, and no camera-ready claim is
    made. If a venue version appears later, the canonical source must be re-acquired and the
    record re-verified rather than edited in place.
-4. **Affiliation facts read from page 1 only.** First-author affiliations noted in the cards
+4. **Affiliation facts read from page 1 only.** First-author affiliations noted in this report
    (Purdue / Bosch Center for AI for P0016; Tsinghua University / Li Auto for P0017) come
    from the papers' own front matter. Nothing was inferred from external sources.
 5. **No title, author or acronym conflict was found** for A1-A5, H1 or H2: titles matched

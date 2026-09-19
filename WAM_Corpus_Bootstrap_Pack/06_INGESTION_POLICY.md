@@ -57,7 +57,7 @@ RAW_MD_QC_FAIL
 raw MD 中图像可保留为：
 
 ```markdown
-![](images/xxx.jpg)
+`![](images/<verified-image-file>.jpg)`（这里只是路径模式示例，不是仓库内的图片链接。）
 ```
 
 但不要因此认为 MD 等价于 PDF。

@@ -205,7 +205,7 @@ def main() -> int:
     a("  genuinely resolved in the field's history;")
     a("- no claim that a work does or does not use a world model beyond what its own text says;")
     a("- no deep reading: these are placement-depth text layers, and the manifest marks them `NO_CARD`;")
-    a("- no edit to the owner's `landscape/`, `state/` or `handoff/` files.")
+    a("- no edit to the owner's `landscape/` or `state/` files; the retired handoff area was not touched.")
     a("")
     a("## 12. Reproduce")
     a("")

@@ -176,7 +176,7 @@ decision relevance; both are owner decision points.
   genuinely resolved in the field's history;
 - no claim that a work does or does not use a world model beyond what its own text says;
 - no deep reading: these are placement-depth text layers, and the manifest marks them `NO_CARD`;
-- no edit to the owner's `landscape/`, `state/` or `handoff/` files.
+- no edit to the owner's `landscape/` or `state/` files; the retired handoff area was not touched.
 
 ## 12. Reproduce
 

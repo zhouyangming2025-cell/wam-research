@@ -226,7 +226,7 @@ def main() -> int:
     a("   this pass. Their `source_version` is therefore `arXiv_v1`, and no camera-ready claim is")
     a("   made. If a venue version appears later, the canonical source must be re-acquired and the")
     a("   record re-verified rather than edited in place.")
-    a("4. **Affiliation facts read from page 1 only.** First-author affiliations noted in the cards")
+    a("4. **Affiliation facts read from page 1 only.** First-author affiliations noted in this report")
     a("   (Purdue / Bosch Center for AI for P0016; Tsinghua University / Li Auto for P0017) come")
     a("   from the papers' own front matter. Nothing was inferred from external sources.")
     a("5. **No title, author or acronym conflict was found** for A1-A5, H1 or H2: titles matched")
