@@ -458,6 +458,8 @@ NAVSIM 官方当前 split 文档给出：
 
 这对当前 210 很重要。
 
+> **工程风险提示：** NAVSIM 官方提供的 navtrain-only sensor 包是节省存储的正式路线，但公开 issue 中已有用户报告：即使下载包 MD5 全部通过，按 navtrain scene filter 加载时仍出现大量历史 sensor frame 缺失。该报告不能证明官方包普遍损坏，但在我们已经拥有约 2.8T OpenScene 的前提下，没有理由为了节省空间主动删除完整 trainval、退回精简 navtrain。现有完整数据应优先保留。
+
 已知现场：
 
 ```text
