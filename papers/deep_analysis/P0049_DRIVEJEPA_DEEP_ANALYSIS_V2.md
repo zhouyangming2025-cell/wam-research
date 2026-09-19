@@ -709,7 +709,7 @@ F07 Prediction temporal / observability geometry
 Back-projection succeeds on prior anchors; see:
 
 ```text
-landscape/WAM_DIMENSION_ONTOLOGY_V1_2_AMENDMENT.md
+landscape/WAM_DIMENSION_ONTOLOGY_V1.md (consolidated comparison baseline)
 ```
 
 ---
