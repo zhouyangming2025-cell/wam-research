@@ -1,5 +1,7 @@
 # WAM Research Corpus — Operating System
 
+> Historical corpus-process template. It governs asset provenance only; it does not set the current scientific task or authorize a new research direction. For the live entry order, use `README.md` → `state/CURRENT_STATE.md` → `state/NEXT_TASK.md` → `manifests/CORPUS_MANIFEST.csv`.
+
 ## 目标
 
 建立一个长期可持续的 WAM / Planning-centric 自动驾驶研究语料系统，使：
@@ -180,7 +182,6 @@ Agent 可以：
 state/CURRENT_STATE.md
 state/DECISION_LOG.md
 state/NEXT_TASK.md
-handoff/LATEST.md
 ```
 
 然后按当前任务读取：
