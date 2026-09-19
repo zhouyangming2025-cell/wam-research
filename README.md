@@ -17,6 +17,18 @@ Text and extracted figures only — canonical PDFs remain local/NAS when archive
 
 The repo is designed so a fresh GPT-5.6 Sol session can recover the project without re-reading old chats.
 
+## Active route-rebuild control layer
+
+The historical corpus is preserved, but historical labels and status headers are **not** automatically current conclusions. The active control layer for the canonical 12-paper technical-route reconstruction is:
+
+```text
+research_program/route_rebuild/00_REBUILD_CHARTER_AND_AUTHORITY.md
+research_program/route_rebuild/01_ASSET_DISPOSITION_LEDGER.md
+research_program/route_rebuild/02_CANONICAL12_SOURCE_FIRST_ROUTE_WORKBOOK.md
+```
+
+Read this layer before using taxonomy, route-map, D01/D02, or legacy state documents as an authority. It retains original papers, audits, and useful reasoning while separating direct evidence, reusable methods, working hypotheses, and historical organization attempts.
+
 A copy-ready fresh-session prompt is in `handoff/NEW_SESSION_PROMPT.md`.
 
 ## Current research stage
