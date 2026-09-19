@@ -2,7 +2,7 @@
 
 Last updated: 2026-09-16
 
-Status: **ACTIVE — LITERATURE EXPANSION BEFORE RESEARCH-DIRECTION CONVERGENCE**
+Status: **HISTORICAL EXPANSION QUEUE — retained for ID/provenance; current work is controlled by `state/NEXT_TASK.md`.**
 
 ## Binding rule
 
