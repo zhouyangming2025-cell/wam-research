@@ -2,7 +2,7 @@
 
 Last updated: 2026-09-14
 
-Status: **PHASE-A CENSUS CLOSED — PHASE-B ANCHOR DEEP READS READY**
+Status: **HISTORICAL FIELD ATLAS — phase status superseded by current state; retain family map and evidence boundaries.**
 
 This document is not a gap list. It maps the field: major method families, historical transitions, planning interfaces, supervision/evaluation regimes, strong controls and recurring comparison questions.
 
