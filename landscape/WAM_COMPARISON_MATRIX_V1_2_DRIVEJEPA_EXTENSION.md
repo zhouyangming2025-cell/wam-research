@@ -2,7 +2,7 @@
 
 Last updated: 2026-09-15
 
-Status: **SEVEN-ANCHOR EXTENSION — Drive-JEPA stress test complete**
+Status: **HISTORICAL PROJECTION SNAPSHOT — not current state or final route authority; retain only as a traceable comparison aid.**
 
 Use with:
 
