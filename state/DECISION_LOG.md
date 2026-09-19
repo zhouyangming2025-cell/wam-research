@@ -19,9 +19,7 @@ Canonical artifacts:
 ```text
 papers/deep_analysis/P0063_DYNFLOWDRIVE_DEEP_ANALYSIS_V2.md
 audits/literature/PHASE_C5_DYNFLOWDRIVE_AUDIT.md
-landscape/P0063_DYNFLOWDRIVE_ONTOLOGY_PROJECTION.md
-landscape/WAM_COMPARISON_MATRIX_V1_3_DYNFLOWDRIVE_EXTENSION.md
-landscape/WAM_DIMENSION_ONTOLOGY_V1_3_AMENDMENT.md
+(derived projection, matrix extension and amendment were later removed after evidence consolidation; claims remain in the deep analysis and consolidated ontology baseline)
 ```
 
 **Source/version boundary**
@@ -188,8 +186,7 @@ Canonical artifacts:
 ```text
 papers/deep_analysis/P0062_METIS_DEEP_ANALYSIS_V2.md
 audits/literature/PHASE_C5_METIS_AUDIT.md
-landscape/P0062_METIS_ONTOLOGY_PROJECTION.md
-landscape/WAM_COMPARISON_MATRIX_V1_2_METIS_EXTENSION.md
+(derived projection and matrix extension were later removed after evidence consolidation; claims remain in the deep analysis and consolidated ontology baseline)
 ```
 
 **Source/version boundary**
@@ -323,9 +320,7 @@ Canonical artifacts:
 ```text
 papers/deep_analysis/P0049_DRIVEJEPA_DEEP_ANALYSIS_V2.md
 audits/literature/PHASE_C5_DRIVEJEPA_AUDIT.md
-landscape/P0049_DRIVEJEPA_ONTOLOGY_PROJECTION.md
-landscape/WAM_COMPARISON_MATRIX_V1_2_DRIVEJEPA_EXTENSION.md
-landscape/WAM_DIMENSION_ONTOLOGY_V1_2_AMENDMENT.md
+(derived projection, matrix extension and amendment were later removed after evidence consolidation; claims remain in the deep analysis and consolidated ontology baseline)
 ```
 
 **Stable mechanism judgment**
