@@ -2,40 +2,32 @@
 
 ## 唯一下一任务
 
-> **对固定 12 篇逐篇重核原文与现有 deep analysis / source audit；只有在每条结论可追溯后，才原位修订唯一的 `landscape/WAM_COMPARISON_MATRIX_V1.md`。**
+> **完成“删除前证据复核”：对当前已删/拟删的派生文档逐条比对其 Git 历史、raw paper、source/code audit、deep analysis 与现存主文档，判定其独有内容是否已有存活来源。**
 
-不新建路线表、extension、branch 或 taxonomy 版本。`WAM_COMPARISON_MATRIX_V1.md` 目前只是五篇锚点的历史基线，不是当前结论；若证据不足，保留 `UNKNOWN`，不能用旧 V1.1–V1.3 快照补齐。
+这是一道清理闸门，不是新一轮总结，也不创建新文件、分支、taxonomy 或路线标签。
 
-## 每篇必须先核对的事实
+## 工作顺序
 
-```text
-1. 训练图：未来/世界对象、监督、梯度与教师
-2. 部署图：真实保留的模块、输入、动作接口与删去的模块
-3. future 对象：视觉、BEV、latent、关系状态、候选后果或仅训练目标
-4. candidate / score / selector：是否存在，谁拥有最终行动选择权
-5. artifact / mode / paper-code 版本边界
-6. 评测与反应性边界
-```
+1. 复核已删除的 12 份 matrix extension 与 3 份 ontology amendment：将其中的每个独有事实分成“已在存活证据层出现 / 只在派生快照出现 / 仅为历史推断”。
+2. 对只在派生快照出现、但有明确原文或代码定位的事实，原位补入对应既有 deep analysis 或 source audit；无定位的历史推断不提升为事实。
+3. 审计 `papers/cards/`、早期 route / map / output 文档：先区分独有证据、可复用方法、纯重复摘要、已暂停猜想，再决定保留、归档或删除。
+4. 只有上述复核完成后，才继续逐篇核验固定 12 篇，并最终原位修订唯一的比较基线。
 
-## 允许的结果
+## 禁止事项
 
 ```text
-可证实的论文事实 / 代码事实
-有边界的跨论文比较
-明确标出的 OUR INFERENCE
-UNKNOWN / NOT REPORTED
+不得继续删除派生文档，直到该文件的独有事实已完成来源核对；
+不得以 git 历史可恢复为由跳过价值判断；
+不得把历史分支的 READY / STABLE / normative 写成当前结论；
+不得将 12 篇审计取代 Field Reconstruction 或取消 ProSim 队列；
+不得开始研究问题或方法设计。
 ```
 
-## 不允许的结果
+## 完成条件
 
 ```text
-以“是否有 world model”“是否预测未来”“是否联合训练”直接命名路线；
-把训练期未来监督写成在线 rollout；
-把视频解码、离线可视化或固定 logged future 写成部署期反应式推演；
-把同一论文不同 artifact/mode 压成一行；
-先写路线名、再补证据。
+每一项删除都有可追溯的证据处置记录；
+当前 main 的单一入口、主程序和子任务不冲突；
+剩余的派生材料均有明确用途，或已被取消当前权威；
+随后恢复 P0067 ProSim 的 source gate 与深读。
 ```
-
-## 停止条件
-
-12 篇的证据边界均已重核；保留的唯一比较矩阵可清楚区分论文事实、代码事实、推断与未知；只有出现至少两个可复核成员的因果分叉，才讨论技术路线。
