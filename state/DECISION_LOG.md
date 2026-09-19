@@ -2,6 +2,8 @@
 
 Newest entry first.
 
+**读取规则：**本文件是按日期保留的决策历史，不是当前任务队列。发生冲突时，先读 `state/CURRENT_STATE.md` 和 `state/NEXT_TASK.md`；本文件只能提供当时的依据、修正与可追溯性。历史条目中的“authorized / active / next”均不自动恢复效力。
+
 > Integrity note — 2026-09-15: this file had been accidentally truncated during an earlier update. The recoverable project decisions below have been restored conservatively from the project state/history. When a later decision supersedes an earlier one, both are retained and explicitly marked rather than deleting history.
 
 ---
