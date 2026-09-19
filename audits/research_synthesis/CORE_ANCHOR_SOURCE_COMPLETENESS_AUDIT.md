@@ -2,7 +2,7 @@
 
 Last updated: 2026-09-15
 
-Status: **ACTIVE — fifteen-anchor source-layer completeness tracking during WAM expansion**
+Status: **HISTORICAL FIFTEEN-ANCHOR SOURCE SNAPSHOT — current paper scope and task authority live in `state/CURRENT_STATE.md` and `state/NEXT_TASK.md`.**
 
 Purpose: keep separate:
 
