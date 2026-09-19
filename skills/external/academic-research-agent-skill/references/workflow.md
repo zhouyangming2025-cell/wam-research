@@ -58,7 +58,7 @@ If sources or competitors have not been inspected, the gate is `NOT_ASSESSED`, n
 
 ### Reality Gate
 
-Use `BLOCK`, `FEASIBILITY_PILOT_ONLY`, `EXECUTION_READY`, or `FULL_RUN_READY`. Read [reality_gate.md](reality_gate.md). Planning depth must not exceed the verdict.
+Use `BLOCK`, `FEASIBILITY_PILOT_ONLY`, `EXECUTION_READY`, or `FULL_RUN_READY`. The upstream `reality_gate.md` is not included in this trimmed snapshot; apply the project-local gate and evidence rules instead. Planning depth must not exceed the verdict.
 
 For a raw idea without a named experimental unit or access path, record `NOT_ASSESSED` and no execution authorization. Create a formal Reality Gate artifact only when the decision is feasibility-sensitive, after a reframe, or when the user explicitly requests the audit.
 
