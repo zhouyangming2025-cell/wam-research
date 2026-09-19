@@ -2,7 +2,7 @@
 
 Last updated: 2026-09-15
 
-Status: **ACTIVE ADDENDUM — merge into `WAM_DIMENSION_ONTOLOGY_V1.md` only after World4Drive re-projection**
+Status: **HISTORICAL DISCOVERY ADDENDUM — retained for provenance; its useful dimension definitions were consolidated into the ontology baseline.**
 
 This file supplements `landscape/WAM_DIMENSION_DISCOVERY_LOG.md`, whose LAW/WoTE sections remain canonical. It records dimensions exposed by the third and fourth ontology-discovery anchors without prematurely freezing IDs.
 
