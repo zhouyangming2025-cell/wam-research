@@ -395,6 +395,34 @@ raw nuPlan 需求：真实
 
 ---
 
+
+## 1.5 ReWorld：进一步支持“先用 checkpoint，不为论文名盲下 raw data”
+
+DriveLaW 团队在 2026-08 开源的 ReWorld 同样报告了基于 driving videos 的 world-model representation learning，并在统一实验里使用 nuPlan + nuScenes。
+
+但当前公开 Stage-1 数据入口仍然是通用的：
+
+```yaml
+video_root: /path/to/training/videos
+total_source_frames: 33
+condition_source_frames: 9
+video_width: 1024
+video_height: 512
+```
+
+`OnlineVideoFolderDataset` 直接递归读取 mp4/webm/avi/mkv，并没有公开 raw NuPlan DB + sensor_blobs → training clips 的 NuPlan-specific converter。
+
+同时作者已发布 ReWorld 权重。
+
+因此 ReWorld 不改变当前下载结论：
+
+- 它再次证明 high-frequency driving video 对 WAM 有研究价值；
+- 但它没有提供足以要求我们现在下载完整 raw nuPlan 的公开转换链；
+- 对当前研究推进，应先用 released weights + OpenScene/NAVSIM；
+- 如果未来构建自研 driving-video corpus，再把 raw NuPlan / 123D 作为候选数据源。
+
+---
+
 # 2. 四篇论文的最终下载判定
 
 | 方法 | raw nuPlan 对论文是否有用 | 公开代码能否闭合 raw 数据链 | 当前是否为它下载 raw |
