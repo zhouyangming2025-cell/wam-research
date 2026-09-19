@@ -849,3 +849,81 @@ Epona → CAM_F0
 # 10. 当前结论一句话
 
 > **我们现在已经不缺“一个叫 nuPlan 的 20TB 数据集”；我们缺的是对目标 WAM 真正有用的那一小部分高频数据。短期主线应继续使用现有 OpenScene/NAVSIM 和作者 checkpoints，不批准全量 raw nuPlan 下载；若未来进入高频 world-model 从零预训练，首先围绕 Epona 的 CAM_F0 需求做官方 S3 manifest 和 123D front-only dry-run，再决定最终 Y TB。**
+
+
+# 11. 210 现场核查后：下载策略正式收紧
+
+2026-09-19 现场只读核查确认：
+
+- OpenScene trainval camera：200 个 `.tgz`，**1,242,213,272,326 B**；
+- OpenScene trainval LiDAR：200 个 `.tgz`，**882,141,233,382 B**；
+- trainval metadata：**7,052,210,642 B**；
+- 对应 `.sidecar` 均存在；
+- nuPlan 正式根约 1.7 TB，但未发现 raw `splits/trainval` DB 或 raw trainval sensor；
+- 当前 CloudFront raw trainval camera 路径返回 HTTP 404；
+- 既有 volume inventory 对 trainval camera / LiDAR 均记录 0 objects。
+
+因此本审计的当前正式结论是：
+
+> **短期 raw nuPlan 下载量 = 0 TB。**
+
+这不是“raw nuPlan 无价值”，而是：
+
+1. OpenScene/NAVSIM 当前主线资产已经实质存在；
+2. raw nuPlan 的 exact object list / size /可下载路径仍未闭合；
+3. DriveLaW / WorldDrive / Discrete-WAM 都没有形成“现在必须 raw-from-scratch”的工程理由；
+4. Epona 虽然数据链最完整，但也只有在明确决定重训时才值得为其准备 raw CAM_F0 路线。
+
+完整现场记录：
+
+`datasets/NUPLAN_210_INVENTORY_2026-09-19.md`
+
+## 11.1 对 404 的进一步解释
+
+公开的 py123d 文档目前仍列出 Motional 区域 S3 legacy archive keys：
+
+```text
+https://motional-nuplan.s3-ap-northeast-1.amazonaws.com/public/nuplan-v1.1/
+```
+
+并明确列出：
+
+- train camera 0..42；
+- train LiDAR 0..42；
+- val camera/LiDAR 0..11；
+- test camera/LiDAR 0..11。
+
+因此当前只能说：
+
+> **210 已验证的 CloudFront 路径不可用。**
+
+不能进一步推出：
+
+> **Motional 区域 S3 的对应 archive object 已经不存在。**
+
+为避免任何数据体传输，新增：
+
+`scripts/datasets/nuplan_archive_head_probe.py`
+
+它只发 HTTP HEAD，并记录 Content-Length / ETag / Last-Modified，不下载 ZIP body。
+
+## 11.2 123D 不需要先安装 HF CLI 也能估容量
+
+新增：
+
+`scripts/datasets/hf_dataset_size_probe.py`
+
+它只调用 Hugging Face public tree API 获取路径和文件大小，不下载 Arrow body。
+
+可以直接估：
+
+```text
+camera.pcam_f0.arrow
+ego_state_se3.arrow
+sync.arrow
+```
+
+等 modality 的总字节，作为“自研高频 WAM 最小数据包”的候选容量。
+
+因此下一轮仍然是**只读 metadata audit**，不是下载。
+
