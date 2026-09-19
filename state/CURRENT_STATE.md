@@ -75,8 +75,8 @@ P0066 SAFE-SIM      COMPLETE v2 + official source/code audit
 Canonical ontology:
 
 ```text
-V1.3 ACTIVE
-NO V1.4 authorized by SAFE-SIM
+V1.3 comparison coordinate retained for the consolidation gate
+NO V1.4 authorized by SAFE-SIM; ontology is not final route authority
 ```
 
 ---
@@ -91,7 +91,7 @@ papers/deep_analysis/P0066_SAFESIM_DEEP_ANALYSIS_V2.md
 audits/literature/P0066_SAFESIM_SOURCE_CODE_AUDIT.md
 audits/literature/PHASE_C7_SAFESIM_AUDIT.md
 landscape/P0066_SAFESIM_ONTOLOGY_PROJECTION.md
-landscape/WAM_COMPARISON_MATRIX_V1_3_SAFESIM_EXTENSION.md
+landscape/WAM_COMPARISON_MATRIX_V1.md (historical comparison snapshot; no per-paper extension is canonical)
 ```
 
 Canonical subtype:
