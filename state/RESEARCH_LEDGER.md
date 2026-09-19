@@ -1,29 +1,12 @@
 # RESEARCH_LEDGER
 
-Running factual ledger of assets, research-state transitions and scientific gates.
+**角色：历史资产、阶段记录与可复核出处账本；不是当前状态页。**
 
-## Current research stage
+当前方向和唯一任务只以 `state/CURRENT_STATE.md` 与 `state/NEXT_TASK.md` 为准。本文件中关于 Phase、Wave、anchor 数、ontology 版本、下一步或授权状态均按其写入日期保留，不得单独恢复为当前任务。
 
-```text
-FIELD RECONSTRUCTION — PHASE C FIRST PASS COMPLETE
-NEXT: PHASE D ADVERSARIAL PROBLEM DISCOVERY
-```
+历史记录的有效用途：追溯何时产生了什么材料、当时采用了什么边界、哪些观察可回到原文/审计复核。历史的 `ACTIVE`、`AUTHORIZED`、`COMPLETE` 等字样不是当前批准。
 
-Canonical documents:
-
-- `landscape/FIELD_RECONSTRUCTION_PLAN.md`
-- `landscape/PLANNING_WAM_TAXONOMY.md`
-- `landscape/FIELD_ATLAS.md`
-- `landscape/PHASE_B_ANCHORS.md`
-- `landscape/PHASE_B_WAVE1_SYNTHESIS.md`
-- `landscape/PHASE_B_WAVE1_COMPARABILITY_AUDIT.md`
-- `landscape/PHASE_B_WAVE2_SYNTHESIS.md`
-- `landscape/PHASE_B_WAVE2_COMPARABILITY_AUDIT.md`
-- `landscape/PHASE_B_WAVE3_CLOSEOUT.md`
-- `landscape/PHASE_B_WAVE4_SYNTHESIS.md`
-- `audits/literature/RESEARCH_QA_GATE_CLOSEOUT.md`
-- `landscape/PHASE_C_WAVES1_4_FIELD_SYNTHESIS.md`
-
+原始历史内容如下。
 ## Hypotheses
 
 | hypothesis | status | role | file |
