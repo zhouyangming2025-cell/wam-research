@@ -2,7 +2,7 @@
 
 Last updated: 2026-09-15
 
-Status: **SIX-ANCHOR EXTENSION — use with V1 matrix + SeerDrive full projection**
+Status: **HISTORICAL PROJECTION SNAPSHOT — not current state or final route authority; retain only as a traceable comparison aid.**
 
 Base:
 
