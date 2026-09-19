@@ -78,6 +78,19 @@ DriveLaW / GraphWorld / SeerDrive
 
 The deletion test therefore remains local to each deep analysis: remove the claimed bridge and ask whether the paper is still the same method. A row may be revised only when the underlying raw text or pinned source audit changes.
 
+
+## Branch-audit guardrails retained without restoring a route layer
+
+A read-only audit of every non-`main` branch found one completed, reusable result: the canonical-12 reconstruction branch separated artifact scope, deployment lifecycle, candidate identity, and evidence boundaries. Its proposed route compression is **not** copied here: that branch labels itself `RECONSTRUCTED-BUT-NOT-NORMATIVE`, and its human-acceptance and held-out tests were still pending. The following guardrails are retained because they prevent the Q1–Q5 interface from collapsing distinct mechanisms:
+
+- **Scope the artifact before comparing it.** Use paper/code version × task mode × planning or generation path. Split when the deployment graph changes (for example, SeerDrive paper versus release, Epona planning versus rollout, or Drive-JEPA PF versus PB); do not force one paper to have one answer.
+- **Require candidate identity and a common resolver.** Multiple samples, diffusion steps, or proposal refinements are not a candidate route by themselves. Call it candidate selection only when candidate identity survives to a shared resolver and one output is committed.
+- **Separate lifecycle and clocks.** A future branch used only for training is not an online world carrier. Internal denoising, flow transport, or within-decision refinement is not physical-time rollout unless the source establishes that relation.
+- **Do not equate the common terminal shape.** World4Drive, WorldDrive, and WoTE can all look like candidate → future representation → score/select, while their future construction, supervision, lifecycle, and deployment role differ.
+- **Keep evidence boundaries visible.** Never replace a paper graph with a release graph, and never turn an unresolved deployment or counterfactual claim into verified absence. Preserve `PAPER FACT`, `CODE FACT`, `OUR INFERENCE`, and `UNKNOWN` at the deep-analysis layer.
+
+These are audit controls, not additional questions or a second route/ontology layer. The five-question table remains the only compact cross-paper surface; the raw/deep/source chain remains the dispute resolver.
+
 ## External-survey pressure-test boundary
 
 The five questions were not invented from the old driving-only matrices. A separate exploratory audit consulted broad world-model/control lineages (including Dyna, predictive-state/value-prediction methods, latent planning, Dreamer/MuZero and TD-MPC families) and recent world-model surveys. Its useful methodological result is retained here without importing another corpus layer:
