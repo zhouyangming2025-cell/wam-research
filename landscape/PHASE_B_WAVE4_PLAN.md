@@ -2,7 +2,7 @@
 
 Last updated: 2026-09-14
 
-Status: **ACTIVE**
+Status: **HISTORICAL WAVE-4 PLAN — retained for reactivity/evaluation provenance; no longer authorizes work.**
 
 Wave 4 begins only after the Waves 1–3 Research QA Gate was closed.
 
