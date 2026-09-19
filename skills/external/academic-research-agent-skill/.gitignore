@@ -1,9 +1,0 @@
-.DS_Store
-config/language.yaml
-artifacts/
-runs/
-*.log
-*.tmp
-.env
-.venv/
-__pycache__/

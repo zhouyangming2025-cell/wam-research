@@ -13,7 +13,7 @@
 
 | 来源 | 本地目录 | 角色 | 建议处理 |
 |---|---|---|---|
-| [Academic Research Agent Skill](https://github.com/ngtiendong/Academic-Research-Agent-Skill) | `external/academic-research-agent-skill/` | 研究流程总框架：reality / novelty / claim gates | 提炼 gate 语言和 evidence contract，不整包启用 |
+| [Academic Research Agent Skill](https://github.com/ngtiendong/Academic-Research-Agent-Skill) | `external/academic-research-agent-skill/SKILL.md` + `references/{source_grounding,workflow}.md` | source/claim gate 与反重复 artifact discipline | 只保留当前证据链需要的三个参考文件，不整包启用 |
 | [Paper Deep Reader Skill](https://github.com/Linwei-Chen/paper-deep-reader-skill) | `external/paper-deep-reader-skill/` | 单篇论文精读、图表和公式讲解 | 作为 `paper-reader` 的主要参考 |
 | [Agent Paper Reader](https://github.com/chuyanchu/agent-paper-reader) | `external/agent-paper-reader/` | claim-evidence、复现性、反证实验 | 作为 `evidence-audit` 的主要参考 |
 | [Agent Skills for Academic Research](https://github.com/jjfroehlich/agent-skills-for-academic-research) | `external/literature-reading-and-synthesis/` | claim-evidence 与文献综合 | 作为跨论文证据综合参考 |
