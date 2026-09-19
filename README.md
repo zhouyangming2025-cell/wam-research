@@ -10,6 +10,11 @@ Persistent research workspace for **World Model + one-stage End-to-End + plannin
 3. manifests / raw paper / source-code audit / deep analysis required by that task
 ~~~
 
+辅助参考（不构成新的工作入口）：
+
+- 阅读方法契约：`landscape/WAM_READING_SKILL_STACK.md`
+- 条件性 PDF 复核队列：`audits/literature/PDF_VERIFICATION_QUEUE.md`（仅在复用对应数字/细节时执行）
+
 不从旧 taxonomy、route map、handoff、状态标题或聊天记忆推断当前任务。
 
 远端旧分支只作为审计历史，不是平行工作入口；工作树与当前状态只认 `main`。旧分支中的 route / ontology / matrix 草稿未被恢复为当前结论。
@@ -52,5 +57,7 @@ SAFE-SIM 的完整 raw Markdown 与图像也已恢复到 `papers/raw_md/P0066_Sa
 ## 当前清理规则
 
 不删除 raw Markdown、来源/代码审计、带独立定位的 deep analysis、manifest、实验记录和决策历史。派生 matrix、ontology amendment、paper-card、路线图和导航文档必须先完成“独有证据是否已有存活来源”的核对，才可合并、归档或删除；paper-card 层目前已退役。
+
+Markdown 拓扑现已冻结：除更新现有证据、状态或审计文件外，不新增 summary、map、queue、handoff 或第二投影层，不为同一结论建立第二份入口。
 
 研究问题发现、候选问题提升和方法设计仍暂停。
