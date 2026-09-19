@@ -15,8 +15,17 @@ there and are now retained in the source register. The standalone
 and core-WAM correction queue are already preserved in this decision log and in the
 current-state/anchor records. No raw paper, source/code audit, deep analysis,
 manifest, experiment log or scientific decision was removed. The historical
-`landscape/WAM_DEEP_READ_EXPANSION_QUEUE_V1.md` remains retained for wave/ID
-provenance and is not a current entry point.
+`landscape/WAM_DEEP_READ_EXPANSION_QUEUE_V1.md` was retained during the first
+pass for wave/ID provenance, then retired in the subsequent cleanup entry below.
+
+## 2026-09-19 — Retire the superseded expansion queue
+
+`landscape/WAM_DEEP_READ_EXPANSION_QUEUE_V1.md` was a historical wave/ID queue,
+not an evidence source. Its current task, maturity gate, anchor status and C.7
+boundaries are already represented by `state/CURRENT_STATE.md`,
+`state/NEXT_TASK.md`, the WAM reading contract and the per-paper deep/source
+audits. It is removed to leave one operational task path; no paper, audit,
+manifest or experiment evidence is removed.
 
 ## 2026-09-19 — Non-main branch audit closed; main remains sole working entry
 
