@@ -203,9 +203,9 @@ ProSim vs WoTE / DA-WAM
 ProSim vs BridgeSim / ReactSimBench where evidence allows
 ```
 
-## 9. Full Ontology V1.3 projection
+## 9. Full A–P audit inside the deep analysis
 
-Force-fill A–P.
+Force-fill A–P and perform the residue test inside the ProSim deep-analysis file itself. Do not create a separate per-paper ontology projection or comparison-matrix extension.
 
 Residue watch:
 
@@ -214,18 +214,15 @@ Does prompt-conditioned multi-agent simulation expose a new dimension beyond exi
 ```
 
 Do not create V1.4 unless a genuine irreducible residue survives back-projection.
-
 ---
 
 # Planned artifacts — not yet present
 
-These are outputs of the ProSim task, not current repository files. Do not treat their absence as a broken state or create them during cleanup:
+These are outputs of the ProSim task, not current repository files. Create only the minimum evidence-bearing artifacts:
 
 ```text
 P0067_PROSIM_DEEP_ANALYSIS_V2.md
 PHASE_C7_PROSIM_AUDIT.md
-P0067_PROSIM_ONTOLOGY_PROJECTION.md
-WAM_COMPARISON_MATRIX_V1_3_PROSIM_EXTENSION.md
 ```
 
 If official source is usable, the same task may additionally produce:
@@ -234,7 +231,7 @@ If official source is usable, the same task may additionally produce:
 P0067_PROSIM_SOURCE_CODE_AUDIT.md
 ```
 
-Create only the minimum artifacts required by the evidence actually found; do not pre-create templates or parallel summaries.
+The A–P normalization, residue test and cross-paper comparisons belong inside the deep analysis/audit. Do not create a separate ontology projection, comparison-matrix extension, or template.
 ---
 
 # Stop condition
@@ -254,7 +251,7 @@ truth-source boundary explicit
 +
 strongest matched evidence and limitations explicit
 +
-full A–P ontology projection complete
+A–P audit and residue test included in the deep analysis
 +
 comparison against SAFE-SIM complete
 ```
