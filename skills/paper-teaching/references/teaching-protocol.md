@@ -1,256 +1,170 @@
-# Progressive Paper Teaching Protocol
+# Mechanism Deep-Dive and Confusion-Repair Protocol
 
-Use this protocol when a paper needs more than a compact summary. It is designed for learners who can understand a semantic description but cannot yet reconstruct the mechanism, computation, or mathematics.
+Use this reference only after the detail-value gate has identified a mechanism, computation, or mathematical dependency worth teaching. The default claim-and-evidence workflow is defined in `SKILL.md` and `claim-evidence-note.md`.
 
-## 1. Build the teaching map
+## 1. Define the bounded gate
 
-Before answering, write an internal map with five fields:
-
-| Field | Question |
-|---|---|
-| Learner state | What can the learner already explain without copying the teacher's words? |
-| Established ledger | Which definitions, distinctions, and causal links must not be retaught? |
-| Paper mainline | What single causal path carries the paper's central idea? |
-| Dependency graph | Which concepts must be understood before the next requested detail? |
-| Evidence boundary | Which claims are verified, inferred, or still unchecked? |
-| Next gate | What is the smallest new capability the learner needs now? |
-
-Choose one next gate. Do not optimize for covering pages; optimize for making that gate reconstructable.
-
-## 2. Control repetition and concept load
-
-Before drafting each round, create this internal three-line budget:
+Before drafting, record:
 
 ```text
 Established — reference only:
-New — one primary mechanism, up to two supporting concepts:
-Deferred — explicitly exclude from this round:
+Question resolved this round:
+Primary mechanism:
+Necessary supporting concepts (maximum two):
+Deferred:
+Exit condition:
 ```
 
-Apply these rules:
+For a broad synthesis or research note, do not use the one-mechanism restriction. It applies to mechanism deep dives and confusion repair.
 
-1. **Reference, do not replay.** Refer to established material in the shortest phrase that reconnects the chain. Do not reproduce its definition, table, example, formula, or conclusion.
-2. **One representation per fact.** Explain a fact once in the most useful form. Do not repeat the same content as prose, a table, a flow diagram, and a closing recap.
-3. **One main mechanism per round.** A mechanism is a causal operation the learner must be able to reconstruct, such as corruption, embedding lookup, attention routing, target construction, or parameter update. These are separate rounds unless the learner already knows the supporting operations.
-4. **No defensive over-explanation.** Do not add adjacent background merely because it may become relevant later. Put it in `Deferred`.
-5. **Repair locally.** If the learner questions one link, remove downstream material and fix that link; do not restart the surrounding chapter.
+## 2. Trace necessity, not just sequence
 
-## 3. Phase A — semantic orientation
+Explain each step as:
 
-Start with one concrete task instance. Establish:
+```text
+current problem
+→ why the next operation is needed
+→ operation
+→ resulting object
+→ boundary or failure mode
+```
 
-- what information is available;
-- what must be produced;
-- why the existing approach is insufficient on the paper's chosen axis;
-- the paper's proposed change;
-- the claimed benefit and its limit.
-
-Avoid architecture names until their role is clear. Mark broad historical statements as provisional until the relevant literature has been checked.
-
-Exit condition: the learner can explain the problem and proposal in ordinary language and can state one thing the proposal does not prove.
-
-## 4. Phase B — mechanism and data flow
-
-Trace one example through the pipeline. For every task mode or stage, record:
+For each relevant module or task stage, identify:
 
 | Item | Required description |
 |---|---|
-| Known condition | What is supplied to the model? |
-| Hidden or corrupted state | What is masked, noised, missing, or latent? |
-| Target | What exact object should be recovered or predicted? |
-| Supervision source | Where does the correct target come from? |
-| Gradient destination | Which parameters can change from this loss? |
+| Known condition | What information is supplied? |
+| Unknown/noisy state | What is missing, masked, corrupted, sampled, or latent? |
+| Operation | What transformation or interaction occurs? |
+| Output | What exact object is produced? |
+| Target | What should be recovered or predicted? |
+| Supervision source | Where does the target come from? |
+| Gradient destination | Which parameters can this loss change? |
 | Deployment status | Is this component or output used at inference? |
 
-Keep three clocks separate:
+Name modules only after establishing their jobs.
 
-1. **Data time** — past, current, and future frames or actions inside one example.
-2. **Optimization time** — minibatches and parameter updates.
-3. **Curriculum time** — training stages, task-mixture changes, freezing, or LoRA adaptation.
+## 3. Keep lifecycles and clocks separate
 
-Do not infer sequential training merely because a paper lists several objectives. Verify whether tasks are mixed jointly, alternated, staged, or fine-tuned. If unclear, say so.
+Do not mix:
 
-Exit condition: the learner can narrate one sample's path and identify which outputs create learning signals for which shared or separate parameters.
+1. **Data time** — past, current, and future states within one sample.
+2. **Solver time** — diffusion, flow, token-edit, or refinement iterations over the same prediction.
+3. **Optimization time** — minibatches and parameter updates.
+4. **Curriculum time** — training stages, task-mixture changes, freezing, adapters, or post-training.
+5. **Deployment lifecycle** — modules and outputs retained, bypassed, distilled, or removed at inference.
 
-## 5. Phase C — representation choices
+Do not infer sequential stages merely because a paper lists several objectives. Verify whether tasks are mixed, alternated, staged, frozen, or fine-tuned; otherwise mark the schedule unknown.
 
-For every key representation, answer four questions:
+## 4. Preserve notation and realistic structure
 
-1. What physical or semantic object is encoded?
-2. What mathematical object stores it: continuous vector, discrete ID, distribution, coordinate, spline, action primitive, or something else?
-3. Which operations become natural because of this choice?
-4. What information, precision, or flexibility may be lost?
+Maintain a local notation ledger. Keep these namespaces distinct:
 
-Then run one counterfactual using the nearest alternative. For example, if a method uses discrete visual tokens, explain exactly which training target, output head, corruption process, and decoder would change under a continuous latent. Do not claim that one representation is universally superior unless evidence supports it.
+- physical time;
+- sequence or spatial position;
+- token ID;
+- vector coordinate;
+- class candidate;
+- probability/logit entry;
+- optimization step;
+- editing or denoising round.
 
-Exit condition: the learner can explain both the advantage and the cost of the chosen representation.
+At each computational step, state the input object and shape, operation, output object and shape, semantic axis, and whether each value is observed, sampled, predicted, targeted, or learned.
 
-## 6. Phase D — concrete computation trace
+Use realistic vocabulary sizes, tensor ranks, and sequence structure when they matter. Show a sparse subset of a large vector rather than shrinking a 16,384-class problem into a four-class world that changes what an index means.
 
-### 6.1 Start with a notation ledger
+Before using numbers, label their provenance once:
 
-Use stable names such as:
+- `paper value` — reported configuration or result;
+- `teaching construction` — invented solely to expose a mechanism;
+- `inference` — deduced from verified facts;
+- `unknown` — not determined by the source.
 
-| Symbol role | Example convention |
-|---|---|
-| sequence position | `i` |
-| physical time | `t` |
-| token ID | `v_i` |
-| candidate token ID | `k` |
-| logit vector | `s_i` |
-| predicted distribution | `p_i` |
-| target distribution | `q_i` |
-| model parameters | `theta` |
-| edit round | `r` |
+Run a pseudo-concreteness check: if removing the numbers leaves the same understanding, remove them. Do not replace a soft target with one-hot merely to simplify arithmetic unless the simplification and its limits are explicit.
 
-Adapt names to the paper, but never reuse one symbol for two roles.
+## 5. Training computation trace
 
-### 6.2 Keep a shape ledger
-
-At each step state:
-
-- input object and shape;
-- operation;
-- output object and shape;
-- which axis has semantic meaning;
-- whether the value is observed, sampled, predicted, or learned.
-
-### 6.3 Use realistic examples
-
-Retain the actual structure and show sparse values. Example: say the vocabulary has 16,384 candidates, then display the target probabilities for token IDs 831, 4207, and 12501 plus the residual mass. This preserves the distinction between a candidate ID and its probability while keeping arithmetic readable.
-
-Before using numbers, state their provenance once:
-
-- `paper value` for a reported configuration or result;
-- `teaching construction` for an invented value used to expose a mechanism;
-- `inference` for a value or behavior deduced from stated facts;
-- `unknown` when the source does not determine it.
-
-Then ask whether the example exposes a computation or only decorates a verbal claim. A useful numerical example must do at least one of the following:
-
-- distinguish namespaces that are easy to confuse;
-- show how an output changes when an input changes;
-- make a target, loss, normalization, shape, or update directly traceable;
-- preserve a real structural property that a tiny toy example would destroy.
-
-Otherwise omit the numbers.
-
-### 6.4 Training trace checklist
-
-Use the following as a multi-round map, not as a requirement to cover everything in one answer:
+Use only the portion required by the learner's question:
 
 1. raw sample;
-2. encoding or tokenization;
+2. encoding/tokenization;
 3. corruption, masking, or conditioning;
-4. model input;
-5. logits or continuous prediction;
+4. effective model input;
+5. prediction or logits;
 6. target construction;
 7. per-position loss;
-8. aggregation into total loss;
-9. computation graph back to affected parameters;
+8. total-loss aggregation;
+9. computation graph to affected parameters;
 10. optimizer update;
-11. what changes for the next minibatch.
+11. changed behavior on later samples.
 
-For every loss, answer: “If this term decreases, what observable behavior is being encouraged?”
+For every loss, answer: “If this term decreases, what observable behavior is encouraged?”
 
-### 6.5 Inference trace checklist
+Do not describe clean targets as absent when they may remain in the computation but be isolated by an attention mask.
 
-Walk through:
+## 6. Inference computation trace
 
-1. available observation and command;
+When relevant, walk through:
+
+1. available observations and commands;
 2. initialization of unknown variables;
-3. one prediction or editing round;
-4. confidence computation;
-5. selection or resampling rule;
+3. one prediction/editing step;
+4. confidence or uncertainty computation;
+5. selection, freezing, replacement, or resampling rule;
 6. stopping condition;
 7. decoding into the deployed output.
 
-If confidence is the maximum predicted probability, say that it is confidence in the model's current preferred candidate, not confidence that the current token is already correct. These are different quantities.
+If confidence is the maximum predicted probability, say that it measures confidence in the model's current preferred candidate, not automatically confidence that the current input token is correct.
 
-Exit condition: the learner can reproduce the trace with dimensions and can point to where each target and update originates.
+## 7. Formula discipline
 
-## 7. Phase E — bounded foundation detours
+Never present a compact formula as if it were an explanation.
 
-Open a detour when the learner asks “why does this formula do that?”, confuses a scalar result with a function, or cannot identify what a derivative is taken with respect to.
+- Define each symbol where it first appears in the current round.
+- Separate learned parameters, intermediate variables, constants, targets, and observed values.
+- Distinguish a function such as `L(theta)` from an evaluated value such as `L(theta_current)=2.00`.
+- If a result such as `dL/ds = p - q` is required, derive it only after its prerequisites are established, or explicitly label it as a temporarily used result.
+- Before connecting one scalar loss to many parameters, establish multivariable dependence, partial derivatives, the computation graph, and the chain rule or automatic differentiation.
+- For soft-target cross-entropy, do not claim the minimum is zero. When relevant, use `H(q,p)=H(q)+KL(q||p)`: matching `p` to `q` minimizes the loss at `H(q)`.
 
-Use prerequisite routing. For example, deriving the softmax-cross-entropy gradient may require:
+If the prerequisite chain is large, open a bounded foundation detour and bookmark the exact paper location to resume.
 
-1. function versus evaluated value;
-2. derivative as local sensitivity;
-3. multivariable functions and partial derivatives;
-4. composition and the chain rule;
-5. logits and softmax probabilities;
-6. cross-entropy as a function of those probabilities;
-7. only then the combined result.
+## 8. Foundation detours
 
-Teach one dependency at a time. Each detour must include:
+Open a detour only when the unresolved prerequisite blocks the paper question. Teach one dependency at a time. A detour must contain:
 
-- why this prerequisite is needed for the paper question;
-- one realistic but bounded example;
+- why this prerequisite is needed now;
+- one realistic, bounded example;
 - one reconstruction check;
-- an explicit bookmark for returning to the paper.
+- the bookmark for returning to the paper.
 
-Do not use “the optimizer handles it” to hide the computation. Do not derive every theorem either; stop at the depth needed for the learner's current question.
+Do not use “the optimizer handles it” to conceal the mechanism, and do not derive unrelated theory merely because it is adjacent.
 
-## 8. Phase F — evidence and scientific interpretation
+## 9. Confusion repair
 
-Maintain a claim ledger when the explanation includes novelty, superiority, or historical comparison:
+When the learner reports confusion:
 
-| Claim | Status | Locator or basis | Scope and caveat |
-|---|---|---|---|
-| architecture or objective | paper fact | section/equation/figure | paper version |
-| mechanism benefit | author claim or inference | passage or reasoning | may lack isolation |
-| measured improvement | direct evidence | table/metric | dataset and baseline |
-| implementation behavior | code fact | file/function/commit | code version |
-| novelty relative to field | literature synthesis | checked comparison set | never universal by default |
+1. Restate the first failing link precisely.
+2. Classify the gap as vocabulary, mechanism, computation, mathematics, evidence, lifecycle, or notation.
+3. Remove concepts introduced downstream of that link.
+4. Check for an omitted reason, unstable symbol, mixed clock, pseudo-concrete number, or teaching simplification that changed the real structure.
+5. Re-explain with the same scenario at one lower dependency level.
+6. Ask one bounded reconstruction question rather than “懂了吗?”.
+7. Resume only after the link is stable.
 
-When evidence does not isolate a component, say that the result supports the full system rather than proving that component caused the gain.
+Do not restart the whole chapter or replay the established ledger.
 
-## 9. Phase G — selective cross-paper comparison
+## 10. Round and handoff contract
 
-Compare mechanisms, not paper titles. First identify the axis under discussion, then group only relevant works into families such as:
+For a deep-dive round:
 
-- continuous latent prediction;
-- discrete token prediction;
-- direct trajectory regression;
-- action primitives or discretized controls;
-- auxiliary world-model supervision;
-- shared generative backbone.
+- resolve one exact question;
+- add one primary mechanism and at most two necessary supporting concepts;
+- reuse stable notation without replaying setup;
+- separate training from inference and teaching constructions from paper facts;
+- finish with one newly established link and one next unresolved link, without a full recap.
 
-For each relevant family, summarize approximate prevalence within the checked set, the common mechanism, and the meaningful difference from the focal paper. Omit papers that do not address that axis.
-
-Use three labels:
-
-- **Common foundation** — broadly shared idea or routine practice.
-- **Subset choice** — one of several established design families.
-- **Paper-specific contribution** — a combination or mechanism that appears distinctive within the checked evidence.
-
-Never infer uniqueness from absence in a small reading list.
-
-## 10. Confusion recovery audit
-
-When an explanation fails, inspect these likely causes before adding another example:
-
-- The reason for an operation was omitted.
-- Too many dependencies were introduced in one round.
-- A symbol changed meaning or appeared before definition.
-- A realistic-scale example still lacked causal logic.
-- A toy example changed the real task's structure.
-- Training, inference, data time, and curriculum time were mixed.
-- A result was presented as a derivation.
-- A scalar loss value was confused with the loss function.
-- A paper statement was confused with the teacher's inference.
-- A comparison included irrelevant papers or overstated scope.
-- Established content was repeated in anticipation of confusion rather than because confusion was observed.
-- The same claim was presented in several formats without adding a new relationship.
-- Invented numbers created a concrete appearance without exposing a calculation.
-- A simplified account changed “not visible because of masking” into “not present in the computation.”
-
-Fix the earliest cause, not the latest visible symptom.
-
-## 11. Preserve state across rounds
-
-End a long teaching turn with an internal handoff in this form:
+For a multi-round internal handoff, record only changed state:
 
 ```text
 Established:
@@ -260,5 +174,3 @@ Paper location paused at:
 Do not introduce yet:
 Next reconstruction check:
 ```
-
-The next turn should begin at the recorded gate. Do not restart the paper, replay the `Established` entries, or promise to connect everything in a single future response. A closing handoff is state, not a second summary: record only what changed during the current round.

@@ -1,143 +1,106 @@
 ---
 name: paper-teaching
-description: "Teach a technical research paper progressively and interactively, from the semantic mainline through mechanism, computation, mathematics, and evidence. Use when explaining or continuing to explain a paper, designing a paper-learning sequence, or repairing a learner's partial understanding. Do not use for a one-shot abstract summary that needs no teaching progression."
+description: "Teach and synthesize technical research papers by identifying their core claims, minimal mechanisms, evidence, novelty boundaries, and deployment lifecycle, with computation or mathematics taught only when needed. Use for progressive explanation, confusion repair, cross-paper comparison, or research-note creation; not for a one-shot abstract summary with no teaching or evidence analysis."
 ---
 
 # Paper Teaching
 
-Build an understanding the learner can reconstruct, not merely recognize while reading.
+Help the learner reconstruct what a paper claims, how it works, what evidence supports it, and what remains unproven. Do not turn paper reading into a compulsory tour through every tensor operation or mathematical prerequisite.
 
-## Before teaching
+## Choose the teaching mode
 
-1. Establish the source boundary: paper text, supplement, code, related papers, and what has not been checked.
-2. Translate different papers' terminology into common technical language before comparing them.
-3. Infer the learner's current layer from their questions. Never treat semantic understanding as proof of computational or mathematical understanding.
-4. For multi-round teaching, confusion repair, mathematics, or cross-paper comparison, read [the teaching protocol](references/teaching-protocol.md).
+Use the narrowest mode that fits the request.
 
-## Track six understanding layers
+1. **Claim-and-evidence orientation (default)** — Identify the problem, a small set of primary claims, minimal implementation, evidence, comparison scope, and limits. Use this for first explanations, framework understanding, paper synthesis, and deciding what deserves deeper study. Read [claim-evidence-note.md](references/claim-evidence-note.md).
+2. **Mechanism deep dive** — Trace one requested mechanism through data, operations, targets, losses, parameter updates, or decoding. Use only when the detail affects understanding, evaluation, or reproduction. Read [teaching-protocol.md](references/teaching-protocol.md).
+3. **Confusion repair** — Stop expansion, locate the first broken dependency, and repair it at one lower level. Read [teaching-protocol.md](references/teaching-protocol.md).
+4. **Evidence-grounded research note** — Produce a compact problem → claim → mechanism → evidence → boundary record. Read [claim-evidence-note.md](references/claim-evidence-note.md).
 
-| Layer | Learner can answer |
+When modes overlap, begin with claim-and-evidence orientation and enter a deep dive only at a justified gate.
+
+## Start with a claim map
+
+Before teaching, establish the source boundary and internally record:
+
+- the paper's stated problem and whether the framing itself has been checked;
+- the smallest useful set of **primary claims** that define the paper, usually two to four;
+- **supporting mechanisms** that solve difficulties created by those claims;
+- **generic components** such as standard attention, losses, optimizers, LoRA, or known tokenizers;
+- the minimum training and inference lifecycle needed to understand the claims;
+- the experiment, theorem, code fact, or comparison that supports each claim;
+- the nearest relevant alternatives and the checked comparison set.
+
+Do not flatten primary claims, supporting mechanisms, and generic components into one list of equal “innovations.” An experiment can reveal what the authors intend to validate, but an ablation does not by itself establish novelty.
+
+## Apply the detail-value gate
+
+Before explaining a technical detail, ask whether it is needed to do at least one of the following:
+
+- identify or distinguish a core contribution;
+- understand the paper's essential data flow or lifecycle;
+- evaluate an experimental or mathematical claim;
+- compare against the nearest mechanism family;
+- reproduce the requested part of the method;
+- repair a dependency the learner has explicitly exposed.
+
+If none applies, defer the detail. State its functional role in one sentence if needed. Hidden dimensions, projection matrices, softmax derivatives, and optimizer mechanics are not default teaching goals merely because they appear in the implementation.
+
+## Default claim-first workflow
+
+1. **Position the paper** — One concrete task, inputs, outputs, deployment graph, and one-sentence technical identity.
+2. **Separate the problem from the rhetoric** — Distinguish a field-level problem, an author framing, and an unchecked historical claim.
+3. **Rank the contributions** — Primary claims, supporting mechanisms, and generic components.
+4. **Give the minimum mechanism** — Explain only the data flow required to make the claims meaningful, including what is shared, predicted, supervised, retained, or removed.
+5. **Audit the evidence** — For each primary claim, state what supports it, what alternative explanation remains, and how far the conclusion can extend.
+6. **Compare selectively** — Normalize terminology and compare only relevant mechanism families within the checked set.
+7. **Choose the next depth** — Continue to experiments, consolidate into a note, or open one bounded mechanism/foundation deep dive.
+
+Do not postpone evidence until after an exhaustive architecture or mathematics tutorial.
+
+## Use understanding layers as diagnostics, not a curriculum
+
+| Layer | Diagnostic question |
 |---|---|
-| S — Semantics | What problem is being solved, and what is the high-level idea? |
-| M — Mechanism | What enters each module, what operation happens, and what exits? |
-| C — Computation | What are the tensors, shapes, targets, probabilities, losses, updates, and decoding steps? |
-| F — Foundations | Why does the mathematical operation work, and where does its formula come from? |
-| E — Evidence | Which statements are paper facts, author claims, measured results, or interpretation? |
-| T — Transfer | How does this choice differ from relevant alternative mechanism families, and when would it fail? |
+| S — Semantics | Can the learner state the problem and proposal? |
+| M — Mechanism | Can the learner trace the essential data flow? |
+| C — Computation | Can the learner reconstruct shapes, targets, probabilities, losses, and decoding? |
+| F — Foundations | Can the learner justify the required mathematical operation? |
+| E — Evidence | Can the learner distinguish claim, result, inference, and limitation? |
+| T — Transfer | Can the learner compare the nearest alternatives and failure conditions? |
 
-Maintain a small internal state for every important concept: `unintroduced`, `semantic`, `mechanistic`, `computational`, or `reconstructable`. If the learner says “the meaning is clear, but I cannot describe the actual process,” mark S as established and C/F as unresolved. Do not repeat S with new wording.
+For ordinary paper understanding, prioritize `S → essential M → E → T`. Enter C or F only when the detail-value gate passes. Semantic understanding is not proof of computational understanding, but computational mastery is also not required for every paper judgment.
 
-## Maintain an established-knowledge ledger
+## Preserve continuity without repetition
 
-For multi-round teaching, keep an internal ledger of concepts the learner has already established. Treat the ledger as a compression contract:
+Maintain an internal established-knowledge ledger for multi-round teaching:
 
-- Reuse established concepts in one short reference; do not redefine, re-table, re-example, or re-summarize them.
-- Repeat only to correct an error, connect an established concept to a genuinely new mechanism, or answer an explicit request. State the reason when repeating.
-- If a concept appears in the main explanation, do not restate it in a second table, flow, and closing summary.
-- Do not make each round independently self-contained. Continuity is part of the teaching method.
-- When unsure whether an old concept is stable, use one small reconstruction check instead of reteaching it preemptively.
+- `established` — reference briefly; do not redefine, re-table, re-example, or re-summarize;
+- `new this round` — emphasize only the relationships being added;
+- `deferred` — exclude explicitly when adjacent detail would distract;
+- `blocked` — record the earliest missing prerequisite.
 
-Before drafting, separate `established`, `new this round`, and `deferred`. The visible answer should emphasize only `new this round`.
+Repeat only to correct an error, connect to a genuinely new relationship, or answer an explicit request. Do not make every round independently self-contained. When stability is uncertain, use one bounded reconstruction check instead of preventive reteaching.
 
-## Default teaching progression
+## Preserve evidence and comparison discipline
 
-Teach in this order, but stop at the learner's current gate instead of forcing all stages into one answer.
+Classify material claims as **paper fact**, **author claim**, **direct evidence**, **code fact**, **mathematical consequence**, **literature synthesis**, **teaching construction**, **inference**, or **unknown**.
 
-1. **Orientation** — One concrete scenario, the paper's task, inputs, outputs, and one-sentence contribution.
-2. **Mechanism** — Trace one sample through the system. Name modules only after explaining their jobs.
-3. **Lifecycle** — Separate data preparation, training modes or stages, parameter updates, and inference. State what is shared, frozen, newly added, or discarded.
-4. **Representation** — Explain what each representation preserves, makes easy, and loses. Use a concrete counterfactual: “If this paper used the alternative representation, which operations would change?”
-5. **Computation** — Walk through one realistic training or inference case with stable notation, shapes, selected values, target construction, output, and update destination.
-6. **Foundations** — When a prerequisite gap appears, pause the paper and teach only the shortest dependency chain needed to remove it.
-7. **Evidence and comparison** — Audit claims and compare only relevant mechanism families.
-8. **Consolidation** — Ask the learner to reconstruct one bounded path; repair the first missing link rather than introducing more content.
+- Novelty claims require a relevant comparison set; negative universal claims require especially strong evidence.
+- Translate synonymous terminology into shared technical language before comparing papers.
+- Group relevant works into mechanism families; omit papers unrelated to the current axis.
+- Use calibrated scope such as “within the checked set” or “several compared works.”
+- Match the required evidence to the strength of the claim. Failure to prove reactive closed-loop validity does not erase evidence for action-conditioned sensitivity; it limits the conclusion to the lower evidence level.
+- Separate training-time knowledge shaping from deployment-time computation. Shared training does not imply that a predicted future remains on the online action path.
 
-## Use a fixed round contract
+## Final check
 
-Each teaching round must:
+Before responding, verify:
 
-1. State the exact question being resolved.
-2. Name the one primary mechanism added in the round. Introduce at most two supporting concepts unless the learner asks for a broader synthesis.
-3. Reuse one stable scenario and notation ledger without replaying its established setup.
-4. Explain every step as: **current problem → why the next operation is needed → operation → result → boundary**.
-5. Define every symbol next to the formula where it first appears in that round.
-6. Separate training from inference and distinguish teaching examples from paper-reported facts.
-7. End with one sentence for `newly established` and one for `next unresolved`; do not summarize the whole round again.
-
-When the learner challenges a step, stop onward expansion. Repair that exact dependency first.
-
-## Preserve real structure in examples
-
-- Use realistic vocabulary sizes, tensor ranks, sequence lengths, or module structure when they matter.
-- Show only a few selected or top-k entries from a large vector; do not shrink a 16,384-class problem into four classes if that changes what the learner thinks an index means.
-- Keep these namespaces visibly distinct: time position, spatial position, token ID, vector index, class candidate, and iterative editing round.
-- Do not replace a soft target with one-hot merely to simplify arithmetic. If a simplified teaching construction is used, say exactly what was simplified and what remains unchanged.
-- Keep the same example across adjacent rounds so new detail attaches to an existing mental model.
-- A concrete-looking number is useful only if the learner can trace how it was obtained or what distinction it exposes. Do not add arbitrary token IDs, probabilities, dimensions, or table rows merely to make an explanation look concrete.
-- Label the boundary once before an example: list which values are paper-reported, which are teaching constructions, and which mechanism details remain unknown. Do not leave invented values visually indistinguishable from evidence.
-- After writing an example, run the **pseudo-concreteness check**: if removing the numbers leaves the learner with the same understanding, replace them with a shorter structural explanation; if the numbers matter, show their causal or computational relationship.
-
-## Enforce formula discipline
-
-Never drop a compact formula as though it were an explanation.
-
-- Distinguish a function such as `L(theta)` from its current evaluated value such as `L(theta_current) = 2.00`.
-- Distinguish learned parameters, intermediate variables, constants, targets, and observed values.
-- Before connecting one scalar loss to many parameters, establish multivariable functions, partial derivatives, the computation graph, and the chain rule or automatic differentiation.
-- If a result such as `dL/ds = p - q` is needed, either derive it from already established prerequisites or label it as a result being temporarily used without derivation. Do not blur those two states.
-- For soft-target cross-entropy, do not claim the minimum is zero. Explain its decomposition `H(q,p) = H(q) + KL(q || p)` when relevant: matching `p` to `q` minimizes the loss, whose minimum is `H(q)`.
-
-If the required prerequisite is too large, open a bounded foundation detour and record where the paper explanation is paused.
-
-## Compare papers selectively
-
-Do not march through every paper or force comparisons with unrelated work.
-
-1. Group relevant papers into a small number of mechanism families.
-2. State whether a point is field consensus, used by a subset, or a paper-specific contribution.
-3. Compare against the nearest meaningful alternatives on the same axis.
-4. Normalize synonymous terminology into one shared description, while preserving important implementation differences.
-5. Use calibrated scope: “several compared works,” “within the checked set,” or “this paper appears unique on this axis.” Never turn an unchecked subset into “all prior work.”
-
-## Use explicit evidence grammar
-
-Classify material claims as one of:
-
-- **Paper fact** — directly stated architecture, objective, data, or procedure.
-- **Author claim** — the authors' interpretation or novelty claim.
-- **Direct evidence** — supported by an experiment, table, figure, ablation, or theorem.
-- **Code fact** — verified in the released implementation.
-- **Mathematical consequence** — follows from stated equations or definitions.
-- **Teaching construction** — an example invented only for explanation.
-- **Inference** — a reasoned interpretation not directly asserted.
-- **Unknown** — not established by checked sources.
-
-Novelty claims require checking the relevant comparison set. Negative universal claims require especially strong evidence.
-
-## Recover from confusion
-
-When the learner reports confusion:
-
-1. Quote or restate the first failing link precisely.
-2. Identify whether the gap is vocabulary, mechanism, computation, mathematics, evidence, or notation.
-3. Remove downstream concepts introduced after that link.
-4. Re-explain with the same scenario at one lower dependency level.
-5. Check one bounded question that requires reconstruction, not “懂了吗?”.
-6. Resume the paper only after that link is stable.
-
-## Final self-check
-
-Before sending a teaching response, verify:
-
-- Did I explain why each operation exists, not only what happens?
-- Can the learner identify inputs, outputs, supervision, and parameter-update destinations?
-- Is every new symbol defined locally and used consistently?
-- Did I separate function, value, variable, and parameter?
-- Did I preserve realistic structure without overwhelming detail?
-- Did I distinguish evidence from interpretation and novelty from shared practice?
-- Did I compare only relevant alternatives at an appropriate level of aggregation?
-- Did I stop at the current learning gate rather than covering the whole paper?
-- Did I avoid reteaching anything already in the established-knowledge ledger?
-- Is there exactly one primary new mechanism, with no more than two necessary supporting concepts?
-- Do numerical examples reveal a real calculation or distinction rather than imitate concreteness?
-- Did I avoid presenting inaccessible clean targets as absent from the computation when they may instead be isolated by a mask?
+- Are the paper's primary claims visible before low-level details?
+- Did I distinguish a field foundation, a route choice, and a paper-specific design?
+- Is the mechanism explanation the minimum needed for the current goal?
+- Does every major conclusion have an evidence status and scope boundary?
+- Did I avoid forcing irrelevant paper-by-paper comparisons?
+- Did I separate training, inference, data time, and solver/refinement time?
+- Did I avoid reteaching established knowledge?
+- If I used formulas or numerical examples, did they expose a real dependency rather than imitate concreteness?
