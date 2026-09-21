@@ -1,7 +1,7 @@
 # nuPlan / OpenScene / NAVSIM 下载决策：WAM 代码级审计
 
 > 状态：2026-09-19  
-> 目标：把 `datasets/NUPLAN_DATASET_AUDIT.md` 的数据集认知进一步落到“现在究竟应该下载什么、暂时不要下载什么”。  
+> 目标：把同目录 `NUPLAN_DATASET_AUDIT.md` 的数据集认知进一步落到“现在究竟应该下载什么、暂时不要下载什么”。
 > 原则：**论文写了 nuPlan，不等于需要完整 raw nuPlan；README 写了 download all splits，也不等于模型实际读取全部传感器。以 dataloader / preprocessing / config 为最高工程证据。**
 
 ---
@@ -876,7 +876,7 @@ Epona → CAM_F0
 
 完整现场记录：
 
-`datasets/NUPLAN_210_INVENTORY_2026-09-19.md`
+该 2026-09-19 专项 inventory 已由 `datasets/resource_inventory_20260921.md` 取代；当前现场事实只认后者。
 
 ## 11.1 对 404 的进一步解释
 
@@ -926,4 +926,3 @@ sync.arrow
 等 modality 的总字节，作为“自研高频 WAM 最小数据包”的候选容量。
 
 因此下一轮仍然是**只读 metadata audit**，不是下载。
-

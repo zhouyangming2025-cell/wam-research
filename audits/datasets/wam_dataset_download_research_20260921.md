@@ -4,7 +4,7 @@
 
 本文件基于：
 
-- `datasets/wam_field_dataset_census_20260921.md`：65 个论文条目的 source-first 数据使用底账；
+- `audits/datasets/wam_field_dataset_census_20260921.md`：65 个论文条目的 source-first 数据使用底账；
 - `datasets/resource_inventory_20260921.md`：210 当前正式数据池约 5.13 TiB；
 - 2026-09-21 对官方项目页、官方 GitHub、官方 Hugging Face / Google Cloud 下载页的逐项核查。
 

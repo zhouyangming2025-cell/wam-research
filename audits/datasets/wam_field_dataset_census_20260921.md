@@ -473,19 +473,18 @@ GAIA-1 使用约 **4,700 h** proprietary London driving data。它说明领域�
 
 当前机器数据事实：
 
-- [resource_inventory_20260921.md](./resource_inventory_20260921.md)
+- [resource_inventory_20260921.md](../../datasets/resource_inventory_20260921.md)
 - inventory commit: `ea2f5f9330e8591080e56b4da293f7c0e18739ef`
 
 ### 关键数据/benchmark 原文条目
 
-- [P0030 nuScenes](../papers/raw_md/P0030_nuScenes/P0030_nuScenes.raw.md)
-- [P0031 nuPlan](../papers/raw_md/P0031_nuPlan/P0031_nuPlan.raw.md)
-- [P0032 NAVSIM](../papers/raw_md/P0032_NAVSIM/P0032_NAVSIM.raw.md)
-- [P0033 Bench2Drive](../papers/raw_md/P0033_Bench2Drive/P0033_Bench2Drive.raw.md)
-- [P0034 HUGSIM](../papers/raw_md/P0034_HUGSIM/P0034_HUGSIM.raw.md)
+- [P0030 nuScenes](../../papers/raw_md/P0030_nuScenes/P0030_nuScenes.raw.md)
+- [P0031 nuPlan](../../papers/raw_md/P0031_nuPlan/P0031_nuPlan.raw.md)
+- [P0032 NAVSIM](../../papers/raw_md/P0032_NAVSIM/P0032_NAVSIM.raw.md)
+- [P0033 Bench2Drive](../../papers/raw_md/P0033_Bench2Drive/P0033_Bench2Drive.raw.md)
+- [P0034 HUGSIM](../../papers/raw_md/P0034_HUGSIM/P0034_HUGSIM.raw.md)
 
 ### 本轮额外核验
 
 - ProSim official repository: https://github.com/Ariostgx/ProSim
 - ProSim paper: https://arxiv.org/abs/2409.05863
-

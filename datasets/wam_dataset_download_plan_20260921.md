@@ -2,9 +2,9 @@
 
 ## 0. 任务与口径
 
-本文件承接两份已有底账：
+本文件以两类底账为依据：
 
-- `datasets/wam_field_dataset_census_20260921.md`：65 篇论文逐篇核实“实际用了什么数据”；
+- `audits/datasets/wam_field_dataset_census_20260921.md`：65 篇论文逐篇核实“实际用了什么数据”；
 - `datasets/resource_inventory_20260921.md`：210 开发机正式数据根的现场事实。
 
 本轮只回答一个问题：缺失/部分覆盖的数据，到底哪些应该下载、下载什么、哪些应该复用已有 raw data、哪些应该等待或按需生成。
@@ -12,6 +12,8 @@
 对每项尽量核查：官方/作者发布源、当前版本、体量、模态、许可、是否 gated、与 210 的重复关系。官方没有给出统一字节数或 dataset-specific license 的，保留 UNKNOWN，不用第三方估算冒充官方数字。
 
 > 重要：210 的“未见”仅表示 2026-09-21 正式数据根 inventory 未记录。真正开跑下载前，还应做目标路径 existence / manifest / hash 检查。
+
+> 本文负责“下什么”，不规定一条固定传输路线。实际执行必须遵循 WAM 工作根的 `文档/DOWNLOAD_SOP.md`：Windows 负责必要的登录、mint 和 queue；210 对可达的公开对象直接搬运字节。只有现场证明 210 无法搬运时，才设计 Windows staging + SSH 的例外路线。
 
 ---
 
@@ -279,9 +281,9 @@ Turning-nuScenes 完全建立在 nuScenes validation 上。GraphWorld 原文给�
 
 ---
 
-## 13. 与现有文档的职责分工
+## 13. 文档职责
 
-- 论文→数据使用事实：`wam_field_dataset_census_20260921.md`；
+- 论文→数据使用事实：`../audits/datasets/wam_field_dataset_census_20260921.md`；
 - 210 当前磁盘事实：`resource_inventory_20260921.md`；
 - 本文件：官方源/版本/体量/许可/gate/重复关系 → 下载决策。
 
