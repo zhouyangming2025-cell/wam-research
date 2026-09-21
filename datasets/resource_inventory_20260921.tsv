@@ -1,0 +1,15 @@
+dataset	subset	state	bytes	files_or_payloads	sidecars	acceptance_evidence	path
+openscene	openscene-v1.1	landed_609_hash_1_size_only	2545682394232	609	609	soak_full_b_audit.json	/mnt/nas/planning/zhouyangming/wam_datasets/openscene/openscene-v1.1
+openscene	navsim	landed	449007425603	-	-	soak_full_b_audit.json	/mnt/nas/planning/zhouyangming/wam_datasets/openscene/navsim
+openscene	navsim-v2	landed	50241887601	-	-	soak_full_b_audit.json	/mnt/nas/planning/zhouyangming/wam_datasets/openscene/navsim-v2
+nuplan	v1.1/sensor_blobs/test_set	pass_size_tar_no_upstream_hash	1695274394424	24	24	nuplan_v1.1_test_20260917_acceptance_corrected.txt	/mnt/nas/planning/zhouyangming/wam_datasets/nuplan/v1.1/sensor_blobs/test_set
+nuplan	v1.1/sensor_blobs/extracted_CAM_F0	present_extracted	1079972195	5100_jpg_approx	0	现场目录扫描	/mnt/nas/planning/zhouyangming/wam_datasets/nuplan/v1.1/sensor_blobs/2021.05.12.22.00.38_veh-35_01008_01518
+nuplan	v1.1/splits/mini	present	14351192064	64_db	0	asset inventory	/mnt/nas/planning/zhouyangming/wam_datasets/nuplan/v1.1/splits
+nuplan	mini_lidar_0	present_archive	74069152445	1	0	asset inventory	/mnt/nas/planning/zhouyangming/wam_datasets/nuplan/nuplan-v1.1_mini_lidar_0.zip
+nuplan	maps	present_archive	1426619540	7	0	asset inventory	/mnt/nas/planning/zhouyangming/wam_datasets/nuplan/maps
+nuscenes	v1.0_core_full	pass_tar_inventory_13_of_13	372554105065	13	0	nuscenes_v1.0_core_current_20260917_resume_nopromote_acceptance.progress.json	/mnt/nas/planning/zhouyangming/wam_datasets/nuscenes/v1.0
+nuscenes	trainval01_camera_supplement	present	17590765342	1	1	asset inventory	/mnt/nas/planning/zhouyangming/wam_datasets/nuscenes/v1.0-trainval01_blobs_camera.tgz
+nuscenes	CAN_bus	pass_zip_7834_members	780974697	1	1	nuscenes_extensions_20260918_acceptance.txt	/mnt/nas/planning/zhouyangming/wam_datasets/nuscenes/can_bus.zip
+nuscenes	Map_Expansion_v1.3	pass_zip_13_members	398535531	1	1	nuscenes_extensions_20260918_acceptance.txt	/mnt/nas/planning/zhouyangming/wam_datasets/nuscenes/nuScenes-map-expansion-v1.3.zip
+bench2drive	v0.0.4_no_depth	pass_sha256_and_container	415362512861	1100	1100	b2d_v004_20260919_resume_acceptance.txt	/mnt/nas/planning/zhouyangming/wam_datasets/bench2drive/v0.0.4_no_depth
+bench2drive	v0.0.4_map	pass_sha256_and_container	3146330646	12	12	b2d_v004_20260919_resume_acceptance.txt	/mnt/nas/planning/zhouyangming/wam_datasets/bench2drive/v0.0.4_map

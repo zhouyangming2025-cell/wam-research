@@ -1,0 +1,61 @@
+{
+  "generated_at": "2026-09-21T10:49:44+08:00",
+  "scope": {
+    "formal_data_root": "/mnt/nas/planning/zhouyangming/wam_datasets",
+    "control_root": "/mnt/nas/planning/zhouyangming/wam",
+    "method": "read-only live scan; latest du -sb for four formal top-level directories",
+    "download_started": false,
+    "destructive_actions": false
+  },
+  "formal_data_total": {
+    "bytes": 5640966287240,
+    "tib": 5.1304289511,
+    "note": "sum of four top-level du -sb values; avoids mixed walk/du double counting"
+  },
+  "datasets": [
+    {"name":"openscene","bytes":3044931711532,"tib":2.769,"files":1218,"payloads":609,"sidecars":609,"state":"610/610 landed; 609 upstream-hash, 1 size-only","path":"/mnt/nas/planning/zhouyangming/wam_datasets/openscene"},
+    {"name":"nuplan","bytes":1786201342956,"tib":1.624,"files":5220,"sidecars":24,"state":"test 24/24 size+tar pass; no raw trainval observed","path":"/mnt/nas/planning/zhouyangming/wam_datasets/nuplan"},
+    {"name":"nuscenes","bytes":391324385149,"tib":0.356,"files":19,"sidecars":3,"state":"core 13/13 tar inventory pass; extensions pass","path":"/mnt/nas/planning/zhouyangming/wam_datasets/nuscenes"},
+    {"name":"bench2drive","bytes":418508847603,"tib":0.381,"files":2224,"payloads":1112,"sidecars":1112,"state":"1112/1112 SHA256/container pass","path":"/mnt/nas/planning/zhouyangming/wam_datasets/bench2drive"}
+  ],
+  "subsets": [
+    {"dataset":"openscene","subset":"openscene-v1.1","bytes":2545682394232},
+    {"dataset":"openscene","subset":"navsim","bytes":449007425603},
+    {"dataset":"openscene","subset":"navsim-v2","bytes":50241887601},
+    {"dataset":"nuplan","subset":"v1.1/sensor_blobs/test_set","bytes":1695274394424,"files":24,"sidecars":24},
+    {"dataset":"nuplan","subset":"v1.1/sensor_blobs/extracted_CAM_F0","bytes":1079972195},
+    {"dataset":"nuplan","subset":"v1.1/splits","bytes":14351192064,"files":64},
+    {"dataset":"nuplan","subset":"mini_lidar_0.zip","bytes":74069152445,"files":1},
+    {"dataset":"nuplan","subset":"maps","bytes":1426619540,"files":7},
+    {"dataset":"nuscenes","subset":"v1.0_core_full","bytes":372554105065,"files":13},
+    {"dataset":"nuscenes","subset":"trainval01_camera_supplement","bytes":17590765342,"files":1},
+    {"dataset":"nuscenes","subset":"can_bus.zip","bytes":780974697,"members":7834},
+    {"dataset":"nuscenes","subset":"nuScenes-map-expansion-v1.3.zip","bytes":398535531,"members":13},
+    {"dataset":"bench2drive","subset":"v0.0.4_no_depth","bytes":415362512861,"payloads":1100,"sidecars":1100},
+    {"dataset":"bench2drive","subset":"v0.0.4_map","bytes":3146330646,"payloads":12,"sidecars":12}
+  ],
+  "control_root_evidence": {
+    "inventory_json_remote": "/mnt/nas/planning/zhouyangming/wam/cache/p2/wam_inventory_20260921.json",
+    "inventory_tsv_remote": "/mnt/nas/planning/zhouyangming/wam/cache/p2/wam_inventory_20260921.tsv",
+    "part_files_deep_scan": 69,
+    "part_files_bytes_gib_approx": 362.37,
+    "parts_directories": 5,
+    "parts_directories_bytes_gib_approx": 5.31,
+    "zero_byte_files_deep_scan": 2028,
+    "active_wam_processes": 0,
+    "historical_locks_retained": true,
+    "formal_data_root_parts": 0
+  },
+  "local_non_payload": {
+    "root": "D:/zym_information/ZYM/wam",
+    "files": 40486,
+    "bytes": 8521551341,
+    "research_assets_files": 8981,
+    "research_assets_bytes": 2976066533,
+    "paper_research_files": 26959,
+    "paper_research_bytes": 2012376505,
+    "workspace_files": 4062,
+    "workspace_bytes": 1308686763,
+    "counted_in_formal_total": false
+  }
+}
