@@ -1,6 +1,6 @@
 # WAM 12 + WAM+VLA 10：数据资产逐项账本（2026-09-28）
 
-口径：只计 22 篇**自身**的训练、预训练、微调、验证需求；单纯出现在相关工作的数据不计。论文原文固定为仓库 `cb05048dfb822e95d44e52dd85b830c750411e2c` 的 [papers/raw_md](https://github.com/zhouyangming2025-cell/wam-research/tree/cb05048dfb822e95d44e52dd85b830c750411e2c/papers/raw_md)。`官网标称` 是发布方显示的取整量，`字节` 才是可审计的准确量。因可访问的站点未提供公开 `Content-Length` 列表，**不得把前者改写为精确字节**。不查看、不扣减用户存储。单独的 [nuPlan 169 文件清单](nuplan_v1_1_official_file_manifest_2026-09-28.md) 给出每个文件名、页面容量和官方直链。
+口径：只计 22 篇**自身**的训练、预训练、微调、验证需求；单纯出现在相关工作的数据不计。论文原文固定为仓库 `cb05048dfb822e95d44e52dd85b830c750411e2c` 的 [papers/raw_md](https://github.com/zhouyangming2025-cell/wam-research/tree/cb05048dfb822e95d44e52dd85b830c750411e2c/papers/raw_md)。`官网标称` 是发布方显示的取整量，`字节` 只在官方 `Size`/`Content-Length` 或已审计 archive inventory 明确返回整数时才写精确；其余保留发布方近似值或 UNKNOWN。2026-09-28 已从 Motional S3 listing 取得 nuPlan 169 个对象的精确 byte，其他逐篇资产不因此自动变成精确。**不把取整标称数伪装成精确字节。**本轮不检查或扣减 NAS 当前占用。单独的 [nuPlan 169 文件清单](nuplan_v1_1_official_file_manifest_2026-09-28.md) 给出每个对象名、显示容量、精确 byte 和官方直链。
 
 ## 22 篇论文的资产入口（原文事实；`?` 表示论文未给精确训练列表）
 
