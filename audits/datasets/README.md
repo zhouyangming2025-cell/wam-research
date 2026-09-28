@@ -10,6 +10,7 @@
 补充专项证据（不替代资产总账或下载优先级）：
 
 - [22 篇 WAM / WAM+VLA 数据集与容量审计过程](WAM_WAMVLA_22_DATASET_AUDIT_PROCESS_20260928.md)
+- [可能超过 1 TB 的数据资产专项审计](WAM_22_OVER_1TB_ASSET_AUDIT_20260928.md)
 - [22 篇逐论文资产账本](WAM_22_dataset_asset_register_2026-09-28.md)
 - [nuPlan v1.1 官方逐对象 byte manifest](nuplan_v1_1_official_file_manifest_2026-09-28.md)
 - [OpenScene v1.1 官方逐文件 byte manifest](openscene_v1_1_official_file_manifest_2026-09-28.md)（含可机读 [TSV](openscene_v1_1_official_file_manifest_2026-09-28.tsv)）
