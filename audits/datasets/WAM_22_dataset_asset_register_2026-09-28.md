@@ -119,7 +119,7 @@ nuPlan 项 `N` 已从“页面显示 GB 单位不明”升级为官方对象级 
 
 ## 截止本轮的未闭合项与终止标准
 
-1. **nuPlan 已闭合。** 169 个官方对象的精确 `Size` 已抓取；历史“GB/GiB 单位猜测”作废。要估算展开体积或只下载 paper-specific shards，仍需按实际 member/scene 集合另算。
+1. **nuPlan v1.1 公开发布对象账本已闭合，全时段原始传感器尚未闭合。** 169 个官方对象的精确 `Size` 已抓取，历史“GB/GiB 单位猜测”作废。Motional 称已公开 120h raw sensor 约为完整 nuPlan 的 10%（当时约 16 TB）；官方 devkit 描述完整数据超过 1,300h，Motional 较早页面为 1,500h。因此全时段 raw sensor byte 仍 UNKNOWN；按 120h 的官方近似或当前 S3 camera/LiDAR 清单线性外推约 160–240 TB，仅是量级分析，不是官方清单、精确需求或硬上限。公开对象的解压容量及 paper-specific shards 仍需按实际 member/scene 集合另算。详见[>1 TB 专项审计](WAM_22_OVER_1TB_ASSET_AUDIT_20260928.md)、[Motional 120h/10%说明](https://motional.com/news/motionals-nuplan-dataset-will-advance-av-planning-research)及[官方 devkit](https://github.com/motional/nuplan-devkit)。
 2. **OpenScene 官方压缩对象容量已闭合，展开未闭合。**常规 534 项 2,506,457,646,127 B，private 6 项 39,224,624,432 B；全部 540 项 2,545,682,270,559 B。历史目录 inventory 多 123,673 B，包含 sidecar。旧的 0.265 TB“冲突”来自官网取整/单位口径与含 private 的 inventory 相比；不能再作为同范围未解释差额。
 3. **LAW CARLA 189K frames**：作者未公开和该论文对应的 modality/resolution/codec/file manifest/bytes；ThinkTwice 约 8 TB 只能作同规模参照。
 4. **VLA 源媒体**：ReCogDrive/SGDrive 发布 JSONL 需要逐唯一路径映射到 nuScenes/OpenScene/NAVSIM/B2D 或独立源视频；LingoQA 整包已列但 ReCog 实际子集 UNKNOWN；DRAMA、SUTD 原视频文件体积未知。WAM-Flow 3.4M 通用 VQA 的确切 LLaVA-v1.5 来源 split、图像资产与去重 manifest 未公开。
