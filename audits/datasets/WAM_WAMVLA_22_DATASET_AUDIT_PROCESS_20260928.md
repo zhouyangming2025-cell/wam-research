@@ -6,6 +6,7 @@
 
 - [22 篇论文逐篇数据资产账本](WAM_22_dataset_asset_register_2026-09-28.md)：逐篇训练/预训练、微调、评测数据；父数据/派生包/annotation 与独立媒体的关系；当前已知容量、证据和未闭合项；高概率与可定价组合的算术。
 - [nuPlan v1.1 官方对象 byte manifest](nuplan_v1_1_official_file_manifest_2026-09-28.md)：从官方 S3 对象 `Size` 字段得到的 169 项精确压缩容量。
+- [OpenScene v1.1 官方文件级 manifest](openscene_v1_1_official_file_manifest_2026-09-28.md)：官方固定 revision 下 540 个对象，另附 [逐文件 TSV](openscene_v1_1_official_file_manifest_2026-09-28.tsv)；用于消解官方页面与历史目录 inventory 的口径差。
 - 已有背景资产不重复抄写：[65 篇数据集 census](../../audits/datasets/wam_field_dataset_census_20260921.md)、[2026-09-21 资产 inventory](../../datasets/resource_inventory_20260921.md)、[nuPlan/OpenScene/NAVSIM 血缘审计](../../audits/datasets/NUPLAN_DATASET_AUDIT.md)。
 
 ## 用户目标和审计口径如何收敛
@@ -74,6 +75,8 @@ nuScenes Core Full 与 QA/benchmark 子集也采用母体依赖思路；DriveLM/
 
 ### 阶段 7：重算 high / all 的条件容量和
 
+以下数字保留首次提交时的历史计算过程；**现行口径见阶段 8 与资产账本**，不可将本段当最终容量表。
+
 高概率资产定义为频次高或明确支撑多个 WAM/WAM+VLA 复现路线的组合，而非近期下载队列。主情景保留完整 nuPlan、OpenScene 父体、NAVSIM v2 synthetic 包、nuScenes、旧 Bench2Drive Base 与现行 v0.0.4，再加 VLA 的多个小 annotation 包。基于当前可核容量，资产账本给出：
 
 - **high 条件组合：nuPlan 20.280630002024 TB + 其余 3.816689510071 TB =24.097319512095 TB。**
@@ -91,8 +94,18 @@ nuScenes Core Full 与 QA/benchmark 子集也采用母体依赖思路；DriveLM/
 
 ## 当前结论与后续 closure gate
 
-**【当前可确认】**已完成 22 篇范围内的逐篇数据入口表、父/子 lineage 区分、可见发布包体积核验；最大 nuPlan 官方下载清单现在达到逐对象精确 byte。**【仍未确认】**全量 22 篇数据盘需要不是一个闭合数字，因为 LAW CARLA 原始资产、VLA QA 源媒体映射、WAM-Flow 3.4M 图像、GraphWorld/DriveBench corruption、部分 benchmark 子集和私有 W0 都缺确切文件级 bytes；OpenScene 显示值与历史 archive inventory 仍冲突。完整资产目录是现在的可复核产物，不等于容量审计已全部关闭。
+**【当前可确认】**已完成 22 篇范围内逐篇数据入口表、父/子 lineage 区分，以及 nuPlan 官方对象逐项 byte；后续已取 OpenScene 官方固定 revision 的 540 项文件级 `size`，见阶段 8。**【仍未确认】**全量 22 篇数据盘需求不是闭合数字：LAW CARLA 原始资产、VLA QA 源媒体映射、WAM-Flow 3.4M 图像、GraphWorld/DriveBench corruption、部分 benchmark 子集和私有 W0 仍缺可匹配的文件级 bytes。完整资产目录是现在的可复核产物，不等于容量审计已全部关闭。
 
 要把容量审计关闭，下一轮必须按账本 UNKNOWN 行逐个获取官方文件 manifest / API `Size` / `Content-Length`，并把每个 paper 的路径抽取到源媒体 ID；一项一行记录 `asset_id, paper_id, role, version, split, modality, shard, exact_bytes, source, duplicate_of, public/private, compressed/unpacked`。接着分别计算：（a）高概率最小可复现组合，（b）22 篇全部公开原始数据/标注/评测协议组合，（c）私有数据的独立 UNKNOWN，不允许以公开替代。对于父体和派生 archive，用相同文件 SHA 或上游 object ID 去重；对无 hash 的重叠只给独立下载包情景与逻辑去重情景两列。最后由 zip/tar central directory 或公开解包 byte 数计算展开与峰值需求。
 
 本轮只读公共项目论文文件、公开网站与官方 object metadata；没有检查 NAS 现场、没有下载数据包、没有解压/搬移/删除数据、没有修改资产 inventory 或当前 scientific state。仓库提交本审计材料后仍须以文档所列 UNKNOWN 为未决事项继续审计。
+
+## 阶段 8：官方 OpenScene 清单与专项缺口推进（2026-09-28，后续提交）
+
+【官方文件事实】固定 `OpenDriveLab/OpenScene` HF revision `a76f840b65e972bc45e56c2adced897498e9a026`，分页读取 620 个条目，筛出 `openscene-v1.1/` 540 个文件；常规 mini/trainval/test 534 项共 **2,506,457,646,127 B**，private test 6 项共 **39,224,624,432 B**，全部共 **2,545,682,270,559 B**。项目旧目录 inventory **2,545,682,394,232 B** 比官方对象和大 123,673 B，目录含 sidecar。旧差额 0.265 TB 主要是拿官网取整九项与**含 private** 的目录比较；不得再称同范围未解冲突。官方明细和文件 URL 已在新 manifest，未下载 payload。NAVSIM v1 独立 archive 在同一官方 revision 为 **449,007,410,406 B**，v2 五包为 **50,241,882,946 B**；历史目录对应多 15,197 B、4,655 B，疑为 sidecar（未逐 sidecar 独立验算）。逻辑父子关系已知，archive 内容同一性没有 SHA 证明。
+
+【原文/作者事实】LAW 明确 CARLA **0.9.10.1**、Roach 教师、189K 帧；论文的 CARLA 输入 resize 900×256 属于训练预处理，不提供原图分辨率。检查作者公开 `BraveGroup/LAW` 代码后仅发现 nuScenes 数据准备/训练说明，没有该 CARLA 采集包及文件 manifest；因此无法公开定价。ReCogDrive 作者公开 17 个 JSONL 对象，固定 HF revision `f55bb18e0aca846bbedfb516760a1b9b7cfe3ebf` 的 `size` 合计 **3,789,771,567 B**，仍仅是标注；全量唯一路径归属和独立媒体字节未完成。WAM-Flow 作者模型仓 `data/navsim_668k.jsonl` 为 **414,319,989 B** 的 NAVSIM 标注，并非 3.4M 通用 VQA 的图像包。
+
+【官方 Zenodo 事实】`records/7431011` 九个文件 `size` 合计 **20,534,486,181 B**：四个 `.h5` 分别是 motion、ResNet101、ResNet18、MobileNetV2 预计算特征，其余是 JSONL 与视频 ID 映射；record 没有原始视频文件。SUTD 源媒体与 ReCogDrive 样本路径的对应及原始视频发布字节保持 UNKNOWN。
+
+【修订算术】原 high/all 条件和均减去 `2,545,682,394,232 − 2,506,457,646,127 = 39,224,748,105 B`，对应 **约 24.058 TB / 约 29.588 TB**；加 ThinkTwice 同规模参考为 **约 37.588 TB**。旧约 24.097/29.627/37.627 TB 不再是当前口径。这些组合混有网页约数、整库对论文子集的替代及未计价媒体，既不是完整下界也不是上界。高概率 nuPlan 仍保留完整 v1.1；NAVSIM 采用父体逻辑覆盖场景，若另存 navtrain archive 再单列包留存。压缩包、解压后、预处理峰值三列中后两列仍 UNKNOWN。私有 70M 帧独立标 PRIVATE/UNKNOWN，公开资料下全量上限**无法确定**。
