@@ -117,3 +117,17 @@ nuScenes Core Full 与 QA/benchmark 子集也采用母体依赖思路；DriveLM/
 【官方可访问性事实】Honda DRAMA 给出 17,785 个约 2 秒片段、双摄像机采集参数，但原始数据须由高校邮箱申请，公开页面未列文件 bytes，记 **RESTRICTED/UNKNOWN**。SUTD 官方 GitHub 提供原 dataset 的下载申请入口；Zenodo record 的九文件清单只覆盖 feature 和标注，因此应表述为“该 record 不含原视频”，不能误写成“SUTD 原视频没有发布”。两者当前没有能公开复核且对应 ReCogDrive 实际样本的原媒体 byte 清单。DriveBench 官方准备文档的 corruption 图像来自独立 Google Drive，公开 HF `arena` 小子集不足以定价完整包；GraphWorld 原文仅指定 Rain/Snow/Fog 三天气，未指明所有强度对应的下载对象，保持 UNKNOWN。
 
 【盘需求判定】已闭合的对象级 byte 是**指定压缩包集合**，不是完整 22 篇的可复现需求。研究高概率组合仍约 **24.058 TB**（其中 nuPlan 全 v1.1 20,280,630,002,024 B），更广已定价包约 **29.588 TB**；后者含 FineVision 整库，只是条件包留存场景。LAW 独立 CARLA、WAM-Flow 通用图片、ReCogDrive/SGDrive 未映射源媒体、天气腐蚀/DriveBench 全量及 W0 私有资产都没有可证上限，解包和峰值也未知。因此现在不能证明 32/40/64 TB 中任一容量足够；若只在明确封闭的已列包范围内选盘，可把相应条件和作为**压缩包空间一项输入**，另外为展开/缓存留 UNKNOWN，而不能报告整项目硬盘最终规格。
+
+## 阶段 10：公开候选包、VLA 来源与可选缓存（2026-09-28）
+
+本阶段以远端审计分支 `fd784e3` 的文件为起点；此前阶段 8/9 的 **24.058/29.588 TB** 是历史条件和，现行公式在[账本“本轮容量核算”](WAM_22_dataset_asset_register_2026-09-28.md#本轮容量核算2026-09-28-修订组合口径不是全部需求闭合)。逐字段证据、版本与状态集中在[新增的专项证据](WAM_22_OPEN_ITEMS_EVIDENCE_20260928.md)，其职责是保留三分包对象 ID、版本边界与有界路径来源，不另建重复的 22 篇总表。
+
+1. **TCP 是 CANDIDATE，LAW 仍 UNKNOWN。** TCP 作者明确在 HF 发布三段 ZIP，总 `123,448,985,790 B`，逐段官方 `size` 与 LFS ID 入新证据表。LAW 原文确实写 CARLA 0.9.10.1、Roach、沿 TCP/DriveAdapter 采 189K 帧；ThinkTwice 作者也说 TCP 有 189K 训练帧。但 LAW 没有公开采集对象 ID、member/场景表和 hash，不能把 TCP 包定为 LAW 实际容量；另一个约 8 TB 的高分辨率多模态采集也仅作敏感性参照。
+2. **ReCogDrive/SGDrive 为 PARTIAL。** ReCogDrive 官方 17 个 JSONL 对象的 3,789,771,567 B、SGDrive 单个 932,449,828 B 是标注容量。此前有界读取覆盖 17/17 文件各首 4,096 B、SGDrive 前 1 MiB，路径形态分别归到 NAVSIM/OpenScene、Bench2Drive、nuScenes、LingoQA、DRAMA、SUTD、CODA-LM/MAPLM 与尚不能归属的平铺文件名；这些临时前缀未持久化。本轮不能重新访问整份 JSONL，故实际扫描的 JSONL 行数、媒体 URI 总数、唯一数与无法归属数都标 UNKNOWN，不把路径形态误称为完整去重清单。SUTD 的 `.mp4` 路径说明其 feature/annotation Zenodo 包不能代替原视频。
+3. **WAM-Flow 保留 UNKNOWN。** 原文为 3.4M LLaVA-v1.5 来源通用 QA；作者固定代码 `pretrain.yaml` 指向 `llava_v1_5_mix665k_2.jsonl`，并列多个驾驶 JSONL。标准 LLaVA 665K 标注还需组成数据集的原图；作者 HF 的 414,319,989 B `navsim_668k.jsonl` 是 NAVSIM 标注。没有 3.4M 版本/split/唯一图像 URI，不推价。
+4. **腐蚀评测仍 PARTIAL/UNKNOWN bytes。** GraphWorld 原文仅锁定 nuScenes-C val 的 Snow/Rain/Fog，未披露具体 severity 或是否另存像素；原 nuScenes-C 作者仓提供 camera/LiDAR 的 test-time 函数，不能断言必需预生成全量包。DriveBench 官方准备文档明确将文本放 HF、图片放独立 Google Drive、解到 `data/corruption` 与 `data/nuscenes/samples`；UniDriveVLA 未给实际使用子包/文件 byte。两项都不以小 arena 子集或完整 benchmark 页数替代。
+5. **W0 PRIVATE/UNKNOWN。** P0072 原文是 in-house 70M frames、>1M clips、100 难例；未公开压缩对象或上限，和可购买公开包情景分离。
+6. **SGDrive 可选缓存独立记账。** 作者固定源码 `docs/Train_Eval.md` 明言 DiT 模仿训练可缓存 VLM hidden states，约 1–2 TB；另一条较慢路径直接联合训练。缓存脚本使用独立 `CACHE_PATH`、`agent.cache_hidden_state=True`，与原图或解包字节不能直接去重，也不能保证其与 metric cache 同时存在的峰值恰为 1–2 TB。整体 unpack/预处理峰值保持 UNKNOWN。
+7. **Bench2Drive 官方版别核对。** 旧 Base 官方 1,000 包 `334,866,900,094 B`；v0.0.4 无 depth 1,100 包 `415,362,197,807 B`；历史 map 目录（12 `.npz` 和 sidecar）`3,146,330,646 B`。官方新包加历史 map 为混合口径 `418,508,528,453 B`，比历史汇总行 `418,508,847,603 B` 少 **319,150 B**：no-depth 子目录与官方对象差 315,054 B，汇总行与两个子目录和又差 4,096 B，均未逐文件定位。旧 Base 和新版不可互替，Full/depth 也未有 22 篇整包证据。XML route protocol 不作传感器数据集。
+
+**修订情景：**以阶段 8 的 24.058094763990 / 29.587653263990 TB 混合精度和替换旧 Base、可选新版 B2D、NAVSIM v2 三项，差额 `0.065133423711 TB`，得到约 **23.993 / 29.523 TB**；高概率组合若不保留论文直接 0/22 的新版 B2D 包，为约 **23.574 TB**。宽组合额外假设 TCP 候选三包并存为约 **29.646 TB**，绝不能读作 LAW 已定价。另留 NAVSIM v1 archive 加约 0.449 TB；SGDrive 缓存仅在选择该训练流程时另占作者估计约 1–2 TB；FineVision 4.65 TB 是整库代入，不是论文真实子集。这些是选定压缩包条件和，未解决的 LAW、原视频/通用图片、腐蚀评测、私有 W0 和解包峰值使公开完整容量与上限继续 UNKNOWN。

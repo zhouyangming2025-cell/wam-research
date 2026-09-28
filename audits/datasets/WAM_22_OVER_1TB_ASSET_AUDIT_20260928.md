@@ -2,6 +2,8 @@
 
 审计日期：2026-09-28。范围锁定于仓库源论文提交 [cb05048dfb822e95d44e52dd85b830c750411e2c](https://github.com/zhouyangming2025-cell/wam-research/tree/cb05048dfb822e95d44e52dd85b830c750411e2c/papers/raw_md) 的 12 篇 planning-centric WAM + 10 篇 WAM+VLA；论文实际训练、预训练、微调、验证资产见[逐篇账本](WAM_22_dataset_asset_register_2026-09-28.md)。此文件只回答：哪些实际使用或可能需要的资产会跨过 1 TB；不检查 NAS，不决定下载。
 
+后续核到 TCP/CARLA 三分包 `0.123448985790 TB`，仅为 LAW 候选；旧 Bench2Drive Base 官方对象和 `0.334866900094 TB`、新版 no-depth 官方对象和 `0.415362197807 TB`。这些小于 1 TB，不改变本报告的 >1 TB 分类；[逐字段证据](WAM_22_OPEN_ITEMS_EVIDENCE_20260928.md)和[现行容量情景](WAM_22_dataset_asset_register_2026-09-28.md#本轮容量核算2026-09-28-修订组合口径不是全部需求闭合)取代下文早期约数。
+
 ## 判定口径与结论
 
 - TB 按十进制 10^12 byte。官方网页的 TB/GB 是发布方近似标注时保留原精度；精确容量只认文件 listing 的 Size/Content-Length。
