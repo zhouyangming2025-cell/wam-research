@@ -109,6 +109,17 @@ PAPERS = [
     ("P0018", "GameFormer"),           # H1
     ("P0019", "M2I"),                  # H2
     ("P0020", "Bahram2016"),           # H3
+    # WAM+VLA source ingest 2026-09-28
+    ("P0068", "DriveWorld-VLA"),
+    ("P0069", "UniWorldVLA"),
+    ("P0070", "SGDrive"),
+    ("P0071", "FSDrive"),
+    ("P0072", "DriveVLA-W0"),
+    ("P0073", "CoT4AD"),
+    ("P0074", "WAM-Flow"),
+    ("P0075", "ExploreVLA"),
+    ("P0076", "UniDriveVLA"),
+    ("P0077", "UniDrive-WM"),
 ]
 
 try:
