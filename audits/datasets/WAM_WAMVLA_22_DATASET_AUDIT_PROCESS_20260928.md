@@ -109,3 +109,11 @@ nuScenes Core Full 与 QA/benchmark 子集也采用母体依赖思路；DriveLM/
 【官方 Zenodo 事实】`records/7431011` 九个文件 `size` 合计 **20,534,486,181 B**：四个 `.h5` 分别是 motion、ResNet101、ResNet18、MobileNetV2 预计算特征，其余是 JSONL 与视频 ID 映射；record 没有原始视频文件。SUTD 源媒体与 ReCogDrive 样本路径的对应及原始视频发布字节保持 UNKNOWN。
 
 【修订算术】原 high/all 条件和均减去 `2,545,682,394,232 − 2,506,457,646,127 = 39,224,748,105 B`，对应 **约 24.058 TB / 约 29.588 TB**；加 ThinkTwice 同规模参考为 **约 37.588 TB**。旧约 24.097/29.627/37.627 TB 不再是当前口径。这些组合混有网页约数、整库对论文子集的替代及未计价媒体，既不是完整下界也不是上界。高概率 nuPlan 仍保留完整 v1.1；NAVSIM 采用父体逻辑覆盖场景，若另存 navtrain archive 再单列包留存。压缩包、解压后、预处理峰值三列中后两列仍 UNKNOWN。私有 70M 帧独立标 PRIVATE/UNKNOWN，公开资料下全量上限**无法确定**。
+
+## 阶段 9：可访问性与论文真实子集（2026-09-28）
+
+【作者代码/原文事实】UniDriveVLA 的 nuScenes Stage 1 训练脚本出现 `dataset_finevision.jsonl#641439`，Bench2Drive Stage 1 出现 `finevision_subset_cleaned.jsonl#1141184`，联合训练 config 则引用 `finevision_subset_90k.jsonl`；这三个具体记录选择/文件名进一步否定“作者必然读取 FineVision 全库 4.65TB”的理解，仍不能推算实际唯一图片字节，也未证明这些文件可独立公开重建。官方代码和文档链接已入账本。CityWalker 官方 HF revision `3a25b28b81b3a978ff751d4896aff2d0b0812c30` 含 18 个 `traj_nav` 分卷加一份 `pose_label.zip`，19 包 `size` 合计 **6,820,369,835 B**；作者将其称 teleportation 数据，另有 CityWalk 网络视频 playlists，二者不能互换。Metis 使用的 15h（6h/9h）与这些分卷的精确对应仍 UNKNOWN。
+
+【官方可访问性事实】Honda DRAMA 给出 17,785 个约 2 秒片段、双摄像机采集参数，但原始数据须由高校邮箱申请，公开页面未列文件 bytes，记 **RESTRICTED/UNKNOWN**。SUTD 官方 GitHub 提供原 dataset 的下载申请入口；Zenodo record 的九文件清单只覆盖 feature 和标注，因此应表述为“该 record 不含原视频”，不能误写成“SUTD 原视频没有发布”。两者当前没有能公开复核且对应 ReCogDrive 实际样本的原媒体 byte 清单。DriveBench 官方准备文档的 corruption 图像来自独立 Google Drive，公开 HF `arena` 小子集不足以定价完整包；GraphWorld 原文仅指定 Rain/Snow/Fog 三天气，未指明所有强度对应的下载对象，保持 UNKNOWN。
+
+【盘需求判定】已闭合的对象级 byte 是**指定压缩包集合**，不是完整 22 篇的可复现需求。研究高概率组合仍约 **24.058 TB**（其中 nuPlan 全 v1.1 20,280,630,002,024 B），更广已定价包约 **29.588 TB**；后者含 FineVision 整库，只是条件包留存场景。LAW 独立 CARLA、WAM-Flow 通用图片、ReCogDrive/SGDrive 未映射源媒体、天气腐蚀/DriveBench 全量及 W0 私有资产都没有可证上限，解包和峰值也未知。因此现在不能证明 32/40/64 TB 中任一容量足够；若只在明确封闭的已列包范围内选盘，可把相应条件和作为**压缩包空间一项输入**，另外为展开/缓存留 UNKNOWN，而不能报告整项目硬盘最终规格。
