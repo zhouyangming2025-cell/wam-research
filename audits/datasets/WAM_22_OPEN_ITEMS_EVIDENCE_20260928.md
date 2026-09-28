@@ -35,20 +35,59 @@ ReCogDrive 作者 [来源表](https://github.com/xiaomi-research/recogdrive#driv
 | `Bench2drive_QA`, `Bench2drive_Traj` | `./Bench2drive/v1/<route>/camera/rgb_front/...jpg` | Bench2Drive；`v1` 与旧 Base 的 archive 成员对应尚未证明，PARTIAL |
 | `Navsim_ReCogDrive`, `Navsim_Traj` | `./NAVSIM/dataset/sensor_blobs/trainval/.../CAM_F0/...jpg`、`./dataset/sensor_blobs/trainval/...` | NAVSIM/OpenScene trainval 逻辑母体，PARTIAL；独立 archive hash 未比 |
 | `DriveLM` 两变体、`Nuinstruct`, `Nuscenes-QA`, `Omnidrive`, `Senna` | `/mnt/evad_fs/opensource-data/nuscenes/samples/CAM_FRONT/...jpg` 或 `samples/CAM_.../...jpg` | nuScenes 路径规范；个别前缀样本重复文件名，未计唯一数，PARTIAL |
-| `LingoQA` | `./LingoQA/Scenery/images/train/<id>/<frame>.jpg` | LingoQA 独立图像源，实际子集 UNKNOWN |
-| `Drama` | `./Drama/combined/titan/clip_.../movie.gif` | DRAMA 源媒体，申请受限，RESTRICTED |
+| `LingoQA` | 前缀出现 `./LingoQA/Scenery/images/train/<id>/<frame>.jpg`；作者训练配置 root 为 `/LingoQA/Action/images`，length=26,824 | 源路径不一致；需全量 URI 扫描确定 ReCog 实际使用的是 scenery、action 或二者 |
+| `Drama` | `./Drama/combined/titan/clip_.../movie.gif`；ReCog 配置 root `/Drama/drama_data/combined`，length=16,404 | Honda `combined/` 含 raw frame PNG、flow PNG、movie.gif；申请限高校非商业使用；容量 UNKNOWN/RESTRICTED |
 | `SUTD` | `./SUTD/compressed_videos/<id>.mp4` | **需要视频**；Zenodo 的 20,534,486,181 B `.h5`/annotation 包不能代替，RESTRICTED/UNKNOWN |
-| `CODA-LM`, `Maplm` | `./CODA-LM/images/0001.jpg`、`./MAPLM/maplm_v0.1/train/<id>/photo_forward.jpg` | 各自发布资产与 nuScenes 父体的逐图关系 UNKNOWN |
-| `Drivegpt4`, `Talk2Car` | `training_<id>_...png`、`img_train_0.jpg` | 平铺文件名不足以归属原始媒体，UNKNOWN |
+| `CODA-LM` | `./CODA-LM/images/0001.jpg`；配置 root `/CODA-LM/Val`，length=20,318 | 官方发布包/与 nuScenes 父体的逐图关系仍 UNKNOWN |
+| `MAPLM` | `./MAPLM/maplm_v0.1/train/<id>/photo_forward.jpg`；配置 length=10,612 | 指向 v0.1；官方说明分卷但未列 bytes；2024 2M 点云为后续不同版本，不能混算 |
+| `Drivegpt4` | 配置 root `/Drivegpt4/BDD_X_imgs_select`，length=26,319；第三方 HF 同名包含 `BDD_X_imgs_select.tar`，页面显示 21.9 GB | 强候选映射；未以逐样本 URI/hash 证明完整对应；不是整个 BDD-X 视频库 |
+| `Talk2Car` | 前缀为 `img_train_0.jpg`，配置 root `/Talk2Car/imgs`、length=8,079 | 平铺文件名不足以归属原始媒体，UNKNOWN |
 | SGDrive `sgdrive.jsonl` | `"image": ["navsim_data/sensor_blobs/trainval/.../CAM_F0/...jpg", ...]`，样本中四个时序前视帧 | NAVSIM/OpenScene trainval 逻辑母体，PARTIAL |
 
 **统计边界：**覆盖的 annotation 对象数是 ReCogDrive 17、SGDrive 1；实际逐行扫描数、媒体 URI 读取总数、规范化后唯一数、未归属唯一数均为 **UNKNOWN**，绝不可把 17 或四帧当唯一媒体总数。全量闭合需按每条 JSONL 的 `image/images/video/image_path`（包括字符串、数组、字典）抽 URI，去掉本地挂载前缀，规范大小写与分隔符，以 `(source_dataset, canonical_relative_path)` 去重；父体内再用官方文件 ID/散列核对，不能只按 basename 跨数据集去重。路径或 annotation count 均不等于压缩包 byte。ReCogDrive 原图依赖 nuScenes/OpenScene/B2D 时先作为父体覆盖情景；LingoQA、DRAMA、SUTD 等独立媒体并集仍 UNKNOWN。
+
+
+## ReCogDrive 训练配置：root/记录数不是媒体容量
+
+作者固定提交 `6b8d8f5e01346c71094651c81dcaf66405dbc04e` 的 [`recogdrive_pretrain.json`](https://github.com/xiaomi-research/recogdrive/blob/6b8d8f5e01346c71094651c81dcaf66405dbc04e/internvl_chat/shell/data_info/recogdrive_pretrain.json) 明确给出下列本地根目录和配置 `length`。它证明训练配置期望读取这些来源，但 `length` 是配置样本计数，不是独立文件数、唯一媒体数或 byte；不能直接相加为资产容量。NAVSIM 两个来源各 85,109 条，其中 `Navsim` 的 `repeat_time=2`；LLaVA 行 `repeat_time=0.2`。
+
+| 配置源 | root（去掉 `/path/to`） | length | repeat_time |
+|---|---|---:|---:|
+| Navsim | `/NAVSIM/dataset` | 85,109 | 2 |
+| Navsim_QA | `/NAVSIM/dataset` | 85,109 | 1 |
+| CODA-LM | `/CODA-LM/Val` | 20,318 | 1 |
+| DriveLM | `/nuscenes` | 4,072 | 1 |
+| LingoQA | `/LingoQA/Action/images` | 26,824 | 1 |
+| MAPLM | `/MAPLM/maplm_v0.1` | 10,612 | 1 |
+| Nuinstruct | `/nuscenes` | 57,317 | 1 |
+| Omnidrive | `/nuscenes` | 28,010 | 1 |
+| SUTD | `/SUTD/compressed_videos` | 9,916 | 1 |
+| Talk2Car | `/Talk2Car/imgs` | 8,079 | 1 |
+| NuScenes-QA | `/nuscenes` | 24,988 | 1 |
+| Drivegpt4 | `/Drivegpt4/BDD_X_imgs_select` | 26,319 | 1 |
+| Senna | `/nuscenes` | 27,813 | 1 |
+| Drama | `/Drama/drama_data/combined` | 16,404 | 1 |
+| llava | `/llava` | 665,298 | 0.2 |
+
+最接近的可定价项是 DriveGPT4：第三方 [HF 仓](https://huggingface.co/datasets/owl10/Drivegpt4-BDD/tree/main) 有 `BDD_X_imgs_select.tar`，页面显示 21.9 GB（非精确 byte、非论文作者发布仓）；与配置 root 同名，故作为**候选包**，未 hash/逐路径证明完全相同，也不代表论文用了完整包。LingoQA 配置指向 `Action/images`，而本次以前缀读到的标注路径是 `Scenery/images/train`；在全量样本路径核查完成前，不判断哪个 split 真正被读取。MAPLM 配置只锁定 `maplm_v0.1`：[`LLVM-AD/MAPLM` README](https://github.com/LLVM-AD/MAPLM) 列出的 2023 首包由 v0.1 三个分卷及 zip 组成，含 BEV 和三张全景图，但没公布容量；README 另提的 2024 年 2M 点云/HD map 是另一版，不能代替或叠加 v0.1。
+
+DRAMA 配置指向 `drama_data/combined`。Honda [官方说明](https://usa.honda-ri.com/drama) 确认 17,785 个约 2 秒片段、SEKONIX 与 GoPro 双摄及 CAN/IMU；raw 包结构同时含 `frame_*.png`、`flow_*.png` 和 `movie.gif`。官方没有给下载字节/分卷 manifest，且数据申请限大学身份和非商业研究，因此容量继续为 UNKNOWN。SUTD root 则明确是压缩视频目录；已列 Zenodo 特征+标注 20.534 GB 不是这批视频。
+
+## WAM-Flow：论文 3.4M 与可见配置/公开文件未闭合
+
+【原文事实】P0074 报告 6.5M VQA：3.4M LLaVA-v1.5 来源通用多模态 VQA + 3.1M ReCogDrive 驾驶 QA。
+
+【代码事实】固定作者 [`config/pretrain.yaml`](https://github.com/fudan-generative-vision/WAM-Flow/blob/747dad929a419e11c7fb2fcbd57fec90e9e31a55/config/pretrain.yaml) 的 `data_list` 共 16 项，首项是占位路径 `path/to/llava_v1_5_mix665k_2.jsonl`；另列 CODA-LM、DriveGPT4、LingoQA、MAPLM、nuScenes QA、OmniDrive、Senna、Talk2Car、DriveLM、nuPlan/NAVSIM ReCogDrive、NAVSIM 668K/103K、nuScenes train，其中 `navsim_recogdrive.jsonl` 被列两次。作者 [`SupervisedDataset` loader](https://github.com/fudan-generative-vision/WAM-Flow/blob/747dad929a419e11c7fb2fcbd57fec90e9e31a55/flow_matching/data/navsim.py) 将各 JSONL 行并入数据集并用 PIL 按 `image` 路径打开本地原图；所以若该预训练配置实际运行，图像媒体是硬依赖。
+
+公开的 WAM-Flow [SFT launcher](https://github.com/fudan-generative-vision/WAM-Flow/blob/747dad929a419e11c7fb2fcbd57fec90e9e31a55/scripts/sft_navsim.sh) 只指向 `sft_navsim.yaml`，其 `data_list` 仅 `data/navsim_668k.jsonl`；作者 HF data 页也只列这一 NAVSIM 标注文件（414,319,989 B），没有 3.4M general VQA manifest/图像包。配置中的 `mix665k_2` 文件名与论文 3.4M 不能因名字相近而等同于标准 LLaVA 665K，也不能假设这 665K 覆盖 3.4M 训练样本。标准 LLaVA v1.5 所需的 COCO、GQA、OCR-VQA、TextVQA、Visual Genome 图像只是**可能上游候选**，在作者样本级映射确认前不加入本账本或任何容量总和。
+
+**判断：**现有公开配置不足以复原论文所报 3.4M 通用数据的确切组成；可能是配置不完整、过期或仅为子集，现有证据无法区分。故图像 URI、独立来源包、去重关系、字节和是否超过 0.1 TB 均保留 UNKNOWN。NAVSIM 668K 标注包与此项无替代关系。
 
 ## 其他状态行与峰值
 
 | asset_id | paper_id / role | version / split / modality | file / shard | bytes | source URL / revision或日期 | duplicate_of | 压缩/公开 | status |
 |---|---|---|---|---:|---|---|---|---|
-| WAMFLOW-GENERAL-VQA | P0074／VLM 预训练 | 论文称 LLaVA-v1.5 来源 3.4M；split 与图像模态清单 UNKNOWN | 图像 URI 集合 UNKNOWN | UNKNOWN | [原文 §3.4](https://github.com/zhouyangming2025-cell/wam-research/blob/cb05048dfb822e95d44e52dd85b830c750411e2c/papers/raw_md/P0074_WAM-Flow/P0074_WAM-Flow.raw.md#L157)；[作者配置 `747dad9`](https://github.com/fudan-generative-vision/WAM-Flow/blob/747dad929a419e11c7fb2fcbd57fec90e9e31a55/config/pretrain.yaml) 引 `llava_v1_5_mix665k_2.jsonl`，2026-09-28 | LLaVA/其他 VQA 重复 UNKNOWN | 原图／PUBLIC 可得性不明 | PARTIAL |
+| WAMFLOW-GENERAL-VQA | P0074／VLM 预训练 | 原文 3.4M 通用 VQA；代码占位配置列 `llava_v1_5_mix665k_2.jsonl`，二者映射 UNKNOWN | 图像 URI 与独立发布 shard UNKNOWN | UNKNOWN | [原文 §3.4](https://github.com/zhouyangming2025-cell/wam-research/blob/cb05048dfb822e95d44e52dd85b830c750411e2c/papers/raw_md/P0074_WAM-Flow/P0074_WAM-Flow.raw.md#L157)；[固定 pretrain.yaml](https://github.com/fudan-generative-vision/WAM-Flow/blob/747dad929a419e11c7fb2fcbd57fec90e9e31a55/config/pretrain.yaml)；[loader](https://github.com/fudan-generative-vision/WAM-Flow/blob/747dad929a419e11c7fb2fcbd57fec90e9e31a55/flow_matching/data/navsim.py) | 标准 LLaVA 上游源/其他 VQA 重复 UNKNOWN | 原图可用性不等于标注公开 | PARTIAL |
 | WAMFLOW-NAVSIM-ANN | P0074／NAVSIM 标注 | `navsim_668k.jsonl`／NAVSIM | 单个 JSONL | **414,319,989** | [作者模型仓 data](https://huggingface.co/fudan-generative-ai/WAM-Flow/tree/main/data)，2026-09-28；[LLaVA 标准 README](https://github.com/haotian-liu/LLaVA#visual-instruction-tuning)另说 665K 标注须从组成数据集取得图片 | NAVSIM/OpenScene 逻辑母体 | 直接文本／PUBLIC | VERIFIED（标注）；不可充当上行图片 |
 | GRAPHWORLD-NUSC-C | P0065／Snow、Rain、Fog 开环验证 | nuScenes val，三天气；severity 未披露 | 预生成图像包或运行时函数 UNKNOWN | UNKNOWN | [原文 §5.1/附录](https://github.com/zhouyangming2025-cell/wam-research/blob/cb05048dfb822e95d44e52dd85b830c750411e2c/papers/raw_md/P0065_GraphWorld/P0065_GraphWorld.raw.md#L358)；[nuScenes-C 原作者函数](https://github.com/thu-ml/3D_Corruptions_AD#how-to-use)可对 camera/LiDAR 在 test-time 生成，2026-09-28 | nuScenes val；派生图像不可未经检验去重 | 模态/包 UNKNOWN／PUBLIC | PARTIAL |
 | UNIDRIVE-DRIVEBENCH | P0076／驾驶理解评测 | DriveBench；实际 corruption 子集 UNKNOWN | [作者另列 image bundle](https://drive.google.com/file/d/1_MqbX1oXH9S55eC0r_rZvvaoAD5GVOyW/view?usp=share_link)、HF text 与 `data/corruption/` | UNKNOWN | [官方 DATA_PREPAER.md](https://github.com/worldbench/DriveBench/blob/main/docs/DATA_PREPAER.md)，2026-09-28 | nuScenes samples 为母体，额外腐蚀图像未比对 | 预生成媒体／PUBLIC 页面可见 | PARTIAL |
