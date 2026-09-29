@@ -1,4 +1,4 @@
-# WAM / 一段式自动驾驶数据集领域盘点（2026-09-21）
+# WAM / WAM+VLA 自动驾驶数据集领域盘点（2026-09-21；75篇语料交叉补录 2026-09-29）
 
 ## 0. 本轮结论
 
@@ -20,6 +20,12 @@
 
 ---
 
+## 0.1 当前仓库论文语料的统一覆盖（2026-09-29）
+
+本次把此前分开的 65 篇广义领域 census 与 22 篇 WAM / WAM+VLA 专项账本接成同一语料口径：65 + 22 − 12 篇重叠核心 WAM = **75 个唯一论文 ID**。其中 65 篇底账为 64 篇 full raw Markdown 加 P0067 ProSim source note；22 篇专项账本包含同一批核心 12 篇及 P0068–P0077 十篇 WAM+VLA。复核固定论文源后，仓库当前 papers/raw_md 共 74 个 .raw.md 与 P0067 source note，对应 75 个唯一论文 ID。覆盖的是**仓库当前收录的论文**，不等于截至当前日期整个领域文献全集。
+
+本文现在作为这 75 个论文 ID 的**数据集使用登记入口**：保留 65 篇逐篇表，并补入 10 篇 VLA 逐篇记录及跨账本频次；资产名称、角色、版本/血缘和未确认项优先登记，容量、解包与峰值仍以专项证据账本核，不在本节合并估算。相关来源见 [22 篇逐论文资产账本](WAM_22_dataset_asset_register_2026-09-28.md) 与 [媒体/缺口补充证据](WAM_22_OPEN_ITEMS_EVIDENCE_20260928.md)。
+
 ## 1. 65 篇审计后的总体图景
 
 按“论文直接使用或明确作为其 benchmark/source”的口径，仓库 65 个条目中最集中的数据体系如下。每个 paper ID 对同一数据家族最多计 1 次；同一论文可同时出现在 v1、v2 两行。来源数据、数据集/benchmark 自身论文也按 ledger 中的角色计入，因此这些是**文献条目频次**，不能直接解释成独立下载包数或项目复现概率。
@@ -39,6 +45,10 @@
 | **HUGSIM** | **4** | 含 HUGSIM 自身场景/benchmark 发布论文 |
 | **OpenScene（论文直接写明使用）** | **3** | NAVSIM 上游关系不重复当作直接 OpenScene 使用 |
 | **OpenDV** | **3** | 大规模驾驶视频预训练数据，Vista/PWM/CausalDrive 等使用 |
+
+**75 篇去重并集的已复核高频家族：**nuScenes **38/75**、NAVSIM（版本合并）**37/75**、nuPlan（含 mini，直接使用口径）**20/75**、Bench2Drive **14/75**、HUGSIM **5/75**；论文直接点名 OpenScene 为 **3/75**。这些频次已按 paper ID 去重并与 22 篇逐篇表复算。NAVSIM/OpenScene/nuPlan 的上游血缘不自动转成直接使用频次；不同角色统计见[交叉复核表](WAM_22_dataset_asset_register_2026-09-28.md#与-65-篇领域盘点的频次交叉复核)。频次只回答论文是否涉及该家族，不回答资产包是否相同或是否要下载整包。
+
+
 
 **NAVSIM 版本复核：**逐篇原文复核后，明确写出 v1 的条目为 20（包括 census 原表漏标的 P0007 DriveReward 与 P0052 ReWorld）；明确写出 v2 的为 13，其中 12 篇也明确写出 v1。另有 6 篇虽未写版本号，但报告 `navtrain/navtest` 的 1,192/136 scenarios 或约 103k/12k samples，按 NAVSIM v1 典型 split profile 单列；这不能替代版本/文件修订号。剩余 3 篇 P0015、P0048、P0059 未给足以判定版本的 split 信息。因此唯一家族频次仍是 30，不能用重叠的 v1/v2 两行直接相加。旧“v1 29”实为“20 条明确 v1 + 9 条原先未标版本、但排除仅 v2 的 P0013”；其中 6 条有 v1 典型 split 佐证，3 条仍未判版本，不应作为纯 v1 精确计数。
 
@@ -118,7 +128,7 @@
 
 ---
 
-## 3. 仓库 65 篇论文：逐篇数据审计 ledger
+## 3. 仓库论文：逐篇数据审计 ledger（65 篇广义 census + 10 篇 VLA 补录）
 
 ### 3.1 P0001–P0019
 
@@ -207,6 +217,25 @@
 
 ---
 
+### 3.5 P0068–P0077：WAM+VLA 补录
+
+以下十篇是 65 篇底账之后新纳入的 VLA 论文；资产角色沿用 22 篇专项账本的原文核对。问号表示数据池身份或源媒体依赖仍未完全确认，不把标注 JSONL 当作原图/视频。
+
+| ID | 论文 | 实际训练 / 预训练 / 评测数据 | 资产层说明与未确认项 |
+|---|---|---|---|
+| P0068 | DriveWorld-VLA | **NAVSIM、nuScenes；ReCogDrive 式 VLM 预训练池（候选）** | 论文未给完整 12 源图像清单；与 ReCogDrive 的具体同一性及实际媒体清单未闭合。 |
+| P0069 | Uni-World VLA | **NAVSIM；nuPlan 轨迹消融** | nuPlan 轨迹消融不等于使用 nuPlan 全部相机、LiDAR 或数据库。 |
+| P0070 | SGDrive | **NAVSIM；SGDrive 驾驶 QA 与轨迹 QA 标注** | 作者 JSONL 已识别；部分图片路径指向 NAVSIM/OpenScene，完整唯一媒体路径和其他来源归属未闭合。 |
+| P0071 | FSDrive | **nuScenes 图像/标注、OmniDrive-nuScenes QA、DriveLM GVQA；NAVSIM / DriveLM 评测** | QA 标注与 nuScenes 原始图像分层登记；评测包不替代原图。 |
+| P0072 | DriveVLA-W0 | **nuPlan、NAVSIM；私有 70M 帧 / 百万级 clips** | 私有数据单独记为 PRIVATE/UNKNOWN；不得用公开数据包替代。 |
+| P0073 | CoT4AD | **nuScenes、旧版 Bench2Drive** | 按论文实际版本登记，不以新版包替换旧版。 |
+| P0074 | WAM-Flow | **nuPlan（论文称 668K）、NAVSIM 103K RL、ReCogDrive 驾驶 QA、LLaVA-v1.5 通用 VQA（论文称 3.4M）；公开的 navsim_668k.jsonl 与论文各阶段映射未确认** | pretrain.yaml 的 665K 配置与论文 3.4M 来源映射未知；公开的 navsim_668k.jsonl 是 NAVSIM 标注，不能替代该通用 VQA 图像；各阶段映射、图像路径与 split 未确认。 |
+| P0075 | ExploreVLA | **NAVSIM、nuScenes、HUGSIM 四域场景** | 记录论文使用的 HUGSIM 重建场景；不自动追加 KITTI-360、Waymo、PandaSet 原始全集。 |
+| P0076 | UniDriveVLA | **FineVision + 驾驶 VQA 混合训练、nuScenes、旧版 Bench2Drive；DriveBench 与七项通用 VQA 评测** | FineVision 实际分卷/抽样及 DriveBench 完整 corruption 文件清单未知。七项通用 VQA 集在 §13 单列。 |
+| P0077 | UniDrive-WM | **旧版 Bench2Drive、nuScenes、混合 VQA；DriveLM 与 Chat-B2D 评测** | 混合 VQA 的组成未完整命名；Chat-B2D 与 Bench2Drive 的标注/原图依赖分开记。 |
+
+逐篇原文链接见[WAM+VLA 原文清单](../../papers/WAM_VLA_PAPER_LIST.md)及[22 篇专项账本](WAM_22_dataset_asset_register_2026-09-28.md)。容量和官方包证据不在此重复。
+
 ## 4. 领域基础数据源总表
 
 这一节只保留对后续“是否需要下载”真正有意义的数据实体。
@@ -259,6 +288,43 @@
 | **SocioDrive-Bench** | 80% nuPlan + 20% CARLA | driving sociology / reactive world-model benchmark | **未见；公开状态待下一轮核** |
 
 ---
+
+### 4.4 WAM+VLA 新增的通用视觉、VQA 与腐蚀评测资产
+
+以下资产身份纳入 75 篇统一登记；“标注集”与“原始媒体”分开，具体文件版本和字节数不在本阶段处理。论文/代码给出名称但未给足源清单的，保留 PARTIAL/UNKNOWN。
+
+| 数据资产 | 论文/角色 | 母体或类型 | 登记状态 |
+|---|---|---|---|
+| ReCogDrive_Pretraining | P0074 论文明确使用 3.1M 驾驶 QA；P0068 仅有 ReCogDrive 式预训练关联线索 | 多源驾驶 QA / 轨迹标注；JSONL 不等于源媒体 | **PARTIAL**：17 个标注文件与作者配置已登记；逐样本唯一媒体路径与逐源归属未闭合。 |
+| SGDrive 标注集 | P0070 训练 | 驾驶 QA + 轨迹 QA | **PARTIAL**：标注包身份已知；完整原图/视频来源映射未闭合。 |
+| UniDriveVLA 作者 JSON/标注 | P0076 训练 | 驾驶 VQA 标注 | **PARTIAL**：与原始图片包的包含关系需按路径核验。 |
+| FineVision | P0076 通用视觉/VQA 混合训练 | 通用视觉数据家族 | **PARTIAL**：论文/代码提示抽样清单，实际 shards 与样本媒体集合未确认。 |
+| LLaVA-v1.5 general VQA mix | P0074 通用 VQA 训练 | 通用图像 + VQA 标注 | **UNKNOWN**：论文 3.4M 与公开配置 665K 不一致，具体发布版本、split 和图像路径未确认。 |
+| navsim_668k.jsonl | P0074 作者 SFT 配置中的 NAVSIM 标注 | NAVSIM 派生标注；不是原图包 | **PARTIAL**：文件内容身份为 NAVSIM 标注；它与论文所称 nuPlan 668K 训练阶段的对应关系未证实，且不能代替 3.4M 通用 VQA 原图。 |
+| DriveBench | P0076 腐蚀鲁棒性评测 | 驾驶图像 corruption benchmark + QA | **PARTIAL**：评测名与任务已知，完整 corruption image 清单及运行时生成/预生成边界未知。 |
+| ReCogDrive 上游配置源：NAVSIM / Bench2Drive QA 与轨迹项 | P0074 作者固定配置/17 个标注 JSONL | NAVSIM/OpenScene 与 Bench2Drive 的派生 QA/轨迹标注 | **PARTIAL**：路径前缀可识别；独立 archive hash 与逐样本唯一数未核。 |
+| DriveLM | P0007 recipe、P0025 OmniDrive 数据链、P0071 FSDrive、P0077 UniDrive-WM 评测；P0074 作者配置列为源 | nuScenes 图像上的驾驶 QA | **PARTIAL**：标注来源已命名；每篇实际 split 与原图重用关系未统一。 |
+| NuScenes-QA | P0007 recipe；P0074 作者配置列为源 | nuScenes QA 标注 | **PARTIAL**：与 nuScenes 母体相关；逐样本对应未统一。 |
+| OmniDrive QA | P0007 recipe、P0025、P0071；P0074 作者配置列为源 | nuScenes 派生驾驶/反事实 QA | **PARTIAL**：区分 QA 标注包与 nuScenes 原图。 |
+| NuInstruct | P0007 recipe；P0074 作者配置列为源 | 驾驶指令/QA 标注，图像路径可能指向 nuScenes | **PARTIAL**：source path 中可识别 nuScenes 根；样本级映射未统一。 |
+| Senna | P0007 recipe；P0074 作者配置列为源 | 驾驶 QA 标注，图像路径可能指向 nuScenes | **PARTIAL**：source path 中可识别 nuScenes 根；样本级映射未统一。 |
+| CODA-LM | P0074 作者配置及 ReCogDrive 标注源 | 独立驾驶 QA 图像来源候选 | **PARTIAL**：配置指向 Val 子集；与 nuScenes 的逐图关系未核。 |
+| LingoQA | P0007 recipe；P0074 作者配置/标注源 | 驾驶视频帧 + QA；Scenery/Action split | **PARTIAL**：标注前缀与配置 root 不一致，实际使用 split 待核。 |
+| MAPLM v0.1 | P0074 作者配置/标注源 | 驾驶多视角图像及地图/问答标注 | **PARTIAL**：v0.1 配置已识别；公开分卷与实际引用样本映射未闭合。 |
+| SUTD TrafficQA | P0007 recipe；P0074 作者配置/标注源 | 视频 QA；标注/features 与原视频分层 | **PARTIAL**：配置明确指向 compressed_videos；Zenodo features/annotation 不能替代视频。 |
+| Talk2Car | P0007 recipe；P0074 作者配置/标注源 | nuScenes 相关语言导航/指令数据 | **PARTIAL**：前缀为平铺图像文件名，母体映射待核。 |
+| DriveGPT4 / BDD-X selected images | P0007 recipe；P0074 作者配置/标注源 | BDD-X 图像/对话标注候选 | **PARTIAL**：配置 root 与公开候选包同名，逐样本 identity 未核；不等同完整 BDD-X 视频。 |
+| DRAMA | P0074 作者配置/标注源 | 多摄像头驾驶视频、光流与标注 | **RESTRICTED/UNKNOWN**：作者申请受限；公开 byte manifest 未找到。 |
+| MMStar | P0076 通用视觉问答评测 | 通用 VQA benchmark | **PARTIAL**：名称已知，论文对应版本/split 清单待核。 |
+| MMMU | P0076 通用视觉问答评测 | 通用 VQA benchmark | **PARTIAL**：名称已知，论文对应版本/split 清单待核。 |
+| RealWorldQA | P0076 通用视觉问答评测 | 通用 VQA benchmark | **PARTIAL**：名称已知，论文对应版本/split 清单待核。 |
+| AI2D | P0076 通用视觉问答评测 | 通用图表/科学图像问答 | **PARTIAL**：名称已知，论文对应版本/split 清单待核。 |
+| MME | P0076 通用视觉问答评测 | 通用 VLM benchmark | **PARTIAL**：名称已知，论文对应版本/split 清单待核。 |
+| VLMsAreBlind | P0076 通用视觉问答评测 | 通用 VLM benchmark | **PARTIAL**：名称已知，论文对应版本/split 清单待核。 |
+| ChartQA | P0076 通用视觉问答评测 | 图表问答 benchmark | **PARTIAL**：名称已知，论文对应版本/split 清单待核。 |
+| Chat-B2D（ORION 原版） | P0077 通用/驾驶 VQA 评测 | Bench2Drive 图像上的 QA 标注 | **PARTIAL**：按原版与后续扩展版区分；样本路径映射单列核查。 |
+
+DriveReward 的 10 项域内 QA 预训练来源仍按 §5 登记；ReCogDrive 源目录中出现的 CODA-LM、DRAMA、SUTD、Talk2Car、LingoQA 等保留为**上游候选/标注来源记录**。只有论文 recipe 或配置确认实际加载时才增加直接使用频次，不把“目录中存在”推成“每篇都用”。逐源媒体和包证据见 [22 篇开放项证据](WAM_22_OPEN_ITEMS_EVIDENCE_20260928.md)。
 
 ## 5. 一段式 / WAM 的语言与奖励数据支线
 
@@ -500,3 +566,75 @@ GAIA-1 使用约 **4,700 h** proprietary London driving data。它说明领域�
 
 - ProSim official repository: https://github.com/Ariostgx/ProSim
 - ProSim paper: https://arxiv.org/abs/2409.05863
+
+## 13. 统一登记状态与闭合边界（2026-09-29）
+
+**本文件现统一覆盖 75 个在库论文 ID**：65 篇广义 census 与 22 篇专项账本按 12 篇重叠去重。高频资产频次见 §1；本节补充驾驶 QA 等重复资产及只在一篇论文出现的具名资产。VLA 通用视觉、驾驶 QA、腐蚀评测等新资产逐项见 §4.4，逐篇论文关联见 §3.1–§3.5。频次按论文 ID 计，不代表包数、样本数或整包下载量。当前登记先闭合名称、角色与血缘，不做容量决策。
+
+### 13.1 已复核的重复数据家族
+
+| 数据家族 / 资产 | 论文频次（去重） | 说明 |
+|---|---:|---|
+| nuScenes | 38/75 | 含数据集自身论文及 HUGSIM 来源记录；不是 38 次完整包下载。 |
+| NAVSIM（合并版本） | 37/75 | v1/v2 等版本重叠；见 §1 与 22 篇交叉表。 |
+| nuPlan（直接使用，含 mini） | 20/75 | 不把 NAVSIM/OpenScene 上游血缘重复计作直接使用。 |
+| Bench2Drive | 14/75 | 旧论文版与项目新版分开登记。 |
+| WOMD / Waymo Open Motion | 6/75 | 与 Waymo 原始 sensor/perception 数据分开。 |
+| HUGSIM | 5/75 | 计 HUGSIM 场景/benchmark 使用，不推导出原始来源数据全库需求。 |
+| CARLA 原生/仿真侧资产 | 8/75 | simulator/场景路线；与 Bench2Drive 家族分别记账。 |
+| OpenScene（论文直接点名） | 3/75 | NAVSIM 上游关系不作为直接 OpenScene 使用频次。 |
+| OpenDV | 3/75 | 驾驶视频预训练数据。 |
+| DriveLM | 4/75 | P0007、P0025、P0071、P0077 的 recipe/训练/评测表有明确记录。P0074 配置亦列出，但未作为额外确认使用次数。 |
+| OmniDrive QA | 3/75 | P0007、P0025、P0071 明确记录；P0074 配置候选不重复计频。 |
+| ReCogDrive QA | 2/75 | P0007 recipe 与 P0074 论文均明确使用；P0068 的关系仍是候选。 |
+
+P0074 作者配置列出的 NuScenes-QA、NuInstruct、LingoQA、SUTD、Talk2Car、Senna、DriveGPT4、CODA-LM、MAPLM、DRAMA 等，在 §4.4 保留为“代码配置/上游来源”状态；在逐样本映射或训练配置与论文对应关系闭合前，不把配置中的每个子源都当作已确认的独立论文使用频次。
+
+### 13.2 当前账本中的单篇资产
+
+下表列的是在当前逐篇使用账本中只对应一个 paper ID 的具名资产。对 HUGSIM 的源数据只登记为作者用于重建的来源，不表示下游论文需下载完整母库；私人或作者生成资产仍保留在全集中，但不进入公开可采购项。
+
+| 数据资产 | 论文频次 | 类型 / 关系 | 状态 |
+|---|---:|---|---|
+| RiskBench | 1/75：P0005 | CARLA 风险场景 / benchmark | 名称与用途已登记；发布包/版本仍需核。 |
+| ReactSim-Bench | 1/75：P0014 | nuPlan 派生的 reactive traffic benchmark | 数据身份已知；单独发布资产状态待核。 |
+| BridgeSim / NavHard | 1/75：P0013 | 跨模拟器评测平台及场景/协议 | 平台、benchmark 与日志数据分层；CARLA 支持能力不等于该论文使用 CARLA 场景。 |
+| SocioDrive-Bench | 1/75：P0015 | 交互式 world-model benchmark；论文称 nuPlan/CARLA 混合来源 | benchmark 身份已知；公开包与媒体清单待核。 |
+| SUP-AD | 1/75：P0024 | DriveVLM 私有驾驶数据 | PRIVATE/UNKNOWN；不计公开数据需求。 |
+| OpenLane-v2 | 1/75：P0025 | 道路拓扑标注；OmniDrive counterfactual checklist 的来源 | 与 nuScenes 传感器数据分开登记。 |
+| COCO | 1/75：P0028 | ViDAR 通用视觉初始化 | 论文记录为通用初始化，不是自动驾驶主训练数据。 |
+| ImageNet | 1/75：P0028 | ViDAR 通用视觉初始化 | 同上；按其实际初始化角色保留。 |
+| KITTI-360 | 1/75：P0034 | HUGSIM 重建场景来源 | 来源资产；HUGSIM 下游场景使用不推出整库需求。 |
+| PandaSet | 1/75：P0034 | HUGSIM 重建场景来源 | 来源资产；HUGSIM 下游场景使用不推出整库需求。 |
+| GAIA-1 London corpus | 1/75：P0035 | 约 4,700 h proprietary driving corpus | PRIVATE/RESTRICTED；非公开采购项。 |
+| Occ3D | 1/75：P0043 | nuScenes/Waymo occupancy 标签扩展 | 派生标签与 raw sensor 分开登记。 |
+| nuScenes-Occupancy | 1/75：P0044 | nuScenes occupancy 标签扩展 | 派生标签与 raw sensor 分开登记。 |
+| Lyft-Level5 | 1/75：P0044 | 独立真实驾驶数据集 | 名称已知；论文所需 split/模态待核。 |
+| CoVLA | 1/75：P0049 | driving video + CAN/action/trajectory/language | 与 OpenScene/NAVSIM 分开；整库与论文子集待核。 |
+| DrivingDojo | 1/75：P0049 | interactive driving video / trajectory | 与 CoVLA、OpenScene 分开登记。 |
+| UCF-101 | 1/75：P0052 | ReWorld 辅助线性 probe 数据 | 辅助表征评测，不并入驾驶主训练集。 |
+| SUMMIT Alignment dataset | 1/75：P0054 | SUMMIT/CARLA 上作者构建的 59,944 场景集 | 作者生成 benchmark 数据；不是公开真实道路母库。 |
+| OpenStreetMap | 1/75：P0056 | DriveArena 的地图来源 | 地图资产，不与 nuScenes/nuPlan 传感器包合并。 |
+| CityWalker | 1/75：P0062 | 城市导航 / teleoperation 数据；Metis 使用 15 h | 与公开分卷的映射未确认，详见专项账本。 |
+| Turning-nuScenes | 1/75：P0065 | nuScenes val 场景筛选集 | 派生场景列表；不按独立完整图像库计。 |
+| Adv-nuSc | 1/75：P0065 | nuScenes val adversarial 子集 | 与 nuScenes 母体分层。 |
+| nuScenes-C | 1/75：P0065 | nuScenes corruption benchmark | GraphWorld 所用三天气 corruption 文件清单 UNKNOWN。 |
+| DriveReward Dataset / DriveReward-Bench | 1/75：P0007 | NAVSIM 派生 reward / reasoning 标注与 benchmark | 与 NAVSIM 原始场景和训练标注分层。 |
+| ProSim-Instruct-520k | 1/75：P0067 | 基于 WOMD 的 prompt / motion-tag 标注 | 与 WOMD 母体分层；该篇依据 source note 与官方发布信息。 |
+| LAW Roach / TCP-CARLA candidate | 1/75：P0048 | CARLA expert frames；TCP 三分包仅候选 | LAW 实际采集包身份仍 UNKNOWN，不能以 TCP 候选代替。 |
+| DriveVLA-W0 in-house corpus | 1/75：P0072 | 私有 70M 帧 / 百万级 clips 与 100 难例 | PRIVATE/UNKNOWN；不以公开 nuPlan/NAVSIM 替代。 |
+
+VLA / 通用视觉部分同样保留单篇资产：P0074 的 LLaVA-v1.5 通用 VQA 与 NAVSIM 标注文件、P0076 的 FineVision / DriveBench / 七项通用 VQA 评测、P0077 的 Chat-B2D，以及 P0072 的私有 W0 语料，分别见 §4.4 和 §3.5；不会因这些资产目前没有确定容量而从“数据集全集”中删除。
+
+“统一登记”按**数据资产层级**区分四类：①原始驾驶传感器/视频/轨迹母体；②从母体筛选或重组织的派生包与 benchmark（如 OpenScene/NAVSIM、Bench2Drive、HUGSIM）；③QA/指令/奖励标注；④benchmark 的额外媒体、corruption 图像或私有/作者自采资产。同一名称出现多次按 paper ID 去重计频；上游来源只作 lineage 关联，不自动视为每篇都直接读取母体全量。Related Work 中纯引用且未参与训练、微调、评测或构建的数据不计入使用频次。
+
+仍需保持显式未闭合行，不把它们折成容量估值：
+
+- **源媒体身份未闭合：**ReCogDrive、SGDrive 和混合 VQA 标注引用的唯一图像/视频路径，及其与 nuScenes、NAVSIM/OpenScene、Bench2Drive、LingoQA、DRAMA、SUTD 等母体的逐样本关系。
+- **通用视觉数据身份未闭合：**WAM-Flow 的 3.4M VQA 图像版本/split/样本清单；论文所称 nuPlan 668K 与公开 navsim_668k.jsonl 的阶段关系；UniDriveVLA 的 FineVision 实际取样与七项通用评测集对应 split。
+- **评测资源粒度未闭合：**GraphWorld nuScenes-C 三天气实际 corruption 文件；DriveBench 完整 corruption 资源及生成方式。
+- **非公开/作者资产：**LAW 的 189K CARLA/Roach 数据具体发布对象仍 UNKNOWN；DriveVLA-W0 的 70M 帧/百万级 clips 为 PRIVATE/UNKNOWN；GAIA-1、SUP-AD 与自建 Alignment 数据分别保留私有或作者生成属性。
+- **派生包/母体边界：**NAVSIM v1 navtrain 与 OpenScene trainval、HUGSIM scenes 与原始来源、CityWalker 15h 子集与公开包、Bench2Drive 旧版/新版都必须保持分行；不能只靠名称推断内容相同。
+
+因此，当前可表述为：**75 篇论文覆盖已统一；高频数据家族和已命名单篇资产已纳入登记；数据资产身份映射尚有 PARTIAL/UNKNOWN，不宣布领域全集资产闭合。**下一轮继续补齐或将每个未知项正式定界后，再冻结“数据集全集”并开始容量汇总。本节不提供盘容量建议。
+
