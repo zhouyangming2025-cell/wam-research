@@ -55,6 +55,31 @@ nuScenes 派生的 Occupancy、nuScenes-C、DriveLM/OmniDrive 等应分别理解
 
 复现旧论文须使用与其匹配的 Base/Full/旧评测版；当前项目的 v0.0.4 no-depth/map 是另一版资产。depth/occupancy 大包也不应在模型不读取这些模态时默认纳入。当前 release 的身份、文件范围和 bytes 已在 22 篇证据记录中与旧版分开。
 
+## 用代码沿一条 NAVSIM 样本走一遍
+
+下面把数据文件、样本窗口、模型张量和评分结果分开看。代码链路固定在 NAVSIM v2 主分支提交 `0a380a9063d7162ec93d0f51e9990ebac585f720`（2025-10-27）；v1.1 分支的 loader 在 `3e8291bfa89ff247231e0227778840cd0a036896`（2025-06-05），同样按日志切窗口，但不要把 v2 的两阶段/反应式评估描述成每篇 v1 论文都使用的步骤。
+
+| 环节 | 代码里发生的事 | 对数据的含义 |
+|---|---|---|
+| 1. 选场景窗口 | `filter_scenes()` 逐个读 log pickle，把帧列表按 `num_history_frames + num_future_frames` 和 `frame_interval` 切片；丢弃过短窗口、无 route 的窗口，并用历史末帧 token 标识样本。 | metadata 先定义哪些时刻成为规划样本。代码默认 `SceneFilter` 为 4 帧历史、10 帧未来，步长缺省为整个窗口长度；具体实验配置可覆盖这些值，所以不能把默认值当成所有论文的统一采样策略。NAVSIM 的帧间隔常量为 0.5 秒，对应 2 Hz。 |
+| 2. 载入场景与传感器 | `SceneLoader` 用 log pickle 构造 `Scene`，并通过 `sensor_blobs_path` 与帧内相对 `data_path` / `lidar_path` 读取配置指定的相机和 LiDAR；地图由 `map_name` 连接到 nuPlan map API。 | metadata/路径索引和 JPEG/点云本体是分开的。`SensorConfig` 可按模态、历史帧选择传感器；一个训练配置不必读取全部相机或 LiDAR，但它需要实际选择的 blob 文件。 |
+| 3. 分开输入与监督 | `Scene.get_agent_input()` 只整理历史帧的 ego pose、速度/加速度、驾驶命令、相机和 LiDAR；ego pose 转为以当前时刻为原点的局部坐标。`Scene.get_future_trajectory()` 可从未来 ego pose 提取局部轨迹；`Dataset` 将 `AgentInput` 交给 feature builders，将完整 `Scene`（含未来 privileged 状态）交给 target builders。 | 模型可见输入和训练目标不是同一份张量。未来真值用于构造监督，不等于未来传感器媒体一定被模型读取；具体目标由所选 builder 决定。 |
+| 4. 缓存训练张量 | `Dataset` 可把各 builder 的 feature/target 分别 gzip-pickle 到 `cache_path/log_name/token/`；`CacheOnlyDataset` 在匹配缓存齐全时可绕过 `SceneLoader`。 | 这是可再生的预处理产物，既不是 OpenScene 原包，也不能代替重新选择模态/监督所需的原始数据。容量核算应把原 archive、缓存和临时预处理空间分开。 |
+| 5. 前向得到规划 | `AbstractAgent.compute_trajectory()` 运行 feature builders、批量化后调用 `forward()`，读取 `predictions["trajectory"]` 并封装成 `Trajectory`。输出是局部坐标的 `(x, y, heading)` 序列；采样点数和时间间隔随 agent 的 `TrajectorySampling` 配置而定。 | NAVSIM 规划输出是一段轨迹，不是单帧动作类别。dataclass 自带的 4 秒/0.5 秒是默认采样值，不应覆盖特定 agent 的配置。 |
+| 6. 离线打分 | v2 的 `run_pdm_score_from_submission.py` 按 token 读取预测轨迹和预先生成的 `MetricCache`，送入 `PDMSimulator`、`PDMScorer` 与 reactive traffic policy，之后聚合乘性/加权指标。 | 指标缓存和原始传感器包是不同资产；v2 的 PDM pseudo-simulation 仍不等于 CARLA 图形仿真中的完整闭环。用 NAVSIM 分数比较时，必须锁定 split、devkit revision、agent 采样和指标实现。 |
+
+这条代码链也解释了为什么“拥有 OpenScene archive”与“已准备好某次训练”不是同一判断：训练是否要读取原图/点云由 agent 的 `SensorConfig` 决定；是否可从缓存训练取决于 feature/target builder 和 token 是否一致；评分还要有对应版本的 metric cache、地图和 evaluator。指南不把运行代码产生的 cache 或 CARLA 安装计入 OpenScene/NAVSIM 数据包容量。本次只检查了公开代码与文档，没有加载、下载或扫描本地数据集。
+
+### 与 nuScenes sample、Bench2Drive clip/route 的区别
+
+| 体系 | 一个样本/评测单元如何表示 | 数据 loader 或评测如何继续追踪 | 对照 NAVSIM 的要点 |
+|---|---|---|---|
+| **nuScenes** | `scene` 是一段日志；`sample` 是带前后 token 的关键时刻；每个 `sample_data` 是某个传感器的一次记录，含文件名、时间戳、关键帧标记及标定/ego-pose 引用；`sample_annotation` 通过 token 关联到 sample。 | devkit 读入 JSON tables 后，给 keyframe `sample` 建立 channel→`sample_data` token 的反向索引；`get_sample_data()` 再解析文件路径、相机内参并把 3D box 转到传感器坐标系。 | nuScenes 的基本粒度是跨传感器对齐的关键帧/标注关系。它本身不替研究者规定 NAVSIM 式的历史-未来窗口、规划 target builder 或 PDM 指标。 |
+| **Bench2Drive 论文版** | 2024 论文报告的是 CARLA 中采集的专家短 clip（论文报告 13,638 clips、10 Hz 等）；它们用于离线训练，按场景类别组织。 | clip 包含多帧传感器和标注；其本体是已录制的传感器样本，不是运行评测时实时生成的 CARLA route。 | 旧论文的 clip 数不能与后来 release 的 route 数混为同一版本或同一切分。 |
+| **Bench2Drive v0.0.4** | 作者在 2026-08-11 的 release commit `7ec25d1c9f7522d923ce5f3420986cef1cb2d956` 说明新的均衡训练集为 44 场景×25=1,100 routes，另有 44×5=220 条 validation routes；旧 Mini/Base/Full 仍作为独立下载项列出。 | `leaderboard/data/bench2drive_0.0.4_val.xml` 等 XML 是评测 route/scenario 配置；CARLA 与 evaluator 按协议运行 agent 并产生逐 route 结果。XML 协议不是离线 sensor archive。 | 训练 archive、route 配置、CARLA/地图运行环境和评测结果是不同容量项；只拿到 clip 或只装好 CARLA 都不足以复现完整 benchmark。 |
+
+因此，三者虽然都含时间关系，数据边界不同：nuScenes 通过 token 化表结构组织传感器关键帧；OpenScene/NAVSIM 先把日志帧切成规划窗口，再定义可见历史、监督未来和轨迹分数；Bench2Drive 则把已录制训练数据与仿真器执行的 route benchmark 并列发布。决定存储时应分别列出媒体 archive、标注/索引、缓存、地图/模拟器环境和评测协议，不能从“样本数”推断它们包含同样的文件。
+
 ## 条件路线：有用，但解决不同问题
 
 | 数据体系 | 它补上的能力 | 不应当误认为 |
@@ -90,8 +115,9 @@ nuScenes 派生的 Occupancy、nuScenes-C、DriveLM/OmniDrive 等应分别理解
 - nuScenes 官方：[数据集介绍](https://www.nuscenes.org/nuscenes)、[devkit tutorial](https://www.nuscenes.org/tutorials/nuscenes_tutorial.html)。
 - nuPlan 官方：[nuPlan 数据页](https://www.nuplan.org/)、[nuPlan devkit](https://github.com/motional/nuplan-devkit)。
 - OpenScene 作者发布：[项目主页/README](https://github.com/OpenDriveLab/OpenScene)、[v1.1 下载与数据结构说明](https://github.com/OpenDriveLab/OpenScene/blob/main/docs/getting_started.md)。
-- NAVSIM 作者发布：[代码、版本记录、split 与评测文档](https://github.com/autonomousvision/navsim)。
-- Bench2Drive 作者发布：[数据版本与 benchmark](https://github.com/Thinklab-SJTU/Bench2Drive)。
+- NAVSIM 作者发布：[代码、版本记录、split 与评测文档](https://github.com/autonomousvision/navsim)；本节走读固定到 [v2 dataloader](https://github.com/autonomousvision/navsim/blob/0a380a9063d7162ec93d0f51e9990ebac585f720/navsim/common/dataloader.py)、[dataclasses](https://github.com/autonomousvision/navsim/blob/0a380a9063d7162ec93d0f51e9990ebac585f720/navsim/common/dataclasses.py)、[training dataset](https://github.com/autonomousvision/navsim/blob/0a380a9063d7162ec93d0f51e9990ebac585f720/navsim/planning/training/dataset.py)、[agent interface](https://github.com/autonomousvision/navsim/blob/0a380a9063d7162ec93d0f51e9990ebac585f720/navsim/agents/abstract_agent.py)、[training entrypoint](https://github.com/autonomousvision/navsim/blob/0a380a9063d7162ec93d0f51e9990ebac585f720/navsim/planning/script/run_training.py) 和 [v2 PDM scoring entrypoint](https://github.com/autonomousvision/navsim/blob/0a380a9063d7162ec93d0f51e9990ebac585f720/navsim/planning/script/run_pdm_score_from_submission.py)。v1.1 loader 对照版本：[commit `3e8291b`](https://github.com/autonomousvision/navsim/blob/3e8291bfa89ff247231e0227778840cd0a036896/navsim/common/dataloader.py)。
+- nuScenes 作者发布：[devkit token 索引与 `get_sample_data()`](https://github.com/nutonomy/nuscenes-devkit/blob/b40adc467b919192899405d9b77871afee8efa07/python-sdk/nuscenes/nuscenes.py)（revision `b40adc4`，2026-08-06）。
+- Bench2Drive 作者发布：[0.0.4 README 与下载/benchmark 区分](https://github.com/Thinklab-SJTU/Bench2Drive/blob/7ec25d1c9f7522d923ce5f3420986cef1cb2d956/README.md)、[0.0.4 validation route XML](https://github.com/Thinklab-SJTU/Bench2Drive/blob/7ec25d1c9f7522d923ce5f3420986cef1cb2d956/leaderboard/data/bench2drive_0.0.4_val.xml)。
 - Waymo 官方：[数据集格式与 Perception/Motion/End-to-End 划分](https://github.com/waymo-research/waymo-open-dataset)、[官方数据入口及条款](https://waymo.com/open/)。
 - OpenDV 作者发布：[DriveAGI/OpenDV 项目与处理说明](https://github.com/OpenDriveLab/DriveAGI)。
 - 容量、版本和资产状态仍以 [22 篇资产账本](../audits/datasets/WAM_22_dataset_asset_register_2026-09-28.md)、[nuPlan manifest](../audits/datasets/nuplan_v1_1_official_file_manifest_2026-09-28.md)、[OpenScene manifest](../audits/datasets/openscene_v1_1_official_file_manifest_2026-09-28.md) 为准。
