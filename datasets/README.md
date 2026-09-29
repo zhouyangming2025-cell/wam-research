@@ -8,6 +8,7 @@
 | `resource_inventory_20260921.tsv` | 表格化资产账 |
 | `resource_inventory_20260921.json` | 机器可读资产账 |
 | `wam_dataset_download_plan_20260921.md` | 后续数据集选择、版本、许可、体量和优先级 |
+| `wam_common_dataset_understanding_guide_2026-09-29.md` | 主干数据集的数据结构、WAM用途及母体/派生/benchmark边界 |
 
 研究依据位于 `../audits/datasets/`，只用于解释结论，不是执行入口。
 
