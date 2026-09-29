@@ -29,6 +29,23 @@
 | [P0076 UniDriveVLA](https://github.com/zhouyangming2025-cell/wam-research/blob/cb05048dfb822e95d44e52dd85b830c750411e2c/papers/raw_md/P0076_UniDriveVLA/P0076_UniDriveVLA.raw.md#L148) | 驾驶 VQA + FineVision 为主的通用数据（混采3:7）；nuScenes、旧 B2D | nuScenes、旧 B2D、DriveBench、七通用 VQA | FineVision 实际使用分卷 UNKNOWN。 |
 | [P0077 UniDrive-WM](https://github.com/zhouyangming2025-cell/wam-research/blob/cb05048dfb822e95d44e52dd85b830c750411e2c/papers/raw_md/P0077_UniDrive-WM/P0077_UniDrive-WM.raw.md#L184-L194) | 旧 B2D Base、nuScenes、混合 VQA? | 旧 B2D、nuScenes、DriveLM、Chat-B2D | Chat-B2D 对应 ORION 原版 zip；不是 B2D-VL 的后续版本。 |
 
+## 与 65 篇领域盘点的频次交叉复核（2026-09-29）
+
+现有 [65 篇领域 census](wam_field_dataset_census_20260921.md) 截止 P0067，包含这 22 篇中的 12 篇核心 WAM；本账本另含 P0068–P0077 十篇 WAM+VLA。两表合并须按 paper ID 去重：**65 + 22 − 12 = 75 个唯一条目**。复核 `papers/raw_md/` 文件名也得到 75 个唯一 paper ID：74 个 `.raw.md` 加上只有 source note 的 P0067；P0066 的 source note 与其 full raw 对应，不另算一篇。因此这个并集覆盖当前仓库该目录的论文 ID，但不证明仓库覆盖全部领域文献。下表从两张逐篇表分别复算；“频次”是至少一次训练、微调、评测或明确 benchmark/source 使用的 paper ID 数，不是下载次数、全量使用比例或统计学上的使用概率。
+
+| 数据家族/资产 | 65 篇广义 census | 22 篇专项 | 去重并集 | 复核说明 |
+|---|---:|---:|---:|---|
+| NAVSIM（所有版本合并） | 30/65 | 19/22 | **37/75** | 22 篇对应 P0001、P0009、P0042、P0045、P0046、P0048、P0049、P0061–P0065、P0068–P0072、P0074–P0075；65 篇内版本明确项有交叉，不能把旧“v1 29”当作纯 v1 |
+| nuScenes | 31/65 | 15/22 | **38/75** | 22 篇对应 P0001、P0009、P0042、P0046、P0048、P0061、P0063、P0065、P0068、P0071、P0073–P0077；广义 census 另含 P0030 自身数据集论文和 P0034 HUGSIM 来源 |
+| nuPlan（含 mini） | 17/65 | 7/22 | **20/75** | 22 篇直接列及消融使用的 paper ID 为 P0001、P0009、P0042、P0064、P0069、P0072、P0074；不把 NAVSIM/OpenScene 血缘重复计作直接 nuPlan 使用 |
+| Bench2Drive 家族 | 11/65 | 7/22 | **14/75** | 22 篇所列旧版使用为 P0045、P0049、P0061、P0065、P0073、P0076、P0077；v0.0.4 在 22 篇中的直接频次为 0/22 |
+| HUGSIM | 4/65 | 1/22 | **5/75** | 22 篇对应 P0075；原始 KITTI-360/Waymo/PandaSet 不因此成为 HUGSIM 必需整库 |
+| OpenScene（论文直接命名） | 3/65 | 1/22 | **3/75** | 22 篇对应 P0049，已在 65 篇内；故去重后仍是 3，NAVSIM 上游关系另记 |
+
+并集新增的十篇 VLA 中，逐篇表新增 NAVSIM 7 篇（P0068–P0072、P0074–P0075）、nuScenes 7 篇（P0068、P0071、P0073–P0077）、nuPlan 3 篇（P0069、P0072、P0074）和 Bench2Drive 3 篇（P0073、P0076–P0077）。这个并集仍只是仓库当前纳入的 75 个条目，不证明仓库已覆盖截至当前日期的全部 WAM 论文。
+
+**频次不等于“高概率使用整包”。** 例如 NAVSIM 19/22 表明这个 benchmark 家族在固定专项中常见；并不能推出 19 篇都需要独立保留 NAVSIM archive，也不能把 OpenScene parent 和 navtrain 派生包重复计入。nuPlan 的 7/22 是直接论文频次，容量情景仍单列其 v1.1 公开压缩包，属于包选择假设，不代表每篇都读取 169 个对象。
+
 ## 逐数据资产账本：容量、证据与重复关系
 
 | 资产／版本 | 发布方可核容量 | 计量状态 | 母体/依赖；计盘决定 | 一手来源 |

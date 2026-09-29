@@ -8,6 +8,7 @@
 - **P0067 ProSim**：仓库当前只有 verified source note，没有 full raw Markdown；因此只使用 source note，并额外核对官方 ProSim 发布页确认其底层使用 **Waymo Open Dataset / WOMD** 与 **ProSim-Instruct-520k**；
 - 统计只记录论文**实际训练、微调、主/补充评测、明确构建 benchmark 的数据**；
 - **不把 Related Work / reference list 中“提到过”的数据集算作论文使用数据**；
+- 这 65 条是仓库当时的**广义领域语料**，不等于 65 篇纯 WAM 论文；包含 E2E、预测、occupancy、仿真/benchmark 等相邻工作，也包含 P0030–P0033 数据集/benchmark 论文自身；频次是语料内唯一 paper ID 数，不是全领域抽样比例；
 - 作者自行生成的 feature cache、latent cache、trajectory anchors、pseudo labels、reward cache、teacher trajectories、checkpoint 等普通复现中间资产，不纳入“基础数据集下载”盘点；
 - 如果作者生成的数据已经成为**独立命名、公开发布或可复用的 dataset / benchmark**，则单独登记，例如 Occ3D、DriveReward、OmniDrive、ProSim-Instruct-520k。
 
@@ -21,20 +22,31 @@
 
 ## 1. 65 篇审计后的总体图景
 
-按“论文直接使用或明确作为其 benchmark/source”的口径，仓库 65 个条目中最集中的数据体系如下。
+按“论文直接使用或明确作为其 benchmark/source”的口径，仓库 65 个条目中最集中的数据体系如下。每个 paper ID 对同一数据家族最多计 1 次；同一论文可同时出现在 v1、v2 两行。来源数据、数据集/benchmark 自身论文也按 ledger 中的角色计入，因此这些是**文献条目频次**，不能直接解释成独立下载包数或项目复现概率。
 
-| 数据体系 | 65 条目中直接出现次数 | 说明 |
+| 数据体系 | 65 条目中涉及条目数 | 说明 |
 |---|---:|---|
-| **nuScenes** | **31** | 仍是最广泛的真实多传感器基础：E2E、world model、occupancy、生成、鲁棒性都在用 |
-| **NAVSIM v1** | **29** | planning-centric WAM / 一段式规划最集中的统一训练与评测体系 |
-| **nuPlan（含 mini）** | **17** | 大规模规划/行为数据与 world-model 视频预训练的重要源头；同时是 OpenScene/NAVSIM 上游 |
-| **NAVSIM v2** | **13** | 2025–2026 明显增加，尤其用于 navhard / two-stage / EPDMS |
-| **Bench2Drive** | **11** | CARLA 反应式闭环的重要标准 benchmark |
-| **CARLA 系** | **8** | 包括直接 CARLA、CARLA-v2、RiskBench、Roach 专家采集、SUMMIT 等 |
-| **WOMD / Waymo** | **6** | 交互预测、traffic simulation、HUGSIM/BridgeSim/ProSim 的重要数据源 |
-| **HUGSIM** | **4** | 真实场景重建的 photorealistic closed-loop benchmark |
-| **OpenScene（论文直接写明使用）** | **3** | 注意：NAVSIM 本身建立在 OpenScene/nuPlan 之上，不能把所有 NAVSIM 论文重复计为“直接使用 OpenScene” |
-| **OpenDV** | **3** | 大规模驾驶视频 world-model 预训练数据，Vista/PWM/CausalDrive 等使用 |
+| **nuScenes** | **31** | 含 P0030 数据集论文及 P0034 的 HUGSIM 来源记录；频次不代表每篇都需下载原始 nuScenes 全量 |
+| **NAVSIM 家族（版本合并）** | **30** | v1/v2/未标版本合并后的唯一条目数；见下方版本拆分 |
+| **nuPlan（含 mini）** | **17** | 含 P0031 数据集论文及 NAVSIM/OpenScene 上游关系记录；不代表需要全时段 raw sensor |
+| **NAVSIM v1（明确标版本）** | **20** | 与 v2 有交集；另有记录只写 NAVSIM，需按 split 信息拆分 |
+| **NAVSIM v1 典型 split（论文未写版本号）** | **6** | 报告 `navtrain/navtest` 的 1,192/136 scenarios 或约 103k/12k samples；能识别为 v1 典型 split profile，但不证明具体 archive revision |
+| **NAVSIM v2（明确标版本）** | **13** | 其中 12 条也明确涉及 v1；版本频次不能相加成家族频次 |
+| **NAVSIM 版本仍未能判定** | **3** | 只称 NAVSIM/使用 NAVSIM 评测 protocol，未给版本或足以识别 split 的信息 |
+| **Bench2Drive 家族** | **11** | 含 P0033 benchmark 论文；多版本/子包需另核，不能等同于 11 次下载 |
+| **CARLA 原生/仿真侧资产** | **8** | 计 RiskBench、Roach、SUMMIT 等明确 CARLA 实验；仅使用 Bench2Drive 的论文另按 Bench2Drive 计，BridgeSim 的 CARLA 支持能力不算实际使用 |
+| **WOMD / Waymo** | **6** | 含 WOMD 与 HUGSIM 来源记录；不能混同 Waymo Perception 全量原始传感器 |
+| **HUGSIM** | **4** | 含 HUGSIM 自身场景/benchmark 发布论文 |
+| **OpenScene（论文直接写明使用）** | **3** | NAVSIM 上游关系不重复当作直接 OpenScene 使用 |
+| **OpenDV** | **3** | 大规模驾驶视频预训练数据，Vista/PWM/CausalDrive 等使用 |
+
+**NAVSIM 版本复核：**逐篇原文复核后，明确写出 v1 的条目为 20（包括 census 原表漏标的 P0007 DriveReward 与 P0052 ReWorld）；明确写出 v2 的为 13，其中 12 篇也明确写出 v1。另有 6 篇虽未写版本号，但报告 `navtrain/navtest` 的 1,192/136 scenarios 或约 103k/12k samples，按 NAVSIM v1 典型 split profile 单列；这不能替代版本/文件修订号。剩余 3 篇 P0015、P0048、P0059 未给足以判定版本的 split 信息。因此唯一家族频次仍是 30，不能用重叠的 v1/v2 两行直接相加。旧“v1 29”实为“20 条明确 v1 + 9 条原先未标版本、但排除仅 v2 的 P0013”；其中 6 条有 v1 典型 split 佐证，3 条仍未判版本，不应作为纯 v1 精确计数。
+
+若只为观察基础数据集/benchmark owner paper 对总数的影响，剔除 P0030–P0033 四篇后分母为 61，nuScenes 为 30、NAVSIM 家族为 29、nuPlan 为 15、Bench2Drive 为 10。这个敏感性仍包含 E2E、预测、仿真等相邻方向；它不是“纯 WAM 方法论文”频次，也不改变原始 65 条 census 的主表口径。
+
+**CARLA 口径复核：**[P0013 BridgeSim 原文 Table 1](../../papers/raw_md/P0013_BridgeSim/P0013_BridgeSim.raw.md#L31) 把 CARLA 列为平台支持地图，但[实验段落](../../papers/raw_md/P0013_BridgeSim/P0013_BridgeSim.raw.md#L164)报告的是 NavHard log-replay、nuScenes/WOMD unseen-scene 及替换交通策略的测试；没有证据将 CARLA 场景列为该论文实际读取的数据。因此逐篇表将 CARLA 从 P0013 的“实际使用数据”列移到能力备注，CARLA 原生/仿真侧 8 条统计保持不变。
+
+**与 22 篇专项范围的关系：**本 census 截止 P0067，覆盖 12 篇核心 WAM；后续 22 篇账本另含 P0068–P0077 共 10 篇 WAM+VLA。两套范围重叠 12 篇，合并时应去重，当前两账本的并集为 75 个条目，而不是 87 篇。详见 [22 篇账本中的交叉复核表](WAM_22_dataset_asset_register_2026-09-28.md#与-65-篇领域盘点的频次交叉复核)。
 
 这比上一版多暴露出几条不能忽略的数据支线：
 
@@ -118,12 +130,12 @@
 | P0004 | BeTop | 交互预测 / 规划 | **nuPlan、WOMD** | nuPlan planning + Waymo Open Motion prediction |
 | P0005 | RiskWorld | 风险 world model / simulation | **RiskBench（CARLA）** | RiskBench 由 CARLA 风险场景构成 |
 | P0006 | GenDrive | 生成式规划 | **nuPlan** | 训练和 closed-loop planning test 都在 nuPlan |
-| P0007 | DriveReward | 奖励模型 / 数据集 | **NAVSIM → DriveReward / DriveReward-Bench** | DriveReward 从 NAVSIM train 构建；另有 QA 预训练混合，见 §6 |
+| P0007 | DriveReward | 奖励模型 / 数据集 | **NAVSIM v1 → DriveReward / DriveReward-Bench** | 原文报告 NAVSIM-V1 RL 评测及 train-set 衍生（[原文](../../papers/raw_md/P0007_DriveReward/P0007_DriveReward.raw.md#L92)）；另有 QA 预训练混合，见 §6 |
 | P0009 | DriveLaW | 核心 WAM | **nuPlan、nuScenes、NAVSIM v1** | 大规模视频预训练 + NAVSIM planning |
 | P0010 | TOAD | E2E planning | **NAVSIM v1、NAVSIM v2、HUGSIM** | 同时覆盖 log-based 与 photorealistic closed-loop |
 | P0011 | SensitivityShaping | 外围：通用动力学 / OOD | **无统一 AD 基础数据集可列** | 不是本次自动驾驶数据下载主线，避免强行计数 |
 | P0012 | DAWAM | WAM | **NAVSIM v1、NAVSIM v2** | planning benchmark 主线 |
-| P0013 | BridgeSim | 闭环 simulator / benchmark | **NAVSIM v2、nuPlan、nuScenes、WOMD、CARLA / BridgeSim** | 平台支持多地图/多场景源；不是单一原始数据集 |
+| P0013 | BridgeSim | 闭环 simulator / benchmark | **NAVSIM v2、nuPlan、nuScenes、WOMD、BridgeSim/NavHard** | CARLA 是论文列出的支持能力；实验报告未证明实际读取 CARLA 场景，不计 CARLA 使用频次 |
 | P0014 | ReactSimBench | reactive traffic benchmark | **nuPlan → ReactSim-Bench** | 基于 nuPlan 构建 2,636 个 test scenarios |
 | P0015 | CausalDrive | 交互式 world renderer | **OpenDV、nuPlan、SocioDrive-Bench、Bench2Drive/CARLA、NAVSIM** | OpenDV 1,700 h 预训练；SocioDrive-Bench 20K clips，80% nuPlan / 20% CARLA |
 | P0016 | CounterfactualPred | 反事实预测 benchmark | **CARLA** | controlled counterfactual GT 来自 simulator |
@@ -137,7 +149,7 @@
 |---|---|---|---|---|
 | P0021 | HydraMDP | E2E planning | **NAVSIM v1** | NAVSIM 主线 |
 | P0022 | DriveSuprim | E2E planning | **NAVSIM v1、NAVSIM v2、Bench2Drive** | 论文强调不引入额外训练数据 |
-| P0023 | iPad | E2E planning | **NAVSIM、Bench2Drive** | 非反应式 + CARLA 闭环 |
+| P0023 | iPad | E2E planning | **NAVSIM v1 split profile、Bench2Drive** | 原文使用 103k/12k 的官方 navtrain/navtest（[原文](../../papers/raw_md/P0023_iPad/P0023_iPad.raw.md#L152)）；未写 archive revision |
 | P0024 | DriveVLM | VLM / E2E | **nuScenes、SUP-AD（内部）** | SUP-AD 为非公开自有数据，不能作为公共下载候选 |
 | P0025 | OmniDrive | VLM 数据 / 规划 | **nuScenes、OpenLane-v2、OmniDrive、DriveLM** | OmniDrive QA 基于 nuScenes；counterfactual checklist 还用 OpenLane-v2 topology |
 | P0026 | ORION | VLM / E2E | **Bench2Drive** | 主要 CARLA E2E benchmark |
@@ -159,8 +171,8 @@
 
 | ID | 论文 | 定位 | 实际训练 / 评测 / 构建数据 | 盘点备注 |
 |---|---|---|---|---|
-| P0040 | DrivingGPT | WAM | **nuPlan、NAVSIM** | world modeling + planning |
-| P0041 | PolicyWM / PWM | WAM | **OpenDV、nuScenes、NAVSIM** | 大视频预训练 → 下游 planning |
+| P0040 | DrivingGPT | WAM | **nuPlan、NAVSIM v1 split profile** | 原文列 navtrain/navtest 1,192/136 scenarios（[原文](../../papers/raw_md/P0040_DrivingGPT/P0040_DrivingGPT.raw.md#L106)）；world modeling + planning |
+| P0041 | PolicyWM / PWM | WAM | **OpenDV、nuScenes、NAVSIM v1 split profile** | 原文列约 103k/12k train/test samples（[原文](../../papers/raw_md/P0041_PolicyWM/P0041_PolicyWM.raw.md#L100)）；大视频预训练 → 下游 planning |
 | P0042 | WorldDrive | 核心 WAM | **nuPlan、nuScenes、NAVSIM v1/v2** | 多阶段数据链 |
 | P0043 | OccWorld | occupancy world model | **nuScenes + Occ3D** | Occ3D 是额外 occupancy GT，不能等同于 raw nuScenes |
 | P0044 | DriveOccWorld | occupancy world model | **nuScenes、nuScenes-Occupancy、Lyft-Level5** | 独立 occupancy 扩展 + 独立 Lyft 数据 |
@@ -169,25 +181,25 @@
 | P0047 | DriveWorld | world-model pretraining | **OpenScene、nuScenes** | OpenScene 大规模 4D pretrain → nuScenes downstream |
 | P0048 | LAW | 核心 WAM | **nuScenes、NAVSIM、CARLA/Roach expert** | Roach 189K frames 属作者 CARLA expert 采集 |
 | P0049 | Drive-JEPA | 核心 WAM | **CoVLA、DrivingDojo、OpenScene、NAVSIM v1/v2、Bench2Drive** | 本仓库中最明显的多源驾驶视频预训练之一 |
-| P0050 | WorldRFT | WAM | **nuScenes、NAVSIM** | open-loop + NAVSIM |
+| P0050 | WorldRFT | WAM | **nuScenes、NAVSIM v1 split profile** | 原文列 1,192/136 train/test sequences（[原文](../../papers/raw_md/P0050_WorldRFT/P0050_WorldRFT.raw.md#L443)）；open-loop + NAVSIM |
 | P0051 | Auto-JEPA | WAM | **NAVSIM v1、NAVSIM v2** | action-oriented latent world model |
-| P0052 | ReWorld | WAM | **nuScenes、NAVSIM；UCF-101（辅助 probe）** | UCF-101 仅表示学习线性探针，不是驾驶训练主数据 |
+| P0052 | ReWorld | WAM | **nuScenes、NAVSIM v1；UCF-101（辅助 probe）** | 原文明写 NAVSIM v1（[原文](../../papers/raw_md/P0052_ReWorld/P0052_ReWorld.raw.md#L244)）；UCF-101 仅表示学习线性探针，不是驾驶训练主数据 |
 | P0053 | WA-JEPA | WAM | **nuPlan、NAVSIM v1/v2、HUGSIM** | Stage 1 明确 nuPlan multi-view pretrain |
 | P0054 | What Truly Matters | 外围：prediction evaluation | **SUMMIT/CARLA 自建 Alignment dataset** | 59,944 自采 simulation scenarios；不是公开驾驶 sensor corpus 主线 |
 | P0055 | SLEDGE | generative scene / simulation | **nuPlan** | 生成式驾驶环境主数据源 |
 | P0056 | DriveArena | generative closed-loop simulator | **nuScenes；OpenStreetMap；nuPlan 零样本测试** | World Dreamer 700/150 nuScenes；OSM 是地图源 |
 | P0057 | UniAD | E2E | **nuScenes** | 标准 E2E 基线 |
 | P0058 | VAD | E2E | **nuScenes** | 标准 E2E 基线 |
-| P0059 | DiffusionDrive | E2E planning | **NAVSIM、nuScenes** | NAVSIM 主结果 + nuScenes open-loop |
+| P0059 | DiffusionDrive | E2E planning | **NAVSIM、nuScenes** | 使用 NAVSIM navtest；未找到能单独识别版本的 split 规模，NAVSIM v1/v2 UNKNOWN |
 
 ### 3.4 P0060–P0067
 
 | ID | 论文 | 定位 | 实际训练 / 评测 / 构建数据 | 盘点备注 |
 |---|---|---|---|---|
 | P0060 | DrivoR | E2E planning | **NAVSIM v1、NAVSIM v2、HUGSIM** | navtrain 训练；navhard-two-stage；HUGSIM zero-shot |
-| P0061 | SeerDrive | 核心 WAM | **NAVSIM、nuScenes；Bench2Drive（补充）** | future-aware planning |
+| P0061 | SeerDrive | 核心 WAM | **NAVSIM v1 split profile、nuScenes；Bench2Drive（补充）** | 原文列 1,192/136 navtrain/navtest scenarios（[原文](../../papers/raw_md/P0061_SeerDrive/P0061_SeerDrive.raw.md#L107)）；future-aware planning |
 | P0062 | Metis | 核心 WAM | **NAVSIM v2、CityWalker；NAVSIM v1（补充）** | 自动驾驶 + 城市机器人导航 |
-| P0063 | DynFlowDrive | 核心 WAM | **nuScenes、NAVSIM** | 两套独立实验 |
+| P0063 | DynFlowDrive | 核心 WAM | **nuScenes、NAVSIM v1 split profile** | 原文列 1,192/136 train/test scenarios（[原文](../../papers/raw_md/P0063_DynFlowDrive/P0063_DynFlowDrive.raw.md#L223)）；两套独立实验 |
 | P0064 | Discrete-WAM | 核心 WAM | **nuPlan、NAVSIM v1/v2** | nuPlan pretraining + NAVSIM post-training |
 | P0065 | GraphWorld | 核心 WAM | **nuScenes、NAVSIM v1/v2、Bench2Drive** | 另有 Turning-nuScenes、Adv-nuSc、nuScenes-C robustness |
 | P0066 | Safe-Sim | safety-critical traffic simulation | **nuScenes、nuPlan mini** | nuScenes train；nuScenes val + nuPlan mini val |
@@ -220,7 +232,7 @@
 
 | 名称 | 本质 | 主要使用论文 | 210 当前状态 |
 |---|---|---|---|
-| **NAVSIM v1** | OpenScene/nuPlan 上的非反应式 planning benchmark | 29 个条目 | **已有** |
+| **NAVSIM v1 / 未标版本 NAVSIM** | OpenScene/nuPlan 上的非反应式 planning benchmark | **20 条明确 v1；另 6 条符合 v1 典型 split；3 条未能判版本；NAVSIM 家族 30 条，v2 13 条（与 v1 重叠 12 条）** | **已有** |
 | **NAVSIM v2** | EPDMS + reactive traffic support + two-stage pseudo-simulation | 13 个条目 | **已有** |
 | **Bench2Drive** | CARLA E2E train/eval benchmark | 11 个条目 | **已有 v0.0.4 no-depth + maps；depth 未见** |
 | **HUGSIM** | 真实场景重建 photorealistic closed-loop | TOAD、WA-JEPA、DrivoR 等 | **未见 released scene/scenario 资产** |
