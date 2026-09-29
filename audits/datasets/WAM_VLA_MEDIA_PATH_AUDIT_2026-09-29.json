@@ -1,0 +1,1416 @@
+{
+  "audit_date": "2026-09-29",
+  "method": {
+    "annotation_only": true,
+    "media_objects_requested": 0,
+    "media_keys": [
+      "clip_path",
+      "clip_paths",
+      "frame_path",
+      "frame_paths",
+      "image",
+      "image_path",
+      "image_paths",
+      "images",
+      "media_path",
+      "media_paths",
+      "video",
+      "video_path",
+      "video_paths",
+      "videos"
+    ],
+    "deduplication": "Path-level only: (family, normalized relative path); no basename-only or media-byte/hash deduplication.",
+    "normalization": "URL-decode, slash normalization, remove known dataset mount prefix by dataset marker; preserve case within relative path.",
+    "complete_scan": true,
+    "selected_annotation_objects": 18,
+    "include_path_substring": null,
+    "input_object_bytes_expected": 4722221395
+  },
+  "source_objects": [
+    {
+      "annotation_set": "ReCogDrive",
+      "repo": "owl10/ReCogDrive_Pretraining",
+      "revision": "f55bb18e0aca846bbedfb516760a1b9b7cfe3ebf",
+      "path": "Bench2drive_QA/Bench2drive_QA.jsonl",
+      "source_url": "https://huggingface.co/datasets/owl10/ReCogDrive_Pretraining/resolve/f55bb18e0aca846bbedfb516760a1b9b7cfe3ebf/Bench2drive_QA/Bench2drive_QA.jsonl",
+      "bytes_expected": 1007343319,
+      "repo_blob_oid": "f35dbbcae7d961790ad782f83f5e90fc816ffe3c",
+      "lfs_sha256_expected": "e65849bbec072431b12fb513375e616c6d1708b3698a2489cf84c4bc5760c212",
+      "xet_hash": "18676a86f2d049f7df6508a97da13f00c5cdabf59c0f60eda2493f36c765f628",
+      "last_commit": "f55bb18e0aca846bbedfb516760a1b9b7cfe3ebf",
+      "annotation_id": "ReCogDrive:Bench2drive_QA/Bench2drive_QA.jsonl",
+      "context_family": "Bench2Drive",
+      "bytes_streamed": 1007343319,
+      "response_content_length": 1007343319,
+      "final_host": "us.aws.cdn.hf.co",
+      "stream_sha256": "e65849bbec072431b12fb513375e616c6d1708b3698a2489cf84c4bc5760c212",
+      "lfs_sha256_matches": true,
+      "rows_read": 49942,
+      "parse_errors": 0,
+      "media_uri_occurrences": 299652,
+      "media_by_family_modality_confidence": [
+        {
+          "family": "Bench2Drive",
+          "modality": "image",
+          "mapping_basis": "PATH_PREFIX",
+          "uri_occurrences": 299652
+        }
+      ],
+      "complete": true
+    },
+    {
+      "annotation_set": "ReCogDrive",
+      "repo": "owl10/ReCogDrive_Pretraining",
+      "revision": "f55bb18e0aca846bbedfb516760a1b9b7cfe3ebf",
+      "path": "Bench2drive_Traj/Bench2drive_Traj.jsonl",
+      "source_url": "https://huggingface.co/datasets/owl10/ReCogDrive_Pretraining/resolve/f55bb18e0aca846bbedfb516760a1b9b7cfe3ebf/Bench2drive_Traj/Bench2drive_Traj.jsonl",
+      "bytes_expected": 409885730,
+      "repo_blob_oid": "8e0f3c67e6a1d1bba35921ad516c7cc99f7e535e",
+      "lfs_sha256_expected": "9a0840a360347178d68faf0716723ab55d49c259b0a69b9e6471aa4360222084",
+      "xet_hash": "8aee104382a7a11e843153ada4f7faeea3b480ae9f0266f8c2442915c73add75",
+      "last_commit": "f55bb18e0aca846bbedfb516760a1b9b7cfe3ebf",
+      "annotation_id": "ReCogDrive:Bench2drive_Traj/Bench2drive_Traj.jsonl",
+      "context_family": "Bench2Drive",
+      "bytes_streamed": 409885730,
+      "response_content_length": 409885730,
+      "final_host": "us.aws.cdn.hf.co",
+      "stream_sha256": "9a0840a360347178d68faf0716723ab55d49c259b0a69b9e6471aa4360222084",
+      "lfs_sha256_matches": true,
+      "rows_read": 196761,
+      "parse_errors": 0,
+      "media_uri_occurrences": 1180566,
+      "media_by_family_modality_confidence": [
+        {
+          "family": "Bench2Drive",
+          "modality": "image",
+          "mapping_basis": "PATH_PREFIX",
+          "uri_occurrences": 1180566
+        }
+      ],
+      "complete": true
+    },
+    {
+      "annotation_set": "ReCogDrive",
+      "repo": "owl10/ReCogDrive_Pretraining",
+      "revision": "f55bb18e0aca846bbedfb516760a1b9b7cfe3ebf",
+      "path": "CODA-LM/dataset_coda_lm.jsonl",
+      "source_url": "https://huggingface.co/datasets/owl10/ReCogDrive_Pretraining/resolve/f55bb18e0aca846bbedfb516760a1b9b7cfe3ebf/CODA-LM/dataset_coda_lm.jsonl",
+      "bytes_expected": 24557896,
+      "repo_blob_oid": "6516b5187718b5f264f181523c0a6b07eca8715e",
+      "lfs_sha256_expected": "a518895a64ae6e896f8756daaa550144f5e4123d15a67f1bb55c9e0321918c20",
+      "xet_hash": "32d215993161925c7a4183ebdf96c5eef98d2a79b48cea9599f050f4b920a420",
+      "last_commit": "1ba298316cb3c210df94b6666bf6f02dfc8d9d13",
+      "annotation_id": "ReCogDrive:CODA-LM/dataset_coda_lm.jsonl",
+      "context_family": "CODA-LM",
+      "bytes_streamed": 24557896,
+      "response_content_length": 24557896,
+      "final_host": "us.aws.cdn.hf.co",
+      "stream_sha256": "a518895a64ae6e896f8756daaa550144f5e4123d15a67f1bb55c9e0321918c20",
+      "lfs_sha256_matches": true,
+      "rows_read": 20318,
+      "parse_errors": 0,
+      "media_uri_occurrences": 20318,
+      "media_by_family_modality_confidence": [
+        {
+          "family": "CODA-LM",
+          "modality": "image",
+          "mapping_basis": "PATH_PREFIX",
+          "uri_occurrences": 20318
+        }
+      ],
+      "complete": true
+    },
+    {
+      "annotation_set": "ReCogDrive",
+      "repo": "owl10/ReCogDrive_Pretraining",
+      "revision": "f55bb18e0aca846bbedfb516760a1b9b7cfe3ebf",
+      "path": "Drama/dataset_drama.jsonl",
+      "source_url": "https://huggingface.co/datasets/owl10/ReCogDrive_Pretraining/resolve/f55bb18e0aca846bbedfb516760a1b9b7cfe3ebf/Drama/dataset_drama.jsonl",
+      "bytes_expected": 21437538,
+      "repo_blob_oid": "bc6af2a1b55d511b1bb4fa212d6b2d9e14ce58fb",
+      "lfs_sha256_expected": "294c44d60f77538e2fd1df883a5b34c869dba677312f2b99e478a08bb800db61",
+      "xet_hash": "d584f24408874e7ba5bc0bafbdd4c29678e543be8017f4d02ef23690b565122f",
+      "last_commit": "1ba298316cb3c210df94b6666bf6f02dfc8d9d13",
+      "annotation_id": "ReCogDrive:Drama/dataset_drama.jsonl",
+      "context_family": "DRAMA",
+      "bytes_streamed": 21437538,
+      "response_content_length": 21437538,
+      "final_host": "us.aws.cdn.hf.co",
+      "stream_sha256": "294c44d60f77538e2fd1df883a5b34c869dba677312f2b99e478a08bb800db61",
+      "lfs_sha256_matches": true,
+      "rows_read": 16401,
+      "parse_errors": 0,
+      "media_uri_occurrences": 16401,
+      "media_by_family_modality_confidence": [
+        {
+          "family": "DRAMA",
+          "modality": "video",
+          "mapping_basis": "PATH_PREFIX",
+          "uri_occurrences": 16401
+        }
+      ],
+      "complete": true
+    },
+    {
+      "annotation_set": "ReCogDrive",
+      "repo": "owl10/ReCogDrive_Pretraining",
+      "revision": "f55bb18e0aca846bbedfb516760a1b9b7cfe3ebf",
+      "path": "DriveLM/drivelm_change_box_type.jsonl",
+      "source_url": "https://huggingface.co/datasets/owl10/ReCogDrive_Pretraining/resolve/f55bb18e0aca846bbedfb516760a1b9b7cfe3ebf/DriveLM/drivelm_change_box_type.jsonl",
+      "bytes_expected": 84501306,
+      "repo_blob_oid": "d5854bbf5c2f209409790f0f605e5fe8854ad2b4",
+      "lfs_sha256_expected": "ec28fdd260fbc323236f06eed88b23655df56b661d4b8cadfa2e9ccc8e6759f4",
+      "xet_hash": "45b3a5aefa6217c286b83fb7ab4a2a0c59ee58554f74a7ca72ab943dddcbd027",
+      "last_commit": "139298674f091169fa21fcc049562dfc102bde8c",
+      "annotation_id": "ReCogDrive:DriveLM/drivelm_change_box_type.jsonl",
+      "context_family": "nuScenes",
+      "bytes_streamed": 84501306,
+      "response_content_length": 84501306,
+      "final_host": "us.aws.cdn.hf.co",
+      "stream_sha256": "ec28fdd260fbc323236f06eed88b23655df56b661d4b8cadfa2e9ccc8e6759f4",
+      "lfs_sha256_matches": true,
+      "rows_read": 4072,
+      "parse_errors": 0,
+      "media_uri_occurrences": 24432,
+      "media_by_family_modality_confidence": [
+        {
+          "family": "nuScenes",
+          "modality": "image",
+          "mapping_basis": "PATH_PREFIX",
+          "uri_occurrences": 24432
+        }
+      ],
+      "complete": true
+    },
+    {
+      "annotation_set": "ReCogDrive",
+      "repo": "owl10/ReCogDrive_Pretraining",
+      "revision": "f55bb18e0aca846bbedfb516760a1b9b7cfe3ebf",
+      "path": "DriveLM/drivelm_original_box.jsonl",
+      "source_url": "https://huggingface.co/datasets/owl10/ReCogDrive_Pretraining/resolve/f55bb18e0aca846bbedfb516760a1b9b7cfe3ebf/DriveLM/drivelm_original_box.jsonl",
+      "bytes_expected": 77619323,
+      "repo_blob_oid": "a24ec7385d5f3cfaa96c6a4bb31f7faa1b1c5cf7",
+      "lfs_sha256_expected": "4fbf31d2316a25563142fbe99f78e165f0fa1039f33dfe2f3ace3ec77d7860f5",
+      "xet_hash": "54c43693d8445d2946f1fd3e184373ffea7e8dcda166dc32c08d5b2e0c5d2481",
+      "last_commit": "139298674f091169fa21fcc049562dfc102bde8c",
+      "annotation_id": "ReCogDrive:DriveLM/drivelm_original_box.jsonl",
+      "context_family": "nuScenes",
+      "bytes_streamed": 77619323,
+      "response_content_length": 77619323,
+      "final_host": "us.aws.cdn.hf.co",
+      "stream_sha256": "4fbf31d2316a25563142fbe99f78e165f0fa1039f33dfe2f3ace3ec77d7860f5",
+      "lfs_sha256_matches": true,
+      "rows_read": 4072,
+      "parse_errors": 0,
+      "media_uri_occurrences": 24432,
+      "media_by_family_modality_confidence": [
+        {
+          "family": "nuScenes",
+          "modality": "image",
+          "mapping_basis": "PATH_PREFIX",
+          "uri_occurrences": 24432
+        }
+      ],
+      "complete": true
+    },
+    {
+      "annotation_set": "ReCogDrive",
+      "repo": "owl10/ReCogDrive_Pretraining",
+      "revision": "f55bb18e0aca846bbedfb516760a1b9b7cfe3ebf",
+      "path": "Drivegpt4/dataset_drivegpt4.jsonl",
+      "source_url": "https://huggingface.co/datasets/owl10/ReCogDrive_Pretraining/resolve/f55bb18e0aca846bbedfb516760a1b9b7cfe3ebf/Drivegpt4/dataset_drivegpt4.jsonl",
+      "bytes_expected": 48949414,
+      "repo_blob_oid": "f0d6f6ff0550cb88279304ac414e91bf4704af2a",
+      "lfs_sha256_expected": "626ffe421d5bab0677b191044f817aebd5713f8786afeda5ee21c5ab7976bf38",
+      "xet_hash": "33b44df6ea83631a02e8a9c709afe4c8fa7e6942050334c3ab163d7bf114304b",
+      "last_commit": "1ba298316cb3c210df94b6666bf6f02dfc8d9d13",
+      "annotation_id": "ReCogDrive:Drivegpt4/dataset_drivegpt4.jsonl",
+      "context_family": "DriveGPT4/BDD-X",
+      "bytes_streamed": 48949414,
+      "response_content_length": 48949414,
+      "final_host": "us.aws.cdn.hf.co",
+      "stream_sha256": "626ffe421d5bab0677b191044f817aebd5713f8786afeda5ee21c5ab7976bf38",
+      "lfs_sha256_matches": true,
+      "rows_read": 26319,
+      "parse_errors": 0,
+      "media_uri_occurrences": 210552,
+      "media_by_family_modality_confidence": [
+        {
+          "family": "DriveGPT4/BDD-X",
+          "modality": "image",
+          "mapping_basis": "ANNOTATION_CONTEXT",
+          "uri_occurrences": 210552
+        }
+      ],
+      "complete": true
+    },
+    {
+      "annotation_set": "ReCogDrive",
+      "repo": "owl10/ReCogDrive_Pretraining",
+      "revision": "f55bb18e0aca846bbedfb516760a1b9b7cfe3ebf",
+      "path": "LingoQA/dataset_lingoqa.jsonl",
+      "source_url": "https://huggingface.co/datasets/owl10/ReCogDrive_Pretraining/resolve/f55bb18e0aca846bbedfb516760a1b9b7cfe3ebf/LingoQA/dataset_lingoqa.jsonl",
+      "bytes_expected": 92711709,
+      "repo_blob_oid": "f31014f493e6236aa76889f7d9e5e4cfb84ac7c2",
+      "lfs_sha256_expected": "a0ec55be0b90279708a29b9f4754ce6f67510538682e9b330195fe12d66ae2f1",
+      "xet_hash": "7174cea5fefd2ad38893fb05da857a9611300ae27a7025384487573ae990b98a",
+      "last_commit": "1ba298316cb3c210df94b6666bf6f02dfc8d9d13",
+      "annotation_id": "ReCogDrive:LingoQA/dataset_lingoqa.jsonl",
+      "context_family": "LingoQA",
+      "bytes_streamed": 92711709,
+      "response_content_length": 92711709,
+      "final_host": "us.aws.cdn.hf.co",
+      "stream_sha256": "a0ec55be0b90279708a29b9f4754ce6f67510538682e9b330195fe12d66ae2f1",
+      "lfs_sha256_matches": true,
+      "rows_read": 26824,
+      "parse_errors": 0,
+      "media_uri_occurrences": 134120,
+      "media_by_family_modality_confidence": [
+        {
+          "family": "LingoQA",
+          "modality": "image",
+          "mapping_basis": "PATH_PREFIX",
+          "uri_occurrences": 134120
+        }
+      ],
+      "complete": true
+    },
+    {
+      "annotation_set": "ReCogDrive",
+      "repo": "owl10/ReCogDrive_Pretraining",
+      "revision": "f55bb18e0aca846bbedfb516760a1b9b7cfe3ebf",
+      "path": "Maplm/dataset_maplm.jsonl",
+      "source_url": "https://huggingface.co/datasets/owl10/ReCogDrive_Pretraining/resolve/f55bb18e0aca846bbedfb516760a1b9b7cfe3ebf/Maplm/dataset_maplm.jsonl",
+      "bytes_expected": 25223737,
+      "repo_blob_oid": "e55ff1fb2f73016533a41de5257f4457d4997c15",
+      "lfs_sha256_expected": "95fa1feb406c53012caf0210fe848fca165c32a05462134d074cbfe3c1c9e49a",
+      "xet_hash": "56dd475b89e37fb8f7481e8de200d6ad5facb0d349353aa28bde553633787c68",
+      "last_commit": "1ba298316cb3c210df94b6666bf6f02dfc8d9d13",
+      "annotation_id": "ReCogDrive:Maplm/dataset_maplm.jsonl",
+      "context_family": "MAPLM",
+      "bytes_streamed": 25223737,
+      "response_content_length": 25223737,
+      "final_host": "us.aws.cdn.hf.co",
+      "stream_sha256": "95fa1feb406c53012caf0210fe848fca165c32a05462134d074cbfe3c1c9e49a",
+      "lfs_sha256_matches": true,
+      "rows_read": 10612,
+      "parse_errors": 0,
+      "media_uri_occurrences": 31836,
+      "media_by_family_modality_confidence": [
+        {
+          "family": "MAPLM",
+          "modality": "image",
+          "mapping_basis": "PATH_PREFIX",
+          "uri_occurrences": 31836
+        }
+      ],
+      "complete": true
+    },
+    {
+      "annotation_set": "ReCogDrive",
+      "repo": "owl10/ReCogDrive_Pretraining",
+      "revision": "f55bb18e0aca846bbedfb516760a1b9b7cfe3ebf",
+      "path": "Navsim_ReCogDrive/dataset_navsim_recogdrive.jsonl",
+      "source_url": "https://huggingface.co/datasets/owl10/ReCogDrive_Pretraining/resolve/f55bb18e0aca846bbedfb516760a1b9b7cfe3ebf/Navsim_ReCogDrive/dataset_navsim_recogdrive.jsonl",
+      "bytes_expected": 737567360,
+      "repo_blob_oid": "ddd49ccbc03159f026c6df969efb2ff8609c5926",
+      "lfs_sha256_expected": "57b66ad9ad7deba58e326bdea9162f74032dbc3aa95bac7e1464c32286a84ca9",
+      "xet_hash": "4535045f52226509e0e88f02528fa7ca524d25084d7f7c3163d1d46885d4a6a6",
+      "last_commit": "1ba298316cb3c210df94b6666bf6f02dfc8d9d13",
+      "annotation_id": "ReCogDrive:Navsim_ReCogDrive/dataset_navsim_recogdrive.jsonl",
+      "context_family": "NAVSIM/OpenScene",
+      "bytes_streamed": 737567360,
+      "response_content_length": 737567360,
+      "final_host": "us.aws.cdn.hf.co",
+      "stream_sha256": "57b66ad9ad7deba58e326bdea9162f74032dbc3aa95bac7e1464c32286a84ca9",
+      "lfs_sha256_matches": true,
+      "rows_read": 85109,
+      "parse_errors": 0,
+      "media_uri_occurrences": 85109,
+      "media_by_family_modality_confidence": [
+        {
+          "family": "NAVSIM/OpenScene",
+          "modality": "image",
+          "mapping_basis": "PATH_PREFIX",
+          "uri_occurrences": 85109
+        }
+      ],
+      "complete": true
+    },
+    {
+      "annotation_set": "ReCogDrive",
+      "repo": "owl10/ReCogDrive_Pretraining",
+      "revision": "f55bb18e0aca846bbedfb516760a1b9b7cfe3ebf",
+      "path": "Navsim_Traj/dataset_navsim_traj.jsonl",
+      "source_url": "https://huggingface.co/datasets/owl10/ReCogDrive_Pretraining/resolve/f55bb18e0aca846bbedfb516760a1b9b7cfe3ebf/Navsim_Traj/dataset_navsim_traj.jsonl",
+      "bytes_expected": 191907292,
+      "repo_blob_oid": "5b26dddfd8eab5af7d8ebe84af9fcc50ededbead",
+      "lfs_sha256_expected": "c06fcabb0435168fd3ea7b4509cc05fa0288dce4793e1190ed5cfe0b67d25d4e",
+      "xet_hash": "1fcc233e2cbcbcad76a0cc6506c35b8ce5db00ee71dc305abf581398b9ea79a3",
+      "last_commit": "1ba298316cb3c210df94b6666bf6f02dfc8d9d13",
+      "annotation_id": "ReCogDrive:Navsim_Traj/dataset_navsim_traj.jsonl",
+      "context_family": "NAVSIM/OpenScene",
+      "bytes_streamed": 191907292,
+      "response_content_length": 191907292,
+      "final_host": "us.aws.cdn.hf.co",
+      "stream_sha256": "c06fcabb0435168fd3ea7b4509cc05fa0288dce4793e1190ed5cfe0b67d25d4e",
+      "lfs_sha256_matches": true,
+      "rows_read": 85109,
+      "parse_errors": 0,
+      "media_uri_occurrences": 85109,
+      "media_by_family_modality_confidence": [
+        {
+          "family": "NAVSIM/OpenScene",
+          "modality": "image",
+          "mapping_basis": "PATH_PREFIX",
+          "uri_occurrences": 85109
+        }
+      ],
+      "complete": true
+    },
+    {
+      "annotation_set": "ReCogDrive",
+      "repo": "owl10/ReCogDrive_Pretraining",
+      "revision": "f55bb18e0aca846bbedfb516760a1b9b7cfe3ebf",
+      "path": "Nuinstruct/dataset_nuinstruct.jsonl",
+      "source_url": "https://huggingface.co/datasets/owl10/ReCogDrive_Pretraining/resolve/f55bb18e0aca846bbedfb516760a1b9b7cfe3ebf/Nuinstruct/dataset_nuinstruct.jsonl",
+      "bytes_expected": 246273130,
+      "repo_blob_oid": "5cbf9d2c893ebf71ac6e491cc8921180d4bd6dc9",
+      "lfs_sha256_expected": "a35b47a1268c011b95a94a1131e4ccc0badabb7c2c2cb35269ac209a89eb0ca4",
+      "xet_hash": "fb5795b4b4ab5b8f615f47e1edd9748c0199ce763b5caa9f783a9fe0371d6300",
+      "last_commit": "1ba298316cb3c210df94b6666bf6f02dfc8d9d13",
+      "annotation_id": "ReCogDrive:Nuinstruct/dataset_nuinstruct.jsonl",
+      "context_family": "nuScenes",
+      "bytes_streamed": 246273130,
+      "response_content_length": 246273130,
+      "final_host": "us.aws.cdn.hf.co",
+      "stream_sha256": "a35b47a1268c011b95a94a1131e4ccc0badabb7c2c2cb35269ac209a89eb0ca4",
+      "lfs_sha256_matches": true,
+      "rows_read": 57317,
+      "parse_errors": 0,
+      "media_uri_occurrences": 1542258,
+      "media_by_family_modality_confidence": [
+        {
+          "family": "nuScenes",
+          "modality": "image",
+          "mapping_basis": "PATH_PATTERN",
+          "uri_occurrences": 1542258
+        }
+      ],
+      "complete": true
+    },
+    {
+      "annotation_set": "ReCogDrive",
+      "repo": "owl10/ReCogDrive_Pretraining",
+      "revision": "f55bb18e0aca846bbedfb516760a1b9b7cfe3ebf",
+      "path": "Nuscenes-QA/dataset_nuscenes_qa.jsonl",
+      "source_url": "https://huggingface.co/datasets/owl10/ReCogDrive_Pretraining/resolve/f55bb18e0aca846bbedfb516760a1b9b7cfe3ebf/Nuscenes-QA/dataset_nuscenes_qa.jsonl",
+      "bytes_expected": 189749118,
+      "repo_blob_oid": "a0297cea7f7fdd72f38ad12ec3ae31d2c1c7bfda",
+      "lfs_sha256_expected": "76390788b712e5260fe5d6c5f1a6c37701df79edcb70f58de8d4d27481318135",
+      "xet_hash": "c7462b7f2afb72c9c4e592c98c35393503c453da59cd29bb33bc9e664f227bed",
+      "last_commit": "1ba298316cb3c210df94b6666bf6f02dfc8d9d13",
+      "annotation_id": "ReCogDrive:Nuscenes-QA/dataset_nuscenes_qa.jsonl",
+      "context_family": "nuScenes",
+      "bytes_streamed": 189749118,
+      "response_content_length": 189749118,
+      "final_host": "us.aws.cdn.hf.co",
+      "stream_sha256": "76390788b712e5260fe5d6c5f1a6c37701df79edcb70f58de8d4d27481318135",
+      "lfs_sha256_matches": true,
+      "rows_read": 24988,
+      "parse_errors": 0,
+      "media_uri_occurrences": 149928,
+      "media_by_family_modality_confidence": [
+        {
+          "family": "nuScenes",
+          "modality": "image",
+          "mapping_basis": "PATH_PATTERN",
+          "uri_occurrences": 149928
+        }
+      ],
+      "complete": true
+    },
+    {
+      "annotation_set": "ReCogDrive",
+      "repo": "owl10/ReCogDrive_Pretraining",
+      "revision": "f55bb18e0aca846bbedfb516760a1b9b7cfe3ebf",
+      "path": "Omnidrive/dataset_omnidrive.jsonl",
+      "source_url": "https://huggingface.co/datasets/owl10/ReCogDrive_Pretraining/resolve/f55bb18e0aca846bbedfb516760a1b9b7cfe3ebf/Omnidrive/dataset_omnidrive.jsonl",
+      "bytes_expected": 195598167,
+      "repo_blob_oid": "537408431ebca5e6374c913a9e18ffdd8fff3f7a",
+      "lfs_sha256_expected": "1160fbd2cd143605b876548afc296b0029a0884e1c10d07d6369de1a0c993dd6",
+      "xet_hash": "633b7307786aaeb9bf1c9de701680bb2e2e36afe928a57697637a37b8686675c",
+      "last_commit": "1ba298316cb3c210df94b6666bf6f02dfc8d9d13",
+      "annotation_id": "ReCogDrive:Omnidrive/dataset_omnidrive.jsonl",
+      "context_family": "nuScenes",
+      "bytes_streamed": 195598167,
+      "response_content_length": 195598167,
+      "final_host": "us.aws.cdn.hf.co",
+      "stream_sha256": "1160fbd2cd143605b876548afc296b0029a0884e1c10d07d6369de1a0c993dd6",
+      "lfs_sha256_matches": true,
+      "rows_read": 28009,
+      "parse_errors": 0,
+      "media_uri_occurrences": 168054,
+      "media_by_family_modality_confidence": [
+        {
+          "family": "nuScenes",
+          "modality": "image",
+          "mapping_basis": "PATH_PATTERN",
+          "uri_occurrences": 168054
+        }
+      ],
+      "complete": true
+    },
+    {
+      "annotation_set": "ReCogDrive",
+      "repo": "owl10/ReCogDrive_Pretraining",
+      "revision": "f55bb18e0aca846bbedfb516760a1b9b7cfe3ebf",
+      "path": "SUTD/dataset_sutd.jsonl",
+      "source_url": "https://huggingface.co/datasets/owl10/ReCogDrive_Pretraining/resolve/f55bb18e0aca846bbedfb516760a1b9b7cfe3ebf/SUTD/dataset_sutd.jsonl",
+      "bytes_expected": 30424175,
+      "repo_blob_oid": "8b15591adc41f7e41ff198a549f1de97c88980c5",
+      "lfs_sha256_expected": "22b13e3bb917e4dc76d0eb02e911a1bc2c1d126412f37afc8755d0e2138b1c83",
+      "xet_hash": "af7e4afc299745b8fc49a0db52a1f5fe3f3056b56bd21831ab27fafc85aa648c",
+      "last_commit": "1ba298316cb3c210df94b6666bf6f02dfc8d9d13",
+      "annotation_id": "ReCogDrive:SUTD/dataset_sutd.jsonl",
+      "context_family": "SUTD TrafficQA",
+      "bytes_streamed": 30424175,
+      "response_content_length": 30424175,
+      "final_host": "us.aws.cdn.hf.co",
+      "stream_sha256": "22b13e3bb917e4dc76d0eb02e911a1bc2c1d126412f37afc8755d0e2138b1c83",
+      "lfs_sha256_matches": true,
+      "rows_read": 9916,
+      "parse_errors": 0,
+      "media_uri_occurrences": 9916,
+      "media_by_family_modality_confidence": [
+        {
+          "family": "SUTD TrafficQA",
+          "modality": "video",
+          "mapping_basis": "PATH_PREFIX",
+          "uri_occurrences": 9916
+        }
+      ],
+      "complete": true
+    },
+    {
+      "annotation_set": "ReCogDrive",
+      "repo": "owl10/ReCogDrive_Pretraining",
+      "revision": "f55bb18e0aca846bbedfb516760a1b9b7cfe3ebf",
+      "path": "Senna/dataset_senna.jsonl",
+      "source_url": "https://huggingface.co/datasets/owl10/ReCogDrive_Pretraining/resolve/f55bb18e0aca846bbedfb516760a1b9b7cfe3ebf/Senna/dataset_senna.jsonl",
+      "bytes_expected": 402490225,
+      "repo_blob_oid": "91fd121b9d324457fa81ab3cdaba77746560f1f7",
+      "lfs_sha256_expected": "cc187e7cf65b037f8072e5f04536d517825221a8be6738314c657feafa3f62cc",
+      "xet_hash": "4a53fdc13f6fe6ae07bd32a1d838d7f369189e0e0da52864618927e6143c9107",
+      "last_commit": "1ba298316cb3c210df94b6666bf6f02dfc8d9d13",
+      "annotation_id": "ReCogDrive:Senna/dataset_senna.jsonl",
+      "context_family": "nuScenes",
+      "bytes_streamed": 402490225,
+      "response_content_length": 402490225,
+      "final_host": "us.aws.cdn.hf.co",
+      "stream_sha256": "cc187e7cf65b037f8072e5f04536d517825221a8be6738314c657feafa3f62cc",
+      "lfs_sha256_matches": true,
+      "rows_read": 27885,
+      "parse_errors": 0,
+      "media_uri_occurrences": 167310,
+      "media_by_family_modality_confidence": [
+        {
+          "family": "nuScenes",
+          "modality": "image",
+          "mapping_basis": "PATH_PATTERN",
+          "uri_occurrences": 167310
+        }
+      ],
+      "complete": true
+    },
+    {
+      "annotation_set": "ReCogDrive",
+      "repo": "owl10/ReCogDrive_Pretraining",
+      "revision": "f55bb18e0aca846bbedfb516760a1b9b7cfe3ebf",
+      "path": "Talk2Car/dataset_talk2car.jsonl",
+      "source_url": "https://huggingface.co/datasets/owl10/ReCogDrive_Pretraining/resolve/f55bb18e0aca846bbedfb516760a1b9b7cfe3ebf/Talk2Car/dataset_talk2car.jsonl",
+      "bytes_expected": 3532128,
+      "repo_blob_oid": "74f4505a3ee72d2e5e7148a0451c81b86f9e7d98",
+      "lfs_sha256_expected": null,
+      "xet_hash": null,
+      "last_commit": "1ba298316cb3c210df94b6666bf6f02dfc8d9d13",
+      "annotation_id": "ReCogDrive:Talk2Car/dataset_talk2car.jsonl",
+      "context_family": "Talk2Car",
+      "bytes_streamed": 3532128,
+      "response_content_length": 3532128,
+      "final_host": "huggingface.co",
+      "stream_sha256": "69b205c958aeb9b0b3c60ad27108e854bd5a02929199cd7cc60742270ba36f76",
+      "lfs_sha256_matches": null,
+      "rows_read": 8079,
+      "parse_errors": 0,
+      "media_uri_occurrences": 8079,
+      "media_by_family_modality_confidence": [
+        {
+          "family": "Talk2Car",
+          "modality": "image",
+          "mapping_basis": "ANNOTATION_CONTEXT",
+          "uri_occurrences": 8079
+        }
+      ],
+      "complete": true
+    },
+    {
+      "annotation_set": "SGDrive",
+      "repo": "SII-Whaleice/SGDrive",
+      "revision": "c6379bea8aaf635883b33fcc99499b59d42aad1e",
+      "path": "sgdrive.jsonl",
+      "source_url": "https://huggingface.co/SII-Whaleice/SGDrive/resolve/c6379bea8aaf635883b33fcc99499b59d42aad1e/sgdrive.jsonl",
+      "bytes_expected": 932449828,
+      "repo_blob_oid": "208bfae169df45ead02cf67ce02c162b2a9709a8",
+      "lfs_sha256_expected": "8f7caea18f139265d43783f790225a000483fce49df5900aa1ebd9600505d937",
+      "xet_hash": "5f429e0ceba477b4c3d10336298f8c30a18dedf9f7657486dd853b1d13319c15",
+      "last_commit": "c6379bea8aaf635883b33fcc99499b59d42aad1e",
+      "annotation_id": "SGDrive:sgdrive.jsonl",
+      "context_family": "NAVSIM/OpenScene",
+      "bytes_streamed": 932449828,
+      "response_content_length": 932449828,
+      "final_host": "us.aws.cdn.hf.co",
+      "stream_sha256": "8f7caea18f139265d43783f790225a000483fce49df5900aa1ebd9600505d937",
+      "lfs_sha256_matches": true,
+      "rows_read": 85109,
+      "parse_errors": 0,
+      "media_uri_occurrences": 340436,
+      "media_by_family_modality_confidence": [
+        {
+          "family": "NAVSIM/OpenScene",
+          "modality": "image",
+          "mapping_basis": "PATH_PREFIX",
+          "uri_occurrences": 340436
+        }
+      ],
+      "complete": true
+    }
+  ],
+  "per_annotation_family_modality": [
+    {
+      "annotation_id": "ReCogDrive:Bench2drive_QA/Bench2drive_QA.jsonl",
+      "family": "Bench2Drive",
+      "modality": "image",
+      "mapping_basis": "PATH_PREFIX",
+      "uri_occurrences": 299652,
+      "unique_paths_in_annotation": 299652
+    },
+    {
+      "annotation_id": "ReCogDrive:Bench2drive_Traj/Bench2drive_Traj.jsonl",
+      "family": "Bench2Drive",
+      "modality": "image",
+      "mapping_basis": "PATH_PREFIX",
+      "uri_occurrences": 1180566,
+      "unique_paths_in_annotation": 1180566
+    },
+    {
+      "annotation_id": "ReCogDrive:CODA-LM/dataset_coda_lm.jsonl",
+      "family": "CODA-LM",
+      "modality": "image",
+      "mapping_basis": "PATH_PREFIX",
+      "uri_occurrences": 20318,
+      "unique_paths_in_annotation": 15516
+    },
+    {
+      "annotation_id": "ReCogDrive:Drama/dataset_drama.jsonl",
+      "family": "DRAMA",
+      "modality": "video",
+      "mapping_basis": "PATH_PREFIX",
+      "uri_occurrences": 16401,
+      "unique_paths_in_annotation": 16401
+    },
+    {
+      "annotation_id": "ReCogDrive:DriveLM/drivelm_change_box_type.jsonl",
+      "family": "nuScenes",
+      "modality": "image",
+      "mapping_basis": "PATH_PREFIX",
+      "uri_occurrences": 24432,
+      "unique_paths_in_annotation": 24432
+    },
+    {
+      "annotation_id": "ReCogDrive:DriveLM/drivelm_original_box.jsonl",
+      "family": "nuScenes",
+      "modality": "image",
+      "mapping_basis": "PATH_PREFIX",
+      "uri_occurrences": 24432,
+      "unique_paths_in_annotation": 24432
+    },
+    {
+      "annotation_id": "ReCogDrive:Drivegpt4/dataset_drivegpt4.jsonl",
+      "family": "DriveGPT4/BDD-X",
+      "modality": "image",
+      "mapping_basis": "ANNOTATION_CONTEXT",
+      "uri_occurrences": 210552,
+      "unique_paths_in_annotation": 113320
+    },
+    {
+      "annotation_id": "ReCogDrive:LingoQA/dataset_lingoqa.jsonl",
+      "family": "LingoQA",
+      "modality": "image",
+      "mapping_basis": "PATH_PREFIX",
+      "uri_occurrences": 134120,
+      "unique_paths_in_annotation": 134120
+    },
+    {
+      "annotation_id": "ReCogDrive:Maplm/dataset_maplm.jsonl",
+      "family": "MAPLM",
+      "modality": "image",
+      "mapping_basis": "PATH_PREFIX",
+      "uri_occurrences": 31836,
+      "unique_paths_in_annotation": 31836
+    },
+    {
+      "annotation_id": "ReCogDrive:Navsim_ReCogDrive/dataset_navsim_recogdrive.jsonl",
+      "family": "NAVSIM/OpenScene",
+      "modality": "image",
+      "mapping_basis": "PATH_PREFIX",
+      "uri_occurrences": 85109,
+      "unique_paths_in_annotation": 85109
+    },
+    {
+      "annotation_id": "ReCogDrive:Navsim_Traj/dataset_navsim_traj.jsonl",
+      "family": "NAVSIM/OpenScene",
+      "modality": "image",
+      "mapping_basis": "PATH_PREFIX",
+      "uri_occurrences": 85109,
+      "unique_paths_in_annotation": 85109
+    },
+    {
+      "annotation_id": "ReCogDrive:Nuinstruct/dataset_nuinstruct.jsonl",
+      "family": "nuScenes",
+      "modality": "image",
+      "mapping_basis": "PATH_PATTERN",
+      "uri_occurrences": 1542258,
+      "unique_paths_in_annotation": 49074
+    },
+    {
+      "annotation_id": "ReCogDrive:Nuscenes-QA/dataset_nuscenes_qa.jsonl",
+      "family": "nuScenes",
+      "modality": "image",
+      "mapping_basis": "PATH_PATTERN",
+      "uri_occurrences": 149928,
+      "unique_paths_in_annotation": 149928
+    },
+    {
+      "annotation_id": "ReCogDrive:Omnidrive/dataset_omnidrive.jsonl",
+      "family": "nuScenes",
+      "modality": "image",
+      "mapping_basis": "PATH_PATTERN",
+      "uri_occurrences": 168054,
+      "unique_paths_in_annotation": 168054
+    },
+    {
+      "annotation_id": "ReCogDrive:SUTD/dataset_sutd.jsonl",
+      "family": "SUTD TrafficQA",
+      "modality": "video",
+      "mapping_basis": "PATH_PREFIX",
+      "uri_occurrences": 9916,
+      "unique_paths_in_annotation": 9916
+    },
+    {
+      "annotation_id": "ReCogDrive:Senna/dataset_senna.jsonl",
+      "family": "nuScenes",
+      "modality": "image",
+      "mapping_basis": "PATH_PATTERN",
+      "uri_occurrences": 167310,
+      "unique_paths_in_annotation": 167310
+    },
+    {
+      "annotation_id": "ReCogDrive:Talk2Car/dataset_talk2car.jsonl",
+      "family": "Talk2Car",
+      "modality": "image",
+      "mapping_basis": "ANNOTATION_CONTEXT",
+      "uri_occurrences": 8079,
+      "unique_paths_in_annotation": 8079
+    },
+    {
+      "annotation_id": "SGDrive:sgdrive.jsonl",
+      "family": "NAVSIM/OpenScene",
+      "modality": "image",
+      "mapping_basis": "PATH_PREFIX",
+      "uri_occurrences": 340436,
+      "unique_paths_in_annotation": 126032
+    }
+  ],
+  "family_modality_summary": [
+    {
+      "family": "Bench2Drive",
+      "modality": "image",
+      "mapping_basis": "PATH_PREFIX",
+      "uri_occurrences": 1480218,
+      "unique_paths_across_scanned_annotations": 1242114,
+      "unique_path_annotation_pairs": 1480218,
+      "cross_annotation_duplicate_path_pairs": 238104,
+      "annotation_files": 2
+    },
+    {
+      "family": "CODA-LM",
+      "modality": "image",
+      "mapping_basis": "PATH_PREFIX",
+      "uri_occurrences": 20318,
+      "unique_paths_across_scanned_annotations": 15516,
+      "unique_path_annotation_pairs": 15516,
+      "cross_annotation_duplicate_path_pairs": 0,
+      "annotation_files": 1
+    },
+    {
+      "family": "DRAMA",
+      "modality": "video",
+      "mapping_basis": "PATH_PREFIX",
+      "uri_occurrences": 16401,
+      "unique_paths_across_scanned_annotations": 16401,
+      "unique_path_annotation_pairs": 16401,
+      "cross_annotation_duplicate_path_pairs": 0,
+      "annotation_files": 1
+    },
+    {
+      "family": "DriveGPT4/BDD-X",
+      "modality": "image",
+      "mapping_basis": "ANNOTATION_CONTEXT",
+      "uri_occurrences": 210552,
+      "unique_paths_across_scanned_annotations": 113320,
+      "unique_path_annotation_pairs": 113320,
+      "cross_annotation_duplicate_path_pairs": 0,
+      "annotation_files": 1
+    },
+    {
+      "family": "LingoQA",
+      "modality": "image",
+      "mapping_basis": "PATH_PREFIX",
+      "uri_occurrences": 134120,
+      "unique_paths_across_scanned_annotations": 134120,
+      "unique_path_annotation_pairs": 134120,
+      "cross_annotation_duplicate_path_pairs": 0,
+      "annotation_files": 1
+    },
+    {
+      "family": "MAPLM",
+      "modality": "image",
+      "mapping_basis": "PATH_PREFIX",
+      "uri_occurrences": 31836,
+      "unique_paths_across_scanned_annotations": 31836,
+      "unique_path_annotation_pairs": 31836,
+      "cross_annotation_duplicate_path_pairs": 0,
+      "annotation_files": 1
+    },
+    {
+      "family": "NAVSIM/OpenScene",
+      "modality": "image",
+      "mapping_basis": "PATH_PREFIX",
+      "uri_occurrences": 510654,
+      "unique_paths_across_scanned_annotations": 126032,
+      "unique_path_annotation_pairs": 296250,
+      "cross_annotation_duplicate_path_pairs": 170218,
+      "annotation_files": 3
+    },
+    {
+      "family": "SUTD TrafficQA",
+      "modality": "video",
+      "mapping_basis": "PATH_PREFIX",
+      "uri_occurrences": 9916,
+      "unique_paths_across_scanned_annotations": 9916,
+      "unique_path_annotation_pairs": 9916,
+      "cross_annotation_duplicate_path_pairs": 0,
+      "annotation_files": 1
+    },
+    {
+      "family": "Talk2Car",
+      "modality": "image",
+      "mapping_basis": "ANNOTATION_CONTEXT",
+      "uri_occurrences": 8079,
+      "unique_paths_across_scanned_annotations": 8079,
+      "unique_path_annotation_pairs": 8079,
+      "cross_annotation_duplicate_path_pairs": 0,
+      "annotation_files": 1
+    },
+    {
+      "family": "nuScenes",
+      "modality": "image",
+      "mapping_basis": "PATH_PATTERN",
+      "uri_occurrences": 2027550,
+      "unique_paths_across_scanned_annotations": 175872,
+      "unique_path_annotation_pairs": 534366,
+      "cross_annotation_duplicate_path_pairs": 358494,
+      "annotation_files": 4
+    },
+    {
+      "family": "nuScenes",
+      "modality": "image",
+      "mapping_basis": "PATH_PREFIX",
+      "uri_occurrences": 48864,
+      "unique_paths_across_scanned_annotations": 24432,
+      "unique_path_annotation_pairs": 48864,
+      "cross_annotation_duplicate_path_pairs": 24432,
+      "annotation_files": 2
+    }
+  ],
+  "family_unique_path_summary": [
+    {
+      "family": "Bench2Drive",
+      "unique_paths": 1242114,
+      "uri_occurrences": 1480218,
+      "annotation_files": 2
+    },
+    {
+      "family": "CODA-LM",
+      "unique_paths": 15516,
+      "uri_occurrences": 20318,
+      "annotation_files": 1
+    },
+    {
+      "family": "DRAMA",
+      "unique_paths": 16401,
+      "uri_occurrences": 16401,
+      "annotation_files": 1
+    },
+    {
+      "family": "DriveGPT4/BDD-X",
+      "unique_paths": 113320,
+      "uri_occurrences": 210552,
+      "annotation_files": 1
+    },
+    {
+      "family": "LingoQA",
+      "unique_paths": 134120,
+      "uri_occurrences": 134120,
+      "annotation_files": 1
+    },
+    {
+      "family": "MAPLM",
+      "unique_paths": 31836,
+      "uri_occurrences": 31836,
+      "annotation_files": 1
+    },
+    {
+      "family": "NAVSIM/OpenScene",
+      "unique_paths": 126032,
+      "uri_occurrences": 510654,
+      "annotation_files": 3
+    },
+    {
+      "family": "SUTD TrafficQA",
+      "unique_paths": 9916,
+      "uri_occurrences": 9916,
+      "annotation_files": 1
+    },
+    {
+      "family": "Talk2Car",
+      "unique_paths": 8079,
+      "uri_occurrences": 8079,
+      "annotation_files": 1
+    },
+    {
+      "family": "nuScenes",
+      "unique_paths": 175872,
+      "uri_occurrences": 2076414,
+      "annotation_files": 6
+    }
+  ],
+  "family_path_prefix_summary": [
+    {
+      "family": "Bench2Drive",
+      "path_prefix": "v1",
+      "uri_occurrences": 1480218,
+      "unique_paths": 1242114,
+      "annotation_files": 2
+    },
+    {
+      "family": "CODA-LM",
+      "path_prefix": "images",
+      "uri_occurrences": 9685,
+      "unique_paths": 4883,
+      "annotation_files": 1
+    },
+    {
+      "family": "CODA-LM",
+      "path_prefix": "images_w_boxes",
+      "uri_occurrences": 10633,
+      "unique_paths": 10633,
+      "annotation_files": 1
+    },
+    {
+      "family": "DRAMA",
+      "path_prefix": "combined/2020-0127-132751",
+      "uri_occurrences": 463,
+      "unique_paths": 463,
+      "annotation_files": 1
+    },
+    {
+      "family": "DRAMA",
+      "path_prefix": "combined/2020-0129-105040",
+      "uri_occurrences": 442,
+      "unique_paths": 442,
+      "annotation_files": 1
+    },
+    {
+      "family": "DRAMA",
+      "path_prefix": "combined/2020-0129-144857",
+      "uri_occurrences": 377,
+      "unique_paths": 377,
+      "annotation_files": 1
+    },
+    {
+      "family": "DRAMA",
+      "path_prefix": "combined/2020-0131-103016",
+      "uri_occurrences": 373,
+      "unique_paths": 373,
+      "annotation_files": 1
+    },
+    {
+      "family": "DRAMA",
+      "path_prefix": "combined/2020-0131-135401",
+      "uri_occurrences": 727,
+      "unique_paths": 727,
+      "annotation_files": 1
+    },
+    {
+      "family": "DRAMA",
+      "path_prefix": "combined/2020-0203-114632",
+      "uri_occurrences": 406,
+      "unique_paths": 406,
+      "annotation_files": 1
+    },
+    {
+      "family": "DRAMA",
+      "path_prefix": "combined/2020-0203-154554",
+      "uri_occurrences": 386,
+      "unique_paths": 386,
+      "annotation_files": 1
+    },
+    {
+      "family": "DRAMA",
+      "path_prefix": "combined/2020-0204-103442",
+      "uri_occurrences": 272,
+      "unique_paths": 272,
+      "annotation_files": 1
+    },
+    {
+      "family": "DRAMA",
+      "path_prefix": "combined/2020-0204-150838",
+      "uri_occurrences": 354,
+      "unique_paths": 354,
+      "annotation_files": 1
+    },
+    {
+      "family": "DRAMA",
+      "path_prefix": "combined/2020-0205-103411",
+      "uri_occurrences": 539,
+      "unique_paths": 539,
+      "annotation_files": 1
+    },
+    {
+      "family": "DRAMA",
+      "path_prefix": "combined/2020-0205-152530",
+      "uri_occurrences": 277,
+      "unique_paths": 277,
+      "annotation_files": 1
+    },
+    {
+      "family": "DRAMA",
+      "path_prefix": "combined/2020-0206-101736",
+      "uri_occurrences": 276,
+      "unique_paths": 276,
+      "annotation_files": 1
+    },
+    {
+      "family": "DRAMA",
+      "path_prefix": "combined/2020-0206-142535",
+      "uri_occurrences": 144,
+      "unique_paths": 144,
+      "annotation_files": 1
+    },
+    {
+      "family": "DRAMA",
+      "path_prefix": "combined/2020-0207-101955",
+      "uri_occurrences": 600,
+      "unique_paths": 600,
+      "annotation_files": 1
+    },
+    {
+      "family": "DRAMA",
+      "path_prefix": "combined/2020-0207-151349",
+      "uri_occurrences": 445,
+      "unique_paths": 445,
+      "annotation_files": 1
+    },
+    {
+      "family": "DRAMA",
+      "path_prefix": "combined/2020-0210-101957",
+      "uri_occurrences": 407,
+      "unique_paths": 407,
+      "annotation_files": 1
+    },
+    {
+      "family": "DRAMA",
+      "path_prefix": "combined/2020-0210-142719",
+      "uri_occurrences": 37,
+      "unique_paths": 37,
+      "annotation_files": 1
+    },
+    {
+      "family": "DRAMA",
+      "path_prefix": "combined/2020-0210-155354",
+      "uri_occurrences": 241,
+      "unique_paths": 241,
+      "annotation_files": 1
+    },
+    {
+      "family": "DRAMA",
+      "path_prefix": "combined/2020-0212-102546",
+      "uri_occurrences": 338,
+      "unique_paths": 338,
+      "annotation_files": 1
+    },
+    {
+      "family": "DRAMA",
+      "path_prefix": "combined/2020-0212-150403",
+      "uri_occurrences": 91,
+      "unique_paths": 91,
+      "annotation_files": 1
+    },
+    {
+      "family": "DRAMA",
+      "path_prefix": "combined/2020-0213-143552",
+      "uri_occurrences": 472,
+      "unique_paths": 472,
+      "annotation_files": 1
+    },
+    {
+      "family": "DRAMA",
+      "path_prefix": "combined/2020-0214-102601",
+      "uri_occurrences": 270,
+      "unique_paths": 270,
+      "annotation_files": 1
+    },
+    {
+      "family": "DRAMA",
+      "path_prefix": "combined/2020-0214-145407",
+      "uri_occurrences": 317,
+      "unique_paths": 317,
+      "annotation_files": 1
+    },
+    {
+      "family": "DRAMA",
+      "path_prefix": "combined/2020-0217-110854",
+      "uri_occurrences": 268,
+      "unique_paths": 268,
+      "annotation_files": 1
+    },
+    {
+      "family": "DRAMA",
+      "path_prefix": "combined/2020-0217-144444",
+      "uri_occurrences": 96,
+      "unique_paths": 96,
+      "annotation_files": 1
+    },
+    {
+      "family": "DRAMA",
+      "path_prefix": "combined/2020-0218-103119",
+      "uri_occurrences": 269,
+      "unique_paths": 269,
+      "annotation_files": 1
+    },
+    {
+      "family": "DRAMA",
+      "path_prefix": "combined/2020-0218-151547",
+      "uri_occurrences": 119,
+      "unique_paths": 119,
+      "annotation_files": 1
+    },
+    {
+      "family": "DRAMA",
+      "path_prefix": "combined/2020-0220-102630",
+      "uri_occurrences": 556,
+      "unique_paths": 556,
+      "annotation_files": 1
+    },
+    {
+      "family": "DRAMA",
+      "path_prefix": "combined/2020-0220-151845",
+      "uri_occurrences": 258,
+      "unique_paths": 258,
+      "annotation_files": 1
+    },
+    {
+      "family": "DRAMA",
+      "path_prefix": "combined/2020-0221-115122",
+      "uri_occurrences": 153,
+      "unique_paths": 153,
+      "annotation_files": 1
+    },
+    {
+      "family": "DRAMA",
+      "path_prefix": "combined/2020-0225-102455",
+      "uri_occurrences": 279,
+      "unique_paths": 279,
+      "annotation_files": 1
+    },
+    {
+      "family": "DRAMA",
+      "path_prefix": "combined/2020-0225-145150",
+      "uri_occurrences": 168,
+      "unique_paths": 168,
+      "annotation_files": 1
+    },
+    {
+      "family": "DRAMA",
+      "path_prefix": "combined/2020-0226-101332",
+      "uri_occurrences": 331,
+      "unique_paths": 331,
+      "annotation_files": 1
+    },
+    {
+      "family": "DRAMA",
+      "path_prefix": "combined/2020-0226-140503",
+      "uri_occurrences": 496,
+      "unique_paths": 496,
+      "annotation_files": 1
+    },
+    {
+      "family": "DRAMA",
+      "path_prefix": "combined/2020-0227-104226",
+      "uri_occurrences": 367,
+      "unique_paths": 367,
+      "annotation_files": 1
+    },
+    {
+      "family": "DRAMA",
+      "path_prefix": "combined/2020-0227-153144",
+      "uri_occurrences": 202,
+      "unique_paths": 202,
+      "annotation_files": 1
+    },
+    {
+      "family": "DRAMA",
+      "path_prefix": "combined/2020-0228-102841",
+      "uri_occurrences": 471,
+      "unique_paths": 471,
+      "annotation_files": 1
+    },
+    {
+      "family": "DRAMA",
+      "path_prefix": "combined/2020-0228-150133",
+      "uri_occurrences": 369,
+      "unique_paths": 369,
+      "annotation_files": 1
+    },
+    {
+      "family": "DRAMA",
+      "path_prefix": "combined/titan",
+      "uri_occurrences": 3745,
+      "unique_paths": 3745,
+      "annotation_files": 1
+    },
+    {
+      "family": "DriveGPT4/BDD-X",
+      "path_prefix": "(flat-root)",
+      "uri_occurrences": 210552,
+      "unique_paths": 113320,
+      "annotation_files": 1
+    },
+    {
+      "family": "LingoQA",
+      "path_prefix": "Action/images/train",
+      "uri_occurrences": 116770,
+      "unique_paths": 116770,
+      "annotation_files": 1
+    },
+    {
+      "family": "LingoQA",
+      "path_prefix": "Scenery/images/train",
+      "uri_occurrences": 17350,
+      "unique_paths": 17350,
+      "annotation_files": 1
+    },
+    {
+      "family": "MAPLM",
+      "path_prefix": "maplm_v0.1/train",
+      "uri_occurrences": 31836,
+      "unique_paths": 31836,
+      "annotation_files": 1
+    },
+    {
+      "family": "NAVSIM/OpenScene",
+      "path_prefix": "sensor_blobs/trainval",
+      "uri_occurrences": 510654,
+      "unique_paths": 126032,
+      "annotation_files": 3
+    },
+    {
+      "family": "SUTD TrafficQA",
+      "path_prefix": "compressed_videos",
+      "uri_occurrences": 9916,
+      "unique_paths": 9916,
+      "annotation_files": 1
+    },
+    {
+      "family": "Talk2Car",
+      "path_prefix": "(flat-root)",
+      "uri_occurrences": 8079,
+      "unique_paths": 8079,
+      "annotation_files": 1
+    },
+    {
+      "family": "nuScenes",
+      "path_prefix": "samples/CAM_BACK",
+      "uri_occurrences": 346069,
+      "unique_paths": 29312,
+      "annotation_files": 6
+    },
+    {
+      "family": "nuScenes",
+      "path_prefix": "samples/CAM_BACK_LEFT",
+      "uri_occurrences": 346069,
+      "unique_paths": 29312,
+      "annotation_files": 6
+    },
+    {
+      "family": "nuScenes",
+      "path_prefix": "samples/CAM_BACK_RIGHT",
+      "uri_occurrences": 346069,
+      "unique_paths": 29312,
+      "annotation_files": 6
+    },
+    {
+      "family": "nuScenes",
+      "path_prefix": "samples/CAM_FRONT",
+      "uri_occurrences": 346069,
+      "unique_paths": 29312,
+      "annotation_files": 6
+    },
+    {
+      "family": "nuScenes",
+      "path_prefix": "samples/CAM_FRONT_LEFT",
+      "uri_occurrences": 346069,
+      "unique_paths": 29312,
+      "annotation_files": 6
+    },
+    {
+      "family": "nuScenes",
+      "path_prefix": "samples/CAM_FRONT_RIGHT",
+      "uri_occurrences": 346069,
+      "unique_paths": 29312,
+      "annotation_files": 6
+    }
+  ],
+  "pairwise_path_intersections": [
+    {
+      "family": "Bench2Drive",
+      "annotation_a": "ReCogDrive:Bench2drive_QA/Bench2drive_QA.jsonl",
+      "annotation_b": "ReCogDrive:Bench2drive_Traj/Bench2drive_Traj.jsonl",
+      "shared_canonical_paths": 238104
+    },
+    {
+      "family": "NAVSIM/OpenScene",
+      "annotation_a": "ReCogDrive:Navsim_ReCogDrive/dataset_navsim_recogdrive.jsonl",
+      "annotation_b": "ReCogDrive:Navsim_Traj/dataset_navsim_traj.jsonl",
+      "shared_canonical_paths": 85109
+    },
+    {
+      "family": "NAVSIM/OpenScene",
+      "annotation_a": "ReCogDrive:Navsim_ReCogDrive/dataset_navsim_recogdrive.jsonl",
+      "annotation_b": "SGDrive:sgdrive.jsonl",
+      "shared_canonical_paths": 85109
+    },
+    {
+      "family": "NAVSIM/OpenScene",
+      "annotation_a": "ReCogDrive:Navsim_Traj/dataset_navsim_traj.jsonl",
+      "annotation_b": "SGDrive:sgdrive.jsonl",
+      "shared_canonical_paths": 85109
+    },
+    {
+      "family": "nuScenes",
+      "annotation_a": "ReCogDrive:DriveLM/drivelm_change_box_type.jsonl",
+      "annotation_b": "ReCogDrive:DriveLM/drivelm_original_box.jsonl",
+      "shared_canonical_paths": 24432
+    },
+    {
+      "family": "nuScenes",
+      "annotation_a": "ReCogDrive:DriveLM/drivelm_change_box_type.jsonl",
+      "annotation_b": "ReCogDrive:Nuinstruct/dataset_nuinstruct.jsonl",
+      "shared_canonical_paths": 5772
+    },
+    {
+      "family": "nuScenes",
+      "annotation_a": "ReCogDrive:DriveLM/drivelm_change_box_type.jsonl",
+      "annotation_b": "ReCogDrive:Nuscenes-QA/dataset_nuscenes_qa.jsonl",
+      "shared_canonical_paths": 21870
+    },
+    {
+      "family": "nuScenes",
+      "annotation_a": "ReCogDrive:DriveLM/drivelm_change_box_type.jsonl",
+      "annotation_b": "ReCogDrive:Omnidrive/dataset_omnidrive.jsonl",
+      "shared_canonical_paths": 24342
+    },
+    {
+      "family": "nuScenes",
+      "annotation_a": "ReCogDrive:DriveLM/drivelm_change_box_type.jsonl",
+      "annotation_b": "ReCogDrive:Senna/dataset_senna.jsonl",
+      "shared_canonical_paths": 24198
+    },
+    {
+      "family": "nuScenes",
+      "annotation_a": "ReCogDrive:DriveLM/drivelm_original_box.jsonl",
+      "annotation_b": "ReCogDrive:Nuinstruct/dataset_nuinstruct.jsonl",
+      "shared_canonical_paths": 5772
+    },
+    {
+      "family": "nuScenes",
+      "annotation_a": "ReCogDrive:DriveLM/drivelm_original_box.jsonl",
+      "annotation_b": "ReCogDrive:Nuscenes-QA/dataset_nuscenes_qa.jsonl",
+      "shared_canonical_paths": 21870
+    },
+    {
+      "family": "nuScenes",
+      "annotation_a": "ReCogDrive:DriveLM/drivelm_original_box.jsonl",
+      "annotation_b": "ReCogDrive:Omnidrive/dataset_omnidrive.jsonl",
+      "shared_canonical_paths": 24342
+    },
+    {
+      "family": "nuScenes",
+      "annotation_a": "ReCogDrive:DriveLM/drivelm_original_box.jsonl",
+      "annotation_b": "ReCogDrive:Senna/dataset_senna.jsonl",
+      "shared_canonical_paths": 24198
+    },
+    {
+      "family": "nuScenes",
+      "annotation_a": "ReCogDrive:Nuinstruct/dataset_nuinstruct.jsonl",
+      "annotation_b": "ReCogDrive:Nuscenes-QA/dataset_nuscenes_qa.jsonl",
+      "shared_canonical_paths": 37884
+    },
+    {
+      "family": "nuScenes",
+      "annotation_a": "ReCogDrive:Nuinstruct/dataset_nuinstruct.jsonl",
+      "annotation_b": "ReCogDrive:Omnidrive/dataset_omnidrive.jsonl",
+      "shared_canonical_paths": 41766
+    },
+    {
+      "family": "nuScenes",
+      "annotation_a": "ReCogDrive:Nuinstruct/dataset_nuinstruct.jsonl",
+      "annotation_b": "ReCogDrive:Senna/dataset_senna.jsonl",
+      "shared_canonical_paths": 41736
+    },
+    {
+      "family": "nuScenes",
+      "annotation_a": "ReCogDrive:Nuscenes-QA/dataset_nuscenes_qa.jsonl",
+      "annotation_b": "ReCogDrive:Omnidrive/dataset_omnidrive.jsonl",
+      "shared_canonical_paths": 149316
+    },
+    {
+      "family": "nuScenes",
+      "annotation_a": "ReCogDrive:Nuscenes-QA/dataset_nuscenes_qa.jsonl",
+      "annotation_b": "ReCogDrive:Senna/dataset_senna.jsonl",
+      "shared_canonical_paths": 148518
+    },
+    {
+      "family": "nuScenes",
+      "annotation_a": "ReCogDrive:Omnidrive/dataset_omnidrive.jsonl",
+      "annotation_b": "ReCogDrive:Senna/dataset_senna.jsonl",
+      "shared_canonical_paths": 166584
+    }
+  ],
+  "unmapped_unique_path_count": 0,
+  "unmapped_unique_path_examples_count": 0,
+  "unmapped_unique_path_examples": [],
+  "canonical_path_set_sha256": "983025472d13ea342a3821a0d37e74c90643561400455bd9e304df759376acba"
+}

@@ -1,6 +1,6 @@
 # 22 篇 WAM / WAM+VLA：可能超过 1 TB 的数据资产专项审计
 
-审计日期：2026-09-28。范围锁定于仓库源论文提交 [cb05048dfb822e95d44e52dd85b830c750411e2c](https://github.com/zhouyangming2025-cell/wam-research/tree/cb05048dfb822e95d44e52dd85b830c750411e2c/papers/raw_md) 的 12 篇 planning-centric WAM + 10 篇 WAM+VLA；论文实际训练、预训练、微调、验证资产见[逐篇账本](WAM_22_dataset_asset_register_2026-09-28.md)。此文件只回答：哪些实际使用或可能需要的资产会跨过 1 TB；不检查 NAS，不决定下载。
+初始审计日期：2026-09-28；ReCogDrive/SGDrive 路径计数补充于 2026-09-29。范围锁定于仓库源论文提交 [cb05048dfb822e95d44e52dd85b830c750411e2c](https://github.com/zhouyangming2025-cell/wam-research/tree/cb05048dfb822e95d44e52dd85b830c750411e2c/papers/raw_md) 的 12 篇 planning-centric WAM + 10 篇 WAM+VLA；论文实际训练、预训练、微调、验证资产见[逐篇账本](WAM_22_dataset_asset_register_2026-09-28.md)。此文件只回答：哪些实际使用或可能需要的资产会跨过 1 TB；不检查 NAS，不决定下载。
 
 后续核到 TCP/CARLA 三分包 `0.123448985790 TB`，仅为 LAW 候选；旧 Bench2Drive Base 官方对象和 `0.334866900094 TB`、新版 no-depth 官方对象和 `0.415362197807 TB`。这些小于 1 TB，不改变本报告的 >1 TB 分类；[逐字段证据](WAM_22_OPEN_ITEMS_EVIDENCE_20260928.md)和[现行容量情景](WAM_22_dataset_asset_register_2026-09-28.md#本轮容量核算2026-09-28-修订组合口径不是全部需求闭合)取代下文早期约数。
 
@@ -39,7 +39,7 @@ Bench2Drive 官方 README 同时列 Base 1000 clips 约 400 GB、Full 约 4 TB�
 | DriveVLA-W0 私有驾驶集 | 原文称 in-house 约 **70M frames、>1M clips**；含 100 个难例测试场景 | 私有，不提供公开包、模态/分辨率/压缩率及 byte manifest；无法从论文训练步数或公开 nuPlan 代替 | **很高**：帧量极大，最可能显著抬高总量；容量上限 UNKNOWN。 |
 | LAW 独立 CARLA/Roach 集 | 原文称 CARLA 0.9.10.1、Roach 教师采集 **189K 帧**；与 Bench2Drive Base 是不同资产 | LAW 作者没有公布该训练集的原始分辨率、模态、编码、帧率或文件 manifest。论文 resize 到 900×256 是模型预处理，不能据此压缩估算原始采集。ThinkTwice 同量级 189K 帧约 8 TB 只可作敏感性参照，绝非 LAW 实测或上限 | **高**：可大于 1 TB，但 UNKNOWN。 |
 | WAM-Flow 通用 VQA 原图 | 论文称约 **3.4M** 通用 VQA 样本来自 LLaVA v1.5 系；另用约 3.1M driving QA | 没有论文样本到图像 URI、原始数据源 split 和压缩文件的 manifest。作者仓约 414 MB navsim_668k.jsonl 是 NAVSIM annotation，不能代表 3.4M 通用图像 | **高**：图像源并集未知，不能按样本数换算。 |
-| ReCogDrive / SGDrive / DriveWorld-VLA 多源 QA 原媒体 | ReCogDrive 作者发布 17 个 JSONL 共 **3,789,771,567 B**；源表覆盖多个驾驶 QA 数据集。JSONL 是标注，不包含所有原图/视频。已单独发现 LingoQA 媒体包约 61 GB、SUTD Zenodo 20.534 GB（主要为 feature/annotation）；DRAMA 原视频 byte 未公开 | 多个来源可能复用 nuScenes、OpenScene、NAVSIM、Bench2Drive，也有独立视频。全量唯一路径/媒体 ID、逐源 archive bytes 与跨包重复未核清；不能把父包大小相加后当 unique bytes，也不能认为 JSONL 已包含媒体 | **高**：联合源媒体并集是否 >1 TB 为 UNKNOWN。 |
+| ReCogDrive / SGDrive / DriveWorld-VLA 多源 QA 原媒体 | 2026-09-29 全量扫描 ReCogDrive 17 个 JSONL 与 SGDrive 1 个 JSONL，共 **4,722,221,395 B** 标注、**1,873,206** 个 family-scoped 唯一路径；JSONL 不包含所有原图/视频。LingoQA 页面约 61 GB（取整包），SUTD Zenodo **20,534,486,181 B** 主要为 feature/annotation；DRAMA 原媒体 byte 未公开 | 路径已按 family 计数，且记录了标注间 path intersection；源媒体官方 archive/member identity、论文实际子集 bytes、跨 family 媒体 hash 仍未核清。不能把父包大小相加后当 unique bytes，也不能认为 JSONL 已包含媒体 | **高**：联合源媒体并集是否 >1 TB 为 UNKNOWN。 |
 | UniDrive-WM mixed VQA | 论文说使用混合 VQA/driving 数据 | 数据源、样本量、图片/视频打包方式未给完整 manifest | **中高**：名称无法定价，可能和其他 VQA 复用。 |
 | GraphWorld 的 nuScenes-C corruption 与 DriveBench 完整腐蚀图像 | GraphWorld 使用 Rain/Snow/Fog 三类天气；nuScenes-C 全 benchmark 有多类 corruption 与 severity。DriveBench 发布评测集包含 corruption images 与 QA | 22 篇具体实验只指向子集；被论文使用的 severity、预生成图像/运行时生成方式、全量文件 manifest/bytes 未被锁定 | **中**：全量派生包可能大，但论文子集不等于 full benchmark；UNKNOWN。 |
 | HUGSIM 所用源数据父集（Waymo、KITTI-360、PandaSet、nuScenes） | ExploreVLA 使用 HUGSIM 四域预建重建场景；HUGSIM 场景发布包约 60.7 GB | 要运行发布的 HUGSIM 场景不等于需要完整下载其原始父数据全集。若重做全部 scene reconstruction，具体选段/父集文件清单未知 | **条件项**：完整 Waymo raw 等父体可能跨 TB，但不是论文已证实的下载需求；主清单只计 HUGSIM 发布资产。 |

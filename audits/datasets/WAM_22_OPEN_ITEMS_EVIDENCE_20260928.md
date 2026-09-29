@@ -26,25 +26,36 @@ TCP [作者 README](https://github.com/OpenDriveLab/TCP/blob/main/README.md#data
 
 新版本官方 no-depth 对象加历史 map **目录**为 `415,362,197,807 + 3,146,330,646 = 418,508,528,453 B`，这是混合来源的压缩发布/目录口径。历史两个子目录之和为 **418,508,843,507 B**；历史汇总行 `418,508,847,603 B` 还多 **4,096 B**（未定位到具体文件）。汇总行与混合口径相差 **319,150 B = 315,054 + 4,096 B**；其中 315,054 B 是历史 no-depth 子目录比官方对象和多的量。map `.npz` 与 sidecar 未逐文件拆分，不能称 `3,146,330,646 B` 为纯地图 payload。路线 XML 是 CARLA 仿真协议，不计入离线传感器包。Full 约 4 TB、v0.0.4 depth 约 7.3 TB 属不同模态/版本，22 篇没有整包使用证据。
 
-## VLA 原媒体：有界路径核查与未闭合的唯一数
+## VLA 标注媒体路径：全量扫描完成，媒体字节仍未闭合
 
-ReCogDrive 作者 [来源表](https://github.com/xiaomi-research/recogdrive#driving-pretraining-datasets) 列 12 个外部驾驶 QA 源及 NAVSIM/Bench2Drive 派生。固定 [HF revision `f55bb18e0aca846bbedfb516760a1b9b7cfe3ebf`](https://huggingface.co/datasets/owl10/ReCogDrive_Pretraining/tree/f55bb18e0aca846bbedfb516760a1b9b7cfe3ebf) 的 **17 个 JSONL 对象合计 3,789,771,567 B**，只是 annotation。前一轮对 17/17 个文件各读取首 4,096 B（共至多 69,632 B），对 `image`/`images` 及视频路径字段做前缀观察；对 SGDrive 的 [作者 `sgdrive.jsonl`](https://huggingface.co/SII-Whaleice/SGDrive/blob/c6379bea8aaf635883b33fcc99499b59d42aad1e/sgdrive.jsonl) 首 1 MiB 做过有界读取，官方对象 932,449,828 B。**这些临时前缀未保存在仓库，不能据此宣称全量扫描、唯一 URI 数或跨源 SHA 去重**。本次没有再下载 JSONL 或原媒体。路径形态观察如下；这是可追溯的字段/母体分类，不是完整行数统计。
+2026-09-29 对 ReCogDrive 固定 [HF revision `f55bb18e0aca846bbedfb516760a1b9b7cfe3ebf`](https://huggingface.co/datasets/owl10/ReCogDrive_Pretraining/tree/f55bb18e0aca846bbedfb516760a1b9b7cfe3ebf) 的 17 个 JSONL 与 SGDrive 固定 [commit `c6379bea8aaf635883b33fcc99499b59d42aad1e`](https://huggingface.co/SII-Whaleice/SGDrive/tree/c6379bea8aaf635883b33fcc99499b59d42aad1e) 的 `sgdrive.jsonl` 做了完整流式扫描。官方 HF tree API `size` 合计 `3,789,771,567 + 932,449,828 = 4,722,221,395 B`；实际读入字节逐对象与该值一致。共解析 **766,842 行、4,498,508 个媒体路径引用**（4,472,191 image、26,317 video/GIF），无 JSON 解析错误；18 个对象中 17 个实际 SHA-256 与官方 LFS OID 相符，Talk2Car 对象未提供 LFS OID。没有请求任何图像或视频。`4,722,221,395 B` 是 JSONL 标注文本，不是媒体体积。
 
-| annotation 来源 | 前缀中出现的媒体字段/路径形态（省略动态文件名） | 候选母体与状态 |
-|---|---|---|
-| `Bench2drive_QA`, `Bench2drive_Traj` | `./Bench2drive/v1/<route>/camera/rgb_front/...jpg` | Bench2Drive；`v1` 与旧 Base 的 archive 成员对应尚未证明，PARTIAL |
-| `Navsim_ReCogDrive`, `Navsim_Traj` | `./NAVSIM/dataset/sensor_blobs/trainval/.../CAM_F0/...jpg`、`./dataset/sensor_blobs/trainval/...` | NAVSIM/OpenScene trainval 逻辑母体，PARTIAL；独立 archive hash 未比 |
-| `DriveLM` 两变体、`Nuinstruct`, `Nuscenes-QA`, `Omnidrive`, `Senna` | `/mnt/evad_fs/opensource-data/nuscenes/samples/CAM_FRONT/...jpg` 或 `samples/CAM_.../...jpg` | nuScenes 路径规范；个别前缀样本重复文件名，未计唯一数，PARTIAL |
-| `LingoQA` | 前缀出现 `./LingoQA/Scenery/images/train/<id>/<frame>.jpg`；作者训练配置 root 为 `/LingoQA/Action/images`，length=26,824 | 源路径不一致；需全量 URI 扫描确定 ReCog 实际使用的是 scenery、action 或二者 |
-| `Drama` | `./Drama/combined/titan/clip_.../movie.gif`；ReCog 配置 root `/Drama/drama_data/combined`，length=16,404 | Honda `combined/` 含 raw frame PNG、flow PNG、movie.gif；申请限高校非商业使用；容量 UNKNOWN/RESTRICTED |
-| `SUTD` | `./SUTD/compressed_videos/<id>.mp4` | **需要视频**；Zenodo 的 20,534,486,181 B `.h5`/annotation 包不能代替，RESTRICTED/UNKNOWN |
-| `CODA-LM` | `./CODA-LM/images/0001.jpg`；配置 root `/CODA-LM/Val`，length=20,318 | 官方发布包/与 nuScenes 父体的逐图关系仍 UNKNOWN |
-| `MAPLM` | `./MAPLM/maplm_v0.1/train/<id>/photo_forward.jpg`；配置 length=10,612 | 官方 README 指定四个主分卷；linked Drive UI 2026-09-28 显示约18.92 GB；另有 small/JSON 对象需判关系；2024 2M 点云版仍单独 UNKNOWN |
-| `Drivegpt4` | 配置 root `/Drivegpt4/BDD_X_imgs_select`，length=26,319；第三方 HF 同名包含 `BDD_X_imgs_select.tar`，页面显示 21.9 GB | 强候选映射；未以逐样本 URI/hash 证明完整对应；不是整个 BDD-X 视频库 |
-| `Talk2Car` | 前缀为 `img_train_0.jpg`，配置 root `/Talk2Car/imgs`、length=8,079 | 平铺文件名不足以归属原始媒体，UNKNOWN |
-| SGDrive `sgdrive.jsonl` | `"image": ["navsim_data/sensor_blobs/trainval/.../CAM_F0/...jpg", ...]`，样本中四个时序前视帧 | NAVSIM/OpenScene trainval 逻辑母体，PARTIAL |
+规范化规则和逐对象 URL、版本、size、实际 SHA-256、行数、引用数、逐来源唯一路径数保存在[机器可读扫描结果](WAM_VLA_MEDIA_PATH_AUDIT_2026-09-29.json)；可用[扫描脚本](../../scripts/datasets/audit_vla_media_paths.py)按相同固定 revision 复核。扫描递归读取 `image/images/video/videos/image_path(s)/video_path(s)/frame_path(s)/clip_path(s)/media_path(s)` 字段；规范斜杠和 URL 转义，按数据集标记剥离挂载根，以 `(source family, canonical relative path)` 计路径级唯一值。**不按 basename 去重、不跨源媒体 hash 去重**；因此下表是媒体路径引用/路径并集，不是经内容哈希验证的独立文件数或字节数。
 
-**统计边界：**覆盖的 annotation 对象数是 ReCogDrive 17、SGDrive 1；实际逐行扫描数、媒体 URI 读取总数、规范化后唯一数、未归属唯一数均为 **UNKNOWN**，绝不可把 17 或四帧当唯一媒体总数。全量闭合需按每条 JSONL 的 `image/images/video/image_path`（包括字符串、数组、字典）抽 URI，去掉本地挂载前缀，规范大小写与分隔符，以 `(source_dataset, canonical_relative_path)` 去重；父体内再用官方文件 ID/散列核对，不能只按 basename 跨数据集去重。路径或 annotation count 均不等于压缩包 byte。ReCogDrive 原图依赖 nuScenes/OpenScene/B2D 时先作为父体覆盖情景；LingoQA、DRAMA、SUTD 等独立媒体并集仍 UNKNOWN。
+| 注释来源 | JSONL 行数 | URI 引用数 | 本文件唯一路径 | 归属依据与主要路径 | 文件/媒体状态 |
+|---|---:|---:|---:|---|---|
+| Bench2drive QA | 49,942 | 299,652 | 299,652 | `Bench2drive/v1/...`；Bench2Drive | 路径直接标识；与旧 Base archive 的内容 hash 未比 |
+| Bench2drive Traj | 196,761 | 1,180,566 | 1,180,566 | `Bench2drive/v1/...`；Bench2Drive | 与 QA 文件共享 238,104 条规范路径，不是内容 hash 去重 |
+| CODA-LM | 20,318 | 20,318 | 15,516 | `images/` 与 `images_w_boxes/`；CODA-LM | 两目录共 4,883 与 10,633 条唯一路径；原图包与 nuScenes 重复关系未知 |
+| DRAMA | 16,401 | 16,401 | 16,401 | `combined/<clip>/...movie.gif`；DRAMA | 39 个 `combined/` 下 clip 目录；原始视频/帧/光流包字节仍 UNKNOWN/RESTRICTED |
+| DriveLM change-box / original-box | 各 4,072 | 各 24,432 | 各 24,432 | `samples/CAM_*`；nuScenes 六相机 | 两 JSONL 共享 24,432 条规范路径；不代表独立 annotation 的内容字节 |
+| DriveGPT4 | 26,319 | 210,552 | 113,320 | 载荷为平铺相对路径；依据来源文件及配置 root `/Drivegpt4/BDD_X_imgs_select` 归属 BDD-X | **上下文推断**；第三方同名 tar 仍未与这些文件逐项/hash 证明相同 |
+| LingoQA | 26,824 | 134,120 | 134,120 | `Action/images/train` 116,770；`Scenery/images/train` 17,350 | 两个 split 都在 annotation 中出现；训练配置仅列 Action root，实际路径解析/分包字节仍需核 |
+| MAPLM | 10,612 | 31,836 | 31,836 | `maplm_v0.1/train/...`；MAPLM | 路径直接标识；约 18.92 GB 主分卷不是该子集的实测字节 |
+| NAVSIM ReCogDrive / NAVSIM Traj | 各 85,109 | 各 85,109 | 各 85,109 | `sensor_blobs/trainval/...`；NAVSIM/OpenScene | 两文件规范路径集合完全重合；与 OpenScene 官方 archive 未做文件 hash |
+| NuInstruct | 57,317 | 1,542,258 | 49,074 | `samples/CAM_*`；nuScenes | 路径模式直接识别；大量引用在同文件内重复 |
+| nuScenes-QA | 24,988 | 149,928 | 149,928 | `samples/CAM_*`；nuScenes | 六相机图像路径 |
+| OmniDrive | 28,009 | 168,054 | 168,054 | `samples/CAM_*`；nuScenes | 六相机图像路径；公开配置 length 为 28,010，与实有行数差 1 |
+| SUTD TrafficQA | 9,916 | 9,916 | 9,916 | `compressed_videos/*.mp4`；SUTD TrafficQA | annotation 明确引用 MP4；Zenodo 20,534,486,181 B features/annotation 不能代替原视频 |
+| Senna | 27,885 | 167,310 | 167,310 | `samples/CAM_*`；nuScenes | 配置 length 27,813，比对象实际行数少 72 |
+| Talk2Car | 8,079 | 8,079 | 8,079 | 平铺图片名；依据 annotation 源与配置 root `/Talk2Car/imgs` 归属 | **上下文推断**；不能仅凭 basename 证明媒体母体 |
+| SGDrive `sgdrive.jsonl` | 85,109 | 340,436 | 126,032 | `navsim_data/sensor_blobs/trainval/.../CAM_F0/...`；NAVSIM/OpenScene | 每行四个前视时序 image 路径；与两份 ReCogDrive NAVSIM JSONL 各共享 85,109 条规范路径 |
+
+来源家族并集为 **1,873,206 个规范路径**：Bench2Drive 1,242,114；nuScenes 175,872（六个 `CAM_*` 目录各 29,312）；NAVSIM/OpenScene 126,032；DriveGPT4/BDD-X 113,320；LingoQA 134,120；MAPLM 31,836；DRAMA 16,401；CODA-LM 15,516；SUTD 9,916；Talk2Car 8,079。路径标记或 annotation 上下文 fallback 后未归类路径为 0；但 **DriveGPT4 与 Talk2Car 的 121,399 个唯一路径来自文件/配置上下文，不是路径字符串自行证明**。
+
+可直接复核的跨 JSONL 路径重用：Bench2Drive QA/Traj 共享 238,104 路径；两份 ReCogDrive NAVSIM 文件各 85,109 路径完全相同，SGDrive 也分别共享这 85,109 条，三者并集 126,032；nuScenes 六份 annotation 合计 583,230 个“每文件唯一路径出现”，合并后 175,872 个路径，重复出现超出并集 407,358 次，逐文件 pairwise 交集见 JSON。跨不同 source family 的媒体内容未读、未计算 SHA；不能据此排除 CODA-LM 等源包与 nuScenes 的内容重合。
+
+**容量结论不因路径计数改变：**这些 URI 数不是压缩包 byte。LingoQA 同时出现 Action 与 Scenery，但包页面约数只说明可见整包，不给这两组引用的精确子集字节；DRAMA、SUTD 原媒体体积仍 UNKNOWN/RESTRICTED；DriveGPT4 同名候选包没有逐 URI/hash 绑定。容量情景不得将 4.72 GB annotation 字节当媒体容量，也未据帧数/路径数推算媒体 byte。ReCogDrive 代码对本地图片调用 `os.path.join(root, image_path)`，LingoQA 与部分带前缀的相对路径仍须与训练配置根一起验证实际可解析性：[固定代码](https://github.com/xiaomi-research/recogdrive/blob/6b8d8f5e01346c71094651c81dcaf66405dbc04e/internvl_chat/internvl/train/internvl_chat_pretrain.py#L450-L455)。
 
 
 ## ReCogDrive 训练配置：root/记录数不是媒体容量

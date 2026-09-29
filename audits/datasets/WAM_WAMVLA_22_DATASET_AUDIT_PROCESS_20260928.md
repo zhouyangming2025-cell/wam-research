@@ -94,7 +94,7 @@ nuScenes Core Full 与 QA/benchmark 子集也采用母体依赖思路；DriveLM/
 
 ## 当前结论与后续 closure gate
 
-**【当前可确认】**已完成 22 篇范围内逐篇数据入口表、父/子 lineage 区分，以及 nuPlan 官方对象逐项 byte；后续已取 OpenScene 官方固定 revision 的 540 项文件级 `size`，见阶段 8。**【仍未确认】**全量 22 篇数据盘需求不是闭合数字：LAW CARLA 原始资产、VLA QA 源媒体映射、WAM-Flow 3.4M 图像、GraphWorld/DriveBench corruption、部分 benchmark 子集和私有 W0 仍缺可匹配的文件级 bytes。完整资产目录是现在的可复核产物，不等于容量审计已全部关闭。
+**【当前可确认】**已完成 22 篇范围内逐篇数据入口表、父/子 lineage 区分、nuPlan/OpenScene 官方文件 byte，以及 ReCogDrive 17 份和 SGDrive 1 份公开 JSONL 的全量媒体路径扫描（阶段 11）。路径映射和标注间路径交集已记录；**【仍未确认】**源图像/视频官方文件包与论文实际子集的字节、媒体内容 hash、解包/缓存峰值仍未闭合。LAW CARLA 原始资产、WAM-Flow 3.4M 图像、GraphWorld/DriveBench corruption、部分 benchmark 子集和私有 W0 仍缺可匹配文件 byte。完整资产目录和路径映射均不等于容量审计已全部关闭。
 
 要把容量审计关闭，下一轮必须按账本 UNKNOWN 行逐个获取官方文件 manifest / API `Size` / `Content-Length`，并把每个 paper 的路径抽取到源媒体 ID；一项一行记录 `asset_id, paper_id, role, version, split, modality, shard, exact_bytes, source, duplicate_of, public/private, compressed/unpacked`。接着分别计算：（a）高概率最小可复现组合，（b）22 篇全部公开原始数据/标注/评测协议组合，（c）私有数据的独立 UNKNOWN，不允许以公开替代。对于父体和派生 archive，用相同文件 SHA 或上游 object ID 去重；对无 hash 的重叠只给独立下载包情景与逻辑去重情景两列。最后由 zip/tar central directory 或公开解包 byte 数计算展开与峰值需求。
 
@@ -104,7 +104,7 @@ nuScenes Core Full 与 QA/benchmark 子集也采用母体依赖思路；DriveLM/
 
 【官方文件事实】固定 `OpenDriveLab/OpenScene` HF revision `a76f840b65e972bc45e56c2adced897498e9a026`，分页读取 620 个条目，筛出 `openscene-v1.1/` 540 个文件；常规 mini/trainval/test 534 项共 **2,506,457,646,127 B**，private test 6 项共 **39,224,624,432 B**，全部共 **2,545,682,270,559 B**。项目旧目录 inventory **2,545,682,394,232 B** 比官方对象和大 123,673 B，目录含 sidecar。旧差额 0.265 TB 主要是拿官网取整九项与**含 private** 的目录比较；不得再称同范围未解冲突。官方明细和文件 URL 已在新 manifest，未下载 payload。NAVSIM v1 独立 archive 在同一官方 revision 为 **449,007,410,406 B**，v2 五包为 **50,241,882,946 B**；历史目录对应多 15,197 B、4,655 B，疑为 sidecar（未逐 sidecar 独立验算）。逻辑父子关系已知，archive 内容同一性没有 SHA 证明。
 
-【原文/作者事实】LAW 明确 CARLA **0.9.10.1**、Roach 教师、189K 帧；论文的 CARLA 输入 resize 900×256 属于训练预处理，不提供原图分辨率。检查作者公开 `BraveGroup/LAW` 代码后仅发现 nuScenes 数据准备/训练说明，没有该 CARLA 采集包及文件 manifest；因此无法公开定价。ReCogDrive 作者公开 17 个 JSONL 对象，固定 HF revision `f55bb18e0aca846bbedfb516760a1b9b7cfe3ebf` 的 `size` 合计 **3,789,771,567 B**，仍仅是标注；全量唯一路径归属和独立媒体字节未完成。WAM-Flow 作者模型仓 `data/navsim_668k.jsonl` 为 **414,319,989 B** 的 NAVSIM 标注，并非 3.4M 通用 VQA 的图像包。
+【原文/作者事实】LAW 明确 CARLA **0.9.10.1**、Roach 教师、189K 帧；论文的 CARLA 输入 resize 900×256 属于训练预处理，不提供原图分辨率。检查作者公开 `BraveGroup/LAW` 代码后仅发现 nuScenes 数据准备/训练说明，没有该 CARLA 采集包及文件 manifest；因此无法公开定价。ReCogDrive 作者固定 HF revision `f55bb18e0aca846bbedfb516760a1b9b7cfe3ebf` 的 17 个 JSONL `size` 合计 **3,789,771,567 B**，仍仅是标注；全量媒体路径映射已在阶段11完成，独立媒体字节仍 UNKNOWN。WAM-Flow 作者模型仓 `data/navsim_668k.jsonl` 为 **414,319,989 B** 的 NAVSIM 标注，并非 3.4M 通用 VQA 的图像包。
 
 【官方 Zenodo 事实】`records/7431011` 九个文件 `size` 合计 **20,534,486,181 B**：四个 `.h5` 分别是 motion、ResNet101、ResNet18、MobileNetV2 预计算特征，其余是 JSONL 与视频 ID 映射；record 没有原始视频文件。SUTD 源媒体与 ReCogDrive 样本路径的对应及原始视频发布字节保持 UNKNOWN。
 
@@ -116,14 +116,14 @@ nuScenes Core Full 与 QA/benchmark 子集也采用母体依赖思路；DriveLM/
 
 【官方可访问性事实】Honda DRAMA 给出 17,785 个约 2 秒片段、双摄像机采集参数，但原始数据须由高校邮箱申请，公开页面未列文件 bytes，记 **RESTRICTED/UNKNOWN**。SUTD 官方 GitHub 提供原 dataset 的下载申请入口；Zenodo record 的九文件清单只覆盖 feature 和标注，因此应表述为“该 record 不含原视频”，不能误写成“SUTD 原视频没有发布”。两者当前没有能公开复核且对应 ReCogDrive 实际样本的原媒体 byte 清单。DriveBench 官方准备文档的 corruption 图像来自独立 Google Drive，公开 HF `arena` 小子集不足以定价完整包；GraphWorld 原文仅指定 Rain/Snow/Fog 三天气，未指明所有强度对应的下载对象，保持 UNKNOWN。
 
-【盘需求判定】已闭合的对象级 byte 是**指定压缩包集合**，不是完整 22 篇的可复现需求。研究高概率组合仍约 **24.058 TB**（其中 nuPlan 全 v1.1 20,280,630,002,024 B），更广已定价包约 **29.588 TB**；后者含 FineVision 整库，只是条件包留存场景。LAW 独立 CARLA、WAM-Flow 通用图片、ReCogDrive/SGDrive 未映射源媒体、天气腐蚀/DriveBench 全量及 W0 私有资产都没有可证上限，解包和峰值也未知。因此现在不能证明 32/40/64 TB 中任一容量足够；若只在明确封闭的已列包范围内选盘，可把相应条件和作为**压缩包空间一项输入**，另外为展开/缓存留 UNKNOWN，而不能报告整项目硬盘最终规格。
+【阶段9时点判断，路径状态由阶段11更新】已闭合的对象级 byte 是**指定压缩包集合**，不是完整 22 篇的可复现需求。研究高概率组合仍约 **24.058 TB**（其中 nuPlan 全 v1.1 20,280,630,002,024 B），更广已定价包约 **29.588 TB**；后者含 FineVision 整库，只是条件包留存场景。LAW 独立 CARLA、WAM-Flow 通用图片、ReCogDrive/SGDrive 原媒体 bytes、天气腐蚀/DriveBench 全量及 W0 私有资产都没有可证上限，解包和峰值也未知。因此现在不能证明 32/40/64 TB 中任一容量足够；若只在明确封闭的已列包范围内选盘，可把相应条件和作为**压缩包空间一项输入**，另外为展开/缓存留 UNKNOWN，而不能报告整项目硬盘最终规格。
 
 ## 阶段 10：公开候选包、VLA 来源与可选缓存（2026-09-28）
 
-本阶段以远端审计分支 `fd784e3` 的文件为起点；此前阶段 8/9 的 **24.058/29.588 TB** 是历史条件和，现行公式在[账本“本轮容量核算”](WAM_22_dataset_asset_register_2026-09-28.md#本轮容量核算2026-09-28-修订组合口径不是全部需求闭合)。逐字段证据、版本与状态集中在[新增的专项证据](WAM_22_OPEN_ITEMS_EVIDENCE_20260928.md)，其职责是保留三分包对象 ID、版本边界与有界路径来源，不另建重复的 22 篇总表。
+本阶段以远端审计分支 `fd784e3` 的文件为起点；此前阶段 8/9 的 **24.058/29.588 TB** 是历史条件和，现行公式在[账本“本轮容量核算”](WAM_22_dataset_asset_register_2026-09-28.md#本轮容量核算2026-09-28-修订组合口径不是全部需求闭合)。本阶段 ReCogDrive/SGDrive 的有界扫描状态已由 2026-09-29 阶段11替代；其余逐字段证据、版本与状态集中在[专项证据](WAM_22_OPEN_ITEMS_EVIDENCE_20260928.md)，不另建重复的 22 篇总表。
 
 1. **TCP 是 CANDIDATE，LAW 仍 UNKNOWN。** TCP 作者明确在 HF 发布三段 ZIP，总 `123,448,985,790 B`，逐段官方 `size` 与 LFS ID 入新证据表。LAW 原文确实写 CARLA 0.9.10.1、Roach、沿 TCP/DriveAdapter 采 189K 帧；ThinkTwice 作者也说 TCP 有 189K 训练帧。但 LAW 没有公开采集对象 ID、member/场景表和 hash，不能把 TCP 包定为 LAW 实际容量；另一个约 8 TB 的高分辨率多模态采集也仅作敏感性参照。
-2. **ReCogDrive/SGDrive 为 PARTIAL。** ReCogDrive 官方 17 个 JSONL 对象的 3,789,771,567 B、SGDrive 单个 932,449,828 B 是标注容量。此前有界读取覆盖 17/17 文件各首 4,096 B、SGDrive 前 1 MiB，路径形态分别归到 NAVSIM/OpenScene、Bench2Drive、nuScenes、LingoQA、DRAMA、SUTD、CODA-LM/MAPLM 与尚不能归属的平铺文件名；这些临时前缀未持久化。本轮不能重新访问整份 JSONL，故实际扫描的 JSONL 行数、媒体 URI 总数、唯一数与无法归属数都标 UNKNOWN，不把路径形态误称为完整去重清单。SUTD 的 `.mp4` 路径说明其 feature/annotation Zenodo 包不能代替原视频。
+2. **（阶段11状态更新）ReCogDrive/SGDrive 标注已全量扫描，媒体包仍 PARTIAL。** 2026-09-29 对 ReCogDrive 17 个 JSONL 与 SGDrive `sgdrive.jsonl` 全量读取，18 个对象合计 4,722,221,395 B 标注文本，解析 766,842 rows 与 4,498,508 URI refs，形成 1,873,206 个 family-scoped unique paths；逐来源计数和路径交集见阶段11。路径并集不是原媒体 byte，也不等于跨来源 SHA 去重。SUTD 的 `.mp4` 引用说明 20.534 GB feature/annotation Zenodo 包不能代替像素视频；DRAMA GIF、LingoQA Action/Scenery、DriveGPT4 同名候选包等媒体字节仍未定价。
 3. **WAM-Flow 保留 UNKNOWN。** 原文为 3.4M LLaVA-v1.5 来源通用 QA；作者固定代码 `pretrain.yaml` 指向 `llava_v1_5_mix665k_2.jsonl`，并列多个驾驶 JSONL。标准 LLaVA 665K 标注还需组成数据集的原图；作者 HF 的 414,319,989 B `navsim_668k.jsonl` 是 NAVSIM 标注。没有 3.4M 版本/split/唯一图像 URI，不推价。
 4. **腐蚀评测仍 PARTIAL/UNKNOWN bytes。** GraphWorld 原文仅锁定 nuScenes-C val 的 Snow/Rain/Fog，未披露具体 severity 或是否另存像素；原 nuScenes-C 作者仓提供 camera/LiDAR 的 test-time 函数，不能断言必需预生成全量包。DriveBench 官方准备文档明确将文本放 HF、图片放独立 Google Drive、解到 `data/corruption` 与 `data/nuscenes/samples`；UniDriveVLA 未给实际使用子包/文件 byte。两项都不以小 arena 子集或完整 benchmark 页数替代。
 5. **W0 PRIVATE/UNKNOWN。** P0072 原文是 in-house 70M frames、>1M clips、100 难例；未公开压缩对象或上限，和可购买公开包情景分离。
@@ -131,3 +131,13 @@ nuScenes Core Full 与 QA/benchmark 子集也采用母体依赖思路；DriveLM/
 7. **Bench2Drive 官方版别核对。** 旧 Base 官方 1,000 包 `334,866,900,094 B`；v0.0.4 无 depth 1,100 包 `415,362,197,807 B`；历史 map 目录（12 `.npz` 和 sidecar）`3,146,330,646 B`。官方新包加历史 map 为混合口径 `418,508,528,453 B`，比历史汇总行 `418,508,847,603 B` 少 **319,150 B**：no-depth 子目录与官方对象差 315,054 B，汇总行与两个子目录和又差 4,096 B，均未逐文件定位。旧 Base 和新版不可互替，Full/depth 也未有 22 篇整包证据。XML route protocol 不作传感器数据集。
 
 **修订情景：**以阶段 8 的 24.058094763990 / 29.587653263990 TB 混合精度和替换旧 Base、可选新版 B2D、NAVSIM v2 三项，差额 `0.065133423711 TB`，得到约 **23.993 / 29.523 TB**；高概率组合若不保留论文直接 0/22 的新版 B2D 包，为约 **23.574 TB**。宽组合额外假设 TCP 候选三包并存为约 **29.646 TB**，绝不能读作 LAW 已定价。另留 NAVSIM v1 archive 加约 0.449 TB；SGDrive 缓存仅在选择该训练流程时另占作者估计约 1–2 TB；FineVision 4.65 TB 是整库代入，不是论文真实子集。这些是选定压缩包条件和，未解决的 LAW、原视频/通用图片、腐蚀评测、私有 W0 和解包峰值使公开完整容量与上限继续 UNKNOWN。
+
+## 阶段 11：ReCogDrive / SGDrive 全量媒体路径映射（2026-09-29）
+
+本阶段更新阶段 10 对 ReCogDrive / SGDrive 的状态：公开 annotation JSONL 全量已读；原图、原视频本体没有请求或下载。
+
+【官方元数据与流式扫描】对 ReCogDrive pinned revision `f55bb18e0aca846bbedfb516760a1b9b7cfe3ebf` 的 17 个 JSONL，以及 SGDrive pinned revision `c6379bea8aaf635883b33fcc99499b59d42aad1e` 的 `sgdrive.jsonl` 全量流式读取。18 个 annotation 对象 `size` 合计 `4,722,221,395 B`，每个对象实际读取字节均与 HF tree API size 相等；总计 766,842 JSONL rows、4,498,508 media URI refs，image 4,472,191、video/GIF 26,317，解析错误 0。17/18 实际 SHA-256 与对象 API 暴露的 LFS OID 相符，Talk2Car 对象未提供 LFS OID。没有请求任何媒体对象；这 4.722 GB 是 annotation 文本，不是图片/视频容量。
+
+【路径事实】按 source family + 规范化 relative path 做路径级去重，得到 1,873,206 family-scoped unique paths：Bench2Drive 1,242,114；nuScenes 175,872；NAVSIM/OpenScene 126,032；DriveGPT4/BDD-X 113,320；LingoQA 134,120（Action 116,770、Scenery 17,350）；MAPLM 31,836；DRAMA GIF 16,401；CODA-LM 15,516；SUTD MP4 9,916；Talk2Car 8,079。NuScenes 六份 QA annotation 和 B2D/NAVSIM 多份标注的逐文件相交、方法与 source object SHA 在[补充证据](WAM_22_OPEN_ITEMS_EVIDENCE_20260928.md#vla-标注媒体路径全量扫描完成媒体字节仍未闭合)及[机器可读结果](WAM_VLA_MEDIA_PATH_AUDIT_2026-09-29.json)。路径交集不是内容 SHA；不同 source family 也未跨库 image hash 去重。DriveGPT4 与 Talk2Car 的 121,399 unique paths 由 annotation 文件/配置根上下文归属，不是路径字符串自证。
+
+【容量边界】没有把路径个数换算成 byte，也没有更改高概率或扩展条件和。源媒体压缩包字节仍 UNKNOWN：SUTD 标注引用 9,916 `.mp4`，其 20.534 GB Zenodo 包是 feature/annotation；DRAMA 引用的 16,401 GIF 与受限 raw media 未定价；LingoQA 引用两个 split，但作者配置和本地 path join 还需核运行；DriveGPT4 同名 candidate archive 未按 path/hash 绑定。WAM-Flow 通用 3.4M VQA、LAW CARLA、corruption benchmark、W0 私有数据、解包和训练 cache 峰值继续各自单列 UNKNOWN/PRIVATE。

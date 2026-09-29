@@ -225,7 +225,7 @@
 |---|---|---|---|
 | P0068 | DriveWorld-VLA | **NAVSIM、nuScenes；ReCogDrive 式 VLM 预训练池（候选）** | 论文未给完整 12 源图像清单；与 ReCogDrive 的具体同一性及实际媒体清单未闭合。 |
 | P0069 | Uni-World VLA | **NAVSIM；nuPlan 轨迹消融** | nuPlan 轨迹消融不等于使用 nuPlan 全部相机、LiDAR 或数据库。 |
-| P0070 | SGDrive | **NAVSIM；SGDrive 驾驶 QA 与轨迹 QA 标注** | 作者 JSONL 已识别；部分图片路径指向 NAVSIM/OpenScene，完整唯一媒体路径和其他来源归属未闭合。 |
+| P0070 | SGDrive | **NAVSIM；SGDrive 驾驶 QA 与轨迹 QA 标注** | 公开 JSONL 全量扫描：85,109 rows、340,436 image path refs、126,032 个 NAVSIM/OpenScene family-scoped unique paths；原媒体 byte 与 archive hash 未核。 |
 | P0071 | FSDrive | **nuScenes 图像/标注、OmniDrive-nuScenes QA、DriveLM GVQA；NAVSIM / DriveLM 评测** | QA 标注与 nuScenes 原始图像分层登记；评测包不替代原图。 |
 | P0072 | DriveVLA-W0 | **nuPlan、NAVSIM；私有 70M 帧 / 百万级 clips** | 私有数据单独记为 PRIVATE/UNKNOWN；不得用公开数据包替代。 |
 | P0073 | CoT4AD | **nuScenes、旧版 Bench2Drive** | 按论文实际版本登记，不以新版包替换旧版。 |
@@ -295,26 +295,26 @@
 
 | 数据资产 | 论文/角色 | 母体或类型 | 登记状态 |
 |---|---|---|---|
-| ReCogDrive_Pretraining | P0074 论文明确使用 3.1M 驾驶 QA；P0068 仅有 ReCogDrive 式预训练关联线索 | 多源驾驶 QA / 轨迹标注；JSONL 不等于源媒体 | **PARTIAL**：17 个标注文件与作者配置已登记；逐样本唯一媒体路径与逐源归属未闭合。 |
-| SGDrive 标注集 | P0070 训练 | 驾驶 QA + 轨迹 QA | **PARTIAL**：标注包身份已知；完整原图/视频来源映射未闭合。 |
+| ReCogDrive_Pretraining | P0074 论文明确使用 3.1M 驾驶 QA；P0068 仅有 ReCogDrive 式预训练关联线索 | 多源驾驶 QA / 轨迹标注；17 个 JSONL 与源媒体分层 | **PARTIAL**：17/17 JSONL 全量路径扫描，681,733 rows、4,158,072 URI refs、1,832,283 source-family unique paths；实际论文章节取用子集、媒体 byte/hash 未闭合。 |
+| SGDrive 标注集 | P0070 训练 | 驾驶 QA + 轨迹 QA；JSONL 引用 NAVSIM/OpenScene 路径 | **PARTIAL**：全量 85,109 rows、340,436 refs、126,032 unique paths 已核；原图 byte、OpenScene archive/member hash 与 loader root 仍 UNKNOWN。 |
 | UniDriveVLA 作者 JSON/标注 | P0076 训练 | 驾驶 VQA 标注 | **PARTIAL**：与原始图片包的包含关系需按路径核验。 |
 | FineVision | P0076 通用视觉/VQA 混合训练 | 通用视觉数据家族 | **PARTIAL**：论文/代码提示抽样清单，实际 shards 与样本媒体集合未确认。 |
 | LLaVA-v1.5 general VQA mix | P0074 通用 VQA 训练 | 通用图像 + VQA 标注 | **UNKNOWN**：论文 3.4M 与公开配置 665K 不一致，具体发布版本、split 和图像路径未确认。 |
 | navsim_668k.jsonl | P0074 作者 SFT 配置中的 NAVSIM 标注 | NAVSIM 派生标注；不是原图包 | **PARTIAL**：文件内容身份为 NAVSIM 标注；它与论文所称 nuPlan 668K 训练阶段的对应关系未证实，且不能代替 3.4M 通用 VQA 原图。 |
 | DriveBench | P0076 腐蚀鲁棒性评测 | 驾驶图像 corruption benchmark + QA | **PARTIAL**：评测名与任务已知，完整 corruption image 清单及运行时生成/预生成边界未知。 |
-| ReCogDrive 上游配置源：NAVSIM / Bench2Drive QA 与轨迹项 | P0074 作者固定配置/17 个标注 JSONL | NAVSIM/OpenScene 与 Bench2Drive 的派生 QA/轨迹标注 | **PARTIAL**：路径前缀可识别；独立 archive hash 与逐样本唯一数未核。 |
+| ReCogDrive 上游配置源：NAVSIM / Bench2Drive QA 与轨迹项 | P0074 作者固定配置/17 个标注 JSONL | NAVSIM/OpenScene 与 Bench2Drive 的派生 QA/轨迹标注 | **PARTIAL**：完整 canonical path 数及标注间相交已核；对应 archive bytes/member hash 未核。 |
 | DriveLM | P0007 recipe、P0025 OmniDrive 数据链、P0071 FSDrive、P0077 UniDrive-WM 评测；P0074 作者配置列为源 | nuScenes 图像上的驾驶 QA | **PARTIAL**：标注来源已命名；每篇实际 split 与原图重用关系未统一。 |
 | NuScenes-QA | P0007 recipe；P0074 作者配置列为源 | nuScenes QA 标注 | **PARTIAL**：与 nuScenes 母体相关；逐样本对应未统一。 |
 | OmniDrive QA | P0007 recipe、P0025、P0071；P0074 作者配置列为源 | nuScenes 派生驾驶/反事实 QA | **PARTIAL**：区分 QA 标注包与 nuScenes 原图。 |
 | NuInstruct | P0007 recipe；P0074 作者配置列为源 | 驾驶指令/QA 标注，图像路径可能指向 nuScenes | **PARTIAL**：source path 中可识别 nuScenes 根；样本级映射未统一。 |
 | Senna | P0007 recipe；P0074 作者配置列为源 | 驾驶 QA 标注，图像路径可能指向 nuScenes | **PARTIAL**：source path 中可识别 nuScenes 根；样本级映射未统一。 |
-| CODA-LM | P0074 作者配置及 ReCogDrive 标注源 | 独立驾驶 QA 图像来源候选 | **PARTIAL**：配置指向 Val 子集；与 nuScenes 的逐图关系未核。 |
-| LingoQA | P0007 recipe；P0074 作者配置/标注源 | 驾驶视频帧 + QA；Scenery/Action split | **PARTIAL**：标注前缀与配置 root 不一致，实际使用 split 待核。 |
-| MAPLM v0.1 | P0074 作者配置/标注源 | 驾驶多视角图像及地图/问答标注 | **PARTIAL**：v0.1 配置已识别；公开分卷与实际引用样本映射未闭合。 |
-| SUTD TrafficQA | P0007 recipe；P0074 作者配置/标注源 | 视频 QA；标注/features 与原视频分层 | **PARTIAL**：配置明确指向 compressed_videos；Zenodo features/annotation 不能替代视频。 |
-| Talk2Car | P0007 recipe；P0074 作者配置/标注源 | nuScenes 相关语言导航/指令数据 | **PARTIAL**：前缀为平铺图像文件名，母体映射待核。 |
-| DriveGPT4 / BDD-X selected images | P0007 recipe；P0074 作者配置/标注源 | BDD-X 图像/对话标注候选 | **PARTIAL**：配置 root 与公开候选包同名，逐样本 identity 未核；不等同完整 BDD-X 视频。 |
-| DRAMA | P0074 作者配置/标注源 | 多摄像头驾驶视频、光流与标注 | **RESTRICTED/UNKNOWN**：作者申请受限；公开 byte manifest 未找到。 |
+| CODA-LM | P0074 作者配置及 ReCogDrive 标注源 | 独立驾驶 QA 图像来源候选 | **PARTIAL**：15,516 unique paths（`images/` 和 `images_w_boxes/`）；与 nuScenes 的内容 hash/官方文件映射未核。 |
+| LingoQA | P0007 recipe；P0074 作者配置/标注源 | 驾驶视频帧 + QA；Scenery/Action split | **PARTIAL**：134,120 unique paths：Action 116,770、Scenery 17,350；配置根/loader path join 与实际媒体包仍需核。 |
+| MAPLM v0.1 | P0074 作者配置/标注源 | 驾驶多视角图像及地图/问答标注 | **PARTIAL**：31,836 unique `maplm_v0.1/train` paths；主 archive 大小是包近似值，不代表子集精确字节。 |
+| SUTD TrafficQA | P0007 recipe；P0074 作者配置/标注源 | 视频 QA；标注/features 与原视频分层 | **PARTIAL/RESTRICTED**：9,916 unique `.mp4` paths；Zenodo features/annotation 不含这些像素视频，原始包 byte UNKNOWN。 |
+| Talk2Car | P0007 recipe；P0074 作者配置/标注源 | nuScenes 相关语言导航/指令数据 | **PARTIAL**：8,079 unique paths 按标注来源/配置 root 归属；平铺 basename 不能独立证明母体。 |
+| DriveGPT4 / BDD-X selected images | P0007 recipe；P0074 作者配置/标注源 | BDD-X 图像/对话标注候选 | **PARTIAL**：113,320 unique relative paths 按文件与 config root 推断；同名候选包未逐路径/hash 绑定，不等同完整 BDD-X 视频。 |
+| DRAMA | P0074 作者配置/标注源 | 多摄像头驾驶视频、GIF、光流与标注 | **RESTRICTED/UNKNOWN**：全量标注引用 16,401 unique GIF paths，原始发布包 byte 未找到且申请受限。 |
 | MMStar | P0076 通用视觉问答评测 | 通用 VQA benchmark | **PARTIAL**：名称已知，论文对应版本/split 清单待核。 |
 | MMMU | P0076 通用视觉问答评测 | 通用 VQA benchmark | **PARTIAL**：名称已知，论文对应版本/split 清单待核。 |
 | RealWorldQA | P0076 通用视觉问答评测 | 通用 VQA benchmark | **PARTIAL**：名称已知，论文对应版本/split 清单待核。 |
@@ -630,11 +630,10 @@ VLA / 通用视觉部分同样保留单篇资产：P0074 的 LLaVA-v1.5 通用 V
 
 仍需保持显式未闭合行，不把它们折成容量估值：
 
-- **源媒体身份未闭合：**ReCogDrive、SGDrive 和混合 VQA 标注引用的唯一图像/视频路径，及其与 nuScenes、NAVSIM/OpenScene、Bench2Drive、LingoQA、DRAMA、SUTD 等母体的逐样本关系。
+- **源媒体 package identity/容量未闭合：**ReCogDrive/SGDrive 18 份 JSONL 的路径已全量映射及计数，但源包成员、论文实际子集、媒体 byte 与跨 family SHA 去重未闭；LingoQA root resolution、DRAMA/SUTD 限制媒体字节仍 UNKNOWN。
 - **通用视觉数据身份未闭合：**WAM-Flow 的 3.4M VQA 图像版本/split/样本清单；论文所称 nuPlan 668K 与公开 navsim_668k.jsonl 的阶段关系；UniDriveVLA 的 FineVision 实际取样与七项通用评测集对应 split。
 - **评测资源粒度未闭合：**GraphWorld nuScenes-C 三天气实际 corruption 文件；DriveBench 完整 corruption 资源及生成方式。
 - **非公开/作者资产：**LAW 的 189K CARLA/Roach 数据具体发布对象仍 UNKNOWN；DriveVLA-W0 的 70M 帧/百万级 clips 为 PRIVATE/UNKNOWN；GAIA-1、SUP-AD 与自建 Alignment 数据分别保留私有或作者生成属性。
 - **派生包/母体边界：**NAVSIM v1 navtrain 与 OpenScene trainval、HUGSIM scenes 与原始来源、CityWalker 15h 子集与公开包、Bench2Drive 旧版/新版都必须保持分行；不能只靠名称推断内容相同。
 
 因此，当前可表述为：**75 篇论文覆盖已统一；高频数据家族和已命名单篇资产已纳入登记；数据资产身份映射尚有 PARTIAL/UNKNOWN，不宣布领域全集资产闭合。**下一轮继续补齐或将每个未知项正式定界后，再冻结“数据集全集”并开始容量汇总。本节不提供盘容量建议。
-
