@@ -1,8 +1,12 @@
-# WAM / WAM+VLA 自动驾驶数据集领域盘点（2026-09-21；75篇语料交叉补录 2026-09-29）
+# WAM / WAM+VLA 领域数据集目录（来源语料交叉补录 2026-09-29）
 
 ## 0. 本轮结论
 
-上一版“核心 12 + 16 篇代表性扩展论文”**不足以作为后续下载决策的最终数据底账**。本版已改为对仓库 `papers/raw_md/` 的 **65 个论文条目逐项审计**：
+上一版“核心 12 + 16 篇代表性扩展论文”**不足以作为后续下载决策的数据集底账**。本目录的目标是尽量找全仓库 WAM / WAM+VLA 相关论文涉及的数据集和数据资产，并按资产家族归并；不是把扩展论文逐篇做成与核心论文同等深度的审计。
+
+已有的 65 篇广义 census 与 22 篇专项账本提供发现来源和出处。其中既有逐篇记录仅作追溯与频次交叉检查，本轮不继续扩写 75 篇逐篇分析。目录主体按数据资产组织：原始驾驶数据、派生数据与 benchmark、语言/QA/奖励标注、通用视觉数据、仿真与作者私有资产分别登记。
+
+此前的广义 census 曾对仓库 `papers/raw_md/` 中的 **65 个论文条目做逐项核对**：
 
 - **64 个条目**：直接读取 `<ID>_<Name>.raw.md` 原文；
 - **P0067 ProSim**：仓库当前只有 verified source note，没有 full raw Markdown；因此只使用 source note，并额外核对官方 ProSim 发布页确认其底层使用 **Waymo Open Dataset / WOMD** 与 **ProSim-Instruct-520k**；
@@ -10,23 +14,25 @@
 - **不把 Related Work / reference list 中“提到过”的数据集算作论文使用数据**；
 - 这 65 条是仓库当时的**广义领域语料**，不等于 65 篇纯 WAM 论文；包含 E2E、预测、occupancy、仿真/benchmark 等相邻工作，也包含 P0030–P0033 数据集/benchmark 论文自身；频次是语料内唯一 paper ID 数，不是全领域抽样比例；
 - 作者自行生成的 feature cache、latent cache、trajectory anchors、pseudo labels、reward cache、teacher trajectories、checkpoint 等普通复现中间资产，不纳入“基础数据集下载”盘点；
-- 如果作者生成的数据已经成为**独立命名、公开发布或可复用的 dataset / benchmark**，则单独登记，例如 Occ3D、DriveReward、OmniDrive、ProSim-Instruct-520k。
+- 如果作者生成的数据在论文中被**独立命名，或明确作为训练集/benchmark 使用**，则纳入资产目录并标注公开状态；公开、私有、发布状态未知分开登记。例如 Occ3D、DriveReward、OmniDrive、ProSim-Instruct-520k、CornerCaseRepo 与作者构建的场景集。
 
-本文件的任务仍然只是：
+本目录的主要任务是：
 
-> **先把这个研究域实际使用的数据集搞清楚，并和 210 当前数据池对齐。**
+> **先把这个研究域实际涉及的数据集和资产家族找全、统一名称并厘清来源关系；容量与下载决策后置。**
 
-**本轮不输出下载优先级。** 下载源、版本、许可、gated access、压缩/解压体量、模态选择、重复数据等，下一轮再全网调查。
+本目录的范围是仓库当前收录的论文语料，不声称等于整个领域文献全集。频次只作“哪些数据集反复出现”的辅助信息，不要求对扩展论文逐篇复核全部版本、样本和文件。**本阶段不输出下载优先级或总容量。**
+
+**2026-09-29 数据集查漏调整：**批量筛查 raw Markdown 中的数据集/benchmark 标题后，补登记 CornerCaseRepo、CARLA Leaderboard v1/v2、Think2Drive 专家帧，以及 CounterfactualPred 的作者构建场景集。只对新出现资产回看相关段落确认身份；不扩展成对所有论文逐篇重挖。未核公开包状态或字节的资产保留 UNKNOWN。
 
 ---
 
 ## 0.1 当前仓库论文语料的统一覆盖（2026-09-29）
 
-本次把此前分开的 65 篇广义领域 census 与 22 篇 WAM / WAM+VLA 专项账本接成同一语料口径：65 + 22 − 12 篇重叠核心 WAM = **75 个唯一论文 ID**。其中 65 篇底账为 64 篇 full raw Markdown 加 P0067 ProSim source note；22 篇专项账本包含同一批核心 12 篇及 P0068–P0077 十篇 WAM+VLA。复核固定论文源后，仓库当前 papers/raw_md 共 74 个 .raw.md 与 P0067 source note，对应 75 个唯一论文 ID。覆盖的是**仓库当前收录的论文**，不等于截至当前日期整个领域文献全集。
+本次统一发现来源池为此前 65 篇广义领域 census 与 22 篇 WAM / WAM+VLA 专项账本的去重并集：65 + 22 − 12 篇重叠核心 WAM = **75 个唯一论文 ID**。其中 65 篇底账为 64 篇 full raw Markdown 加 P0067 ProSim source note；22 篇专项账本包含同一批核心 12 篇及 P0068–P0077 十篇 WAM+VLA。该范围覆盖**仓库当前收录的论文**，不等于整个领域文献全集。
 
-本文现在作为这 75 个论文 ID 的**数据集使用登记入口**：保留 65 篇逐篇表，并补入 10 篇 VLA 逐篇记录及跨账本频次；资产名称、角色、版本/血缘和未确认项优先登记，容量、解包与峰值仍以专项证据账本核，不在本节合并估算。相关来源见 [22 篇逐论文资产账本](WAM_22_dataset_asset_register_2026-09-28.md) 与 [媒体/缺口补充证据](WAM_22_OPEN_ITEMS_EVIDENCE_20260928.md)。
+阅读顺序以数据集为中心：先看 §3–§6 的数据资产目录；§1 频次及 §13 重复/单篇资产表用于快速识别高频与长尾；附录 A 保留已有论文到数据集的出处映射，但不再作为扩展论文逐篇深挖任务。22 篇核心证据见 [逐论文资产账本](WAM_22_dataset_asset_register_2026-09-28.md) 与 [媒体/缺口补充证据](WAM_22_OPEN_ITEMS_EVIDENCE_20260928.md)。
 
-## 1. 65 篇审计后的总体图景
+## 1. 高频数据家族：仓库来源语料频次（辅助索引）
 
 按“论文直接使用或明确作为其 benchmark/source”的口径，仓库 65 个条目中最集中的数据体系如下。每个 paper ID 对同一数据家族最多计 1 次；同一论文可同时出现在 v1、v2 两行。来源数据、数据集/benchmark 自身论文也按 ledger 中的角色计入，因此这些是**文献条目频次**，不能直接解释成独立下载包数或项目复现概率。
 
@@ -109,7 +115,11 @@
 模拟器 / 交互环境
 ├── CARLA
 │   ├── Bench2Drive
+│   ├── CARLA Leaderboard v1/v2 routes/scenarios
+│   ├── CornerCaseRepo（Think2Drive）
 │   ├── RiskBench
+│   ├── Think2Drive expert frames
+│   ├── CounterfactualPred case set
 │   ├── LAW 的 Roach expert data
 │   ├── CausalDrive 的 safety-critical / SocioDrive 数据组成
 │   └── SUMMIT（基于 CARLA）
@@ -128,117 +138,25 @@
 
 ---
 
-## 3. 仓库论文：逐篇数据审计 ledger（65 篇广义 census + 10 篇 VLA 补录）
+## 3. 数据资产目录：类别与阅读入口
 
-### 3.1 P0001–P0019
+本目录按资产实体归档，不按论文逐篇展开。相同上游数据可同时出现在母体、筛选子集、标注层或 benchmark 中；这些层次要分开登记，不能因名称相似就视为同一包或可相互替代。
 
-| ID | 论文 | 定位 | 实际训练 / 评测 / 构建数据 | 盘点备注 |
-|---|---|---|---|---|
-| P0001 | Epona | 核心 WAM | **nuPlan、nuScenes、NAVSIM v1** | nuPlan + 700 nuScenes scenes 训练；NuPlan test / nuScenes / NAVSIM 评测 |
-| P0002 | SafeDrive | WAM / 安全规划 | **NAVSIM v1、NAVSIM v2、Bench2Drive** | 同时覆盖 PDMS、EPDMS 与 CARLA 闭环 |
-| P0003 | GraphAD | 图式 E2E | **nuScenes** | 主数据集 |
-| P0004 | BeTop | 交互预测 / 规划 | **nuPlan、WOMD** | nuPlan planning + Waymo Open Motion prediction |
-| P0005 | RiskWorld | 风险 world model / simulation | **RiskBench（CARLA）** | RiskBench 由 CARLA 风险场景构成 |
-| P0006 | GenDrive | 生成式规划 | **nuPlan** | 训练和 closed-loop planning test 都在 nuPlan |
-| P0007 | DriveReward | 奖励模型 / 数据集 | **NAVSIM v1 → DriveReward / DriveReward-Bench** | 原文报告 NAVSIM-V1 RL 评测及 train-set 衍生（[原文](../../papers/raw_md/P0007_DriveReward/P0007_DriveReward.raw.md#L92)）；另有 QA 预训练混合，见 §6 |
-| P0009 | DriveLaW | 核心 WAM | **nuPlan、nuScenes、NAVSIM v1** | 大规模视频预训练 + NAVSIM planning |
-| P0010 | TOAD | E2E planning | **NAVSIM v1、NAVSIM v2、HUGSIM** | 同时覆盖 log-based 与 photorealistic closed-loop |
-| P0011 | SensitivityShaping | 外围：通用动力学 / OOD | **无统一 AD 基础数据集可列** | 不是本次自动驾驶数据下载主线，避免强行计数 |
-| P0012 | DAWAM | WAM | **NAVSIM v1、NAVSIM v2** | planning benchmark 主线 |
-| P0013 | BridgeSim | 闭环 simulator / benchmark | **NAVSIM v2、nuPlan、nuScenes、WOMD、BridgeSim/NavHard** | CARLA 是论文列出的支持能力；实验报告未证明实际读取 CARLA 场景，不计 CARLA 使用频次 |
-| P0014 | ReactSimBench | reactive traffic benchmark | **nuPlan → ReactSim-Bench** | 基于 nuPlan 构建 2,636 个 test scenarios |
-| P0015 | CausalDrive | 交互式 world renderer | **OpenDV、nuPlan、SocioDrive-Bench、Bench2Drive/CARLA、NAVSIM** | OpenDV 1,700 h 预训练；SocioDrive-Bench 20K clips，80% nuPlan / 20% CARLA |
-| P0016 | CounterfactualPred | 反事实预测 benchmark | **CARLA** | controlled counterfactual GT 来自 simulator |
-| P0017 | CRAFT | 闭环 E2E | **Bench2Drive / CARLA** | 闭环 benchmark |
-| P0018 | GameFormer | 交互预测 / 规划 | **WOMD、nuPlan** | 两条真实行为数据线 |
-| P0019 | M2I | 交互运动预测 | **WOMD** | Waymo motion benchmark |
+| 资产层 | 数据集目录位置 | 典型内容 |
+|---|---|---|
+| 原始驾驶传感器、motion、视频 | §4.1、§6 | nuScenes、nuPlan、WOMD、OpenDV、CoVLA、DrivingDojo 等 |
+| 规划、闭环、仿真与 benchmark | §4.2 | NAVSIM、Bench2Drive、HUGSIM、RiskBench、ReactSim-Bench；CARLA/SUMMIT 等模拟器另标为软件/环境 |
+| 派生标注、占用/拓扑与驾驶 QA | §4.3、§4.4、§5 | Occ3D、OpenLane-v2、DriveLM、OmniDrive、ReCogDrive、SUTD 等；标注与其引用的图像/视频分层 |
+| 通用视觉/VQA 训练与评测资产 | §4.4 | FineVision、LLaVA-v1.5 来源、通用 VQA benchmark；复合数据集未公开组成时按家族登记并标明 UNKNOWN |
+| 作者自采、私有或仅特定论文所需资产 | §8、§13.2 | LAW/Roach 候选、W0、GAIA-1、SUP-AD、作者生成 benchmark |
 
-### 3.2 P0021–P0039
-
-| ID | 论文 | 定位 | 实际训练 / 评测 / 构建数据 | 盘点备注 |
-|---|---|---|---|---|
-| P0021 | HydraMDP | E2E planning | **NAVSIM v1** | NAVSIM 主线 |
-| P0022 | DriveSuprim | E2E planning | **NAVSIM v1、NAVSIM v2、Bench2Drive** | 论文强调不引入额外训练数据 |
-| P0023 | iPad | E2E planning | **NAVSIM v1 split profile、Bench2Drive** | 原文使用 103k/12k 的官方 navtrain/navtest（[原文](../../papers/raw_md/P0023_iPad/P0023_iPad.raw.md#L152)）；未写 archive revision |
-| P0024 | DriveVLM | VLM / E2E | **nuScenes、SUP-AD（内部）** | SUP-AD 为非公开自有数据，不能作为公共下载候选 |
-| P0025 | OmniDrive | VLM 数据 / 规划 | **nuScenes、OpenLane-v2、OmniDrive、DriveLM** | OmniDrive QA 基于 nuScenes；counterfactual checklist 还用 OpenLane-v2 topology |
-| P0026 | ORION | VLM / E2E | **Bench2Drive** | 主要 CARLA E2E benchmark |
-| P0027 | Think2Drive | world-model RL | **CARLA-v2** | simulator-generated RL 数据体系 |
-| P0028 | ViDAR | world representation pretrain | **nuScenes** | 主实验全部在 nuScenes；COCO/ImageNet 只属通用初始化 |
-| P0029 | GenAD | E2E / generative | **nuScenes** | 主数据集 |
-| P0030 | nuScenes | 数据集论文 | **nuScenes** | 基础数据源 |
-| P0031 | nuPlan | 数据集 / planning benchmark 论文 | **nuPlan** | 基础数据源 |
-| P0032 | NAVSIM | benchmark 论文 | **OpenScene / nuPlan → NAVSIM v1** | 非反应式 planning benchmark |
-| P0033 | Bench2Drive | benchmark 论文 | **Bench2Drive / CARLA** | E2E 多能力闭环 |
-| P0034 | HUGSIM | photorealistic closed-loop | **HUGSIM；来源 KITTI-360、Waymo、nuScenes、PandaSet** | 重建场景资产需要单独看待 |
-| P0035 | GAIA-1 | driving world model | **4,700 h proprietary London driving data** | 非公开基础数据，记录但不列公开下载 |
-| P0036 | DriveDreamer | driving world model | **nuScenes** | 主数据集 |
-| P0037 | Drive-WM | driving world model | **nuScenes** | 主数据集 |
-| P0038 | Vista | large-scale driving world model | **OpenDV；nuScenes 等跨域评测** | 关键训练源是约 1,740 h worldwide driving video |
-| P0039 | DriveDreamer-2 | driving world model | **nuScenes** | 主数据集 |
-
-### 3.3 P0040–P0059
-
-| ID | 论文 | 定位 | 实际训练 / 评测 / 构建数据 | 盘点备注 |
-|---|---|---|---|---|
-| P0040 | DrivingGPT | WAM | **nuPlan、NAVSIM v1 split profile** | 原文列 navtrain/navtest 1,192/136 scenarios（[原文](../../papers/raw_md/P0040_DrivingGPT/P0040_DrivingGPT.raw.md#L106)）；world modeling + planning |
-| P0041 | PolicyWM / PWM | WAM | **OpenDV、nuScenes、NAVSIM v1 split profile** | 原文列约 103k/12k train/test samples（[原文](../../papers/raw_md/P0041_PolicyWM/P0041_PolicyWM.raw.md#L100)）；大视频预训练 → 下游 planning |
-| P0042 | WorldDrive | 核心 WAM | **nuPlan、nuScenes、NAVSIM v1/v2** | 多阶段数据链 |
-| P0043 | OccWorld | occupancy world model | **nuScenes + Occ3D** | Occ3D 是额外 occupancy GT，不能等同于 raw nuScenes |
-| P0044 | DriveOccWorld | occupancy world model | **nuScenes、nuScenes-Occupancy、Lyft-Level5** | 独立 occupancy 扩展 + 独立 Lyft 数据 |
-| P0045 | WoTE | 核心 WAM | **NAVSIM v1、Bench2Drive** | BEV world model trajectory evaluation |
-| P0046 | World4Drive | 核心 WAM | **nuScenes、NAVSIM v1** | 主实验两套 |
-| P0047 | DriveWorld | world-model pretraining | **OpenScene、nuScenes** | OpenScene 大规模 4D pretrain → nuScenes downstream |
-| P0048 | LAW | 核心 WAM | **nuScenes、NAVSIM、CARLA/Roach expert** | Roach 189K frames 属作者 CARLA expert 采集 |
-| P0049 | Drive-JEPA | 核心 WAM | **CoVLA、DrivingDojo、OpenScene、NAVSIM v1/v2、Bench2Drive** | 本仓库中最明显的多源驾驶视频预训练之一 |
-| P0050 | WorldRFT | WAM | **nuScenes、NAVSIM v1 split profile** | 原文列 1,192/136 train/test sequences（[原文](../../papers/raw_md/P0050_WorldRFT/P0050_WorldRFT.raw.md#L443)）；open-loop + NAVSIM |
-| P0051 | Auto-JEPA | WAM | **NAVSIM v1、NAVSIM v2** | action-oriented latent world model |
-| P0052 | ReWorld | WAM | **nuScenes、NAVSIM v1；UCF-101（辅助 probe）** | 原文明写 NAVSIM v1（[原文](../../papers/raw_md/P0052_ReWorld/P0052_ReWorld.raw.md#L244)）；UCF-101 仅表示学习线性探针，不是驾驶训练主数据 |
-| P0053 | WA-JEPA | WAM | **nuPlan、NAVSIM v1/v2、HUGSIM** | Stage 1 明确 nuPlan multi-view pretrain |
-| P0054 | What Truly Matters | 外围：prediction evaluation | **SUMMIT/CARLA 自建 Alignment dataset** | 59,944 自采 simulation scenarios；不是公开驾驶 sensor corpus 主线 |
-| P0055 | SLEDGE | generative scene / simulation | **nuPlan** | 生成式驾驶环境主数据源 |
-| P0056 | DriveArena | generative closed-loop simulator | **nuScenes；OpenStreetMap；nuPlan 零样本测试** | World Dreamer 700/150 nuScenes；OSM 是地图源 |
-| P0057 | UniAD | E2E | **nuScenes** | 标准 E2E 基线 |
-| P0058 | VAD | E2E | **nuScenes** | 标准 E2E 基线 |
-| P0059 | DiffusionDrive | E2E planning | **NAVSIM、nuScenes** | 使用 NAVSIM navtest；未找到能单独识别版本的 split 规模，NAVSIM v1/v2 UNKNOWN |
-
-### 3.4 P0060–P0067
-
-| ID | 论文 | 定位 | 实际训练 / 评测 / 构建数据 | 盘点备注 |
-|---|---|---|---|---|
-| P0060 | DrivoR | E2E planning | **NAVSIM v1、NAVSIM v2、HUGSIM** | navtrain 训练；navhard-two-stage；HUGSIM zero-shot |
-| P0061 | SeerDrive | 核心 WAM | **NAVSIM v1 split profile、nuScenes；Bench2Drive（补充）** | 原文列 1,192/136 navtrain/navtest scenarios（[原文](../../papers/raw_md/P0061_SeerDrive/P0061_SeerDrive.raw.md#L107)）；future-aware planning |
-| P0062 | Metis | 核心 WAM | **NAVSIM v2、CityWalker；NAVSIM v1（补充）** | 自动驾驶 + 城市机器人导航 |
-| P0063 | DynFlowDrive | 核心 WAM | **nuScenes、NAVSIM v1 split profile** | 原文列 1,192/136 train/test scenarios（[原文](../../papers/raw_md/P0063_DynFlowDrive/P0063_DynFlowDrive.raw.md#L223)）；两套独立实验 |
-| P0064 | Discrete-WAM | 核心 WAM | **nuPlan、NAVSIM v1/v2** | nuPlan pretraining + NAVSIM post-training |
-| P0065 | GraphWorld | 核心 WAM | **nuScenes、NAVSIM v1/v2、Bench2Drive** | 另有 Turning-nuScenes、Adv-nuSc、nuScenes-C robustness |
-| P0066 | Safe-Sim | safety-critical traffic simulation | **nuScenes、nuPlan mini** | nuScenes train；nuScenes val + nuPlan mini val |
-| P0067 | ProSim | promptable closed-loop traffic simulation | **WOMD + ProSim-Instruct-520k** | 仓库无 raw paper；官方发布确认 prompts/tags 覆盖 WOMD train/val |
+§4–§6 与 §13.2 是数据集/资产目录主体；§1 的论文频次只辅助判断哪些家族反复出现。逐篇来源表放在[附录 A](#附录-a-已有论文到数据集出处映射来源索引)，不要求读者逐篇核对后才能使用本目录。
 
 ---
 
-### 3.5 P0068–P0077：WAM+VLA 补录
-
-以下十篇是 65 篇底账之后新纳入的 VLA 论文；资产角色沿用 22 篇专项账本的原文核对。问号表示数据池身份或源媒体依赖仍未完全确认，不把标注 JSONL 当作原图/视频。
-
-| ID | 论文 | 实际训练 / 预训练 / 评测数据 | 资产层说明与未确认项 |
-|---|---|---|---|
-| P0068 | DriveWorld-VLA | **NAVSIM、nuScenes；ReCogDrive 式 VLM 预训练池（候选）** | 论文未给完整 12 源图像清单；与 ReCogDrive 的具体同一性及实际媒体清单未闭合。 |
-| P0069 | Uni-World VLA | **NAVSIM；nuPlan 轨迹消融** | nuPlan 轨迹消融不等于使用 nuPlan 全部相机、LiDAR 或数据库。 |
-| P0070 | SGDrive | **NAVSIM；SGDrive 驾驶 QA 与轨迹 QA 标注** | 公开 JSONL 全量扫描：85,109 rows、340,436 image path refs、126,032 个 NAVSIM/OpenScene family-scoped unique paths；原媒体 byte 与 archive hash 未核。 |
-| P0071 | FSDrive | **nuScenes 图像/标注、OmniDrive-nuScenes QA、DriveLM GVQA；NAVSIM / DriveLM 评测** | QA 标注与 nuScenes 原始图像分层登记；评测包不替代原图。 |
-| P0072 | DriveVLA-W0 | **nuPlan、NAVSIM；私有 70M 帧 / 百万级 clips** | 私有数据单独记为 PRIVATE/UNKNOWN；不得用公开数据包替代。 |
-| P0073 | CoT4AD | **nuScenes、旧版 Bench2Drive** | 按论文实际版本登记，不以新版包替换旧版。 |
-| P0074 | WAM-Flow | **nuPlan（论文称 668K）、NAVSIM 103K RL、ReCogDrive 驾驶 QA、LLaVA-v1.5 通用 VQA（论文称 3.4M）；公开的 navsim_668k.jsonl 与论文各阶段映射未确认** | pretrain.yaml 的 665K 配置与论文 3.4M 来源映射未知；公开的 navsim_668k.jsonl 是 NAVSIM 标注，不能替代该通用 VQA 图像；各阶段映射、图像路径与 split 未确认。 |
-| P0075 | ExploreVLA | **NAVSIM、nuScenes、HUGSIM 四域场景** | 记录论文使用的 HUGSIM 重建场景；不自动追加 KITTI-360、Waymo、PandaSet 原始全集。 |
-| P0076 | UniDriveVLA | **FineVision + 驾驶 VQA 混合训练、nuScenes、旧版 Bench2Drive；DriveBench 与七项通用 VQA 评测** | FineVision 实际分卷/抽样及 DriveBench 完整 corruption 文件清单未知。七项通用 VQA 集在 §13 单列。 |
-| P0077 | UniDrive-WM | **旧版 Bench2Drive、nuScenes、混合 VQA；DriveLM 与 Chat-B2D 评测** | 混合 VQA 的组成未完整命名；Chat-B2D 与 Bench2Drive 的标注/原图依赖分开记。 |
-
-逐篇原文链接见[WAM+VLA 原文清单](../../papers/WAM_VLA_PAPER_LIST.md)及[22 篇专项账本](WAM_22_dataset_asset_register_2026-09-28.md)。容量和官方包证据不在此重复。
-
 ## 4. 领域基础数据源总表
 
-这一节只保留对后续“是否需要下载”真正有意义的数据实体。
+本节按类别登记仓库来源语料中出现的具名基础数据、benchmark 与衍生资产；软件环境、原始母体和标注/派生层分开记。是否下载、下载全量还是子集留到容量与复现阶段判断。
 
 ### 4.1 真实驾驶 / motion / video 基础数据
 
@@ -264,6 +182,10 @@
 | **NAVSIM v1 / 未标版本 NAVSIM** | OpenScene/nuPlan 上的非反应式 planning benchmark | **20 条明确 v1；另 6 条符合 v1 典型 split；3 条未能判版本；NAVSIM 家族 30 条，v2 13 条（与 v1 重叠 12 条）** | **已有** |
 | **NAVSIM v2** | EPDMS + reactive traffic support + two-stage pseudo-simulation | 13 个条目 | **已有** |
 | **Bench2Drive** | CARLA E2E train/eval benchmark | 11 个条目 | **已有 v0.0.4 no-depth + maps；depth 未见** |
+| **CARLA Leaderboard v1/v2** | CARLA 闭环 route/scenario benchmark；与 Bench2Drive 分开 | [P0027 原文](../../papers/raw_md/P0027_Think2Drive/P0027_Think2Drive.raw.md#L7)直接报告官方 v1/v2 route 评测；v2 含 39 类场景 | 论文确认使用；独立 route asset 文件清单未在本轮核对 |
+| **CornerCaseRepo** | Think2Drive 提出的 CARLA 场景解耦 route benchmark；1,600 train + 390 eval routes | [P0027 原文 §4.2](../../papers/raw_md/P0027_Think2Drive/P0027_Think2Drive.raw.md#L153) | 名称、规模和作用有论文依据；公开 route 包状态 UNKNOWN |
+| **Think2Drive expert frames** | CARLA 不同天气下采集的 TCP 模仿学习输入；论文称 200K frames | [P0027 原文](../../papers/raw_md/P0027_Think2Drive/P0027_Think2Drive.raw.md#L181) | 作者生成资产；frame bytes 与公开包状态 UNKNOWN，不从帧数推算容量 |
+| **CounterfactualPred CARLA case set** | 作者构建的 186 个反事实案例、72 个初始 placements 的 RGB 序列 benchmark | [P0016 原文 §5.1](../../papers/raw_md/P0016_CounterfactualPred/P0016_CounterfactualPred.raw.md#L121) | 原文描述了采集与模态；独立公开发布状态 UNKNOWN，不从分辨率/帧数推算容量 |
 | **HUGSIM** | 真实场景重建 photorealistic closed-loop | TOAD、WA-JEPA、DrivoR 等 | **未见 released scene/scenario 资产** |
 | **RiskBench** | CARLA 风险场景数据/benchmark | RiskWorld | **未见** |
 | **ReactSim-Bench** | nuPlan 上构建的 reactive traffic test benchmark | ReactSimBench | **未作为独立资产确认** |
@@ -451,9 +373,9 @@ GAIA-1 使用约 **4,700 h** proprietary London driving data。它说明领域�
 
 ---
 
-## 8. 哪些东西不要误列成你的“基础数据下载职责”
+## 8. 哪些东西不是独立公开基础数据包
 
-即使复现时可能需要，也先不纳入基础数据集下载盘点：
+以下常规训练产物或软件环境不按独立基础数据集包计；若其在论文中被明确命名为数据资产或 benchmark，仍登记在 §13.2，并将发布状态和容量保持为 UNKNOWN：
 
 - 作者训练产生的 latent / feature cache；
 - trajectory anchor / K-Means centers；
@@ -463,7 +385,7 @@ GAIA-1 使用约 **4,700 h** proprietary London driving data。它说明领域�
 - Grounded-SAM / Metric3D 临时 pseudo labels；
 - author checkpoint / backbone weights；
 - 单篇代码运行时重新生成的 `*.pkl`；
-- LAW 的 Roach 189K expert frames、WhatTrulyMatters 的 Alignment-59,944 等**作者自采/自生成实验数据**，除非后续确认作者提供独立公开下载包；
+- LAW 的 Roach 189K expert frames、WhatTrulyMatters 的 Alignment-59,944、Think2Drive 的 200K CARLA expert frames、CounterfactualPred 的 186-case RGB benchmark 等**作者自采/自生成实验资产**均予登记；它们不因此成为可公开采购的数据包，也不推定有独立下载源；
 - CARLA / SUMMIT 的软件安装、版本、route config、evaluation server：这是复现环境准备，不是“公开基础数据集下载”。
 
 但如果作者把衍生内容正式发布成独立 dataset / benchmark，例如：
@@ -494,9 +416,9 @@ GAIA-1 使用约 **4,700 h** proprietary London driving data。它说明领域�
 
 ---
 
-## 10. 本轮方法与审计强度
+## 10. 已有底账的来源与审计强度（历史记录）
 
-本轮不是关键词扫一遍 references，而是：
+此前形成逐篇底账时采用了以下核验方式；这说明现有证据从何而来，不代表后续需要对每篇扩展论文重复同一深度：
 
 1. 枚举 `papers/raw_md/` **65 个目录**；
 2. 对 **64 个 full raw Markdown** 读取 Abstract、Experiments / Dataset / Benchmark / Implementation 等相关段落；
@@ -511,29 +433,24 @@ GAIA-1 使用约 **4,700 h** proprietary London driving data。它说明领域�
    - 基于 **Waymo Open Dataset / WOMD**；
    - ProSim-Instruct-520k 覆盖 Waymo train/val，提供 prompt 与 motion tags。
 
-因此，本版比“核心 12 + 16”更适合作为下一轮下载调查的输入底账。
+因此，现有底账可以作为数据集名称发现与来源追溯的输入；本轮后续增量按数据集家族处理，不重复构造逐篇报告。
 
 ---
 
-## 11. 下一步边界
+## 11. 后续工作边界
 
-**本次到此为止，不做下载推荐。**
+数据集全集清理与容量审计分成两个阶段。先完成数据集目录，再决定哪些项目进入容量核验；不得从未定价直接推导为不重要或不需要。
 
-下一轮若开始决定“具体下载什么”，应对本文件中的**缺失/部分覆盖项**逐一全网核查：
+数据集目录阶段按以下边界推进：
 
-- 官方 source / mirror；
-- dataset version；
-- license / gated access；
-- raw vs processed；
-- train / val / test；
-- camera / LiDAR / map / motion / text 等模态；
-- 压缩与解压体量；
-- checksum / manifest；
-- 是否能只下论文真正需要的 subset；
-- 是否和 210 的 nuPlan / OpenScene / NAVSIM 数据发生内容重复；
-- 是否是独立发布资产，还是必须由代码从已有数据生成。
+- 合并本 census、22 篇核心账本及已有下载调研里出现的 canonical 数据集/资产名称；
+- 统一别名、版本家族和父子/派生关系，分开原始数据、benchmark、annotation、通用视觉数据、仿真软件、作者自采或私有数据；
+- 对仓库论文材料做批量候选名查漏；仅对新出现或身份/血缘不清的名字回看相关来源，不再逐篇挖掘全部论文；
+- 对未能确认身份或实际参与方式的条目保留 `PARTIAL` / `UNKNOWN`，并明确目录只覆盖仓库语料。
 
-在上述核查完成以前，不把任何“inventory 未见”自动变成“必须下载”。
+容量阶段再按资产优先级核验官方下载源、版本、许可、模态、split、文件清单、压缩/解压大小、重复关系与峰值空间。核心 22 篇已有账本的闭合项目不重做，容量未知也不从小时数、帧数或 QA 数量外推。
+
+在目录与容量证据闭合以前，不把任何“论文出现”自动变成“必须下载整包”，也不把任何未公开/私有数据用公共数据替代。
 
 ---
 
@@ -569,7 +486,7 @@ GAIA-1 使用约 **4,700 h** proprietary London driving data。它说明领域�
 
 ## 13. 统一登记状态与闭合边界（2026-09-29）
 
-**本文件现统一覆盖 75 个在库论文 ID**：65 篇广义 census 与 22 篇专项账本按 12 篇重叠去重。高频资产频次见 §1；本节补充驾驶 QA 等重复资产及只在一篇论文出现的具名资产。VLA 通用视觉、驾驶 QA、腐蚀评测等新资产逐项见 §4.4，逐篇论文关联见 §3.1–§3.5。频次按论文 ID 计，不代表包数、样本数或整包下载量。当前登记先闭合名称、角色与血缘，不做容量决策。
+**本文件以 75 个在库论文 ID 作为发现来源池**：65 篇广义 census 与 22 篇专项账本按 12 篇重叠去重。高频资产频次见 §1；本节补充驾驶 QA 等重复资产及只在一篇论文出现的具名资产。VLA 通用视觉、驾驶 QA、腐蚀评测等新资产逐项见 §4.4，逐篇论文关联见附录 A.1–A.5。频次按论文 ID 计，不代表包数、样本数或整包下载量。当前登记先闭合名称、角色与血缘，不做容量决策。
 
 ### 13.1 已复核的重复数据家族
 
@@ -590,9 +507,9 @@ GAIA-1 使用约 **4,700 h** proprietary London driving data。它说明领域�
 
 P0074 作者配置列出的 NuScenes-QA、NuInstruct、LingoQA、SUTD、Talk2Car、Senna、DriveGPT4、CODA-LM、MAPLM、DRAMA 等，在 §4.4 保留为“代码配置/上游来源”状态；在逐样本映射或训练配置与论文对应关系闭合前，不把配置中的每个子源都当作已确认的独立论文使用频次。
 
-### 13.2 当前账本中的单篇资产
+### 13.2 单篇出现的具名资产（长尾目录）
 
-下表列的是在当前逐篇使用账本中只对应一个 paper ID 的具名资产。对 HUGSIM 的源数据只登记为作者用于重建的来源，不表示下游论文需下载完整母库；私人或作者生成资产仍保留在全集中，但不进入公开可采购项。
+下表按数据资产列出当前来源语料中只出现于一个 paper ID 的具名长尾项。“1/75”只描述语料频次，不代表复现优先级或下载建议。HUGSIM 源数据只表示作者用于重建的来源，不表示下游论文需下载完整母库；私人或作者生成资产保留在目录中，但与公开可采购项分开。
 
 | 数据资产 | 论文频次 | 类型 / 关系 | 状态 |
 |---|---:|---|---|
@@ -600,6 +517,10 @@ P0074 作者配置列出的 NuScenes-QA、NuInstruct、LingoQA、SUTD、Talk2Car
 | ReactSim-Bench | 1/75：P0014 | nuPlan 派生的 reactive traffic benchmark | 数据身份已知；单独发布资产状态待核。 |
 | BridgeSim / NavHard | 1/75：P0013 | 跨模拟器评测平台及场景/协议 | 平台、benchmark 与日志数据分层；CARLA 支持能力不等于该论文使用 CARLA 场景。 |
 | SocioDrive-Bench | 1/75：P0015 | 交互式 world-model benchmark；论文称 nuPlan/CARLA 混合来源 | benchmark 身份已知；公开包与媒体清单待核。 |
+| [CARLA Leaderboard v1/v2 routes/scenarios](../../papers/raw_md/P0027_Think2Drive/P0027_Think2Drive.raw.md#L7) | 1/75：P0027 直接使用 | CARLA 官方 route/scenario 闭环评测；v2 为 39 类场景 | 论文确认评测协议；单独 route 文件清单未核，勿与 Bench2Drive 训练包合并。 |
+| [CornerCaseRepo](../../papers/raw_md/P0027_Think2Drive/P0027_Think2Drive.raw.md#L153) | 1/75：P0027 | Think2Drive CARLA route benchmark；1,600 train + 390 eval | 论文声称 benchmark；公开 route 包/复现方式仍 UNKNOWN。 |
+| [Think2Drive expert TCP frames](../../papers/raw_md/P0027_Think2Drive/P0027_Think2Drive.raw.md#L181) | 1/75：P0027 | CARLA expert 在不同天气下采集的 200K 模仿学习帧 | 论文记载帧数；是否单独发布及实际字节 UNKNOWN。 |
+| [CounterfactualPred CARLA case set](../../papers/raw_md/P0016_CounterfactualPred/P0016_CounterfactualPred.raw.md#L121) | 1/75：P0016 | 186 个反事实案例 / 72 个 placements；每案例包含 factual、counterfactual、null 三路 RGB 序列 | 作者构建 benchmark；公开独立包 UNKNOWN。 |
 | SUP-AD | 1/75：P0024 | DriveVLM 私有驾驶数据 | PRIVATE/UNKNOWN；不计公开数据需求。 |
 | OpenLane-v2 | 1/75：P0025 | 道路拓扑标注；OmniDrive counterfactual checklist 的来源 | 与 nuScenes 传感器数据分开登记。 |
 | COCO | 1/75：P0028 | ViDAR 通用视觉初始化 | 论文记录为通用初始化，不是自动驾驶主训练数据。 |
@@ -624,7 +545,7 @@ P0074 作者配置列出的 NuScenes-QA、NuInstruct、LingoQA、SUTD、Talk2Car
 | LAW Roach / TCP-CARLA candidate | 1/75：P0048 | CARLA expert frames；TCP 三分包仅候选 | LAW 实际采集包身份仍 UNKNOWN，不能以 TCP 候选代替。 |
 | DriveVLA-W0 in-house corpus | 1/75：P0072 | 私有 70M 帧 / 百万级 clips 与 100 难例 | PRIVATE/UNKNOWN；不以公开 nuPlan/NAVSIM 替代。 |
 
-VLA / 通用视觉部分同样保留单篇资产：P0074 的 LLaVA-v1.5 通用 VQA 与 NAVSIM 标注文件、P0076 的 FineVision / DriveBench / 七项通用 VQA 评测、P0077 的 Chat-B2D，以及 P0072 的私有 W0 语料，分别见 §4.4 和 §3.5；不会因这些资产目前没有确定容量而从“数据集全集”中删除。
+VLA / 通用视觉部分同样保留单篇资产：P0074 的 LLaVA-v1.5 通用 VQA 与 NAVSIM 标注文件、P0076 的 FineVision / DriveBench / 七项通用 VQA 评测、P0077 的 Chat-B2D，以及 P0072 的私有 W0 语料，分别见 §4.4 和附录 A.5；不会因这些资产目前没有确定容量而从“数据集全集”中删除。
 
 “统一登记”按**数据资产层级**区分四类：①原始驾驶传感器/视频/轨迹母体；②从母体筛选或重组织的派生包与 benchmark（如 OpenScene/NAVSIM、Bench2Drive、HUGSIM）；③QA/指令/奖励标注；④benchmark 的额外媒体、corruption 图像或私有/作者自采资产。同一名称出现多次按 paper ID 去重计频；上游来源只作 lineage 关联，不自动视为每篇都直接读取母体全量。Related Work 中纯引用且未参与训练、微调、评测或构建的数据不计入使用频次。
 
@@ -636,4 +557,116 @@ VLA / 通用视觉部分同样保留单篇资产：P0074 的 LLaVA-v1.5 通用 V
 - **非公开/作者资产：**LAW 的 189K CARLA/Roach 数据具体发布对象仍 UNKNOWN；DriveVLA-W0 的 70M 帧/百万级 clips 为 PRIVATE/UNKNOWN；GAIA-1、SUP-AD 与自建 Alignment 数据分别保留私有或作者生成属性。
 - **派生包/母体边界：**NAVSIM v1 navtrain 与 OpenScene trainval、HUGSIM scenes 与原始来源、CityWalker 15h 子集与公开包、Bench2Drive 旧版/新版都必须保持分行；不能只靠名称推断内容相同。
 
-因此，当前可表述为：**75 篇论文覆盖已统一；高频数据家族和已命名单篇资产已纳入登记；数据资产身份映射尚有 PARTIAL/UNKNOWN，不宣布领域全集资产闭合。**下一轮继续补齐或将每个未知项正式定界后，再冻结“数据集全集”并开始容量汇总。本节不提供盘容量建议。
+因此，当前可表述为：**75 个仓库论文 ID 已作为发现来源池合并；高频数据家族和已命名单篇资产已有数据集中心的分组目录；若干长尾资产的正式名称、父体关系或实际依赖仍为 PARTIAL/UNKNOWN，所以还不能宣布仓库语料涉及的数据集目录完全闭合。**后续先按数据集家族做候选查漏与身份归并，不扩写逐篇分析；目录冻结后再衔接容量汇总。本节不提供盘容量建议。
+
+---
+
+## 附录 A. 已有论文到数据集出处映射（来源索引）
+
+本附录保留此前完成的逐篇记录，作为数据集名称的来源追溯和频次交叉检查。它不是后续扩展工作的审计模板；增量按数据集家族做别名、血缘和类别核对，只在身份有歧义时回看相关原文。
+
+### A.1 P0001–P0019
+
+| ID | 论文 | 定位 | 实际训练 / 评测 / 构建数据 | 盘点备注 |
+|---|---|---|---|---|
+| P0001 | Epona | 核心 WAM | **nuPlan、nuScenes、NAVSIM v1** | nuPlan + 700 nuScenes scenes 训练；NuPlan test / nuScenes / NAVSIM 评测 |
+| P0002 | SafeDrive | WAM / 安全规划 | **NAVSIM v1、NAVSIM v2、Bench2Drive** | 同时覆盖 PDMS、EPDMS 与 CARLA 闭环 |
+| P0003 | GraphAD | 图式 E2E | **nuScenes** | 主数据集 |
+| P0004 | BeTop | 交互预测 / 规划 | **nuPlan、WOMD** | nuPlan planning + Waymo Open Motion prediction |
+| P0005 | RiskWorld | 风险 world model / simulation | **RiskBench（CARLA）** | RiskBench 由 CARLA 风险场景构成 |
+| P0006 | GenDrive | 生成式规划 | **nuPlan** | 训练和 closed-loop planning test 都在 nuPlan |
+| P0007 | DriveReward | 奖励模型 / 数据集 | **NAVSIM v1 → DriveReward / DriveReward-Bench** | 原文报告 NAVSIM-V1 RL 评测及 train-set 衍生（[原文](../../papers/raw_md/P0007_DriveReward/P0007_DriveReward.raw.md#L92)）；另有 QA 预训练混合，见 §6 |
+| P0009 | DriveLaW | 核心 WAM | **nuPlan、nuScenes、NAVSIM v1** | 大规模视频预训练 + NAVSIM planning |
+| P0010 | TOAD | E2E planning | **NAVSIM v1、NAVSIM v2、HUGSIM** | 同时覆盖 log-based 与 photorealistic closed-loop |
+| P0011 | SensitivityShaping | 外围：通用动力学 / OOD | **无统一 AD 基础数据集可列** | 不是本次自动驾驶数据下载主线，避免强行计数 |
+| P0012 | DAWAM | WAM | **NAVSIM v1、NAVSIM v2** | planning benchmark 主线 |
+| P0013 | BridgeSim | 闭环 simulator / benchmark | **NAVSIM v2、nuPlan、nuScenes、WOMD、BridgeSim/NavHard** | CARLA 是论文列出的支持能力；实验报告未证明实际读取 CARLA 场景，不计 CARLA 使用频次 |
+| P0014 | ReactSimBench | reactive traffic benchmark | **nuPlan → ReactSim-Bench** | 基于 nuPlan 构建 2,636 个 test scenarios |
+| P0015 | CausalDrive | 交互式 world renderer | **OpenDV、nuPlan、SocioDrive-Bench、Bench2Drive/CARLA、NAVSIM** | OpenDV 1,700 h 预训练；SocioDrive-Bench 20K clips，80% nuPlan / 20% CARLA |
+| P0016 | CounterfactualPred | 反事实预测 benchmark | **CARLA；作者构建的 186-case RGB counterfactual benchmark** | controlled counterfactual GT 来自 simulator；公开独立包状态 UNKNOWN |
+| P0017 | CRAFT | 闭环 E2E | **Bench2Drive / CARLA** | 闭环 benchmark |
+| P0018 | GameFormer | 交互预测 / 规划 | **WOMD、nuPlan** | 两条真实行为数据线 |
+| P0019 | M2I | 交互运动预测 | **WOMD** | Waymo motion benchmark |
+
+### A.2 P0021–P0039
+
+| ID | 论文 | 定位 | 实际训练 / 评测 / 构建数据 | 盘点备注 |
+|---|---|---|---|---|
+| P0021 | HydraMDP | E2E planning | **NAVSIM v1** | NAVSIM 主线 |
+| P0022 | DriveSuprim | E2E planning | **NAVSIM v1、NAVSIM v2、Bench2Drive** | 论文强调不引入额外训练数据 |
+| P0023 | iPad | E2E planning | **NAVSIM v1 split profile、Bench2Drive** | 原文使用 103k/12k 的官方 navtrain/navtest（[原文](../../papers/raw_md/P0023_iPad/P0023_iPad.raw.md#L152)）；未写 archive revision |
+| P0024 | DriveVLM | VLM / E2E | **nuScenes、SUP-AD（内部）** | SUP-AD 为非公开自有数据，不能作为公共下载候选 |
+| P0025 | OmniDrive | VLM 数据 / 规划 | **nuScenes、OpenLane-v2、OmniDrive、DriveLM** | OmniDrive QA 基于 nuScenes；counterfactual checklist 还用 OpenLane-v2 topology |
+| P0026 | ORION | VLM / E2E | **Bench2Drive** | 主要 CARLA E2E benchmark |
+| P0027 | Think2Drive | world-model RL | **CARLA Leaderboard v1/v2、CornerCaseRepo、200K expert TCP frames** | CARLA v2 39 场景；CornerCaseRepo 1,600/390 train/eval routes；expert frame 公布帧数但包体 UNKNOWN |
+| P0028 | ViDAR | world representation pretrain | **nuScenes** | 主实验全部在 nuScenes；COCO/ImageNet 只属通用初始化 |
+| P0029 | GenAD | E2E / generative | **nuScenes** | 主数据集 |
+| P0030 | nuScenes | 数据集论文 | **nuScenes** | 基础数据源 |
+| P0031 | nuPlan | 数据集 / planning benchmark 论文 | **nuPlan** | 基础数据源 |
+| P0032 | NAVSIM | benchmark 论文 | **OpenScene / nuPlan → NAVSIM v1** | 非反应式 planning benchmark |
+| P0033 | Bench2Drive | benchmark 论文 | **Bench2Drive / CARLA** | E2E 多能力闭环 |
+| P0034 | HUGSIM | photorealistic closed-loop | **HUGSIM；来源 KITTI-360、Waymo、nuScenes、PandaSet** | 重建场景资产需要单独看待 |
+| P0035 | GAIA-1 | driving world model | **4,700 h proprietary London driving data** | 非公开基础数据，记录但不列公开下载 |
+| P0036 | DriveDreamer | driving world model | **nuScenes** | 主数据集 |
+| P0037 | Drive-WM | driving world model | **nuScenes** | 主数据集 |
+| P0038 | Vista | large-scale driving world model | **OpenDV；nuScenes 等跨域评测** | 关键训练源是约 1,740 h worldwide driving video |
+| P0039 | DriveDreamer-2 | driving world model | **nuScenes** | 主数据集 |
+
+### A.3 P0040–P0059
+
+| ID | 论文 | 定位 | 实际训练 / 评测 / 构建数据 | 盘点备注 |
+|---|---|---|---|---|
+| P0040 | DrivingGPT | WAM | **nuPlan、NAVSIM v1 split profile** | 原文列 navtrain/navtest 1,192/136 scenarios（[原文](../../papers/raw_md/P0040_DrivingGPT/P0040_DrivingGPT.raw.md#L106)）；world modeling + planning |
+| P0041 | PolicyWM / PWM | WAM | **OpenDV、nuScenes、NAVSIM v1 split profile** | 原文列约 103k/12k train/test samples（[原文](../../papers/raw_md/P0041_PolicyWM/P0041_PolicyWM.raw.md#L100)）；大视频预训练 → 下游 planning |
+| P0042 | WorldDrive | 核心 WAM | **nuPlan、nuScenes、NAVSIM v1/v2** | 多阶段数据链 |
+| P0043 | OccWorld | occupancy world model | **nuScenes + Occ3D** | Occ3D 是额外 occupancy GT，不能等同于 raw nuScenes |
+| P0044 | DriveOccWorld | occupancy world model | **nuScenes、nuScenes-Occupancy、Lyft-Level5** | 独立 occupancy 扩展 + 独立 Lyft 数据 |
+| P0045 | WoTE | 核心 WAM | **NAVSIM v1、Bench2Drive** | BEV world model trajectory evaluation |
+| P0046 | World4Drive | 核心 WAM | **nuScenes、NAVSIM v1** | 主实验两套 |
+| P0047 | DriveWorld | world-model pretraining | **OpenScene、nuScenes** | OpenScene 大规模 4D pretrain → nuScenes downstream |
+| P0048 | LAW | 核心 WAM | **nuScenes、NAVSIM、CARLA/Roach expert** | Roach 189K frames 属作者 CARLA expert 采集 |
+| P0049 | Drive-JEPA | 核心 WAM | **CoVLA、DrivingDojo、OpenScene、NAVSIM v1/v2、Bench2Drive** | 本仓库中最明显的多源驾驶视频预训练之一 |
+| P0050 | WorldRFT | WAM | **nuScenes、NAVSIM v1 split profile** | 原文列 1,192/136 train/test sequences（[原文](../../papers/raw_md/P0050_WorldRFT/P0050_WorldRFT.raw.md#L443)）；open-loop + NAVSIM |
+| P0051 | Auto-JEPA | WAM | **NAVSIM v1、NAVSIM v2** | action-oriented latent world model |
+| P0052 | ReWorld | WAM | **nuScenes、NAVSIM v1；UCF-101（辅助 probe）** | 原文明写 NAVSIM v1（[原文](../../papers/raw_md/P0052_ReWorld/P0052_ReWorld.raw.md#L244)）；UCF-101 仅表示学习线性探针，不是驾驶训练主数据 |
+| P0053 | WA-JEPA | WAM | **nuPlan、NAVSIM v1/v2、HUGSIM** | Stage 1 明确 nuPlan multi-view pretrain |
+| P0054 | What Truly Matters | 外围：prediction evaluation | **SUMMIT/CARLA 自建 Alignment dataset** | 59,944 自采 simulation scenarios；不是公开驾驶 sensor corpus 主线 |
+| P0055 | SLEDGE | generative scene / simulation | **nuPlan** | 生成式驾驶环境主数据源 |
+| P0056 | DriveArena | generative closed-loop simulator | **nuScenes；OpenStreetMap；nuPlan 零样本测试** | World Dreamer 700/150 nuScenes；OSM 是地图源 |
+| P0057 | UniAD | E2E | **nuScenes** | 标准 E2E 基线 |
+| P0058 | VAD | E2E | **nuScenes** | 标准 E2E 基线 |
+| P0059 | DiffusionDrive | E2E planning | **NAVSIM、nuScenes** | 使用 NAVSIM navtest；未找到能单独识别版本的 split 规模，NAVSIM v1/v2 UNKNOWN |
+
+### A.4 P0060–P0067
+
+| ID | 论文 | 定位 | 实际训练 / 评测 / 构建数据 | 盘点备注 |
+|---|---|---|---|---|
+| P0060 | DrivoR | E2E planning | **NAVSIM v1、NAVSIM v2、HUGSIM** | navtrain 训练；navhard-two-stage；HUGSIM zero-shot |
+| P0061 | SeerDrive | 核心 WAM | **NAVSIM v1 split profile、nuScenes；Bench2Drive（补充）** | 原文列 1,192/136 navtrain/navtest scenarios（[原文](../../papers/raw_md/P0061_SeerDrive/P0061_SeerDrive.raw.md#L107)）；future-aware planning |
+| P0062 | Metis | 核心 WAM | **NAVSIM v2、CityWalker；NAVSIM v1（补充）** | 自动驾驶 + 城市机器人导航 |
+| P0063 | DynFlowDrive | 核心 WAM | **nuScenes、NAVSIM v1 split profile** | 原文列 1,192/136 train/test scenarios（[原文](../../papers/raw_md/P0063_DynFlowDrive/P0063_DynFlowDrive.raw.md#L223)）；两套独立实验 |
+| P0064 | Discrete-WAM | 核心 WAM | **nuPlan、NAVSIM v1/v2** | nuPlan pretraining + NAVSIM post-training |
+| P0065 | GraphWorld | 核心 WAM | **nuScenes、NAVSIM v1/v2、Bench2Drive** | 另有 Turning-nuScenes、Adv-nuSc、nuScenes-C robustness |
+| P0066 | Safe-Sim | safety-critical traffic simulation | **nuScenes、nuPlan mini** | nuScenes train；nuScenes val + nuPlan mini val |
+| P0067 | ProSim | promptable closed-loop traffic simulation | **WOMD + ProSim-Instruct-520k** | 仓库无 raw paper；官方发布确认 prompts/tags 覆盖 WOMD train/val |
+
+---
+
+### A.5 P0068–P0077：WAM+VLA 补录
+
+以下十篇是 65 篇底账之后新纳入的 VLA 论文；资产角色沿用 22 篇专项账本的原文核对。问号表示数据池身份或源媒体依赖仍未完全确认，不把标注 JSONL 当作原图/视频。
+
+| ID | 论文 | 实际训练 / 预训练 / 评测数据 | 资产层说明与未确认项 |
+|---|---|---|---|
+| P0068 | DriveWorld-VLA | **NAVSIM、nuScenes；ReCogDrive 式 VLM 预训练池（候选）** | 论文未给完整 12 源图像清单；与 ReCogDrive 的具体同一性及实际媒体清单未闭合。 |
+| P0069 | Uni-World VLA | **NAVSIM；nuPlan 轨迹消融** | nuPlan 轨迹消融不等于使用 nuPlan 全部相机、LiDAR 或数据库。 |
+| P0070 | SGDrive | **NAVSIM；SGDrive 驾驶 QA 与轨迹 QA 标注** | 公开 JSONL 全量扫描：85,109 rows、340,436 image path refs、126,032 个 NAVSIM/OpenScene family-scoped unique paths；原媒体 byte 与 archive hash 未核。 |
+| P0071 | FSDrive | **nuScenes 图像/标注、OmniDrive-nuScenes QA、DriveLM GVQA；NAVSIM / DriveLM 评测** | QA 标注与 nuScenes 原始图像分层登记；评测包不替代原图。 |
+| P0072 | DriveVLA-W0 | **nuPlan、NAVSIM；私有 70M 帧 / 百万级 clips** | 私有数据单独记为 PRIVATE/UNKNOWN；不得用公开数据包替代。 |
+| P0073 | CoT4AD | **nuScenes、旧版 Bench2Drive** | 按论文实际版本登记，不以新版包替换旧版。 |
+| P0074 | WAM-Flow | **nuPlan（论文称 668K）、NAVSIM 103K RL、ReCogDrive 驾驶 QA、LLaVA-v1.5 通用 VQA（论文称 3.4M）；公开的 navsim_668k.jsonl 与论文各阶段映射未确认** | pretrain.yaml 的 665K 配置与论文 3.4M 来源映射未知；公开的 navsim_668k.jsonl 是 NAVSIM 标注，不能替代该通用 VQA 图像；各阶段映射、图像路径与 split 未确认。 |
+| P0075 | ExploreVLA | **NAVSIM、nuScenes、HUGSIM 四域场景** | 记录论文使用的 HUGSIM 重建场景；不自动追加 KITTI-360、Waymo、PandaSet 原始全集。 |
+| P0076 | UniDriveVLA | **FineVision + 驾驶 VQA 混合训练、nuScenes、旧版 Bench2Drive；DriveBench 与七项通用 VQA 评测** | FineVision 实际分卷/抽样及 DriveBench 完整 corruption 文件清单未知。七项通用 VQA 集在 §13 单列。 |
+| P0077 | UniDrive-WM | **旧版 Bench2Drive、nuScenes、混合 VQA；DriveLM 与 Chat-B2D 评测** | 混合 VQA 的组成未完整命名；Chat-B2D 与 Bench2Drive 的标注/原图依赖分开记。 |
+
+逐篇原文链接见[WAM+VLA 原文清单](../../papers/WAM_VLA_PAPER_LIST.md)及[22 篇专项账本](WAM_22_dataset_asset_register_2026-09-28.md)。容量和官方包证据不在此重复。
