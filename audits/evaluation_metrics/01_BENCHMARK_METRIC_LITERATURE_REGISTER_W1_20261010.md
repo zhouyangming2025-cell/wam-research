@@ -18,10 +18,12 @@
 | **DriveJudge: Rethinking Autonomous Driving Evaluation with Vision-Language Models**；2026-06 预印本，[arXiv 正文](https://arxiv.org/html/2606.17362v1) | **VLM 理解场景 + 选择性调用物理规则函数**，不是纯 VLM 打分或统一硬规则；建立驾驶质量分类和轨迹偏好选择两种评价指标测试 | 正文 Sec.3/4/5：33,577 个 2s 窗口来自 10,732 段标注；DQC 使用人类合理性标签与 AUC/AP，TPS 使用成对偏好匹配准确率；作者报告对 EPDMS 的 DQC AUC 优势及对 DriveCritic 的 TPS 准确率优势；局限：未验证闭环效果 | `METHOD-READ`、`NOT-INGESTED`；**未核实正式会议接收**，不得记为顶会论文 |
 | **S2O: An Integrated driving decision-making performance evaluation method bridging subjective feeling to objective evaluation**；Accident Analysis & Prevention 2025，[期刊 DOI](https://doi.org/10.1016/j.aap.2025.108026) | 将安全、时间效率、舒适、能耗等客观因素映射到人的主观质量分；传统自动驾驶综合评价与**人类标注拟合**路线，可迁移到 E2E 指标 | 官方摘要：D2E 约 1000 案例、4 万个人工评分；报告评分 MAE 与 SUMO/规划算法验证，**不是 NAVSIM 新 benchmark** | `PRIMARY-ABSTRACT`、`NOT-INGESTED`；`B3` 次级标签，全文/可用数据待审计 |
 | **Scalable evaluation methods for autonomous vehicles**；Expert Systems with Applications 2024，[期刊 DOI](https://doi.org/10.1016/j.eswa.2024.123603) | **场景复杂度校正 + 多目标聚合**，增加其他交通参与者受影响的“altruism”评价维度；将场景难度和能力表现同时纳入总分 | 官方摘要介绍仿真与实车测试；指标数学形式、权重法 MEREC 与 MARCOS、有效性需全文审计 | `PRIMARY-ABSTRACT`、`NOT-INGESTED`；`B3` 次级标签，全文获取可能受出版商限制 |
-
+| **Don't Shake the Wheel: Momentum-Aware Planning in End-to-End Autonomous Driving (MomAD)**；**CVPR 2025**，[CVPR 正式论文](https://openaccess.thecvf.com/content/CVPR2025/html/Song_Dont_Shake_the_Wheel_Momentum-Aware_Planning_in_End-to-End_Autonomous_Driving_CVPR_2025_paper.html)、[官方代码](https://github.com/adept-thu/MomAD) | **TPC (Trajectory Prediction Consistency)**：前后两次规划先转换到相同坐标系，仅在实际未来时间的重合区间比较计划轨迹差异；属于**模型论文附带提出的规划时间稳定性新评价维度**，不是改 PDMS，也不是评测方向为主贡献 | Turning-nuScenes 6s：SparseDrive TPC **2.90m** → MomAD **1.93m**，减少 0.97m；同场景 Collision 2.57%→2.31%（**0.26 个百分点，非相对下降 26%**）。还用 nuScenes 和 Bench2Drive 评测。注意 TPC 小不自动等于安全/正确 | `PAPER-EQ6-READ` + `OFFICIAL-CODE-STATIC-READ`，源码 **3s/6s 公开评价函数中没看到按时间重合与 ego 坐标对齐的变换、跨场景重置**； `CRITICAL-IMPLEMENTATION-FOLLOWUP`，须对照实际评测 pipeline 与复算，不能直接拿源码评估跨场景稳定性 |
 | **FluidTest / Is Your Trajectory Displacement Safe in Long-tail?**；2026-06 预印本，[arXiv](https://arxiv.org/abs/2606.16313) | 将规划评价重表述为：相对于专家轨迹，规划轨迹是否产生**额外的安全威胁**；采用 32 类语义风险、成对 WebUI 人工标注及三代理反思验证流程；属于**评价任务/风险验证管线**而非简单新标量 PDMS | 摘要报告 WOD-E2E 场景上 Poutine、RAP 轨迹新增威胁比例分别 65%、51%；缺全文方法/可重复标注一致性细节 | `PRIMARY-ABSTRACT`、`NOT-INGESTED`、`FOLLOW-UP`，**不记为正式会议论文** |
 
-**本表扩展为 7 篇是“直接指标/评分器/评价任务”的初始代表样本，**不是 B1a 全领域总数；其中 StyleDrive 与 WOD-E2E 的评价公式路线和 DriveJudge/DriveCritic 的学习评价路线不应混写成同一种机制。
+**本表扩展为 8 篇是“直接指标/评分器/评价任务”的初始代表样本，**不是 B1a 全领域总数；其中 StyleDrive 与 WOD-E2E 的评价公式路线和 DriveJudge/DriveCritic 的学习评价路线不应混写成同一种机制。
+
+**MomAD/TPC 单独审计提醒**：论文 §4.1 Eq.(6) 明确强调“coordinate transformation + overlapping prediction times + validation-set aggregation”；官方 [3s](https://github.com/adept-thu/MomAD/blob/7d2247605364e1aba8d7ba4e99f57d01fc452f8c/open_loop/projects/mmdet3d_plugin/datasets/evaluation/planning/planning_eval_roboAD.py) 和 [6s](https://github.com/adept-thu/MomAD/blob/7d2247605364e1aba8d7ba4e99f57d01fc452f8c/open_loop/projects/mmdet3d_plugin/datasets/evaluation/planning/planning_eval_roboAD_6s.py) 的 `compute_Consist` 直接用当前轨迹减 `last_final_planning`，后者是循环上一个 **valid sample** 的轨迹，并在首个样本初始化为零；在此实现段中未见根据 timestamp、scene_token、ego pose 进行坐标转换、时间偏移、scene 边界复位。**需要审计上游是否已等价对齐，不能未经验证照搬这段代码或直接断言发表结果错误。** TPC 评价的是规划输出跨时刻一致性，不是车辆 jerk/方向盘振荡的直接测量，也可能偏好坚持错误的旧计划；须和安全、碰撞与正确性指标联合使用。
 
 ## B. 评价协议、平台、聚合及情境评测（B1b）
 
@@ -69,7 +71,7 @@
 
 ## F. 尚未完成、不得夸大的内容
 
-- **截至 Wave 2 补录共 17 篇**：B1a 7、B1b 8、B1p 1、B1d 1；不是“全领域只有 15 篇”，也不是“15 篇全文已精读”。B2 与 B3 只列关联线索，**不计在 15 篇之内**。
+- **截至 2026-10-10 补录共 18 篇**：B1a 8、B1b 8、B1p 1、B1d 1；不是“全领域只有 18 篇”，也不是“18 篇全文已精读”。B2 与 B3 只列关联线索，**不计在 18 篇之内**。
 - 尚未完成逐论文 PDF/代码精读、按关键词和引文链的系统去重、2024–2026 会议全量扫描或 citation saturation 判断。
 - Wave 2 已核到 WOD RFS 官方代码计算、DriveCritic 数据拆分、DriveJudge 验证协议；参见 [`03_WAVE2_PRIMARY_SOURCE_METRIC_AUDIT_20261010.md`](03_WAVE2_PRIMARY_SOURCE_METRIC_AUDIT_20261010.md)。尚待补核：StyleDrive 代码版本、WOD 标注信度、DriveCritic 跨标注者一致性、DriveJudge 标注协议与训练开销、S2O/Scalable 公式全文、nuPlan-R 两项新增指标，以及新增 FluidTest 的完整流程。
 - Wave 2 可重点寻找：**独立于新增感知模态的低成本 B1a 改造**、**场景复杂度/交互影响校正**、**传统轨迹 risk/cost 到公开 Benchmarks 的适配前例**；在完整检索前不得将其标记为科研空白或创新点。
