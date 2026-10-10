@@ -6,7 +6,7 @@
 > 研究目的：寻找 **以规划质量的评价指标/Benchmark 机制创新为贡献** 的论文，再与传统方法交叉对照。重点不是 WAM 模型“使用哪个 benchmark”。
 >
 > 状态：`METHOD-READ` = 阅读了可定位方法/实验段落；`PRIMARY-ABSTRACT` = 仅经作者/期刊/会议正式摘要核实身份与主要贡献；`REPO-SOURCE` = 仓库已有原文或证据审计，**不自动意味着本轮逐行精读**；`FOLLOW-UP` = 待补代码、全文或细节。  
-> 分类：`B1a` 直接评价量/公式/评分器；`B1b` 评测环境/协议/聚合；`B1p` **运动预测评价**（相邻领域，不能并入自车规划指标总数）；`B2` 模型内部训练/候选评分；`B3` 传统评价理论与迁移来源。一个工作可有次级标签，以主贡献归类，**每篇只登记一次**。
+> 分类：`B1a` 直接评价量/公式/评分器；`B1b` 评测环境/协议/聚合；`B1p` **运动预测评价**（相邻领域，不能并入自车规划指标总数）；`B1d` 对官方指标的效度/对照研究（不直接提新 benchmark）；`B2` 模型内部训练/候选评分；`B3` 传统评价理论与迁移来源。一个工作可有次级标签，以主贡献归类，**每篇只登记一次**。
 
 ## A. 核心：自车规划质量的评分指标/评价器（B1a）
 
@@ -19,7 +19,9 @@
 | **S2O: An Integrated driving decision-making performance evaluation method bridging subjective feeling to objective evaluation**；Accident Analysis & Prevention 2025，[期刊 DOI](https://doi.org/10.1016/j.aap.2025.108026) | 将安全、时间效率、舒适、能耗等客观因素映射到人的主观质量分；传统自动驾驶综合评价与**人类标注拟合**路线，可迁移到 E2E 指标 | 官方摘要：D2E 约 1000 案例、4 万个人工评分；报告评分 MAE 与 SUMO/规划算法验证，**不是 NAVSIM 新 benchmark** | `PRIMARY-ABSTRACT`、`NOT-INGESTED`；`B3` 次级标签，全文/可用数据待审计 |
 | **Scalable evaluation methods for autonomous vehicles**；Expert Systems with Applications 2024，[期刊 DOI](https://doi.org/10.1016/j.eswa.2024.123603) | **场景复杂度校正 + 多目标聚合**，增加其他交通参与者受影响的“altruism”评价维度；将场景难度和能力表现同时纳入总分 | 官方摘要介绍仿真与实车测试；指标数学形式、权重法 MEREC 与 MARCOS、有效性需全文审计 | `PRIMARY-ABSTRACT`、`NOT-INGESTED`；`B3` 次级标签，全文获取可能受出版商限制 |
 
-**本表 6 篇是“直接指标/评分器”的初始代表样本，**不是 B1a 全领域总数；其中 StyleDrive 与 WOD-E2E 的评价公式路线和 DriveJudge/DriveCritic 的学习评价路线不应混写成同一种机制。
+| **FluidTest / Is Your Trajectory Displacement Safe in Long-tail?**；2026-06 预印本，[arXiv](https://arxiv.org/abs/2606.16313) | 将规划评价重表述为：相对于专家轨迹，规划轨迹是否产生**额外的安全威胁**；采用 32 类语义风险、成对 WebUI 人工标注及三代理反思验证流程；属于**评价任务/风险验证管线**而非简单新标量 PDMS | 摘要报告 WOD-E2E 场景上 Poutine、RAP 轨迹新增威胁比例分别 65%、51%；缺全文方法/可重复标注一致性细节 | `PRIMARY-ABSTRACT`、`NOT-INGESTED`、`FOLLOW-UP`，**不记为正式会议论文** |
+
+**本表扩展为 7 篇是“直接指标/评分器/评价任务”的初始代表样本，**不是 B1a 全领域总数；其中 StyleDrive 与 WOD-E2E 的评价公式路线和 DriveJudge/DriveCritic 的学习评价路线不应混写成同一种机制。
 
 ## B. 评价协议、平台、聚合及情境评测（B1b）
 
@@ -42,6 +44,12 @@
 |---|---|---|
 | **Measuring What Matters: Scenario-Driven Evaluation for Trajectory Predictors in Autonomous Driving**；AAAI 2026，[官方出版页](https://ojs.aaai.org/index.php/AAAI/article/view/36978) | 按场景 criticality 自适应组合**周围交通参与者轨迹预测**的 accuracy 与 diversity，并比较与下游驾驶性能的关联 | **评价对象是 trajectory predictor（预测器），不是 ego planner。** `PRIMARY-ABSTRACT`，可以借鉴“场景条件化聚合/下游关联验证”，禁止虚计入规划指标创新论文数。 |
 
+## C2. 指标效度对照研究（B1d；与新指标论文分开登记）
+
+| 论文、原始来源 | 贡献性质 | 验证边界 |
+|---|---|---|
+| **Do Open-Loop Metrics Predict Closed-Loop Driving? A Cross-Benchmark Correlation Study of NAVSIM and Bench2Drive**；2026-04 预印本，[arXiv](https://arxiv.org/abs/2605.00066) | 对已有 NAVSIM 规划分项与 Bench2Drive 闭环 Driving Score 做跨指标相关性研究，并比较一个简化的 3 分项组合；属于**指标效度及指标组合诊断**，不是大规模正式新 benchmark | 从 15 个方法搜集公开结果，仅 **8** 个模型有可配对数据；作者报告简化版与原版相关性均约 Spearman ρ=0.90。**同一小样本选方案并验证，不能推论普适新评分已被证明更优**；`PRIMARY-ABSTRACT`，预印本 |
+
 ## D. 模型内评分与传统方法（关联索引，不混算）
 
 - **B2：** [WoTE](../../papers/raw_md/P0045_WoTE/P0045_WoTE.raw.md)、[Hydra-MDP](../../papers/raw_md/P0021_HydraMDP/P0021_HydraMDP.raw.md)、[DriveSuprim](../../papers/raw_md/P0022_DriveSuprim/P0022_DriveSuprim.raw.md)、[DrivoR](../../papers/raw_md/P0060_DrivoR/P0060_DrivoR.raw.md)、[WAM-Flow](../../papers/raw_md/P0074_WAM-Flow/P0074_WAM-Flow.raw.md)、[DriveReward 审计](../literature/PHASE_C6_DRIVEREWARD_AUDIT.md) 等；仅供指标评价侧方法迁移，不充当新 Benchmark 论文。
@@ -61,7 +69,7 @@
 
 ## F. 尚未完成、不得夸大的内容
 
-- **本次登记共 15 篇**：B1a 6、B1b 8、B1p 1；不是“全领域只有 15 篇”，也不是“15 篇全文已精读”。B2 与 B3 只列关联线索，**不计在 15 篇之内**。
+- **截至 Wave 2 补录共 17 篇**：B1a 7、B1b 8、B1p 1、B1d 1；不是“全领域只有 15 篇”，也不是“15 篇全文已精读”。B2 与 B3 只列关联线索，**不计在 15 篇之内**。
 - 尚未完成逐论文 PDF/代码精读、按关键词和引文链的系统去重、2024–2026 会议全量扫描或 citation saturation 判断。
-- 需要优先补核：StyleDrive 官方实现版本与论文差异、WOD RFS 精确计分与数据标注、DriveCritic 数据拆分、DriveJudge 验证基准独立性、S2O/Scalable 的完整评价公式、nuPlan-R 两项新增指标。
+- Wave 2 已核到 WOD RFS 官方代码计算、DriveCritic 数据拆分、DriveJudge 验证协议；参见 [`03_WAVE2_PRIMARY_SOURCE_METRIC_AUDIT_20261010.md`](03_WAVE2_PRIMARY_SOURCE_METRIC_AUDIT_20261010.md)。尚待补核：StyleDrive 代码版本、WOD 标注信度、DriveCritic 跨标注者一致性、DriveJudge 标注协议与训练开销、S2O/Scalable 公式全文、nuPlan-R 两项新增指标，以及新增 FluidTest 的完整流程。
 - Wave 2 可重点寻找：**独立于新增感知模态的低成本 B1a 改造**、**场景复杂度/交互影响校正**、**传统轨迹 risk/cost 到公开 Benchmarks 的适配前例**；在完整检索前不得将其标记为科研空白或创新点。
