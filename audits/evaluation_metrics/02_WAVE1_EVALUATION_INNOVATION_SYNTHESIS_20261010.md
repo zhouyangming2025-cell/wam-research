@@ -3,6 +3,8 @@
 > 本文是**第一轮专题比较的证据导向分析**，不宣布方法创新点。与[逐论文登记账本](01_BENCHMARK_METRIC_LITERATURE_REGISTER_W1_20261010.md)配套阅读。  
 > 固定工作边界：关注 **benchmark 评价指标**，不把训练 loss、候选 scorer 的贡献混入；保留官方 NAVSIM/Bench2Drive 结果用于未来可比实验，不预设必须替代它们。
 
+**新增重点专项（2026-10-10）**：已建立 [风险场 × E2E/WAM 规划评价指标专项](04_RISKFIELD_E2E_WAM_METRIC_SPECIAL_STUDY_20261010.md)，并归档[用户原有完整复盘](source_materials/riskfield_e2e_wam_research_recap_CN.md)。研究优先级是外部评价指标/诊断量；FlowDrive、DRiF、READ 等模型内部风险场研究作为新颖性压力和迁移证据，**不得混称为已提出新的 Benchmark 评分**。该专项仍处于文献审计和可行性验证准备阶段，不改变现有官方指标。
+
 ## 1. 当前获得的最主要认识
 
 过去的框架“修改已有评分 / 提出新指标”依然有效，但过于粗糙：这一轮已找到多个**评价变化发生的位置**。
