@@ -320,7 +320,7 @@ cf.CalculateCollisionProbabilityFast(name, weight, predictions,
 - Zhou et al. 2025 Environment/Uncertainty-Aware Reachability：https://www.sciencedirect.com/science/article/pii/S0967066125000826
 - Sadigh et al. 2016 反应式交互（RSS正式论文页）：https://www.roboticsproceedings.org/rss12/p29.html
 - Ortiz et al. 2023 TTC with motion orientation：https://www.sciencedirect.com/science/article/pii/S0001457523002191
-- Wang et al. 2016 Driving Safety Field：https://www.sciencedirect.com/science/article/pii/S0968090X16001510
+- Wang et al. 2016 Driving Safety Field：https://doi.org/10.1016/j.trc.2016.10.003
 - CriMe真实源码与官方接口：https://github.com/CommonRoad/commonroad-crime ；https://cps.pages.gitlab.lrz.de/commonroad/commonroad-criticality-measures/user/getting_started.html
 - Frenetix 官方规划论文：https://arxiv.org/abs/2402.01443 ；代码：https://github.com/TUM-AVS/Frenetix-Motion-Planner
 
