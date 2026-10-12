@@ -8,7 +8,7 @@
 2. **同步几何距离是相对于原 Gaussian V0 的独立信息来源**：DCE 按同一时间步查询**完整多边形**间距离；TTCE 从最近距离时间读出时间。它直接补全原 V0 后轴单点漏检，但不说明名义无碰撞时的制动危险或主观不安。
 3. **`TTC` 与 `TTCStar` 是两条实现路线**。普通 `TTC` 使用车道/纵向间距、加速度公式；`TTCStar` 用给定 Ego 轨迹、旋转矩形和 collision checker 做时间步检测。且 `TTCStar` 的 collision checker 还装有 road-boundary obstacle：**需要区分撞周车与触碰道路边界，不能盲目叫纯周车 TTC**。
 4. **`TTR` 并非神奇通用风险概率**：它调用 `TTB`（BRAKE）、`TTK`（KICKDOWN/加速）、`TTS`（转向），由 TTM 的候选机动模拟与二分搜索求最迟启动时刻，再取 max。动作集、Ego动力学、预测 horizon、collision checker 均会改变值。
-5. **`P_MC` 当前代码不等于“给定 Ego 轨迹上的周车多模态碰撞概率”**：它对 Ego 的 STOP/TURN/LANECHANGE/OVERTAKE/RANDOM 等机动做 Monte Carlo，调用 TTCStar 判断，并对碰撞样本的 pdf 结果 `np.average`。是否有合法归一化需核实其 `simulator.pdf` 定义；不能直接拿返回值当作已校准 `P(collision | candidate, multimodal actors)`。
+5. **`P_MC` 当前代码不等于“给定 Ego 轨迹上的周车多模态碰撞概率”**：它对 Ego 的 STOP/TURN/LANECHANGE/OVERTAKE/RANDOM 等机动做 Monte Carlo，调用 TTCStar 判断，并对碰撞样本的 pdf 结果 `np.average`。已继续追查 `utility/simulation.py`：`simulator.pdf` 对 STOP/TURN/RANDOM 等样本取 `scipy.stats.norm(...).pdf(...)`（正态**概率密度**，不是单次碰撞事件概率）。再对**仅碰撞样本的密度**取 `np.average`，不是常规 Monte Carlo 的“全部样本碰撞指示变量求均值”，也没有显式概率归一化；因此该函数返回值不可直接当作已校准 `P(collision | candidate, multimodal actors)`。
 6. **GDRF 2024 与 IR 2025 依然是论文公式证据缺口，不可凭摘要补全。** 官方出版社文字证实 GDRF 的两类几何集合 `GDRF-D`（主观未来状态担忧）与 `GDRF-E`（环境损害后果）和主观评分参数校准；IR 2025 自述 IDRF 的方向性改进及模拟/真实验证。但这次仍未取得可核对的全文式子/默认参数、概率归一化及时间同步证明。
 7. **冻结 V0 不变**：此前空间风险条带、单点漏检、K4 负收益都是真实课题，不能由其他代码库存在而宣告 V0 全面失败；也不能把 V0 的经验强度当碰撞概率。
 
@@ -31,7 +31,7 @@
 | [`measure/index/btn.py`](https://github.com/CommonRoad/commonroad-crime/blob/develop/commonroad_crime/measure/index/btn.py) | `ALongReq.compute` / `-configuration.vehicle.curvilinear.a_lon_max` | 相对制动能力比值；继承 ALongReq 所有输入/异常条件 | `df67e44d4b0a58f1d4469391ff130c817c2c10ef` |
 | [`measure/time/ttm.py`](https://github.com/CommonRoad/commonroad-crime/blob/develop/commonroad_crime/measure/time/ttm.py) | Simulate B/K/STEER 动作，然后二分“最迟还能避免碰撞的时刻”；`detect_collision` 用 TTCStar | 不是简单数学闭式：受机动仿真集及候选基线轨迹影响 | `bc2f1a4979136c74c799eb072bc92aa8efc1293f` |
 | [`measure/time/ttr.py`](https://github.com/CommonRoad/commonroad-crime/blob/develop/commonroad_crime/measure/time/ttr.py) | 实际 `self._evaluator=[TTB,TTK,TTS]`，求各个 TTM，取 max 并记录 winning maneuver | 能比较避险余量；“max”表示存在一种较晚仍可施行的逃生动作，不能直接替代多模态碰撞概率 | `401ede44c45deb0b491b64de0a945a16e59a6379` |
-| [`measure/probability/p_mc.py`](https://github.com/CommonRoad/commonroad-crime/blob/develop/commonroad_crime/measure/probability/p_mc.py) | 对 Ego 模拟多种动作，收集碰撞模拟的 `pdf_bundle[j]`，`np.average(colliding_prob_list)`；无碰撞样本返回0 | **不能直接当作固定 Ego candidate + 周车联合未来的经验碰撞比例**；必须核合法性、概率归一化与目标事件 | `3cf3787a9a01012187b985a4a743f0baf27b5e28` |
+| [`measure/probability/p_mc.py`](https://github.com/CommonRoad/commonroad-crime/blob/develop/commonroad_crime/measure/probability/p_mc.py) | 对 Ego 模拟多种动作，收集碰撞模拟的 `pdf_bundle[j]`，`np.average(colliding_prob_list)`；无碰撞样本返回0 | **不能直接当作固定 Ego candidate + 周车联合未来的经验碰撞比例**；追查 simulator 得知 `pdf` 为正态密度（非单次事件概率） | `3cf3787a9a01012187b985a4a743f0baf27b5e28` |
 | [`measure/probability/p_smh.py`](https://github.com/CommonRoad/commonroad-crime/blob/develop/commonroad_crime/measure/probability/p_smh.py) | `compute` 仅打印 `coming soon` | **仓库导出了类不代表实现已完成**；勿称该项已有可用实现 | `7208a1c87f22f15aebb8e6cd6c7ebbea8c9fcaac` |
 | [`measure/__init__.py`](https://github.com/CommonRoad/commonroad-crime/blob/develop/commonroad_crime/measure/__init__.py) | 导出上述及其他指标 | 可追踪模块真实位置 | `8916ec89a4db5a0e45c41477ef2e023e52152961` |
 
@@ -53,11 +53,22 @@ d_{\min}(\tau^k)=\min_{i,t}\operatorname{dist}\big(B_e^k(t),B_i(t)\big).
 \hat P_{\rm col}(\tau^k)=\sum_{z=1}^Z p_z\,\mathbf1\!\left[\exists i,t:\ B_e^k(t)\cap B_i^z(t)\ne\varnothing\right],\quad\sum_zp_z=1.
 \]
 
-其中 \(z\) 是**周围交通的联合时序未来假设**，而不是“Ego 如果随机转向、制动、变道的样本”；真实项目还需预测器与校准证据，不能凭式子称真实概率。`P_MC` 是采样 Ego 行为的另一种关键性定义，其在本轮读到的代码中 `np.average(colliding_prob_list)` 无法仅凭名字证明满足上述归一化。反例：若各碰撞样本 `pdf=0.2`，碰撞样本数量1和9都给 `0.2`；**只有在补充特殊密度权重语义后才可能解释，必须从 `Simulation*.pdf` 追到底层**。这是待查风险，不是给项目整体判错。
+其中 \(z\) 是**周围交通的联合时序未来假设**，而不是“Ego 如果随机转向、制动、变道的样本”；真实项目还需预测器与校准证据，不能凭式子称真实概率。`P_MC` 是采样 Ego 行为的另一种关键性定义，其在本轮读到的代码中 `np.average(colliding_prob_list)` 现已追到底层：`SimulationRandoMonteCarlo` 使用两个正态密度相乘，`SimulationLongMonteCarlo` 与 `SimulationLatMonteCarlo` 使用 `scipy.stats.norm(...).pdf(...)`。密度值可大于1，具有连续变量的单位倒数语义，**不是归一化碰撞概率**；更关键的是代码只收集碰撞样本，再对这些密度取平均，而非对所有采样结果的碰撞指示变量取期望。因此不能把 `P_MC.compute()` 视为标准 Monte Carlo 事件频率估计。反例：若各碰撞样本 `pdf=0.2`，碰撞样本数量1和9都给 `0.2`。这种结论仅针对本次读取的 `develop` 代码逻辑；并不证明仓库其他概率模块或论文整体错误。
 
 ### 2.3 纵向 BTN 的控制算例（解析示意，不是运行 CriMe 的结果）
 
 假定直线同车道、间隙 20m、前车恒速，Ego 纵向速度分别为 20m/s 和 30m/s，前车为 20m/s 或 10m/s；可用最大制动 6m/s²。理想化闭合速度为0时，当前维持速度无需额外减速；闭合速度20m/s时，避免追近所需等效制动 \(a_{req}=20^2/(2\times20)=10\,\mathrm{m/s^2}\)，BTN=10/6≈1.67，已超出设定制动能力（忽略反应时延将更乐观）。同样20m几何间隙，**制动可控性的信息不是几何距离单独提供的**。此式只用于一维且恒速前车；不能推广为路口全方向 BTN。
+
+
+### 2.4 新增底层证据：Monte Carlo 权重到底是什么（源码已核）
+
+读取 [\`commonroad_crime/utility/simulation.py\`](https://github.com/CommonRoad/commonroad-crime/blob/develop/commonroad_crime/utility/simulation.py)，本轮 blob SHA 为 \`6c86edeee97b968e3db8edb7825021dac03918ea\`；其约第181–215、358–387、865–894行显示：
+
+- \`SimulationRandoMonteCarlo.set_inputs\`：\`self.pdf = a_lat_norm.pdf(self.a_lat) * a_long_norm.pdf(self.a_long)\`。
+- \`SimulationLongMonteCarlo.set_inputs\`：\`self.pdf = a_long_norm.pdf(self.a_long)\`。
+- \`SimulationLatMonteCarlo.set_inputs\`：\`self.pdf = a_lat_norm.pdf(self.a_lat)\`。
+
+这里的 \`norm.pdf\` 是连续正态分布**概率密度函数**，即使数值可能小于1也并非“发生事故的概率”，且在标准差足够小时可大于1。对碰撞样本的密度值作均值并不是蒙特卡洛估计碰撞事件概率的标准式 \`np.mean(collision_indicator_over_all_samples)\`。对于重要性采样也应使用合适的完整样本权重和归一化，而代码未显示该式。**本轮结论由“仅怀疑权重合法性”推进到“已确认其返回公式不是标准事件概率估计”**，但依旧没有运行数值测试，不给出具体对外结果误差大小。
 
 ## 3. GDRF 2024 与 IR 2025：继续追索后的具体进展及限制
 
