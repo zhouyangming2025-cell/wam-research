@@ -1,0 +1,28 @@
+{
+  "turning_pair_46_47": {
+    "ego_id": 46,
+    "actor_id": 47,
+    "samples": 31,
+    "min_gap_m": 1.5318397662607592,
+    "time_min_gap_s": 2.1,
+    "frame_min_gap": 1801,
+    "v0star_peak": 0.01330165028001944,
+    "time_peak_s": 2.4000000000000004,
+    "wu_peak": 0.015389990153850853,
+    "wu_t_s": 2.4000000000000004,
+    "sampled_fullbody_collision": false
+  },
+  "opposite_26_27": {
+    "ego_id": 26,
+    "actor_id": 27,
+    "samples": 31,
+    "min_gap_m": 1.6326148990346638,
+    "time_min_gap_s": 1.6,
+    "frame_min_gap": 996,
+    "v0star_peak": 0.061488351734855826,
+    "time_peak_s": 0.0,
+    "wu_peak": 0.03431532939337614,
+    "wu_t_s": 0.0,
+    "sampled_fullbody_collision": false
+  }
+}

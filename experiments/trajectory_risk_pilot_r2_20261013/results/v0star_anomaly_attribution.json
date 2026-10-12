@@ -1,0 +1,82 @@
+{
+  "v0star_peak_frame": 2865,
+  "v0star_peak_t_s": 4.5,
+  "v0star_peak_sum": 0.4613111042645028,
+  "per_actor_peak": [
+    {
+      "actor_id": 71,
+      "static": 1.2054194416227723e-94,
+      "dynamic": 1.6605513406750452e-97,
+      "total": 1.2070799929634473e-94,
+      "poly_gap_m": 25.48508053062169,
+      "local_forward_m": 16.223879272773985,
+      "local_lateral_m": 25.515136651455705,
+      "sigma_dynamic_long_m": 21.709673202151063,
+      "sigma_lateral_m": 1.761,
+      "gate": 4.312970906948018e-06,
+      "radial_sep_rate_mps": 3.572495055978123,
+      "actor_speed_mps": 2.809284784424676,
+      "ego_speed_mps": 6.427396984783186
+    },
+    {
+      "actor_id": 72,
+      "static": 0.005179663473741224,
+      "dynamic": 0.45613144079076157,
+      "total": 0.4613111042645028,
+      "poly_gap_m": 9.296540132230296,
+      "local_forward_m": -14.473573038022954,
+      "local_lateral_m": 0.940390085559021,
+      "sigma_dynamic_long_m": 20.281341983124687,
+      "sigma_lateral_m": 1.791,
+      "gate": 0.999999989391105,
+      "radial_sep_rate_mps": 9.104249470052132,
+      "actor_speed_mps": 3.047339987595739,
+      "ego_speed_mps": 6.427396984783186
+    },
+    {
+      "actor_id": 73,
+      "static": 1.1340263597904055e-87,
+      "dynamic": 4.779504669818526e-92,
+      "total": 1.1340741548371037e-87,
+      "poly_gap_m": 31.90966378907887,
+      "local_forward_m": 27.14739353354281,
+      "local_lateral_m": 25.034675339116433,
+      "sigma_dynamic_long_m": 33.493720642407766,
+      "sigma_lateral_m": 1.831,
+      "gate": 1.4211372001097792e-10,
+      "radial_sep_rate_mps": 3.4839012834953773,
+      "actor_speed_mps": 0.8452768777152253,
+      "ego_speed_mps": 6.427396984783186
+    }
+  ],
+  "nearest_at_t_2p5": [
+    {
+      "actor_id": 71,
+      "poly_gap_m": 23.280481036435308,
+      "total": 3.491908416863153e-37,
+      "static": 3.490501054120039e-37,
+      "dynamic": 1.40736274311379e-40,
+      "local_forward_m": 21.916839555854786,
+      "local_lateral_m": 14.984346094605383
+    },
+    {
+      "actor_id": 72,
+      "poly_gap_m": 1.6210203930490015,
+      "total": 0.001384314754349299,
+      "static": 0.0007215953124761579,
+      "dynamic": 0.0006627194418731409,
+      "local_forward_m": 1.8461321648313598,
+      "local_lateral_m": 4.790014303733881
+    },
+    {
+      "actor_id": 73,
+      "poly_gap_m": 29.75320598444539,
+      "total": 4.274698191559049e-40,
+      "static": 4.2746965628502566e-40,
+      "dynamic": 1.6287087917604294e-46,
+      "local_forward_m": 29.458332744879772,
+      "local_lateral_m": 15.8612199055414
+    }
+  ],
+  "not_frozen_v0": true
+}

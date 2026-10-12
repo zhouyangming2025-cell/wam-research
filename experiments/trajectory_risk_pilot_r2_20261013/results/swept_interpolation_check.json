@@ -1,0 +1,32 @@
+[
+  {
+    "case": "real_70_vs_72",
+    "observed_0p1_min_gap_m": 1.5324023616030678,
+    "observed_frame_of_min": 2848,
+    "linear_pose_interpolated_0p01_min_gap_m": 1.5324023616030678,
+    "interpolated_frame": 2848.0,
+    "interpolated_contact_count": 0,
+    "samples": 600,
+    "interpolation_assumption": "linear center position/shortest heading-angle over each recorded 0.1s interval"
+  },
+  {
+    "case": "turning_46_vs_47",
+    "observed_0p1_min_gap_m": 1.5318397662607592,
+    "observed_frame_of_min": 1801,
+    "linear_pose_interpolated_0p01_min_gap_m": 1.5283060736528775,
+    "interpolated_frame": 1801.3,
+    "interpolated_contact_count": 0,
+    "samples": 300,
+    "interpolation_assumption": "linear center position/shortest heading-angle over each recorded 0.1s interval"
+  },
+  {
+    "case": "opposite_26_vs_27",
+    "observed_0p1_min_gap_m": 1.6326148990346638,
+    "observed_frame_of_min": 996,
+    "linear_pose_interpolated_0p01_min_gap_m": 1.629596246449086,
+    "interpolated_frame": 996.2,
+    "interpolated_contact_count": 0,
+    "samples": 300,
+    "interpolation_assumption": "linear center position/shortest heading-angle over each recorded 0.1s interval"
+  }
+]

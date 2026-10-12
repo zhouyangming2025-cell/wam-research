@@ -1,0 +1,21 @@
+{
+  "label": "SYNTHETIC_INPUTS/ORACLE_INPUT_STATE",
+  "time_step_s": 0.1,
+  "horizon_s": 4,
+  "formula_port": "V0* handoff source unverified; ego reference at center; actor SUM only one actor",
+  "wu": "Wu Eq7-9 one deterministic future mode p=1; a=6,b=2, gamma=.95 per 0.5s; not TRTP",
+  "geometry": "Shapely exact oriented rectangle per step; gap=0 insufficient by itself to distinguish deep overlap",
+  "cases": {
+    "gap": "fixed ego12m/s front10m/s; only initial 26m vs17m center spacing",
+    "closing": "fixed front10m/s at 25m; ego10 vs14m/s; geometry at t=0 fixed",
+    "front_brake": "fixed initial states; front 10m/s constant vs -5m/s^2 after t=1 (stop t=3)",
+    "rear_accel": "fixed initial states; actor rear -20m at10m/s vs accelerating 3m/s2",
+    "opposite": "same scalar speed 10m/s each; actor continues same direction vs heads toward ego from x25m (yaw rotates physically)",
+    "crossing": "fixed linear tracks; actor passes intersection t=2 vs t=4; first sample differs by actor initial location",
+    "pedestrian": "same actor initial location; actor waits vs cross t=2; ego constant",
+    "cutin": "same ego and initial actor; actor keeps 3.5m lateral gap vs moves into ego lane by t=3, physically not dynamics-checked",
+    "cone_yaw": "same tiny static obstacle occupancy approximated oriented 0.4x0.3m rectangle; change yaw only, note not exactly symmetric geometry",
+    "parked_car": "actual oriented 4.8x1.9 rectangle yaw alters physical occupancy hence geometric risk may legitimately change",
+    "front_edge": "ego rectangle 5x2 touching tiny .15m obstacle at x=2.45m with center 2.45m away"
+  }
+}

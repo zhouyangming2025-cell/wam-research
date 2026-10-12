@@ -1,0 +1,31 @@
+{
+  "0.1s": {
+    "n": 61,
+    "min_gap_m": 1.5324023616030678,
+    "min_gap_t_s": 2.8,
+    "v0_peak": 0.5756387297544424,
+    "v0_peak_t_s": 4.7,
+    "wu_peak": 0.00879313916242768,
+    "wu_peak_t_s": 3.4,
+    "v0_mean_arithmetic": 0.05649366969109078,
+    "wu_mean_arithmetic": 0.002112911598297754,
+    "observed_collisions_count": 0
+  },
+  "0.5s": {
+    "n": 13,
+    "min_gap_m": 1.6210203930490015,
+    "min_gap_t_s": 2.5,
+    "v0_peak": 0.4613111042645028,
+    "v0_peak_t_s": 4.5,
+    "wu_peak": 0.008685306790550988,
+    "wu_peak_t_s": 3.5,
+    "v0_mean_arithmetic": 0.04865045760718716,
+    "wu_mean_arithmetic": 0.001983740261144222,
+    "observed_collisions_count": 0
+  },
+  "parity_0p5s_vs_original": {
+    "geom_abs_max": 2.220446049250313e-16,
+    "v0star_abs_max": 9.8879238130678e-17,
+    "wu_abs_max": 8.847089727481716e-17
+  }
+}
