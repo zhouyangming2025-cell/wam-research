@@ -62,13 +62,13 @@ d_{\min}(\tau^k)=\min_{i,t}\operatorname{dist}\big(B_e^k(t),B_i(t)\big).
 
 ### 2.4 新增底层证据：Monte Carlo 权重到底是什么（源码已核）
 
-读取 [\`commonroad_crime/utility/simulation.py\`](https://github.com/CommonRoad/commonroad-crime/blob/develop/commonroad_crime/utility/simulation.py)，本轮 blob SHA 为 \`6c86edeee97b968e3db8edb7825021dac03918ea\`；其约第181–215、358–387、865–894行显示：
+读取 [`commonroad_crime/utility/simulation.py`](https://github.com/CommonRoad/commonroad-crime/blob/develop/commonroad_crime/utility/simulation.py)，本轮 blob SHA 为 `6c86edeee97b968e3db8edb7825021dac03918ea`；其约第181–215、358–387、865–894行显示：
 
-- \`SimulationRandoMonteCarlo.set_inputs\`：\`self.pdf = a_lat_norm.pdf(self.a_lat) * a_long_norm.pdf(self.a_long)\`。
-- \`SimulationLongMonteCarlo.set_inputs\`：\`self.pdf = a_long_norm.pdf(self.a_long)\`。
-- \`SimulationLatMonteCarlo.set_inputs\`：\`self.pdf = a_lat_norm.pdf(self.a_lat)\`。
+- `SimulationRandoMonteCarlo.set_inputs`：`self.pdf = a_lat_norm.pdf(self.a_lat) * a_long_norm.pdf(self.a_long)`。
+- `SimulationLongMonteCarlo.set_inputs`：`self.pdf = a_long_norm.pdf(self.a_long)`。
+- `SimulationLatMonteCarlo.set_inputs`：`self.pdf = a_lat_norm.pdf(self.a_lat)`。
 
-这里的 \`norm.pdf\` 是连续正态分布**概率密度函数**，即使数值可能小于1也并非“发生事故的概率”，且在标准差足够小时可大于1。对碰撞样本的密度值作均值并不是蒙特卡洛估计碰撞事件概率的标准式 \`np.mean(collision_indicator_over_all_samples)\`。对于重要性采样也应使用合适的完整样本权重和归一化，而代码未显示该式。**本轮结论由“仅怀疑权重合法性”推进到“已确认其返回公式不是标准事件概率估计”**，但依旧没有运行数值测试，不给出具体对外结果误差大小。
+这里的 `norm.pdf` 是连续正态分布**概率密度函数**，即使数值可能小于1也并非“发生事故的概率”，且在标准差足够小时可大于1。对碰撞样本的密度值作均值并不是蒙特卡洛估计碰撞事件概率的标准式 `np.mean(collision_indicator_over_all_samples)`。对于重要性采样也应使用合适的完整样本权重和归一化，而代码未显示该式。**本轮结论由“仅怀疑权重合法性”推进到“已确认其返回公式不是标准事件概率估计”**，但依旧没有运行数值测试，不给出具体对外结果误差大小。
 
 ## 3. GDRF 2024 与 IR 2025：继续追索后的具体进展及限制
 
