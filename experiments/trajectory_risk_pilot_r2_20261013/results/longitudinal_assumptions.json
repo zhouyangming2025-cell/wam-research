@@ -1,0 +1,7 @@
+{
+  "rho_s": 1,
+  "max_accel_during_response_mps2": 2,
+  "min_ego_braking_mps2": 4,
+  "max_front_braking_mps2": 6,
+  "assumption": "single lane ordered rear ego/front actor; no lateral, exact speed; illustrative safety margin, not certified RSS implementation"
+}

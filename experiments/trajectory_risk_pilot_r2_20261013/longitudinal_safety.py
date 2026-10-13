@@ -7,6 +7,8 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 O=Path(__file__).parent
+(O/'figures').mkdir(parents=True,exist_ok=True)  # clean checkout has no figures/
+(O/'results').mkdir(parents=True,exist_ok=True)
 def rss_longitudinal(v_rear,v_front,rho=1.,a_accel_max=2.,b_rear_min=4.,b_front_max=6.):
  return max(0,v_rear*rho+.5*a_accel_max*rho**2 + (v_rear+a_accel_max*rho)**2/(2*b_rear_min) - v_front**2/(2*b_front_max))
 rows=[]

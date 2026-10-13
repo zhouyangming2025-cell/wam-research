@@ -11,6 +11,8 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 OUT=Path(__file__).parent
+(OUT/'figures').mkdir(parents=True,exist_ok=True)  # clean checkout has no figures/
+(OUT/'results').mkdir(parents=True,exist_ok=True)
 df=pd.read_csv(OUT/'data/interaction_original_0p1s_70_73.csv')
 groups={id:g.set_index('frame_id') for id,g in df.groupby('track_id')}
 def evaluate(frame):

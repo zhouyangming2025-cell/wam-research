@@ -11,6 +11,8 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from matplotlib.patches import Polygon
 OUT=Path(__file__).parent
+(OUT/'figures').mkdir(parents=True,exist_ok=True)  # clean checkout has no figures/
+(OUT/'results').mkdir(parents=True,exist_ok=True)
 DF=pd.read_csv(str(OUT/'data'/'interaction_R1_0p5s_70_73.csv'))
 T=[]
 for frame in sorted(DF.frame_id.unique()):
@@ -64,7 +66,7 @@ for col,label in enumerate(['Static','Dynamic','Total']):
    coords=np.array(poly(v).exterior.coords)
    ax.add_patch(Polygon(coords,closed=True,fill=False,edgecolor=color,linewidth=2 if id==70 else 1.5))
    ax.arrow(v.x,v.y,v.vx*.6,v.vy*.6,color=color,width=.03,head_width=.25,length_includes_head=True)
-   ax.text(v.x+.2,v.y+.25,str(id),color=color,weight='bold',fontsize=9)
+   ax.text(v.x+.2,v.y+.25,str(id),color=color,weight='bold',fontsize=9,clip_on=True)
   ax.plot([DF[(DF.track_id==70)&(DF.frame_id==frame)].iloc[0].x],[DF[(DF.track_id==70)&(DF.frame_id==frame)].iloc[0].y],'kx',ms=5)
   ax.set_xlim(990,1013);ax.set_ylim(987,1015);ax.set_aspect('equal',adjustable='box');ax.set_title(f't={(frame-2820)/10:.1f}s | {label} | unverified V0*')
   fig.colorbar(im,ax=ax,shrink=.55)

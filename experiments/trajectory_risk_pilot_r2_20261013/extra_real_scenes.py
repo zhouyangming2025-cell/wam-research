@@ -10,6 +10,8 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from matplotlib.patches import Polygon
 O=Path(__file__).parent
+(O/'figures').mkdir(parents=True,exist_ok=True)  # clean checkout has no figures/
+(O/'results').mkdir(parents=True,exist_ok=True)
 df=pd.read_csv(O/'data/interaction_extra_real_0p1s.csv')
 SCENES={'turning_pair_46_47':(46,47,1780,1810),'opposite_26_27':(26,27,980,1010)}
 all_results=[];summaries={}; fig,axes=plt.subplots(2,2,figsize=(13,11),constrained_layout=True)

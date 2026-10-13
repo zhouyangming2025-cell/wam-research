@@ -12,6 +12,8 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 O=Path(__file__).parent
+(O/'figures').mkdir(parents=True,exist_ok=True)  # clean checkout has no figures/
+(O/'results').mkdir(parents=True,exist_ok=True)
 T=np.round(np.arange(0,4.001,.1),3)
 def st(x,y,vx,vy,yaw,length=4.7,width=1.8):return dict(x=float(x),y=float(y),vx=float(vx),vy=float(vy),psi_rad=float(yaw),length=length,width=width)
 def pair(kind,variant,t):

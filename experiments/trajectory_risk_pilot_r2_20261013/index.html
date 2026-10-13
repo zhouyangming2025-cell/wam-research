@@ -1,0 +1,28 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>R2 trajectory-risk pilot - visual evidence</title>
+<style>
+body{font-family:system-ui,Segoe UI,Arial,sans-serif;margin:24px;max-width:1200px}
+figure{margin:0 0 28px 0;border:1px solid #ddd;padding:10px;border-radius:6px}
+img{max-width:100%;height:auto;display:block}
+figcaption{font-size:13px;color:#333;margin-top:8px;line-height:1.5}
+.warn{background:#fff3cd;border:1px solid #ffd479;padding:10px;border-radius:6px;font-size:13px}
+code{background:#f4f4f4;padding:1px 4px;border-radius:3px}
+</style>
+<h1>R2 trajectory-risk pilot - visual evidence</h1>
+<p class="warn"><b>V0* has NOT passed frozen-V0 source-parity certification.</b>
+Every "V0*" value is a hand-off formula port, not the frozen Gaussian V0.
+The Wu curve uses the single logged future mode, i.e. an offline Oracle, not a deployable predictor.</p>
+<p>Local browser for the figures committed to
+<code>experiments/trajectory_risk_pilot_r2_20261013/figures/</code>.
+GitHub renders the same set inline in <code>VISUAL_REVIEW.md</code>.</p>
+<figure><img src="overview_thumbnail.png" alt="overview_thumbnail.png"><figcaption><b>overview_thumbnail.png</b><br>Portfolio overview — contact sheet of every figure below.</figcaption></figure>
+<figure><img src="figures/v0star_2p5_vs_4p5_components.png" alt="v0star_2p5_vs_4p5_components.png"><figcaption><b>v0star_2p5_vs_4p5_components.png</b><br>Actor 72 anomaly, t=2.5s vs t=4.5s: Static / Dynamic / Total components on an equal coordinate ratio and a shared per-column colour scale. Body gap grows 1.62 m -> 9.30 m while the Dynamic component rises.</figcaption></figure>
+<figure><img src="figures/v0star_actor_risk_by_time.png" alt="v0star_actor_risk_by_time.png"><figcaption><b>v0star_actor_risk_by_time.png</b><br>Per-actor raw V0* at the ego-center query for Actors 71/72/73 plus the actor SUM.</figcaption></figure>
+<figure><img src="figures/sampling_0p1_vs_0p5_real.png" alt="sampling_0p1_vs_0p5_real.png"><figcaption><b>sampling_0p1_vs_0p5_real.png</b><br>Recorded INTERACTION 10 Hz vs 2 Hz subsample on the same real coordinates: full-body gap, V0* and Wu time-slice. Shows the peak the coarse sampling missed.</figcaption></figure>
+<figure><img src="figures/extra_real_pair_comparison.png" alt="extra_real_pair_comparison.png"><figcaption><b>extra_real_pair_comparison.png</b><br>Two further recorded INTERACTION motion structures (turning 46/47, oncoming 26/27): logged bodies, real velocity arrows, both risk queries and the synchronous gap.</figcaption></figure>
+<figure><img src="figures/controlled_page_1.png" alt="controlled_page_1.png"><figcaption><b>controlled_page_1.png</b><br>Controlled page 1: gap near/far, closing speed, front hard-brake, rear-car acceleration.</figcaption></figure>
+<figure><img src="figures/controlled_page_2.png" alt="controlled_page_2.png"><figcaption><b>controlled_page_2.png</b><br>Controlled page 2: oncoming vs same-direction, intersection simultaneous vs delayed, pedestrian wait vs cross, parallel vs cut-in.</figcaption></figure>
+<figure><img src="figures/controlled_page_3.png" alt="controlled_page_3.png"><figcaption><b>controlled_page_3.png</b><br>Controlled page 3: static cone yaw 0/90, parked-car yaw 0/90, ego front-edge tiny obstacle.</figcaption></figure>
+<figure><img src="figures/cone_yaw_and_front_edge_fields.png" alt="cone_yaw_and_front_edge_fields.png"><figcaption><b>cone_yaw_and_front_edge_fields.png</b><br>Dedicated 2-D field figure: identical physical static obstacle at yaw=0 vs yaw=90 under the same V0* kernel, plus the front-edge miss counterexample where the body already overlaps but the ego-center query returns ~0.</figcaption></figure>
+<figure><img src="figures/longitudinal_safety_margin.png" alt="longitudinal_safety_margin.png"><figcaption><b>longitudinal_safety_margin.png</b><br>Illustrative longitudinal RSS-style margin (1-D ordered vehicles only; not an official library validation).</figcaption></figure>
