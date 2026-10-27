@@ -140,3 +140,33 @@
 后续应继续对工作分类中未完成方法审计的论文做证据升级，不得直接沿用历史的“剩余 56/91”作为实时计数。
 
 **最新可下载源数据：** 本轮会话交付 `BATCH2_MATH_AUDIT.zip` 含统一账本、A/B 公式索引、57 个校验后的原始公式块、8 张逐篇深入卡。上述 ZIP 并未整包同步至 GitHub；GitHub 已长期保存 8 张重点方法卡与本主账本。
+
+## 8. Batch3：11 篇数学机制增量与统一身份分类修正（2026-10-28）
+
+本轮由用户 `all_md.zip` 选取 11 篇未深审风险场/相邻数学机制原文，**确切对比源 Markdown 原样公式 73 个**，ZIP 原文 SHA-256 全部 11/11 通过；**无 PDF 视觉复核或全文穷尽验证**。完整逐篇 formula→roles→time→aggregation→counterexample 在会话生成 `mechanism_batch3_20261028/BATCH3_MATH_AUDIT.zip`，GitHub 已另存 11 张精简重点数学审计卡：`audits/literature/riskfield_models/Pxxxx_MECHANISM_AUDIT.md`。精简卡保留关键公式，其余公式目前仅在 ZIP 中，不能冒称 73 式已逐字镜像 GitHub。
+
+| 局部编号 | 分类 | 核心方法与发现 | GitHub 卡 |
+|---|---|---|---|
+| P0046 | A | Road User Safety Field：q(T_r,b_max)、ε_R、交互 Risk Force 及后果强度；不是事故概率 | [卡](riskfield_models/P0046_MECHANISM_AUDIT.md) |
+| P0113 | **A→B** | 论文明确引用已有风险场；Eq.(16)–(17) 是**候选序号上的碰撞标签高斯平滑**，重排候选可改变分数 | [卡](riskfield_models/P0113_MECHANISM_AUDIT.md) |
+| P0138 | A | 车辆场×虚拟质量 + 行人各向异性核 + 道路指数场；若干 MD 式需视觉确认 | [卡](riskfield_models/P0138_MECHANISM_AUDIT.md) |
+| P0180 | A（阻塞） | 跟驰相对速度积分和纵向安全域；MD 缺关键原式、e^(−1/v) 在 v=0 未定义 | [卡](riskfield_models/P0180_MECHANISM_AUDIT.md) |
+| P0072 | B | SFF claimed-set 安全程序与集合交叠势；不能混为高斯危险密度 | [卡](riskfield_models/P0072_MECHANISM_AUDIT.md) |
+| P0097 | B | 已有 DRF 调参数模拟周车干预，生成 critical scenarios，非新的风险核 | [卡](riskfield_models/P0097_MECHANISM_AUDIT.md) |
+| P0103 | B | RSS 安全距离尺度 + 遮挡出现的纵/横虚拟力修正；原式有量纲/下标疑点 | [卡](riskfield_models/P0103_MECHANISM_AUDIT.md) |
+| P0237 | B | 预测变道意图触发 1D APF，安全时距 l=d0+hv 与换力控制 | [卡](riskfield_models/P0237_MECHANISM_AUDIT.md) |
+| P0096 | C 对照 | **每个真实未来时刻** GMM 等值轮廓→轴对齐占用→车辆 Minkowski 膨胀；峰值归一核并非概率密度 | [卡](riskfield_models/P0096_MECHANISM_AUDIT.md) |
+| P0124 | C 对照 | 同刻车辆几何碰撞 Monte Carlo；`max_t P(col at t)` **不是** `P(∪_t collision_t)` | [卡](riskfield_models/P0124_MECHANISM_AUDIT.md) |
+| P0163 | **C→B** | FlowDrive 真实构建 BEV Gaussian 风险/车道吸引场，嵌入 end-to-end 特征，不是原创新风险核 | [卡](riskfield_models/P0163_MECHANISM_AUDIT.md) |
+
+**当前合库工作分类更新**：A 64、B 41、C 84、D 75（合计 264 标题候选组；**不是已 DOI 核定的 264 篇独立论文**）。上一版 A65/B39/C85/D75 已被上述两项有原文证据的分类改判取代。
+
+### Batch3 实质性数学结论
+
+1. *索引空间 vs 物理空间*：P0113 `g(u-k)` 的 `u,k` 是候选列表编号，P0163 `U_risk(u,v)` 的 `u,v` 是 BEV 位置。二者即使用 Gaussian 核，也不是同一空间运算。
+2. *峰值归一 ≠ 概率密度*：P0096 的 GMM 每分量除其最大值后，累计积分一般不等于1；阈值 ε 控制等势轮廓保守性，不是自动事故概率保证。
+3. *逐时刻事件概率最大值 ≠ 时域并集概率*：P0124 对两个独立各 0.2 的碰撞事件返回 max=0.2，而并集 P=0.36。已明确数值反例，不能改写作者原始 max 公式。
+4. *响应能力作为物理输入*：P0046 q(T_r,b_max) 提供纯距离势没有的人员/车辆能力变量，但经验参数会决定 q 随 T_r 的方向；需要在确定参数号及原 PDF 后才可声称严格单调。
+5. *安全程序潜势 vs 经验危险分数*：P0072 SFF 取安全控制程序可达集合的交叠，不可与高斯风险幅度在物理解释或保证层面等价。
+
+本批未新增研究代码或训练，不修改 WAM 主项目状态。此账本是唯一专题总览入口，链接到局部详细机制卡；未经 PDF 核实的 MinerU 疑点保留 `PDF_REQUIRED`。
