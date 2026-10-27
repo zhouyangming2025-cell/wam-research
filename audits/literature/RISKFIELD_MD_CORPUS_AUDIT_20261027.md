@@ -84,3 +84,24 @@
 - `REVIEW_QA.csv` / `GITHUB_PRIOR_WORK_CROSSWALK.csv`：阶段 QA 与跨仓库身份纠错。
 
 最终原则：严格区分 `SOURCE_EXTRACTED`、`CORE_METHOD_SPOT_REVIEW`、`FULL_FORMULA_VERIFIED`，本轮没有任何依据声称已经完成 264 篇的完整数学复核。
+
+## 6. 数学机制核读批次 B2（2026-10-27；8 篇 / 57 个原始公式块）
+
+原始证据：用户提交 `all_md.zip` 中相应 MinerU Markdown；57 个公式块均已精确定位、原样抽取并确认在源 Markdown 出现，无行号定位失败。**这只表示 MD 来源一致性，不等于 PDF 视觉验收、完整模型参数验证或独立实验复现。**
+
+| paper_id | 原始机制 | 对固定候选风险评价的边界 | 逐篇证据 |
+|---|---|---|---|
+| P0082 | 逆距离静态场 + 指数相对方向速度动态场 + 分离车身圆碰撞检查 | 势场引导与真实几何接触是不同模块；源距离向量疑误 | [卡](riskfield_models/P0082_MECHANISM_AUDIT.md) |
+| P0086 | 前后分段伪距离、四次横向量、虚拟风险质量与 co-force | ν=0 / ν=νm 下分母需退化处理；非未来同刻风险概率 | [卡](riskfield_models/P0086_MECHANISM_AUDIT.md) |
+| P0091 | 认知失误→主观风险图、和客观图比较警报 | 并未提出独立风险场本体；B 类应用而非 A 类原创 | [卡](riskfield_models/P0091_MECHANISM_AUDIT.md) |
+| P0092 | 尺寸各向异性静态高斯 + 动能/驾驶风格场 + 控制约束 | 单独动能项不区分车间距离，动态约束并非风险核的时空同步 | [卡](riskfield_models/P0092_MECHANISM_AUDIT.md) |
+| P0111 | 高斯障碍核的停车距离尺度 + 纵向 TTC 提前换道 | `abs(v_rel)` 丢失追近方向；是控制程序增强，不是新概率场 | [卡](riskfield_models/P0111_MECHANISM_AUDIT.md) |
+| P0121 | **每个未来时刻**的多模态周车旋转高斯场 + ego MPCC 查询 | 时间步对应关系和两层 γ 折扣需查原始符号/代码 | [卡](riskfield_models/P0121_MECHANISM_AUDIT.md) |
+| P0140 | 车身伪距离类库仑场、环岛 DENCLUE 聚类风险 | 反距离奇异；MD Eq.(12) 失真、下标角色存疑 | [卡](riskfield_models/P0140_MECHANISM_AUDIT.md) |
+| P0143 | 经验 ETA 分段风险映射 + 4D 锚节点风险占用图 | **Eq.(2) ETA=3s 左0.2008、右0.5，不连续**；非碰撞概率 | [卡](riskfield_models/P0143_MECHANISM_AUDIT.md) |
+
+本批可直接证实的结构性区别：风险核为状态条件空间场、逐未来时刻预测场、主观驾驶员错误场、系统级宏观风险场，不能根据“potential/risk”同名合并。B2 的完整 57 个源公式、邻近文字、行号和候选衍生反例以会话交付 `BATCH2_MATH_AUDIT.zip` 保存；GitHub 8 张卡已保留核心公式但**未镜像所有 57 个完整公式块**。
+
+**尚未完成：** 以前列出的56篇是旧阶段基线而非本轮剩余数（中间已有额外核读）；继续按 `PAPER_IDENTITY_AND_RELEVANCE.csv`、`AUDITED_MODEL_SEMANTICS_NEW.csv` 与新增卡共同去重判定当前状态。当前 B2 不改变其余论文的质量等级，也未完成剩余 C 类全库复核。
+
+此文仍是风险场独立专项记录，不修改 `main` WAM 工作状态或混入非风险场 WAM 论文。
