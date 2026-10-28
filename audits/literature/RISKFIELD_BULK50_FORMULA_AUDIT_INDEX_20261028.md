@@ -106,3 +106,87 @@ P0076 用 B 样条学习非负风险面，可能具有与普通“使用 APF 做
 - `CROSS_PAPER_MATH_COMPARISON.md` 和 `SOURCE_REPLAY_QA.json`：横向比较与逐式重放 QA。
 
 **归档限制：** 目前 GitHub 是此索引及阶段研究结论，原样 LaTeX/上下文的大体积批量文件暂时仍在本会话 ZIP，未冒充全部已 push 到仓库。
+
+## 7. 五个可直接定位的数学原式与语义对照（原式为 MD 内容，判断为本次推论）
+
+### A. P0076：非负 B 样条风险面与时间积分
+
+源 MD Eq.(2) L41–43：
+
+\[
+risk(x,y):=\sum_{i=1}^{n_1}\sum_{j=1}^{n_2} c_{ij}B_i^{k_1}(x)B_j^{k_2}(y).
+\]
+
+Eq.(3) L47–49 拟合样本点 \((x_l,y_l,r_l)\) 并加 \(\frac{\lambda}{2}\|c\|^2\)；Eq.(17) L159–161：
+
+\[
+J_1=\int_{t_0}^{t_f}\big(v(t)\,risk(x(t),y(t))\big)^2\,dt .
+\]
+
+**解释：** 空间风险面来自离散风险标签的平滑拟合，后用自车速度修正沿候选行驶的暴露积分。原文 §II 明确限制 risk map 仅依赖位置并是静态的；与未来周车同步占用不是同一件事。源 Eq.(21) 的 \`risk\` 在 MinerU 中出现字母上点解析异常，PDF_REQUIRED。
+
+### B. P0017：Time-to-Occupancy 逆时距场
+
+源 Eq.(7) L110–112 和 Eq.(8) L123–125：
+
+\[
+\mathrm{ATTO}_n(D_{o_n})=\frac{D_{o_n}}{V_r+dA_r},
+\qquad Risk_n(D_{o_n})=\mathrm{ATTO}_n^{-1}(D_{o_n}).
+\]
+
+Eq.(13) L159–161：
+
+\[
+Risk_{o\&v}=\sup(Risk_{int_1},\dots,Risk_{int_n}).
+\]
+
+**解释：** \`d\` 被作者称为加速度增益；若认为它是无量纲，则 \(V_r+dA_r\) 量纲不一致，需核参数的时间单位。该风险是逆预计到达时间，文中设最大截断，并非事故概率。等时距与等未来碰撞几何仍不等价。
+
+### C. P0182：S-field 与 O-field 不同物理层
+
+源 Eq.(1) L64–66：
+
+\[
+r^s_{ij}=\exp\left[-\left|\frac{\Delta x_{ij}}{\gamma_x}\right|^{\alpha_x}-\left|\frac{\Delta y_{ij}}{\gamma_y}\right|^{\alpha_y}\right].
+\]
+
+Eq.(2) L72–74：
+
+\[
+r^o_{ij}=\exp\left[-(\hat d_{m,ij}/d^*)^{\beta_1}\right]\exp\left[-(\hat t_{m,ij}/t^*)^{\beta_2}\right].
+\]
+
+**解释：** S 是空间接近的主观尺度，O 是预测最近距与接近时间的客观摘要。论文 §III.B 明说该模型 **adopts S/O field from prior reference [21]**；此次不能把两式的原创权属归于 STRAP。两者输出 0–1 形式不足以证明校准事故概率。
+
+### D. P0204：曲线横向坐标 t 不等于物理时间
+
+源 Eq.(17) L196–198：
+
+\[
+DRF(s,t)=a(s)\exp\left[-\frac{t^2}{2\sigma^2(s,\delta)}\right].
+\]
+
+Eq.(27) L275–277：
+
+\[
+R_i^n=f_{\mathrm{DRF}}\cdot f_{\mathrm{COST}}.
+\]
+
+**解释：** 此处 \`s\` 是沿驾驶路径的前向距离、\`t\` 是横向偏移。二维核与以 OBB 表面净距、运动能量构造的 COST 相乘，不能仅因为乘积而解释成两车碰撞的联合事件概率。
+
+### E. P0238：未来同刻安全裕量，而不是空间核强度
+
+源 Eq.(6),(7) L104–110：
+
+\[
+\mathcal H^{P_k}_{e,i}=\{(P_{e,k},P_{i,k})\mid h_{e,i}(P_k)\ge0\},
+\]
+\[
+h_{e,i}(P_k)=(X_{e,k}-X_{i,k})^2+\left(\frac{Y_{e,k}-Y_{i,k}}{\tau}\right)^2-\mathcal D_s^2.
+\]
+
+Eq.(8) L116–118 又引入 \(\dot h\)、\(\gamma h\) 与离散鲁棒修正；Eq.(9),(10) 对 H 均值/方差做 delta-method 近似。
+
+**解释：** \`k\` 是预测时刻、\(e/i\) 同时出现。这是候选相关的时刻安全裕量入口，但假设椭圆包络、车辆纵横向尺寸/朝向和 CBF 控制可行性并未由一个 h≥0 自动解决。源 §III.A 明确该 CBF-inspired 风险评价基于 prior [17]，创新归属需进一步核。
+
+以上简化渲染式仅用于横向阅读；逐字原始 MinerU 表达、重复 \`\\tag\`、邻近源段和 SHA 请用完整的 \`BULK50_SOURCE_FORMULAS_ALL.csv\` 与逐篇 Markdown 追溯。
