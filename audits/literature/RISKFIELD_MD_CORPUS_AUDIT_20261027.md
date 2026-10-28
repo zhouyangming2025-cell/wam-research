@@ -200,3 +200,18 @@
 详细示范已实际落地：**[P0121 完整公式机制链核读](riskfield_models/P0121_MECHANISM_AUDIT.md)**。源论文 20 个展示式已精确逐个回放，连通 Eq.(1)–(20) 的预测、风险场和 MPCC，但发现 Eq.(13) 括号、Eq.(15) 时间索引及双 γ、概率归一化等关键不闭合点，因此**未**标 `FULL_FORMULA_VERIFIED`。会话端另保存全 20 式原样附录 `P0121_FULL_MATH_MODEL_AUDIT.md`，尚未完整镜像到 GitHub。
 
 **后续使用原则：** 与其一年产出上百张不完整公式卡，不如按照上述验收门槛逐篇达到 `MODEL_SEMANTICS_CLOSED`。跨论文等价整理只做最必要的重复阅读减免，不应取代逐篇计算链理解。此前分类/批次统计保留历史，不作为完成度 KPI。
+
+## 12. Full-chain 模式第二批：4 篇逐篇数学链闭合排查（2026-10-28）
+
+这批不再追求新论文数；选取 P0240、P0256、P0076、P0238 四篇公式机制不同的论文，对每篇原文**所有展示公式块**重新定位并区分场本体/输入/下游/训练：共 7+22+21+17=**67 式**。原始 MD SHA-256 四份全部确认，成稿附件 67/67 公式与源文件逐字符对齐；**未作 PDF 视觉检查，不声称完整数学闭合**。
+
+| 论文 | 公式建模主链 | 当前最重要不闭合点 | GitHub 逐篇卡 |
+|---|---|---|---|
+| P0240 | 经验等效质量→反应/制动距离 sigmoid 源场→路边界场→驾驶风格图像 | 动态方向指数正负号反转、源/受体质量下标、矢量聚合未写式 | [P0240](riskfield_models/P0240_MECHANISM_AUDIT.md) |
+| P0256 | 确定性规则未来路径→全对路径矩形交面积→分别前视索引衰减→最坏 NPC SP→SAC reward | 没有同步未来时刻匹配，不能作为真正时空碰撞风险 | [P0256](riskfield_models/P0256_MECHANISM_AUDIT.md) |
+| P0076 | 人工空间风险标签→非负张量 B 样条拟合→速度加权风险积分→词典序两阶段 OCP | 经验标签非概率、动态 actor 不存在、Eq.(21) 字符污染 | [P0076](riskfield_models/P0076_MECHANISM_AUDIT.md) |
+| P0238 | 同时刻两车椭圆安全 h→动态 CBF H→delta-method 风险分布→尾部 CVaR→最坏周车→MPC 硬软约束 | Eq.(10) 梯度变量维度、Theorem3 上界/全时域概率条件 | [P0238](riskfield_models/P0238_MECHANISM_AUDIT.md) |
+
+**完全原式备份**：用户会话生成 `FOUR_PAPER_FULL_MATH_AUDIT_20261028.zip`，包括四篇完整逐式 MD、67 式全量表、4 份原始 MinerU MD、源路径与 SHA 映射、独立逐式回放验收。GitHub 当前提交的是四篇重点公式链与歧义，不是全部 67 式的原样镜像。所有四篇状态为 `MD_EQUATION_CHAIN_MAPPED_WITH_BLOCKERS`，不是 `FULL_FORMULA_VERIFIED`。
+
+**去重策略**：P0240 含引用既有 Tian/Wu 风险核但新增制动 sigmoid；P0256 是路径扫掠交面积风险，不应与同步占用安全势混并；P0076 新在 B 样条数值表示、不提供新事故物理量；P0238 以成熟 CBF/CVaR 提供安全约束机制对照，不因为名称“risk map”而计为原创 Gaussian 场。
